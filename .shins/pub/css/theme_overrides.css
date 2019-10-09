@@ -1,1 +1,14 @@
 /* place your custom CSS overrides here */
+.toc-wrapper {
+	background-color: #ffffff;
+}
+
+.toc-link, .toc-footer li {
+    color: #333333;
+    font-size: 1.3rem;
+    font-weight: normal;
+}
+
+#toc {
+    margin-top: 1rem;
+}

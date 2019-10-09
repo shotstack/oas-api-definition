@@ -122,6 +122,9 @@
                {
                   "DeveloperKey": []
                }
+            ],
+            "tags": [
+               "Rendering Tasks"
             ]
          }
       },
@@ -225,6 +228,9 @@
                {
                   "DeveloperKey": []
                }
+            ],
+            "tags": [
+               "Rendering Tasks"
             ]
          },
          "parameters": [

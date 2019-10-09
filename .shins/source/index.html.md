@@ -1,8 +1,6 @@
 ---
-title: shotstack
-language_tabs:
-  - curl: Curl
-  - php: PHP
+title: Shotstack
+language_tabs: []
 toc_footers: []
 includes: []
 search: false
@@ -11,9 +9,9 @@ headingLevel: 2
 
 ---
 
-<h1 id="shotstack">shotstack v1</h1>
+<h1 id="shotstack">Shotstack v1</h1>
 
-> Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
+> Scroll down for example requests and responses.
 
 The Shotstack API is a video editing service that allows for the programatic
 creation of videos using JSON.
@@ -29,47 +27,13 @@ Base URLs:
 * API Key (DeveloperKey)
     - Parameter Name: **x-api-key**, in: header. Secured using an API developer key as specified.
 
-<h1 id="shotstack-default">Default</h1>
+<h1 id="shotstack-rendering-tasks">Rendering Tasks</h1>
 
 ## postRender
 
 <a id="opIdpostRender"></a>
 
 > Code samples
-
-```php
-<?php
-
-require 'vendor/autoload.php';
-
-$headers = array(
-    'Content-Type' => 'application/json',
-    'Accept' => 'application/json',
-    'x-api-key' => 'API_KEY',
-    
-    );
-
-$client = new \GuzzleHttp\Client();
-
-// Define array of request body.
-$request_body = array();
-
-try {
-    $response = $client->request('POST','https://api.shotstack.io/{version}/render', array(
-        'headers' => $headers,
-        'json' => $request_body,
-       )
-    );
-    print_r($response->getBody()->getContents());
- }
- catch (\GuzzleHttp\Exception\BadResponseException $e) {
-    // handle exception or api errors.
-    print_r($e->getMessage());
- }
-
- // ...
-
-```
 
 `POST /render`
 
@@ -159,39 +123,6 @@ DeveloperKey
 <a id="opIdgetRender"></a>
 
 > Code samples
-
-```php
-<?php
-
-require 'vendor/autoload.php';
-
-$headers = array(
-    'Accept' => 'application/json',
-    'x-api-key' => 'API_KEY',
-    
-    );
-
-$client = new \GuzzleHttp\Client();
-
-// Define array of request body.
-$request_body = array();
-
-try {
-    $response = $client->request('GET','https://api.shotstack.io/{version}/render/{id}', array(
-        'headers' => $headers,
-        'json' => $request_body,
-       )
-    );
-    print_r($response->getBody()->getContents());
- }
- catch (\GuzzleHttp\Exception\BadResponseException $e) {
-    // handle exception or api errors.
-    print_r($e->getMessage());
- }
-
- // ...
-
-```
 
 `GET /render/{id}`
 
