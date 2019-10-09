@@ -2,6 +2,17 @@
 
 Defines the Shotstack API and provides tooling for documentation and SDK generation.
 
+## Generating Docs
+
+Requires the shins repo to be set up as a Git subtree. See instructions below.
+
+Once that is done build the docs using:
+
+```
+npm run docs
+```
+Generated docs are saved to build/docs directory
+
 
 ### Linking Shins as a Subtree
 

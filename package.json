@@ -9,7 +9,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "./build.sh",
-    "docs": "./node_modules/.bin/widdershins --search false --language_tabs 'curl:Curl' --summary api.oas3.json -o build/docs.md"
+    "docs": "./build-docs.sh"
   },
   "repository": {
     "type": "git",
