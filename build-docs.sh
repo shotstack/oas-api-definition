@@ -4,11 +4,13 @@ mkdir -p $DOCS_DIR
 cp $DOCS_DIR/index.html.md .shins/source/index.html.md
 
 cd .shins
-node shins.js
+node shins.js --logo ../assets/img/logo.png
 
 cd -
 
+mkdir -p $DOCS_DIR/source/images
 cp .shins/index.html ./$DOCS_DIR/.
 cp -r .shins/pub ./$DOCS_DIR/.
+cp -r .shins/source/images/custom_logo.png ./$DOCS_DIR/source/images/custom_logo.png
 
 rm ./$DOCS_DIR/index.html.md
