@@ -1,0 +1,27 @@
+{
+  "name": "raml-api-definition",
+  "version": "1.0.0",
+  "description": "RAML definaition for Shotstack API",
+  "main": "index.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "./build.sh",
+    "docs": "./node_modules/.bin/widdershins --search false --language_tabs 'curl:Curl' --summary api.oas3.json -o build/docs.md"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/shotstack/raml-api-definition.git"
+  },
+  "author": "Jeff Shillitto",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/shotstack/raml-api-definition#readme",
+  "dependencies": {
+    "oas-raml-converter": "^1.1.43"
+  },
+  "devDependencies": {
+    "widdershins": "^3.6.7"
+  }
+}
