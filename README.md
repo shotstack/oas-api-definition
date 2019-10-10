@@ -2,6 +2,14 @@
 
 Defines the Shotstack API and provides tooling for documentation and SDK generation.
 
+## Installation
+
+The project is built using NodeJS. To install the dependencies run the command:
+
+```
+npm install
+```
+
 ## Generating Docs
 
 Requires the shins repo to be set up as a Git subtree. See instructions below.
