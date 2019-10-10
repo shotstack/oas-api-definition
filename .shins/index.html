@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Shotstack</title>
+    <title>Shotstack API Reference Documentation</title>
 
     <style>
     </style>
@@ -172,13 +172,23 @@
 <blockquote>
 <p>Scroll down for example requests and responses.</p>
 </blockquote>
-<p>The Shotstack API is a video editing service that allows for the programatic creation of videos using JSON.</p>
+<p>The Shotstack API is a video editing service that allows for the programatic creation of videos using JSON. You can configure an edit and POST it the Shotstack API which will take render your video and provide a file location when complete. For more details check <a href="https://shotstack.io">https://shotstack.io</a></p>
 <p>Base URLs:</p>
 <ul>
 <li>
 <p><a href="https://api.shotstack.io/{version}">https://api.shotstack.io/{version}</a></p>
 <ul>
-<li><strong>version</strong> -  Default: version</li>
+<li>
+<p><strong>version</strong> -  Default: v1</p>
+<ul>
+<li>
+<p>v1</p>
+</li>
+<li>
+<p>stage</p>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -186,7 +196,7 @@
 <ul>
 <li>API Key (DeveloperKey)
 <ul>
-<li>Parameter Name: <strong>x-api-key</strong>, in: header. Secured using an API developer key as specified.</li>
+<li>Parameter Name: <strong>x-api-key</strong>, in: header. Set the header named below with your provided key for the correct environment (v1 or stage). Include the header in all calls to the API that are secured with a key.</li>
 </ul>
 </li>
 </ul>

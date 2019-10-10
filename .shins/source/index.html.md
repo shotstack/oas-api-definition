@@ -13,18 +13,22 @@ headingLevel: 2
 
 > Scroll down for example requests and responses.
 
-The Shotstack API is a video editing service that allows for the programatic creation of videos using JSON.
+The Shotstack API is a video editing service that allows for the programatic creation of videos using JSON. You can configure an edit and POST it the Shotstack API which will take render your video and provide a file location when complete. For more details check https://shotstack.io
 
 Base URLs:
 
 * <a href="https://api.shotstack.io/{version}">https://api.shotstack.io/{version}</a>
 
-    * **version** -  Default: version
+    * **version** -  Default: v1
+
+        * v1
+
+        * stage
 
 # Authentication
 
 * API Key (DeveloperKey)
-    - Parameter Name: **x-api-key**, in: header. Secured using an API developer key as specified.
+    - Parameter Name: **x-api-key**, in: header. Set the header named below with your provided key for the correct environment (v1 or stage). Include the header in all calls to the API that are secured with a key.
 
 <h1 id="shotstack-endpoints">Endpoints</h1>
 

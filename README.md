@@ -13,6 +13,12 @@ npm run docs
 ```
 Generated docs are saved to build/docs directory
 
+You can preview the docs in the browser using:
+
+```
+npm run start
+```
+
 
 ### Linking Shins as a Subtree
 

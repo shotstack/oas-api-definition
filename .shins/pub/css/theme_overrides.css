@@ -65,8 +65,8 @@ a {
 }
 
 .toc-wrapper .logo {
-    padding: 10px;
-    width: 88%;
+    padding: 18px 24px 10px;
+    width: 80%;
 }
 
 #toc {
@@ -97,7 +97,8 @@ a {
 }
 
 .toc-wrapper > .search::before {
-	left: 24px;
+    left: 24px;
+    top: 19px;
 	color: #25d3d0;
 }
 
@@ -138,4 +139,10 @@ div .highlight {
 	max-width: 46%;
 	max-height: 400px;
 	margin: 2%;
+}
+
+.content p code {
+	padding: 10px 10px 6px 10px;
+	font-weight: bold;
+	border: 1px solid #dddddd;
 }
