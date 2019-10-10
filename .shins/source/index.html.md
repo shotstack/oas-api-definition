@@ -13,8 +13,7 @@ headingLevel: 2
 
 > Scroll down for example requests and responses.
 
-The Shotstack API is a video editing service that allows for the programatic
-creation of videos using JSON.
+The Shotstack API is a video editing service that allows for the programatic creation of videos using JSON.
 
 Base URLs:
 
@@ -284,9 +283,7 @@ DeveloperKey
 
 ```
 
-*An edit defines the content of the video in a timeline and the output
-format.
-*
+*An edit defines the content of the video in a timeline and the output format.*
 
 ### Properties
 
@@ -339,12 +336,7 @@ format.
 
 ```
 
-*A timeline represents the contents of a video edit over time, in seconds.
-A timeline consists of layers called tracks. Tracks are composed of
-titles, images or video segments referred to as clips which are placed
-along the track at specific starting point and lasting for a specific
-amount of time.
-*
+*A timeline represents the contents of a video edit over time, in seconds. A timeline consists of layers called tracks. Tracks are composed of titles, images or video segments referred to as clips which are placed along the track at specific starting point and lasting for a specific amount of time.*
 
 ### Properties
 
@@ -366,9 +358,7 @@ amount of time.
 
 ```
 
-*A music or audio file in mp3 format that plays for the duration of the
-rendered video or the length of the audio file, which ever is shortest.
-*
+*A music or audio file in mp3 format that plays for the duration of the rendered video or the length of the audio file, which ever is shortest.*
 
 ### Properties
 
@@ -420,10 +410,7 @@ rendered video or the length of the audio file, which ever is shortest.
 
 ```
 
-*A track contains an array of clips. Tracks are layered on top of each
-other in the order in the array. The top most track will render on top of
-those below it.
-*
+*A track contains an array of clips. Tracks are layered on top of each other in the order in the array. The top most track will render on top of those below it.*
 
 ### Properties
 
@@ -462,10 +449,7 @@ those below it.
 
 ```
 
-*A clip is a container for a specific type of asset, i.e. a title, photo or video.
-You use a Clip to define when an asset will display on the timeline, how long it
-will play for and transitions and effects to apply to it.
-*
+*A clip is a container for a specific type of asset, i.e. a title, photo or video. You use a Clip to define when an asset will display on the timeline, how long it will play for and transitions and effects to apply to it.*
 
 ### Properties
 
@@ -540,9 +524,7 @@ will play for and transitions and effects to apply to it.
 
 ```
 
-*The TitleAsset clip type lets you create video titles from a text string and
-apply styling and positioning.
-*
+*The TitleAsset clip type lets you create video titles from a text string and apply styling and positioning.*
 
 ### Properties
 
@@ -600,10 +582,7 @@ apply styling and positioning.
 
 ```
 
-*The ImageAsset is used to create video from images. The src
-must be a publicly accesible URL to an image resource such as a jpg or
-png file.
-*
+*The ImageAsset is used to create video from images. The src must be a publicly accesible URL to an image resource such as a jpg or png file.*
 
 ### Properties
 
@@ -626,11 +605,7 @@ png file.
 
 ```
 
-*The VideoAsset is used to create video sequences from video files. The src
-must be a publicly accesible URL to a video resource such as an mp4 file.
-The in and out attributes of the parent Clip let you trim the video file
-by setting the start and end point to use.
-*
+*The VideoAsset is used to create video sequences from video files. The src must be a publicly accesible URL to a video resource such as an mp4 file. The in and out attributes of the parent Clip let you trim the video file by setting the start and end point to use.*
 
 ### Properties
 
@@ -685,8 +660,7 @@ by setting the start and end point to use.
 
 ```
 
-*Offsets the position of an asset horizontally or vertically by a relative distance.
-*
+*Offsets the position of an asset horizontally or vertically by a relative distance.*
 
 ### Properties
 
