@@ -4,7 +4,7 @@ language_tabs: []
 toc_footers: []
 includes: []
 search: true
-highlight_theme: darkula
+highlight_theme: dracula
 headingLevel: 2
 
 ---

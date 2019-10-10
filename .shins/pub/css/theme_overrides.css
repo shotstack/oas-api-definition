@@ -128,3 +128,14 @@ a {
 .content table tr:nth-child(2n) > td {
 	background-color: #f7f7f7;
 }
+
+.content blockquote > p {
+	font-weight: bold;
+	color: #25d3d0;
+}
+
+div .highlight {
+	max-width: 46%;
+	max-height: 400px;
+	margin: 2%;
+}

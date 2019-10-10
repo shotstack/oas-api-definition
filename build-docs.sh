@@ -1,6 +1,6 @@
 DOCS_DIR=build/docs
 mkdir -p $DOCS_DIR
-./node_modules/.bin/widdershins --language_tabs --summary api.oas3.json -o $DOCS_DIR/index.html.md
+./node_modules/.bin/widdershins --theme dracula --language_tabs --summary api.oas3.json -o $DOCS_DIR/index.html.md
 cp $DOCS_DIR/index.html.md .shins/source/index.html.md
 
 cd .shins
