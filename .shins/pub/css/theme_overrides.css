@@ -146,3 +146,10 @@ div .highlight {
 	font-weight: bold;
 	border: 1px solid #dddddd;
 }
+
+.lang-selector a.active {
+	color: #25d3d0;
+	border-top: 2px solid #25d3d0;
+	line-height: 26px;
+	padding-bottom: 2px;
+}

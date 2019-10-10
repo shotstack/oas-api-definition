@@ -1,6 +1,15 @@
 ---
 title: Shotstack
-language_tabs: []
+language_tabs:
+  - shell: Curl
+  - http: HTTP
+  - javascript--nodejs: NodeJS
+  - javascript: jQuery
+  - php: PHP
+  - ruby: Ruby
+  - python: Python
+  - java: Java
+  - go: Go
 toc_footers: []
 includes: []
 search: true
@@ -11,7 +20,7 @@ headingLevel: 2
 
 <h1 id="shotstack">Shotstack v1</h1>
 
-> Scroll down for example requests and responses.
+> Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
 
 The Shotstack API is a video editing service that allows for the programatic creation of videos using JSON. You can configure an edit and POST it the Shotstack API which will take render your video and provide a file location when complete. For more details check https://shotstack.io
 
@@ -37,6 +46,221 @@ Base URLs:
 <a id="opIdpostRender"></a>
 
 > Code samples
+
+```shell
+# You can also use wget
+curl -X POST https://api.shotstack.io/{version}/render \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  -H 'x-api-key: API_KEY'
+
+```
+
+```http
+POST https://api.shotstack.io/{version}/render HTTP/1.1
+Host: api.shotstack.io
+Content-Type: application/json
+Accept: application/json
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+const inputBody = '{
+  "timeline": {
+    "soundtrack": {
+      "src": "string",
+      "effect": "fadeIn"
+    },
+    "background": "string",
+    "tracks": [
+      {
+        "clips": [
+          {
+            "asset": {
+              "type": "title",
+              "text": "string",
+              "style": "minimal",
+              "color": "white",
+              "size": "medium",
+              "background": "string",
+              "position": "center",
+              "offset": {
+                "x": 0,
+                "y": 0
+              }
+            },
+            "start": 0,
+            "length": 0,
+            "transition": {
+              "in": "fade",
+              "out": "fade"
+            },
+            "effect": "zoomIn",
+            "filter": "boost"
+          }
+        ]
+      }
+    ]
+  },
+  "output": {
+    "format": "mp4",
+    "resolution": "preview"
+  }
+}';
+const headers = {
+  'Content-Type':'application/json',
+  'Accept':'application/json',
+  'x-api-key':'API_KEY'
+
+};
+
+fetch('https://api.shotstack.io/{version}/render',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```javascript
+var headers = {
+  'Content-Type':'application/json',
+  'Accept':'application/json',
+  'x-api-key':'API_KEY'
+
+};
+
+$.ajax({
+  url: 'https://api.shotstack.io/{version}/render',
+  method: 'post',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```php
+<?php
+
+require 'vendor/autoload.php';
+
+$headers = array(
+    'Content-Type' => 'application/json',
+    'Accept' => 'application/json',
+    'x-api-key' => 'API_KEY',
+    
+    );
+
+$client = new \GuzzleHttp\Client();
+
+// Define array of request body.
+$request_body = array();
+
+try {
+    $response = $client->request('POST','https://api.shotstack.io/{version}/render', array(
+        'headers' => $headers,
+        'json' => $request_body,
+       )
+    );
+    print_r($response->getBody()->getContents());
+ }
+ catch (\GuzzleHttp\Exception\BadResponseException $e) {
+    // handle exception or api errors.
+    print_r($e->getMessage());
+ }
+
+ // ...
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Content-Type' => 'application/json',
+  'Accept' => 'application/json',
+  'x-api-key' => 'API_KEY'
+}
+
+result = RestClient.post 'https://api.shotstack.io/{version}/render',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json',
+  'x-api-key': 'API_KEY'
+}
+
+r = requests.post('https://api.shotstack.io/{version}/render', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://api.shotstack.io/{version}/render");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Content-Type": []string{"application/json"},
+        "Accept": []string{"application/json"},
+        "x-api-key": []string{"API_KEY"},
+        
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("POST", "https://api.shotstack.io/{version}/render", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
 
 `POST /render`
 
@@ -126,6 +350,172 @@ DeveloperKey
 <a id="opIdgetRender"></a>
 
 > Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://api.shotstack.io/{version}/render/{id} \
+  -H 'Accept: application/json' \
+  -H 'x-api-key: API_KEY'
+
+```
+
+```http
+GET https://api.shotstack.io/{version}/render/{id} HTTP/1.1
+Host: api.shotstack.io
+Accept: application/json
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json',
+  'x-api-key':'API_KEY'
+
+};
+
+fetch('https://api.shotstack.io/{version}/render/{id}',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json',
+  'x-api-key':'API_KEY'
+
+};
+
+$.ajax({
+  url: 'https://api.shotstack.io/{version}/render/{id}',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```php
+<?php
+
+require 'vendor/autoload.php';
+
+$headers = array(
+    'Accept' => 'application/json',
+    'x-api-key' => 'API_KEY',
+    
+    );
+
+$client = new \GuzzleHttp\Client();
+
+// Define array of request body.
+$request_body = array();
+
+try {
+    $response = $client->request('GET','https://api.shotstack.io/{version}/render/{id}', array(
+        'headers' => $headers,
+        'json' => $request_body,
+       )
+    );
+    print_r($response->getBody()->getContents());
+ }
+ catch (\GuzzleHttp\Exception\BadResponseException $e) {
+    // handle exception or api errors.
+    print_r($e->getMessage());
+ }
+
+ // ...
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json',
+  'x-api-key' => 'API_KEY'
+}
+
+result = RestClient.get 'https://api.shotstack.io/{version}/render/{id}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'x-api-key': 'API_KEY'
+}
+
+r = requests.get('https://api.shotstack.io/{version}/render/{id}', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://api.shotstack.io/{version}/render/{id}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        "x-api-key": []string{"API_KEY"},
+        
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "https://api.shotstack.io/{version}/render/{id}", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
 
 `GET /render/{id}`
 
