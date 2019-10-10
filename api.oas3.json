@@ -124,7 +124,7 @@
                }
             ],
             "tags": [
-               "Rendering Tasks"
+               "Endpoints"
             ]
          }
       },
@@ -230,7 +230,7 @@
                }
             ],
             "tags": [
-               "Rendering Tasks"
+               "Endpoints"
             ]
          },
          "parameters": [

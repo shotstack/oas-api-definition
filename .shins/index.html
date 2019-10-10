@@ -18,24 +18,7 @@
     <link rel="stylesheet" media="screen" href="pub/css/darkula.css">
     <link rel="stylesheet" media="screen" href="pub/css/theme_overrides.css">
     
-      <script src="source/javascripts/lib/_jquery.js"></script>
-<script src="source/javascripts/lib/_energize.js"></script>
-<script src="source/javascripts/app/_lang.js"></script>
-<script src="source/javascripts/app/_toc.js"></script>
-<script type="text/javascript">
-$(function() {
-  loadToc($('#toc'), '.toc-link', '.toc-list-h2, .toc-list-h3, .toc-list-h4, .toc-list-h5, .toc-list-h6', 10);
-  setupLanguages($('body').data('languages'));
-  $('.content').imagesLoaded( function() {
-    recacheHeights();
-    refreshToc();
-  });
-});
-
-window.onpopstate = function() {
-  activateLanguage(getLanguageFromQueryString());
-};
-</script>
+      <script src="pub/js/shins.js"></script>
 
     
     <meta name="theme-color" content="#F3F7F9" />
@@ -53,6 +36,11 @@ window.onpopstate = function() {
       <img src="source/images/custom_logo.png" class="logo" alt="Logo">
       
       
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      
       <div id="toc" class="toc-list-h1">
 	  	<ul class="toc-list-h1">
         
@@ -67,7 +55,7 @@ window.onpopstate = function() {
           </li>
         
           <li>
-            <a href="#shotstack-rendering-tasks" class="toc-h1 toc-link" data-title="Rendering Tasks">Rendering Tasks</a>
+            <a href="#shotstack-endpoints" class="toc-h1 toc-link" data-title="Endpoints">Endpoints</a>
             
               <ul class="toc-list-h2">
                 
@@ -203,7 +191,7 @@ creation of videos using JSON.</p>
 </ul>
 </li>
 </ul>
-<h1 id="shotstack-rendering-tasks">Rendering Tasks</h1>
+<h1 id="shotstack-endpoints">Endpoints</h1>
 <h2 id="postrender">postRender</h2>
 <p><a id="opIdpostRender"></a></p>
 <blockquote>

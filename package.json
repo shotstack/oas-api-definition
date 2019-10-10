@@ -9,7 +9,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "./build.sh",
-    "docs": "./build-docs.sh"
+    "docs": "./build-docs.sh",
+    "start": "cd .shins && npm run start"
   },
   "repository": {
     "type": "git",

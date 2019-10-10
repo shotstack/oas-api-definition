@@ -1,14 +1,68 @@
 /* place your custom CSS overrides here */
+body {
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+}
+
 .toc-wrapper {
-	background-color: #ffffff;
+    background-color: #ffffff;
+}
+
+.toc-h1.toc-link {
+    padding-top: 6px;
+    padding-bottom: 6px;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: bold;
 }
 
 .toc-link, .toc-footer li {
     color: #333333;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     font-weight: normal;
+}
+
+.toc-wrapper .logo {
+    padding: 10px;
+    width: 88%;
 }
 
 #toc {
     margin-top: 1rem;
+}
+
+.toc-wrapper .toc-list-h2 {
+	background-color: #ffffff;
+}
+
+.toc-wrapper .toc-link.active {
+	background-color: #f7f7f7;
+	color: #25d3d0;
+}
+
+.toc-wrapper .toc-link.active-parent {
+    background-color: #f1f1f1;
+	color: #25d3d0;
+}
+
+.toc-wrapper > .search input {
+	background: #f7f7f7;
+	border: 1px solid #cccccc;
+	color: #777777;
+    border-radius: 3px;
+    font-weight: normal;
+    padding-left: 26px;
+}
+
+.toc-wrapper > .search::before {
+	left: 24px;
+	color: #25d3d0;
+}
+
+.toc-wrapper .search-results a {
+	color: #25d3d0;
+	font-weight: normal;
+}
+
+.toc-wrapper .toc-footer {
+	border-top: none;
 }

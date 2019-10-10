@@ -3,7 +3,7 @@ title: Shotstack
 language_tabs: []
 toc_footers: []
 includes: []
-search: false
+search: true
 highlight_theme: darkula
 headingLevel: 2
 
@@ -27,7 +27,7 @@ Base URLs:
 * API Key (DeveloperKey)
     - Parameter Name: **x-api-key**, in: header. Secured using an API developer key as specified.
 
-<h1 id="shotstack-rendering-tasks">Rendering Tasks</h1>
+<h1 id="shotstack-endpoints">Endpoints</h1>
 
 ## postRender
 
