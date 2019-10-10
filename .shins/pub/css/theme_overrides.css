@@ -79,7 +79,8 @@ a {
 
 .toc-wrapper .toc-link.active {
 	background-color: #f7f7f7;
-	color: #25d3d0;
+    color: #25d3d0;
+    border-right: 2px solid #25d3d0;
 }
 
 .toc-wrapper .toc-link.active-parent {
@@ -131,7 +132,6 @@ a {
 }
 
 .content blockquote > p {
-	font-weight: bold;
 	color: #25d3d0;
 }
 
@@ -152,4 +152,15 @@ div .highlight {
 	border-top: 2px solid #25d3d0;
 	line-height: 26px;
 	padding-bottom: 2px;
+}
+
+h1#shotstack {
+	color: #333;
+    font-size: 40px;
+    font-weight: lighter;
+    text-transform: capitalize;
+}
+
+h1#shotstack::after {
+    content: " API Reference";
 }
