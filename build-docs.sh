@@ -1,11 +1,16 @@
 DOCS_DIR=build/docs
+OAS3_YAML=api.oas3.yaml
+OAS3_JSON=api.oas3.json
 mkdir -p $DOCS_DIR
+
+# Convert YAML to JSON
+./node_modules/.bin/js-yaml $OAS3_YAML > $OAS3_JSON
 
 # Convert OpenAPI to doc to Shins Markdown
 ./node_modules/.bin/widdershins \
     --theme dracula \
     --language_tabs shell:Curl http:HTTP javascript--nodejs:NodeJS javascript:jQuery php:PHP ruby:Ruby python:Python java:Java go:Go \
-    --summary api.oas3.json \
+    --summary $OAS3_JSON \
     --outfile $DOCS_DIR/index.html.md
 
 cp $DOCS_DIR/index.html.md .shins/source/index.html.md
@@ -31,3 +36,4 @@ sed -e "/{{GA}}/{r .ga" -e "d}" ./$DOCS_DIR/index.html > ./$DOCS_DIR/index.tmp.h
 mv -f ./$DOCS_DIR/index.tmp.html ./$DOCS_DIR/index.html
 
 rm ./$DOCS_DIR/index.html.md
+rm $OAS3_JSON

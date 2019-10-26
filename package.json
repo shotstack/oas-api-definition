@@ -1,11 +1,8 @@
 {
-  "name": "raml-api-definition",
+  "name": "oas3-api-shotstack-definition",
   "version": "1.0.0",
-  "description": "RAML definaition for Shotstack API",
+  "description": "Open API Specification 3 (OAS3) definition for the Shotstack API",
   "main": "index.js",
-  "directories": {
-    "example": "examples"
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "./build.sh",
@@ -14,12 +11,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@bitbucket.org/shotstack/raml-api-definition.git"
+    "url": "git+ssh://git@bitbucket.org/shotstack/oas-api-definition.git"
   },
   "author": "Jeff Shillitto",
   "license": "ISC",
-  "homepage": "https://bitbucket.org/shotstack/raml-api-definition#readme",
+  "homepage": "https://github.com/shotstack/oas-api-definition",
   "dependencies": {
+    "js-yaml": "^3.13.1",
     "oas-raml-converter": "^1.1.43"
   },
   "devDependencies": {
