@@ -571,20 +571,36 @@ components:
           maximum: 1
       type: object
     Output:
-      description: The video output format
+      description: The video output format.
       properties:
         format:
+          description: >- 
+            `mp4` video or animated `gif`
           enum:
             - mp4
             - gif
           type: string
         resolution:
+          description: The output resoltion of the video.
           enum:
             - preview
             - mobile
             - sd
             - hd
             - '1080'
+          type: string
+        aspectRatio:
+          description: >-
+            The aspect ratio (shape) of the video. Useful for social media sites. Options are:
+            <ul>
+              <li>`16:9` - regular landscape/horizontal aspect ratio (default)</li>
+              <li>`9:16` - vertical/portrait aspect ratio.</li>
+              <li>`1:1` - square aspect ratio.</li>
+            </ul>
+          enum:
+            - '16:9'
+            - '9:16'
+            - '1:1'
           type: string
       required:
         - format

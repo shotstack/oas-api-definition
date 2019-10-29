@@ -112,7 +112,8 @@ const inputBody = '{
   },
   "output": {
     "format": "mp4",
-    "resolution": "preview"
+    "resolution": "preview",
+    "aspectRatio": "16:9"
   }
 }';
 const headers = {
@@ -322,7 +323,8 @@ Render the contents of a timeline as a video file.
   },
   "output": {
     "format": "mp4",
-    "resolution": "preview"
+    "resolution": "preview",
+    "aspectRatio": "16:9"
   }
 }
 ```
@@ -692,7 +694,8 @@ DeveloperKey
   },
   "output": {
     "format": "mp4",
-    "resolution": "preview"
+    "resolution": "preview",
+    "aspectRatio": "16:9"
   }
 }
 
@@ -705,7 +708,7 @@ DeveloperKey
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |timeline|[Timeline](#schematimeline)|true|none|A timeline represents the contents of a video edit over time, in seconds. A timeline consists of layers called tracks. Tracks are composed of titles, images or video segments referred to as clips which are placed along the track at specific starting point and lasting for a specific amount of time.|
-|output|[Output](#schemaoutput)|true|none|The video output format|
+|output|[Output](#schemaoutput)|true|none|The video output format.|
 
 <h2 id="tocStimeline">Timeline</h2>
 
@@ -1181,19 +1184,21 @@ DeveloperKey
 ```json
 {
   "format": "mp4",
-  "resolution": "preview"
+  "resolution": "preview",
+  "aspectRatio": "16:9"
 }
 
 ```
 
-*The video output format*
+*The video output format.*
 
 ### Properties
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|format|string|true|none|none|
-|resolution|string|true|none|none|
+|format|string|true|none|`mp4` video or animated `gif`|
+|resolution|string|true|none|The output resoltion of the video.|
+|aspectRatio|string|false|none|The aspect ratio (shape) of the video. Useful for social media sites. Options are: <ul>   <li>`16:9` - regular landscape/horizontal aspect ratio (default)</li>   <li>`9:16` - vertical/portrait aspect ratio.</li>   <li>`1:1` - square aspect ratio.</li> </ul>|
 
 #### Enumerated Values
 
@@ -1206,6 +1211,9 @@ DeveloperKey
 |resolution|sd|
 |resolution|hd|
 |resolution|1080|
+|aspectRatio|16:9|
+|aspectRatio|9:16|
+|aspectRatio|1:1|
 
 <h2 id="tocSqueuedresponse">QueuedResponse</h2>
 
@@ -1309,7 +1317,8 @@ DeveloperKey
       },
       "output": {
         "format": "mp4",
-        "resolution": "preview"
+        "resolution": "preview",
+        "aspectRatio": "16:9"
       }
     },
     "created": "string",
@@ -1383,7 +1392,8 @@ DeveloperKey
     },
     "output": {
       "format": "mp4",
-      "resolution": "preview"
+      "resolution": "preview",
+      "aspectRatio": "16:9"
     }
   },
   "created": "string",
