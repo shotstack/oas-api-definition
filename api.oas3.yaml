@@ -4,8 +4,8 @@ info:
   version: v1
   description: >-
     The Shotstack API is a video editing service that allows for the programatic
-    creation of videos using JSON. You can configure an edit and POST it the
-    Shotstack API which will take render your video and provide a file location
+    creation of videos using JSON. You can configure an edit and POST it to the
+    Shotstack API which will render your video and provide a file location
     when complete. For more details check https://shotstack.io
 servers:
   - url: 'https://api.shotstack.io/{version}'
@@ -265,12 +265,56 @@ components:
             - $ref: '#/components/schemas/TitleAsset'
             - $ref: '#/components/schemas/ImageAsset'
             - $ref: '#/components/schemas/VideoAsset'
+            - $ref: '#/components/schemas/HtmlAsset'
         start:
-          description: 'The start position of the Clip on the timeline, in seconds.'
+          description: The start position of the Clip on the timeline, in seconds.
           type: number
         length:
-          description: 'The length, in seconds, the Clip should play for.'
+          description: The length, in seconds, the Clip should play for.
           type: number
+        fit:
+          default: crop
+          description: >-
+            Set how the asset should be scaled to fit the viewport using one of the following options: 
+              <ul>
+                <li>`cover` - stretch the asset to fill the viewport without maintaining the aspect ratio.</li>
+                <li>`contain` - fit the entire asset within the viewport while maintaining the original aspect ratio.</li>
+                <li>`crop` - scale the asset to fill the viewport while maintaining the aspect ratio. The asset will be cropped if it exceeds the bounds of the viewport.</li>
+              </ul>
+          enum:
+            - cover
+            - contain
+            - crop
+          type: string
+        scale:
+          description: >-
+            Scale the asset to a fraction of the viewport size - i.e. setting the scale to 0.5 will scale
+            asset to half the size of the viewport. This is useful for picture-in-picture video and 
+            scaling images such as logos and watermarks.
+          type: number
+        position:
+          default: center
+          description: >- 
+            Place the asset in one of nine predefined positions of the viewport. This is most effective
+            for when the asset is scaled and you want to position the element to a specific position.
+          enum:
+            - top
+            - topRight
+            - right
+            - bottomRight
+            - bottom
+            - bottomLeft
+            - left
+            - topLeft
+            - center
+          type: string
+        offset:
+          description: >-
+            Offset the location of the asset relative to it's position on the
+            viewport. The offset distance is relative to the width of the viewport -
+            for example an x offset of 0.5 will move the asset half the viewport width
+            to the right.
+          $ref: '#/components/schemas/Offset'
         transition:
           $ref: '#/components/schemas/Transition'
         effect:
@@ -424,6 +468,60 @@ components:
       required:
         - type
         - src
+    HtmlAsset:
+      description: >-
+        The HtmlAsset clip type lets you create text based layout and formatting using
+        HTML and CSS. You can also set the height and width of a bounding box for the HTML
+        content to sit within. Text and elements will wrap within the bounding box.
+      type: object
+      properties:
+        type:
+          default: html
+          description: The type of asset - set to <b>html</b> for HTML.
+          type: string
+        html:
+          description: The HTML text string.
+          type: string
+          example: "<p>Hello <b>World</b></p>"
+        css:
+          description: >-
+            The CSS text string to apply styling to the HTML.
+          type: string
+          example: "p { color: #ffffff; } b { color: #ffff00; }"
+        width:
+          description: >-
+            Set the width of the HTML asset bounding box. Text will wrap to fill the bounding box.
+          type: number
+          example: 400
+        height:
+          description: >-
+            Set the width of the HTML asset bounding box. Text and elements will be masked if they exceed the 
+            height of the bounding box.
+          type: number
+          example: 300
+        background:
+          description: >-
+            Apply a background color behind the HTML bounding box using HTML color notation
+            with support for transparency.
+          type: string
+          default: transparent
+        position:
+          default: center
+          description: Place the HTML in one of nine predefined positions within the HTML area.
+          enum:
+            - top
+            - topRight
+            - right
+            - bottomRight
+            - bottom
+            - bottomLeft
+            - left
+            - topLeft
+            - center
+          type: string
+      required:
+        - type
+        - html
     Transition:
       description: In and out transitions for a clip - i.e. fade in and fade out
       properties:
@@ -450,13 +548,25 @@ components:
         x:
           description: >-
             Offset an asset on the horizontal axis (left or right), range varies
-            from -1 to 1.
+            from -1 to 1. Positive numbers move the asset right, negative left.
+            For all assets except titles the distance moved is relative to the width 
+            of the viewport - i.e. an X offset of 0.5 will move the asset half the 
+            screen width to the right.
           type: number
-        'y':
+          format: float
+          minimum: -1
+          maximum: 1
+        y:
           description: >-
             Offset an asset on the vertical axis (up or down), range varies from
-            -1 to 1.
+            -1 to 1. Positive numbers move the asset up, negative down.
+            For all assets except titles the distance moved is relative to the height 
+            of the viewport - i.e. an Y offset of 0.5 will move the asset up half the 
+            screen height.
           type: number
+          format: float
+          minimum: -1
+          maximum: 1
       type: object
     Output:
       description: The video output format

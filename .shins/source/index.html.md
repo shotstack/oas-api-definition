@@ -22,7 +22,7 @@ headingLevel: 2
 
 > Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
 
-The Shotstack API is a video editing service that allows for the programatic creation of videos using JSON. You can configure an edit and POST it the Shotstack API which will take render your video and provide a file location when complete. For more details check https://shotstack.io
+The Shotstack API is a video editing service that allows for the programatic creation of videos using JSON. You can configure an edit and POST it to the Shotstack API which will render your video and provide a file location when complete. For more details check https://shotstack.io
 
 Base URLs:
 
@@ -86,12 +86,19 @@ const inputBody = '{
               "background": "string",
               "position": "center",
               "offset": {
-                "x": 0,
-                "y": 0
+                "x": -1,
+                "y": -1
               }
             },
             "start": 0,
             "length": 0,
+            "fit": "crop",
+            "scale": 0,
+            "position": "center",
+            "offset": {
+              "x": -1,
+              "y": -1
+            },
             "transition": {
               "in": "fade",
               "out": "fade"
@@ -289,12 +296,19 @@ Render the contents of a timeline as a video file.
               "background": "string",
               "position": "center",
               "offset": {
-                "x": 0,
-                "y": 0
+                "x": -1,
+                "y": -1
               }
             },
             "start": 0,
             "length": 0,
+            "fit": "crop",
+            "scale": 0,
+            "position": "center",
+            "offset": {
+              "x": -1,
+              "y": -1
+            },
             "transition": {
               "in": "fade",
               "out": "fade"
@@ -652,12 +666,19 @@ DeveloperKey
               "background": "string",
               "position": "center",
               "offset": {
-                "x": 0,
-                "y": 0
+                "x": -1,
+                "y": -1
               }
             },
             "start": 0,
             "length": 0,
+            "fit": "crop",
+            "scale": 0,
+            "position": "center",
+            "offset": {
+              "x": -1,
+              "y": -1
+            },
             "transition": {
               "in": "fade",
               "out": "fade"
@@ -710,12 +731,19 @@ DeveloperKey
             "background": "string",
             "position": "center",
             "offset": {
-              "x": 0,
-              "y": 0
+              "x": -1,
+              "y": -1
             }
           },
           "start": 0,
           "length": 0,
+          "fit": "crop",
+          "scale": 0,
+          "position": "center",
+          "offset": {
+            "x": -1,
+            "y": -1
+          },
           "transition": {
             "in": "fade",
             "out": "fade"
@@ -786,12 +814,19 @@ DeveloperKey
         "background": "string",
         "position": "center",
         "offset": {
-          "x": 0,
-          "y": 0
+          "x": -1,
+          "y": -1
         }
       },
       "start": 0,
       "length": 0,
+      "fit": "crop",
+      "scale": 0,
+      "position": "center",
+      "offset": {
+        "x": -1,
+        "y": -1
+      },
       "transition": {
         "in": "fade",
         "out": "fade"
@@ -827,12 +862,19 @@ DeveloperKey
     "background": "string",
     "position": "center",
     "offset": {
-      "x": 0,
-      "y": 0
+      "x": -1,
+      "y": -1
     }
   },
   "start": 0,
   "length": 0,
+  "fit": "crop",
+  "scale": 0,
+  "position": "center",
+  "offset": {
+    "x": -1,
+    "y": -1
+  },
   "transition": {
     "in": "fade",
     "out": "fade"
@@ -869,12 +911,22 @@ DeveloperKey
 |---|---|---|---|---|
 |» *anonymous*|[VideoAsset](#schemavideoasset)|false|none|The VideoAsset is used to create video sequences from video files. The src must be a publicly accesible URL to a video resource such as an mp4 file. The in and out attributes of the parent Clip let you trim the video file by setting the start and end point to use.|
 
+*xor*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» *anonymous*|[HtmlAsset](#schemahtmlasset)|false|none|The HtmlAsset clip type lets you create text based layout and formatting using HTML and CSS. You can also set the height and width of a bounding box for the HTML content to sit within. Text and elements will wrap within the bounding box.|
+
 *continued*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |start|number|true|none|The start position of the Clip on the timeline, in seconds.|
 |length|number|true|none|The length, in seconds, the Clip should play for.|
+|fit|string|false|none|Set how the asset should be scaled to fit the viewport using one of the following options:    <ul>     <li>`cover` - stretch the asset to fill the viewport without maintaining the aspect ratio.</li>     <li>`contain` - fit the entire asset within the viewport while maintaining the original aspect ratio.</li>     <li>`crop` - scale the asset to fill the viewport while maintaining the aspect ratio. The asset will be cropped if it exceeds the bounds of the viewport.</li>   </ul>|
+|scale|number|false|none|Scale the asset to a fraction of the viewport size - i.e. setting the scale to 0.5 will scale asset to half the size of the viewport. This is useful for picture-in-picture video and  scaling images such as logos and watermarks.|
+|position|string|false|none|Place the asset in one of nine predefined positions of the viewport. This is most effective for when the asset is scaled and you want to position the element to a specific position.|
+|offset|[Offset](#schemaoffset)|false|none|Offset the location of the asset relative to it's position on the viewport. The offset distance is relative to the width of the viewport - for example an x offset of 0.5 will move the asset half the viewport width to the right.|
 |transition|[Transition](#schematransition)|false|none|In and out transitions for a clip - i.e. fade in and fade out|
 |effect|string|false|none|A motion effect to apply to the Clip.|
 |filter|string|false|none|A filter effect to apply to the Clip.|
@@ -883,6 +935,18 @@ DeveloperKey
 
 |Property|Value|
 |---|---|
+|fit|cover|
+|fit|contain|
+|fit|crop|
+|position|top|
+|position|topRight|
+|position|right|
+|position|bottomRight|
+|position|bottom|
+|position|bottomLeft|
+|position|left|
+|position|topLeft|
+|position|center|
 |effect|zoomIn|
 |effect|zoomOut|
 |effect|slideLeft|
@@ -911,8 +975,8 @@ DeveloperKey
   "background": "string",
   "position": "center",
   "offset": {
-    "x": 0,
-    "y": 0
+    "x": -1,
+    "y": -1
   }
 }
 
@@ -1010,6 +1074,51 @@ DeveloperKey
 |trim|number|false|none|The start trim point of the clip, in seconds (defaults to 0). Videos will start from the in trim point. The video will play until the file ends or the Clip length is reached.|
 |volume|number|false|none|Set the volume for the clip between 0 and 1 where 0 is muted and 1 is full volume (defaults to 0).|
 
+<h2 id="tocShtmlasset">HtmlAsset</h2>
+
+<a id="schemahtmlasset"></a>
+
+```json
+{
+  "type": "html",
+  "html": "<p>Hello <b>World</b></p>",
+  "css": "p { color: #ffffff; } b { color: #ffff00; }",
+  "width": 400,
+  "height": 300,
+  "background": "transparent",
+  "position": "center"
+}
+
+```
+
+*The HtmlAsset clip type lets you create text based layout and formatting using HTML and CSS. You can also set the height and width of a bounding box for the HTML content to sit within. Text and elements will wrap within the bounding box.*
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|type|string|true|none|The type of asset - set to <b>html</b> for HTML.|
+|html|string|true|none|The HTML text string.|
+|css|string|false|none|The CSS text string to apply styling to the HTML.|
+|width|number|false|none|Set the width of the HTML asset bounding box. Text will wrap to fill the bounding box.|
+|height|number|false|none|Set the width of the HTML asset bounding box. Text and elements will be masked if they exceed the  height of the bounding box.|
+|background|string|false|none|Apply a background color behind the HTML bounding box using HTML color notation with support for transparency.|
+|position|string|false|none|Place the HTML in one of nine predefined positions within the HTML area.|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|position|top|
+|position|topRight|
+|position|right|
+|position|bottomRight|
+|position|bottom|
+|position|bottomLeft|
+|position|left|
+|position|topLeft|
+|position|center|
+
 <h2 id="tocStransition">Transition</h2>
 
 <a id="schematransition"></a>
@@ -1048,8 +1157,8 @@ DeveloperKey
 
 ```json
 {
-  "x": 0,
-  "y": 0
+  "x": -1,
+  "y": -1
 }
 
 ```
@@ -1060,8 +1169,8 @@ DeveloperKey
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|x|number|false|none|Offset an asset on the horizontal axis (left or right), range varies from -1 to 1.|
-|y|number|false|none|Offset an asset on the vertical axis (up or down), range varies from -1 to 1.|
+|x|number(float)|false|none|Offset an asset on the horizontal axis (left or right), range varies from -1 to 1. Positive numbers move the asset right, negative left. For all assets except titles the distance moved is relative to the width  of the viewport - i.e. an X offset of 0.5 will move the asset half the  screen width to the right.|
+|y|number(float)|false|none|Offset an asset on the vertical axis (up or down), range varies from -1 to 1. Positive numbers move the asset up, negative down. For all assets except titles the distance moved is relative to the height  of the viewport - i.e. an Y offset of 0.5 will move the asset up half the  screen height.|
 
 <h2 id="tocSoutput">Output</h2>
 
@@ -1172,12 +1281,19 @@ DeveloperKey
                   "background": "string",
                   "position": "center",
                   "offset": {
-                    "x": 0,
-                    "y": 0
+                    "x": -1,
+                    "y": -1
                   }
                 },
                 "start": 0,
                 "length": 0,
+                "fit": "crop",
+                "scale": 0,
+                "position": "center",
+                "offset": {
+                  "x": -1,
+                  "y": -1
+                },
                 "transition": {
                   "in": "fade",
                   "out": "fade"
@@ -1239,12 +1355,19 @@ DeveloperKey
                 "background": "string",
                 "position": "center",
                 "offset": {
-                  "x": 0,
-                  "y": 0
+                  "x": -1,
+                  "y": -1
                 }
               },
               "start": 0,
               "length": 0,
+              "fit": "crop",
+              "scale": 0,
+              "position": "center",
+              "offset": {
+                "x": -1,
+                "y": -1
+              },
               "transition": {
                 "in": "fade",
                 "out": "fade"

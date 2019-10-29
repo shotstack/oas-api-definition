@@ -160,6 +160,11 @@
                   </li>
                 
                   <li>
+                    <a href="#tocshtmlasset" class="toc-h2 toc-link" data-title="">HtmlAsset</a>
+                    
+                  </li>
+                
+                  <li>
                     <a href="#tocstransition" class="toc-h2 toc-link" data-title="">Transition</a>
                     
                   </li>
@@ -213,7 +218,7 @@
 <blockquote>
 <p>Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.</p>
 </blockquote>
-<p>The Shotstack API is a video editing service that allows for the programatic creation of videos using JSON. You can configure an edit and POST it the Shotstack API which will take render your video and provide a file location when complete. For more details check <a href="https://shotstack.io">https://shotstack.io</a></p>
+<p>The Shotstack API is a video editing service that allows for the programatic creation of videos using JSON. You can configure an edit and POST it to the Shotstack API which will render your video and provide a file location when complete. For more details check <a href="https://shotstack.io">https://shotstack.io</a></p>
 <p>Base URLs:</p>
 <ul>
 <li>
@@ -281,12 +286,19 @@ curl -X POST https://api.shotstack.io/{version}/render \
               "background": "string",
               "position": "center",
               "offset": {
-                "x": 0,
-                "y": 0
+                "x": -1,
+                "y": -1
               }
             },
             "start": 0,
             "length": 0,
+            "fit": "crop",
+            "scale": 0,
+            "position": "center",
+            "offset": {
+              "x": -1,
+              "y": -1
+            },
             "transition": {
               "in": "fade",
               "out": "fade"
@@ -464,12 +476,19 @@ System.out.println(response.toString());
               <span class="hljs-attr">"background"</span>: <span class="hljs-string">"string"</span>,
               <span class="hljs-attr">"position"</span>: <span class="hljs-string">"center"</span>,
               <span class="hljs-attr">"offset"</span>: {
-                <span class="hljs-attr">"x"</span>: <span class="hljs-number">0</span>,
-                <span class="hljs-attr">"y"</span>: <span class="hljs-number">0</span>
+                <span class="hljs-attr">"x"</span>: <span class="hljs-number">-1</span>,
+                <span class="hljs-attr">"y"</span>: <span class="hljs-number">-1</span>
               }
             },
             <span class="hljs-attr">"start"</span>: <span class="hljs-number">0</span>,
             <span class="hljs-attr">"length"</span>: <span class="hljs-number">0</span>,
+            <span class="hljs-attr">"fit"</span>: <span class="hljs-string">"crop"</span>,
+            <span class="hljs-attr">"scale"</span>: <span class="hljs-number">0</span>,
+            <span class="hljs-attr">"position"</span>: <span class="hljs-string">"center"</span>,
+            <span class="hljs-attr">"offset"</span>: {
+              <span class="hljs-attr">"x"</span>: <span class="hljs-number">-1</span>,
+              <span class="hljs-attr">"y"</span>: <span class="hljs-number">-1</span>
+            },
             <span class="hljs-attr">"transition"</span>: {
               <span class="hljs-attr">"in"</span>: <span class="hljs-string">"fade"</span>,
               <span class="hljs-attr">"out"</span>: <span class="hljs-string">"fade"</span>
@@ -850,12 +869,19 @@ DeveloperKey
               <span class="hljs-attr">"background"</span>: <span class="hljs-string">"string"</span>,
               <span class="hljs-attr">"position"</span>: <span class="hljs-string">"center"</span>,
               <span class="hljs-attr">"offset"</span>: {
-                <span class="hljs-attr">"x"</span>: <span class="hljs-number">0</span>,
-                <span class="hljs-attr">"y"</span>: <span class="hljs-number">0</span>
+                <span class="hljs-attr">"x"</span>: <span class="hljs-number">-1</span>,
+                <span class="hljs-attr">"y"</span>: <span class="hljs-number">-1</span>
               }
             },
             <span class="hljs-attr">"start"</span>: <span class="hljs-number">0</span>,
             <span class="hljs-attr">"length"</span>: <span class="hljs-number">0</span>,
+            <span class="hljs-attr">"fit"</span>: <span class="hljs-string">"crop"</span>,
+            <span class="hljs-attr">"scale"</span>: <span class="hljs-number">0</span>,
+            <span class="hljs-attr">"position"</span>: <span class="hljs-string">"center"</span>,
+            <span class="hljs-attr">"offset"</span>: {
+              <span class="hljs-attr">"x"</span>: <span class="hljs-number">-1</span>,
+              <span class="hljs-attr">"y"</span>: <span class="hljs-number">-1</span>
+            },
             <span class="hljs-attr">"transition"</span>: {
               <span class="hljs-attr">"in"</span>: <span class="hljs-string">"fade"</span>,
               <span class="hljs-attr">"out"</span>: <span class="hljs-string">"fade"</span>
@@ -924,12 +950,19 @@ DeveloperKey
             <span class="hljs-attr">"background"</span>: <span class="hljs-string">"string"</span>,
             <span class="hljs-attr">"position"</span>: <span class="hljs-string">"center"</span>,
             <span class="hljs-attr">"offset"</span>: {
-              <span class="hljs-attr">"x"</span>: <span class="hljs-number">0</span>,
-              <span class="hljs-attr">"y"</span>: <span class="hljs-number">0</span>
+              <span class="hljs-attr">"x"</span>: <span class="hljs-number">-1</span>,
+              <span class="hljs-attr">"y"</span>: <span class="hljs-number">-1</span>
             }
           },
           <span class="hljs-attr">"start"</span>: <span class="hljs-number">0</span>,
           <span class="hljs-attr">"length"</span>: <span class="hljs-number">0</span>,
+          <span class="hljs-attr">"fit"</span>: <span class="hljs-string">"crop"</span>,
+          <span class="hljs-attr">"scale"</span>: <span class="hljs-number">0</span>,
+          <span class="hljs-attr">"position"</span>: <span class="hljs-string">"center"</span>,
+          <span class="hljs-attr">"offset"</span>: {
+            <span class="hljs-attr">"x"</span>: <span class="hljs-number">-1</span>,
+            <span class="hljs-attr">"y"</span>: <span class="hljs-number">-1</span>
+          },
           <span class="hljs-attr">"transition"</span>: {
             <span class="hljs-attr">"in"</span>: <span class="hljs-string">"fade"</span>,
             <span class="hljs-attr">"out"</span>: <span class="hljs-string">"fade"</span>
@@ -1053,12 +1086,19 @@ DeveloperKey
         <span class="hljs-attr">"background"</span>: <span class="hljs-string">"string"</span>,
         <span class="hljs-attr">"position"</span>: <span class="hljs-string">"center"</span>,
         <span class="hljs-attr">"offset"</span>: {
-          <span class="hljs-attr">"x"</span>: <span class="hljs-number">0</span>,
-          <span class="hljs-attr">"y"</span>: <span class="hljs-number">0</span>
+          <span class="hljs-attr">"x"</span>: <span class="hljs-number">-1</span>,
+          <span class="hljs-attr">"y"</span>: <span class="hljs-number">-1</span>
         }
       },
       <span class="hljs-attr">"start"</span>: <span class="hljs-number">0</span>,
       <span class="hljs-attr">"length"</span>: <span class="hljs-number">0</span>,
+      <span class="hljs-attr">"fit"</span>: <span class="hljs-string">"crop"</span>,
+      <span class="hljs-attr">"scale"</span>: <span class="hljs-number">0</span>,
+      <span class="hljs-attr">"position"</span>: <span class="hljs-string">"center"</span>,
+      <span class="hljs-attr">"offset"</span>: {
+        <span class="hljs-attr">"x"</span>: <span class="hljs-number">-1</span>,
+        <span class="hljs-attr">"y"</span>: <span class="hljs-number">-1</span>
+      },
       <span class="hljs-attr">"transition"</span>: {
         <span class="hljs-attr">"in"</span>: <span class="hljs-string">"fade"</span>,
         <span class="hljs-attr">"out"</span>: <span class="hljs-string">"fade"</span>
@@ -1104,12 +1144,19 @@ DeveloperKey
     <span class="hljs-attr">"background"</span>: <span class="hljs-string">"string"</span>,
     <span class="hljs-attr">"position"</span>: <span class="hljs-string">"center"</span>,
     <span class="hljs-attr">"offset"</span>: {
-      <span class="hljs-attr">"x"</span>: <span class="hljs-number">0</span>,
-      <span class="hljs-attr">"y"</span>: <span class="hljs-number">0</span>
+      <span class="hljs-attr">"x"</span>: <span class="hljs-number">-1</span>,
+      <span class="hljs-attr">"y"</span>: <span class="hljs-number">-1</span>
     }
   },
   <span class="hljs-attr">"start"</span>: <span class="hljs-number">0</span>,
   <span class="hljs-attr">"length"</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-attr">"fit"</span>: <span class="hljs-string">"crop"</span>,
+  <span class="hljs-attr">"scale"</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-attr">"position"</span>: <span class="hljs-string">"center"</span>,
+  <span class="hljs-attr">"offset"</span>: {
+    <span class="hljs-attr">"x"</span>: <span class="hljs-number">-1</span>,
+    <span class="hljs-attr">"y"</span>: <span class="hljs-number">-1</span>
+  },
   <span class="hljs-attr">"transition"</span>: {
     <span class="hljs-attr">"in"</span>: <span class="hljs-string">"fade"</span>,
     <span class="hljs-attr">"out"</span>: <span class="hljs-string">"fade"</span>
@@ -1204,6 +1251,27 @@ DeveloperKey
 </tr>
 </tbody>
 </table>
+<p><em>xor</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>» <em>anonymous</em></td>
+<td><a href="#schemahtmlasset">HtmlAsset</a></td>
+<td>false</td>
+<td>none</td>
+<td>The HtmlAsset clip type lets you create text based layout and formatting using HTML and CSS. You can also set the height and width of a bounding box for the HTML content to sit within. Text and elements will wrap within the bounding box.</td>
+</tr>
+</tbody>
+</table>
 <p><em>continued</em></p>
 <table>
 <thead>
@@ -1229,6 +1297,34 @@ DeveloperKey
 <td>true</td>
 <td>none</td>
 <td>The length, in seconds, the Clip should play for.</td>
+</tr>
+<tr>
+<td>fit</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>Set how the asset should be scaled to fit the viewport using one of the following options:    <ul>     <li><code>cover</code> - stretch the asset to fill the viewport without maintaining the aspect ratio.</li>     <li><code>contain</code> - fit the entire asset within the viewport while maintaining the original aspect ratio.</li>     <li><code>crop</code> - scale the asset to fill the viewport while maintaining the aspect ratio. The asset will be cropped if it exceeds the bounds of the viewport.</li>   </ul></td>
+</tr>
+<tr>
+<td>scale</td>
+<td>number</td>
+<td>false</td>
+<td>none</td>
+<td>Scale the asset to a fraction of the viewport size - i.e. setting the scale to 0.5 will scale asset to half the size of the viewport. This is useful for picture-in-picture video and  scaling images such as logos and watermarks.</td>
+</tr>
+<tr>
+<td>position</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>Place the asset in one of nine predefined positions of the viewport. This is most effective for when the asset is scaled and you want to position the element to a specific position.</td>
+</tr>
+<tr>
+<td>offset</td>
+<td><a href="#schemaoffset">Offset</a></td>
+<td>false</td>
+<td>none</td>
+<td>Offset the location of the asset relative to it's position on the viewport. The offset distance is relative to the width of the viewport - for example an x offset of 0.5 will move the asset half the viewport width to the right.</td>
 </tr>
 <tr>
 <td>transition</td>
@@ -1262,6 +1358,54 @@ DeveloperKey
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>fit</td>
+<td>cover</td>
+</tr>
+<tr>
+<td>fit</td>
+<td>contain</td>
+</tr>
+<tr>
+<td>fit</td>
+<td>crop</td>
+</tr>
+<tr>
+<td>position</td>
+<td>top</td>
+</tr>
+<tr>
+<td>position</td>
+<td>topRight</td>
+</tr>
+<tr>
+<td>position</td>
+<td>right</td>
+</tr>
+<tr>
+<td>position</td>
+<td>bottomRight</td>
+</tr>
+<tr>
+<td>position</td>
+<td>bottom</td>
+</tr>
+<tr>
+<td>position</td>
+<td>bottomLeft</td>
+</tr>
+<tr>
+<td>position</td>
+<td>left</td>
+</tr>
+<tr>
+<td>position</td>
+<td>topLeft</td>
+</tr>
+<tr>
+<td>position</td>
+<td>center</td>
+</tr>
 <tr>
 <td>effect</td>
 <td>zoomIn</td>
@@ -1327,8 +1471,8 @@ DeveloperKey
   <span class="hljs-attr">"background"</span>: <span class="hljs-string">"string"</span>,
   <span class="hljs-attr">"position"</span>: <span class="hljs-string">"center"</span>,
   <span class="hljs-attr">"offset"</span>: {
-    <span class="hljs-attr">"x"</span>: <span class="hljs-number">0</span>,
-    <span class="hljs-attr">"y"</span>: <span class="hljs-number">0</span>
+    <span class="hljs-attr">"x"</span>: <span class="hljs-number">-1</span>,
+    <span class="hljs-attr">"y"</span>: <span class="hljs-number">-1</span>
   }
 }
 
@@ -1609,6 +1753,130 @@ DeveloperKey
 </tr>
 </tbody>
 </table>
+<h2 id="tocshtmlasset">HtmlAsset</h2>
+<p><a id="schemahtmlasset"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"html"</span>,
+  <span class="hljs-attr">"html"</span>: <span class="hljs-string">"&lt;p&gt;Hello &lt;b&gt;World&lt;/b&gt;&lt;/p&gt;"</span>,
+  <span class="hljs-attr">"css"</span>: <span class="hljs-string">"p { color: #ffffff; } b { color: #ffff00; }"</span>,
+  <span class="hljs-attr">"width"</span>: <span class="hljs-number">400</span>,
+  <span class="hljs-attr">"height"</span>: <span class="hljs-number">300</span>,
+  <span class="hljs-attr">"background"</span>: <span class="hljs-string">"transparent"</span>,
+  <span class="hljs-attr">"position"</span>: <span class="hljs-string">"center"</span>
+}
+
+</code></pre>
+<p><em>The HtmlAsset clip type lets you create text based layout and formatting using HTML and CSS. You can also set the height and width of a bounding box for the HTML content to sit within. Text and elements will wrap within the bounding box.</em></p>
+<h3 id="properties">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>The type of asset - set to <b>html</b> for HTML.</td>
+</tr>
+<tr>
+<td>html</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>The HTML text string.</td>
+</tr>
+<tr>
+<td>css</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>The CSS text string to apply styling to the HTML.</td>
+</tr>
+<tr>
+<td>width</td>
+<td>number</td>
+<td>false</td>
+<td>none</td>
+<td>Set the width of the HTML asset bounding box. Text will wrap to fill the bounding box.</td>
+</tr>
+<tr>
+<td>height</td>
+<td>number</td>
+<td>false</td>
+<td>none</td>
+<td>Set the width of the HTML asset bounding box. Text and elements will be masked if they exceed the  height of the bounding box.</td>
+</tr>
+<tr>
+<td>background</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>Apply a background color behind the HTML bounding box using HTML color notation with support for transparency.</td>
+</tr>
+<tr>
+<td>position</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>Place the HTML in one of nine predefined positions within the HTML area.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="enumerated-values">Enumerated Values</h4>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>position</td>
+<td>top</td>
+</tr>
+<tr>
+<td>position</td>
+<td>topRight</td>
+</tr>
+<tr>
+<td>position</td>
+<td>right</td>
+</tr>
+<tr>
+<td>position</td>
+<td>bottomRight</td>
+</tr>
+<tr>
+<td>position</td>
+<td>bottom</td>
+</tr>
+<tr>
+<td>position</td>
+<td>bottomLeft</td>
+</tr>
+<tr>
+<td>position</td>
+<td>left</td>
+</tr>
+<tr>
+<td>position</td>
+<td>topLeft</td>
+</tr>
+<tr>
+<td>position</td>
+<td>center</td>
+</tr>
+</tbody>
+</table>
 <h2 id="tocstransition">Transition</h2>
 <p><a id="schematransition"></a></p>
 <pre class="highlight tab tab-json"><code>{
@@ -1684,8 +1952,8 @@ DeveloperKey
 <h2 id="tocsoffset">Offset</h2>
 <p><a id="schemaoffset"></a></p>
 <pre class="highlight tab tab-json"><code>{
-  <span class="hljs-attr">"x"</span>: <span class="hljs-number">0</span>,
-  <span class="hljs-attr">"y"</span>: <span class="hljs-number">0</span>
+  <span class="hljs-attr">"x"</span>: <span class="hljs-number">-1</span>,
+  <span class="hljs-attr">"y"</span>: <span class="hljs-number">-1</span>
 }
 
 </code></pre>
@@ -1704,17 +1972,17 @@ DeveloperKey
 <tbody>
 <tr>
 <td>x</td>
-<td>number</td>
+<td>number(float)</td>
 <td>false</td>
 <td>none</td>
-<td>Offset an asset on the horizontal axis (left or right), range varies from -1 to 1.</td>
+<td>Offset an asset on the horizontal axis (left or right), range varies from -1 to 1. Positive numbers move the asset right, negative left. For all assets except titles the distance moved is relative to the width  of the viewport - i.e. an X offset of 0.5 will move the asset half the  screen width to the right.</td>
 </tr>
 <tr>
 <td>y</td>
-<td>number</td>
+<td>number(float)</td>
 <td>false</td>
 <td>none</td>
-<td>Offset an asset on the vertical axis (up or down), range varies from -1 to 1.</td>
+<td>Offset an asset on the vertical axis (up or down), range varies from -1 to 1. Positive numbers move the asset up, negative down. For all assets except titles the distance moved is relative to the height  of the viewport - i.e. an Y offset of 0.5 will move the asset up half the  screen height.</td>
 </tr>
 </tbody>
 </table>
@@ -1907,12 +2175,19 @@ DeveloperKey
                   <span class="hljs-attr">"background"</span>: <span class="hljs-string">"string"</span>,
                   <span class="hljs-attr">"position"</span>: <span class="hljs-string">"center"</span>,
                   <span class="hljs-attr">"offset"</span>: {
-                    <span class="hljs-attr">"x"</span>: <span class="hljs-number">0</span>,
-                    <span class="hljs-attr">"y"</span>: <span class="hljs-number">0</span>
+                    <span class="hljs-attr">"x"</span>: <span class="hljs-number">-1</span>,
+                    <span class="hljs-attr">"y"</span>: <span class="hljs-number">-1</span>
                   }
                 },
                 <span class="hljs-attr">"start"</span>: <span class="hljs-number">0</span>,
                 <span class="hljs-attr">"length"</span>: <span class="hljs-number">0</span>,
+                <span class="hljs-attr">"fit"</span>: <span class="hljs-string">"crop"</span>,
+                <span class="hljs-attr">"scale"</span>: <span class="hljs-number">0</span>,
+                <span class="hljs-attr">"position"</span>: <span class="hljs-string">"center"</span>,
+                <span class="hljs-attr">"offset"</span>: {
+                  <span class="hljs-attr">"x"</span>: <span class="hljs-number">-1</span>,
+                  <span class="hljs-attr">"y"</span>: <span class="hljs-number">-1</span>
+                },
                 <span class="hljs-attr">"transition"</span>: {
                   <span class="hljs-attr">"in"</span>: <span class="hljs-string">"fade"</span>,
                   <span class="hljs-attr">"out"</span>: <span class="hljs-string">"fade"</span>
@@ -1997,12 +2272,19 @@ DeveloperKey
                 <span class="hljs-attr">"background"</span>: <span class="hljs-string">"string"</span>,
                 <span class="hljs-attr">"position"</span>: <span class="hljs-string">"center"</span>,
                 <span class="hljs-attr">"offset"</span>: {
-                  <span class="hljs-attr">"x"</span>: <span class="hljs-number">0</span>,
-                  <span class="hljs-attr">"y"</span>: <span class="hljs-number">0</span>
+                  <span class="hljs-attr">"x"</span>: <span class="hljs-number">-1</span>,
+                  <span class="hljs-attr">"y"</span>: <span class="hljs-number">-1</span>
                 }
               },
               <span class="hljs-attr">"start"</span>: <span class="hljs-number">0</span>,
               <span class="hljs-attr">"length"</span>: <span class="hljs-number">0</span>,
+              <span class="hljs-attr">"fit"</span>: <span class="hljs-string">"crop"</span>,
+              <span class="hljs-attr">"scale"</span>: <span class="hljs-number">0</span>,
+              <span class="hljs-attr">"position"</span>: <span class="hljs-string">"center"</span>,
+              <span class="hljs-attr">"offset"</span>: {
+                <span class="hljs-attr">"x"</span>: <span class="hljs-number">-1</span>,
+                <span class="hljs-attr">"y"</span>: <span class="hljs-number">-1</span>
+              },
               <span class="hljs-attr">"transition"</span>: {
                 <span class="hljs-attr">"in"</span>: <span class="hljs-string">"fade"</span>,
                 <span class="hljs-attr">"out"</span>: <span class="hljs-string">"fade"</span>
