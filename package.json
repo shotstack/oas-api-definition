@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "./build.sh",
     "docs": "./build-docs.sh",
-    "start": "cd .shins && npm run start"
+    "start": "cd .shins && npm run start",
+    "deploy": "aws s3 sync build/docs/ s3://shotstack.io/docs/api"
   },
   "repository": {
     "type": "git",
