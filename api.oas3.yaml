@@ -529,6 +529,7 @@ components:
           description: The transition in
           enum:
             - fade
+            - reveal
             - wipeLeft
             - wipeRight
           type: string
@@ -536,6 +537,7 @@ components:
           description: The transition out
           enum:
             - fade
+            - reveal
             - wipeLeft
             - wipeRight
           type: string

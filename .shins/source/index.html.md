@@ -1145,9 +1145,11 @@ DeveloperKey
 |Property|Value|
 |---|---|
 |in|fade|
+|in|reveal|
 |in|wipeLeft|
 |in|wipeRight|
 |out|fade|
+|out|reveal|
 |out|wipeLeft|
 |out|wipeRight|
 
