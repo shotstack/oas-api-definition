@@ -27,6 +27,18 @@ You can preview the docs in the browser using:
 npm run start
 ```
 
+## Generating SDK's
+
+Requires the [OpenAPI Generator](https://openapi-generator.tech/) to be installed.
+
+Once installed generate SDK's for PHP, Node and Ruby:
+
+```
+npm run sdks
+```
+
+Note: The generated SDK's need some modifications to work correctly, and need to be copied to the respective project repos at this stage.
+
 
 ### Linking Shins as a Subtree
 

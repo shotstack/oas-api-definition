@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "./build.sh",
+    "build": "./build-docs.sh && ./build-sdks.sh",
     "docs": "./build-docs.sh",
+    "sdks": "./build-sdks.sh",
     "start": "cd .shins && npm run start",
     "deploy": "aws s3 sync build/docs/ s3://shotstack.io/docs/api"
   },
