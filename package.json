@@ -9,7 +9,7 @@
     "docs": "./build-docs.sh",
     "sdks": "./build-sdks.sh",
     "start": "cd .shins && npm run start",
-    "deploy": "aws s3 sync build/docs/ s3://shotstack.io/docs/api"
+    "deploy:docs": "aws s3 sync build/docs/ s3://shotstack.io/docs/api"
   },
   "repository": {
     "type": "git",

@@ -27,6 +27,15 @@ You can preview the docs in the browser using:
 npm run start
 ```
 
+Deploy docs using:
+
+```
+npm run deploy:docs
+```
+
+Note: this deploys to Shotstack's S3 docs bucket, if you wish to host your own documentation, modify the script within the `package.json` file.
+
+
 ## Generating SDK's
 
 Requires the [OpenAPI Generator](https://openapi-generator.tech/) to be installed.

@@ -251,21 +251,22 @@ components:
       type: object
     Clip:
       description: >-
-        A clip is a container for a specific type of asset, i.e. a title, photo
-        or video. You use a Clip to define when an asset will display on the
-        timeline, how long it will play for and transitions and effects to apply
+        A clip is a container for a specific type of asset, i.e. a title, image, video,
+        audio or html. You use a Clip to define when an asset will display on the
+        timeline, how long it will play for and transitions, filters and effects to apply
         to it.
       properties:
         asset:
           description: >-
             The type of asset to display for the duration of this Clip. Value
-            must be one of <b>TitleAsset</b>, <b>ImageAsset</b> or
-            <b>VideoAsset</b>.
+            must be one of <b>TitleAsset</b>, <b>ImageAsset</b>, <b>VideoAsset</b>,
+            <b>HtmlAsset</b> or <b>AudioAsset</b>
           oneOf:
             - $ref: '#/components/schemas/TitleAsset'
             - $ref: '#/components/schemas/ImageAsset'
             - $ref: '#/components/schemas/VideoAsset'
             - $ref: '#/components/schemas/HtmlAsset'
+            - $ref: '#/components/schemas/AudioAsset'
         start:
           description: The start position of the Clip on the timeline, in seconds.
           type: number
@@ -441,8 +442,7 @@ components:
       description: >-
         The VideoAsset is used to create video sequences from video files. The
         src must be a publicly accesible URL to a video resource such as an mp4
-        file. The in and out attributes of the parent Clip let you trim the
-        video file by setting the start and end point to use.
+        file.
       type: object
       properties:
         type:
@@ -456,13 +456,13 @@ components:
           type: string
         trim:
           description: >-
-            The start trim point of the clip, in seconds (defaults to 0). Videos
+            The start trim point of the video clip, in seconds (defaults to 0). Videos
             will start from the in trim point. The video will play until the
             file ends or the Clip length is reached.
           type: number
         volume:
           description: >-
-            Set the volume for the clip between 0 and 1 where 0 is muted and 1
+            Set the volume for the video clip between 0 and 1 where 0 is muted and 1
             is full volume (defaults to 0).
           type: number
       required:
@@ -522,6 +522,36 @@ components:
       required:
         - type
         - html
+    AudioAsset:
+      description: >-
+        The AudioAsset is used to add sound effects and audio at specific intervals on
+        the timeline. The src must be a publicly accesible URL to an audio resource such 
+        as an mp3 file.
+      type: object
+      properties:
+        type:
+          default: audio
+          description: The type of asset - set to <b>audio</b> for audio assets.
+          type: string
+        src:
+          description: >-
+            The audio source URL. The URL must be publicly accessible or include
+            credentials.
+          type: string
+        trim:
+          description: >-
+            The start trim point of the audio clip, in seconds (defaults to 0). Audio
+            will start from the in trim point. The audio will play until the
+            file ends or the Clip length is reached.
+          type: number
+        volume:
+          description: >-
+            Set the volume for the audio clip between 0 and 1 where 0 is muted and 1
+            is full volume (defaults to 1).
+          type: number
+      required:
+        - type
+        - src
     Transition:
       description: In and out transitions for a clip - i.e. fade in and fade out
       properties:

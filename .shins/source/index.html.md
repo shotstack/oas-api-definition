@@ -888,13 +888,13 @@ DeveloperKey
 
 ```
 
-*A clip is a container for a specific type of asset, i.e. a title, photo or video. You use a Clip to define when an asset will display on the timeline, how long it will play for and transitions and effects to apply to it.*
+*A clip is a container for a specific type of asset, i.e. a title, image, video, audio or html. You use a Clip to define when an asset will display on the timeline, how long it will play for and transitions, filters and effects to apply to it.*
 
 ### Properties
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|asset|any|true|none|The type of asset to display for the duration of this Clip. Value must be one of <b>TitleAsset</b>, <b>ImageAsset</b> or <b>VideoAsset</b>.|
+|asset|any|true|none|The type of asset to display for the duration of this Clip. Value must be one of <b>TitleAsset</b>, <b>ImageAsset</b>, <b>VideoAsset</b>, <b>HtmlAsset</b> or <b>AudioAsset</b>|
 
 *oneOf*
 
@@ -912,13 +912,19 @@ DeveloperKey
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» *anonymous*|[VideoAsset](#schemavideoasset)|false|none|The VideoAsset is used to create video sequences from video files. The src must be a publicly accesible URL to a video resource such as an mp4 file. The in and out attributes of the parent Clip let you trim the video file by setting the start and end point to use.|
+|» *anonymous*|[VideoAsset](#schemavideoasset)|false|none|The VideoAsset is used to create video sequences from video files. The src must be a publicly accesible URL to a video resource such as an mp4 file.|
 
 *xor*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |» *anonymous*|[HtmlAsset](#schemahtmlasset)|false|none|The HtmlAsset clip type lets you create text based layout and formatting using HTML and CSS. You can also set the height and width of a bounding box for the HTML content to sit within. Text and elements will wrap within the bounding box.|
+
+*xor*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» *anonymous*|[AudioAsset](#schemaaudioasset)|false|none|The AudioAsset is used to add sound effects and audio at specific intervals on the timeline. The src must be a publicly accesible URL to an audio resource such  as an mp3 file.|
 
 *continued*
 
@@ -1066,7 +1072,7 @@ DeveloperKey
 
 ```
 
-*The VideoAsset is used to create video sequences from video files. The src must be a publicly accesible URL to a video resource such as an mp4 file. The in and out attributes of the parent Clip let you trim the video file by setting the start and end point to use.*
+*The VideoAsset is used to create video sequences from video files. The src must be a publicly accesible URL to a video resource such as an mp4 file.*
 
 ### Properties
 
@@ -1074,8 +1080,8 @@ DeveloperKey
 |---|---|---|---|---|
 |type|string|true|none|The type of asset - set to <b>video</b> for videos.|
 |src|string|true|none|The video source URL. The URL must be publicly accessible or include credentials.|
-|trim|number|false|none|The start trim point of the clip, in seconds (defaults to 0). Videos will start from the in trim point. The video will play until the file ends or the Clip length is reached.|
-|volume|number|false|none|Set the volume for the clip between 0 and 1 where 0 is muted and 1 is full volume (defaults to 0).|
+|trim|number|false|none|The start trim point of the video clip, in seconds (defaults to 0). Videos will start from the in trim point. The video will play until the file ends or the Clip length is reached.|
+|volume|number|false|none|Set the volume for the video clip between 0 and 1 where 0 is muted and 1 is full volume (defaults to 0).|
 
 <h2 id="tocShtmlasset">HtmlAsset</h2>
 
@@ -1121,6 +1127,31 @@ DeveloperKey
 |position|left|
 |position|topLeft|
 |position|center|
+
+<h2 id="tocSaudioasset">AudioAsset</h2>
+
+<a id="schemaaudioasset"></a>
+
+```json
+{
+  "type": "audio",
+  "src": "string",
+  "trim": 0,
+  "volume": 0
+}
+
+```
+
+*The AudioAsset is used to add sound effects and audio at specific intervals on the timeline. The src must be a publicly accesible URL to an audio resource such  as an mp3 file.*
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|type|string|true|none|The type of asset - set to <b>audio</b> for audio assets.|
+|src|string|true|none|The audio source URL. The URL must be publicly accessible or include credentials.|
+|trim|number|false|none|The start trim point of the audio clip, in seconds (defaults to 0). Audio will start from the in trim point. The audio will play until the file ends or the Clip length is reached.|
+|volume|number|false|none|Set the volume for the audio clip between 0 and 1 where 0 is muted and 1 is full volume (defaults to 1).|
 
 <h2 id="tocStransition">Transition</h2>
 

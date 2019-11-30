@@ -165,6 +165,11 @@
                   </li>
                 
                   <li>
+                    <a href="#tocsaudioasset" class="toc-h2 toc-link" data-title="">AudioAsset</a>
+                    
+                  </li>
+                
+                  <li>
                     <a href="#tocstransition" class="toc-h2 toc-link" data-title="">Transition</a>
                     
                   </li>
@@ -1169,7 +1174,7 @@ DeveloperKey
 }
 
 </code></pre>
-<p><em>A clip is a container for a specific type of asset, i.e. a title, photo or video. You use a Clip to define when an asset will display on the timeline, how long it will play for and transitions and effects to apply to it.</em></p>
+<p><em>A clip is a container for a specific type of asset, i.e. a title, image, video, audio or html. You use a Clip to define when an asset will display on the timeline, how long it will play for and transitions, filters and effects to apply to it.</em></p>
 <h3 id="properties">Properties</h3>
 <table>
 <thead>
@@ -1187,7 +1192,7 @@ DeveloperKey
 <td>any</td>
 <td>true</td>
 <td>none</td>
-<td>The type of asset to display for the duration of this Clip. Value must be one of <b>TitleAsset</b>, <b>ImageAsset</b> or <b>VideoAsset</b>.</td>
+<td>The type of asset to display for the duration of this Clip. Value must be one of <b>TitleAsset</b>, <b>ImageAsset</b>, <b>VideoAsset</b>, <b>HtmlAsset</b> or <b>AudioAsset</b></td>
 </tr>
 </tbody>
 </table>
@@ -1250,7 +1255,7 @@ DeveloperKey
 <td><a href="#schemavideoasset">VideoAsset</a></td>
 <td>false</td>
 <td>none</td>
-<td>The VideoAsset is used to create video sequences from video files. The src must be a publicly accesible URL to a video resource such as an mp4 file. The in and out attributes of the parent Clip let you trim the video file by setting the start and end point to use.</td>
+<td>The VideoAsset is used to create video sequences from video files. The src must be a publicly accesible URL to a video resource such as an mp4 file.</td>
 </tr>
 </tbody>
 </table>
@@ -1272,6 +1277,27 @@ DeveloperKey
 <td>false</td>
 <td>none</td>
 <td>The HtmlAsset clip type lets you create text based layout and formatting using HTML and CSS. You can also set the height and width of a bounding box for the HTML content to sit within. Text and elements will wrap within the bounding box.</td>
+</tr>
+</tbody>
+</table>
+<p><em>xor</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>» <em>anonymous</em></td>
+<td><a href="#schemaaudioasset">AudioAsset</a></td>
+<td>false</td>
+<td>none</td>
+<td>The AudioAsset is used to add sound effects and audio at specific intervals on the timeline. The src must be a publicly accesible URL to an audio resource such  as an mp3 file.</td>
 </tr>
 </tbody>
 </table>
@@ -1713,7 +1739,7 @@ DeveloperKey
 }
 
 </code></pre>
-<p><em>The VideoAsset is used to create video sequences from video files. The src must be a publicly accesible URL to a video resource such as an mp4 file. The in and out attributes of the parent Clip let you trim the video file by setting the start and end point to use.</em></p>
+<p><em>The VideoAsset is used to create video sequences from video files. The src must be a publicly accesible URL to a video resource such as an mp4 file.</em></p>
 <h3 id="properties">Properties</h3>
 <table>
 <thead>
@@ -1745,14 +1771,14 @@ DeveloperKey
 <td>number</td>
 <td>false</td>
 <td>none</td>
-<td>The start trim point of the clip, in seconds (defaults to 0). Videos will start from the in trim point. The video will play until the file ends or the Clip length is reached.</td>
+<td>The start trim point of the video clip, in seconds (defaults to 0). Videos will start from the in trim point. The video will play until the file ends or the Clip length is reached.</td>
 </tr>
 <tr>
 <td>volume</td>
 <td>number</td>
 <td>false</td>
 <td>none</td>
-<td>Set the volume for the clip between 0 and 1 where 0 is muted and 1 is full volume (defaults to 0).</td>
+<td>Set the volume for the video clip between 0 and 1 where 0 is muted and 1 is full volume (defaults to 0).</td>
 </tr>
 </tbody>
 </table>
@@ -1877,6 +1903,59 @@ DeveloperKey
 <tr>
 <td>position</td>
 <td>center</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocsaudioasset">AudioAsset</h2>
+<p><a id="schemaaudioasset"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"audio"</span>,
+  <span class="hljs-attr">"src"</span>: <span class="hljs-string">"string"</span>,
+  <span class="hljs-attr">"trim"</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-attr">"volume"</span>: <span class="hljs-number">0</span>
+}
+
+</code></pre>
+<p><em>The AudioAsset is used to add sound effects and audio at specific intervals on the timeline. The src must be a publicly accesible URL to an audio resource such  as an mp3 file.</em></p>
+<h3 id="properties">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>The type of asset - set to <b>audio</b> for audio assets.</td>
+</tr>
+<tr>
+<td>src</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>The audio source URL. The URL must be publicly accessible or include credentials.</td>
+</tr>
+<tr>
+<td>trim</td>
+<td>number</td>
+<td>false</td>
+<td>none</td>
+<td>The start trim point of the audio clip, in seconds (defaults to 0). Audio will start from the in trim point. The audio will play until the file ends or the Clip length is reached.</td>
+</tr>
+<tr>
+<td>volume</td>
+<td>number</td>
+<td>false</td>
+<td>none</td>
+<td>Set the volume for the audio clip between 0 and 1 where 0 is muted and 1 is full volume (defaults to 1).</td>
 </tr>
 </tbody>
 </table>
