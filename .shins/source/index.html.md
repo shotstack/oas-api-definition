@@ -104,7 +104,8 @@ const inputBody = '{
               "out": "fade"
             },
             "effect": "zoomIn",
-            "filter": "boost"
+            "filter": "boost",
+            "opacity": 0
           }
         ]
       }
@@ -315,7 +316,8 @@ Render the contents of a timeline as a video file.
               "out": "fade"
             },
             "effect": "zoomIn",
-            "filter": "boost"
+            "filter": "boost",
+            "opacity": 0
           }
         ]
       }
@@ -686,7 +688,8 @@ DeveloperKey
               "out": "fade"
             },
             "effect": "zoomIn",
-            "filter": "boost"
+            "filter": "boost",
+            "opacity": 0
           }
         ]
       }
@@ -752,7 +755,8 @@ DeveloperKey
             "out": "fade"
           },
           "effect": "zoomIn",
-          "filter": "boost"
+          "filter": "boost",
+          "opacity": 0
         }
       ]
     }
@@ -835,7 +839,8 @@ DeveloperKey
         "out": "fade"
       },
       "effect": "zoomIn",
-      "filter": "boost"
+      "filter": "boost",
+      "opacity": 0
     }
   ]
 }
@@ -883,7 +888,8 @@ DeveloperKey
     "out": "fade"
   },
   "effect": "zoomIn",
-  "filter": "boost"
+  "filter": "boost",
+  "opacity": 0
 }
 
 ```
@@ -939,6 +945,7 @@ DeveloperKey
 |transition|[Transition](#schematransition)|false|none|In and out transitions for a clip - i.e. fade in and fade out|
 |effect|string|false|none|A motion effect to apply to the Clip.|
 |filter|string|false|none|A filter effect to apply to the Clip.|
+|opacity|number|false|none|Sets the opacity of the Clip where 1 is opaque and 0 is transparent.|
 
 #### Enumerated Values
 
@@ -1340,7 +1347,8 @@ DeveloperKey
                   "out": "fade"
                 },
                 "effect": "zoomIn",
-                "filter": "boost"
+                "filter": "boost",
+                "opacity": 0
               }
             ]
           }
@@ -1415,7 +1423,8 @@ DeveloperKey
                 "out": "fade"
               },
               "effect": "zoomIn",
-              "filter": "boost"
+              "filter": "boost",
+              "opacity": 0
             }
           ]
         }

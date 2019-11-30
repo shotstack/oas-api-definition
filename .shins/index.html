@@ -309,7 +309,8 @@ curl -X POST https://api.shotstack.io/{version}/render \
               "out": "fade"
             },
             "effect": "zoomIn",
-            "filter": "boost"
+            "filter": "boost",
+            "opacity": 0
           }
         ]
       }
@@ -500,7 +501,8 @@ System.out.println(response.toString());
               <span class="hljs-attr">"out"</span>: <span class="hljs-string">"fade"</span>
             },
             <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"zoomIn"</span>,
-            <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"boost"</span>
+            <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"boost"</span>,
+            <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">0</span>
           }
         ]
       }
@@ -894,7 +896,8 @@ DeveloperKey
               <span class="hljs-attr">"out"</span>: <span class="hljs-string">"fade"</span>
             },
             <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"zoomIn"</span>,
-            <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"boost"</span>
+            <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"boost"</span>,
+            <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">0</span>
           }
         ]
       }
@@ -976,7 +979,8 @@ DeveloperKey
             <span class="hljs-attr">"out"</span>: <span class="hljs-string">"fade"</span>
           },
           <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"zoomIn"</span>,
-          <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"boost"</span>
+          <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"boost"</span>,
+          <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">0</span>
         }
       ]
     }
@@ -1112,7 +1116,8 @@ DeveloperKey
         <span class="hljs-attr">"out"</span>: <span class="hljs-string">"fade"</span>
       },
       <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"zoomIn"</span>,
-      <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"boost"</span>
+      <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"boost"</span>,
+      <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">0</span>
     }
   ]
 }
@@ -1170,7 +1175,8 @@ DeveloperKey
     <span class="hljs-attr">"out"</span>: <span class="hljs-string">"fade"</span>
   },
   <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"zoomIn"</span>,
-  <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"boost"</span>
+  <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"boost"</span>,
+  <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">0</span>
 }
 
 </code></pre>
@@ -1375,6 +1381,13 @@ DeveloperKey
 <td>false</td>
 <td>none</td>
 <td>A filter effect to apply to the Clip.</td>
+</tr>
+<tr>
+<td>opacity</td>
+<td>number</td>
+<td>false</td>
+<td>none</td>
+<td>Sets the opacity of the Clip where 1 is opaque and 0 is transparent.</td>
 </tr>
 </tbody>
 </table>
@@ -2303,7 +2316,8 @@ DeveloperKey
                   <span class="hljs-attr">"out"</span>: <span class="hljs-string">"fade"</span>
                 },
                 <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"zoomIn"</span>,
-                <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"boost"</span>
+                <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"boost"</span>,
+                <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">0</span>
               }
             ]
           }
@@ -2401,7 +2415,8 @@ DeveloperKey
                 <span class="hljs-attr">"out"</span>: <span class="hljs-string">"fade"</span>
               },
               <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"zoomIn"</span>,
-              <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"boost"</span>
+              <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"boost"</span>,
+              <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">0</span>
             }
           ]
         }

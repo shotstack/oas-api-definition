@@ -339,6 +339,9 @@ components:
             - muted
             - negative
           type: string
+        opacity:
+          description: Sets the opacity of the Clip where 1 is opaque and 0 is transparent.
+          type: number
       required:
         - asset
         - start
