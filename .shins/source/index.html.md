@@ -73,6 +73,11 @@ const inputBody = '{
       "effect": "fadeIn"
     },
     "background": "string",
+    "fonts": [
+      {
+        "src": "string"
+      }
+    ],
     "tracks": [
       {
         "clips": [
@@ -285,6 +290,11 @@ Render the contents of a timeline as a video file.
       "effect": "fadeIn"
     },
     "background": "string",
+    "fonts": [
+      {
+        "src": "string"
+      }
+    ],
     "tracks": [
       {
         "clips": [
@@ -657,6 +667,11 @@ DeveloperKey
       "effect": "fadeIn"
     },
     "background": "string",
+    "fonts": [
+      {
+        "src": "string"
+      }
+    ],
     "tracks": [
       {
         "clips": [
@@ -724,6 +739,11 @@ DeveloperKey
     "effect": "fadeIn"
   },
   "background": "string",
+  "fonts": [
+    {
+      "src": "string"
+    }
+  ],
   "tracks": [
     {
       "clips": [
@@ -773,6 +793,7 @@ DeveloperKey
 |---|---|---|---|---|
 |soundtrack|[Soundtrack](#schemasoundtrack)|false|none|A music or audio soundtrack file in mp3 format.|
 |background|string|false|none|A hexidecimal value for the timeline background colour. Defaults to black (#000000).|
+|fonts|[[Font](#schemafont)]|false|none|An array of custom fonts to be downloaded for use by the HTML assets.|
 |tracks|[[Track](#schematrack)]|true|none|A timeline consists of an array of tracks, each track containing clips. Tracks are layered on top of each other in the same order they are added to the array with the top most track layered over the top of those below it. Ensure that a track containing titles is the top most track so that it is displayed above videos and images.|
 
 <h2 id="tocSsoundtrack">Soundtrack</h2>
@@ -1194,6 +1215,25 @@ DeveloperKey
 |out|wipeLeft|
 |out|wipeRight|
 
+<h2 id="tocSfont">Font</h2>
+
+<a id="schemafont"></a>
+
+```json
+{
+  "src": "string"
+}
+
+```
+
+*Download a custom font to use with the HTML asset type, using the font name in the CSS or font tag.*
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|src|string|true|none|The URL of the font file. The URL must be publicly accessible or include credentials.|
+
 <h2 id="tocSoffset">Offset</h2>
 
 <a id="schemaoffset"></a>
@@ -1316,6 +1356,11 @@ DeveloperKey
           "effect": "fadeIn"
         },
         "background": "string",
+        "fonts": [
+          {
+            "src": "string"
+          }
+        ],
         "tracks": [
           {
             "clips": [
@@ -1392,6 +1437,11 @@ DeveloperKey
         "effect": "fadeIn"
       },
       "background": "string",
+      "fonts": [
+        {
+          "src": "string"
+        }
+      ],
       "tracks": [
         {
           "clips": [

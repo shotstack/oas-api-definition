@@ -175,6 +175,11 @@
                   </li>
                 
                   <li>
+                    <a href="#tocsfont" class="toc-h2 toc-link" data-title="">Font</a>
+                    
+                  </li>
+                
+                  <li>
                     <a href="#tocsoffset" class="toc-h2 toc-link" data-title="">Offset</a>
                     
                   </li>
@@ -278,6 +283,11 @@ curl -X POST https://api.shotstack.io/{version}/render \
       "effect": "fadeIn"
     },
     "background": "string",
+    "fonts": [
+      {
+        "src": "string"
+      }
+    ],
     "tracks": [
       {
         "clips": [
@@ -470,6 +480,11 @@ System.out.println(response.toString());
       <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"fadeIn"</span>
     },
     <span class="hljs-attr">"background"</span>: <span class="hljs-string">"string"</span>,
+    <span class="hljs-attr">"fonts"</span>: [
+      {
+        <span class="hljs-attr">"src"</span>: <span class="hljs-string">"string"</span>
+      }
+    ],
     <span class="hljs-attr">"tracks"</span>: [
       {
         <span class="hljs-attr">"clips"</span>: [
@@ -865,6 +880,11 @@ DeveloperKey
       <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"fadeIn"</span>
     },
     <span class="hljs-attr">"background"</span>: <span class="hljs-string">"string"</span>,
+    <span class="hljs-attr">"fonts"</span>: [
+      {
+        <span class="hljs-attr">"src"</span>: <span class="hljs-string">"string"</span>
+      }
+    ],
     <span class="hljs-attr">"tracks"</span>: [
       {
         <span class="hljs-attr">"clips"</span>: [
@@ -948,6 +968,11 @@ DeveloperKey
     <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"fadeIn"</span>
   },
   <span class="hljs-attr">"background"</span>: <span class="hljs-string">"string"</span>,
+  <span class="hljs-attr">"fonts"</span>: [
+    {
+      <span class="hljs-attr">"src"</span>: <span class="hljs-string">"string"</span>
+    }
+  ],
   <span class="hljs-attr">"tracks"</span>: [
     {
       <span class="hljs-attr">"clips"</span>: [
@@ -1014,6 +1039,13 @@ DeveloperKey
 <td>false</td>
 <td>none</td>
 <td>A hexidecimal value for the timeline background colour. Defaults to black (#000000).</td>
+</tr>
+<tr>
+<td>fonts</td>
+<td>[<a href="#schemafont">Font</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>An array of custom fonts to be downloaded for use by the HTML assets.</td>
 </tr>
 <tr>
 <td>tracks</td>
@@ -2052,6 +2084,35 @@ DeveloperKey
 </tr>
 </tbody>
 </table>
+<h2 id="tocsfont">Font</h2>
+<p><a id="schemafont"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">"src"</span>: <span class="hljs-string">"string"</span>
+}
+
+</code></pre>
+<p><em>Download a custom font to use with the HTML asset type, using the font name in the CSS or font tag.</em></p>
+<h3 id="properties">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>src</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>The URL of the font file. The URL must be publicly accessible or include credentials.</td>
+</tr>
+</tbody>
+</table>
 <h2 id="tocsoffset">Offset</h2>
 <p><a id="schemaoffset"></a></p>
 <pre class="highlight tab tab-json"><code>{
@@ -2285,6 +2346,11 @@ DeveloperKey
           <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"fadeIn"</span>
         },
         <span class="hljs-attr">"background"</span>: <span class="hljs-string">"string"</span>,
+        <span class="hljs-attr">"fonts"</span>: [
+          {
+            <span class="hljs-attr">"src"</span>: <span class="hljs-string">"string"</span>
+          }
+        ],
         <span class="hljs-attr">"tracks"</span>: [
           {
             <span class="hljs-attr">"clips"</span>: [
@@ -2384,6 +2450,11 @@ DeveloperKey
         <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"fadeIn"</span>
       },
       <span class="hljs-attr">"background"</span>: <span class="hljs-string">"string"</span>,
+      <span class="hljs-attr">"fonts"</span>: [
+        {
+          <span class="hljs-attr">"src"</span>: <span class="hljs-string">"string"</span>
+        }
+      ],
       <span class="hljs-attr">"tracks"</span>: [
         {
           <span class="hljs-attr">"clips"</span>: [

@@ -202,6 +202,11 @@ components:
             A hexidecimal value for the timeline background colour. Defaults to
             black (#000000).
           type: string
+        fonts:
+          description: An array of custom fonts to be downloaded for use by the HTML assets.
+          type: array
+          items:
+            $ref: '#/components/schemas/Font'
         tracks:
           description: >-
             A timeline consists of an array of tracks, each track containing
@@ -574,6 +579,16 @@ components:
             - wipeLeft
             - wipeRight
           type: string
+      type: object
+    Font:
+      description: >-
+        Download a custom font to use with the HTML asset type, using the font name in the CSS or font tag.
+      properties:
+        src:
+          description: The URL of the font file. The URL must be publicly accessible or include credentials.
+          type: string
+      required:
+        - src
       type: object
     Offset:
       description: >-
