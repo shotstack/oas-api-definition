@@ -22,7 +22,7 @@ headingLevel: 2
 
 > Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
 
-The Shotstack API is a video editing service that allows for the programatic creation of videos using JSON. You can configure an edit and POST it to the Shotstack API which will render your video and provide a file location when complete. For more details check https://shotstack.io
+The Shotstack API is a video editing service that allows for the automated creation of videos using JSON. You can configure an edit and POST it to the Shotstack API which will render your video and provide a video file location when complete. For more details check https://shotstack.io
 
 Base URLs:
 
@@ -72,7 +72,7 @@ const inputBody = '{
       "src": "string",
       "effect": "fadeIn"
     },
-    "background": "string",
+    "background": null,
     "fonts": [
       {
         "src": "string"
@@ -86,7 +86,7 @@ const inputBody = '{
               "type": "title",
               "text": "string",
               "style": "minimal",
-              "color": "white",
+              "color": null,
               "size": "medium",
               "background": "string",
               "position": "center",
@@ -289,7 +289,7 @@ Render the contents of a timeline as a video file.
       "src": "string",
       "effect": "fadeIn"
     },
-    "background": "string",
+    "background": null,
     "fonts": [
       {
         "src": "string"
@@ -303,7 +303,7 @@ Render the contents of a timeline as a video file.
               "type": "title",
               "text": "string",
               "style": "minimal",
-              "color": "white",
+              "color": null,
               "size": "medium",
               "background": "string",
               "position": "center",
@@ -356,7 +356,7 @@ Render the contents of a timeline as a video file.
   "success": true,
   "message": "Created",
   "response": {
-    "message": "Render Successfuly Queued",
+    "message": "Render Successfully Queued",
     "id": "2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7"
   }
 }
@@ -666,7 +666,7 @@ DeveloperKey
       "src": "string",
       "effect": "fadeIn"
     },
-    "background": "string",
+    "background": null,
     "fonts": [
       {
         "src": "string"
@@ -680,7 +680,7 @@ DeveloperKey
               "type": "title",
               "text": "string",
               "style": "minimal",
-              "color": "white",
+              "color": null,
               "size": "medium",
               "background": "string",
               "position": "center",
@@ -738,7 +738,7 @@ DeveloperKey
     "src": "string",
     "effect": "fadeIn"
   },
-  "background": "string",
+  "background": null,
   "fonts": [
     {
       "src": "string"
@@ -752,7 +752,7 @@ DeveloperKey
             "type": "title",
             "text": "string",
             "style": "minimal",
-            "color": "white",
+            "color": null,
             "size": "medium",
             "background": "string",
             "position": "center",
@@ -792,7 +792,7 @@ DeveloperKey
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |soundtrack|[Soundtrack](#schemasoundtrack)|false|none|A music or audio soundtrack file in mp3 format.|
-|background|string|false|none|A hexidecimal value for the timeline background colour. Defaults to black (#000000).|
+|background|string|false|none|A hexadecimal value for the timeline background colour. Defaults to #000000 (black).|
 |fonts|[[Font](#schemafont)]|false|none|An array of custom fonts to be downloaded for use by the HTML assets.|
 |tracks|[[Track](#schematrack)]|true|none|A timeline consists of an array of tracks, each track containing clips. Tracks are layered on top of each other in the same order they are added to the array with the top most track layered over the top of those below it. Ensure that a track containing titles is the top most track so that it is displayed above videos and images.|
 
@@ -837,7 +837,7 @@ DeveloperKey
         "type": "title",
         "text": "string",
         "style": "minimal",
-        "color": "white",
+        "color": null,
         "size": "medium",
         "background": "string",
         "position": "center",
@@ -886,7 +886,7 @@ DeveloperKey
     "type": "title",
     "text": "string",
     "style": "minimal",
-    "color": "white",
+    "color": null,
     "size": "medium",
     "background": "string",
     "position": "center",
@@ -933,13 +933,13 @@ DeveloperKey
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» *anonymous*|[ImageAsset](#schemaimageasset)|false|none|The ImageAsset is used to create video from images. The src must be a publicly accesible URL to an image resource such as a jpg or png file.|
+|» *anonymous*|[ImageAsset](#schemaimageasset)|false|none|The ImageAsset is used to create video from images. The src must be a publicly accessible URL to an image resource such as a jpg or png file.|
 
 *xor*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» *anonymous*|[VideoAsset](#schemavideoasset)|false|none|The VideoAsset is used to create video sequences from video files. The src must be a publicly accesible URL to a video resource such as an mp4 file.|
+|» *anonymous*|[VideoAsset](#schemavideoasset)|false|none|The VideoAsset is used to create video sequences from video files. The src must be a publicly accessible URL to a video resource such as an mp4 file.|
 
 *xor*
 
@@ -951,7 +951,7 @@ DeveloperKey
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» *anonymous*|[AudioAsset](#schemaaudioasset)|false|none|The AudioAsset is used to add sound effects and audio at specific intervals on the timeline. The src must be a publicly accesible URL to an audio resource such  as an mp3 file.|
+|» *anonymous*|[AudioAsset](#schemaaudioasset)|false|none|The AudioAsset is used to add sound effects and audio at specific intervals on the timeline. The src must be a publicly accessible URL to an audio resource such  as an mp3 file.|
 
 *continued*
 
@@ -1007,7 +1007,7 @@ DeveloperKey
   "type": "title",
   "text": "string",
   "style": "minimal",
-  "color": "white",
+  "color": null,
   "size": "medium",
   "background": "string",
   "position": "center",
@@ -1027,10 +1027,10 @@ DeveloperKey
 |---|---|---|---|---|
 |type|string|true|none|The type of asset - set to <b>title</b> for titles.|
 |text|string|true|none|The title text string - i.e. "My Title".|
-|style|string|false|none|Uses a preset to apply font properties and stylng to the title.|
-|color|string|false|none|Set the text color using HTML color notation including hexidecimal, rgb, rgba and  color name. Transparency is supported by setting the last two characters of a hex string,  i.e. #ffffff33 or using rgba, i.e. rgba(255, 255, 255, 0.5).|
+|style|string|false|none|Uses a preset to apply font properties and styling to the title.|
+|color|string|false|none|Set the text color using hexadecimal color notation. Transparency is supported by setting the first two characters of the hex string (opposite to HTML),  i.e. #80ffffff will be white with  50% transparency.|
 |size|string|false|none|Set the relative size of the text using predefined sizes from xx-small to xx-large.|
-|background|string|false|none|Apply a background color behind the text using HTML color notation with support for  transparency. Useful for subtitles.|
+|background|string|false|none|Apply a background color behind the text. Set the text color using hexadecimal color notation. Transparency is supported by setting the first two characters of the hex string (opposite to HTML),  i.e. #80ffffff will be white with 50% transparency.|
 |position|string|false|none|Place the title in one of nine predefined positions of the viewport.|
 |offset|[Offset](#schemaoffset)|false|none|Offset the location of the title relative to it's position on the screen.|
 
@@ -1077,7 +1077,7 @@ DeveloperKey
 
 ```
 
-*The ImageAsset is used to create video from images. The src must be a publicly accesible URL to an image resource such as a jpg or png file.*
+*The ImageAsset is used to create video from images. The src must be a publicly accessible URL to an image resource such as a jpg or png file.*
 
 ### Properties
 
@@ -1100,7 +1100,7 @@ DeveloperKey
 
 ```
 
-*The VideoAsset is used to create video sequences from video files. The src must be a publicly accesible URL to a video resource such as an mp4 file.*
+*The VideoAsset is used to create video sequences from video files. The src must be a publicly accessible URL to a video resource such as an mp4 file.*
 
 ### Properties
 
@@ -1139,7 +1139,7 @@ DeveloperKey
 |css|string|false|none|The CSS text string to apply styling to the HTML.|
 |width|number|false|none|Set the width of the HTML asset bounding box. Text will wrap to fill the bounding box.|
 |height|number|false|none|Set the width of the HTML asset bounding box. Text and elements will be masked if they exceed the  height of the bounding box.|
-|background|string|false|none|Apply a background color behind the HTML bounding box using HTML color notation with support for transparency.|
+|background|string|false|none|Apply a background color behind the HTML bounding box using. Set the text color using hexadecimal  color notation. Transparency is supported by setting the first two characters of the hex string  (opposite to HTML), i.e. #80ffffff will be white with 50% transparency.|
 |position|string|false|none|Place the HTML in one of nine predefined positions within the HTML area.|
 
 #### Enumerated Values
@@ -1170,7 +1170,7 @@ DeveloperKey
 
 ```
 
-*The AudioAsset is used to add sound effects and audio at specific intervals on the timeline. The src must be a publicly accesible URL to an audio resource such  as an mp3 file.*
+*The AudioAsset is used to add sound effects and audio at specific intervals on the timeline. The src must be a publicly accessible URL to an audio resource such  as an mp3 file.*
 
 ### Properties
 
@@ -1275,7 +1275,7 @@ DeveloperKey
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |format|string|true|none|`mp4` video or animated `gif`|
-|resolution|string|true|none|The output resoltion of the video.|
+|resolution|string|true|none|The output resolution of the video. <ul>   <li>`preview` - 512px x 288px @ 15fps</li>   <li>`mobile` - 640px x 360px @ 25fps</li>   <li>`sd` - 1024px x 576px @25fps</li>   <li>`hd` - 1280px x 720px @25fps</li>   <li>`1080` - 1920px x 1080px @25fps</li> </ul>|
 |aspectRatio|string|false|none|The aspect ratio (shape) of the video. Useful for social media sites. Options are: <ul>   <li>`16:9` - regular landscape/horizontal aspect ratio (default)</li>   <li>`9:16` - vertical/portrait aspect ratio.</li>   <li>`1:1` - square aspect ratio.</li> </ul>|
 
 #### Enumerated Values
@@ -1355,7 +1355,7 @@ DeveloperKey
           "src": "string",
           "effect": "fadeIn"
         },
-        "background": "string",
+        "background": null,
         "fonts": [
           {
             "src": "string"
@@ -1369,7 +1369,7 @@ DeveloperKey
                   "type": "title",
                   "text": "string",
                   "style": "minimal",
-                  "color": "white",
+                  "color": null,
                   "size": "medium",
                   "background": "string",
                   "position": "center",
@@ -1436,7 +1436,7 @@ DeveloperKey
         "src": "string",
         "effect": "fadeIn"
       },
-      "background": "string",
+      "background": null,
       "fonts": [
         {
           "src": "string"
@@ -1450,7 +1450,7 @@ DeveloperKey
                 "type": "title",
                 "text": "string",
                 "style": "minimal",
-                "color": "white",
+                "color": null,
                 "size": "medium",
                 "background": "string",
                 "position": "center",

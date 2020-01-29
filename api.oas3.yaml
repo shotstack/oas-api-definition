@@ -3,7 +3,7 @@ info:
   title: Shotstack
   version: v1
   description: >-
-    The Shotstack API is a video editing service that allows for the programatic
+    The Shotstack API is a video editing service that allows for the automated
     creation of videos using JSON. You can configure an edit and POST it to the
     Shotstack API which will render your video and provide a file location
     when complete. For more details check https://shotstack.io
@@ -27,7 +27,7 @@ paths:
                 success: true
                 message: Created
                 response:
-                  message: Render Successfuly Queued
+                  message: Render Successfully Queued
                   id: 2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7
               schema:
                 $ref: '#/components/schemas/QueuedResponse'
@@ -199,9 +199,10 @@ components:
           $ref: '#/components/schemas/Soundtrack'
         background:
           description: >-
-            A hexidecimal value for the timeline background colour. Defaults to
-            black (#000000).
+            A hexadecimal value for the timeline background colour. Defaults to
+            #000000 (black).
           type: string
+          default: #000000
         fonts:
           description: An array of custom fonts to be downloaded for use by the HTML assets.
           type: array
@@ -366,7 +367,7 @@ components:
           description: The title text string - i.e. "My Title".
           type: string
         style:
-          description: Uses a preset to apply font properties and stylng to the title.
+          description: Uses a preset to apply font properties and styling to the title.
           enum:
             - minimal
             - blockbuster
@@ -380,12 +381,11 @@ components:
             - subtitle
           type: string
         color:
-          default: white
+          default: #ffffff
           description: >-
-            Set the text color using HTML color notation including hexidecimal,
-            rgb, rgba and  color name. Transparency is supported by setting the
-            last two characters of a hex string,  i.e. #ffffff33 or using rgba,
-            i.e. rgba(255, 255, 255, 0.5).
+            Set the text color using hexadecimal color notation. Transparency is supported by setting the
+            first two characters of the hex string (opposite to HTML),  i.e. #80ffffff will be white with 
+            50% transparency.
           type: string
         size:
           default: medium
@@ -403,8 +403,9 @@ components:
           type: string
         background:
           description: >-
-            Apply a background color behind the text using HTML color notation
-            with support for  transparency. Useful for subtitles.
+            Apply a background color behind the text. Set the text color using hexadecimal color notation.
+            Transparency is supported by setting the first two characters of the hex string (opposite to HTML), 
+            i.e. #80ffffff will be white with 50% transparency.
           type: string
         position:
           default: center
@@ -431,7 +432,7 @@ components:
     ImageAsset:
       description: >-
         The ImageAsset is used to create video from images. The src must be a
-        publicly accesible URL to an image resource such as a jpg or png file.
+        publicly accessible URL to an image resource such as a jpg or png file.
       type: object
       properties:
         type:
@@ -449,7 +450,7 @@ components:
     VideoAsset:
       description: >-
         The VideoAsset is used to create video sequences from video files. The
-        src must be a publicly accesible URL to a video resource such as an mp4
+        src must be a publicly accessible URL to a video resource such as an mp4
         file.
       type: object
       properties:
@@ -509,8 +510,9 @@ components:
           example: 300
         background:
           description: >-
-            Apply a background color behind the HTML bounding box using HTML color notation
-            with support for transparency.
+            Apply a background color behind the HTML bounding box using. Set the text color using hexadecimal 
+            color notation. Transparency is supported by setting the first two characters of the hex string 
+            (opposite to HTML), i.e. #80ffffff will be white with 50% transparency.
           type: string
           default: transparent
         position:
@@ -533,7 +535,7 @@ components:
     AudioAsset:
       description: >-
         The AudioAsset is used to add sound effects and audio at specific intervals on
-        the timeline. The src must be a publicly accesible URL to an audio resource such 
+        the timeline. The src must be a publicly accessible URL to an audio resource such 
         as an mp3 file.
       type: object
       properties:
@@ -629,7 +631,15 @@ components:
             - gif
           type: string
         resolution:
-          description: The output resoltion of the video.
+          description: >-
+            The output resolution of the video.
+            <ul>
+              <li>`preview` - 512px x 288px @ 15fps</li>
+              <li>`mobile` - 640px x 360px @ 25fps</li>
+              <li>`sd` - 1024px x 576px @25fps</li>
+              <li>`hd` - 1280px x 720px @25fps</li>
+              <li>`1080` - 1920px x 1080px @25fps</li>
+            </ul>
           enum:
             - preview
             - mobile
