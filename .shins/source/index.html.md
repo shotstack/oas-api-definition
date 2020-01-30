@@ -22,7 +22,7 @@ headingLevel: 2
 
 > Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
 
-The Shotstack API is a video editing service that allows for the automated creation of videos using JSON. You can configure an edit and POST it to the Shotstack API which will render your video and provide a video file location when complete. For more details check https://shotstack.io
+The Shotstack API is a video editing service that allows for the automated creation of videos using JSON. You can configure an edit and POST it to the Shotstack API which will render your video and provide a file location when complete. For more details check https://shotstack.io
 
 Base URLs:
 
@@ -72,7 +72,7 @@ const inputBody = '{
       "src": "string",
       "effect": "fadeIn"
     },
-    "background": null,
+    "background": "#000000",
     "fonts": [
       {
         "src": "string"
@@ -86,7 +86,7 @@ const inputBody = '{
               "type": "title",
               "text": "string",
               "style": "minimal",
-              "color": null,
+              "color": "#ffffff",
               "size": "medium",
               "background": "string",
               "position": "center",
@@ -289,7 +289,7 @@ Render the contents of a timeline as a video file.
       "src": "string",
       "effect": "fadeIn"
     },
-    "background": null,
+    "background": "#000000",
     "fonts": [
       {
         "src": "string"
@@ -303,7 +303,7 @@ Render the contents of a timeline as a video file.
               "type": "title",
               "text": "string",
               "style": "minimal",
-              "color": null,
+              "color": "#ffffff",
               "size": "medium",
               "background": "string",
               "position": "center",
@@ -666,7 +666,7 @@ DeveloperKey
       "src": "string",
       "effect": "fadeIn"
     },
-    "background": null,
+    "background": "#000000",
     "fonts": [
       {
         "src": "string"
@@ -680,7 +680,7 @@ DeveloperKey
               "type": "title",
               "text": "string",
               "style": "minimal",
-              "color": null,
+              "color": "#ffffff",
               "size": "medium",
               "background": "string",
               "position": "center",
@@ -738,7 +738,7 @@ DeveloperKey
     "src": "string",
     "effect": "fadeIn"
   },
-  "background": null,
+  "background": "#000000",
   "fonts": [
     {
       "src": "string"
@@ -752,7 +752,7 @@ DeveloperKey
             "type": "title",
             "text": "string",
             "style": "minimal",
-            "color": null,
+            "color": "#ffffff",
             "size": "medium",
             "background": "string",
             "position": "center",
@@ -837,7 +837,7 @@ DeveloperKey
         "type": "title",
         "text": "string",
         "style": "minimal",
-        "color": null,
+        "color": "#ffffff",
         "size": "medium",
         "background": "string",
         "position": "center",
@@ -886,7 +886,7 @@ DeveloperKey
     "type": "title",
     "text": "string",
     "style": "minimal",
-    "color": null,
+    "color": "#ffffff",
     "size": "medium",
     "background": "string",
     "position": "center",
@@ -1007,7 +1007,7 @@ DeveloperKey
   "type": "title",
   "text": "string",
   "style": "minimal",
-  "color": null,
+  "color": "#ffffff",
   "size": "medium",
   "background": "string",
   "position": "center",
@@ -1355,7 +1355,7 @@ DeveloperKey
           "src": "string",
           "effect": "fadeIn"
         },
-        "background": null,
+        "background": "#000000",
         "fonts": [
           {
             "src": "string"
@@ -1369,7 +1369,7 @@ DeveloperKey
                   "type": "title",
                   "text": "string",
                   "style": "minimal",
-                  "color": null,
+                  "color": "#ffffff",
                   "size": "medium",
                   "background": "string",
                   "position": "center",
@@ -1436,7 +1436,7 @@ DeveloperKey
         "src": "string",
         "effect": "fadeIn"
       },
-      "background": null,
+      "background": "#000000",
       "fonts": [
         {
           "src": "string"
@@ -1450,7 +1450,7 @@ DeveloperKey
                 "type": "title",
                 "text": "string",
                 "style": "minimal",
-                "color": null,
+                "color": "#ffffff",
                 "size": "medium",
                 "background": "string",
                 "position": "center",
