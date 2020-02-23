@@ -120,7 +120,8 @@ const inputBody = '{
     "format": "mp4",
     "resolution": "preview",
     "aspectRatio": "16:9"
-  }
+  },
+  "callback": "string"
 }';
 const headers = {
   'Content-Type':'application/json',
@@ -337,7 +338,8 @@ Render the contents of a timeline as a video file.
     "format": "mp4",
     "resolution": "preview",
     "aspectRatio": "16:9"
-  }
+  },
+  "callback": "string"
 }
 ```
 
@@ -714,7 +716,8 @@ DeveloperKey
     "format": "mp4",
     "resolution": "preview",
     "aspectRatio": "16:9"
-  }
+  },
+  "callback": "string"
 }
 
 ```
@@ -727,6 +730,7 @@ DeveloperKey
 |---|---|---|---|---|
 |timeline|[Timeline](#schematimeline)|true|none|A timeline represents the contents of a video edit over time, in seconds. A timeline consists of layers called tracks. Tracks are composed of titles, images or video segments referred to as clips which are placed along the track at specific starting point and lasting for a specific amount of time.|
 |output|[Output](#schemaoutput)|true|none|The video output format.|
+|callback|string|false|none|An optional webhook callback URL used to receive status notifications when a render completes or fails.|
 
 <h2 id="tocStimeline">Timeline</h2>
 
@@ -1403,7 +1407,8 @@ DeveloperKey
         "format": "mp4",
         "resolution": "preview",
         "aspectRatio": "16:9"
-      }
+      },
+      "callback": "string"
     },
     "created": "string",
     "updated": "string"
@@ -1484,7 +1489,8 @@ DeveloperKey
       "format": "mp4",
       "resolution": "preview",
       "aspectRatio": "16:9"
-    }
+    },
+    "callback": "string"
   },
   "created": "string",
   "updated": "string"

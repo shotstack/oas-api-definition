@@ -27,6 +27,8 @@ You can preview the docs in the browser using:
 npm run start
 ```
 
+Note: The first time you start the server the docs will revert to default styling. Run `npm run docs` command again to apply Shotstack styling.
+
 Deploy docs using:
 
 ```

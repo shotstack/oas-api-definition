@@ -1,12 +1,9 @@
 #!/bin/bash
 
 #######################################################
-# Experimental SDK  and Docs generator
+# SDK generator
 #
 # Setup:
-#
-# https://github.com/mulesoft/oas-raml-converter
-# `npm install --save oas-raml-converter`
 #
 # https://openapi-generator.tech
 # `npm install @openapitools/openapi-generator-cli -g`
@@ -20,9 +17,6 @@ BUILD_DIR=./build/sdks
 # Prepare build dir
 rm -r $BUILD_DIR
 mkdir -p $BUILD_DIR
-
-# Convert RAML 1 to OAS 3
-# node convert.js
 
 # PHP SDK
 openapi-generator generate -i $SPEC_FILE -g php -o $BUILD_DIR/php \
