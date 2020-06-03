@@ -120,7 +120,14 @@ const inputBody = '{
   "output": {
     "format": "mp4",
     "resolution": "preview",
-    "aspectRatio": "16:9"
+    "aspectRatio": "16:9",
+    "poster": {
+      "capture": 0
+    },
+    "thumbnail": {
+      "capture": 0,
+      "scale": 0
+    }
   },
   "callback": "string"
 }';
@@ -339,7 +346,14 @@ Render the contents of a timeline as a video file.
   "output": {
     "format": "mp4",
     "resolution": "preview",
-    "aspectRatio": "16:9"
+    "aspectRatio": "16:9",
+    "poster": {
+      "capture": 0
+    },
+    "thumbnail": {
+      "capture": 0,
+      "scale": 0
+    }
   },
   "callback": "string"
 }
@@ -718,7 +732,14 @@ DeveloperKey
   "output": {
     "format": "mp4",
     "resolution": "preview",
-    "aspectRatio": "16:9"
+    "aspectRatio": "16:9",
+    "poster": {
+      "capture": 0
+    },
+    "thumbnail": {
+      "capture": 0,
+      "scale": 0
+    }
   },
   "callback": "string"
 }
@@ -1303,7 +1324,14 @@ DeveloperKey
 {
   "format": "mp4",
   "resolution": "preview",
-  "aspectRatio": "16:9"
+  "aspectRatio": "16:9",
+  "poster": {
+    "capture": 0
+  },
+  "thumbnail": {
+    "capture": 0,
+    "scale": 0
+  }
 }
 
 ```
@@ -1317,6 +1345,8 @@ DeveloperKey
 |format|string|true|none|`mp4` video or animated `gif`|
 |resolution|string|true|none|The output resolution of the video. <ul>   <li>`preview` - 512px x 288px @ 15fps</li>   <li>`mobile` - 640px x 360px @ 25fps</li>   <li>`sd` - 1024px x 576px @25fps</li>   <li>`hd` - 1280px x 720px @25fps</li>   <li>`1080` - 1920px x 1080px @25fps</li> </ul>|
 |aspectRatio|string|false|none|The aspect ratio (shape) of the video. Useful for social media sites. Options are: <ul>   <li>`16:9` - regular landscape/horizontal aspect ratio (default)</li>   <li>`9:16` - vertical/portrait aspect ratio.</li>   <li>`1:1` - square aspect ratio.</li> </ul>|
+|poster|[Poster](#schemaposter)|false|none|Generate a poster image from a specific point on the timeline.|
+|thumbnail|[Thumbnail](#schemathumbnail)|false|none|Generate a thumbnail image from a specific point on the timeline.|
 
 #### Enumerated Values
 
@@ -1332,6 +1362,46 @@ DeveloperKey
 |aspectRatio|16:9|
 |aspectRatio|9:16|
 |aspectRatio|1:1|
+
+<h2 id="tocSposter">Poster</h2>
+
+<a id="schemaposter"></a>
+
+```json
+{
+  "capture": 0
+}
+
+```
+
+*Generate a poster image for the video at a specific point from the timeline. The poster image size will match the size of the output video.*
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|capture|number|true|none|The point on the timeline in seconds to capture a single frame to use as the poster image.|
+
+<h2 id="tocSthumbnail">Thumbnail</h2>
+
+<a id="schemathumbnail"></a>
+
+```json
+{
+  "capture": 0,
+  "scale": 0
+}
+
+```
+
+*Generate a thumbnail image for the video at a specific point from the timeline.*
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|capture|number|true|none|The point on the timeline in seconds to capture a single frame to use as the thumbnail image.|
+|scale|number|true|none|Scale the thumbnail size to a fraction of the viewport size - i.e. setting the scale to 0.5 will scale  the thumbnail to half the size of the viewport.|
 
 <h2 id="tocSqueuedresponse">QueuedResponse</h2>
 
@@ -1443,7 +1513,14 @@ DeveloperKey
       "output": {
         "format": "mp4",
         "resolution": "preview",
-        "aspectRatio": "16:9"
+        "aspectRatio": "16:9",
+        "poster": {
+          "capture": 0
+        },
+        "thumbnail": {
+          "capture": 0,
+          "scale": 0
+        }
       },
       "callback": "string"
     },
@@ -1526,7 +1603,14 @@ DeveloperKey
     "output": {
       "format": "mp4",
       "resolution": "preview",
-      "aspectRatio": "16:9"
+      "aspectRatio": "16:9",
+      "poster": {
+        "capture": 0
+      },
+      "thumbnail": {
+        "capture": 0,
+        "scale": 0
+      }
     },
     "callback": "string"
   },

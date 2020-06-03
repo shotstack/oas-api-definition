@@ -699,9 +699,43 @@ components:
             - '9:16'
             - '1:1'
           type: string
+        poster:
+          description: >-
+            Generate a poster image from a specific point on the timeline.
+          $ref: '#/components/schemas/Poster'
+        thumbnail:
+          description: >-
+            Generate a thumbnail image from a specific point on the timeline.
+          $ref: '#/components/schemas/Thumbnail'
       required:
         - format
         - resolution
+      type: object
+    Poster:
+      description: >-
+        Generate a poster image for the video at a specific point from the timeline. The poster image size
+        will match the size of the output video.
+      properties:
+        capture:
+          description: The point on the timeline in seconds to capture a single frame to use as the poster image.
+          type: number
+      required:
+        - capture
+      type: object
+    Thumbnail:
+      description: Generate a thumbnail image for the video at a specific point from the timeline.
+      properties:
+        capture:
+          description: The point on the timeline in seconds to capture a single frame to use as the thumbnail image.
+          type: number
+        scale:
+          description: >-
+            Scale the thumbnail size to a fraction of the viewport size - i.e. setting the scale to 0.5 will scale 
+            the thumbnail to half the size of the viewport.
+          type: number
+      required:
+        - capture
+        - scale
       type: object
     QueuedResponse:
       properties:
