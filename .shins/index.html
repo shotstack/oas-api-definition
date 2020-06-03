@@ -1257,7 +1257,7 @@ DeveloperKey
 <td>any</td>
 <td>true</td>
 <td>none</td>
-<td>The type of asset to display for the duration of this Clip. Value must be one of <b>TitleAsset</b>, <b>ImageAsset</b>, <b>VideoAsset</b>, <b>HtmlAsset</b> or <b>AudioAsset</b></td>
+<td>The type of asset to display for the duration of this Clip. Value must be one of <b>TitleAsset</b>, <b>ImageAsset</b>, <b>VideoAsset</b>, <b>HtmlAsset</b>, <b>AudioAsset</b> or <b>LumaAsset</b></td>
 </tr>
 </tbody>
 </table>
@@ -1366,6 +1366,27 @@ DeveloperKey
 </tr>
 </tbody>
 </table>
+<p><em>xor</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>» <em>anonymous</em></td>
+<td><a href="#schemalumaasset">LumaAsset</a></td>
+<td>false</td>
+<td>none</td>
+<td>The LumaAsset is used to create luma matte transitions between other assets. A luma matte is  a grey scale animated video where the black areas are transparent and the white areas solid. The luma matte animation should be provided as an mp4 video file. The src must be a publicly  accessible URL to the file.</td>
+</tr>
+</tbody>
+</table>
 <p><em>continued</em></p>
 <table>
 <thead>
@@ -1397,7 +1418,7 @@ DeveloperKey
 <td>string</td>
 <td>false</td>
 <td>none</td>
-<td>Set how the asset should be scaled to fit the viewport using one of the following options:    <ul>     <li><code>cover</code> - stretch the asset to fill the viewport without maintaining the aspect ratio.</li>     <li><code>contain</code> - fit the entire asset within the viewport while maintaining the original aspect ratio.</li>     <li><code>crop</code> - scale the asset to fill the viewport while maintaining the aspect ratio. The asset will be cropped if it exceeds the bounds of the viewport.</li>   </ul></td>
+<td>Set how the asset should be scaled to fit the viewport using one of the following options:    <ul>     <li><code>cover</code> - stretch the asset to fill the viewport without maintaining the aspect ratio.</li>     <li><code>contain</code> - fit the entire asset within the viewport while maintaining the original aspect ratio.</li>     <li><code>crop</code> - scale the asset to fill the viewport while maintaining the aspect ratio. The asset will be cropped if it exceeds the bounds of the viewport.</li>     <li><code>none</code> - preserves the original asset dimensions and does not apply any scaling.</li>   </ul></td>
 </tr>
 <tr>
 <td>scale</td>
@@ -1470,6 +1491,10 @@ DeveloperKey
 <tr>
 <td>fit</td>
 <td>crop</td>
+</tr>
+<tr>
+<td>fit</td>
+<td>none</td>
 </tr>
 <tr>
 <td>position</td>

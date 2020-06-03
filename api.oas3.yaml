@@ -298,11 +298,13 @@ components:
                 <li>`cover` - stretch the asset to fill the viewport without maintaining the aspect ratio.</li>
                 <li>`contain` - fit the entire asset within the viewport while maintaining the original aspect ratio.</li>
                 <li>`crop` - scale the asset to fill the viewport while maintaining the aspect ratio. The asset will be cropped if it exceeds the bounds of the viewport.</li>
+                <li>`none` - preserves the original asset dimensions and does not apply any scaling.</li>
               </ul>
           enum:
             - cover
             - contain
             - crop
+            - none
           type: string
         scale:
           description: >-
