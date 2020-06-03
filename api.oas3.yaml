@@ -664,9 +664,10 @@ components:
       properties:
         format:
           description: >- 
-            `mp4` video or animated `gif`
+            `mp4`, `webm` video or animated `gif`
           enum:
             - mp4
+            - webm
             - gif
           type: string
         resolution:
