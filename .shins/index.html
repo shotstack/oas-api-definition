@@ -170,6 +170,11 @@
                   </li>
                 
                   <li>
+                    <a href="#tocslumaasset" class="toc-h2 toc-link" data-title="">LumaAsset</a>
+                    
+                  </li>
+                
+                  <li>
                     <a href="#tocstransition" class="toc-h2 toc-link" data-title="">Transition</a>
                     
                   </li>
@@ -280,7 +285,8 @@ curl -X POST https://api.shotstack.io/{version}/render \
   "timeline": {
     "soundtrack": {
       "src": "string",
-      "effect": "fadeIn"
+      "effect": "fadeIn",
+      "volume": 0
     },
     "background": "#000000",
     "fonts": [
@@ -478,7 +484,8 @@ System.out.println(response.toString());
   <span class="hljs-attr">"timeline"</span>: {
     <span class="hljs-attr">"soundtrack"</span>: {
       <span class="hljs-attr">"src"</span>: <span class="hljs-string">"string"</span>,
-      <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"fadeIn"</span>
+      <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"fadeIn"</span>,
+      <span class="hljs-attr">"volume"</span>: <span class="hljs-number">0</span>
     },
     <span class="hljs-attr">"background"</span>: <span class="hljs-string">"#000000"</span>,
     <span class="hljs-attr">"fonts"</span>: [
@@ -879,7 +886,8 @@ DeveloperKey
   <span class="hljs-attr">"timeline"</span>: {
     <span class="hljs-attr">"soundtrack"</span>: {
       <span class="hljs-attr">"src"</span>: <span class="hljs-string">"string"</span>,
-      <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"fadeIn"</span>
+      <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"fadeIn"</span>,
+      <span class="hljs-attr">"volume"</span>: <span class="hljs-number">0</span>
     },
     <span class="hljs-attr">"background"</span>: <span class="hljs-string">"#000000"</span>,
     <span class="hljs-attr">"fonts"</span>: [
@@ -975,7 +983,8 @@ DeveloperKey
 <pre class="highlight tab tab-json"><code>{
   <span class="hljs-attr">"soundtrack"</span>: {
     <span class="hljs-attr">"src"</span>: <span class="hljs-string">"string"</span>,
-    <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"fadeIn"</span>
+    <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"fadeIn"</span>,
+    <span class="hljs-attr">"volume"</span>: <span class="hljs-number">0</span>
   },
   <span class="hljs-attr">"background"</span>: <span class="hljs-string">"#000000"</span>,
   <span class="hljs-attr">"fonts"</span>: [
@@ -1070,7 +1079,8 @@ DeveloperKey
 <p><a id="schemasoundtrack"></a></p>
 <pre class="highlight tab tab-json"><code>{
   <span class="hljs-attr">"src"</span>: <span class="hljs-string">"string"</span>,
-  <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"fadeIn"</span>
+  <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"fadeIn"</span>,
+  <span class="hljs-attr">"volume"</span>: <span class="hljs-number">0</span>
 }
 
 </code></pre>
@@ -1100,6 +1110,13 @@ DeveloperKey
 <td>false</td>
 <td>none</td>
 <td>The effect to apply to the audio file</td>
+</tr>
+<tr>
+<td>volume</td>
+<td>number</td>
+<td>false</td>
+<td>none</td>
+<td>Set the volume for the soundtrack between 0 and 1 where 0 is muted and 1 is full volume (defaults to 1).</td>
 </tr>
 </tbody>
 </table>
@@ -2014,6 +2031,51 @@ DeveloperKey
 </tr>
 </tbody>
 </table>
+<h2 id="tocslumaasset">LumaAsset</h2>
+<p><a id="schemalumaasset"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"luma"</span>,
+  <span class="hljs-attr">"src"</span>: <span class="hljs-string">"string"</span>,
+  <span class="hljs-attr">"trim"</span>: <span class="hljs-number">0</span>
+}
+
+</code></pre>
+<p><em>The LumaAsset is used to create luma matte transitions between other assets. A luma matte is  a grey scale animated video where the black areas are transparent and the white areas solid. The luma matte animation should be provided as an mp4 video file. The src must be a publicly  accessible URL to the file.</em></p>
+<h3 id="properties">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>The type of asset - set to <b>luma</b> for luma mattes.</td>
+</tr>
+<tr>
+<td>src</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>The luma matte video source URL. The URL must be publicly accessible or include credentials.</td>
+</tr>
+<tr>
+<td>trim</td>
+<td>number</td>
+<td>false</td>
+<td>none</td>
+<td>The start trim point of the luma video clip, in seconds (defaults to 0). Videos will start from the in trim point. The luma matte video will play until the file ends or the Clip length is reached.</td>
+</tr>
+</tbody>
+</table>
 <h2 id="tocstransition">Transition</h2>
 <p><a id="schematransition"></a></p>
 <pre class="highlight tab tab-json"><code>{
@@ -2353,7 +2415,8 @@ DeveloperKey
       <span class="hljs-attr">"timeline"</span>: {
         <span class="hljs-attr">"soundtrack"</span>: {
           <span class="hljs-attr">"src"</span>: <span class="hljs-string">"string"</span>,
-          <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"fadeIn"</span>
+          <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"fadeIn"</span>,
+          <span class="hljs-attr">"volume"</span>: <span class="hljs-number">0</span>
         },
         <span class="hljs-attr">"background"</span>: <span class="hljs-string">"#000000"</span>,
         <span class="hljs-attr">"fonts"</span>: [
@@ -2458,7 +2521,8 @@ DeveloperKey
     <span class="hljs-attr">"timeline"</span>: {
       <span class="hljs-attr">"soundtrack"</span>: {
         <span class="hljs-attr">"src"</span>: <span class="hljs-string">"string"</span>,
-        <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"fadeIn"</span>
+        <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"fadeIn"</span>,
+        <span class="hljs-attr">"volume"</span>: <span class="hljs-number">0</span>
       },
       <span class="hljs-attr">"background"</span>: <span class="hljs-string">"#000000"</span>,
       <span class="hljs-attr">"fonts"</span>: [

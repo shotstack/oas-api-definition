@@ -70,7 +70,8 @@ const inputBody = '{
   "timeline": {
     "soundtrack": {
       "src": "string",
-      "effect": "fadeIn"
+      "effect": "fadeIn",
+      "volume": 0
     },
     "background": "#000000",
     "fonts": [
@@ -288,7 +289,8 @@ Render the contents of a timeline as a video file.
   "timeline": {
     "soundtrack": {
       "src": "string",
-      "effect": "fadeIn"
+      "effect": "fadeIn",
+      "volume": 0
     },
     "background": "#000000",
     "fonts": [
@@ -666,7 +668,8 @@ DeveloperKey
   "timeline": {
     "soundtrack": {
       "src": "string",
-      "effect": "fadeIn"
+      "effect": "fadeIn",
+      "volume": 0
     },
     "background": "#000000",
     "fonts": [
@@ -740,7 +743,8 @@ DeveloperKey
 {
   "soundtrack": {
     "src": "string",
-    "effect": "fadeIn"
+    "effect": "fadeIn",
+    "volume": 0
   },
   "background": "#000000",
   "fonts": [
@@ -807,7 +811,8 @@ DeveloperKey
 ```json
 {
   "src": "string",
-  "effect": "fadeIn"
+  "effect": "fadeIn",
+  "volume": 0
 }
 
 ```
@@ -820,6 +825,7 @@ DeveloperKey
 |---|---|---|---|---|
 |src|string|true|none|The URL of the mp3 audio file. The URL must be publicly accessible or include credentials.|
 |effect|string|false|none|The effect to apply to the audio file|
+|volume|number|false|none|Set the volume for the soundtrack between 0 and 1 where 0 is muted and 1 is full volume (defaults to 1).|
 
 #### Enumerated Values
 
@@ -1185,6 +1191,29 @@ DeveloperKey
 |trim|number|false|none|The start trim point of the audio clip, in seconds (defaults to 0). Audio will start from the in trim point. The audio will play until the file ends or the Clip length is reached.|
 |volume|number|false|none|Set the volume for the audio clip between 0 and 1 where 0 is muted and 1 is full volume (defaults to 1).|
 
+<h2 id="tocSlumaasset">LumaAsset</h2>
+
+<a id="schemalumaasset"></a>
+
+```json
+{
+  "type": "luma",
+  "src": "string",
+  "trim": 0
+}
+
+```
+
+*The LumaAsset is used to create luma matte transitions between other assets. A luma matte is  a grey scale animated video where the black areas are transparent and the white areas solid. The luma matte animation should be provided as an mp4 video file. The src must be a publicly  accessible URL to the file.*
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|type|string|true|none|The type of asset - set to <b>luma</b> for luma mattes.|
+|src|string|true|none|The luma matte video source URL. The URL must be publicly accessible or include credentials.|
+|trim|number|false|none|The start trim point of the luma video clip, in seconds (defaults to 0). Videos will start from the in trim point. The luma matte video will play until the file ends or the Clip length is reached.|
+
 <h2 id="tocStransition">Transition</h2>
 
 <a id="schematransition"></a>
@@ -1357,7 +1386,8 @@ DeveloperKey
       "timeline": {
         "soundtrack": {
           "src": "string",
-          "effect": "fadeIn"
+          "effect": "fadeIn",
+          "volume": 0
         },
         "background": "#000000",
         "fonts": [
@@ -1439,7 +1469,8 @@ DeveloperKey
     "timeline": {
       "soundtrack": {
         "src": "string",
-        "effect": "fadeIn"
+        "effect": "fadeIn",
+        "volume": 0
       },
       "background": "#000000",
       "fonts": [

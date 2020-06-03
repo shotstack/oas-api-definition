@@ -572,6 +572,32 @@ components:
       required:
         - type
         - src
+    LumaAsset:
+      description: >-
+        The LumaAsset is used to create luma matte transitions between other assets. A luma matte is 
+        a grey scale animated video where the black areas are transparent and the white areas solid.
+        The luma matte animation should be provided as an mp4 video file. The src must be a publicly 
+        accessible URL to the file.
+      type: object
+      properties:
+        type:
+          default: luma
+          description: The type of asset - set to <b>luma</b> for luma mattes.
+          type: string
+        src:
+          description: >-
+            The luma matte video source URL. The URL must be publicly accessible or include
+            credentials.
+          type: string
+        trim:
+          description: >-
+            The start trim point of the luma video clip, in seconds (defaults to 0). Videos
+            will start from the in trim point. The luma matte video will play until the
+            file ends or the Clip length is reached.
+          type: number
+      required:
+        - type
+        - src
     Transition:
       description: In and out transitions for a clip - i.e. fade in and fade out
       properties:
