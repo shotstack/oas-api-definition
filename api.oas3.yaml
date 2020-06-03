@@ -276,13 +276,14 @@ components:
           description: >-
             The type of asset to display for the duration of this Clip. Value
             must be one of <b>TitleAsset</b>, <b>ImageAsset</b>, <b>VideoAsset</b>,
-            <b>HtmlAsset</b> or <b>AudioAsset</b>
+            <b>HtmlAsset</b>, <b>AudioAsset</b> or <b>LumaAsset</b>
           oneOf:
             - $ref: '#/components/schemas/TitleAsset'
             - $ref: '#/components/schemas/ImageAsset'
             - $ref: '#/components/schemas/VideoAsset'
             - $ref: '#/components/schemas/HtmlAsset'
             - $ref: '#/components/schemas/AudioAsset'
+            - $ref: '#/components/schemas/LumaAsset'
         start:
           description: The start position of the Clip on the timeline, in seconds.
           type: number
