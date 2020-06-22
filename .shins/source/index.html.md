@@ -1346,7 +1346,7 @@ DeveloperKey
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|format|string|true|none|`mp4`, `webm` video or animated `gif`|
+|format|string|true|none|`mp4` video or animated `gif`|
 |resolution|string|true|none|The output resolution of the video. <ul>   <li>`preview` - 512px x 288px @ 15fps</li>   <li>`mobile` - 640px x 360px @ 25fps</li>   <li>`sd` - 1024px x 576px @ 25fps</li>   <li>`hd` - 1280px x 720px @ 25fps</li>   <li>`1080` - 1920px x 1080px @ 25fps</li> </ul>|
 |aspectRatio|string|false|none|The aspect ratio (shape) of the video. Useful for social media sites. Options are: <ul>   <li>`16:9` - regular landscape/horizontal aspect ratio (default)</li>   <li>`9:16` - vertical/portrait aspect ratio.</li>   <li>`1:1` - square aspect ratio.</li> </ul>|
 |scaleTo|string|false|none|Override the resolution and scale the video to render at a different size. When using scaleTo the video should be edited at the resolution dimensions, i.e. use font sizes that look best at HD, then use scaleTo to output the video at SD and the text will be scaled to the correct size. This is useful if you want to create multiple video sizes. <ul>   <li>`preview` - 512px x 288px @ 15fps</li>   <li>`mobile` - 640px x 360px @ 25fps</li>   <li>`sd` - 1024px x 576px @25fps</li>   <li>`hd` - 1280px x 720px @25fps</li>   <li>`1080` - 1920px x 1080px @25fps</li> </ul>|
@@ -1358,7 +1358,6 @@ DeveloperKey
 |Property|Value|
 |---|---|
 |format|mp4|
-|format|webm|
 |format|gif|
 |resolution|preview|
 |resolution|mobile|
