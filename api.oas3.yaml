@@ -20,7 +20,7 @@ paths:
     post:
       responses:
         '201':
-          description: ''
+          description: The queued video details
           content:
             application/json:
               example:
@@ -31,7 +31,7 @@ paths:
                   id: 2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7
               schema:
                 $ref: '#/components/schemas/QueuedResponse'
-      description: Render the contents of a timeline as a video file.
+      description: Queue and render the contents of a timeline as a video file.
       summary: Render Video
       operationId: postRender
       requestBody:
@@ -103,7 +103,7 @@ paths:
     get:
       responses:
         '200':
-          description: ''
+          description: The render status details
           content:
             application/json:
               example:

@@ -296,7 +296,7 @@ func main() {
 
 `POST /render`
 
-Render the contents of a timeline as a video file.
+Queue and render the contents of a timeline as a video file.
 
 > Body parameter
 
@@ -395,7 +395,7 @@ Render the contents of a timeline as a video file.
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|none|[QueuedResponse](#schemaqueuedresponse)|
+|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|The queued video details and render id|[QueuedResponse](#schemaqueuedresponse)|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -675,7 +675,7 @@ Get the rendering status, video url and details of a timeline by ID.
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|[RenderResponse](#schemarenderresponse)|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|The render status details|[RenderResponse](#schemarenderresponse)|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:

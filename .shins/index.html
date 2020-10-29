@@ -502,7 +502,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p><code>POST /render</code></p>
-<p>Render the contents of a timeline as a video file.</p>
+<p>Queue and render the contents of a timeline as a video file.</p>
 <blockquote>
 <p>Body parameter</p>
 </blockquote>
@@ -630,7 +630,7 @@ System.out.println(response.toString());
 <tr>
 <td>201</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.2">Created</a></td>
-<td>none</td>
+<td>The queued video details and render id</td>
 <td><a href="#schemaqueuedresponse">QueuedResponse</a></td>
 </tr>
 </tbody>
@@ -911,7 +911,7 @@ System.out.println(response.toString());
 <tr>
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
-<td>none</td>
+<td>The render status details</td>
 <td><a href="#schemarenderresponse">RenderResponse</a></td>
 </tr>
 </tbody>
