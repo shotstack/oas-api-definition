@@ -281,6 +281,7 @@
 curl -X POST https://api.shotstack.io/{version}/render \
   -H <span class="hljs-string">'Content-Type: application/json'</span> \
   -H <span class="hljs-string">'Accept: application/json'</span> \
+  -H <span class="hljs-string">'x-api-queue-id: n7HgsIk82m0m'</span> \
   -H <span class="hljs-string">'x-api-key: API_KEY'</span>
 
 </code></pre>
@@ -288,6 +289,7 @@ curl -X POST https://api.shotstack.io/{version}/render \
 <span class="hljs-attribute">Host</span>: api.shotstack.io
 <span class="hljs-attribute">Content-Type</span>: application/json
 <span class="hljs-attribute">Accept</span>: application/json
+<span class="hljs-attribute">x-api-queue-id</span>: n7HgsIk82m0m
 
 <span class="undefined"></span></code></pre>
 <pre class="highlight tab tab-javascript--nodejs"><code><span class="hljs-keyword">const</span> fetch = <span class="hljs-built_in">require</span>(<span class="hljs-string">'node-fetch'</span>);
@@ -360,6 +362,7 @@ curl -X POST https://api.shotstack.io/{version}/render \
 <span class="hljs-keyword">const</span> headers = {
   <span class="hljs-string">'Content-Type'</span>:<span class="hljs-string">'application/json'</span>,
   <span class="hljs-string">'Accept'</span>:<span class="hljs-string">'application/json'</span>,
+  <span class="hljs-string">'x-api-queue-id'</span>:<span class="hljs-string">'n7HgsIk82m0m'</span>,
   <span class="hljs-string">'x-api-key'</span>:<span class="hljs-string">'API_KEY'</span>
 
 };
@@ -380,6 +383,7 @@ fetch(<span class="hljs-string">'https://api.shotstack.io/{version}/render'</spa
 <pre class="highlight tab tab-javascript"><code><span class="hljs-keyword">var</span> headers = {
   <span class="hljs-string">'Content-Type'</span>:<span class="hljs-string">'application/json'</span>,
   <span class="hljs-string">'Accept'</span>:<span class="hljs-string">'application/json'</span>,
+  <span class="hljs-string">'x-api-queue-id'</span>:<span class="hljs-string">'n7HgsIk82m0m'</span>,
   <span class="hljs-string">'x-api-key'</span>:<span class="hljs-string">'API_KEY'</span>
 
 };
@@ -397,6 +401,7 @@ $.ajax({
 </code></pre>
 <pre class="highlight tab tab-php"><code> <span class="hljs-string">'application/json'</span>,
     <span class="hljs-string">'Accept'</span> =&gt; <span class="hljs-string">'application/json'</span>,
+    <span class="hljs-string">'x-api-queue-id'</span> =&gt; <span class="hljs-string">'n7HgsIk82m0m'</span>,
     <span class="hljs-string">'x-api-key'</span> =&gt; <span class="hljs-string">'API_KEY'</span>,
     
     );
@@ -428,6 +433,7 @@ $request_body = <span class="hljs-keyword">array</span>();
 headers = {
   <span class="hljs-string">'Content-Type'</span> =&gt; <span class="hljs-string">'application/json'</span>,
   <span class="hljs-string">'Accept'</span> =&gt; <span class="hljs-string">'application/json'</span>,
+  <span class="hljs-string">'x-api-queue-id'</span> =&gt; <span class="hljs-string">'n7HgsIk82m0m'</span>,
   <span class="hljs-string">'x-api-key'</span> =&gt; <span class="hljs-string">'API_KEY'</span>
 }
 
@@ -442,6 +448,7 @@ p JSON.parse(result)
 headers = {
   <span class="hljs-string">'Content-Type'</span>: <span class="hljs-string">'application/json'</span>,
   <span class="hljs-string">'Accept'</span>: <span class="hljs-string">'application/json'</span>,
+  <span class="hljs-string">'x-api-queue-id'</span>: <span class="hljs-string">'n7HgsIk82m0m'</span>,
   <span class="hljs-string">'x-api-key'</span>: <span class="hljs-string">'API_KEY'</span>
 }
 
@@ -479,6 +486,7 @@ System.out.println(response.toString());
     headers := <span class="hljs-keyword">map</span>[<span class="hljs-keyword">string</span>][]<span class="hljs-keyword">string</span>{
         <span class="hljs-string">"Content-Type"</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">"application/json"</span>},
         <span class="hljs-string">"Accept"</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">"application/json"</span>},
+        <span class="hljs-string">"x-api-queue-id"</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">"n7HgsIk82m0m"</span>},
         <span class="hljs-string">"x-api-key"</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">"API_KEY"</span>},
         
     }
@@ -578,11 +586,18 @@ System.out.println(response.toString());
 </thead>
 <tbody>
 <tr>
+<td>x-api-queue-id</td>
+<td>header</td>
+<td>string</td>
+<td>false</td>
+<td>The id of a dedicated queue (enterprise customers only).</td>
+</tr>
+<tr>
 <td>body</td>
 <td>body</td>
 <td><a href="#schemaedit">Edit</a></td>
 <td>true</td>
-<td>none</td>
+<td>The video edit specified using JSON.</td>
 </tr>
 </tbody>
 </table>

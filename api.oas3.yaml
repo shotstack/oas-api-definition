@@ -34,6 +34,7 @@ paths:
       description: Render the contents of a timeline as a video file.
       operationId: postRender
       requestBody:
+        description: The video edit specified using JSON.
         content:
           application/json:
             example:
@@ -87,6 +88,14 @@ paths:
         required: true
       security:
         - DeveloperKey: []
+      parameters:
+        - in: header
+          name: x-api-queue-id
+          description: The id of a dedicated queue (enterprise customers only).
+          required: false
+          schema:
+            type: string
+          example: n7HgsIk82m0m
       tags:
         - Endpoints
   '/render/{id}':
