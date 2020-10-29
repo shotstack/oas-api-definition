@@ -337,7 +337,7 @@ curl -X POST https://api.shotstack.io/{version}/render \
               "out": "fade"
             },
             "effect": "zoomIn",
-            "filter": "boost",
+            "filter": "blur",
             "opacity": 0
           }
         ]
@@ -550,7 +550,7 @@ System.out.println(response.toString());
               <span class="hljs-attr">"out"</span>: <span class="hljs-string">"fade"</span>
             },
             <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"zoomIn"</span>,
-            <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"boost"</span>,
+            <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"blur"</span>,
             <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">0</span>
           }
         ]
@@ -630,7 +630,7 @@ System.out.println(response.toString());
 <tr>
 <td>201</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.2">Created</a></td>
-<td>The queued video details and render id</td>
+<td>The queued video details</td>
 <td><a href="#schemaqueuedresponse">QueuedResponse</a></td>
 </tr>
 </tbody>
@@ -967,7 +967,7 @@ DeveloperKey
               <span class="hljs-attr">"out"</span>: <span class="hljs-string">"fade"</span>
             },
             <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"zoomIn"</span>,
-            <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"boost"</span>,
+            <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"blur"</span>,
             <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">0</span>
           }
         ]
@@ -1072,7 +1072,7 @@ DeveloperKey
             <span class="hljs-attr">"out"</span>: <span class="hljs-string">"fade"</span>
           },
           <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"zoomIn"</span>,
-          <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"boost"</span>,
+          <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"blur"</span>,
           <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">0</span>
         }
       ]
@@ -1158,7 +1158,7 @@ DeveloperKey
 <td>string</td>
 <td>false</td>
 <td>none</td>
-<td>The effect to apply to the audio file</td>
+<td>The effect to apply to the audio file <ul>   <li><code>fadeIn</code> - fade volume in only</li>   <li><code>fadeOut</code> - fade volume out only</li>   <li><code>fadeInFadeOut</code> - fade volume in and out</li> </ul></td>
 </tr>
 <tr>
 <td>volume</td>
@@ -1224,7 +1224,7 @@ DeveloperKey
         <span class="hljs-attr">"out"</span>: <span class="hljs-string">"fade"</span>
       },
       <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"zoomIn"</span>,
-      <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"boost"</span>,
+      <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"blur"</span>,
       <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">0</span>
     }
   ]
@@ -1283,7 +1283,7 @@ DeveloperKey
     <span class="hljs-attr">"out"</span>: <span class="hljs-string">"fade"</span>
   },
   <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"zoomIn"</span>,
-  <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"boost"</span>,
+  <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"blur"</span>,
   <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">0</span>
 }
 
@@ -1481,7 +1481,7 @@ DeveloperKey
 <td>string</td>
 <td>false</td>
 <td>none</td>
-<td>Place the asset in one of nine predefined positions of the viewport. This is most effective for when the asset is scaled and you want to position the element to a specific position.</td>
+<td>Place the asset in one of nine predefined positions of the viewport. This is most effective for when the asset is scaled and you want to position the element to a specific position. <ul>   <li><code>top</code> - top (center)</li>   <li><code>topRight</code> - top right</li>   <li><code>right</code> - right (center)</li>   <li><code>bottomRight</code> - bottom right</li>   <li><code>bottom</code> - bottom (center)</li>   <li><code>bottomLeft</code> - bottom left</li>   <li><code>left</code> - left (center)</li>   <li><code>topLeft</code> - top left</li>   <li><code>center</code> - center</li> </ul></td>
 </tr>
 <tr>
 <td>offset</td>
@@ -1502,14 +1502,14 @@ DeveloperKey
 <td>string</td>
 <td>false</td>
 <td>none</td>
-<td>A motion effect to apply to the Clip.</td>
+<td>A motion effect to apply to the Clip. <ul>   <li><code>zoomIn</code> - slow zoom in</li>   <li><code>zoomOut</code> - slow zoom out</li>   <li><code>slideLeft</code> - slow slide (pan) left</li>   <li><code>slideRight</code> - slow slide (pan) right</li>   <li><code>slideUp</code> - slow slide (pan) up</li>   <li><code>slideDown</code> - slow slide (pan) down</li> </ul></td>
 </tr>
 <tr>
 <td>filter</td>
 <td>string</td>
 <td>false</td>
 <td>none</td>
-<td>A filter effect to apply to the Clip.</td>
+<td>A filter effect to apply to the Clip. <ul>   <li><code>blur</code> - blurs the image or video</li>   <li><code>boost</code> - boost contrast and saturation</li>   <li><code>contrast</code> - increase contrast</li>   <li><code>darken</code> - darken the scene</li>   <li><code>greyscale</code> - remove colour</li>   <li><code>lighten</code> - lighten the scene</li>   <li><code>muted</code> - reduce saturation and contrast</li>   <li><code>invert</code> - invert colors</li> </ul></td>
 </tr>
 <tr>
 <td>opacity</td>
@@ -1607,6 +1607,10 @@ DeveloperKey
 </tr>
 <tr>
 <td>filter</td>
+<td>blur</td>
+</tr>
+<tr>
+<td>filter</td>
 <td>boost</td>
 </tr>
 <tr>
@@ -1684,7 +1688,7 @@ DeveloperKey
 <td>string</td>
 <td>false</td>
 <td>none</td>
-<td>Uses a preset to apply font properties and styling to the title.</td>
+<td>Uses a preset to apply font properties and styling to the title. <ul>   <li><code>minimal</code></li>   <li><code>blockbuster</code></li>   <li><code>vogue</code></li>   <li><code>sketchy</code></li>   <li><code>skinny</code></li>   <li><code>chunk</code></li>   <li><code>chunkLight</code></li>   <li><code>marker</code></li>   <li><code>future</code></li>   <li><code>subtitle</code></li> </ul></td>
 </tr>
 <tr>
 <td>color</td>
@@ -1698,7 +1702,7 @@ DeveloperKey
 <td>string</td>
 <td>false</td>
 <td>none</td>
-<td>Set the relative size of the text using predefined sizes from xx-small to xx-large.</td>
+<td>Set the relative size of the text using predefined sizes from xx-small to xx-large. <ul>   <li><code>xx-small</code></li>   <li><code>x-small</code></li>   <li><code>small</code></li>   <li><code>medium</code></li>   <li><code>large</code></li>   <li><code>x-large</code></li>   <li><code>xx-large</code></li> </ul></td>
 </tr>
 <tr>
 <td>background</td>
@@ -1712,7 +1716,7 @@ DeveloperKey
 <td>string</td>
 <td>false</td>
 <td>none</td>
-<td>Place the title in one of nine predefined positions of the viewport.</td>
+<td>Place the title in one of nine predefined positions of the viewport. <ul>   <li><code>top</code> - top (center)</li>   <li><code>topRight</code> - top right</li>   <li><code>right</code> - right (center)</li>   <li><code>bottomRight</code> - bottom right</li>   <li><code>bottom</code> - bottom (center)</li>   <li><code>bottomLeft</code> - bottom left</li>   <li><code>left</code> - left (center)</li>   <li><code>topLeft</code> - top left</li>   <li><code>center</code> - center</li> </ul></td>
 </tr>
 <tr>
 <td>offset</td>
@@ -2001,7 +2005,7 @@ DeveloperKey
 <td>string</td>
 <td>false</td>
 <td>none</td>
-<td>Place the HTML in one of nine predefined positions within the HTML area.</td>
+<td>Place the HTML in one of nine predefined positions within the HTML area. <ul>   <li><code>top</code> - top (center)</li>   <li><code>topRight</code> - top right</li>   <li><code>right</code> - right (center)</li>   <li><code>bottomRight</code> - bottom right</li>   <li><code>bottom</code> - bottom (center)</li>   <li><code>bottomLeft</code> - bottom left</li>   <li><code>left</code> - left (center)</li>   <li><code>topLeft</code> - top left</li>   <li><code>center</code> - center</li> </ul></td>
 </tr>
 </tbody>
 </table>
@@ -2176,14 +2180,14 @@ DeveloperKey
 <td>string</td>
 <td>false</td>
 <td>none</td>
-<td>The transition in</td>
+<td>The transition in. Available transitions are:   <ul>     <li><code>fade</code> - fade in</li>     <li><code>reveal</code> - reveal from left to right</li>     <li><code>wipeLeft</code> - fade across screen to the left</li>     <li><code>wipeRight</code> - fade across screen to the right</li>     <li><code>slideLeft</code> - move slightly left and fade in</li>     <li><code>slideRight</code> - move slightly right and fade in</li>     <li><code>slideUp</code> - move slightly up and fade in</li>     <li><code>slideDown</code> - move slightly down and fade in</li>     <li><code>carouselLeft</code> - slide in from right to left</li>     <li><code>carouselRight</code> - slide in from left to right</li>     <li><code>carouselUp</code> - slide in from bottom to top</li>     <li><code>carouselDown</code> - slide in from top  to bottom</li>     <li><code>zoom</code> - fast zoom in</li>   </ul></td>
 </tr>
 <tr>
 <td>out</td>
 <td>string</td>
 <td>false</td>
 <td>none</td>
-<td>The transition out</td>
+<td>The transition out. Available transitions are:   <ul>     <li><code>fade</code> - fade out</li>     <li><code>reveal</code> - reveal from right to left</li>     <li><code>wipeLeft</code> - fade across screen to the left</li>     <li><code>wipeRight</code> - fade across screen to the right</li>     <li><code>slideLeft</code> - move slightly left and fade out</li>     <li><code>slideRight</code> - move slightly right and fade out</li>     <li><code>slideUp</code> - move slightly up and fade out</li>     <li><code>slideDown</code> - move slightly down and fade out</li>     <li><code>carouselLeft</code> - slide out from right to left</li>     <li><code>carouselRight</code> - slide out from left to right</li>     <li><code>carouselUp</code> - slide out from bottom to top</li>     <li><code>carouselDown</code> - slide out from top  to bottom</li>     <li><code>zoom</code> - fast zoom out</li>   </ul></td>
 </tr>
 </tbody>
 </table>
@@ -2213,6 +2217,42 @@ DeveloperKey
 <td>wipeRight</td>
 </tr>
 <tr>
+<td>in</td>
+<td>slideLeft</td>
+</tr>
+<tr>
+<td>in</td>
+<td>slideRight</td>
+</tr>
+<tr>
+<td>in</td>
+<td>slideUp</td>
+</tr>
+<tr>
+<td>in</td>
+<td>slideDown</td>
+</tr>
+<tr>
+<td>in</td>
+<td>carouselLeft</td>
+</tr>
+<tr>
+<td>in</td>
+<td>carouselRight</td>
+</tr>
+<tr>
+<td>in</td>
+<td>carouselUp</td>
+</tr>
+<tr>
+<td>in</td>
+<td>carouselDown</td>
+</tr>
+<tr>
+<td>in</td>
+<td>zoom</td>
+</tr>
+<tr>
 <td>out</td>
 <td>fade</td>
 </tr>
@@ -2227,6 +2267,42 @@ DeveloperKey
 <tr>
 <td>out</td>
 <td>wipeRight</td>
+</tr>
+<tr>
+<td>out</td>
+<td>slideLeft</td>
+</tr>
+<tr>
+<td>out</td>
+<td>slideRight</td>
+</tr>
+<tr>
+<td>out</td>
+<td>slideUp</td>
+</tr>
+<tr>
+<td>out</td>
+<td>slideDown</td>
+</tr>
+<tr>
+<td>out</td>
+<td>carouselLeft</td>
+</tr>
+<tr>
+<td>out</td>
+<td>carouselRight</td>
+</tr>
+<tr>
+<td>out</td>
+<td>carouselUp</td>
+</tr>
+<tr>
+<td>out</td>
+<td>carouselDown</td>
+</tr>
+<tr>
+<td>out</td>
+<td>zoom</td>
 </tr>
 </tbody>
 </table>
@@ -2644,7 +2720,7 @@ DeveloperKey
                   <span class="hljs-attr">"out"</span>: <span class="hljs-string">"fade"</span>
                 },
                 <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"zoomIn"</span>,
-                <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"boost"</span>,
+                <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"blur"</span>,
                 <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">0</span>
               }
             ]
@@ -2758,7 +2834,7 @@ DeveloperKey
                 <span class="hljs-attr">"out"</span>: <span class="hljs-string">"fade"</span>
               },
               <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"zoomIn"</span>,
-              <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"boost"</span>,
+              <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"blur"</span>,
               <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">0</span>
             }
           ]
@@ -2802,7 +2878,7 @@ DeveloperKey
 <td>string</td>
 <td>true</td>
 <td>none</td>
-<td>The status of the render task</td>
+<td>The status of the render task. <ul>   <li><code>queued</code> - render is queued waiting to be rendered</li>   <li><code>fetching</code> - assets are being fetched</li>   <li><code>rendering</code> - the video is being rendered</li>   <li><code>saving</code> - the final video is being saved to storage</li>   <li><code>done</code> - the video is ready to be downloaded</li>   <li><code>failed</code> - there was an error rendering the video</li> </ul></td>
 </tr>
 <tr>
 <td>id</td>

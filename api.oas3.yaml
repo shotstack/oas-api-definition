@@ -248,7 +248,13 @@ components:
             or include credentials.
           type: string
         effect:
-          description: The effect to apply to the audio file
+          description: >-
+            The effect to apply to the audio file
+            <ul>
+              <li>`fadeIn` - fade volume in only</li>
+              <li>`fadeOut` - fade volume out only</li>
+              <li>`fadeInFadeOut` - fade volume in and out</li>
+            </ul>
           enum:
             - fadeIn
             - fadeOut
@@ -328,6 +334,17 @@ components:
           description: >- 
             Place the asset in one of nine predefined positions of the viewport. This is most effective
             for when the asset is scaled and you want to position the element to a specific position.
+            <ul>
+              <li>`top` - top (center)</li>
+              <li>`topRight` - top right</li>
+              <li>`right` - right (center)</li>
+              <li>`bottomRight` - bottom right</li>
+              <li>`bottom` - bottom (center)</li>
+              <li>`bottomLeft` - bottom left</li>
+              <li>`left` - left (center)</li>
+              <li>`topLeft` - top left</li>
+              <li>`center` - center</li>
+            </ul>
           enum:
             - top
             - topRight
@@ -349,7 +366,16 @@ components:
         transition:
           $ref: '#/components/schemas/Transition'
         effect:
-          description: A motion effect to apply to the Clip.
+          description: >-
+            A motion effect to apply to the Clip.
+            <ul>
+              <li>`zoomIn` - slow zoom in</li>
+              <li>`zoomOut` - slow zoom out</li>
+              <li>`slideLeft` - slow slide (pan) left</li>
+              <li>`slideRight` - slow slide (pan) right</li>
+              <li>`slideUp` - slow slide (pan) up</li>
+              <li>`slideDown` - slow slide (pan) down</li>
+            </ul>
           enum:
             - zoomIn
             - zoomOut
@@ -359,8 +385,20 @@ components:
             - slideDown
           type: string
         filter:
-          description: A filter effect to apply to the Clip.
+          description: >-
+            A filter effect to apply to the Clip.
+            <ul>
+              <li>`blur` - blurs the image or video</li>
+              <li>`boost` - boost contrast and saturation</li>
+              <li>`contrast` - increase contrast</li>
+              <li>`darken` - darken the scene</li>
+              <li>`greyscale` - remove colour</li>
+              <li>`lighten` - lighten the scene</li>
+              <li>`muted` - reduce saturation and contrast</li>
+              <li>`invert` - invert colors</li>
+            </ul>
           enum:
+            - blur
             - boost
             - contrast
             - darken
@@ -391,7 +429,20 @@ components:
           description: The title text string - i.e. "My Title".
           type: string
         style:
-          description: Uses a preset to apply font properties and styling to the title.
+          description: >-
+            Uses a preset to apply font properties and styling to the title.
+            <ul>
+              <li>`minimal`</li>
+              <li>`blockbuster`</li>
+              <li>`vogue`</li>
+              <li>`sketchy`</li>
+              <li>`skinny`</li>
+              <li>`chunk`</li>
+              <li>`chunkLight`</li>
+              <li>`marker`</li>
+              <li>`future`</li>
+              <li>`subtitle`</li>
+            </ul>
           enum:
             - minimal
             - blockbuster
@@ -416,6 +467,15 @@ components:
           description: >-
             Set the relative size of the text using predefined sizes from
             xx-small to xx-large.
+            <ul>
+              <li>`xx-small`</li>
+              <li>`x-small`</li>
+              <li>`small`</li>
+              <li>`medium`</li>
+              <li>`large`</li>
+              <li>`x-large`</li>
+              <li>`xx-large`</li>
+            </ul>
           enum:
             - xx-small
             - x-small
@@ -433,7 +493,19 @@ components:
           type: string
         position:
           default: center
-          description: Place the title in one of nine predefined positions of the viewport.
+          description: >-
+            Place the title in one of nine predefined positions of the viewport.
+            <ul>
+              <li>`top` - top (center)</li>
+              <li>`topRight` - top right</li>
+              <li>`right` - right (center)</li>
+              <li>`bottomRight` - bottom right</li>
+              <li>`bottom` - bottom (center)</li>
+              <li>`bottomLeft` - bottom left</li>
+              <li>`left` - left (center)</li>
+              <li>`topLeft` - top left</li>
+              <li>`center` - center</li>
+            </ul>
           enum:
             - top
             - topRight
@@ -541,7 +613,19 @@ components:
           default: transparent
         position:
           default: center
-          description: Place the HTML in one of nine predefined positions within the HTML area.
+          description: >-
+            Place the HTML in one of nine predefined positions within the HTML area.
+            <ul>
+              <li>`top` - top (center)</li>
+              <li>`topRight` - top right</li>
+              <li>`right` - right (center)</li>
+              <li>`bottomRight` - bottom right</li>
+              <li>`bottom` - bottom (center)</li>
+              <li>`bottomLeft` - bottom left</li>
+              <li>`left` - left (center)</li>
+              <li>`topLeft` - top left</li>
+              <li>`center` - center</li>
+            </ul>
           enum:
             - top
             - topRight
@@ -616,20 +700,70 @@ components:
       description: In and out transitions for a clip - i.e. fade in and fade out
       properties:
         in:
-          description: The transition in
+          description: >-
+            The transition in. Available transitions are:
+              <ul>
+                <li>`fade` - fade in</li>
+                <li>`reveal` - reveal from left to right</li>
+                <li>`wipeLeft` - fade across screen to the left</li>
+                <li>`wipeRight` - fade across screen to the right</li>
+                <li>`slideLeft` - move slightly left and fade in</li>
+                <li>`slideRight` - move slightly right and fade in</li>
+                <li>`slideUp` - move slightly up and fade in</li>
+                <li>`slideDown` - move slightly down and fade in</li>
+                <li>`carouselLeft` - slide in from right to left</li>
+                <li>`carouselRight` - slide in from left to right</li>
+                <li>`carouselUp` - slide in from bottom to top</li>
+                <li>`carouselDown` - slide in from top  to bottom</li>
+                <li>`zoom` - fast zoom in</li>
+              </ul>
           enum:
             - fade
             - reveal
             - wipeLeft
             - wipeRight
+            - slideLeft
+            - slideRight
+            - slideUp
+            - slideDown
+            - carouselLeft
+            - carouselRight
+            - carouselUp
+            - carouselDown
+            - zoom
           type: string
         out:
-          description: The transition out
+          description: >-
+            The transition out. Available transitions are:
+              <ul>
+                <li>`fade` - fade out</li>
+                <li>`reveal` - reveal from right to left</li>
+                <li>`wipeLeft` - fade across screen to the left</li>
+                <li>`wipeRight` - fade across screen to the right</li>
+                <li>`slideLeft` - move slightly left and fade out</li>
+                <li>`slideRight` - move slightly right and fade out</li>
+                <li>`slideUp` - move slightly up and fade out</li>
+                <li>`slideDown` - move slightly down and fade out</li>
+                <li>`carouselLeft` - slide out from right to left</li>
+                <li>`carouselRight` - slide out from left to right</li>
+                <li>`carouselUp` - slide out from bottom to top</li>
+                <li>`carouselDown` - slide out from top  to bottom</li>
+                <li>`zoom` - fast zoom out</li>
+              </ul>
           enum:
             - fade
             - reveal
             - wipeLeft
             - wipeRight
+            - slideLeft
+            - slideRight
+            - slideUp
+            - slideDown
+            - carouselLeft
+            - carouselRight
+            - carouselUp
+            - carouselDown
+            - zoom
           type: string
       type: object
     Font:
@@ -808,7 +942,16 @@ components:
     RenderResponseData:
       properties:
         status:
-          description: The status of the render task
+          description: >-
+            The status of the render task.
+            <ul>
+              <li>`queued` - render is queued waiting to be rendered</li>
+              <li>`fetching` - assets are being fetched</li>
+              <li>`rendering` - the video is being rendered</li>
+              <li>`saving` - the final video is being saved to storage</li>
+              <li>`done` - the video is ready to be downloaded</li>
+              <li>`failed` - there was an error rendering the video</li>
+            </ul>
           enum:
             - queued
             - fetching

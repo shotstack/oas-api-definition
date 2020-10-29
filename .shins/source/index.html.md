@@ -112,7 +112,7 @@ const inputBody = '{
               "out": "fade"
             },
             "effect": "zoomIn",
-            "filter": "boost",
+            "filter": "blur",
             "opacity": 0
           }
         ]
@@ -345,7 +345,7 @@ Queue and render the contents of a timeline as a video file.
               "out": "fade"
             },
             "effect": "zoomIn",
-            "filter": "boost",
+            "filter": "blur",
             "opacity": 0
           }
         ]
@@ -395,7 +395,7 @@ Queue and render the contents of a timeline as a video file.
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|The queued video details and render id|[QueuedResponse](#schemaqueuedresponse)|
+|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|The queued video details|[QueuedResponse](#schemaqueuedresponse)|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -733,7 +733,7 @@ DeveloperKey
               "out": "fade"
             },
             "effect": "zoomIn",
-            "filter": "boost",
+            "filter": "blur",
             "opacity": 0
           }
         ]
@@ -816,7 +816,7 @@ DeveloperKey
             "out": "fade"
           },
           "effect": "zoomIn",
-          "filter": "boost",
+          "filter": "blur",
           "opacity": 0
         }
       ]
@@ -857,7 +857,7 @@ DeveloperKey
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |src|string|true|none|The URL of the mp3 audio file. The URL must be publicly accessible or include credentials.|
-|effect|string|false|none|The effect to apply to the audio file|
+|effect|string|false|none|The effect to apply to the audio file <ul>   <li>`fadeIn` - fade volume in only</li>   <li>`fadeOut` - fade volume out only</li>   <li>`fadeInFadeOut` - fade volume in and out</li> </ul>|
 |volume|number|false|none|Set the volume for the soundtrack between 0 and 1 where 0 is muted and 1 is full volume (defaults to 1).|
 
 #### Enumerated Values
@@ -903,7 +903,7 @@ DeveloperKey
         "out": "fade"
       },
       "effect": "zoomIn",
-      "filter": "boost",
+      "filter": "blur",
       "opacity": 0
     }
   ]
@@ -952,7 +952,7 @@ DeveloperKey
     "out": "fade"
   },
   "effect": "zoomIn",
-  "filter": "boost",
+  "filter": "blur",
   "opacity": 0
 }
 
@@ -1010,11 +1010,11 @@ DeveloperKey
 |length|number|true|none|The length, in seconds, the Clip should play for.|
 |fit|string|false|none|Set how the asset should be scaled to fit the viewport using one of the following options:    <ul>     <li>`cover` - stretch the asset to fill the viewport without maintaining the aspect ratio.</li>     <li>`contain` - fit the entire asset within the viewport while maintaining the original aspect ratio.</li>     <li>`crop` - scale the asset to fill the viewport while maintaining the aspect ratio. The asset will be cropped if it exceeds the bounds of the viewport.</li>     <li>`none` - preserves the original asset dimensions and does not apply any scaling.</li>   </ul>|
 |scale|number|false|none|Scale the asset to a fraction of the viewport size - i.e. setting the scale to 0.5 will scale asset to half the size of the viewport. This is useful for picture-in-picture video and  scaling images such as logos and watermarks.|
-|position|string|false|none|Place the asset in one of nine predefined positions of the viewport. This is most effective for when the asset is scaled and you want to position the element to a specific position.|
+|position|string|false|none|Place the asset in one of nine predefined positions of the viewport. This is most effective for when the asset is scaled and you want to position the element to a specific position. <ul>   <li>`top` - top (center)</li>   <li>`topRight` - top right</li>   <li>`right` - right (center)</li>   <li>`bottomRight` - bottom right</li>   <li>`bottom` - bottom (center)</li>   <li>`bottomLeft` - bottom left</li>   <li>`left` - left (center)</li>   <li>`topLeft` - top left</li>   <li>`center` - center</li> </ul>|
 |offset|[Offset](#schemaoffset)|false|none|Offset the location of the asset relative to it's position on the viewport. The offset distance is relative to the width of the viewport - for example an x offset of 0.5 will move the asset half the viewport width to the right.|
 |transition|[Transition](#schematransition)|false|none|In and out transitions for a clip - i.e. fade in and fade out|
-|effect|string|false|none|A motion effect to apply to the Clip.|
-|filter|string|false|none|A filter effect to apply to the Clip.|
+|effect|string|false|none|A motion effect to apply to the Clip. <ul>   <li>`zoomIn` - slow zoom in</li>   <li>`zoomOut` - slow zoom out</li>   <li>`slideLeft` - slow slide (pan) left</li>   <li>`slideRight` - slow slide (pan) right</li>   <li>`slideUp` - slow slide (pan) up</li>   <li>`slideDown` - slow slide (pan) down</li> </ul>|
+|filter|string|false|none|A filter effect to apply to the Clip. <ul>   <li>`blur` - blurs the image or video</li>   <li>`boost` - boost contrast and saturation</li>   <li>`contrast` - increase contrast</li>   <li>`darken` - darken the scene</li>   <li>`greyscale` - remove colour</li>   <li>`lighten` - lighten the scene</li>   <li>`muted` - reduce saturation and contrast</li>   <li>`invert` - invert colors</li> </ul>|
 |opacity|number|false|none|Sets the opacity of the Clip where 1 is opaque and 0 is transparent.|
 
 #### Enumerated Values
@@ -1040,6 +1040,7 @@ DeveloperKey
 |effect|slideRight|
 |effect|slideUp|
 |effect|slideDown|
+|filter|blur|
 |filter|boost|
 |filter|contrast|
 |filter|darken|
@@ -1077,11 +1078,11 @@ DeveloperKey
 |---|---|---|---|---|
 |type|string|true|none|The type of asset - set to <b>title</b> for titles.|
 |text|string|true|none|The title text string - i.e. "My Title".|
-|style|string|false|none|Uses a preset to apply font properties and styling to the title.|
+|style|string|false|none|Uses a preset to apply font properties and styling to the title. <ul>   <li>`minimal`</li>   <li>`blockbuster`</li>   <li>`vogue`</li>   <li>`sketchy`</li>   <li>`skinny`</li>   <li>`chunk`</li>   <li>`chunkLight`</li>   <li>`marker`</li>   <li>`future`</li>   <li>`subtitle`</li> </ul>|
 |color|string|false|none|Set the text color using hexadecimal color notation. Transparency is supported by setting the first two characters of the hex string (opposite to HTML),  i.e. #80ffffff will be white with  50% transparency.|
-|size|string|false|none|Set the relative size of the text using predefined sizes from xx-small to xx-large.|
+|size|string|false|none|Set the relative size of the text using predefined sizes from xx-small to xx-large. <ul>   <li>`xx-small`</li>   <li>`x-small`</li>   <li>`small`</li>   <li>`medium`</li>   <li>`large`</li>   <li>`x-large`</li>   <li>`xx-large`</li> </ul>|
 |background|string|false|none|Apply a background color behind the text. Set the text color using hexadecimal color notation. Transparency is supported by setting the first two characters of the hex string (opposite to HTML),  i.e. #80ffffff will be white with 50% transparency.|
-|position|string|false|none|Place the title in one of nine predefined positions of the viewport.|
+|position|string|false|none|Place the title in one of nine predefined positions of the viewport. <ul>   <li>`top` - top (center)</li>   <li>`topRight` - top right</li>   <li>`right` - right (center)</li>   <li>`bottomRight` - bottom right</li>   <li>`bottom` - bottom (center)</li>   <li>`bottomLeft` - bottom left</li>   <li>`left` - left (center)</li>   <li>`topLeft` - top left</li>   <li>`center` - center</li> </ul>|
 |offset|[Offset](#schemaoffset)|false|none|Offset the location of the title relative to it's position on the screen.|
 
 #### Enumerated Values
@@ -1190,7 +1191,7 @@ DeveloperKey
 |width|number|false|none|Set the width of the HTML asset bounding box. Text will wrap to fill the bounding box.|
 |height|number|false|none|Set the width of the HTML asset bounding box. Text and elements will be masked if they exceed the  height of the bounding box.|
 |background|string|false|none|Apply a background color behind the HTML bounding box using. Set the text color using hexadecimal  color notation. Transparency is supported by setting the first two characters of the hex string  (opposite to HTML), i.e. #80ffffff will be white with 50% transparency.|
-|position|string|false|none|Place the HTML in one of nine predefined positions within the HTML area.|
+|position|string|false|none|Place the HTML in one of nine predefined positions within the HTML area. <ul>   <li>`top` - top (center)</li>   <li>`topRight` - top right</li>   <li>`right` - right (center)</li>   <li>`bottomRight` - bottom right</li>   <li>`bottom` - bottom (center)</li>   <li>`bottomLeft` - bottom left</li>   <li>`left` - left (center)</li>   <li>`topLeft` - top left</li>   <li>`center` - center</li> </ul>|
 
 #### Enumerated Values
 
@@ -1272,8 +1273,8 @@ DeveloperKey
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|in|string|false|none|The transition in|
-|out|string|false|none|The transition out|
+|in|string|false|none|The transition in. Available transitions are:   <ul>     <li>`fade` - fade in</li>     <li>`reveal` - reveal from left to right</li>     <li>`wipeLeft` - fade across screen to the left</li>     <li>`wipeRight` - fade across screen to the right</li>     <li>`slideLeft` - move slightly left and fade in</li>     <li>`slideRight` - move slightly right and fade in</li>     <li>`slideUp` - move slightly up and fade in</li>     <li>`slideDown` - move slightly down and fade in</li>     <li>`carouselLeft` - slide in from right to left</li>     <li>`carouselRight` - slide in from left to right</li>     <li>`carouselUp` - slide in from bottom to top</li>     <li>`carouselDown` - slide in from top  to bottom</li>     <li>`zoom` - fast zoom in</li>   </ul>|
+|out|string|false|none|The transition out. Available transitions are:   <ul>     <li>`fade` - fade out</li>     <li>`reveal` - reveal from right to left</li>     <li>`wipeLeft` - fade across screen to the left</li>     <li>`wipeRight` - fade across screen to the right</li>     <li>`slideLeft` - move slightly left and fade out</li>     <li>`slideRight` - move slightly right and fade out</li>     <li>`slideUp` - move slightly up and fade out</li>     <li>`slideDown` - move slightly down and fade out</li>     <li>`carouselLeft` - slide out from right to left</li>     <li>`carouselRight` - slide out from left to right</li>     <li>`carouselUp` - slide out from bottom to top</li>     <li>`carouselDown` - slide out from top  to bottom</li>     <li>`zoom` - fast zoom out</li>   </ul>|
 
 #### Enumerated Values
 
@@ -1283,10 +1284,28 @@ DeveloperKey
 |in|reveal|
 |in|wipeLeft|
 |in|wipeRight|
+|in|slideLeft|
+|in|slideRight|
+|in|slideUp|
+|in|slideDown|
+|in|carouselLeft|
+|in|carouselRight|
+|in|carouselUp|
+|in|carouselDown|
+|in|zoom|
 |out|fade|
 |out|reveal|
 |out|wipeLeft|
 |out|wipeRight|
+|out|slideLeft|
+|out|slideRight|
+|out|slideUp|
+|out|slideDown|
+|out|carouselLeft|
+|out|carouselRight|
+|out|carouselUp|
+|out|carouselDown|
+|out|zoom|
 
 <h2 id="tocSfont">Font</h2>
 
@@ -1522,7 +1541,7 @@ DeveloperKey
                   "out": "fade"
                 },
                 "effect": "zoomIn",
-                "filter": "boost",
+                "filter": "blur",
                 "opacity": 0
               }
             ]
@@ -1613,7 +1632,7 @@ DeveloperKey
                 "out": "fade"
               },
               "effect": "zoomIn",
-              "filter": "boost",
+              "filter": "blur",
               "opacity": 0
             }
           ]
@@ -1645,7 +1664,7 @@ DeveloperKey
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|status|string|true|none|The status of the render task|
+|status|string|true|none|The status of the render task. <ul>   <li>`queued` - render is queued waiting to be rendered</li>   <li>`fetching` - assets are being fetched</li>   <li>`rendering` - the video is being rendered</li>   <li>`saving` - the final video is being saved to storage</li>   <li>`done` - the video is ready to be downloaded</li>   <li>`failed` - there was an error rendering the video</li> </ul>|
 |id|string|true|none|The id of the render task in UUID format|
 |owner|string|true|none|The owner id of the render task|
 |url|string|false|none|The URL of the final video. This will only be available if status is done.|

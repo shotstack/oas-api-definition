@@ -123,7 +123,7 @@ a {
     color: #aaa;
 }
 
-.content table td:first-child  {  
+.content table td:first-child  {
     font-weight: bold;
 }
 
@@ -163,4 +163,8 @@ h1#shotstack {
 
 h1#shotstack::after {
     content: " API Reference";
+}
+
+h4#enumerated-values, h4#enumerated-values + table {
+    display: none;
 }
