@@ -41,7 +41,7 @@ Base URLs:
 
 <h1 id="shotstack-endpoints">Endpoints</h1>
 
-## postRender
+## Render Video
 
 <a id="opIdpostRender"></a>
 
@@ -369,7 +369,7 @@ Render the contents of a timeline as a video file.
 }
 ```
 
-<h3 id="postrender-parameters">Parameters</h3>
+<h3 id="render-video-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
@@ -391,7 +391,7 @@ Render the contents of a timeline as a video file.
 }
 ```
 
-<h3 id="postrender-responses">Responses</h3>
+<h3 id="render-video-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -402,7 +402,7 @@ To perform this operation, you must be authenticated by means of one of the foll
 DeveloperKey
 </aside>
 
-## getRender
+## Get Render Status
 
 <a id="opIdgetRender"></a>
 
@@ -578,7 +578,7 @@ func main() {
 
 Get the rendering status, video url and details of a timeline by ID.
 
-<h3 id="getrender-parameters">Parameters</h3>
+<h3 id="get-render-status-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
@@ -671,7 +671,7 @@ Get the rendering status, video url and details of a timeline by ID.
 }
 ```
 
-<h3 id="getrender-responses">Responses</h3>
+<h3 id="get-render-status-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|

@@ -32,6 +32,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/QueuedResponse'
       description: Render the contents of a timeline as a video file.
+      summary: Render Video
       operationId: postRender
       requestBody:
         description: The video edit specified using JSON.
@@ -165,8 +166,9 @@ paths:
                   updated: '2018-05-06T03:33:48.521Z'
               schema:
                 $ref: '#/components/schemas/RenderResponse'
-      description: 'Get the rendering status, video url and details of a timeline by ID.'
+      description: Get the rendering status, video url and details of a timeline by ID.
       operationId: getRender
+      summary: Get Render Status
       security:
         - DeveloperKey: []
       tags:
