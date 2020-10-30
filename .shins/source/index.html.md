@@ -71,14 +71,14 @@ const fetch = require('node-fetch');
 const inputBody = '{
   "timeline": {
     "soundtrack": {
-      "src": "string",
+      "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3",
       "effect": "fadeIn",
-      "volume": 0
+      "volume": 1
     },
     "background": "#000000",
     "fonts": [
       {
-        "src": "string"
+        "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf"
       }
     ],
     "tracks": [
@@ -86,34 +86,27 @@ const inputBody = '{
         "clips": [
           {
             "asset": {
-              "type": "title",
-              "text": "string",
-              "style": "minimal",
-              "color": "#ffffff",
-              "size": "medium",
-              "background": "string",
-              "position": "center",
-              "offset": {
-                "x": -1,
-                "y": -1
-              }
+              "type": "video",
+              "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4",
+              "trim": 2,
+              "volume": 1
             },
-            "start": 0,
-            "length": 0,
+            "start": 2,
+            "length": 5,
             "fit": "crop",
             "scale": 0,
             "position": "center",
             "offset": {
-              "x": -1,
-              "y": -1
+              "x": 0,
+              "y": 0
             },
             "transition": {
               "in": "fade",
               "out": "fade"
             },
             "effect": "zoomIn",
-            "filter": "blur",
-            "opacity": 0
+            "filter": "greyscale",
+            "opacity": 1
           }
         ]
       }
@@ -121,18 +114,18 @@ const inputBody = '{
   },
   "output": {
     "format": "mp4",
-    "resolution": "preview",
+    "resolution": "sd",
     "aspectRatio": "16:9",
     "scaleTo": "preview",
     "poster": {
-      "capture": 0
+      "capture": 1
     },
     "thumbnail": {
-      "capture": 0,
-      "scale": 0
+      "capture": 1,
+      "scale": 0.3
     }
   },
-  "callback": "string"
+  "callback": "https://my-server.com/callback.php"
 }';
 const headers = {
   'Content-Type':'application/json',
@@ -304,14 +297,14 @@ Queue and render the contents of a timeline as a video file.
 {
   "timeline": {
     "soundtrack": {
-      "src": "string",
+      "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3",
       "effect": "fadeIn",
-      "volume": 0
+      "volume": 1
     },
     "background": "#000000",
     "fonts": [
       {
-        "src": "string"
+        "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf"
       }
     ],
     "tracks": [
@@ -319,34 +312,27 @@ Queue and render the contents of a timeline as a video file.
         "clips": [
           {
             "asset": {
-              "type": "title",
-              "text": "string",
-              "style": "minimal",
-              "color": "#ffffff",
-              "size": "medium",
-              "background": "string",
-              "position": "center",
-              "offset": {
-                "x": -1,
-                "y": -1
-              }
+              "type": "video",
+              "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4",
+              "trim": 2,
+              "volume": 1
             },
-            "start": 0,
-            "length": 0,
+            "start": 2,
+            "length": 5,
             "fit": "crop",
             "scale": 0,
             "position": "center",
             "offset": {
-              "x": -1,
-              "y": -1
+              "x": 0,
+              "y": 0
             },
             "transition": {
               "in": "fade",
               "out": "fade"
             },
             "effect": "zoomIn",
-            "filter": "blur",
-            "opacity": 0
+            "filter": "greyscale",
+            "opacity": 1
           }
         ]
       }
@@ -354,18 +340,18 @@ Queue and render the contents of a timeline as a video file.
   },
   "output": {
     "format": "mp4",
-    "resolution": "preview",
+    "resolution": "sd",
     "aspectRatio": "16:9",
     "scaleTo": "preview",
     "poster": {
-      "capture": 0
+      "capture": 1
     },
     "thumbnail": {
-      "capture": 0,
-      "scale": 0
+      "capture": 1,
+      "scale": 0.3
     }
   },
-  "callback": "string"
+  "callback": "https://my-server.com/callback.php"
 }
 ```
 
@@ -692,14 +678,14 @@ DeveloperKey
 {
   "timeline": {
     "soundtrack": {
-      "src": "string",
+      "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3",
       "effect": "fadeIn",
-      "volume": 0
+      "volume": 1
     },
     "background": "#000000",
     "fonts": [
       {
-        "src": "string"
+        "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf"
       }
     ],
     "tracks": [
@@ -707,34 +693,27 @@ DeveloperKey
         "clips": [
           {
             "asset": {
-              "type": "title",
-              "text": "string",
-              "style": "minimal",
-              "color": "#ffffff",
-              "size": "medium",
-              "background": "string",
-              "position": "center",
-              "offset": {
-                "x": -1,
-                "y": -1
-              }
+              "type": "video",
+              "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4",
+              "trim": 2,
+              "volume": 1
             },
-            "start": 0,
-            "length": 0,
+            "start": 2,
+            "length": 5,
             "fit": "crop",
             "scale": 0,
             "position": "center",
             "offset": {
-              "x": -1,
-              "y": -1
+              "x": 0,
+              "y": 0
             },
             "transition": {
               "in": "fade",
               "out": "fade"
             },
             "effect": "zoomIn",
-            "filter": "blur",
-            "opacity": 0
+            "filter": "greyscale",
+            "opacity": 1
           }
         ]
       }
@@ -742,18 +721,18 @@ DeveloperKey
   },
   "output": {
     "format": "mp4",
-    "resolution": "preview",
+    "resolution": "sd",
     "aspectRatio": "16:9",
     "scaleTo": "preview",
     "poster": {
-      "capture": 0
+      "capture": 1
     },
     "thumbnail": {
-      "capture": 0,
-      "scale": 0
+      "capture": 1,
+      "scale": 0.3
     }
   },
-  "callback": "string"
+  "callback": "https://my-server.com/callback.php"
 }
 
 ```
@@ -775,14 +754,14 @@ DeveloperKey
 ```json
 {
   "soundtrack": {
-    "src": "string",
+    "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3",
     "effect": "fadeIn",
-    "volume": 0
+    "volume": 1
   },
   "background": "#000000",
   "fonts": [
     {
-      "src": "string"
+      "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf"
     }
   ],
   "tracks": [
@@ -790,34 +769,27 @@ DeveloperKey
       "clips": [
         {
           "asset": {
-            "type": "title",
-            "text": "string",
-            "style": "minimal",
-            "color": "#ffffff",
-            "size": "medium",
-            "background": "string",
-            "position": "center",
-            "offset": {
-              "x": -1,
-              "y": -1
-            }
+            "type": "video",
+            "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4",
+            "trim": 2,
+            "volume": 1
           },
-          "start": 0,
-          "length": 0,
+          "start": 2,
+          "length": 5,
           "fit": "crop",
           "scale": 0,
           "position": "center",
           "offset": {
-            "x": -1,
-            "y": -1
+            "x": 0,
+            "y": 0
           },
           "transition": {
             "in": "fade",
             "out": "fade"
           },
           "effect": "zoomIn",
-          "filter": "blur",
-          "opacity": 0
+          "filter": "greyscale",
+          "opacity": 1
         }
       ]
     }
@@ -843,9 +815,9 @@ DeveloperKey
 
 ```json
 {
-  "src": "string",
+  "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3",
   "effect": "fadeIn",
-  "volume": 0
+  "volume": 1
 }
 
 ```
@@ -877,34 +849,27 @@ DeveloperKey
   "clips": [
     {
       "asset": {
-        "type": "title",
-        "text": "string",
-        "style": "minimal",
-        "color": "#ffffff",
-        "size": "medium",
-        "background": "string",
-        "position": "center",
-        "offset": {
-          "x": -1,
-          "y": -1
-        }
+        "type": "video",
+        "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4",
+        "trim": 2,
+        "volume": 1
       },
-      "start": 0,
-      "length": 0,
+      "start": 2,
+      "length": 5,
       "fit": "crop",
       "scale": 0,
       "position": "center",
       "offset": {
-        "x": -1,
-        "y": -1
+        "x": 0,
+        "y": 0
       },
       "transition": {
         "in": "fade",
         "out": "fade"
       },
       "effect": "zoomIn",
-      "filter": "blur",
-      "opacity": 0
+      "filter": "greyscale",
+      "opacity": 1
     }
   ]
 }
@@ -926,34 +891,27 @@ DeveloperKey
 ```json
 {
   "asset": {
-    "type": "title",
-    "text": "string",
-    "style": "minimal",
-    "color": "#ffffff",
-    "size": "medium",
-    "background": "string",
-    "position": "center",
-    "offset": {
-      "x": -1,
-      "y": -1
-    }
+    "type": "video",
+    "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4",
+    "trim": 2,
+    "volume": 1
   },
-  "start": 0,
-  "length": 0,
+  "start": 2,
+  "length": 5,
   "fit": "crop",
   "scale": 0,
   "position": "center",
   "offset": {
-    "x": -1,
-    "y": -1
+    "x": 0,
+    "y": 0
   },
   "transition": {
     "in": "fade",
     "out": "fade"
   },
   "effect": "zoomIn",
-  "filter": "blur",
-  "opacity": 0
+  "filter": "greyscale",
+  "opacity": 1
 }
 
 ```
@@ -970,7 +928,7 @@ DeveloperKey
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» *anonymous*|[TitleAsset](#schematitleasset)|false|none|The TitleAsset clip type lets you create video titles from a text string and apply styling and positioning.|
+|» *anonymous*|[VideoAsset](#schemavideoasset)|false|none|The VideoAsset is used to create video sequences from video files. The src must be a publicly accessible URL to a video resource such as an mp4 file.|
 
 *xor*
 
@@ -982,7 +940,7 @@ DeveloperKey
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» *anonymous*|[VideoAsset](#schemavideoasset)|false|none|The VideoAsset is used to create video sequences from video files. The src must be a publicly accessible URL to a video resource such as an mp4 file.|
+|» *anonymous*|[TitleAsset](#schematitleasset)|false|none|The TitleAsset clip type lets you create video titles from a text string and apply styling and positioning.|
 
 *xor*
 
@@ -1049,6 +1007,52 @@ DeveloperKey
 |filter|muted|
 |filter|negative|
 
+<h2 id="tocSvideoasset">VideoAsset</h2>
+
+<a id="schemavideoasset"></a>
+
+```json
+{
+  "type": "video",
+  "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4",
+  "trim": 2,
+  "volume": 1
+}
+
+```
+
+*The VideoAsset is used to create video sequences from video files. The src must be a publicly accessible URL to a video resource such as an mp4 file.*
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|type|string|true|none|The type of asset - set to `video` for videos.|
+|src|string|true|none|The video source URL. The URL must be publicly accessible or include credentials.|
+|trim|number|false|none|The start trim point of the video clip, in seconds (defaults to 0). Videos will start from the in trim point. The video will play until the file ends or the Clip length is reached.|
+|volume|number|false|none|Set the volume for the video clip between 0 and 1 where 0 is muted and 1 is full volume (defaults to 0).|
+
+<h2 id="tocSimageasset">ImageAsset</h2>
+
+<a id="schemaimageasset"></a>
+
+```json
+{
+  "type": "image",
+  "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/image.jpg"
+}
+
+```
+
+*The ImageAsset is used to create video from images. The src must be a publicly accessible URL to an image resource such as a jpg or png file.*
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|type|string|true|none|The type of asset - set to `image` for images.|
+|src|string|true|none|The image source URL. The URL must be publicly accessible or include credentials.|
+
 <h2 id="tocStitleasset">TitleAsset</h2>
 
 <a id="schematitleasset"></a>
@@ -1056,15 +1060,15 @@ DeveloperKey
 ```json
 {
   "type": "title",
-  "text": "string",
+  "text": "Hello World",
   "style": "minimal",
   "color": "#ffffff",
   "size": "medium",
-  "background": "string",
+  "background": "#000000",
   "position": "center",
   "offset": {
-    "x": -1,
-    "y": -1
+    "x": 0,
+    "y": 0
   }
 }
 
@@ -1076,12 +1080,12 @@ DeveloperKey
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|type|string|true|none|The type of asset - set to <b>title</b> for titles.|
+|type|string|true|none|The type of asset - set to `title` for titles.|
 |text|string|true|none|The title text string - i.e. "My Title".|
 |style|string|false|none|Uses a preset to apply font properties and styling to the title. <ul>   <li>`minimal`</li>   <li>`blockbuster`</li>   <li>`vogue`</li>   <li>`sketchy`</li>   <li>`skinny`</li>   <li>`chunk`</li>   <li>`chunkLight`</li>   <li>`marker`</li>   <li>`future`</li>   <li>`subtitle`</li> </ul>|
 |color|string|false|none|Set the text color using hexadecimal color notation. Transparency is supported by setting the first two characters of the hex string (opposite to HTML),  i.e. #80ffffff will be white with  50% transparency.|
 |size|string|false|none|Set the relative size of the text using predefined sizes from xx-small to xx-large. <ul>   <li>`xx-small`</li>   <li>`x-small`</li>   <li>`small`</li>   <li>`medium`</li>   <li>`large`</li>   <li>`x-large`</li>   <li>`xx-large`</li> </ul>|
-|background|string|false|none|Apply a background color behind the text. Set the text color using hexadecimal color notation. Transparency is supported by setting the first two characters of the hex string (opposite to HTML),  i.e. #80ffffff will be white with 50% transparency.|
+|background|string|false|none|Apply a background color behind the text. Set the text color using hexadecimal color notation. Transparency is supported by setting the first two characters of the hex string (opposite to HTML),  i.e. #80ffffff will be white with 50% transparency. Omit to use transparent background.|
 |position|string|false|none|Place the title in one of nine predefined positions of the viewport. <ul>   <li>`top` - top (center)</li>   <li>`topRight` - top right</li>   <li>`right` - right (center)</li>   <li>`bottomRight` - bottom right</li>   <li>`bottom` - bottom (center)</li>   <li>`bottomLeft` - bottom left</li>   <li>`left` - left (center)</li>   <li>`topLeft` - top left</li>   <li>`center` - center</li> </ul>|
 |offset|[Offset](#schemaoffset)|false|none|Offset the location of the title relative to it's position on the screen.|
 
@@ -1116,52 +1120,6 @@ DeveloperKey
 |position|topLeft|
 |position|center|
 
-<h2 id="tocSimageasset">ImageAsset</h2>
-
-<a id="schemaimageasset"></a>
-
-```json
-{
-  "type": "image",
-  "src": "string"
-}
-
-```
-
-*The ImageAsset is used to create video from images. The src must be a publicly accessible URL to an image resource such as a jpg or png file.*
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|type|string|true|none|The type of asset - set to <b>image</b> for images.|
-|src|string|true|none|The image source URL. The URL must be publicly accessible or include credentials.|
-
-<h2 id="tocSvideoasset">VideoAsset</h2>
-
-<a id="schemavideoasset"></a>
-
-```json
-{
-  "type": "video",
-  "src": "string",
-  "trim": 0,
-  "volume": 0
-}
-
-```
-
-*The VideoAsset is used to create video sequences from video files. The src must be a publicly accessible URL to a video resource such as an mp4 file.*
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|type|string|true|none|The type of asset - set to <b>video</b> for videos.|
-|src|string|true|none|The video source URL. The URL must be publicly accessible or include credentials.|
-|trim|number|false|none|The start trim point of the video clip, in seconds (defaults to 0). Videos will start from the in trim point. The video will play until the file ends or the Clip length is reached.|
-|volume|number|false|none|Set the volume for the video clip between 0 and 1 where 0 is muted and 1 is full volume (defaults to 0).|
-
 <h2 id="tocShtmlasset">HtmlAsset</h2>
 
 <a id="schemahtmlasset"></a>
@@ -1172,7 +1130,7 @@ DeveloperKey
   "html": "<p>Hello <b>World</b></p>",
   "css": "p { color: #ffffff; } b { color: #ffff00; }",
   "width": 400,
-  "height": 300,
+  "height": 200,
   "background": "transparent",
   "position": "center"
 }
@@ -1185,7 +1143,7 @@ DeveloperKey
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|type|string|true|none|The type of asset - set to <b>html</b> for HTML.|
+|type|string|true|none|The type of asset - set to `html` for HTML.|
 |html|string|true|none|The HTML text string.|
 |css|string|false|none|The CSS text string to apply styling to the HTML.|
 |width|number|false|none|Set the width of the HTML asset bounding box. Text will wrap to fill the bounding box.|
@@ -1214,9 +1172,9 @@ DeveloperKey
 ```json
 {
   "type": "audio",
-  "src": "string",
+  "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/sound.mp3",
   "trim": 0,
-  "volume": 0
+  "volume": 1
 }
 
 ```
@@ -1227,7 +1185,7 @@ DeveloperKey
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|type|string|true|none|The type of asset - set to <b>audio</b> for audio assets.|
+|type|string|true|none|The type of asset - set to `audio` for audio assets.|
 |src|string|true|none|The audio source URL. The URL must be publicly accessible or include credentials.|
 |trim|number|false|none|The start trim point of the audio clip, in seconds (defaults to 0). Audio will start from the in trim point. The audio will play until the file ends or the Clip length is reached.|
 |volume|number|false|none|Set the volume for the audio clip between 0 and 1 where 0 is muted and 1 is full volume (defaults to 1).|
@@ -1239,7 +1197,7 @@ DeveloperKey
 ```json
 {
   "type": "luma",
-  "src": "string",
+  "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/mask.mp4",
   "trim": 0
 }
 
@@ -1251,7 +1209,7 @@ DeveloperKey
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|type|string|true|none|The type of asset - set to <b>luma</b> for luma mattes.|
+|type|string|true|none|The type of asset - set to `luma` for luma mattes.|
 |src|string|true|none|The luma matte video source URL. The URL must be publicly accessible or include credentials.|
 |trim|number|false|none|The start trim point of the luma video clip, in seconds (defaults to 0). Videos will start from the in trim point. The luma matte video will play until the file ends or the Clip length is reached.|
 
@@ -1313,7 +1271,7 @@ DeveloperKey
 
 ```json
 {
-  "src": "string"
+  "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf"
 }
 
 ```
@@ -1332,8 +1290,8 @@ DeveloperKey
 
 ```json
 {
-  "x": -1,
-  "y": -1
+  "x": 0,
+  "y": 0
 }
 
 ```
@@ -1354,15 +1312,15 @@ DeveloperKey
 ```json
 {
   "format": "mp4",
-  "resolution": "preview",
+  "resolution": "sd",
   "aspectRatio": "16:9",
   "scaleTo": "preview",
   "poster": {
-    "capture": 0
+    "capture": 1
   },
   "thumbnail": {
-    "capture": 0,
-    "scale": 0
+    "capture": 1,
+    "scale": 0.3
   }
 }
 
@@ -1407,7 +1365,7 @@ DeveloperKey
 
 ```json
 {
-  "capture": 0
+  "capture": 1
 }
 
 ```
@@ -1426,8 +1384,8 @@ DeveloperKey
 
 ```json
 {
-  "capture": 0,
-  "scale": 0
+  "capture": 1,
+  "scale": 0.3
 }
 
 ```
@@ -1448,10 +1406,10 @@ DeveloperKey
 ```json
 {
   "success": true,
-  "message": "string",
+  "message": "Created",
   "response": {
-    "message": "string",
-    "id": "string"
+    "message": "Render Successfully Queued",
+    "id": "2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7"
   }
 }
 
@@ -1461,9 +1419,9 @@ DeveloperKey
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|success|boolean|true|none|none|
-|message|string|true|none|none|
-|response|[QueuedResponseData](#schemaqueuedresponsedata)|true|none|none|
+|success|boolean|true|none|`true` if successfully queued, else `false`.|
+|message|string|true|none|`Created`, `Bad Request` or an error message.|
+|response|[QueuedResponseData](#schemaqueuedresponsedata)|true|none|`QueuedResponseData` or an error message.|
 
 <h2 id="tocSqueuedresponsedata">QueuedResponseData</h2>
 
@@ -1471,8 +1429,8 @@ DeveloperKey
 
 ```json
 {
-  "message": "string",
-  "id": "string"
+  "message": "Render Successfully Queued",
+  "id": "2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7"
 }
 
 ```
@@ -1481,8 +1439,8 @@ DeveloperKey
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|message|string|true|none|Success response message|
-|id|string|true|none|The id of the render task in UUID format|
+|message|string|true|none|Success response message or error details.|
+|id|string|true|none|The id of the render task in UUID format.|
 
 <h2 id="tocSrenderresponse">RenderResponse</h2>
 
@@ -1491,23 +1449,29 @@ DeveloperKey
 ```json
 {
   "success": true,
-  "message": "string",
+  "message": "OK",
   "response": {
-    "status": "queued",
-    "id": "string",
-    "owner": "string",
-    "url": "string",
+    "id": "2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7",
+    "owner": "ho6ve8x9q1",
+    "plan": "basic",
+    "status": "done",
+    "error": "",
+    "duration": 8.5,
+    "renderTime": 9433.44,
+    "url": "https://shotstack-api-v1-output.s3-ap-southeast-2.amazonaws.com/ho6ve8x9q1/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4",
+    "poster": "https://shotstack-api-v1-output.s3-ap-southeast-2.amazonaws.com/ho6ve8x9q1/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7-poster.jpg",
+    "thumbnail": "https://shotstack-api-v1-output.s3-ap-southeast-2.amazonaws.com/ho6ve8x9q1/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7-thumb.jpg",
     "data": {
       "timeline": {
         "soundtrack": {
-          "src": "string",
+          "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3",
           "effect": "fadeIn",
-          "volume": 0
+          "volume": 1
         },
         "background": "#000000",
         "fonts": [
           {
-            "src": "string"
+            "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf"
           }
         ],
         "tracks": [
@@ -1515,34 +1479,27 @@ DeveloperKey
             "clips": [
               {
                 "asset": {
-                  "type": "title",
-                  "text": "string",
-                  "style": "minimal",
-                  "color": "#ffffff",
-                  "size": "medium",
-                  "background": "string",
-                  "position": "center",
-                  "offset": {
-                    "x": -1,
-                    "y": -1
-                  }
+                  "type": "video",
+                  "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4",
+                  "trim": 2,
+                  "volume": 1
                 },
-                "start": 0,
-                "length": 0,
+                "start": 2,
+                "length": 5,
                 "fit": "crop",
                 "scale": 0,
                 "position": "center",
                 "offset": {
-                  "x": -1,
-                  "y": -1
+                  "x": 0,
+                  "y": 0
                 },
                 "transition": {
                   "in": "fade",
                   "out": "fade"
                 },
                 "effect": "zoomIn",
-                "filter": "blur",
-                "opacity": 0
+                "filter": "greyscale",
+                "opacity": 1
               }
             ]
           }
@@ -1550,21 +1507,21 @@ DeveloperKey
       },
       "output": {
         "format": "mp4",
-        "resolution": "preview",
+        "resolution": "sd",
         "aspectRatio": "16:9",
         "scaleTo": "preview",
         "poster": {
-          "capture": 0
+          "capture": 1
         },
         "thumbnail": {
-          "capture": 0,
-          "scale": 0
+          "capture": 1,
+          "scale": 0.3
         }
       },
-      "callback": "string"
+      "callback": "https://my-server.com/callback.php"
     },
-    "created": "string",
-    "updated": "string"
+    "created": "2020-10-30T09:42:29.446Z",
+    "updated": "2020-10-30T09:42:39.168Z"
   }
 }
 
@@ -1574,9 +1531,9 @@ DeveloperKey
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|success|boolean|true|none|none|
-|message|string|true|none|none|
-|response|[RenderResponseData](#schemarenderresponsedata)|true|none|none|
+|success|boolean|true|none|`true` if status available, else `false`.|
+|message|string|true|none|`OK` or an error message.|
+|response|[RenderResponseData](#schemarenderresponsedata)|true|none|`RenderResponse` or an error message.|
 
 <h2 id="tocSrenderresponsedata">RenderResponseData</h2>
 
@@ -1584,21 +1541,27 @@ DeveloperKey
 
 ```json
 {
-  "status": "queued",
-  "id": "string",
-  "owner": "string",
-  "url": "string",
+  "id": "2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7",
+  "owner": "ho6ve8x9q1",
+  "plan": "basic",
+  "status": "done",
+  "error": "",
+  "duration": 8.5,
+  "renderTime": 9433.44,
+  "url": "https://shotstack-api-v1-output.s3-ap-southeast-2.amazonaws.com/ho6ve8x9q1/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4",
+  "poster": "https://shotstack-api-v1-output.s3-ap-southeast-2.amazonaws.com/ho6ve8x9q1/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7-poster.jpg",
+  "thumbnail": "https://shotstack-api-v1-output.s3-ap-southeast-2.amazonaws.com/ho6ve8x9q1/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7-thumb.jpg",
   "data": {
     "timeline": {
       "soundtrack": {
-        "src": "string",
+        "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3",
         "effect": "fadeIn",
-        "volume": 0
+        "volume": 1
       },
       "background": "#000000",
       "fonts": [
         {
-          "src": "string"
+          "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf"
         }
       ],
       "tracks": [
@@ -1606,34 +1569,27 @@ DeveloperKey
           "clips": [
             {
               "asset": {
-                "type": "title",
-                "text": "string",
-                "style": "minimal",
-                "color": "#ffffff",
-                "size": "medium",
-                "background": "string",
-                "position": "center",
-                "offset": {
-                  "x": -1,
-                  "y": -1
-                }
+                "type": "video",
+                "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4",
+                "trim": 2,
+                "volume": 1
               },
-              "start": 0,
-              "length": 0,
+              "start": 2,
+              "length": 5,
               "fit": "crop",
               "scale": 0,
               "position": "center",
               "offset": {
-                "x": -1,
-                "y": -1
+                "x": 0,
+                "y": 0
               },
               "transition": {
                 "in": "fade",
                 "out": "fade"
               },
               "effect": "zoomIn",
-              "filter": "blur",
-              "opacity": 0
+              "filter": "greyscale",
+              "opacity": 1
             }
           ]
         }
@@ -1641,21 +1597,21 @@ DeveloperKey
     },
     "output": {
       "format": "mp4",
-      "resolution": "preview",
+      "resolution": "sd",
       "aspectRatio": "16:9",
       "scaleTo": "preview",
       "poster": {
-        "capture": 0
+        "capture": 1
       },
       "thumbnail": {
-        "capture": 0,
-        "scale": 0
+        "capture": 1,
+        "scale": 0.3
       }
     },
-    "callback": "string"
+    "callback": "https://my-server.com/callback.php"
   },
-  "created": "string",
-  "updated": "string"
+  "created": "2020-10-30T09:42:29.446Z",
+  "updated": "2020-10-30T09:42:39.168Z"
 }
 
 ```
@@ -1664,13 +1620,19 @@ DeveloperKey
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
+|id|string|true|none|The id of the render task in UUID format.|
+|owner|string|true|none|The owner id of the render task.|
+|plan|string|false|none|The customer subscription plan.|
 |status|string|true|none|The status of the render task. <ul>   <li>`queued` - render is queued waiting to be rendered</li>   <li>`fetching` - assets are being fetched</li>   <li>`rendering` - the video is being rendered</li>   <li>`saving` - the final video is being saved to storage</li>   <li>`done` - the video is ready to be downloaded</li>   <li>`failed` - there was an error rendering the video</li> </ul>|
-|id|string|true|none|The id of the render task in UUID format|
-|owner|string|true|none|The owner id of the render task|
+|error|string|false|none|An error message, only displayed if an error occurred.|
+|duration|number|false|none|The output video length in seconds.|
+|renderTime|number|false|none|The time taken to render the video in milliseconds.|
 |url|string|false|none|The URL of the final video. This will only be available if status is done.|
-|data|[Edit](#schemaedit)|true|none|The timeline and output data to be rendered|
-|created|string|true|none|The time the render task was initially queued|
-|updated|string|true|none|The time the render status was last updated|
+|poster|string|false|none|The URL of the poster image if requested. This will only be available if status is done.|
+|thumbnail|string|false|none|The URL of the thumbnail image if requested. This will only be available if status is done.|
+|data|[Edit](#schemaedit)|true|none|The timeline and output data to be rendered.|
+|created|string|true|none|The time the render task was initially queued.|
+|updated|string|true|none|The time the render status was last updated.|
 
 #### Enumerated Values
 

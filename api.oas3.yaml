@@ -198,6 +198,7 @@ components:
           description: >-
             An optional webhook callback URL used to receive status notifications
             when a render completes or fails.
+          example: https://my-server.com/callback.php
       required:
         - timeline
         - output
@@ -247,6 +248,7 @@ components:
             The URL of the mp3 audio file. The URL must be publicly accessible
             or include credentials.
           type: string
+          example: https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3
         effect:
           description: >-
             The effect to apply to the audio file
@@ -265,6 +267,7 @@ components:
             Set the volume for the soundtrack between 0 and 1 where 0 is muted and 1
             is full volume (defaults to 1).
           type: number
+          default: 1
       required:
         - src
       type: object
@@ -295,18 +298,20 @@ components:
             must be one of <b>TitleAsset</b>, <b>ImageAsset</b>, <b>VideoAsset</b>,
             <b>HtmlAsset</b>, <b>AudioAsset</b> or <b>LumaAsset</b>
           oneOf:
-            - $ref: '#/components/schemas/TitleAsset'
-            - $ref: '#/components/schemas/ImageAsset'
             - $ref: '#/components/schemas/VideoAsset'
+            - $ref: '#/components/schemas/ImageAsset'
+            - $ref: '#/components/schemas/TitleAsset'
             - $ref: '#/components/schemas/HtmlAsset'
             - $ref: '#/components/schemas/AudioAsset'
             - $ref: '#/components/schemas/LumaAsset'
         start:
           description: The start position of the Clip on the timeline, in seconds.
           type: number
+          example: 2
         length:
           description: The length, in seconds, the Clip should play for.
           type: number
+          example: 5
         fit:
           default: crop
           description: >-
@@ -329,6 +334,7 @@ components:
             asset to half the size of the viewport. This is useful for picture-in-picture video and 
             scaling images such as logos and watermarks.
           type: number
+          example: 0
         position:
           default: center
           description: >- 
@@ -407,14 +413,68 @@ components:
             - muted
             - negative
           type: string
+          example: greyscale
         opacity:
           description: Sets the opacity of the Clip where 1 is opaque and 0 is transparent.
           type: number
+          default: 1
       required:
         - asset
         - start
         - length
       type: object
+    VideoAsset:
+      description: >-
+        The VideoAsset is used to create video sequences from video files. The
+        src must be a publicly accessible URL to a video resource such as an mp4
+        file.
+      type: object
+      properties:
+        type:
+          default: video
+          description: The type of asset - set to `video` for videos.
+          type: string
+        src:
+          description: >-
+            The video source URL. The URL must be publicly accessible or include
+            credentials.
+          type: string
+          example: https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4
+        trim:
+          description: >-
+            The start trim point of the video clip, in seconds (defaults to 0). Videos
+            will start from the in trim point. The video will play until the
+            file ends or the Clip length is reached.
+          type: number
+          example: 2
+        volume:
+          description: >-
+            Set the volume for the video clip between 0 and 1 where 0 is muted and 1
+            is full volume (defaults to 0).
+          type: number
+          example: 1
+      required:
+        - type
+        - src
+    ImageAsset:
+      description: >-
+        The ImageAsset is used to create video from images. The src must be a
+        publicly accessible URL to an image resource such as a jpg or png file.
+      type: object
+      properties:
+        type:
+          default: image
+          description: The type of asset - set to `image` for images.
+          type: string
+        src:
+          description: >-
+            The image source URL. The URL must be publicly accessible or include
+            credentials.
+          type: string
+          example: https://s3-ap-northeast-1.amazonaws.com/my-bucket/image.jpg
+      required:
+        - type
+        - src
     TitleAsset:
       description: >-
         The TitleAsset clip type lets you create video titles from a text string
@@ -423,11 +483,12 @@ components:
       properties:
         type:
           default: title
-          description: The type of asset - set to <b>title</b> for titles.
+          description: The type of asset - set to `title` for titles.
           type: string
         text:
           description: The title text string - i.e. "My Title".
           type: string
+          example: Hello World
         style:
           description: >-
             Uses a preset to apply font properties and styling to the title.
@@ -489,8 +550,9 @@ components:
           description: >-
             Apply a background color behind the text. Set the text color using hexadecimal color notation.
             Transparency is supported by setting the first two characters of the hex string (opposite to HTML), 
-            i.e. #80ffffff will be white with 50% transparency.
+            i.e. #80ffffff will be white with 50% transparency. Omit to use transparent background.
           type: string
+          example: "#000000"
         position:
           default: center
           description: >-
@@ -525,54 +587,6 @@ components:
       required:
         - type
         - text
-    ImageAsset:
-      description: >-
-        The ImageAsset is used to create video from images. The src must be a
-        publicly accessible URL to an image resource such as a jpg or png file.
-      type: object
-      properties:
-        type:
-          default: image
-          description: The type of asset - set to <b>image</b> for images.
-          type: string
-        src:
-          description: >-
-            The image source URL. The URL must be publicly accessible or include
-            credentials.
-          type: string
-      required:
-        - type
-        - src
-    VideoAsset:
-      description: >-
-        The VideoAsset is used to create video sequences from video files. The
-        src must be a publicly accessible URL to a video resource such as an mp4
-        file.
-      type: object
-      properties:
-        type:
-          default: video
-          description: The type of asset - set to <b>video</b> for videos.
-          type: string
-        src:
-          description: >-
-            The video source URL. The URL must be publicly accessible or include
-            credentials.
-          type: string
-        trim:
-          description: >-
-            The start trim point of the video clip, in seconds (defaults to 0). Videos
-            will start from the in trim point. The video will play until the
-            file ends or the Clip length is reached.
-          type: number
-        volume:
-          description: >-
-            Set the volume for the video clip between 0 and 1 where 0 is muted and 1
-            is full volume (defaults to 0).
-          type: number
-      required:
-        - type
-        - src
     HtmlAsset:
       description: >-
         The HtmlAsset clip type lets you create text based layout and formatting using
@@ -582,7 +596,7 @@ components:
       properties:
         type:
           default: html
-          description: The type of asset - set to <b>html</b> for HTML.
+          description: The type of asset - set to `html` for HTML.
           type: string
         html:
           description: The HTML text string.
@@ -603,7 +617,7 @@ components:
             Set the width of the HTML asset bounding box. Text and elements will be masked if they exceed the 
             height of the bounding box.
           type: number
-          example: 300
+          example: 200
         background:
           description: >-
             Apply a background color behind the HTML bounding box using. Set the text color using hexadecimal 
@@ -649,13 +663,14 @@ components:
       properties:
         type:
           default: audio
-          description: The type of asset - set to <b>audio</b> for audio assets.
+          description: The type of asset - set to `audio` for audio assets.
           type: string
         src:
           description: >-
             The audio source URL. The URL must be publicly accessible or include
             credentials.
           type: string
+          example: https://s3-ap-northeast-1.amazonaws.com/my-bucket/sound.mp3
         trim:
           description: >-
             The start trim point of the audio clip, in seconds (defaults to 0). Audio
@@ -667,6 +682,7 @@ components:
             Set the volume for the audio clip between 0 and 1 where 0 is muted and 1
             is full volume (defaults to 1).
           type: number
+          default: 1
       required:
         - type
         - src
@@ -680,13 +696,14 @@ components:
       properties:
         type:
           default: luma
-          description: The type of asset - set to <b>luma</b> for luma mattes.
+          description: The type of asset - set to `luma` for luma mattes.
           type: string
         src:
           description: >-
             The luma matte video source URL. The URL must be publicly accessible or include
             credentials.
           type: string
+          example: https://s3-ap-northeast-1.amazonaws.com/my-bucket/mask.mp4
         trim:
           description: >-
             The start trim point of the luma video clip, in seconds (defaults to 0). Videos
@@ -773,6 +790,7 @@ components:
         src:
           description: The URL of the font file. The URL must be publicly accessible or include credentials.
           type: string
+          example: https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf
       required:
         - src
       type: object
@@ -792,6 +810,7 @@ components:
           format: float
           minimum: -1
           maximum: 1
+          default: 0
         y:
           description: >-
             Offset an asset on the vertical axis (up or down), range varies from
@@ -803,6 +822,7 @@ components:
           format: float
           minimum: -1
           maximum: 1
+          default: 0
       type: object
     Output:
       description: The video output format.
@@ -814,6 +834,7 @@ components:
             - mp4
             - gif
           type: string
+          example: mp4
         resolution:
           description: >-
             The output resolution of the video.
@@ -831,6 +852,7 @@ components:
             - hd
             - '1080'
           type: string
+          example: sd
         aspectRatio:
           description: >-
             The aspect ratio (shape) of the video. Useful for social media sites. Options are:
@@ -844,6 +866,7 @@ components:
             - '9:16'
             - '1:1'
           type: string
+          example: '16:9'
         scaleTo:
           description: >-
             Override the resolution and scale the video to render at a different size. When using scaleTo the video should be
@@ -883,6 +906,7 @@ components:
         capture:
           description: The point on the timeline in seconds to capture a single frame to use as the poster image.
           type: number
+          example: 1
       required:
         - capture
       type: object
@@ -892,11 +916,13 @@ components:
         capture:
           description: The point on the timeline in seconds to capture a single frame to use as the thumbnail image.
           type: number
+          example: 1
         scale:
           description: >-
             Scale the thumbnail size to a fraction of the viewport size - i.e. setting the scale to 0.5 will scale 
             the thumbnail to half the size of the viewport.
           type: number
+          example: 0.3
       required:
         - capture
         - scale
@@ -904,10 +930,15 @@ components:
     QueuedResponse:
       properties:
         success:
+          description: '`true` if successfully queued, else `false`.'
           type: boolean
+          example: true
         message:
+          description: '`Created`, `Bad Request` or an error message.'
           type: string
+          example: Created
         response:
+          description: '`QueuedResponseData` or an error message.'
           $ref: '#/components/schemas/QueuedResponseData'
       required:
         - success
@@ -917,11 +948,13 @@ components:
     QueuedResponseData:
       properties:
         message:
-          description: Success response message
+          description: Success response message or error details.
           type: string
+          example: Render Successfully Queued
         id:
-          description: The id of the render task in UUID format
+          description: The id of the render task in UUID format.
           type: string
+          example: 2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7
       required:
         - message
         - id
@@ -929,10 +962,15 @@ components:
     RenderResponse:
       properties:
         success:
+          description: '`true` if status available, else `false`.'
           type: boolean
+          example: true
         message:
+          description: '`OK` or an error message.'
           type: string
+          example: OK
         response:
+          description: '`RenderResponse` or an error message.'
           $ref: '#/components/schemas/RenderResponseData'
       required:
         - success
@@ -941,6 +979,18 @@ components:
       type: object
     RenderResponseData:
       properties:
+        id:
+          description: The id of the render task in UUID format.
+          type: string
+          example: 2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7
+        owner:
+          description: The owner id of the render task.
+          type: string
+          example: ho6ve8x9q1
+        plan:
+          description: The customer subscription plan.
+          type: string
+          example: basic
         status:
           description: >-
             The status of the render task.
@@ -960,26 +1010,42 @@ components:
             - done
             - failed
           type: string
-        id:
-          description: The id of the render task in UUID format
+          example: done
+        error:
+          description: An error message, only displayed if an error occurred.
           type: string
-        owner:
-          description: The owner id of the render task
-          type: string
+          example: ''
+        duration:
+          description: The output video length in seconds.
+          type: number
+          example: 8.50
+        renderTime:
+          description: The time taken to render the video in milliseconds.
+          type: number
+          example: 9433.44
         url:
-          description: >-
-            The URL of the final video. This will only be available if status is
-            done.
+          description: The URL of the final video. This will only be available if status is done.
           type: string
+          example: https://shotstack-api-v1-output.s3-ap-southeast-2.amazonaws.com/ho6ve8x9q1/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4
+        poster:
+          description: The URL of the poster image if requested. This will only be available if status is done.
+          type: string
+          example: https://shotstack-api-v1-output.s3-ap-southeast-2.amazonaws.com/ho6ve8x9q1/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7-poster.jpg
+        thumbnail:
+          description: The URL of the thumbnail image if requested. This will only be available if status is done.
+          type: string
+          example: https://shotstack-api-v1-output.s3-ap-southeast-2.amazonaws.com/ho6ve8x9q1/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7-thumb.jpg
         data:
-          description: The timeline and output data to be rendered
+          description: The timeline and output data to be rendered.
           $ref: '#/components/schemas/Edit'
         created:
-          description: The time the render task was initially queued
+          description: The time the render task was initially queued.
           type: string
+          example: '2020-10-30T09:42:29.446Z'
         updated:
-          description: The time the render status was last updated
+          description: The time the render status was last updated.
           type: string
+          example: '2020-10-30T09:42:39.168Z'
       required:
         - status
         - id
