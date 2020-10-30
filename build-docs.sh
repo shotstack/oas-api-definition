@@ -32,8 +32,7 @@ cp -r .shins/source/images/navbar.png ./$DOCS_DIR/source/images/navbar.png
 cp -r .shins/source/fonts ./$DOCS_DIR/source/fonts
 
 # Insert Google Analytics
-sed -e "/{{GA}}/{r .ga" -e "d}" ./$DOCS_DIR/index.html > ./$DOCS_DIR/index.tmp.html
-mv -f ./$DOCS_DIR/index.tmp.html ./$DOCS_DIR/index.html
+sed -e "/{{TAGS}}/{r .tags" -e "d}" ./$DOCS_DIR/index.html > ./$DOCS_DIR/index.tmp.html && mv -f ./$DOCS_DIR/index.tmp.html ./$DOCS_DIR/index.html
 
 rm ./$DOCS_DIR/index.html.md
 rm $OAS3_JSON
