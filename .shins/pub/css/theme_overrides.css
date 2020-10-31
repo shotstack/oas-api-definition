@@ -168,3 +168,13 @@ h1#shotstack::after {
 h4#enumerated-values, h4#enumerated-values + table {
     display: none;
 }
+
+@media (max-width: 700px) {
+    div .highlight {
+        max-width: 96%;
+    }
+
+    .content > aside {
+        margin-right: 2%;
+    }
+}
