@@ -972,7 +972,7 @@ DeveloperKey
 |offset|[Offset](#schemaoffset)|false|none|Offset the location of the asset relative to it's position on the viewport. The offset distance is relative to the width of the viewport - for example an x offset of 0.5 will move the asset half the viewport width to the right.|
 |transition|[Transition](#schematransition)|false|none|In and out transitions for a clip - i.e. fade in and fade out|
 |effect|string|false|none|A motion effect to apply to the Clip. <ul>   <li>`zoomIn` - slow zoom in</li>   <li>`zoomOut` - slow zoom out</li>   <li>`slideLeft` - slow slide (pan) left</li>   <li>`slideRight` - slow slide (pan) right</li>   <li>`slideUp` - slow slide (pan) up</li>   <li>`slideDown` - slow slide (pan) down</li> </ul>|
-|filter|string|false|none|A filter effect to apply to the Clip. <ul>   <li>`blur` - blurs the image or video</li>   <li>`boost` - boost contrast and saturation</li>   <li>`contrast` - increase contrast</li>   <li>`darken` - darken the scene</li>   <li>`greyscale` - remove colour</li>   <li>`lighten` - lighten the scene</li>   <li>`muted` - reduce saturation and contrast</li>   <li>`invert` - invert colors</li> </ul>|
+|filter|string|false|none|A filter effect to apply to the Clip. <ul>   <li>`boost` - boost contrast and saturation</li>   <li>`contrast` - increase contrast</li>   <li>`darken` - darken the scene</li>   <li>`greyscale` - remove colour</li>   <li>`lighten` - lighten the scene</li>   <li>`muted` - reduce saturation and contrast</li>   <li>`invert` - invert colors</li> </ul>|
 |opacity|number|false|none|Sets the opacity of the Clip where 1 is opaque and 0 is transparent.|
 
 #### Enumerated Values

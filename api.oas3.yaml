@@ -394,7 +394,6 @@ components:
           description: >-
             A filter effect to apply to the Clip.
             <ul>
-              <li>`blur` - blurs the image or video</li>
               <li>`boost` - boost contrast and saturation</li>
               <li>`contrast` - increase contrast</li>
               <li>`darken` - darken the scene</li>
