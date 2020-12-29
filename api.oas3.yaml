@@ -863,14 +863,20 @@ components:
           maximum: 1
       type: object
     Output:
-      description: The video output format.
+      description: The output format, export range and type of media to generate.
       properties:
         format:
           description: >- 
-            `mp4` video or animated `gif`
+            The output format and type of media file to generate.
+            <ul>
+              <li>`mp4` - mp4 video file</li>
+              <li>`gif` - animated gif</li>
+              <li>`mp3` - mp3 audio file (no video)</li>
+            </ul>
           enum:
             - mp4
             - gif
+            - mp3
           type: string
           example: mp4
         resolution:
@@ -907,6 +913,27 @@ components:
             - '4:5'
           type: string
           example: '16:9'
+        fps:
+          description: >- 
+            Override the default frames per second. Useful for when the source footage is recorded at 30fps, i.e. on 
+            mobile devices. Lower frame rates can be used to add cinematic quality (24fps) or to create smaller file
+             size/faster render times or animated gifs (12 or 15fps). Default is 25fps.
+            <ul>
+              <li>`12` - 12fps</li>
+              <li>`15` - 15fps</li>
+              <li>`24` - 24fps</li>
+              <li>`25` - 25fps</li>
+              <li>`30` - 30fps</li>
+            </ul>
+          enum:
+            - 12
+            - 15
+            - 24
+            - 25
+            - 30
+          type: number
+          example: 25
+          default: 25
         scaleTo:
           description: >-
             Override the resolution and scale the video to render at a different size. When using scaleTo the video should be

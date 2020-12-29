@@ -122,6 +122,7 @@ const inputBody = '{
     "format": "mp4",
     "resolution": "sd",
     "aspectRatio": "16:9",
+    "fps": 25,
     "scaleTo": "preview",
     "poster": {
       "capture": 1
@@ -354,6 +355,7 @@ Queue and render the contents of a timeline as a video file.
     "format": "mp4",
     "resolution": "sd",
     "aspectRatio": "16:9",
+    "fps": 25,
     "scaleTo": "preview",
     "poster": {
       "capture": 1
@@ -741,6 +743,7 @@ DeveloperKey
     "format": "mp4",
     "resolution": "sd",
     "aspectRatio": "16:9",
+    "fps": 25,
     "scaleTo": "preview",
     "poster": {
       "capture": 1
@@ -762,7 +765,7 @@ DeveloperKey
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |timeline|[Timeline](#schematimeline)|true|none|A timeline represents the contents of a video edit over time, in seconds. A timeline consists of layers called tracks. Tracks are composed of titles, images or video segments referred to as clips which are placed along the track at specific starting point and lasting for a specific amount of time.|
-|output|[Output](#schemaoutput)|true|none|The video output format.|
+|output|[Output](#schemaoutput)|true|none|The output format, export range and type of media to generate.|
 |callback|string|false|none|An optional webhook callback URL used to receive status notifications when a render completes or fails.|
 
 <h2 id="tocStimeline">Timeline</h2>
@@ -1389,6 +1392,7 @@ DeveloperKey
   "format": "mp4",
   "resolution": "sd",
   "aspectRatio": "16:9",
+  "fps": 25,
   "scaleTo": "preview",
   "poster": {
     "capture": 1
@@ -1401,15 +1405,16 @@ DeveloperKey
 
 ```
 
-*The video output format.*
+*The output format, export range and type of media to generate.*
 
 ### Properties
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|format|string|true|none|`mp4` video or animated `gif`|
+|format|string|true|none|The output format and type of media file to generate. <ul>   <li>`mp4` - mp4 video file</li>   <li>`gif` - animated gif</li>   <li>`mp3` - mp3 audio file (no video)</li> </ul>|
 |resolution|string|true|none|The output resolution of the video. <ul>   <li>`preview` - 512px x 288px @ 15fps</li>   <li>`mobile` - 640px x 360px @ 25fps</li>   <li>`sd` - 1024px x 576px @ 25fps</li>   <li>`hd` - 1280px x 720px @ 25fps</li>   <li>`1080` - 1920px x 1080px @ 25fps</li> </ul>|
 |aspectRatio|string|false|none|The aspect ratio (shape) of the video. Useful for social media video. Options are: <ul>   <li>`16:9` - regular landscape/horizontal aspect ratio (default)</li>   <li>`9:16` - vertical/portrait aspect ratio</li>   <li>`1:1` - square aspect ratio</li>   <li>`4:5` - short vertical/portrait aspect ratio</li> </ul>|
+|fps|number|false|none|Override the default frames per second. Useful for when the source footage is recorded at 30fps, i.e. on  mobile devices. Lower frame rates can be used to add cinematic quality (24fps) or to create smaller file  size/faster render times or animated gifs (12 or 15fps). Default is 25fps. <ul>   <li>`12` - 12fps</li>   <li>`15` - 15fps</li>   <li>`24` - 24fps</li>   <li>`25` - 25fps</li>   <li>`30` - 30fps</li> </ul>|
 |scaleTo|string|false|none|Override the resolution and scale the video to render at a different size. When using scaleTo the video should be edited at the resolution dimensions, i.e. use font sizes that look best at HD, then use scaleTo to output the video at SD and the text will be scaled to the correct size. This is useful if you want to create multiple video sizes. <ul>   <li>`preview` - 512px x 288px @ 15fps</li>   <li>`mobile` - 640px x 360px @ 25fps</li>   <li>`sd` - 1024px x 576px @25fps</li>   <li>`hd` - 1280px x 720px @25fps</li>   <li>`1080` - 1920px x 1080px @25fps</li> </ul>|
 |poster|[Poster](#schemaposter)|false|none|Generate a poster image from a specific point on the timeline.|
 |thumbnail|[Thumbnail](#schemathumbnail)|false|none|Generate a thumbnail image from a specific point on the timeline.|
@@ -1420,6 +1425,7 @@ DeveloperKey
 |---|---|
 |format|mp4|
 |format|gif|
+|format|mp3|
 |resolution|preview|
 |resolution|mobile|
 |resolution|sd|
@@ -1429,6 +1435,11 @@ DeveloperKey
 |aspectRatio|9:16|
 |aspectRatio|1:1|
 |aspectRatio|4:5|
+|fps|12|
+|fps|15|
+|fps|24|
+|fps|25|
+|fps|30|
 |scaleTo|preview|
 |scaleTo|mobile|
 |scaleTo|sd|
@@ -1591,6 +1602,7 @@ DeveloperKey
         "format": "mp4",
         "resolution": "sd",
         "aspectRatio": "16:9",
+        "fps": 25,
         "scaleTo": "preview",
         "poster": {
           "capture": 1
@@ -1687,6 +1699,7 @@ DeveloperKey
       "format": "mp4",
       "resolution": "sd",
       "aspectRatio": "16:9",
+      "fps": 25,
       "scaleTo": "preview",
       "poster": {
         "capture": 1

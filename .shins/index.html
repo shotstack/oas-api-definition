@@ -352,6 +352,7 @@ curl -X POST https://api.shotstack.io/{version}/render \
     "format": "mp4",
     "resolution": "sd",
     "aspectRatio": "16:9",
+    "fps": 25,
     "scaleTo": "preview",
     "poster": {
       "capture": 1
@@ -564,6 +565,7 @@ System.out.println(response.toString());
     <span class="hljs-attr">"format"</span>: <span class="hljs-string">"mp4"</span>,
     <span class="hljs-attr">"resolution"</span>: <span class="hljs-string">"sd"</span>,
     <span class="hljs-attr">"aspectRatio"</span>: <span class="hljs-string">"16:9"</span>,
+    <span class="hljs-attr">"fps"</span>: <span class="hljs-number">25</span>,
     <span class="hljs-attr">"scaleTo"</span>: <span class="hljs-string">"preview"</span>,
     <span class="hljs-attr">"poster"</span>: {
       <span class="hljs-attr">"capture"</span>: <span class="hljs-number">1</span>
@@ -980,6 +982,7 @@ DeveloperKey
     <span class="hljs-attr">"format"</span>: <span class="hljs-string">"mp4"</span>,
     <span class="hljs-attr">"resolution"</span>: <span class="hljs-string">"sd"</span>,
     <span class="hljs-attr">"aspectRatio"</span>: <span class="hljs-string">"16:9"</span>,
+    <span class="hljs-attr">"fps"</span>: <span class="hljs-number">25</span>,
     <span class="hljs-attr">"scaleTo"</span>: <span class="hljs-string">"preview"</span>,
     <span class="hljs-attr">"poster"</span>: {
       <span class="hljs-attr">"capture"</span>: <span class="hljs-number">1</span>
@@ -1018,7 +1021,7 @@ DeveloperKey
 <td><a href="#schemaoutput">Output</a></td>
 <td>true</td>
 <td>none</td>
-<td>The video output format.</td>
+<td>The output format, export range and type of media to generate.</td>
 </tr>
 <tr>
 <td>callback</td>
@@ -2456,6 +2459,7 @@ DeveloperKey
   <span class="hljs-attr">"format"</span>: <span class="hljs-string">"mp4"</span>,
   <span class="hljs-attr">"resolution"</span>: <span class="hljs-string">"sd"</span>,
   <span class="hljs-attr">"aspectRatio"</span>: <span class="hljs-string">"16:9"</span>,
+  <span class="hljs-attr">"fps"</span>: <span class="hljs-number">25</span>,
   <span class="hljs-attr">"scaleTo"</span>: <span class="hljs-string">"preview"</span>,
   <span class="hljs-attr">"poster"</span>: {
     <span class="hljs-attr">"capture"</span>: <span class="hljs-number">1</span>
@@ -2467,7 +2471,7 @@ DeveloperKey
 }
 
 </code></pre>
-<p><em>The video output format.</em></p>
+<p><em>The output format, export range and type of media to generate.</em></p>
 <h3 id="properties">Properties</h3>
 <table>
 <thead>
@@ -2485,7 +2489,7 @@ DeveloperKey
 <td>string</td>
 <td>true</td>
 <td>none</td>
-<td><code>mp4</code> video or animated <code>gif</code></td>
+<td>The output format and type of media file to generate. <ul>   <li><code>mp4</code> - mp4 video file</li>   <li><code>gif</code> - animated gif</li>   <li><code>mp3</code> - mp3 audio file (no video)</li> </ul></td>
 </tr>
 <tr>
 <td>resolution</td>
@@ -2500,6 +2504,13 @@ DeveloperKey
 <td>false</td>
 <td>none</td>
 <td>The aspect ratio (shape) of the video. Useful for social media video. Options are: <ul>   <li><code>16:9</code> - regular landscape/horizontal aspect ratio (default)</li>   <li><code>9:16</code> - vertical/portrait aspect ratio</li>   <li><code>1:1</code> - square aspect ratio</li>   <li><code>4:5</code> - short vertical/portrait aspect ratio</li> </ul></td>
+</tr>
+<tr>
+<td>fps</td>
+<td>number</td>
+<td>false</td>
+<td>none</td>
+<td>Override the default frames per second. Useful for when the source footage is recorded at 30fps, i.e. on  mobile devices. Lower frame rates can be used to add cinematic quality (24fps) or to create smaller file  size/faster render times or animated gifs (12 or 15fps). Default is 25fps. <ul>   <li><code>12</code> - 12fps</li>   <li><code>15</code> - 15fps</li>   <li><code>24</code> - 24fps</li>   <li><code>25</code> - 25fps</li>   <li><code>30</code> - 30fps</li> </ul></td>
 </tr>
 <tr>
 <td>scaleTo</td>
@@ -2542,6 +2553,10 @@ DeveloperKey
 <td>gif</td>
 </tr>
 <tr>
+<td>format</td>
+<td>mp3</td>
+</tr>
+<tr>
 <td>resolution</td>
 <td>preview</td>
 </tr>
@@ -2576,6 +2591,26 @@ DeveloperKey
 <tr>
 <td>aspectRatio</td>
 <td>4:5</td>
+</tr>
+<tr>
+<td>fps</td>
+<td>12</td>
+</tr>
+<tr>
+<td>fps</td>
+<td>15</td>
+</tr>
+<tr>
+<td>fps</td>
+<td>24</td>
+</tr>
+<tr>
+<td>fps</td>
+<td>25</td>
+</tr>
+<tr>
+<td>fps</td>
+<td>30</td>
 </tr>
 <tr>
 <td>scaleTo</td>
@@ -2818,6 +2853,7 @@ DeveloperKey
         <span class="hljs-attr">"format"</span>: <span class="hljs-string">"mp4"</span>,
         <span class="hljs-attr">"resolution"</span>: <span class="hljs-string">"sd"</span>,
         <span class="hljs-attr">"aspectRatio"</span>: <span class="hljs-string">"16:9"</span>,
+        <span class="hljs-attr">"fps"</span>: <span class="hljs-number">25</span>,
         <span class="hljs-attr">"scaleTo"</span>: <span class="hljs-string">"preview"</span>,
         <span class="hljs-attr">"poster"</span>: {
           <span class="hljs-attr">"capture"</span>: <span class="hljs-number">1</span>
@@ -2937,6 +2973,7 @@ DeveloperKey
       <span class="hljs-attr">"format"</span>: <span class="hljs-string">"mp4"</span>,
       <span class="hljs-attr">"resolution"</span>: <span class="hljs-string">"sd"</span>,
       <span class="hljs-attr">"aspectRatio"</span>: <span class="hljs-string">"16:9"</span>,
+      <span class="hljs-attr">"fps"</span>: <span class="hljs-number">25</span>,
       <span class="hljs-attr">"scaleTo"</span>: <span class="hljs-string">"preview"</span>,
       <span class="hljs-attr">"poster"</span>: {
         <span class="hljs-attr">"capture"</span>: <span class="hljs-number">1</span>
