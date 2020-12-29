@@ -19,7 +19,7 @@ rm -r $BUILD_DIR
 mkdir -p $BUILD_DIR
 
 # PHP SDK
-openapi-generator generate -i $SPEC_FILE -g php -o $BUILD_DIR/php \
+openapi-generator-cli generate -i $SPEC_FILE -g php -o $BUILD_DIR/php \
                   --invoker-package Shotstack\\\\Client
 
 printf "\n========================================= \n"
@@ -29,7 +29,7 @@ printf "\n-- OneOfTitleAssetImageAssetVideoAsset to Asset - see commit: http://t
 printf "\n========================================= \n"
 
 # Ruby SDK
-openapi-generator generate -i $SPEC_FILE -g ruby -o $BUILD_DIR/ruby \
+openapi-generator-cli generate -i $SPEC_FILE -g ruby -o $BUILD_DIR/ruby \
     --additional-properties=moduleName="Shotstack"
 
 printf "\n========================================= \n"
@@ -39,7 +39,7 @@ printf "\n-- OneOfTitleAssetImageAssetVideoAsset to Asset - see commit: http://t
 printf "\n========================================= \n"
 
 # Node SDK
-openapi-generator generate -i $SPEC_FILE -g javascript -o $BUILD_DIR/node \
+openapi-generator-cli generate -i $SPEC_FILE -g javascript -o $BUILD_DIR/node \
     --additional-properties=emitModelMethods=true,licenseName="MIT",projectName="shotstack-sdk",useES6=false,usePromises=true
 
 printf "\n========================================= \n"

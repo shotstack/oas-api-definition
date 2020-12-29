@@ -42,6 +42,10 @@ Note: this deploys to Shotstack's S3 docs bucket, if you wish to host your own d
 
 Requires the [OpenAPI Generator](https://openapi-generator.tech/) to be installed.
 
+```
+npm install @openapitools/openapi-generator-cli -g
+```
+
 Once installed generate SDK's for PHP, Node and Ruby:
 
 ```
