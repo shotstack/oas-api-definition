@@ -612,12 +612,12 @@ components:
           example: "p { color: #ffffff; } b { color: #ffff00; }"
         width:
           description: >-
-            Set the width of the HTML asset bounding box. Text will wrap to fill the bounding box.
+            Set the width of the HTML asset bounding box in pixels. Text will wrap to fill the bounding box.
           type: integer
           example: 400
         height:
           description: >-
-            Set the width of the HTML asset bounding box. Text and elements will be masked if they exceed the 
+            Set the width of the HTML asset bounding box in pixels. Text and elements will be masked if they exceed the 
             height of the bounding box.
           type: integer
           example: 200
