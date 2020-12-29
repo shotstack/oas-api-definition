@@ -893,16 +893,18 @@ components:
           example: sd
         aspectRatio:
           description: >-
-            The aspect ratio (shape) of the video. Useful for social media sites. Options are:
+            The aspect ratio (shape) of the video. Useful for social media video. Options are:
             <ul>
               <li>`16:9` - regular landscape/horizontal aspect ratio (default)</li>
-              <li>`9:16` - vertical/portrait aspect ratio.</li>
-              <li>`1:1` - square aspect ratio.</li>
+              <li>`9:16` - vertical/portrait aspect ratio</li>
+              <li>`1:1` - square aspect ratio</li>
+              <li>`4:5` - short vertical/portrait aspect ratio</li>
             </ul>
           enum:
             - '16:9'
             - '9:16'
             - '1:1'
+            - '4:5'
           type: string
           example: '16:9'
         scaleTo:
