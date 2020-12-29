@@ -89,7 +89,13 @@ const inputBody = '{
               "type": "video",
               "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4",
               "trim": 2,
-              "volume": 1
+              "volume": 1,
+              "crop": {
+                "top": 0.15,
+                "bottom": 0.15,
+                "left": 0,
+                "right": 0
+              }
             },
             "start": 2,
             "length": 5,
@@ -97,8 +103,8 @@ const inputBody = '{
             "scale": 0,
             "position": "center",
             "offset": {
-              "x": 0,
-              "y": 0
+              "x": 0.1,
+              "y": -0.2
             },
             "transition": {
               "in": "fade",
@@ -315,7 +321,13 @@ Queue and render the contents of a timeline as a video file.
               "type": "video",
               "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4",
               "trim": 2,
-              "volume": 1
+              "volume": 1,
+              "crop": {
+                "top": 0.15,
+                "bottom": 0.15,
+                "left": 0,
+                "right": 0
+              }
             },
             "start": 2,
             "length": 5,
@@ -323,8 +335,8 @@ Queue and render the contents of a timeline as a video file.
             "scale": 0,
             "position": "center",
             "offset": {
-              "x": 0,
-              "y": 0
+              "x": 0.1,
+              "y": -0.2
             },
             "transition": {
               "in": "fade",
@@ -696,7 +708,13 @@ DeveloperKey
               "type": "video",
               "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4",
               "trim": 2,
-              "volume": 1
+              "volume": 1,
+              "crop": {
+                "top": 0.15,
+                "bottom": 0.15,
+                "left": 0,
+                "right": 0
+              }
             },
             "start": 2,
             "length": 5,
@@ -704,8 +722,8 @@ DeveloperKey
             "scale": 0,
             "position": "center",
             "offset": {
-              "x": 0,
-              "y": 0
+              "x": 0.1,
+              "y": -0.2
             },
             "transition": {
               "in": "fade",
@@ -772,7 +790,13 @@ DeveloperKey
             "type": "video",
             "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4",
             "trim": 2,
-            "volume": 1
+            "volume": 1,
+            "crop": {
+              "top": 0.15,
+              "bottom": 0.15,
+              "left": 0,
+              "right": 0
+            }
           },
           "start": 2,
           "length": 5,
@@ -780,8 +804,8 @@ DeveloperKey
           "scale": 0,
           "position": "center",
           "offset": {
-            "x": 0,
-            "y": 0
+            "x": 0.1,
+            "y": -0.2
           },
           "transition": {
             "in": "fade",
@@ -852,7 +876,13 @@ DeveloperKey
         "type": "video",
         "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4",
         "trim": 2,
-        "volume": 1
+        "volume": 1,
+        "crop": {
+          "top": 0.15,
+          "bottom": 0.15,
+          "left": 0,
+          "right": 0
+        }
       },
       "start": 2,
       "length": 5,
@@ -860,8 +890,8 @@ DeveloperKey
       "scale": 0,
       "position": "center",
       "offset": {
-        "x": 0,
-        "y": 0
+        "x": 0.1,
+        "y": -0.2
       },
       "transition": {
         "in": "fade",
@@ -894,7 +924,13 @@ DeveloperKey
     "type": "video",
     "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4",
     "trim": 2,
-    "volume": 1
+    "volume": 1,
+    "crop": {
+      "top": 0.15,
+      "bottom": 0.15,
+      "left": 0,
+      "right": 0
+    }
   },
   "start": 2,
   "length": 5,
@@ -902,8 +938,8 @@ DeveloperKey
   "scale": 0,
   "position": "center",
   "offset": {
-    "x": 0,
-    "y": 0
+    "x": 0.1,
+    "y": -0.2
   },
   "transition": {
     "in": "fade",
@@ -1016,7 +1052,13 @@ DeveloperKey
   "type": "video",
   "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4",
   "trim": 2,
-  "volume": 1
+  "volume": 1,
+  "crop": {
+    "top": 0.15,
+    "bottom": 0.15,
+    "left": 0,
+    "right": 0
+  }
 }
 
 ```
@@ -1031,6 +1073,7 @@ DeveloperKey
 |src|string|true|none|The video source URL. The URL must be publicly accessible or include credentials.|
 |trim|number|false|none|The start trim point of the video clip, in seconds (defaults to 0). Videos will start from the in trim point. The video will play until the file ends or the Clip length is reached.|
 |volume|number|false|none|Set the volume for the video clip between 0 and 1 where 0 is muted and 1 is full volume (defaults to 0).|
+|crop|[Crop](#schemacrop)|false|none|Crop the sides of an asset by a relative amount. The size of the crop is specified using a scale between 0 and 1, relative to the screen width - i.e a left crop of 0.5 will crop half of the asset from the left, a top crop  of 0.25 will crop the top by quarter of the asset.|
 
 <h2 id="tocSimageasset">ImageAsset</h2>
 
@@ -1039,7 +1082,13 @@ DeveloperKey
 ```json
 {
   "type": "image",
-  "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/image.jpg"
+  "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/image.jpg",
+  "crop": {
+    "top": 0.15,
+    "bottom": 0.15,
+    "left": 0,
+    "right": 0
+  }
 }
 
 ```
@@ -1052,6 +1101,7 @@ DeveloperKey
 |---|---|---|---|---|
 |type|string|true|none|The type of asset - set to `image` for images.|
 |src|string|true|none|The image source URL. The URL must be publicly accessible or include credentials.|
+|crop|[Crop](#schemacrop)|false|none|Crop the sides of an asset by a relative amount. The size of the crop is specified using a scale between 0 and 1, relative to the screen width - i.e a left crop of 0.5 will crop half of the asset from the left, a top crop  of 0.25 will crop the top by quarter of the asset.|
 
 <h2 id="tocStitleasset">TitleAsset</h2>
 
@@ -1067,8 +1117,8 @@ DeveloperKey
   "background": "#000000",
   "position": "center",
   "offset": {
-    "x": 0,
-    "y": 0
+    "x": 0.1,
+    "y": -0.2
   }
 }
 
@@ -1290,8 +1340,8 @@ DeveloperKey
 
 ```json
 {
-  "x": 0,
-  "y": 0
+  "x": 0.1,
+  "y": -0.2
 }
 
 ```
@@ -1304,6 +1354,31 @@ DeveloperKey
 |---|---|---|---|---|
 |x|number(float)|false|none|Offset an asset on the horizontal axis (left or right), range varies from -1 to 1. Positive numbers move the asset right, negative left. For all assets except titles the distance moved is relative to the width  of the viewport - i.e. an X offset of 0.5 will move the asset half the  screen width to the right.|
 |y|number(float)|false|none|Offset an asset on the vertical axis (up or down), range varies from -1 to 1. Positive numbers move the asset up, negative down. For all assets except titles the distance moved is relative to the height  of the viewport - i.e. an Y offset of 0.5 will move the asset up half the  screen height.|
+
+<h2 id="tocScrop">Crop</h2>
+
+<a id="schemacrop"></a>
+
+```json
+{
+  "top": 0.15,
+  "bottom": 0.15,
+  "left": 0,
+  "right": 0
+}
+
+```
+
+*Crop the sides of an asset by a relative amount. The size of the crop is specified using a scale between 0 and 1, relative to the screen width - i.e a left crop of 0.5 will crop half of the asset from the left, a top crop  of 0.25 will crop the top by quarter of the asset.*
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|top|number(float)|false|none|Crop from the top of the asset|
+|bottom|number(float)|false|none|Crop from the bottom of the asset|
+|left|number(float)|false|none|Crop from the left of the asset|
+|right|number(float)|false|none|Crop from the left of the asset|
 
 <h2 id="tocSoutput">Output</h2>
 
@@ -1482,7 +1557,13 @@ DeveloperKey
                   "type": "video",
                   "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4",
                   "trim": 2,
-                  "volume": 1
+                  "volume": 1,
+                  "crop": {
+                    "top": 0.15,
+                    "bottom": 0.15,
+                    "left": 0,
+                    "right": 0
+                  }
                 },
                 "start": 2,
                 "length": 5,
@@ -1490,8 +1571,8 @@ DeveloperKey
                 "scale": 0,
                 "position": "center",
                 "offset": {
-                  "x": 0,
-                  "y": 0
+                  "x": 0.1,
+                  "y": -0.2
                 },
                 "transition": {
                   "in": "fade",
@@ -1572,7 +1653,13 @@ DeveloperKey
                 "type": "video",
                 "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4",
                 "trim": 2,
-                "volume": 1
+                "volume": 1,
+                "crop": {
+                  "top": 0.15,
+                  "bottom": 0.15,
+                  "left": 0,
+                  "right": 0
+                }
               },
               "start": 2,
               "length": 5,
@@ -1580,8 +1667,8 @@ DeveloperKey
               "scale": 0,
               "position": "center",
               "offset": {
-                "x": 0,
-                "y": 0
+                "x": 0.1,
+                "y": -0.2
               },
               "transition": {
                 "in": "fade",

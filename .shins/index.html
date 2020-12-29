@@ -190,6 +190,11 @@
                   </li>
                 
                   <li>
+                    <a href="#tocscrop" class="toc-h2 toc-link" data-title="">Crop</a>
+                    
+                  </li>
+                
+                  <li>
                     <a href="#tocsoutput" class="toc-h2 toc-link" data-title="">Output</a>
                     
                   </li>
@@ -314,7 +319,13 @@ curl -X POST https://api.shotstack.io/{version}/render \
               "type": "video",
               "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4",
               "trim": 2,
-              "volume": 1
+              "volume": 1,
+              "crop": {
+                "top": 0.15,
+                "bottom": 0.15,
+                "left": 0,
+                "right": 0
+              }
             },
             "start": 2,
             "length": 5,
@@ -322,8 +333,8 @@ curl -X POST https://api.shotstack.io/{version}/render \
             "scale": 0,
             "position": "center",
             "offset": {
-              "x": 0,
-              "y": 0
+              "x": 0.1,
+              "y": -0.2
             },
             "transition": {
               "in": "fade",
@@ -520,7 +531,13 @@ System.out.println(response.toString());
               <span class="hljs-attr">"type"</span>: <span class="hljs-string">"video"</span>,
               <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4"</span>,
               <span class="hljs-attr">"trim"</span>: <span class="hljs-number">2</span>,
-              <span class="hljs-attr">"volume"</span>: <span class="hljs-number">1</span>
+              <span class="hljs-attr">"volume"</span>: <span class="hljs-number">1</span>,
+              <span class="hljs-attr">"crop"</span>: {
+                <span class="hljs-attr">"top"</span>: <span class="hljs-number">0.15</span>,
+                <span class="hljs-attr">"bottom"</span>: <span class="hljs-number">0.15</span>,
+                <span class="hljs-attr">"left"</span>: <span class="hljs-number">0</span>,
+                <span class="hljs-attr">"right"</span>: <span class="hljs-number">0</span>
+              }
             },
             <span class="hljs-attr">"start"</span>: <span class="hljs-number">2</span>,
             <span class="hljs-attr">"length"</span>: <span class="hljs-number">5</span>,
@@ -528,8 +545,8 @@ System.out.println(response.toString());
             <span class="hljs-attr">"scale"</span>: <span class="hljs-number">0</span>,
             <span class="hljs-attr">"position"</span>: <span class="hljs-string">"center"</span>,
             <span class="hljs-attr">"offset"</span>: {
-              <span class="hljs-attr">"x"</span>: <span class="hljs-number">0</span>,
-              <span class="hljs-attr">"y"</span>: <span class="hljs-number">0</span>
+              <span class="hljs-attr">"x"</span>: <span class="hljs-number">0.1</span>,
+              <span class="hljs-attr">"y"</span>: <span class="hljs-number">-0.2</span>
             },
             <span class="hljs-attr">"transition"</span>: {
               <span class="hljs-attr">"in"</span>: <span class="hljs-string">"fade"</span>,
@@ -930,7 +947,13 @@ DeveloperKey
               <span class="hljs-attr">"type"</span>: <span class="hljs-string">"video"</span>,
               <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4"</span>,
               <span class="hljs-attr">"trim"</span>: <span class="hljs-number">2</span>,
-              <span class="hljs-attr">"volume"</span>: <span class="hljs-number">1</span>
+              <span class="hljs-attr">"volume"</span>: <span class="hljs-number">1</span>,
+              <span class="hljs-attr">"crop"</span>: {
+                <span class="hljs-attr">"top"</span>: <span class="hljs-number">0.15</span>,
+                <span class="hljs-attr">"bottom"</span>: <span class="hljs-number">0.15</span>,
+                <span class="hljs-attr">"left"</span>: <span class="hljs-number">0</span>,
+                <span class="hljs-attr">"right"</span>: <span class="hljs-number">0</span>
+              }
             },
             <span class="hljs-attr">"start"</span>: <span class="hljs-number">2</span>,
             <span class="hljs-attr">"length"</span>: <span class="hljs-number">5</span>,
@@ -938,8 +961,8 @@ DeveloperKey
             <span class="hljs-attr">"scale"</span>: <span class="hljs-number">0</span>,
             <span class="hljs-attr">"position"</span>: <span class="hljs-string">"center"</span>,
             <span class="hljs-attr">"offset"</span>: {
-              <span class="hljs-attr">"x"</span>: <span class="hljs-number">0</span>,
-              <span class="hljs-attr">"y"</span>: <span class="hljs-number">0</span>
+              <span class="hljs-attr">"x"</span>: <span class="hljs-number">0.1</span>,
+              <span class="hljs-attr">"y"</span>: <span class="hljs-number">-0.2</span>
             },
             <span class="hljs-attr">"transition"</span>: {
               <span class="hljs-attr">"in"</span>: <span class="hljs-string">"fade"</span>,
@@ -1028,7 +1051,13 @@ DeveloperKey
             <span class="hljs-attr">"type"</span>: <span class="hljs-string">"video"</span>,
             <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4"</span>,
             <span class="hljs-attr">"trim"</span>: <span class="hljs-number">2</span>,
-            <span class="hljs-attr">"volume"</span>: <span class="hljs-number">1</span>
+            <span class="hljs-attr">"volume"</span>: <span class="hljs-number">1</span>,
+            <span class="hljs-attr">"crop"</span>: {
+              <span class="hljs-attr">"top"</span>: <span class="hljs-number">0.15</span>,
+              <span class="hljs-attr">"bottom"</span>: <span class="hljs-number">0.15</span>,
+              <span class="hljs-attr">"left"</span>: <span class="hljs-number">0</span>,
+              <span class="hljs-attr">"right"</span>: <span class="hljs-number">0</span>
+            }
           },
           <span class="hljs-attr">"start"</span>: <span class="hljs-number">2</span>,
           <span class="hljs-attr">"length"</span>: <span class="hljs-number">5</span>,
@@ -1036,8 +1065,8 @@ DeveloperKey
           <span class="hljs-attr">"scale"</span>: <span class="hljs-number">0</span>,
           <span class="hljs-attr">"position"</span>: <span class="hljs-string">"center"</span>,
           <span class="hljs-attr">"offset"</span>: {
-            <span class="hljs-attr">"x"</span>: <span class="hljs-number">0</span>,
-            <span class="hljs-attr">"y"</span>: <span class="hljs-number">0</span>
+            <span class="hljs-attr">"x"</span>: <span class="hljs-number">0.1</span>,
+            <span class="hljs-attr">"y"</span>: <span class="hljs-number">-0.2</span>
           },
           <span class="hljs-attr">"transition"</span>: {
             <span class="hljs-attr">"in"</span>: <span class="hljs-string">"fade"</span>,
@@ -1173,7 +1202,13 @@ DeveloperKey
         <span class="hljs-attr">"type"</span>: <span class="hljs-string">"video"</span>,
         <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4"</span>,
         <span class="hljs-attr">"trim"</span>: <span class="hljs-number">2</span>,
-        <span class="hljs-attr">"volume"</span>: <span class="hljs-number">1</span>
+        <span class="hljs-attr">"volume"</span>: <span class="hljs-number">1</span>,
+        <span class="hljs-attr">"crop"</span>: {
+          <span class="hljs-attr">"top"</span>: <span class="hljs-number">0.15</span>,
+          <span class="hljs-attr">"bottom"</span>: <span class="hljs-number">0.15</span>,
+          <span class="hljs-attr">"left"</span>: <span class="hljs-number">0</span>,
+          <span class="hljs-attr">"right"</span>: <span class="hljs-number">0</span>
+        }
       },
       <span class="hljs-attr">"start"</span>: <span class="hljs-number">2</span>,
       <span class="hljs-attr">"length"</span>: <span class="hljs-number">5</span>,
@@ -1181,8 +1216,8 @@ DeveloperKey
       <span class="hljs-attr">"scale"</span>: <span class="hljs-number">0</span>,
       <span class="hljs-attr">"position"</span>: <span class="hljs-string">"center"</span>,
       <span class="hljs-attr">"offset"</span>: {
-        <span class="hljs-attr">"x"</span>: <span class="hljs-number">0</span>,
-        <span class="hljs-attr">"y"</span>: <span class="hljs-number">0</span>
+        <span class="hljs-attr">"x"</span>: <span class="hljs-number">0.1</span>,
+        <span class="hljs-attr">"y"</span>: <span class="hljs-number">-0.2</span>
       },
       <span class="hljs-attr">"transition"</span>: {
         <span class="hljs-attr">"in"</span>: <span class="hljs-string">"fade"</span>,
@@ -1225,7 +1260,13 @@ DeveloperKey
     <span class="hljs-attr">"type"</span>: <span class="hljs-string">"video"</span>,
     <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4"</span>,
     <span class="hljs-attr">"trim"</span>: <span class="hljs-number">2</span>,
-    <span class="hljs-attr">"volume"</span>: <span class="hljs-number">1</span>
+    <span class="hljs-attr">"volume"</span>: <span class="hljs-number">1</span>,
+    <span class="hljs-attr">"crop"</span>: {
+      <span class="hljs-attr">"top"</span>: <span class="hljs-number">0.15</span>,
+      <span class="hljs-attr">"bottom"</span>: <span class="hljs-number">0.15</span>,
+      <span class="hljs-attr">"left"</span>: <span class="hljs-number">0</span>,
+      <span class="hljs-attr">"right"</span>: <span class="hljs-number">0</span>
+    }
   },
   <span class="hljs-attr">"start"</span>: <span class="hljs-number">2</span>,
   <span class="hljs-attr">"length"</span>: <span class="hljs-number">5</span>,
@@ -1233,8 +1274,8 @@ DeveloperKey
   <span class="hljs-attr">"scale"</span>: <span class="hljs-number">0</span>,
   <span class="hljs-attr">"position"</span>: <span class="hljs-string">"center"</span>,
   <span class="hljs-attr">"offset"</span>: {
-    <span class="hljs-attr">"x"</span>: <span class="hljs-number">0</span>,
-    <span class="hljs-attr">"y"</span>: <span class="hljs-number">0</span>
+    <span class="hljs-attr">"x"</span>: <span class="hljs-number">0.1</span>,
+    <span class="hljs-attr">"y"</span>: <span class="hljs-number">-0.2</span>
   },
   <span class="hljs-attr">"transition"</span>: {
     <span class="hljs-attr">"in"</span>: <span class="hljs-string">"fade"</span>,
@@ -1603,7 +1644,13 @@ DeveloperKey
   <span class="hljs-attr">"type"</span>: <span class="hljs-string">"video"</span>,
   <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4"</span>,
   <span class="hljs-attr">"trim"</span>: <span class="hljs-number">2</span>,
-  <span class="hljs-attr">"volume"</span>: <span class="hljs-number">1</span>
+  <span class="hljs-attr">"volume"</span>: <span class="hljs-number">1</span>,
+  <span class="hljs-attr">"crop"</span>: {
+    <span class="hljs-attr">"top"</span>: <span class="hljs-number">0.15</span>,
+    <span class="hljs-attr">"bottom"</span>: <span class="hljs-number">0.15</span>,
+    <span class="hljs-attr">"left"</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-attr">"right"</span>: <span class="hljs-number">0</span>
+  }
 }
 
 </code></pre>
@@ -1648,13 +1695,26 @@ DeveloperKey
 <td>none</td>
 <td>Set the volume for the video clip between 0 and 1 where 0 is muted and 1 is full volume (defaults to 0).</td>
 </tr>
+<tr>
+<td>crop</td>
+<td><a href="#schemacrop">Crop</a></td>
+<td>false</td>
+<td>none</td>
+<td>Crop the sides of an asset by a relative amount. The size of the crop is specified using a scale between 0 and 1, relative to the screen width - i.e a left crop of 0.5 will crop half of the asset from the left, a top crop  of 0.25 will crop the top by quarter of the asset.</td>
+</tr>
 </tbody>
 </table>
 <h2 id="tocsimageasset">ImageAsset</h2>
 <p><a id="schemaimageasset"></a></p>
 <pre class="highlight tab tab-json"><code>{
   <span class="hljs-attr">"type"</span>: <span class="hljs-string">"image"</span>,
-  <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/image.jpg"</span>
+  <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/image.jpg"</span>,
+  <span class="hljs-attr">"crop"</span>: {
+    <span class="hljs-attr">"top"</span>: <span class="hljs-number">0.15</span>,
+    <span class="hljs-attr">"bottom"</span>: <span class="hljs-number">0.15</span>,
+    <span class="hljs-attr">"left"</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-attr">"right"</span>: <span class="hljs-number">0</span>
+  }
 }
 
 </code></pre>
@@ -1685,6 +1745,13 @@ DeveloperKey
 <td>none</td>
 <td>The image source URL. The URL must be publicly accessible or include credentials.</td>
 </tr>
+<tr>
+<td>crop</td>
+<td><a href="#schemacrop">Crop</a></td>
+<td>false</td>
+<td>none</td>
+<td>Crop the sides of an asset by a relative amount. The size of the crop is specified using a scale between 0 and 1, relative to the screen width - i.e a left crop of 0.5 will crop half of the asset from the left, a top crop  of 0.25 will crop the top by quarter of the asset.</td>
+</tr>
 </tbody>
 </table>
 <h2 id="tocstitleasset">TitleAsset</h2>
@@ -1698,8 +1765,8 @@ DeveloperKey
   <span class="hljs-attr">"background"</span>: <span class="hljs-string">"#000000"</span>,
   <span class="hljs-attr">"position"</span>: <span class="hljs-string">"center"</span>,
   <span class="hljs-attr">"offset"</span>: {
-    <span class="hljs-attr">"x"</span>: <span class="hljs-number">0</span>,
-    <span class="hljs-attr">"y"</span>: <span class="hljs-number">0</span>
+    <span class="hljs-attr">"x"</span>: <span class="hljs-number">0.1</span>,
+    <span class="hljs-attr">"y"</span>: <span class="hljs-number">-0.2</span>
   }
 }
 
@@ -2296,8 +2363,8 @@ DeveloperKey
 <h2 id="tocsoffset">Offset</h2>
 <p><a id="schemaoffset"></a></p>
 <pre class="highlight tab tab-json"><code>{
-  <span class="hljs-attr">"x"</span>: <span class="hljs-number">0</span>,
-  <span class="hljs-attr">"y"</span>: <span class="hljs-number">0</span>
+  <span class="hljs-attr">"x"</span>: <span class="hljs-number">0.1</span>,
+  <span class="hljs-attr">"y"</span>: <span class="hljs-number">-0.2</span>
 }
 
 </code></pre>
@@ -2327,6 +2394,59 @@ DeveloperKey
 <td>false</td>
 <td>none</td>
 <td>Offset an asset on the vertical axis (up or down), range varies from -1 to 1. Positive numbers move the asset up, negative down. For all assets except titles the distance moved is relative to the height  of the viewport - i.e. an Y offset of 0.5 will move the asset up half the  screen height.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocscrop">Crop</h2>
+<p><a id="schemacrop"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">"top"</span>: <span class="hljs-number">0.15</span>,
+  <span class="hljs-attr">"bottom"</span>: <span class="hljs-number">0.15</span>,
+  <span class="hljs-attr">"left"</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-attr">"right"</span>: <span class="hljs-number">0</span>
+}
+
+</code></pre>
+<p><em>Crop the sides of an asset by a relative amount. The size of the crop is specified using a scale between 0 and 1, relative to the screen width - i.e a left crop of 0.5 will crop half of the asset from the left, a top crop  of 0.25 will crop the top by quarter of the asset.</em></p>
+<h3 id="properties">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>top</td>
+<td>number(float)</td>
+<td>false</td>
+<td>none</td>
+<td>Crop from the top of the asset</td>
+</tr>
+<tr>
+<td>bottom</td>
+<td>number(float)</td>
+<td>false</td>
+<td>none</td>
+<td>Crop from the bottom of the asset</td>
+</tr>
+<tr>
+<td>left</td>
+<td>number(float)</td>
+<td>false</td>
+<td>none</td>
+<td>Crop from the left of the asset</td>
+</tr>
+<tr>
+<td>right</td>
+<td>number(float)</td>
+<td>false</td>
+<td>none</td>
+<td>Crop from the left of the asset</td>
 </tr>
 </tbody>
 </table>
@@ -2661,7 +2781,13 @@ DeveloperKey
                   <span class="hljs-attr">"type"</span>: <span class="hljs-string">"video"</span>,
                   <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4"</span>,
                   <span class="hljs-attr">"trim"</span>: <span class="hljs-number">2</span>,
-                  <span class="hljs-attr">"volume"</span>: <span class="hljs-number">1</span>
+                  <span class="hljs-attr">"volume"</span>: <span class="hljs-number">1</span>,
+                  <span class="hljs-attr">"crop"</span>: {
+                    <span class="hljs-attr">"top"</span>: <span class="hljs-number">0.15</span>,
+                    <span class="hljs-attr">"bottom"</span>: <span class="hljs-number">0.15</span>,
+                    <span class="hljs-attr">"left"</span>: <span class="hljs-number">0</span>,
+                    <span class="hljs-attr">"right"</span>: <span class="hljs-number">0</span>
+                  }
                 },
                 <span class="hljs-attr">"start"</span>: <span class="hljs-number">2</span>,
                 <span class="hljs-attr">"length"</span>: <span class="hljs-number">5</span>,
@@ -2669,8 +2795,8 @@ DeveloperKey
                 <span class="hljs-attr">"scale"</span>: <span class="hljs-number">0</span>,
                 <span class="hljs-attr">"position"</span>: <span class="hljs-string">"center"</span>,
                 <span class="hljs-attr">"offset"</span>: {
-                  <span class="hljs-attr">"x"</span>: <span class="hljs-number">0</span>,
-                  <span class="hljs-attr">"y"</span>: <span class="hljs-number">0</span>
+                  <span class="hljs-attr">"x"</span>: <span class="hljs-number">0.1</span>,
+                  <span class="hljs-attr">"y"</span>: <span class="hljs-number">-0.2</span>
                 },
                 <span class="hljs-attr">"transition"</span>: {
                   <span class="hljs-attr">"in"</span>: <span class="hljs-string">"fade"</span>,
@@ -2774,7 +2900,13 @@ DeveloperKey
                 <span class="hljs-attr">"type"</span>: <span class="hljs-string">"video"</span>,
                 <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4"</span>,
                 <span class="hljs-attr">"trim"</span>: <span class="hljs-number">2</span>,
-                <span class="hljs-attr">"volume"</span>: <span class="hljs-number">1</span>
+                <span class="hljs-attr">"volume"</span>: <span class="hljs-number">1</span>,
+                <span class="hljs-attr">"crop"</span>: {
+                  <span class="hljs-attr">"top"</span>: <span class="hljs-number">0.15</span>,
+                  <span class="hljs-attr">"bottom"</span>: <span class="hljs-number">0.15</span>,
+                  <span class="hljs-attr">"left"</span>: <span class="hljs-number">0</span>,
+                  <span class="hljs-attr">"right"</span>: <span class="hljs-number">0</span>
+                }
               },
               <span class="hljs-attr">"start"</span>: <span class="hljs-number">2</span>,
               <span class="hljs-attr">"length"</span>: <span class="hljs-number">5</span>,
@@ -2782,8 +2914,8 @@ DeveloperKey
               <span class="hljs-attr">"scale"</span>: <span class="hljs-number">0</span>,
               <span class="hljs-attr">"position"</span>: <span class="hljs-string">"center"</span>,
               <span class="hljs-attr">"offset"</span>: {
-                <span class="hljs-attr">"x"</span>: <span class="hljs-number">0</span>,
-                <span class="hljs-attr">"y"</span>: <span class="hljs-number">0</span>
+                <span class="hljs-attr">"x"</span>: <span class="hljs-number">0.1</span>,
+                <span class="hljs-attr">"y"</span>: <span class="hljs-number">-0.2</span>
               },
               <span class="hljs-attr">"transition"</span>: {
                 <span class="hljs-attr">"in"</span>: <span class="hljs-string">"fade"</span>,
