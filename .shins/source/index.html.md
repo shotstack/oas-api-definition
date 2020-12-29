@@ -124,6 +124,10 @@ const inputBody = '{
     "aspectRatio": "16:9",
     "fps": 25,
     "scaleTo": "preview",
+    "range": {
+      "start": 3,
+      "length": 6
+    },
     "poster": {
       "capture": 1
     },
@@ -357,6 +361,10 @@ Queue and render the contents of a timeline as a video file.
     "aspectRatio": "16:9",
     "fps": 25,
     "scaleTo": "preview",
+    "range": {
+      "start": 3,
+      "length": 6
+    },
     "poster": {
       "capture": 1
     },
@@ -745,6 +753,10 @@ DeveloperKey
     "aspectRatio": "16:9",
     "fps": 25,
     "scaleTo": "preview",
+    "range": {
+      "start": 3,
+      "length": 6
+    },
     "poster": {
       "capture": 1
     },
@@ -765,7 +777,7 @@ DeveloperKey
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |timeline|[Timeline](#schematimeline)|true|none|A timeline represents the contents of a video edit over time, in seconds. A timeline consists of layers called tracks. Tracks are composed of titles, images or video segments referred to as clips which are placed along the track at specific starting point and lasting for a specific amount of time.|
-|output|[Output](#schemaoutput)|true|none|The output format, export range and type of media to generate.|
+|output|[Output](#schemaoutput)|true|none|The output format, render range and type of media to generate.|
 |callback|string|false|none|An optional webhook callback URL used to receive status notifications when a render completes or fails.|
 
 <h2 id="tocStimeline">Timeline</h2>
@@ -1394,6 +1406,10 @@ DeveloperKey
   "aspectRatio": "16:9",
   "fps": 25,
   "scaleTo": "preview",
+  "range": {
+    "start": 3,
+    "length": 6
+  },
   "poster": {
     "capture": 1
   },
@@ -1405,7 +1421,7 @@ DeveloperKey
 
 ```
 
-*The output format, export range and type of media to generate.*
+*The output format, render range and type of media to generate.*
 
 ### Properties
 
@@ -1416,6 +1432,7 @@ DeveloperKey
 |aspectRatio|string|false|none|The aspect ratio (shape) of the video. Useful for social media video. Options are: <ul>   <li>`16:9` - regular landscape/horizontal aspect ratio (default)</li>   <li>`9:16` - vertical/portrait aspect ratio</li>   <li>`1:1` - square aspect ratio</li>   <li>`4:5` - short vertical/portrait aspect ratio</li> </ul>|
 |fps|number|false|none|Override the default frames per second. Useful for when the source footage is recorded at 30fps, i.e. on  mobile devices. Lower frame rates can be used to add cinematic quality (24fps) or to create smaller file  size/faster render times or animated gifs (12 or 15fps). Default is 25fps. <ul>   <li>`12` - 12fps</li>   <li>`15` - 15fps</li>   <li>`24` - 24fps</li>   <li>`25` - 25fps</li>   <li>`30` - 30fps</li> </ul>|
 |scaleTo|string|false|none|Override the resolution and scale the video to render at a different size. When using scaleTo the video should be edited at the resolution dimensions, i.e. use font sizes that look best at HD, then use scaleTo to output the video at SD and the text will be scaled to the correct size. This is useful if you want to create multiple video sizes. <ul>   <li>`preview` - 512px x 288px @ 15fps</li>   <li>`mobile` - 640px x 360px @ 25fps</li>   <li>`sd` - 1024px x 576px @25fps</li>   <li>`hd` - 1280px x 720px @25fps</li>   <li>`1080` - 1920px x 1080px @25fps</li> </ul>|
+|range|[Range](#schemarange)|false|none|Specify a time range to render, i.e. to render only a portion of a video or audio file. Omit this setting to  export the entire video.|
 |poster|[Poster](#schemaposter)|false|none|Generate a poster image from a specific point on the timeline.|
 |thumbnail|[Thumbnail](#schemathumbnail)|false|none|Generate a thumbnail image from a specific point on the timeline.|
 
@@ -1445,6 +1462,27 @@ DeveloperKey
 |scaleTo|sd|
 |scaleTo|hd|
 |scaleTo|1080|
+
+<h2 id="tocSrange">Range</h2>
+
+<a id="schemarange"></a>
+
+```json
+{
+  "start": 3,
+  "length": 6
+}
+
+```
+
+*Specify a time range to render, i.e. to render only a portion of a video or audio file. Omit this setting to  export the entire video.*
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|start|number(float)|false|none|The point on the timeline, in seconds, to start the render from - i.e. start at second 3.|
+|length|number(float)|false|none|The length of the portion of the video to render - i.e. render 6 seconds of the video.|
 
 <h2 id="tocSposter">Poster</h2>
 
@@ -1604,6 +1642,10 @@ DeveloperKey
         "aspectRatio": "16:9",
         "fps": 25,
         "scaleTo": "preview",
+        "range": {
+          "start": 3,
+          "length": 6
+        },
         "poster": {
           "capture": 1
         },
@@ -1701,6 +1743,10 @@ DeveloperKey
       "aspectRatio": "16:9",
       "fps": 25,
       "scaleTo": "preview",
+      "range": {
+        "start": 3,
+        "length": 6
+      },
       "poster": {
         "capture": 1
       },

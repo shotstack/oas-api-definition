@@ -200,6 +200,11 @@
                   </li>
                 
                   <li>
+                    <a href="#tocsrange" class="toc-h2 toc-link" data-title="">Range</a>
+                    
+                  </li>
+                
+                  <li>
                     <a href="#tocsposter" class="toc-h2 toc-link" data-title="">Poster</a>
                     
                   </li>
@@ -354,6 +359,10 @@ curl -X POST https://api.shotstack.io/{version}/render \
     "aspectRatio": "16:9",
     "fps": 25,
     "scaleTo": "preview",
+    "range": {
+      "start": 3,
+      "length": 6
+    },
     "poster": {
       "capture": 1
     },
@@ -567,6 +576,10 @@ System.out.println(response.toString());
     <span class="hljs-attr">"aspectRatio"</span>: <span class="hljs-string">"16:9"</span>,
     <span class="hljs-attr">"fps"</span>: <span class="hljs-number">25</span>,
     <span class="hljs-attr">"scaleTo"</span>: <span class="hljs-string">"preview"</span>,
+    <span class="hljs-attr">"range"</span>: {
+      <span class="hljs-attr">"start"</span>: <span class="hljs-number">3</span>,
+      <span class="hljs-attr">"length"</span>: <span class="hljs-number">6</span>
+    },
     <span class="hljs-attr">"poster"</span>: {
       <span class="hljs-attr">"capture"</span>: <span class="hljs-number">1</span>
     },
@@ -984,6 +997,10 @@ DeveloperKey
     <span class="hljs-attr">"aspectRatio"</span>: <span class="hljs-string">"16:9"</span>,
     <span class="hljs-attr">"fps"</span>: <span class="hljs-number">25</span>,
     <span class="hljs-attr">"scaleTo"</span>: <span class="hljs-string">"preview"</span>,
+    <span class="hljs-attr">"range"</span>: {
+      <span class="hljs-attr">"start"</span>: <span class="hljs-number">3</span>,
+      <span class="hljs-attr">"length"</span>: <span class="hljs-number">6</span>
+    },
     <span class="hljs-attr">"poster"</span>: {
       <span class="hljs-attr">"capture"</span>: <span class="hljs-number">1</span>
     },
@@ -1021,7 +1038,7 @@ DeveloperKey
 <td><a href="#schemaoutput">Output</a></td>
 <td>true</td>
 <td>none</td>
-<td>The output format, export range and type of media to generate.</td>
+<td>The output format, render range and type of media to generate.</td>
 </tr>
 <tr>
 <td>callback</td>
@@ -2461,6 +2478,10 @@ DeveloperKey
   <span class="hljs-attr">"aspectRatio"</span>: <span class="hljs-string">"16:9"</span>,
   <span class="hljs-attr">"fps"</span>: <span class="hljs-number">25</span>,
   <span class="hljs-attr">"scaleTo"</span>: <span class="hljs-string">"preview"</span>,
+  <span class="hljs-attr">"range"</span>: {
+    <span class="hljs-attr">"start"</span>: <span class="hljs-number">3</span>,
+    <span class="hljs-attr">"length"</span>: <span class="hljs-number">6</span>
+  },
   <span class="hljs-attr">"poster"</span>: {
     <span class="hljs-attr">"capture"</span>: <span class="hljs-number">1</span>
   },
@@ -2471,7 +2492,7 @@ DeveloperKey
 }
 
 </code></pre>
-<p><em>The output format, export range and type of media to generate.</em></p>
+<p><em>The output format, render range and type of media to generate.</em></p>
 <h3 id="properties">Properties</h3>
 <table>
 <thead>
@@ -2518,6 +2539,13 @@ DeveloperKey
 <td>false</td>
 <td>none</td>
 <td>Override the resolution and scale the video to render at a different size. When using scaleTo the video should be edited at the resolution dimensions, i.e. use font sizes that look best at HD, then use scaleTo to output the video at SD and the text will be scaled to the correct size. This is useful if you want to create multiple video sizes. <ul>   <li><code>preview</code> - 512px x 288px @ 15fps</li>   <li><code>mobile</code> - 640px x 360px @ 25fps</li>   <li><code>sd</code> - 1024px x 576px @25fps</li>   <li><code>hd</code> - 1280px x 720px @25fps</li>   <li><code>1080</code> - 1920px x 1080px @25fps</li> </ul></td>
+</tr>
+<tr>
+<td>range</td>
+<td><a href="#schemarange">Range</a></td>
+<td>false</td>
+<td>none</td>
+<td>Specify a time range to render, i.e. to render only a portion of a video or audio file. Omit this setting to  export the entire video.</td>
 </tr>
 <tr>
 <td>poster</td>
@@ -2631,6 +2659,43 @@ DeveloperKey
 <tr>
 <td>scaleTo</td>
 <td>1080</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocsrange">Range</h2>
+<p><a id="schemarange"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">"start"</span>: <span class="hljs-number">3</span>,
+  <span class="hljs-attr">"length"</span>: <span class="hljs-number">6</span>
+}
+
+</code></pre>
+<p><em>Specify a time range to render, i.e. to render only a portion of a video or audio file. Omit this setting to  export the entire video.</em></p>
+<h3 id="properties">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>start</td>
+<td>number(float)</td>
+<td>false</td>
+<td>none</td>
+<td>The point on the timeline, in seconds, to start the render from - i.e. start at second 3.</td>
+</tr>
+<tr>
+<td>length</td>
+<td>number(float)</td>
+<td>false</td>
+<td>none</td>
+<td>The length of the portion of the video to render - i.e. render 6 seconds of the video.</td>
 </tr>
 </tbody>
 </table>
@@ -2855,6 +2920,10 @@ DeveloperKey
         <span class="hljs-attr">"aspectRatio"</span>: <span class="hljs-string">"16:9"</span>,
         <span class="hljs-attr">"fps"</span>: <span class="hljs-number">25</span>,
         <span class="hljs-attr">"scaleTo"</span>: <span class="hljs-string">"preview"</span>,
+        <span class="hljs-attr">"range"</span>: {
+          <span class="hljs-attr">"start"</span>: <span class="hljs-number">3</span>,
+          <span class="hljs-attr">"length"</span>: <span class="hljs-number">6</span>
+        },
         <span class="hljs-attr">"poster"</span>: {
           <span class="hljs-attr">"capture"</span>: <span class="hljs-number">1</span>
         },
@@ -2975,6 +3044,10 @@ DeveloperKey
       <span class="hljs-attr">"aspectRatio"</span>: <span class="hljs-string">"16:9"</span>,
       <span class="hljs-attr">"fps"</span>: <span class="hljs-number">25</span>,
       <span class="hljs-attr">"scaleTo"</span>: <span class="hljs-string">"preview"</span>,
+      <span class="hljs-attr">"range"</span>: {
+        <span class="hljs-attr">"start"</span>: <span class="hljs-number">3</span>,
+        <span class="hljs-attr">"length"</span>: <span class="hljs-number">6</span>
+      },
       <span class="hljs-attr">"poster"</span>: {
         <span class="hljs-attr">"capture"</span>: <span class="hljs-number">1</span>
       },

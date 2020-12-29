@@ -863,7 +863,7 @@ components:
           maximum: 1
       type: object
     Output:
-      description: The output format, export range and type of media to generate.
+      description: The output format, render range and type of media to generate.
       properties:
         format:
           description: >- 
@@ -953,6 +953,8 @@ components:
             - hd
             - '1080'
           type: string
+        range:
+          $ref: '#/components/schemas/Range'
         poster:
           description: >-
             Generate a poster image from a specific point on the timeline.
@@ -964,6 +966,26 @@ components:
       required:
         - format
         - resolution
+      type: object
+    Range:
+      description: >-
+        Specify a time range to render, i.e. to render only a portion of a video or audio file. Omit this setting to 
+        export the entire video.
+      properties:
+        start:
+          description: >-
+            The point on the timeline, in seconds, to start the render from - i.e. start at second 3.
+          type: number
+          format: float
+          minimum: 0
+          example: 3
+        length:
+          description: >-
+            The length of the portion of the video to render - i.e. render 6 seconds of the video.
+          type: number
+          format: float
+          minimum: 0
+          example: 6
       type: object
     Poster:
       description: >-
