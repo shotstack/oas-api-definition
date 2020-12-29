@@ -686,6 +686,19 @@ components:
             is full volume (defaults to 1).
           type: number
           default: 1
+        effect:
+          description: >-
+            The effect to apply to the audio asset
+            <ul>
+              <li>`fadeIn` - fade volume in only</li>
+              <li>`fadeOut` - fade volume out only</li>
+              <li>`fadeInFadeOut` - fade volume in and out</li>
+            </ul>
+          enum:
+            - fadeIn
+            - fadeOut
+            - fadeInFadeOut
+          type: string
       required:
         - type
         - src

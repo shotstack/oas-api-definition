@@ -1239,7 +1239,8 @@ DeveloperKey
   "type": "audio",
   "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/sound.mp3",
   "trim": 0,
-  "volume": 1
+  "volume": 1,
+  "effect": "fadeIn"
 }
 
 ```
@@ -1254,6 +1255,15 @@ DeveloperKey
 |src|string|true|none|The audio source URL. The URL must be publicly accessible or include credentials.|
 |trim|number|false|none|The start trim point of the audio clip, in seconds (defaults to 0). Audio will start from the in trim point. The audio will play until the file ends or the Clip length is reached.|
 |volume|number|false|none|Set the volume for the audio clip between 0 and 1 where 0 is muted and 1 is full volume (defaults to 1).|
+|effect|string|false|none|The effect to apply to the audio file <ul>   <li>`fadeIn` - fade volume in only</li>   <li>`fadeOut` - fade volume out only</li>   <li>`fadeInFadeOut` - fade volume in and out</li> </ul>|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|effect|fadeIn|
+|effect|fadeOut|
+|effect|fadeInFadeOut|
 
 <h2 id="tocSlumaasset">LumaAsset</h2>
 
