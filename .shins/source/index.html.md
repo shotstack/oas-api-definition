@@ -182,7 +182,7 @@ $headers = [
 $client = new \GuzzleHttp\Client();
 
 // Define array of request body.
-$request_body = []];
+$request_body = [];
 
 try {
     $response = $client->request('POST','https://api.shotstack.io/{version}/render', [
@@ -445,7 +445,7 @@ $headers = [
 $client = new \GuzzleHttp\Client();
 
 // Define array of request body.
-$request_body = []];
+$request_body = [];
 
 try {
     $response = $client->request('GET','https://api.shotstack.io/{version}/render/{id}', [
@@ -1442,7 +1442,7 @@ The output format, render range and type of media to generate.
 |format|string|true|none|The output format and type of media file to generate. <ul><br>  <li>`mp4` - mp4 video file</li><br>  <li>`gif` - animated gif</li><br>  <li>`mp3` - mp3 audio file (no video)</li><br></ul>|
 |resolution|string|true|none|The output resolution of the video. <ul><br>  <li>`preview` - 512px x 288px @ 15fps</li><br>  <li>`mobile` - 640px x 360px @ 25fps</li><br>  <li>`sd` - 1024px x 576px @ 25fps</li><br>  <li>`hd` - 1280px x 720px @ 25fps</li><br>  <li>`1080` - 1920px x 1080px @ 25fps</li><br></ul>|
 |aspectRatio|string|false|none|The aspect ratio (shape) of the video. Useful for social media video. Options are: <ul><br>  <li>`16:9` - regular landscape/horizontal aspect ratio (default)</li><br>  <li>`9:16` - vertical/portrait aspect ratio</li><br>  <li>`1:1` - square aspect ratio</li><br>  <li>`4:5` - short vertical/portrait aspect ratio</li><br></ul>|
-|fps|integer|false|none|Override the default frames per second. Useful for when the source footage is recorded at 30fps, i.e. on  mobile devices. Lower frame rates can be used to add cinematic quality (24fps) or to create smaller file<br> size/faster render times or animated gifs (12 or 15fps). Default is 25fps.<br><ul><br>  <li>`12` - 12fps</li><br>  <li>`15` - 15fps</li><br>  <li>`24` - 24fps</li><br>  <li>`25` - 25fps</li><br>  <li>`30` - 30fps</li><br></ul>|
+|fps|integer|false|none|Override the default frames per second. Useful for when the source footage is recorded at 30fps, i.e. on  mobile devices. Lower frame rates can be used to add cinematic quality (24fps) or to create smaller file size/faster render times or animated gifs (12 or 15fps). Default is 25fps. <ul><br>  <li>`12` - 12fps</li><br>  <li>`15` - 15fps</li><br>  <li>`24` - 24fps</li><br>  <li>`25` - 25fps</li><br>  <li>`30` - 30fps</li><br></ul>|
 |scaleTo|string|false|none|Override the resolution and scale the video to render at a different size. When using scaleTo the video should be edited at the resolution dimensions, i.e. use font sizes that look best at HD, then use scaleTo to output the video at SD and the text will be scaled to the correct size. This is useful if you want to create multiple video sizes. <ul><br>  <li>`preview` - 512px x 288px @ 15fps</li><br>  <li>`mobile` - 640px x 360px @ 25fps</li><br>  <li>`sd` - 1024px x 576px @25fps</li><br>  <li>`hd` - 1280px x 720px @25fps</li><br>  <li>`1080` - 1920px x 1080px @25fps</li><br></ul>|
 |range|[Range](#schemarange)|false|none|Specify a time range to render, i.e. to render only a portion of a video or audio file. Omit this setting to  export the entire video.|
 |poster|[Poster](#schemaposter)|false|none|Generate a poster image from a specific point on the timeline.|

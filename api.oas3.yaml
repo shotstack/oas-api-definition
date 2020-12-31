@@ -930,7 +930,7 @@ components:
           description: >- 
             Override the default frames per second. Useful for when the source footage is recorded at 30fps, i.e. on 
             mobile devices. Lower frame rates can be used to add cinematic quality (24fps) or to create smaller file
-             size/faster render times or animated gifs (12 or 15fps). Default is 25fps.
+            size/faster render times or animated gifs (12 or 15fps). Default is 25fps.
             <ul>
               <li>`12` - 12fps</li>
               <li>`15` - 15fps</li>
