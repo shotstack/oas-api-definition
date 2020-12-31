@@ -96,7 +96,7 @@ paths:
           required: false
           schema:
             type: string
-          example: n7HgsIk82m0m
+          example: ENTERPRISE_QUEUE_ID
       tags:
         - Endpoints
   '/render/{id}':
