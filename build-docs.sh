@@ -9,7 +9,7 @@ mkdir -p $DOCS_DIR
 # Convert OpenAPI to doc to Shins Markdown
 ./node_modules/.bin/widdershins \
     --theme dracula \
-    --language_tabs shell:Curl http:HTTP javascript--nodejs:NodeJS javascript:jQuery php:PHP ruby:Ruby python:Python java:Java go:Go \
+    --language_tabs shell:Curl http:HTTP javascript--nodejs:NodeJS php:PHP ruby:Ruby python:Python java:Java go:Go \
     --summary $OAS3_JSON \
     --outfile $DOCS_DIR/index.html.md
 
