@@ -19,10 +19,9 @@
   "license": "ISC",
   "homepage": "https://github.com/shotstack/oas-api-definition",
   "dependencies": {
-    "js-yaml": "^3.14.0",
-    "oas-raml-converter": "^1.1.43"
+    "js-yaml": "^3.14.1"
   },
   "devDependencies": {
-    "widdershins": "^3.6.7"
+    "widdershins": "^4.0.1"
   }
 }

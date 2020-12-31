@@ -1,15 +1,23 @@
 ---
-title: Shotstack
+title: Shotstack v1
 language_tabs:
   - shell: Curl
   - http: HTTP
   - javascript--nodejs: NodeJS
-  - javascript: jQuery
   - php: PHP
   - ruby: Ruby
   - python: Python
   - java: Java
   - go: Go
+language_clients:
+  - shell: ""
+  - http: ""
+  - javascript--nodejs: ""
+  - php: ""
+  - ruby: ""
+  - python: ""
+  - java: ""
+  - go: ""
 toc_footers: []
 includes: []
 search: true
@@ -17,6 +25,8 @@ highlight_theme: dracula
 headingLevel: 2
 
 ---
+
+<!-- Generator: Widdershins v4.0.1 -->
 
 <h1 id="shotstack">Shotstack v1</h1>
 
@@ -52,7 +62,7 @@ Base URLs:
 curl -X POST https://api.shotstack.io/{version}/render \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
-  -H 'x-api-queue-id: n7HgsIk82m0m' \
+  -H 'x-api-queue-id: ENTERPRISE_QUEUE_ID' \
   -H 'x-api-key: API_KEY'
 
 ```
@@ -62,13 +72,13 @@ POST https://api.shotstack.io/{version}/render HTTP/1.1
 Host: api.shotstack.io
 Content-Type: application/json
 Accept: application/json
-x-api-queue-id: n7HgsIk82m0m
+x-api-queue-id: ENTERPRISE_QUEUE_ID
 
 ```
 
 ```javascript--nodejs
 const fetch = require('node-fetch');
-const inputBody = '{
+const inputBody = {
   "timeline": {
     "soundtrack": {
       "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3",
@@ -137,19 +147,18 @@ const inputBody = '{
     }
   },
   "callback": "https://my-server.com/callback.php"
-}';
+};
 const headers = {
   'Content-Type':'application/json',
   'Accept':'application/json',
-  'x-api-queue-id':'n7HgsIk82m0m',
+  'x-api-queue-id':'ENTERPRISE_QUEUE_ID',
   'x-api-key':'API_KEY'
-
 };
 
 fetch('https://api.shotstack.io/{version}/render',
 {
   method: 'POST',
-  body: inputBody,
+  body: JSON.stringify(inputBody),
   headers: headers
 })
 .then(function(res) {
@@ -160,51 +169,26 @@ fetch('https://api.shotstack.io/{version}/render',
 
 ```
 
-```javascript
-var headers = {
-  'Content-Type':'application/json',
-  'Accept':'application/json',
-  'x-api-queue-id':'n7HgsIk82m0m',
-  'x-api-key':'API_KEY'
-
-};
-
-$.ajax({
-  url: 'https://api.shotstack.io/{version}/render',
-  method: 'post',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-
-```
-
 ```php
-<?php
-
 require 'vendor/autoload.php';
 
-$headers = array(
+$headers = [
     'Content-Type' => 'application/json',
     'Accept' => 'application/json',
-    'x-api-queue-id' => 'n7HgsIk82m0m',
+    'x-api-queue-id' => 'ENTERPRISE_QUEUE_ID',
     'x-api-key' => 'API_KEY',
-    
-    );
+];
 
 $client = new \GuzzleHttp\Client();
 
 // Define array of request body.
-$request_body = array();
+$request_body = []];
 
 try {
-    $response = $client->request('POST','https://api.shotstack.io/{version}/render', array(
+    $response = $client->request('POST','https://api.shotstack.io/{version}/render', [
         'headers' => $headers,
         'json' => $request_body,
-       )
-    );
+    ]);
     print_r($response->getBody()->getContents());
  }
  catch (\GuzzleHttp\Exception\BadResponseException $e) {
@@ -223,7 +207,7 @@ require 'json'
 headers = {
   'Content-Type' => 'application/json',
   'Accept' => 'application/json',
-  'x-api-queue-id' => 'n7HgsIk82m0m',
+  'x-api-queue-id' => 'ENTERPRISE_QUEUE_ID',
   'x-api-key' => 'API_KEY'
 }
 
@@ -240,15 +224,13 @@ import requests
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
-  'x-api-queue-id': 'n7HgsIk82m0m',
+  'x-api-queue-id': 'ENTERPRISE_QUEUE_ID',
   'x-api-key': 'API_KEY'
 }
 
-r = requests.post('https://api.shotstack.io/{version}/render', params={
+r = requests.post('https://api.shotstack.io/{version}/render', headers = headers)
 
-}, headers = headers)
-
-print r.json()
+print(r.json())
 
 ```
 
@@ -282,9 +264,8 @@ func main() {
     headers := map[string][]string{
         "Content-Type": []string{"application/json"},
         "Accept": []string{"application/json"},
-        "x-api-queue-id": []string{"n7HgsIk82m0m"},
+        "x-api-queue-id": []string{"ENTERPRISE_QUEUE_ID"},
         "x-api-key": []string{"API_KEY"},
-        
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
@@ -437,7 +418,6 @@ const fetch = require('node-fetch');
 const headers = {
   'Accept':'application/json',
   'x-api-key':'API_KEY'
-
 };
 
 fetch('https://api.shotstack.io/{version}/render/{id}',
@@ -454,47 +434,24 @@ fetch('https://api.shotstack.io/{version}/render/{id}',
 
 ```
 
-```javascript
-var headers = {
-  'Accept':'application/json',
-  'x-api-key':'API_KEY'
-
-};
-
-$.ajax({
-  url: 'https://api.shotstack.io/{version}/render/{id}',
-  method: 'get',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-
-```
-
 ```php
-<?php
-
 require 'vendor/autoload.php';
 
-$headers = array(
+$headers = [
     'Accept' => 'application/json',
     'x-api-key' => 'API_KEY',
-    
-    );
+];
 
 $client = new \GuzzleHttp\Client();
 
 // Define array of request body.
-$request_body = array();
+$request_body = []];
 
 try {
-    $response = $client->request('GET','https://api.shotstack.io/{version}/render/{id}', array(
+    $response = $client->request('GET','https://api.shotstack.io/{version}/render/{id}', [
         'headers' => $headers,
         'json' => $request_body,
-       )
-    );
+    ]);
     print_r($response->getBody()->getContents());
  }
  catch (\GuzzleHttp\Exception\BadResponseException $e) {
@@ -530,11 +487,9 @@ headers = {
   'x-api-key': 'API_KEY'
 }
 
-r = requests.get('https://api.shotstack.io/{version}/render/{id}', params={
+r = requests.get('https://api.shotstack.io/{version}/render/{id}', headers = headers)
 
-}, headers = headers)
-
-print r.json()
+print(r.json())
 
 ```
 
@@ -568,7 +523,6 @@ func main() {
     headers := map[string][]string{
         "Accept": []string{"application/json"},
         "x-api-key": []string{"API_KEY"},
-        
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
@@ -692,9 +646,12 @@ DeveloperKey
 
 # Schemas
 
-<h2 id="tocSedit">Edit</h2>
-
+<h2 id="tocS_Edit">Edit</h2>
+<!-- backwards compatibility -->
 <a id="schemaedit"></a>
+<a id="schema_Edit"></a>
+<a id="tocSedit"></a>
+<a id="tocsedit"></a>
 
 ```json
 {
@@ -770,7 +727,7 @@ DeveloperKey
 
 ```
 
-*An edit defines the content of the video in a timeline and the output format.*
+An edit defines the content of the video in a timeline and the output format.
 
 ### Properties
 
@@ -780,9 +737,12 @@ DeveloperKey
 |output|[Output](#schemaoutput)|true|none|The output format, render range and type of media to generate.|
 |callback|string|false|none|An optional webhook callback URL used to receive status notifications when a render completes or fails.|
 
-<h2 id="tocStimeline">Timeline</h2>
-
+<h2 id="tocS_Timeline">Timeline</h2>
+<!-- backwards compatibility -->
 <a id="schematimeline"></a>
+<a id="schema_Timeline"></a>
+<a id="tocStimeline"></a>
+<a id="tocstimeline"></a>
 
 ```json
 {
@@ -837,7 +797,7 @@ DeveloperKey
 
 ```
 
-*A timeline represents the contents of a video edit over time, in seconds. A timeline consists of layers called tracks. Tracks are composed of titles, images or video segments referred to as clips which are placed along the track at specific starting point and lasting for a specific amount of time.*
+A timeline represents the contents of a video edit over time, in seconds. A timeline consists of layers called tracks. Tracks are composed of titles, images or video segments referred to as clips which are placed along the track at specific starting point and lasting for a specific amount of time.
 
 ### Properties
 
@@ -848,9 +808,12 @@ DeveloperKey
 |fonts|[[Font](#schemafont)]|false|none|An array of custom fonts to be downloaded for use by the HTML assets.|
 |tracks|[[Track](#schematrack)]|true|none|A timeline consists of an array of tracks, each track containing clips. Tracks are layered on top of each other in the same order they are added to the array with the top most track layered over the top of those below it. Ensure that a track containing titles is the top most track so that it is displayed above videos and images.|
 
-<h2 id="tocSsoundtrack">Soundtrack</h2>
-
+<h2 id="tocS_Soundtrack">Soundtrack</h2>
+<!-- backwards compatibility -->
 <a id="schemasoundtrack"></a>
+<a id="schema_Soundtrack"></a>
+<a id="tocSsoundtrack"></a>
+<a id="tocssoundtrack"></a>
 
 ```json
 {
@@ -861,14 +824,14 @@ DeveloperKey
 
 ```
 
-*A music or audio file in mp3 format that plays for the duration of the rendered video or the length of the audio file, which ever is shortest.*
+A music or audio file in mp3 format that plays for the duration of the rendered video or the length of the audio file, which ever is shortest.
 
 ### Properties
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |src|string|true|none|The URL of the mp3 audio file. The URL must be publicly accessible or include credentials.|
-|effect|string|false|none|The effect to apply to the audio file <ul>   <li>`fadeIn` - fade volume in only</li>   <li>`fadeOut` - fade volume out only</li>   <li>`fadeInFadeOut` - fade volume in and out</li> </ul>|
+|effect|string|false|none|The effect to apply to the audio file <ul><br>  <li>`fadeIn` - fade volume in only</li><br>  <li>`fadeOut` - fade volume out only</li><br>  <li>`fadeInFadeOut` - fade volume in and out</li><br></ul>|
 |volume|number|false|none|Set the volume for the soundtrack between 0 and 1 where 0 is muted and 1 is full volume (defaults to 1).|
 
 #### Enumerated Values
@@ -879,9 +842,12 @@ DeveloperKey
 |effect|fadeOut|
 |effect|fadeInFadeOut|
 
-<h2 id="tocStrack">Track</h2>
-
+<h2 id="tocS_Track">Track</h2>
+<!-- backwards compatibility -->
 <a id="schematrack"></a>
+<a id="schema_Track"></a>
+<a id="tocStrack"></a>
+<a id="tocstrack"></a>
 
 ```json
 {
@@ -921,7 +887,7 @@ DeveloperKey
 
 ```
 
-*A track contains an array of clips. Tracks are layered on top of each other in the order in the array. The top most track will render on top of those below it.*
+A track contains an array of clips. Tracks are layered on top of each other in the order in the array. The top most track will render on top of those below it.
 
 ### Properties
 
@@ -929,9 +895,12 @@ DeveloperKey
 |---|---|---|---|---|
 |clips|[[Clip](#schemaclip)]|true|none|An array of Clips comprising of TitleClip, ImageClip or VideoClip.|
 
-<h2 id="tocSclip">Clip</h2>
-
+<h2 id="tocS_Clip">Clip</h2>
+<!-- backwards compatibility -->
 <a id="schemaclip"></a>
+<a id="schema_Clip"></a>
+<a id="tocSclip"></a>
+<a id="tocsclip"></a>
 
 ```json
 {
@@ -967,7 +936,7 @@ DeveloperKey
 
 ```
 
-*A clip is a container for a specific type of asset, i.e. a title, image, video, audio or html. You use a Clip to define when an asset will display on the timeline, how long it will play for and transitions, filters and effects to apply to it.*
+A clip is a container for a specific type of asset, i.e. a title, image, video, audio or html. You use a Clip to define when an asset will display on the timeline, how long it will play for and transitions, filters and effects to apply to it.
 
 ### Properties
 
@@ -975,55 +944,55 @@ DeveloperKey
 |---|---|---|---|---|
 |asset|any|true|none|The type of asset to display for the duration of this Clip. Value must be one of <b>TitleAsset</b>, <b>ImageAsset</b>, <b>VideoAsset</b>, <b>HtmlAsset</b>, <b>AudioAsset</b> or <b>LumaAsset</b>|
 
-*oneOf*
+oneOf
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |» *anonymous*|[VideoAsset](#schemavideoasset)|false|none|The VideoAsset is used to create video sequences from video files. The src must be a publicly accessible URL to a video resource such as an mp4 file.|
 
-*xor*
+xor
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |» *anonymous*|[ImageAsset](#schemaimageasset)|false|none|The ImageAsset is used to create video from images. The src must be a publicly accessible URL to an image resource such as a jpg or png file.|
 
-*xor*
+xor
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |» *anonymous*|[TitleAsset](#schematitleasset)|false|none|The TitleAsset clip type lets you create video titles from a text string and apply styling and positioning.|
 
-*xor*
+xor
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |» *anonymous*|[HtmlAsset](#schemahtmlasset)|false|none|The HtmlAsset clip type lets you create text based layout and formatting using HTML and CSS. You can also set the height and width of a bounding box for the HTML content to sit within. Text and elements will wrap within the bounding box.|
 
-*xor*
+xor
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |» *anonymous*|[AudioAsset](#schemaaudioasset)|false|none|The AudioAsset is used to add sound effects and audio at specific intervals on the timeline. The src must be a publicly accessible URL to an audio resource such  as an mp3 file.|
 
-*xor*
+xor
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |» *anonymous*|[LumaAsset](#schemalumaasset)|false|none|The LumaAsset is used to create luma matte transitions between other assets. A luma matte is  a grey scale animated video where the black areas are transparent and the white areas solid. The luma matte animation should be provided as an mp4 video file. The src must be a publicly  accessible URL to the file.|
 
-*continued*
+continued
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |start|number|true|none|The start position of the Clip on the timeline, in seconds.|
 |length|number|true|none|The length, in seconds, the Clip should play for.|
-|fit|string|false|none|Set how the asset should be scaled to fit the viewport using one of the following options:    <ul>     <li>`cover` - stretch the asset to fill the viewport without maintaining the aspect ratio.</li>     <li>`contain` - fit the entire asset within the viewport while maintaining the original aspect ratio.</li>     <li>`crop` - scale the asset to fill the viewport while maintaining the aspect ratio. The asset will be cropped if it exceeds the bounds of the viewport.</li>     <li>`none` - preserves the original asset dimensions and does not apply any scaling.</li>   </ul>|
+|fit|string|false|none|Set how the asset should be scaled to fit the viewport using one of the following options: <br>  <ul><br>    <li>`cover` - stretch the asset to fill the viewport without maintaining the aspect ratio.</li><br>    <li>`contain` - fit the entire asset within the viewport while maintaining the original aspect ratio.</li><br>    <li>`crop` - scale the asset to fill the viewport while maintaining the aspect ratio. The asset will be cropped if it exceeds the bounds of the viewport.</li><br>    <li>`none` - preserves the original asset dimensions and does not apply any scaling.</li><br>  </ul>|
 |scale|number|false|none|Scale the asset to a fraction of the viewport size - i.e. setting the scale to 0.5 will scale asset to half the size of the viewport. This is useful for picture-in-picture video and  scaling images such as logos and watermarks.|
-|position|string|false|none|Place the asset in one of nine predefined positions of the viewport. This is most effective for when the asset is scaled and you want to position the element to a specific position. <ul>   <li>`top` - top (center)</li>   <li>`topRight` - top right</li>   <li>`right` - right (center)</li>   <li>`bottomRight` - bottom right</li>   <li>`bottom` - bottom (center)</li>   <li>`bottomLeft` - bottom left</li>   <li>`left` - left (center)</li>   <li>`topLeft` - top left</li>   <li>`center` - center</li> </ul>|
+|position|string|false|none|Place the asset in one of nine predefined positions of the viewport. This is most effective for when the asset is scaled and you want to position the element to a specific position. <ul><br>  <li>`top` - top (center)</li><br>  <li>`topRight` - top right</li><br>  <li>`right` - right (center)</li><br>  <li>`bottomRight` - bottom right</li><br>  <li>`bottom` - bottom (center)</li><br>  <li>`bottomLeft` - bottom left</li><br>  <li>`left` - left (center)</li><br>  <li>`topLeft` - top left</li><br>  <li>`center` - center</li><br></ul>|
 |offset|[Offset](#schemaoffset)|false|none|Offset the location of the asset relative to it's position on the viewport. The offset distance is relative to the width of the viewport - for example an x offset of 0.5 will move the asset half the viewport width to the right.|
 |transition|[Transition](#schematransition)|false|none|In and out transitions for a clip - i.e. fade in and fade out|
-|effect|string|false|none|A motion effect to apply to the Clip. <ul>   <li>`zoomIn` - slow zoom in</li>   <li>`zoomOut` - slow zoom out</li>   <li>`slideLeft` - slow slide (pan) left</li>   <li>`slideRight` - slow slide (pan) right</li>   <li>`slideUp` - slow slide (pan) up</li>   <li>`slideDown` - slow slide (pan) down</li> </ul>|
-|filter|string|false|none|A filter effect to apply to the Clip. <ul>   <li>`boost` - boost contrast and saturation</li>   <li>`contrast` - increase contrast</li>   <li>`darken` - darken the scene</li>   <li>`greyscale` - remove colour</li>   <li>`lighten` - lighten the scene</li>   <li>`muted` - reduce saturation and contrast</li>   <li>`invert` - invert colors</li> </ul>|
+|effect|string|false|none|A motion effect to apply to the Clip. <ul><br>  <li>`zoomIn` - slow zoom in</li><br>  <li>`zoomOut` - slow zoom out</li><br>  <li>`slideLeft` - slow slide (pan) left</li><br>  <li>`slideRight` - slow slide (pan) right</li><br>  <li>`slideUp` - slow slide (pan) up</li><br>  <li>`slideDown` - slow slide (pan) down</li><br></ul>|
+|filter|string|false|none|A filter effect to apply to the Clip. <ul><br>  <li>`boost` - boost contrast and saturation</li><br>  <li>`contrast` - increase contrast</li><br>  <li>`darken` - darken the scene</li><br>  <li>`greyscale` - remove colour</li><br>  <li>`lighten` - lighten the scene</li><br>  <li>`muted` - reduce saturation and contrast</li><br>  <li>`invert` - invert colors</li><br></ul>|
 |opacity|number|false|none|Sets the opacity of the Clip where 1 is opaque and 0 is transparent.|
 
 #### Enumerated Values
@@ -1058,9 +1027,12 @@ DeveloperKey
 |filter|muted|
 |filter|negative|
 
-<h2 id="tocSvideoasset">VideoAsset</h2>
-
+<h2 id="tocS_VideoAsset">VideoAsset</h2>
+<!-- backwards compatibility -->
 <a id="schemavideoasset"></a>
+<a id="schema_VideoAsset"></a>
+<a id="tocSvideoasset"></a>
+<a id="tocsvideoasset"></a>
 
 ```json
 {
@@ -1078,7 +1050,7 @@ DeveloperKey
 
 ```
 
-*The VideoAsset is used to create video sequences from video files. The src must be a publicly accessible URL to a video resource such as an mp4 file.*
+The VideoAsset is used to create video sequences from video files. The src must be a publicly accessible URL to a video resource such as an mp4 file.
 
 ### Properties
 
@@ -1090,9 +1062,12 @@ DeveloperKey
 |volume|number|false|none|Set the volume for the video clip between 0 and 1 where 0 is muted and 1 is full volume (defaults to 0).|
 |crop|[Crop](#schemacrop)|false|none|Crop the sides of an asset by a relative amount. The size of the crop is specified using a scale between 0 and 1, relative to the screen width - i.e a left crop of 0.5 will crop half of the asset from the left, a top crop  of 0.25 will crop the top by quarter of the asset.|
 
-<h2 id="tocSimageasset">ImageAsset</h2>
-
+<h2 id="tocS_ImageAsset">ImageAsset</h2>
+<!-- backwards compatibility -->
 <a id="schemaimageasset"></a>
+<a id="schema_ImageAsset"></a>
+<a id="tocSimageasset"></a>
+<a id="tocsimageasset"></a>
 
 ```json
 {
@@ -1108,7 +1083,7 @@ DeveloperKey
 
 ```
 
-*The ImageAsset is used to create video from images. The src must be a publicly accessible URL to an image resource such as a jpg or png file.*
+The ImageAsset is used to create video from images. The src must be a publicly accessible URL to an image resource such as a jpg or png file.
 
 ### Properties
 
@@ -1118,9 +1093,12 @@ DeveloperKey
 |src|string|true|none|The image source URL. The URL must be publicly accessible or include credentials.|
 |crop|[Crop](#schemacrop)|false|none|Crop the sides of an asset by a relative amount. The size of the crop is specified using a scale between 0 and 1, relative to the screen width - i.e a left crop of 0.5 will crop half of the asset from the left, a top crop  of 0.25 will crop the top by quarter of the asset.|
 
-<h2 id="tocStitleasset">TitleAsset</h2>
-
+<h2 id="tocS_TitleAsset">TitleAsset</h2>
+<!-- backwards compatibility -->
 <a id="schematitleasset"></a>
+<a id="schema_TitleAsset"></a>
+<a id="tocStitleasset"></a>
+<a id="tocstitleasset"></a>
 
 ```json
 {
@@ -1139,7 +1117,7 @@ DeveloperKey
 
 ```
 
-*The TitleAsset clip type lets you create video titles from a text string and apply styling and positioning.*
+The TitleAsset clip type lets you create video titles from a text string and apply styling and positioning.
 
 ### Properties
 
@@ -1147,11 +1125,11 @@ DeveloperKey
 |---|---|---|---|---|
 |type|string|true|none|The type of asset - set to `title` for titles.|
 |text|string|true|none|The title text string - i.e. "My Title".|
-|style|string|false|none|Uses a preset to apply font properties and styling to the title. <ul>   <li>`minimal`</li>   <li>`blockbuster`</li>   <li>`vogue`</li>   <li>`sketchy`</li>   <li>`skinny`</li>   <li>`chunk`</li>   <li>`chunkLight`</li>   <li>`marker`</li>   <li>`future`</li>   <li>`subtitle`</li> </ul>|
+|style|string|false|none|Uses a preset to apply font properties and styling to the title. <ul><br>  <li>`minimal`</li><br>  <li>`blockbuster`</li><br>  <li>`vogue`</li><br>  <li>`sketchy`</li><br>  <li>`skinny`</li><br>  <li>`chunk`</li><br>  <li>`chunkLight`</li><br>  <li>`marker`</li><br>  <li>`future`</li><br>  <li>`subtitle`</li><br></ul>|
 |color|string|false|none|Set the text color using hexadecimal color notation. Transparency is supported by setting the first two characters of the hex string (opposite to HTML),  i.e. #80ffffff will be white with  50% transparency.|
-|size|string|false|none|Set the relative size of the text using predefined sizes from xx-small to xx-large. <ul>   <li>`xx-small`</li>   <li>`x-small`</li>   <li>`small`</li>   <li>`medium`</li>   <li>`large`</li>   <li>`x-large`</li>   <li>`xx-large`</li> </ul>|
+|size|string|false|none|Set the relative size of the text using predefined sizes from xx-small to xx-large. <ul><br>  <li>`xx-small`</li><br>  <li>`x-small`</li><br>  <li>`small`</li><br>  <li>`medium`</li><br>  <li>`large`</li><br>  <li>`x-large`</li><br>  <li>`xx-large`</li><br></ul>|
 |background|string|false|none|Apply a background color behind the text. Set the text color using hexadecimal color notation. Transparency is supported by setting the first two characters of the hex string (opposite to HTML),  i.e. #80ffffff will be white with 50% transparency. Omit to use transparent background.|
-|position|string|false|none|Place the title in one of nine predefined positions of the viewport. <ul>   <li>`top` - top (center)</li>   <li>`topRight` - top right</li>   <li>`right` - right (center)</li>   <li>`bottomRight` - bottom right</li>   <li>`bottom` - bottom (center)</li>   <li>`bottomLeft` - bottom left</li>   <li>`left` - left (center)</li>   <li>`topLeft` - top left</li>   <li>`center` - center</li> </ul>|
+|position|string|false|none|Place the title in one of nine predefined positions of the viewport. <ul><br>  <li>`top` - top (center)</li><br>  <li>`topRight` - top right</li><br>  <li>`right` - right (center)</li><br>  <li>`bottomRight` - bottom right</li><br>  <li>`bottom` - bottom (center)</li><br>  <li>`bottomLeft` - bottom left</li><br>  <li>`left` - left (center)</li><br>  <li>`topLeft` - top left</li><br>  <li>`center` - center</li><br></ul>|
 |offset|[Offset](#schemaoffset)|false|none|Offset the location of the title relative to it's position on the screen.|
 
 #### Enumerated Values
@@ -1185,9 +1163,12 @@ DeveloperKey
 |position|topLeft|
 |position|center|
 
-<h2 id="tocShtmlasset">HtmlAsset</h2>
-
+<h2 id="tocS_HtmlAsset">HtmlAsset</h2>
+<!-- backwards compatibility -->
 <a id="schemahtmlasset"></a>
+<a id="schema_HtmlAsset"></a>
+<a id="tocShtmlasset"></a>
+<a id="tocshtmlasset"></a>
 
 ```json
 {
@@ -1202,7 +1183,7 @@ DeveloperKey
 
 ```
 
-*The HtmlAsset clip type lets you create text based layout and formatting using HTML and CSS. You can also set the height and width of a bounding box for the HTML content to sit within. Text and elements will wrap within the bounding box.*
+The HtmlAsset clip type lets you create text based layout and formatting using HTML and CSS. You can also set the height and width of a bounding box for the HTML content to sit within. Text and elements will wrap within the bounding box.
 
 ### Properties
 
@@ -1211,10 +1192,10 @@ DeveloperKey
 |type|string|true|none|The type of asset - set to `html` for HTML.|
 |html|string|true|none|The HTML text string.|
 |css|string|false|none|The CSS text string to apply styling to the HTML.|
-|width|number|false|none|Set the width of the HTML asset bounding box. Text will wrap to fill the bounding box.|
-|height|number|false|none|Set the width of the HTML asset bounding box. Text and elements will be masked if they exceed the  height of the bounding box.|
+|width|integer|false|none|Set the width of the HTML asset bounding box in pixels. Text will wrap to fill the bounding box.|
+|height|integer|false|none|Set the width of the HTML asset bounding box in pixels. Text and elements will be masked if they exceed the  height of the bounding box.|
 |background|string|false|none|Apply a background color behind the HTML bounding box using. Set the text color using hexadecimal  color notation. Transparency is supported by setting the first two characters of the hex string  (opposite to HTML), i.e. #80ffffff will be white with 50% transparency.|
-|position|string|false|none|Place the HTML in one of nine predefined positions within the HTML area. <ul>   <li>`top` - top (center)</li>   <li>`topRight` - top right</li>   <li>`right` - right (center)</li>   <li>`bottomRight` - bottom right</li>   <li>`bottom` - bottom (center)</li>   <li>`bottomLeft` - bottom left</li>   <li>`left` - left (center)</li>   <li>`topLeft` - top left</li>   <li>`center` - center</li> </ul>|
+|position|string|false|none|Place the HTML in one of nine predefined positions within the HTML area. <ul><br>  <li>`top` - top (center)</li><br>  <li>`topRight` - top right</li><br>  <li>`right` - right (center)</li><br>  <li>`bottomRight` - bottom right</li><br>  <li>`bottom` - bottom (center)</li><br>  <li>`bottomLeft` - bottom left</li><br>  <li>`left` - left (center)</li><br>  <li>`topLeft` - top left</li><br>  <li>`center` - center</li><br></ul>|
 
 #### Enumerated Values
 
@@ -1230,9 +1211,12 @@ DeveloperKey
 |position|topLeft|
 |position|center|
 
-<h2 id="tocSaudioasset">AudioAsset</h2>
-
+<h2 id="tocS_AudioAsset">AudioAsset</h2>
+<!-- backwards compatibility -->
 <a id="schemaaudioasset"></a>
+<a id="schema_AudioAsset"></a>
+<a id="tocSaudioasset"></a>
+<a id="tocsaudioasset"></a>
 
 ```json
 {
@@ -1245,7 +1229,7 @@ DeveloperKey
 
 ```
 
-*The AudioAsset is used to add sound effects and audio at specific intervals on the timeline. The src must be a publicly accessible URL to an audio resource such  as an mp3 file.*
+The AudioAsset is used to add sound effects and audio at specific intervals on the timeline. The src must be a publicly accessible URL to an audio resource such  as an mp3 file.
 
 ### Properties
 
@@ -1255,7 +1239,7 @@ DeveloperKey
 |src|string|true|none|The audio source URL. The URL must be publicly accessible or include credentials.|
 |trim|number|false|none|The start trim point of the audio clip, in seconds (defaults to 0). Audio will start from the in trim point. The audio will play until the file ends or the Clip length is reached.|
 |volume|number|false|none|Set the volume for the audio clip between 0 and 1 where 0 is muted and 1 is full volume (defaults to 1).|
-|effect|string|false|none|The effect to apply to the audio file <ul>   <li>`fadeIn` - fade volume in only</li>   <li>`fadeOut` - fade volume out only</li>   <li>`fadeInFadeOut` - fade volume in and out</li> </ul>|
+|effect|string|false|none|The effect to apply to the audio asset <ul><br>  <li>`fadeIn` - fade volume in only</li><br>  <li>`fadeOut` - fade volume out only</li><br>  <li>`fadeInFadeOut` - fade volume in and out</li><br></ul>|
 
 #### Enumerated Values
 
@@ -1265,9 +1249,12 @@ DeveloperKey
 |effect|fadeOut|
 |effect|fadeInFadeOut|
 
-<h2 id="tocSlumaasset">LumaAsset</h2>
-
+<h2 id="tocS_LumaAsset">LumaAsset</h2>
+<!-- backwards compatibility -->
 <a id="schemalumaasset"></a>
+<a id="schema_LumaAsset"></a>
+<a id="tocSlumaasset"></a>
+<a id="tocslumaasset"></a>
 
 ```json
 {
@@ -1278,7 +1265,7 @@ DeveloperKey
 
 ```
 
-*The LumaAsset is used to create luma matte transitions between other assets. A luma matte is  a grey scale animated video where the black areas are transparent and the white areas solid. The luma matte animation should be provided as an mp4 video file. The src must be a publicly  accessible URL to the file.*
+The LumaAsset is used to create luma matte transitions between other assets. A luma matte is  a grey scale animated video where the black areas are transparent and the white areas solid. The luma matte animation should be provided as an mp4 video file. The src must be a publicly  accessible URL to the file.
 
 ### Properties
 
@@ -1288,9 +1275,12 @@ DeveloperKey
 |src|string|true|none|The luma matte video source URL. The URL must be publicly accessible or include credentials.|
 |trim|number|false|none|The start trim point of the luma video clip, in seconds (defaults to 0). Videos will start from the in trim point. The luma matte video will play until the file ends or the Clip length is reached.|
 
-<h2 id="tocStransition">Transition</h2>
-
+<h2 id="tocS_Transition">Transition</h2>
+<!-- backwards compatibility -->
 <a id="schematransition"></a>
+<a id="schema_Transition"></a>
+<a id="tocStransition"></a>
+<a id="tocstransition"></a>
 
 ```json
 {
@@ -1300,14 +1290,14 @@ DeveloperKey
 
 ```
 
-*In and out transitions for a clip - i.e. fade in and fade out*
+In and out transitions for a clip - i.e. fade in and fade out
 
 ### Properties
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|in|string|false|none|The transition in. Available transitions are:   <ul>     <li>`fade` - fade in</li>     <li>`reveal` - reveal from left to right</li>     <li>`wipeLeft` - fade across screen to the left</li>     <li>`wipeRight` - fade across screen to the right</li>     <li>`slideLeft` - move slightly left and fade in</li>     <li>`slideRight` - move slightly right and fade in</li>     <li>`slideUp` - move slightly up and fade in</li>     <li>`slideDown` - move slightly down and fade in</li>     <li>`carouselLeft` - slide in from right to left</li>     <li>`carouselRight` - slide in from left to right</li>     <li>`carouselUp` - slide in from bottom to top</li>     <li>`carouselDown` - slide in from top  to bottom</li>     <li>`zoom` - fast zoom in</li>   </ul>|
-|out|string|false|none|The transition out. Available transitions are:   <ul>     <li>`fade` - fade out</li>     <li>`reveal` - reveal from right to left</li>     <li>`wipeLeft` - fade across screen to the left</li>     <li>`wipeRight` - fade across screen to the right</li>     <li>`slideLeft` - move slightly left and fade out</li>     <li>`slideRight` - move slightly right and fade out</li>     <li>`slideUp` - move slightly up and fade out</li>     <li>`slideDown` - move slightly down and fade out</li>     <li>`carouselLeft` - slide out from right to left</li>     <li>`carouselRight` - slide out from left to right</li>     <li>`carouselUp` - slide out from bottom to top</li>     <li>`carouselDown` - slide out from top  to bottom</li>     <li>`zoom` - fast zoom out</li>   </ul>|
+|in|string|false|none|The transition in. Available transitions are:<br>  <ul><br>    <li>`fade` - fade in</li><br>    <li>`reveal` - reveal from left to right</li><br>    <li>`wipeLeft` - fade across screen to the left</li><br>    <li>`wipeRight` - fade across screen to the right</li><br>    <li>`slideLeft` - move slightly left and fade in</li><br>    <li>`slideRight` - move slightly right and fade in</li><br>    <li>`slideUp` - move slightly up and fade in</li><br>    <li>`slideDown` - move slightly down and fade in</li><br>    <li>`carouselLeft` - slide in from right to left</li><br>    <li>`carouselRight` - slide in from left to right</li><br>    <li>`carouselUp` - slide in from bottom to top</li><br>    <li>`carouselDown` - slide in from top  to bottom</li><br>    <li>`zoom` - fast zoom in</li><br>  </ul>|
+|out|string|false|none|The transition out. Available transitions are:<br>  <ul><br>    <li>`fade` - fade out</li><br>    <li>`reveal` - reveal from right to left</li><br>    <li>`wipeLeft` - fade across screen to the left</li><br>    <li>`wipeRight` - fade across screen to the right</li><br>    <li>`slideLeft` - move slightly left and fade out</li><br>    <li>`slideRight` - move slightly right and fade out</li><br>    <li>`slideUp` - move slightly up and fade out</li><br>    <li>`slideDown` - move slightly down and fade out</li><br>    <li>`carouselLeft` - slide out from right to left</li><br>    <li>`carouselRight` - slide out from left to right</li><br>    <li>`carouselUp` - slide out from bottom to top</li><br>    <li>`carouselDown` - slide out from top  to bottom</li><br>    <li>`zoom` - fast zoom out</li><br>  </ul>|
 
 #### Enumerated Values
 
@@ -1340,9 +1330,12 @@ DeveloperKey
 |out|carouselDown|
 |out|zoom|
 
-<h2 id="tocSfont">Font</h2>
-
+<h2 id="tocS_Font">Font</h2>
+<!-- backwards compatibility -->
 <a id="schemafont"></a>
+<a id="schema_Font"></a>
+<a id="tocSfont"></a>
+<a id="tocsfont"></a>
 
 ```json
 {
@@ -1351,7 +1344,7 @@ DeveloperKey
 
 ```
 
-*Download a custom font to use with the HTML asset type, using the font name in the CSS or font tag.*
+Download a custom font to use with the HTML asset type, using the font name in the CSS or font tag.
 
 ### Properties
 
@@ -1359,9 +1352,12 @@ DeveloperKey
 |---|---|---|---|---|
 |src|string|true|none|The URL of the font file. The URL must be publicly accessible or include credentials.|
 
-<h2 id="tocSoffset">Offset</h2>
-
+<h2 id="tocS_Offset">Offset</h2>
+<!-- backwards compatibility -->
 <a id="schemaoffset"></a>
+<a id="schema_Offset"></a>
+<a id="tocSoffset"></a>
+<a id="tocsoffset"></a>
 
 ```json
 {
@@ -1371,7 +1367,7 @@ DeveloperKey
 
 ```
 
-*Offsets the position of an asset horizontally or vertically by a relative distance.*
+Offsets the position of an asset horizontally or vertically by a relative distance.
 
 ### Properties
 
@@ -1380,9 +1376,12 @@ DeveloperKey
 |x|number(float)|false|none|Offset an asset on the horizontal axis (left or right), range varies from -1 to 1. Positive numbers move the asset right, negative left. For all assets except titles the distance moved is relative to the width  of the viewport - i.e. an X offset of 0.5 will move the asset half the  screen width to the right.|
 |y|number(float)|false|none|Offset an asset on the vertical axis (up or down), range varies from -1 to 1. Positive numbers move the asset up, negative down. For all assets except titles the distance moved is relative to the height  of the viewport - i.e. an Y offset of 0.5 will move the asset up half the  screen height.|
 
-<h2 id="tocScrop">Crop</h2>
-
+<h2 id="tocS_Crop">Crop</h2>
+<!-- backwards compatibility -->
 <a id="schemacrop"></a>
+<a id="schema_Crop"></a>
+<a id="tocScrop"></a>
+<a id="tocscrop"></a>
 
 ```json
 {
@@ -1394,7 +1393,7 @@ DeveloperKey
 
 ```
 
-*Crop the sides of an asset by a relative amount. The size of the crop is specified using a scale between 0 and 1, relative to the screen width - i.e a left crop of 0.5 will crop half of the asset from the left, a top crop  of 0.25 will crop the top by quarter of the asset.*
+Crop the sides of an asset by a relative amount. The size of the crop is specified using a scale between 0 and 1, relative to the screen width - i.e a left crop of 0.5 will crop half of the asset from the left, a top crop  of 0.25 will crop the top by quarter of the asset.
 
 ### Properties
 
@@ -1405,9 +1404,12 @@ DeveloperKey
 |left|number(float)|false|none|Crop from the left of the asset|
 |right|number(float)|false|none|Crop from the left of the asset|
 
-<h2 id="tocSoutput">Output</h2>
-
+<h2 id="tocS_Output">Output</h2>
+<!-- backwards compatibility -->
 <a id="schemaoutput"></a>
+<a id="schema_Output"></a>
+<a id="tocSoutput"></a>
+<a id="tocsoutput"></a>
 
 ```json
 {
@@ -1431,17 +1433,17 @@ DeveloperKey
 
 ```
 
-*The output format, render range and type of media to generate.*
+The output format, render range and type of media to generate.
 
 ### Properties
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|format|string|true|none|The output format and type of media file to generate. <ul>   <li>`mp4` - mp4 video file</li>   <li>`gif` - animated gif</li>   <li>`mp3` - mp3 audio file (no video)</li> </ul>|
-|resolution|string|true|none|The output resolution of the video. <ul>   <li>`preview` - 512px x 288px @ 15fps</li>   <li>`mobile` - 640px x 360px @ 25fps</li>   <li>`sd` - 1024px x 576px @ 25fps</li>   <li>`hd` - 1280px x 720px @ 25fps</li>   <li>`1080` - 1920px x 1080px @ 25fps</li> </ul>|
-|aspectRatio|string|false|none|The aspect ratio (shape) of the video. Useful for social media video. Options are: <ul>   <li>`16:9` - regular landscape/horizontal aspect ratio (default)</li>   <li>`9:16` - vertical/portrait aspect ratio</li>   <li>`1:1` - square aspect ratio</li>   <li>`4:5` - short vertical/portrait aspect ratio</li> </ul>|
-|fps|number|false|none|Override the default frames per second. Useful for when the source footage is recorded at 30fps, i.e. on  mobile devices. Lower frame rates can be used to add cinematic quality (24fps) or to create smaller file  size/faster render times or animated gifs (12 or 15fps). Default is 25fps. <ul>   <li>`12` - 12fps</li>   <li>`15` - 15fps</li>   <li>`24` - 24fps</li>   <li>`25` - 25fps</li>   <li>`30` - 30fps</li> </ul>|
-|scaleTo|string|false|none|Override the resolution and scale the video to render at a different size. When using scaleTo the video should be edited at the resolution dimensions, i.e. use font sizes that look best at HD, then use scaleTo to output the video at SD and the text will be scaled to the correct size. This is useful if you want to create multiple video sizes. <ul>   <li>`preview` - 512px x 288px @ 15fps</li>   <li>`mobile` - 640px x 360px @ 25fps</li>   <li>`sd` - 1024px x 576px @25fps</li>   <li>`hd` - 1280px x 720px @25fps</li>   <li>`1080` - 1920px x 1080px @25fps</li> </ul>|
+|format|string|true|none|The output format and type of media file to generate. <ul><br>  <li>`mp4` - mp4 video file</li><br>  <li>`gif` - animated gif</li><br>  <li>`mp3` - mp3 audio file (no video)</li><br></ul>|
+|resolution|string|true|none|The output resolution of the video. <ul><br>  <li>`preview` - 512px x 288px @ 15fps</li><br>  <li>`mobile` - 640px x 360px @ 25fps</li><br>  <li>`sd` - 1024px x 576px @ 25fps</li><br>  <li>`hd` - 1280px x 720px @ 25fps</li><br>  <li>`1080` - 1920px x 1080px @ 25fps</li><br></ul>|
+|aspectRatio|string|false|none|The aspect ratio (shape) of the video. Useful for social media video. Options are: <ul><br>  <li>`16:9` - regular landscape/horizontal aspect ratio (default)</li><br>  <li>`9:16` - vertical/portrait aspect ratio</li><br>  <li>`1:1` - square aspect ratio</li><br>  <li>`4:5` - short vertical/portrait aspect ratio</li><br></ul>|
+|fps|integer|false|none|Override the default frames per second. Useful for when the source footage is recorded at 30fps, i.e. on  mobile devices. Lower frame rates can be used to add cinematic quality (24fps) or to create smaller file<br> size/faster render times or animated gifs (12 or 15fps). Default is 25fps.<br><ul><br>  <li>`12` - 12fps</li><br>  <li>`15` - 15fps</li><br>  <li>`24` - 24fps</li><br>  <li>`25` - 25fps</li><br>  <li>`30` - 30fps</li><br></ul>|
+|scaleTo|string|false|none|Override the resolution and scale the video to render at a different size. When using scaleTo the video should be edited at the resolution dimensions, i.e. use font sizes that look best at HD, then use scaleTo to output the video at SD and the text will be scaled to the correct size. This is useful if you want to create multiple video sizes. <ul><br>  <li>`preview` - 512px x 288px @ 15fps</li><br>  <li>`mobile` - 640px x 360px @ 25fps</li><br>  <li>`sd` - 1024px x 576px @25fps</li><br>  <li>`hd` - 1280px x 720px @25fps</li><br>  <li>`1080` - 1920px x 1080px @25fps</li><br></ul>|
 |range|[Range](#schemarange)|false|none|Specify a time range to render, i.e. to render only a portion of a video or audio file. Omit this setting to  export the entire video.|
 |poster|[Poster](#schemaposter)|false|none|Generate a poster image from a specific point on the timeline.|
 |thumbnail|[Thumbnail](#schemathumbnail)|false|none|Generate a thumbnail image from a specific point on the timeline.|
@@ -1473,9 +1475,12 @@ DeveloperKey
 |scaleTo|hd|
 |scaleTo|1080|
 
-<h2 id="tocSrange">Range</h2>
-
+<h2 id="tocS_Range">Range</h2>
+<!-- backwards compatibility -->
 <a id="schemarange"></a>
+<a id="schema_Range"></a>
+<a id="tocSrange"></a>
+<a id="tocsrange"></a>
 
 ```json
 {
@@ -1485,7 +1490,7 @@ DeveloperKey
 
 ```
 
-*Specify a time range to render, i.e. to render only a portion of a video or audio file. Omit this setting to  export the entire video.*
+Specify a time range to render, i.e. to render only a portion of a video or audio file. Omit this setting to  export the entire video.
 
 ### Properties
 
@@ -1494,9 +1499,12 @@ DeveloperKey
 |start|number(float)|false|none|The point on the timeline, in seconds, to start the render from - i.e. start at second 3.|
 |length|number(float)|false|none|The length of the portion of the video to render - i.e. render 6 seconds of the video.|
 
-<h2 id="tocSposter">Poster</h2>
-
+<h2 id="tocS_Poster">Poster</h2>
+<!-- backwards compatibility -->
 <a id="schemaposter"></a>
+<a id="schema_Poster"></a>
+<a id="tocSposter"></a>
+<a id="tocsposter"></a>
 
 ```json
 {
@@ -1505,7 +1513,7 @@ DeveloperKey
 
 ```
 
-*Generate a poster image for the video at a specific point from the timeline. The poster image size will match the size of the output video.*
+Generate a poster image for the video at a specific point from the timeline. The poster image size will match the size of the output video.
 
 ### Properties
 
@@ -1513,9 +1521,12 @@ DeveloperKey
 |---|---|---|---|---|
 |capture|number|true|none|The point on the timeline in seconds to capture a single frame to use as the poster image.|
 
-<h2 id="tocSthumbnail">Thumbnail</h2>
-
+<h2 id="tocS_Thumbnail">Thumbnail</h2>
+<!-- backwards compatibility -->
 <a id="schemathumbnail"></a>
+<a id="schema_Thumbnail"></a>
+<a id="tocSthumbnail"></a>
+<a id="tocsthumbnail"></a>
 
 ```json
 {
@@ -1525,7 +1536,7 @@ DeveloperKey
 
 ```
 
-*Generate a thumbnail image for the video at a specific point from the timeline.*
+Generate a thumbnail image for the video at a specific point from the timeline.
 
 ### Properties
 
@@ -1534,9 +1545,12 @@ DeveloperKey
 |capture|number|true|none|The point on the timeline in seconds to capture a single frame to use as the thumbnail image.|
 |scale|number|true|none|Scale the thumbnail size to a fraction of the viewport size - i.e. setting the scale to 0.5 will scale  the thumbnail to half the size of the viewport.|
 
-<h2 id="tocSqueuedresponse">QueuedResponse</h2>
-
+<h2 id="tocS_QueuedResponse">QueuedResponse</h2>
+<!-- backwards compatibility -->
 <a id="schemaqueuedresponse"></a>
+<a id="schema_QueuedResponse"></a>
+<a id="tocSqueuedresponse"></a>
+<a id="tocsqueuedresponse"></a>
 
 ```json
 {
@@ -1558,9 +1572,12 @@ DeveloperKey
 |message|string|true|none|`Created`, `Bad Request` or an error message.|
 |response|[QueuedResponseData](#schemaqueuedresponsedata)|true|none|`QueuedResponseData` or an error message.|
 
-<h2 id="tocSqueuedresponsedata">QueuedResponseData</h2>
-
+<h2 id="tocS_QueuedResponseData">QueuedResponseData</h2>
+<!-- backwards compatibility -->
 <a id="schemaqueuedresponsedata"></a>
+<a id="schema_QueuedResponseData"></a>
+<a id="tocSqueuedresponsedata"></a>
+<a id="tocsqueuedresponsedata"></a>
 
 ```json
 {
@@ -1577,9 +1594,12 @@ DeveloperKey
 |message|string|true|none|Success response message or error details.|
 |id|string|true|none|The id of the render task in UUID format.|
 
-<h2 id="tocSrenderresponse">RenderResponse</h2>
-
+<h2 id="tocS_RenderResponse">RenderResponse</h2>
+<!-- backwards compatibility -->
 <a id="schemarenderresponse"></a>
+<a id="schema_RenderResponse"></a>
+<a id="tocSrenderresponse"></a>
+<a id="tocsrenderresponse"></a>
 
 ```json
 {
@@ -1681,9 +1701,12 @@ DeveloperKey
 |message|string|true|none|`OK` or an error message.|
 |response|[RenderResponseData](#schemarenderresponsedata)|true|none|`RenderResponse` or an error message.|
 
-<h2 id="tocSrenderresponsedata">RenderResponseData</h2>
-
+<h2 id="tocS_RenderResponseData">RenderResponseData</h2>
+<!-- backwards compatibility -->
 <a id="schemarenderresponsedata"></a>
+<a id="schema_RenderResponseData"></a>
+<a id="tocSrenderresponsedata"></a>
+<a id="tocsrenderresponsedata"></a>
 
 ```json
 {
@@ -1780,7 +1803,7 @@ DeveloperKey
 |id|string|true|none|The id of the render task in UUID format.|
 |owner|string|true|none|The owner id of the render task.|
 |plan|string|false|none|The customer subscription plan.|
-|status|string|true|none|The status of the render task. <ul>   <li>`queued` - render is queued waiting to be rendered</li>   <li>`fetching` - assets are being fetched</li>   <li>`rendering` - the video is being rendered</li>   <li>`saving` - the final video is being saved to storage</li>   <li>`done` - the video is ready to be downloaded</li>   <li>`failed` - there was an error rendering the video</li> </ul>|
+|status|string|true|none|The status of the render task. <ul><br>  <li>`queued` - render is queued waiting to be rendered</li><br>  <li>`fetching` - assets are being fetched</li><br>  <li>`rendering` - the video is being rendered</li><br>  <li>`saving` - the final video is being saved to storage</li><br>  <li>`done` - the video is ready to be downloaded</li><br>  <li>`failed` - there was an error rendering the video</li><br></ul>|
 |error|string|false|none|An error message, only displayed if an error occurred.|
 |duration|number|false|none|The output video length in seconds.|
 |renderTime|number|false|none|The time taken to render the video in milliseconds.|
