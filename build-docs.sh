@@ -18,7 +18,7 @@ cp $DOCS_DIR/index.html.md .shins/source/index.html.md
 # Build the Shins docs HTML
 cd .shins
 node shins.js \
-    --logo ../assets/img/logo.png \
+    --logo ../assets/img/logo.svg \
     --logo-url https://shotstack.io \
     --customCss --minify
 
@@ -27,7 +27,7 @@ cd -
 mkdir -p $DOCS_DIR/source/images
 cp .shins/index.html ./$DOCS_DIR/.
 cp -r .shins/pub ./$DOCS_DIR/.
-cp -r .shins/source/images/custom_logo.png ./$DOCS_DIR/source/images/custom_logo.png
+cp -r .shins/source/images/custom_logo.svg ./$DOCS_DIR/source/images/custom_logo.svg
 cp -r .shins/source/images/navbar.png ./$DOCS_DIR/source/images/navbar.png
 cp -r .shins/source/fonts ./$DOCS_DIR/source/fonts
 
