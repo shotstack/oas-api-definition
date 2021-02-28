@@ -273,7 +273,7 @@
 <blockquote>
 <p>Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.</p>
 </blockquote>
-<p>The Shotstack API is a video editing service that allows for the automated creation of videos using JSON. You can configure an edit and POST it to the Shotstack API which will render your video and provide a file location when complete. For more details check <a href="https://shotstack.io">https://shotstack.io</a></p>
+<p>The Shotstack API is a video editing service that allows for the automated creation of videos using JSON. You can configure an edit and POST it to the Shotstack API which will render your video and provide a file location when complete. For more details visit <a href="https://shotstack.io">shotstack.io</a> or checkout our <a href="https://shotstack.gitbook.io/docs/guides/getting-started">getting started</a> documentation.</p>
 <p>Base URLs:</p>
 <ul>
 <li>
@@ -297,7 +297,7 @@
 <ul>
 <li>API Key (DeveloperKey)
 <ul>
-<li>Parameter Name: <strong>x-api-key</strong>, in: header. Set the header named below with your provided key for the correct environment (v1 or stage). Include the header in all calls to the API that are secured with a key.</li>
+<li>Parameter Name: <strong>x-api-key</strong>, in: header. Set the <strong>x-api-key</strong> header with your provided key for the correct environment (v1 or stage). Include the header in all calls to the API that are secured with a key.</li>
 </ul>
 </li>
 </ul>
@@ -371,7 +371,8 @@ curl -X POST https://api.shotstack.io/{version}/render \
           }
         ]
       }
-    ]
+    ],
+    <span class="hljs-string">"cache"</span>: <span class="hljs-literal">true</span>
   },
   <span class="hljs-string">"output"</span>: {
     <span class="hljs-string">"format"</span>: <span class="hljs-string">"mp4"</span>,
@@ -391,7 +392,8 @@ curl -X POST https://api.shotstack.io/{version}/render \
       <span class="hljs-string">"scale"</span>: <span class="hljs-number">0.3</span>
     }
   },
-  <span class="hljs-string">"callback"</span>: <span class="hljs-string">"https://my-server.com/callback.php"</span>
+  <span class="hljs-string">"callback"</span>: <span class="hljs-string">"https://my-server.com/callback.php"</span>,
+  <span class="hljs-string">"disk"</span>: <span class="hljs-string">"local"</span>
 };
 <span class="hljs-keyword">const</span> headers = {
   <span class="hljs-string">'Content-Type'</span>:<span class="hljs-string">'application/json'</span>,
@@ -566,7 +568,8 @@ System.out.println(response.toString());
           }
         ]
       }
-    ]
+    ],
+    <span class="hljs-attr">"cache"</span>: <span class="hljs-literal">true</span>
   },
   <span class="hljs-attr">"output"</span>: {
     <span class="hljs-attr">"format"</span>: <span class="hljs-string">"mp4"</span>,
@@ -586,7 +589,8 @@ System.out.println(response.toString());
       <span class="hljs-attr">"scale"</span>: <span class="hljs-number">0.3</span>
     }
   },
-  <span class="hljs-attr">"callback"</span>: <span class="hljs-string">"https://my-server.com/callback.php"</span>
+  <span class="hljs-attr">"callback"</span>: <span class="hljs-string">"https://my-server.com/callback.php"</span>,
+  <span class="hljs-attr">"disk"</span>: <span class="hljs-string">"local"</span>
 }
 </code></pre>
 <h3 id="render-video-parameters">Parameters</h3>
@@ -970,7 +974,8 @@ DeveloperKey
           }
         ]
       }
-    ]
+    ],
+    <span class="hljs-attr">"cache"</span>: <span class="hljs-literal">true</span>
   },
   <span class="hljs-attr">"output"</span>: {
     <span class="hljs-attr">"format"</span>: <span class="hljs-string">"mp4"</span>,
@@ -990,7 +995,8 @@ DeveloperKey
       <span class="hljs-attr">"scale"</span>: <span class="hljs-number">0.3</span>
     }
   },
-  <span class="hljs-attr">"callback"</span>: <span class="hljs-string">"https://my-server.com/callback.php"</span>
+  <span class="hljs-attr">"callback"</span>: <span class="hljs-string">"https://my-server.com/callback.php"</span>,
+  <span class="hljs-attr">"disk"</span>: <span class="hljs-string">"local"</span>
 }
 
 </code></pre>
@@ -1026,7 +1032,33 @@ DeveloperKey
 <td>string</td>
 <td>false</td>
 <td>none</td>
-<td>An optional webhook callback URL used to receive status notifications when a render completes or fails.</td>
+<td>An optional webhook callback URL used to receive status notifications when a render completes or fails. See <a href="https://shotstack.gitbook.io/docs/guides/architecting-an-application/webhooks">webhooks</a> for  more details.</td>
+</tr>
+<tr>
+<td>disk</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>The disk type to use for storing footage and assets for each render. See <a href="https://shotstack.gitbook.io/docs/guides/architecting-an-application/disk-types">disk types</a> for more details. <ul><br />  <li><code>local</code> - optimised for high speed rendering with up to 512MB storage</li><br />  <li><code>mount</code> - optimised for larger file sizes and longer videos with 5GB for source footage and 512MB for output render</li><br /></ul></td>
+</tr>
+</tbody>
+</table>
+<h4 id="enumerated-values">Enumerated Values</h4>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>disk</td>
+<td>local</td>
+</tr>
+<tr>
+<td>disk</td>
+<td>mount</td>
 </tr>
 </tbody>
 </table>
@@ -1082,7 +1114,8 @@ DeveloperKey
         }
       ]
     }
-  ]
+  ],
+  <span class="hljs-attr">"cache"</span>: <span class="hljs-literal">true</span>
 }
 
 </code></pre>
@@ -1126,6 +1159,13 @@ DeveloperKey
 <td>true</td>
 <td>none</td>
 <td>A timeline consists of an array of tracks, each track containing clips. Tracks are layered on top of each other in the same order they are added to the array with the top most track layered over the top of those below it. Ensure that a track containing titles is the top most track so that it is displayed above videos and images.</td>
+</tr>
+<tr>
+<td>cache</td>
+<td>boolean</td>
+<td>false</td>
+<td>none</td>
+<td>Disable the caching of ingested source footage and assets. See  <a href="https://shotstack.gitbook.io/docs/guides/architecting-an-application/caching">caching</a> for more details.</td>
 </tr>
 </tbody>
 </table>
@@ -1619,10 +1659,6 @@ DeveloperKey
 </tr>
 <tr>
 <td>filter</td>
-<td>blur</td>
-</tr>
-<tr>
-<td>filter</td>
 <td>boost</td>
 </tr>
 <tr>
@@ -2020,14 +2056,14 @@ DeveloperKey
 <td>string</td>
 <td>true</td>
 <td>none</td>
-<td>The HTML text string.</td>
+<td>The HTML text string. See list of <a href="https://shotstack.gitbook.io/docs/guides/architecting-an-application/html-support#supported-html-tags">supported HTML tags</a>.</td>
 </tr>
 <tr>
 <td>css</td>
 <td>string</td>
 <td>false</td>
 <td>none</td>
-<td>The CSS text string to apply styling to the HTML.</td>
+<td>The CSS text string to apply styling to the HTML. See list of  <a href="https://shotstack.gitbook.io/docs/guides/architecting-an-application/html-support#supported-html-tags">support CSS properties</a>.</td>
 </tr>
 <tr>
 <td>width</td>
@@ -2406,7 +2442,7 @@ DeveloperKey
 }
 
 </code></pre>
-<p>Download a custom font to use with the HTML asset type, using the font name in the CSS or font tag.</p>
+<p>Download a custom font to use with the HTML asset type, using the font name in the CSS or font tag. See our <a href="https://shotstack.io/learn/html-custom-fonts/">custom fonts</a> getting started guide for more details.</p>
 <h3 id="properties">Properties</h3>
 <table>
 <thead>
@@ -2987,7 +3023,8 @@ DeveloperKey
               }
             ]
           }
-        ]
+        ],
+        <span class="hljs-attr">"cache"</span>: <span class="hljs-literal">true</span>
       },
       <span class="hljs-attr">"output"</span>: {
         <span class="hljs-attr">"format"</span>: <span class="hljs-string">"mp4"</span>,
@@ -3007,7 +3044,8 @@ DeveloperKey
           <span class="hljs-attr">"scale"</span>: <span class="hljs-number">0.3</span>
         }
       },
-      <span class="hljs-attr">"callback"</span>: <span class="hljs-string">"https://my-server.com/callback.php"</span>
+      <span class="hljs-attr">"callback"</span>: <span class="hljs-string">"https://my-server.com/callback.php"</span>,
+      <span class="hljs-attr">"disk"</span>: <span class="hljs-string">"local"</span>
     },
     <span class="hljs-attr">"created"</span>: <span class="hljs-string">"2020-10-30T09:42:29.446Z"</span>,
     <span class="hljs-attr">"updated"</span>: <span class="hljs-string">"2020-10-30T09:42:39.168Z"</span>
@@ -3114,7 +3152,8 @@ DeveloperKey
             }
           ]
         }
-      ]
+      ],
+      <span class="hljs-attr">"cache"</span>: <span class="hljs-literal">true</span>
     },
     <span class="hljs-attr">"output"</span>: {
       <span class="hljs-attr">"format"</span>: <span class="hljs-string">"mp4"</span>,
@@ -3134,7 +3173,8 @@ DeveloperKey
         <span class="hljs-attr">"scale"</span>: <span class="hljs-number">0.3</span>
       }
     },
-    <span class="hljs-attr">"callback"</span>: <span class="hljs-string">"https://my-server.com/callback.php"</span>
+    <span class="hljs-attr">"callback"</span>: <span class="hljs-string">"https://my-server.com/callback.php"</span>,
+    <span class="hljs-attr">"disk"</span>: <span class="hljs-string">"local"</span>
   },
   <span class="hljs-attr">"created"</span>: <span class="hljs-string">"2020-10-30T09:42:29.446Z"</span>,
   <span class="hljs-attr">"updated"</span>: <span class="hljs-string">"2020-10-30T09:42:39.168Z"</span>

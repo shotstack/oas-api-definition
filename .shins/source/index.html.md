@@ -32,7 +32,7 @@ headingLevel: 2
 
 > Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
 
-The Shotstack API is a video editing service that allows for the automated creation of videos using JSON. You can configure an edit and POST it to the Shotstack API which will render your video and provide a file location when complete. For more details check https://shotstack.io
+The Shotstack API is a video editing service that allows for the automated creation of videos using JSON. You can configure an edit and POST it to the Shotstack API which will render your video and provide a file location when complete. For more details visit [shotstack.io](https://shotstack.io) or checkout our [getting started](https://shotstack.gitbook.io/docs/guides/getting-started) documentation.
 
 Base URLs:
 
@@ -47,7 +47,7 @@ Base URLs:
 # Authentication
 
 * API Key (DeveloperKey)
-    - Parameter Name: **x-api-key**, in: header. Set the header named below with your provided key for the correct environment (v1 or stage). Include the header in all calls to the API that are secured with a key.
+    - Parameter Name: **x-api-key**, in: header. Set the **x-api-key** header with your provided key for the correct environment (v1 or stage). Include the header in all calls to the API that are secured with a key.
 
 <h1 id="shotstack-endpoints">Endpoints</h1>
 
@@ -126,7 +126,8 @@ const inputBody = {
           }
         ]
       }
-    ]
+    ],
+    "cache": true
   },
   "output": {
     "format": "mp4",
@@ -146,7 +147,8 @@ const inputBody = {
       "scale": 0.3
     }
   },
-  "callback": "https://my-server.com/callback.php"
+  "callback": "https://my-server.com/callback.php",
+  "disk": "local"
 };
 const headers = {
   'Content-Type':'application/json',
@@ -334,7 +336,8 @@ Queue and render the contents of a timeline as a video file.
           }
         ]
       }
-    ]
+    ],
+    "cache": true
   },
   "output": {
     "format": "mp4",
@@ -354,7 +357,8 @@ Queue and render the contents of a timeline as a video file.
       "scale": 0.3
     }
   },
-  "callback": "https://my-server.com/callback.php"
+  "callback": "https://my-server.com/callback.php",
+  "disk": "local"
 }
 ```
 
@@ -702,7 +706,8 @@ DeveloperKey
           }
         ]
       }
-    ]
+    ],
+    "cache": true
   },
   "output": {
     "format": "mp4",
@@ -722,7 +727,8 @@ DeveloperKey
       "scale": 0.3
     }
   },
-  "callback": "https://my-server.com/callback.php"
+  "callback": "https://my-server.com/callback.php",
+  "disk": "local"
 }
 
 ```
@@ -735,7 +741,15 @@ An edit defines the content of the video in a timeline and the output format.
 |---|---|---|---|---|
 |timeline|[Timeline](#schematimeline)|true|none|A timeline represents the contents of a video edit over time, in seconds. A timeline consists of layers called tracks. Tracks are composed of titles, images or video segments referred to as clips which are placed along the track at specific starting point and lasting for a specific amount of time.|
 |output|[Output](#schemaoutput)|true|none|The output format, render range and type of media to generate.|
-|callback|string|false|none|An optional webhook callback URL used to receive status notifications when a render completes or fails.|
+|callback|string|false|none|An optional webhook callback URL used to receive status notifications when a render completes or fails. See [webhooks](https://shotstack.gitbook.io/docs/guides/architecting-an-application/webhooks) for  more details.|
+|disk|string|false|none|The disk type to use for storing footage and assets for each render. See [disk types](https://shotstack.gitbook.io/docs/guides/architecting-an-application/disk-types) for more details. <ul><br>  <li>`local` - optimised for high speed rendering with up to 512MB storage</li><br>  <li>`mount` - optimised for larger file sizes and longer videos with 5GB for source footage and 512MB for output render</li><br></ul>|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|disk|local|
+|disk|mount|
 
 <h2 id="tocS_Timeline">Timeline</h2>
 <!-- backwards compatibility -->
@@ -792,7 +806,8 @@ An edit defines the content of the video in a timeline and the output format.
         }
       ]
     }
-  ]
+  ],
+  "cache": true
 }
 
 ```
@@ -807,6 +822,7 @@ A timeline represents the contents of a video edit over time, in seconds. A time
 |background|string|false|none|A hexadecimal value for the timeline background colour. Defaults to #000000 (black).|
 |fonts|[[Font](#schemafont)]|false|none|An array of custom fonts to be downloaded for use by the HTML assets.|
 |tracks|[[Track](#schematrack)]|true|none|A timeline consists of an array of tracks, each track containing clips. Tracks are layered on top of each other in the same order they are added to the array with the top most track layered over the top of those below it. Ensure that a track containing titles is the top most track so that it is displayed above videos and images.|
+|cache|boolean|false|none|Disable the caching of ingested source footage and assets. See  [caching](https://shotstack.gitbook.io/docs/guides/architecting-an-application/caching) for more details.|
 
 <h2 id="tocS_Soundtrack">Soundtrack</h2>
 <!-- backwards compatibility -->
@@ -1018,7 +1034,6 @@ continued
 |effect|slideRight|
 |effect|slideUp|
 |effect|slideDown|
-|filter|blur|
 |filter|boost|
 |filter|contrast|
 |filter|darken|
@@ -1190,8 +1205,8 @@ The HtmlAsset clip type lets you create text based layout and formatting using H
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |type|string|true|none|The type of asset - set to `html` for HTML.|
-|html|string|true|none|The HTML text string.|
-|css|string|false|none|The CSS text string to apply styling to the HTML.|
+|html|string|true|none|The HTML text string. See list of [supported HTML tags](https://shotstack.gitbook.io/docs/guides/architecting-an-application/html-support#supported-html-tags).|
+|css|string|false|none|The CSS text string to apply styling to the HTML. See list of  [support CSS properties](https://shotstack.gitbook.io/docs/guides/architecting-an-application/html-support#supported-html-tags).|
 |width|integer|false|none|Set the width of the HTML asset bounding box in pixels. Text will wrap to fill the bounding box.|
 |height|integer|false|none|Set the width of the HTML asset bounding box in pixels. Text and elements will be masked if they exceed the  height of the bounding box.|
 |background|string|false|none|Apply a background color behind the HTML bounding box using. Set the text color using hexadecimal  color notation. Transparency is supported by setting the first two characters of the hex string  (opposite to HTML), i.e. #80ffffff will be white with 50% transparency.|
@@ -1344,7 +1359,7 @@ In and out transitions for a clip - i.e. fade in and fade out
 
 ```
 
-Download a custom font to use with the HTML asset type, using the font name in the CSS or font tag.
+Download a custom font to use with the HTML asset type, using the font name in the CSS or font tag. See our [custom fonts](https://shotstack.io/learn/html-custom-fonts/) getting started guide for more details.
 
 ### Properties
 
@@ -1664,7 +1679,8 @@ Generate a thumbnail image for the video at a specific point from the timeline.
               }
             ]
           }
-        ]
+        ],
+        "cache": true
       },
       "output": {
         "format": "mp4",
@@ -1684,7 +1700,8 @@ Generate a thumbnail image for the video at a specific point from the timeline.
           "scale": 0.3
         }
       },
-      "callback": "https://my-server.com/callback.php"
+      "callback": "https://my-server.com/callback.php",
+      "disk": "local"
     },
     "created": "2020-10-30T09:42:29.446Z",
     "updated": "2020-10-30T09:42:39.168Z"
@@ -1768,7 +1785,8 @@ Generate a thumbnail image for the video at a specific point from the timeline.
             }
           ]
         }
-      ]
+      ],
+      "cache": true
     },
     "output": {
       "format": "mp4",
@@ -1788,7 +1806,8 @@ Generate a thumbnail image for the video at a specific point from the timeline.
         "scale": 0.3
       }
     },
-    "callback": "https://my-server.com/callback.php"
+    "callback": "https://my-server.com/callback.php",
+    "disk": "local"
   },
   "created": "2020-10-30T09:42:29.446Z",
   "updated": "2020-10-30T09:42:39.168Z"
