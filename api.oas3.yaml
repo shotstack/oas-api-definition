@@ -10,9 +10,11 @@ info:
     [getting started](https://shotstack.gitbook.io/docs/guides/getting-started)
     documentation.
 servers:
-  - url: 'https://api.shotstack.io/{version}'
+  - url: "https://api.shotstack.io/{version}"
     variables:
       version:
+        description: >-
+          Set the stage to `v1` for production usage without watermarks. Set to `stage` to use the development sandbox.
         enum:
           - v1
           - stage
@@ -21,7 +23,7 @@ paths:
   /render:
     post:
       responses:
-        '201':
+        "201":
           description: The queued video details
           content:
             application/json:
@@ -32,7 +34,7 @@ paths:
                   message: Render Successfully Queued
                   id: 2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7
               schema:
-                $ref: '#/components/schemas/QueuedResponse'
+                $ref: "#/components/schemas/QueuedResponse"
       description: Queue and render the contents of a timeline as a video file.
       summary: Render Video
       operationId: postRender
@@ -43,9 +45,9 @@ paths:
             example:
               timeline:
                 soundtrack:
-                  src: 'https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3'
+                  src: "https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3"
                   effect: fadeInFadeOut
-                background: '#000000'
+                background: "#000000"
                 tracks:
                   - clips:
                       - asset:
@@ -87,7 +89,7 @@ paths:
                 format: mp4
                 resolution: sd
             schema:
-              $ref: '#/components/schemas/Edit'
+              $ref: "#/components/schemas/Edit"
         required: true
       security:
         - DeveloperKey: []
@@ -100,11 +102,11 @@ paths:
             type: string
           example: ENTERPRISE_QUEUE_ID
       tags:
-        - Endpoints
-  '/render/{id}':
+        - Editing API
+  "/render/{id}":
     get:
       responses:
-        '200':
+        "200":
           description: The render status details
           content:
             application/json:
@@ -123,7 +125,7 @@ paths:
                         src: >-
                           https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3
                         effect: fadeInFadeOut
-                      background: '#000000'
+                      background: "#000000"
                       tracks:
                         - clips:
                             - asset:
@@ -164,17 +166,17 @@ paths:
                     output:
                       format: mp4
                       resolution: sd
-                  created: '2018-05-06T03:33:25.425Z'
-                  updated: '2018-05-06T03:33:48.521Z'
+                  created: "2020-10-30T09:42:29.446Z"
+                  updated: "2020-10-30T09:42:39.168Z"
               schema:
-                $ref: '#/components/schemas/RenderResponse'
+                $ref: "#/components/schemas/RenderResponse"
       description: Get the rendering status, video url and details of a timeline by ID.
       operationId: getRender
       summary: Get Render Status
       security:
         - DeveloperKey: []
       tags:
-        - Endpoints
+        - Editing API
     parameters:
       - name: id
         in: path
@@ -184,6 +186,103 @@ paths:
             ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
           type: string
         description: The id of the timeline render task in UUID format
+  "/serve/assets/{id}":
+    get:
+      responses:
+        "200":
+          description: Get asset by asset id
+          content:
+            application/json:
+              example:
+                response:
+                  data:
+                    type: asset
+                    attributes:
+                      id: a4482cbf-e321-42a2-ac8b-947d26886840
+                      owner: 5ca6hu7s9k
+                      region: au
+                      renderId: 2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7
+                      filename: 2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4
+                      url: https://cdn.shotstack.io/au/v1/msgtwx8iw6/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4
+                      status: ready
+                      created: "2021-05-06T03:33:48.600Z"
+                      updated: "2021-05-06T03:33:49.521Z"
+              schema:
+                $ref: "#/components/schemas/AssetResponse"
+      description: >-
+        The Serve API is used to interact with, and delete hosted assets including videos, images, audio files, 
+        thumbnails and poster images. Use this endpoint to fetch an asset by asset id. Note that an asset id is unique
+        for each asset and different from the render id.
+      operationId: getAsset
+      summary: Get Asset
+      security:
+        - DeveloperKey: []
+      tags:
+        - Serve API
+    delete:
+      responses:
+        "204":
+          description: An empty response signifying the asset has been deleted
+      description: >-
+        Delete an asset by it's render id. If a render creates multiple assets, such as thumbnail and poster images,
+        each asset must be deleted individually by the asset id.
+      operationId: deleteAsset
+      summary: Delete Asset
+      security:
+        - DeveloperKey: []
+      tags:
+        - Serve API
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+          type: string
+        description: The id of the asset in UUID format
+  "/serve/assets/render/{id}":
+    get:
+      responses:
+        "200":
+          description: Get one or more assets by render id
+          content:
+            application/json:
+              example:
+                response:
+                  data:
+                    - type: asset
+                      attributes:
+                        id: a4482cbf-e321-42a2-ac8b-947d26886840
+                        owner: 5ca6hu7s9k
+                        region: au
+                        renderId: 2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7
+                        filename: 2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4
+                        url: https://cdn.shotstack.io/au/v1/msgtwx8iw6/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4
+                        status: ready
+                        created: "2021-05-06T03:33:48.600Z"
+                        updated: "2021-05-06T03:33:49.521Z"
+              schema:
+                $ref: "#/components/schemas/AssetRenderResponse"
+      description: >-
+        A render may generate more than one file, such as a video, thumbnail and poster image. When the assets are
+        created the only known id is the render id returned by the original [render request](#render-video), status 
+        request or webhook. This endpoint lets you look up one or more assets by the render id.
+      operationId: getAssetByRenderId
+      summary: Get Asset by Render ID
+      security:
+        - DeveloperKey: []
+      tags:
+        - Serve API
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+          type: string
+        description: The render id associated with the asset in UUID format
 components:
   schemas:
     Edit:
@@ -192,9 +291,9 @@ components:
         format.
       properties:
         timeline:
-          $ref: '#/components/schemas/Timeline'
+          $ref: "#/components/schemas/Timeline"
         output:
-          $ref: '#/components/schemas/Output'
+          $ref: "#/components/schemas/Output"
         callback:
           type: string
           description: >-
@@ -231,18 +330,18 @@ components:
       properties:
         soundtrack:
           description: A music or audio soundtrack file in mp3 format.
-          $ref: '#/components/schemas/Soundtrack'
+          $ref: "#/components/schemas/Soundtrack"
         background:
           description: >-
             A hexadecimal value for the timeline background colour. Defaults to
             #000000 (black).
           type: string
-          default: '#000000'
+          default: "#000000"
         fonts:
           description: An array of custom fonts to be downloaded for use by the HTML assets.
           type: array
           items:
-            $ref: '#/components/schemas/Font'
+            $ref: "#/components/schemas/Font"
         tracks:
           description: >-
             A timeline consists of an array of tracks, each track containing
@@ -252,7 +351,7 @@ components:
             top most track so that it is displayed above videos and images.
           type: array
           items:
-            $ref: '#/components/schemas/Track'
+            $ref: "#/components/schemas/Track"
         cache:
           description: >-
             Disable the caching of ingested source footage and assets. See 
@@ -302,10 +401,10 @@ components:
         of those below it.
       properties:
         clips:
-          description: 'An array of Clips comprising of TitleClip, ImageClip or VideoClip.'
+          description: "An array of Clips comprising of TitleClip, ImageClip or VideoClip."
           type: array
           items:
-            $ref: '#/components/schemas/Clip'
+            $ref: "#/components/schemas/Clip"
       required:
         - clips
       type: object
@@ -322,12 +421,12 @@ components:
             must be one of <b>TitleAsset</b>, <b>ImageAsset</b>, <b>VideoAsset</b>,
             <b>HtmlAsset</b>, <b>AudioAsset</b> or <b>LumaAsset</b>
           oneOf:
-            - $ref: '#/components/schemas/VideoAsset'
-            - $ref: '#/components/schemas/ImageAsset'
-            - $ref: '#/components/schemas/TitleAsset'
-            - $ref: '#/components/schemas/HtmlAsset'
-            - $ref: '#/components/schemas/AudioAsset'
-            - $ref: '#/components/schemas/LumaAsset'
+            - $ref: "#/components/schemas/VideoAsset"
+            - $ref: "#/components/schemas/ImageAsset"
+            - $ref: "#/components/schemas/TitleAsset"
+            - $ref: "#/components/schemas/HtmlAsset"
+            - $ref: "#/components/schemas/AudioAsset"
+            - $ref: "#/components/schemas/LumaAsset"
         start:
           description: The start position of the Clip on the timeline, in seconds.
           type: number
@@ -361,7 +460,7 @@ components:
           example: 0
         position:
           default: center
-          description: >- 
+          description: >-
             Place the asset in one of nine predefined positions of the viewport. This is most effective
             for when the asset is scaled and you want to position the element to a specific position.
             <ul>
@@ -392,9 +491,9 @@ components:
             viewport. The offset distance is relative to the width of the viewport -
             for example an x offset of 0.5 will move the asset half the viewport width
             to the right.
-          $ref: '#/components/schemas/Offset'
+          $ref: "#/components/schemas/Offset"
         transition:
-          $ref: '#/components/schemas/Transition'
+          $ref: "#/components/schemas/Transition"
         effect:
           description: >-
             A motion effect to apply to the Clip.
@@ -476,7 +575,7 @@ components:
           type: number
           example: 1
         crop:
-          $ref: '#/components/schemas/Crop'
+          $ref: "#/components/schemas/Crop"
       required:
         - type
         - src
@@ -497,7 +596,7 @@ components:
           type: string
           example: https://s3-ap-northeast-1.amazonaws.com/my-bucket/image.jpg
         crop:
-          $ref: '#/components/schemas/Crop'
+          $ref: "#/components/schemas/Crop"
       required:
         - type
         - src
@@ -543,7 +642,7 @@ components:
             - subtitle
           type: string
         color:
-          default: '#ffffff'
+          default: "#ffffff"
           description: >-
             Set the text color using hexadecimal color notation. Transparency is supported by setting the
             first two characters of the hex string (opposite to HTML),  i.e. #80ffffff will be white with 
@@ -609,7 +708,7 @@ components:
           description: >-
             Offset the location of the title relative to it's position on the
             screen.
-          $ref: '#/components/schemas/Offset'
+          $ref: "#/components/schemas/Offset"
       required:
         - type
         - text
@@ -906,7 +1005,7 @@ components:
       description: The output format, render range and type of media to generate.
       properties:
         format:
-          description: >- 
+          description: >-
             The output format and type of media file to generate.
             <ul>
               <li>`mp4` - mp4 video file</li>
@@ -934,7 +1033,7 @@ components:
             - mobile
             - sd
             - hd
-            - '1080'
+            - "1080"
           type: string
           example: sd
         aspectRatio:
@@ -947,14 +1046,14 @@ components:
               <li>`4:5` - short vertical/portrait aspect ratio</li>
             </ul>
           enum:
-            - '16:9'
-            - '9:16'
-            - '1:1'
-            - '4:5'
+            - "16:9"
+            - "9:16"
+            - "1:1"
+            - "4:5"
           type: string
-          example: '16:9'
+          example: "16:9"
         fps:
-          description: >- 
+          description: >-
             Override the default frames per second. Useful for when the source footage is recorded at 30fps, i.e. on 
             mobile devices. Lower frame rates can be used to add cinematic quality (24fps) or to create smaller file
             size/faster render times or animated gifs (12 or 15fps). Default is 25fps.
@@ -991,18 +1090,18 @@ components:
             - mobile
             - sd
             - hd
-            - '1080'
+            - "1080"
           type: string
         range:
-          $ref: '#/components/schemas/Range'
+          $ref: "#/components/schemas/Range"
         poster:
           description: >-
             Generate a poster image from a specific point on the timeline.
-          $ref: '#/components/schemas/Poster'
+          $ref: "#/components/schemas/Poster"
         thumbnail:
           description: >-
             Generate a thumbnail image from a specific point on the timeline.
-          $ref: '#/components/schemas/Thumbnail'
+          $ref: "#/components/schemas/Thumbnail"
       required:
         - format
         - resolution
@@ -1057,24 +1156,28 @@ components:
         - scale
       type: object
     QueuedResponse:
+      description: >-
+        The response received after a [render request](#render-video) is submitted. The render task is queued for
+        rendering and a unique render id is returned.
       properties:
         success:
-          description: '`true` if successfully queued, else `false`.'
+          description: "`true` if successfully queued, else `false`."
           type: boolean
           example: true
         message:
-          description: '`Created`, `Bad Request` or an error message.'
+          description: "`Created`, `Bad Request` or an error message."
           type: string
           example: Created
         response:
-          description: '`QueuedResponseData` or an error message.'
-          $ref: '#/components/schemas/QueuedResponseData'
+          description: "`QueuedResponseData` or an error message."
+          $ref: "#/components/schemas/QueuedResponseData"
       required:
         - success
         - message
         - response
       type: object
     QueuedResponseData:
+      description: The response data returned with the [QueuedResponse](#tocs_queuedresponse).
       properties:
         message:
           description: Success response message or error details.
@@ -1089,24 +1192,28 @@ components:
         - id
       type: object
     RenderResponse:
+      description: >-
+        The response received after a [render status request](#get-render-status) is submitted. The response includes 
+        details about status of a render and the output URL.
       properties:
         success:
-          description: '`true` if status available, else `false`.'
+          description: "`true` if status available, else `false`."
           type: boolean
           example: true
         message:
-          description: '`OK` or an error message.'
+          description: "`OK` or an error message."
           type: string
           example: OK
         response:
-          description: '`RenderResponse` or an error message.'
-          $ref: '#/components/schemas/RenderResponseData'
+          description: "`RenderResponse` or an error message."
+          $ref: "#/components/schemas/RenderResponseData"
       required:
         - success
         - message
         - response
       type: object
     RenderResponseData:
+      description: The response data returned with the [RenderResponse](#tocs_renderresponse) including status and URL.
       properties:
         id:
           description: The id of the render task in UUID format.
@@ -1115,7 +1222,7 @@ components:
         owner:
           description: The owner id of the render task.
           type: string
-          example: ho6ve8x9q1
+          example: 5ca6hu7s9k
         plan:
           description: The customer subscription plan.
           type: string
@@ -1143,7 +1250,7 @@ components:
         error:
           description: An error message, only displayed if an error occurred.
           type: string
-          example: ''
+          example: ""
         duration:
           description: The output video length in seconds.
           type: number
@@ -1155,26 +1262,26 @@ components:
         url:
           description: The URL of the final video. This will only be available if status is done.
           type: string
-          example: https://shotstack-api-v1-output.s3-ap-southeast-2.amazonaws.com/ho6ve8x9q1/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4
+          example: https://shotstack-api-v1-output.s3-ap-southeast-2.amazonaws.com/5ca6hu7s9k/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4
         poster:
           description: The URL of the poster image if requested. This will only be available if status is done.
           type: string
-          example: https://shotstack-api-v1-output.s3-ap-southeast-2.amazonaws.com/ho6ve8x9q1/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7-poster.jpg
+          example: https://shotstack-api-v1-output.s3-ap-southeast-2.amazonaws.com/5ca6hu7s9k/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7-poster.jpg
         thumbnail:
           description: The URL of the thumbnail image if requested. This will only be available if status is done.
           type: string
-          example: https://shotstack-api-v1-output.s3-ap-southeast-2.amazonaws.com/ho6ve8x9q1/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7-thumb.jpg
+          example: https://shotstack-api-v1-output.s3-ap-southeast-2.amazonaws.com/5ca6hu7s9k/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7-thumb.jpg
         data:
           description: The timeline and output data to be rendered.
-          $ref: '#/components/schemas/Edit'
+          $ref: "#/components/schemas/Edit"
         created:
           description: The time the render task was initially queued.
           type: string
-          example: '2020-10-30T09:42:29.446Z'
+          example: "2020-10-30T09:42:29.446Z"
         updated:
           description: The time the render status was last updated.
           type: string
-          example: '2020-10-30T09:42:39.168Z'
+          example: "2020-10-30T09:42:39.168Z"
       required:
         - status
         - id
@@ -1182,6 +1289,91 @@ components:
         - data
         - created
         - updated
+      type: object
+    AssetResponse:
+      description: >-
+        The response returned by the Serve API [get asset](#get-asset) request. Includes details of a hosted video,
+        image, audio file, thumbnail or poster image. The response follows the [json:api](https://jsonapi.org/)
+        specification.
+      properties:
+        data:
+          description: An asset resource.
+          $ref: "#/components/schemas/AssetResponseData"
+      type: object
+    AssetRenderResponse:
+      description: >-
+        The response returned by the Serve API [get asset by render id](#get-asset-by-render-id) request. The response 
+        is an array of asset resources, including video, image, audio, thumbnail and poster image. The response follows 
+        the [json:api](https://jsonapi.org/) specification.
+      properties:
+        data:
+          type: array
+          description: An array of asset resources grouped by render id.
+          items:
+            $ref: "#/components/schemas/AssetResponseData"
+      type: object
+    AssetResponseData:
+      description: The type of resource (an asset) and attributes of the asset.
+      properties:
+        type:
+          description: The type of resource, in this case it is an assets.
+          type: string
+          example: asset
+        attributes:
+          description: The asset attributes including render id, url, filename, file size, etc...
+          $ref: "#/components/schemas/AssetResponseAttributes"
+      type: object
+    AssetResponseAttributes:
+      description: The list of asset attributes and their values.
+      properties:
+        id:
+          description: The unique id of the hosted asset in UUID format.
+          type: string
+          example: a4482cbf-e321-42a2-ac8b-947d26886840
+        owner:
+          description: The owner id of the render task.
+          type: string
+          example: 5ca6hu7s9k
+        region:
+          description: The region the asset is hosted, currently only `au` (Australia).
+          type: string
+          example: au
+        renderId:
+          description: The original render id that created the asset in UUID format. Multiple assets can share the same render id.
+          type: string
+          example: 2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7
+        filename:
+          description: The asset file name.
+          type: string
+          example: 2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4
+        url:
+          description: The asset file name.
+          type: string
+          example: https://cdn.shotstack.io/au/v1/5ca6hu7s9k/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4
+        status:
+          description: >-
+            The status of the asset.
+            <ul>
+              <li>`importing` - the asset is being copied to the hosting service</li>
+              <li>`ready` - the asset is ready to be served to users</li>
+              <li>`failed` - the asset failed to copy or delete</li>
+              <li>`deleted` - the asset has been deleted</li>
+            </ul>
+          enum:
+            - importing
+            - ready
+            - failed
+            - deleted
+          type: string
+          example: ready
+        created:
+          description: The time the asset was created.
+          type: string
+          example: "2021-06-30T09:42:29.446Z"
+        updated:
+          description: The time the asset status was last updated.
+          type: string
+          example: "2021-06-30T09:42:30.168Z"
       type: object
   responses: {}
   parameters: {}
@@ -1199,4 +1391,3 @@ components:
       name: x-api-key
   links: {}
   callbacks: {}
-
