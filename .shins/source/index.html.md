@@ -38,7 +38,7 @@ Base URLs:
 
 * <a href="https://api.shotstack.io/{version}">https://api.shotstack.io/{version}</a>
 
-    * **version** -  Default: v1
+    * **version** - Set the stage to `v1` for production usage without watermarks. Set to `stage` to use the development sandbox. Default: v1
 
         * v1
 
@@ -49,7 +49,7 @@ Base URLs:
 * API Key (DeveloperKey)
     - Parameter Name: **x-api-key**, in: header. Set the **x-api-key** header with your provided key for the correct environment (v1 or stage). Include the header in all calls to the API that are secured with a key.
 
-<h1 id="shotstack-endpoints">Endpoints</h1>
+<h1 id="shotstack-editing-api">Editing API</h1>
 
 ## Render Video
 
@@ -631,8 +631,8 @@ Get the rendering status, video url and details of a timeline by ID.
         "resolution": "sd"
       }
     },
-    "created": "2018-05-06T03:33:25.425Z",
-    "updated": "2018-05-06T03:33:48.521Z"
+    "created": "2020-10-30T09:42:29.446Z",
+    "updated": "2020-10-30T09:42:39.168Z"
   }
 }
 ```
@@ -642,6 +642,551 @@ Get the rendering status, video url and details of a timeline by ID.
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|The render status details|[RenderResponse](#schemarenderresponse)|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+DeveloperKey
+</aside>
+
+<h1 id="shotstack-serve-api">Serve API</h1>
+
+## Get Asset
+
+<a id="opIdgetAsset"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://api.shotstack.io/{version}/serve/assets/{id} \
+  -H 'Accept: application/json' \
+  -H 'x-api-key: API_KEY'
+
+```
+
+```http
+GET https://api.shotstack.io/{version}/serve/assets/{id} HTTP/1.1
+Host: api.shotstack.io
+Accept: application/json
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json',
+  'x-api-key':'API_KEY'
+};
+
+fetch('https://api.shotstack.io/{version}/serve/assets/{id}',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```php
+require 'vendor/autoload.php';
+
+$headers = [
+    'Accept' => 'application/json',
+    'x-api-key' => 'API_KEY',
+];
+
+$client = new \GuzzleHttp\Client();
+
+// Define array of request body.
+$request_body = [];
+
+try {
+    $response = $client->request('GET','https://api.shotstack.io/{version}/serve/assets/{id}', [
+        'headers' => $headers,
+        'json' => $request_body,
+    ]);
+    print_r($response->getBody()->getContents());
+ }
+ catch (\GuzzleHttp\Exception\BadResponseException $e) {
+    // handle exception or api errors.
+    print_r($e->getMessage());
+ }
+
+ // ...
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json',
+  'x-api-key' => 'API_KEY'
+}
+
+result = RestClient.get 'https://api.shotstack.io/{version}/serve/assets/{id}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'x-api-key': 'API_KEY'
+}
+
+r = requests.get('https://api.shotstack.io/{version}/serve/assets/{id}', headers = headers)
+
+print(r.json())
+
+```
+
+```java
+URL obj = new URL("https://api.shotstack.io/{version}/serve/assets/{id}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        "x-api-key": []string{"API_KEY"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "https://api.shotstack.io/{version}/serve/assets/{id}", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`GET /serve/assets/{id}`
+
+The Serve API is used to interact with, and delete hosted assets including videos, images, audio files,  thumbnails and poster images. Use this endpoint to fetch an asset by asset id. Note that an asset id is unique for each asset and different from the render id.
+
+<h3 id="get-asset-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|id|path|string|true|The id of the asset in UUID format|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "response": {
+    "data": {
+      "type": "asset",
+      "attributes": {
+        "id": "a4482cbf-e321-42a2-ac8b-947d26886840",
+        "owner": "5ca6hu7s9k",
+        "region": "au",
+        "renderId": "2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7",
+        "filename": "2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4",
+        "url": "https://cdn.shotstack.io/au/v1/msgtwx8iw6/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4",
+        "status": "ready",
+        "created": "2021-05-06T03:33:48.600Z",
+        "updated": "2021-05-06T03:33:49.521Z"
+      }
+    }
+  }
+}
+```
+
+<h3 id="get-asset-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Get asset by asset id|[AssetResponse](#schemaassetresponse)|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+DeveloperKey
+</aside>
+
+## Delete Asset
+
+<a id="opIddeleteAsset"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X DELETE https://api.shotstack.io/{version}/serve/assets/{id} \
+  -H 'x-api-key: API_KEY'
+
+```
+
+```http
+DELETE https://api.shotstack.io/{version}/serve/assets/{id} HTTP/1.1
+Host: api.shotstack.io
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+
+const headers = {
+  'x-api-key':'API_KEY'
+};
+
+fetch('https://api.shotstack.io/{version}/serve/assets/{id}',
+{
+  method: 'DELETE',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```php
+require 'vendor/autoload.php';
+
+$headers = [
+    'x-api-key' => 'API_KEY',
+];
+
+$client = new \GuzzleHttp\Client();
+
+// Define array of request body.
+$request_body = [];
+
+try {
+    $response = $client->request('DELETE','https://api.shotstack.io/{version}/serve/assets/{id}', [
+        'headers' => $headers,
+        'json' => $request_body,
+    ]);
+    print_r($response->getBody()->getContents());
+ }
+ catch (\GuzzleHttp\Exception\BadResponseException $e) {
+    // handle exception or api errors.
+    print_r($e->getMessage());
+ }
+
+ // ...
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'x-api-key' => 'API_KEY'
+}
+
+result = RestClient.delete 'https://api.shotstack.io/{version}/serve/assets/{id}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'x-api-key': 'API_KEY'
+}
+
+r = requests.delete('https://api.shotstack.io/{version}/serve/assets/{id}', headers = headers)
+
+print(r.json())
+
+```
+
+```java
+URL obj = new URL("https://api.shotstack.io/{version}/serve/assets/{id}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("DELETE");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "x-api-key": []string{"API_KEY"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("DELETE", "https://api.shotstack.io/{version}/serve/assets/{id}", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`DELETE /serve/assets/{id}`
+
+Delete an asset by it's render id. If a render creates multiple assets, such as thumbnail and poster images, each asset must be deleted individually by the asset id.
+
+<h3 id="delete-asset-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|id|path|string|true|The id of the asset in UUID format|
+
+<h3 id="delete-asset-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|An empty response signifying the asset has been deleted|None|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+DeveloperKey
+</aside>
+
+## Get Asset by Render ID
+
+<a id="opIdgetAssetByRenderId"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://api.shotstack.io/{version}/serve/assets/render/{id} \
+  -H 'Accept: application/json' \
+  -H 'x-api-key: API_KEY'
+
+```
+
+```http
+GET https://api.shotstack.io/{version}/serve/assets/render/{id} HTTP/1.1
+Host: api.shotstack.io
+Accept: application/json
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json',
+  'x-api-key':'API_KEY'
+};
+
+fetch('https://api.shotstack.io/{version}/serve/assets/render/{id}',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```php
+require 'vendor/autoload.php';
+
+$headers = [
+    'Accept' => 'application/json',
+    'x-api-key' => 'API_KEY',
+];
+
+$client = new \GuzzleHttp\Client();
+
+// Define array of request body.
+$request_body = [];
+
+try {
+    $response = $client->request('GET','https://api.shotstack.io/{version}/serve/assets/render/{id}', [
+        'headers' => $headers,
+        'json' => $request_body,
+    ]);
+    print_r($response->getBody()->getContents());
+ }
+ catch (\GuzzleHttp\Exception\BadResponseException $e) {
+    // handle exception or api errors.
+    print_r($e->getMessage());
+ }
+
+ // ...
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json',
+  'x-api-key' => 'API_KEY'
+}
+
+result = RestClient.get 'https://api.shotstack.io/{version}/serve/assets/render/{id}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'x-api-key': 'API_KEY'
+}
+
+r = requests.get('https://api.shotstack.io/{version}/serve/assets/render/{id}', headers = headers)
+
+print(r.json())
+
+```
+
+```java
+URL obj = new URL("https://api.shotstack.io/{version}/serve/assets/render/{id}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        "x-api-key": []string{"API_KEY"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "https://api.shotstack.io/{version}/serve/assets/render/{id}", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`GET /serve/assets/render/{id}`
+
+A render may generate more than one file, such as a video, thumbnail and poster image. When the assets are created the only known id is the render id returned by the original [render request](#render-video), status  request or webhook. This endpoint lets you look up one or more assets by the render id.
+
+<h3 id="get-asset-by-render-id-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|id|path|string|true|The render id associated with the asset in UUID format|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "response": {
+    "data": [
+      {
+        "type": "asset",
+        "attributes": {
+          "id": "a4482cbf-e321-42a2-ac8b-947d26886840",
+          "owner": "5ca6hu7s9k",
+          "region": "au",
+          "renderId": "2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7",
+          "filename": "2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4",
+          "url": "https://cdn.shotstack.io/au/v1/msgtwx8iw6/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4",
+          "status": "ready",
+          "created": "2021-05-06T03:33:48.600Z",
+          "updated": "2021-05-06T03:33:49.521Z"
+        }
+      }
+    ]
+  }
+}
+```
+
+<h3 id="get-asset-by-render-id-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Get one or more assets by render id|[AssetRenderResponse](#schemaassetrenderresponse)|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -1579,6 +2124,8 @@ Generate a thumbnail image for the video at a specific point from the timeline.
 
 ```
 
+The response received after a [render request](#render-video) is submitted. The render task is queued for rendering and a unique render id is returned.
+
 ### Properties
 
 |Name|Type|Required|Restrictions|Description|
@@ -1602,6 +2149,8 @@ Generate a thumbnail image for the video at a specific point from the timeline.
 
 ```
 
+The response data returned with the [QueuedResponse](#tocs_queuedresponse).
+
 ### Properties
 
 |Name|Type|Required|Restrictions|Description|
@@ -1622,15 +2171,15 @@ Generate a thumbnail image for the video at a specific point from the timeline.
   "message": "OK",
   "response": {
     "id": "2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7",
-    "owner": "ho6ve8x9q1",
+    "owner": "5ca6hu7s9k",
     "plan": "basic",
     "status": "done",
     "error": "",
     "duration": 8.5,
     "renderTime": 9433.44,
-    "url": "https://shotstack-api-v1-output.s3-ap-southeast-2.amazonaws.com/ho6ve8x9q1/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4",
-    "poster": "https://shotstack-api-v1-output.s3-ap-southeast-2.amazonaws.com/ho6ve8x9q1/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7-poster.jpg",
-    "thumbnail": "https://shotstack-api-v1-output.s3-ap-southeast-2.amazonaws.com/ho6ve8x9q1/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7-thumb.jpg",
+    "url": "https://shotstack-api-v1-output.s3-ap-southeast-2.amazonaws.com/5ca6hu7s9k/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4",
+    "poster": "https://shotstack-api-v1-output.s3-ap-southeast-2.amazonaws.com/5ca6hu7s9k/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7-poster.jpg",
+    "thumbnail": "https://shotstack-api-v1-output.s3-ap-southeast-2.amazonaws.com/5ca6hu7s9k/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7-thumb.jpg",
     "data": {
       "timeline": {
         "soundtrack": {
@@ -1710,6 +2259,8 @@ Generate a thumbnail image for the video at a specific point from the timeline.
 
 ```
 
+The response received after a [render status request](#get-render-status) is submitted. The response includes  details about status of a render and the output URL.
+
 ### Properties
 
 |Name|Type|Required|Restrictions|Description|
@@ -1728,15 +2279,15 @@ Generate a thumbnail image for the video at a specific point from the timeline.
 ```json
 {
   "id": "2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7",
-  "owner": "ho6ve8x9q1",
+  "owner": "5ca6hu7s9k",
   "plan": "basic",
   "status": "done",
   "error": "",
   "duration": 8.5,
   "renderTime": 9433.44,
-  "url": "https://shotstack-api-v1-output.s3-ap-southeast-2.amazonaws.com/ho6ve8x9q1/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4",
-  "poster": "https://shotstack-api-v1-output.s3-ap-southeast-2.amazonaws.com/ho6ve8x9q1/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7-poster.jpg",
-  "thumbnail": "https://shotstack-api-v1-output.s3-ap-southeast-2.amazonaws.com/ho6ve8x9q1/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7-thumb.jpg",
+  "url": "https://shotstack-api-v1-output.s3-ap-southeast-2.amazonaws.com/5ca6hu7s9k/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4",
+  "poster": "https://shotstack-api-v1-output.s3-ap-southeast-2.amazonaws.com/5ca6hu7s9k/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7-poster.jpg",
+  "thumbnail": "https://shotstack-api-v1-output.s3-ap-southeast-2.amazonaws.com/5ca6hu7s9k/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7-thumb.jpg",
   "data": {
     "timeline": {
       "soundtrack": {
@@ -1815,6 +2366,8 @@ Generate a thumbnail image for the video at a specific point from the timeline.
 
 ```
 
+The response data returned with the [RenderResponse](#tocs_renderresponse) including status and URL.
+
 ### Properties
 
 |Name|Type|Required|Restrictions|Description|
@@ -1843,4 +2396,157 @@ Generate a thumbnail image for the video at a specific point from the timeline.
 |status|saving|
 |status|done|
 |status|failed|
+
+<h2 id="tocS_AssetResponse">AssetResponse</h2>
+<!-- backwards compatibility -->
+<a id="schemaassetresponse"></a>
+<a id="schema_AssetResponse"></a>
+<a id="tocSassetresponse"></a>
+<a id="tocsassetresponse"></a>
+
+```json
+{
+  "data": {
+    "type": "asset",
+    "attributes": {
+      "id": "a4482cbf-e321-42a2-ac8b-947d26886840",
+      "owner": "5ca6hu7s9k",
+      "region": "au",
+      "renderId": "2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7",
+      "filename": "2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4",
+      "url": "https://cdn.shotstack.io/au/v1/5ca6hu7s9k/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4",
+      "status": "ready",
+      "created": "2021-06-30T09:42:29.446Z",
+      "updated": "2021-06-30T09:42:30.168Z"
+    }
+  }
+}
+
+```
+
+The response returned by the Serve API [get asset](#get-asset) request. Includes details of a hosted video, image, audio file, thumbnail or poster image. The response follows the [json:api](https://jsonapi.org/) specification.
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|data|[AssetResponseData](#schemaassetresponsedata)|false|none|An asset resource.|
+
+<h2 id="tocS_AssetRenderResponse">AssetRenderResponse</h2>
+<!-- backwards compatibility -->
+<a id="schemaassetrenderresponse"></a>
+<a id="schema_AssetRenderResponse"></a>
+<a id="tocSassetrenderresponse"></a>
+<a id="tocsassetrenderresponse"></a>
+
+```json
+{
+  "data": [
+    {
+      "type": "asset",
+      "attributes": {
+        "id": "a4482cbf-e321-42a2-ac8b-947d26886840",
+        "owner": "5ca6hu7s9k",
+        "region": "au",
+        "renderId": "2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7",
+        "filename": "2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4",
+        "url": "https://cdn.shotstack.io/au/v1/5ca6hu7s9k/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4",
+        "status": "ready",
+        "created": "2021-06-30T09:42:29.446Z",
+        "updated": "2021-06-30T09:42:30.168Z"
+      }
+    }
+  ]
+}
+
+```
+
+The response returned by the Serve API [get asset by render id](#get-asset-by-render-id) request. The response  is an array of asset resources, including video, image, audio, thumbnail and poster image. The response follows  the [json:api](https://jsonapi.org/) specification.
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|data|[[AssetResponseData](#schemaassetresponsedata)]|false|none|An array of asset resources grouped by render id.|
+
+<h2 id="tocS_AssetResponseData">AssetResponseData</h2>
+<!-- backwards compatibility -->
+<a id="schemaassetresponsedata"></a>
+<a id="schema_AssetResponseData"></a>
+<a id="tocSassetresponsedata"></a>
+<a id="tocsassetresponsedata"></a>
+
+```json
+{
+  "type": "asset",
+  "attributes": {
+    "id": "a4482cbf-e321-42a2-ac8b-947d26886840",
+    "owner": "5ca6hu7s9k",
+    "region": "au",
+    "renderId": "2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7",
+    "filename": "2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4",
+    "url": "https://cdn.shotstack.io/au/v1/5ca6hu7s9k/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4",
+    "status": "ready",
+    "created": "2021-06-30T09:42:29.446Z",
+    "updated": "2021-06-30T09:42:30.168Z"
+  }
+}
+
+```
+
+The type of resource (an asset) and attributes of the asset.
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|type|string|false|none|The type of resource, in this case it is an assets.|
+|attributes|[AssetResponseAttributes](#schemaassetresponseattributes)|false|none|The asset attributes including render id, url, filename, file size, etc...|
+
+<h2 id="tocS_AssetResponseAttributes">AssetResponseAttributes</h2>
+<!-- backwards compatibility -->
+<a id="schemaassetresponseattributes"></a>
+<a id="schema_AssetResponseAttributes"></a>
+<a id="tocSassetresponseattributes"></a>
+<a id="tocsassetresponseattributes"></a>
+
+```json
+{
+  "id": "a4482cbf-e321-42a2-ac8b-947d26886840",
+  "owner": "5ca6hu7s9k",
+  "region": "au",
+  "renderId": "2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7",
+  "filename": "2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4",
+  "url": "https://cdn.shotstack.io/au/v1/5ca6hu7s9k/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4",
+  "status": "ready",
+  "created": "2021-06-30T09:42:29.446Z",
+  "updated": "2021-06-30T09:42:30.168Z"
+}
+
+```
+
+The list of asset attributes and their values.
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|id|string|false|none|The unique id of the hosted asset in UUID format.|
+|owner|string|false|none|The owner id of the render task.|
+|region|string|false|none|The region the asset is hosted, currently only `au` (Australia).|
+|renderId|string|false|none|The original render id that created the asset in UUID format. Multiple assets can share the same render id.|
+|filename|string|false|none|The asset file name.|
+|url|string|false|none|The asset file name.|
+|status|string|false|none|The status of the asset. <ul><br>  <li>`importing` - the asset is being copied to the hosting service</li><br>  <li>`ready` - the asset is ready to be served to users</li><br>  <li>`failed` - the asset failed to copy or delete</li><br>  <li>`deleted` - the asset has been deleted</li><br></ul>|
+|created|string|false|none|The time the asset was created.|
+|updated|string|false|none|The time the asset status was last updated.|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|status|importing|
+|status|ready|
+|status|failed|
+|status|deleted|
 

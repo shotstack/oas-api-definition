@@ -47,3 +47,5 @@ printf "\nNode SDK Generated"
 printf "\n\nNow fix:"
 printf "\n-- OneOfTitleAssetImageAssetVideoAsset to Asset - see commit history"
 printf "\n========================================= \n"
+
+openapi-generator-cli generate -i $SPEC_FILE -g csharp -o $BUILD_DIR/csharp
