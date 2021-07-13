@@ -463,25 +463,23 @@ fetch(<span class="hljs-string">'https://api.shotstack.io/{version}/render'</spa
 });
 
 </code></pre>
-<pre class="highlight tab tab-php"><code><span class="hljs-keyword">require</span> <span class="hljs-string">'vendor/autoload.php'</span>;
-
-$headers = [
-    <span class="hljs-string">'Content-Type'</span> =&gt; <span class="hljs-string">'application/json'</span>,
+<pre class="highlight tab tab-php"><code> <span class="hljs-string">'application/json'</span>,
     <span class="hljs-string">'Accept'</span> =&gt; <span class="hljs-string">'application/json'</span>,
     <span class="hljs-string">'x-api-queue-id'</span> =&gt; <span class="hljs-string">'ENTERPRISE_QUEUE_ID'</span>,
     <span class="hljs-string">'x-api-key'</span> =&gt; <span class="hljs-string">'API_KEY'</span>,
-];
+);
 
 $client = <span class="hljs-keyword">new</span> \GuzzleHttp\Client();
 
 <span class="hljs-comment">// Define array of request body.</span>
-$request_body = [];
+$request_body = <span class="hljs-keyword">array</span>();
 
 <span class="hljs-keyword">try</span> {
-    $response = $client-&gt;request(<span class="hljs-string">'POST'</span>,<span class="hljs-string">'https://api.shotstack.io/{version}/render'</span>, [
+    $response = $client-&gt;request(<span class="hljs-string">'POST'</span>,<span class="hljs-string">'https://api.shotstack.io/{version}/render'</span>, <span class="hljs-keyword">array</span>(
         <span class="hljs-string">'headers'</span> =&gt; $headers,
         <span class="hljs-string">'json'</span> =&gt; $request_body,
-    ]);
+       )
+    );
     print_r($response-&gt;getBody()-&gt;getContents());
  }
  <span class="hljs-keyword">catch</span> (\GuzzleHttp\<span class="hljs-keyword">Exception</span>\BadResponseException $e) {
@@ -743,23 +741,21 @@ fetch(<span class="hljs-string">'https://api.shotstack.io/{version}/render/{id}'
 });
 
 </code></pre>
-<pre class="highlight tab tab-php"><code><span class="hljs-keyword">require</span> <span class="hljs-string">'vendor/autoload.php'</span>;
-
-$headers = [
-    <span class="hljs-string">'Accept'</span> =&gt; <span class="hljs-string">'application/json'</span>,
+<pre class="highlight tab tab-php"><code> <span class="hljs-string">'application/json'</span>,
     <span class="hljs-string">'x-api-key'</span> =&gt; <span class="hljs-string">'API_KEY'</span>,
-];
+);
 
 $client = <span class="hljs-keyword">new</span> \GuzzleHttp\Client();
 
 <span class="hljs-comment">// Define array of request body.</span>
-$request_body = [];
+$request_body = <span class="hljs-keyword">array</span>();
 
 <span class="hljs-keyword">try</span> {
-    $response = $client-&gt;request(<span class="hljs-string">'GET'</span>,<span class="hljs-string">'https://api.shotstack.io/{version}/render/{id}'</span>, [
+    $response = $client-&gt;request(<span class="hljs-string">'GET'</span>,<span class="hljs-string">'https://api.shotstack.io/{version}/render/{id}'</span>, <span class="hljs-keyword">array</span>(
         <span class="hljs-string">'headers'</span> =&gt; $headers,
         <span class="hljs-string">'json'</span> =&gt; $request_body,
-    ]);
+       )
+    );
     print_r($response-&gt;getBody()-&gt;getContents());
  }
  <span class="hljs-keyword">catch</span> (\GuzzleHttp\<span class="hljs-keyword">Exception</span>\BadResponseException $e) {
@@ -1005,23 +1001,21 @@ fetch(<span class="hljs-string">'https://api.shotstack.io/{version}/serve/assets
 });
 
 </code></pre>
-<pre class="highlight tab tab-php"><code><span class="hljs-keyword">require</span> <span class="hljs-string">'vendor/autoload.php'</span>;
-
-$headers = [
-    <span class="hljs-string">'Accept'</span> =&gt; <span class="hljs-string">'application/json'</span>,
+<pre class="highlight tab tab-php"><code> <span class="hljs-string">'application/json'</span>,
     <span class="hljs-string">'x-api-key'</span> =&gt; <span class="hljs-string">'API_KEY'</span>,
-];
+);
 
 $client = <span class="hljs-keyword">new</span> \GuzzleHttp\Client();
 
 <span class="hljs-comment">// Define array of request body.</span>
-$request_body = [];
+$request_body = <span class="hljs-keyword">array</span>();
 
 <span class="hljs-keyword">try</span> {
-    $response = $client-&gt;request(<span class="hljs-string">'GET'</span>,<span class="hljs-string">'https://api.shotstack.io/{version}/serve/assets/{id}'</span>, [
+    $response = $client-&gt;request(<span class="hljs-string">'GET'</span>,<span class="hljs-string">'https://api.shotstack.io/{version}/serve/assets/{id}'</span>, <span class="hljs-keyword">array</span>(
         <span class="hljs-string">'headers'</span> =&gt; $headers,
         <span class="hljs-string">'json'</span> =&gt; $request_body,
-    ]);
+       )
+    );
     print_r($response-&gt;getBody()-&gt;getContents());
  }
  <span class="hljs-keyword">catch</span> (\GuzzleHttp\<span class="hljs-keyword">Exception</span>\BadResponseException $e) {
@@ -1201,22 +1195,20 @@ fetch(<span class="hljs-string">'https://api.shotstack.io/{version}/serve/assets
 });
 
 </code></pre>
-<pre class="highlight tab tab-php"><code><span class="hljs-keyword">require</span> <span class="hljs-string">'vendor/autoload.php'</span>;
-
-$headers = [
-    <span class="hljs-string">'x-api-key'</span> =&gt; <span class="hljs-string">'API_KEY'</span>,
-];
+<pre class="highlight tab tab-php"><code> <span class="hljs-string">'API_KEY'</span>,
+);
 
 $client = <span class="hljs-keyword">new</span> \GuzzleHttp\Client();
 
 <span class="hljs-comment">// Define array of request body.</span>
-$request_body = [];
+$request_body = <span class="hljs-keyword">array</span>();
 
 <span class="hljs-keyword">try</span> {
-    $response = $client-&gt;request(<span class="hljs-string">'DELETE'</span>,<span class="hljs-string">'https://api.shotstack.io/{version}/serve/assets/{id}'</span>, [
+    $response = $client-&gt;request(<span class="hljs-string">'DELETE'</span>,<span class="hljs-string">'https://api.shotstack.io/{version}/serve/assets/{id}'</span>, <span class="hljs-keyword">array</span>(
         <span class="hljs-string">'headers'</span> =&gt; $headers,
         <span class="hljs-string">'json'</span> =&gt; $request_body,
-    ]);
+       )
+    );
     print_r($response-&gt;getBody()-&gt;getContents());
  }
  <span class="hljs-keyword">catch</span> (\GuzzleHttp\<span class="hljs-keyword">Exception</span>\BadResponseException $e) {
@@ -1371,23 +1363,21 @@ fetch(<span class="hljs-string">'https://api.shotstack.io/{version}/serve/assets
 });
 
 </code></pre>
-<pre class="highlight tab tab-php"><code><span class="hljs-keyword">require</span> <span class="hljs-string">'vendor/autoload.php'</span>;
-
-$headers = [
-    <span class="hljs-string">'Accept'</span> =&gt; <span class="hljs-string">'application/json'</span>,
+<pre class="highlight tab tab-php"><code> <span class="hljs-string">'application/json'</span>,
     <span class="hljs-string">'x-api-key'</span> =&gt; <span class="hljs-string">'API_KEY'</span>,
-];
+);
 
 $client = <span class="hljs-keyword">new</span> \GuzzleHttp\Client();
 
 <span class="hljs-comment">// Define array of request body.</span>
-$request_body = [];
+$request_body = <span class="hljs-keyword">array</span>();
 
 <span class="hljs-keyword">try</span> {
-    $response = $client-&gt;request(<span class="hljs-string">'GET'</span>,<span class="hljs-string">'https://api.shotstack.io/{version}/serve/assets/render/{id}'</span>, [
+    $response = $client-&gt;request(<span class="hljs-string">'GET'</span>,<span class="hljs-string">'https://api.shotstack.io/{version}/serve/assets/render/{id}'</span>, <span class="hljs-keyword">array</span>(
         <span class="hljs-string">'headers'</span> =&gt; $headers,
         <span class="hljs-string">'json'</span> =&gt; $request_body,
-    ]);
+       )
+    );
     print_r($response-&gt;getBody()-&gt;getContents());
  }
  <span class="hljs-keyword">catch</span> (\GuzzleHttp\<span class="hljs-keyword">Exception</span>\BadResponseException $e) {

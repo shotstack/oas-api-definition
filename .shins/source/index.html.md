@@ -172,25 +172,28 @@ fetch('https://api.shotstack.io/{version}/render',
 ```
 
 ```php
+<?php
+
 require 'vendor/autoload.php';
 
-$headers = [
+$headers = array(
     'Content-Type' => 'application/json',
     'Accept' => 'application/json',
     'x-api-queue-id' => 'ENTERPRISE_QUEUE_ID',
     'x-api-key' => 'API_KEY',
-];
+);
 
 $client = new \GuzzleHttp\Client();
 
 // Define array of request body.
-$request_body = [];
+$request_body = array();
 
 try {
-    $response = $client->request('POST','https://api.shotstack.io/{version}/render', [
+    $response = $client->request('POST','https://api.shotstack.io/{version}/render', array(
         'headers' => $headers,
         'json' => $request_body,
-    ]);
+       )
+    );
     print_r($response->getBody()->getContents());
  }
  catch (\GuzzleHttp\Exception\BadResponseException $e) {
@@ -439,23 +442,26 @@ fetch('https://api.shotstack.io/{version}/render/{id}',
 ```
 
 ```php
+<?php
+
 require 'vendor/autoload.php';
 
-$headers = [
+$headers = array(
     'Accept' => 'application/json',
     'x-api-key' => 'API_KEY',
-];
+);
 
 $client = new \GuzzleHttp\Client();
 
 // Define array of request body.
-$request_body = [];
+$request_body = array();
 
 try {
-    $response = $client->request('GET','https://api.shotstack.io/{version}/render/{id}', [
+    $response = $client->request('GET','https://api.shotstack.io/{version}/render/{id}', array(
         'headers' => $headers,
         'json' => $request_body,
-    ]);
+       )
+    );
     print_r($response->getBody()->getContents());
  }
  catch (\GuzzleHttp\Exception\BadResponseException $e) {
@@ -694,23 +700,26 @@ fetch('https://api.shotstack.io/{version}/serve/assets/{id}',
 ```
 
 ```php
+<?php
+
 require 'vendor/autoload.php';
 
-$headers = [
+$headers = array(
     'Accept' => 'application/json',
     'x-api-key' => 'API_KEY',
-];
+);
 
 $client = new \GuzzleHttp\Client();
 
 // Define array of request body.
-$request_body = [];
+$request_body = array();
 
 try {
-    $response = $client->request('GET','https://api.shotstack.io/{version}/serve/assets/{id}', [
+    $response = $client->request('GET','https://api.shotstack.io/{version}/serve/assets/{id}', array(
         'headers' => $headers,
         'json' => $request_body,
-    ]);
+       )
+    );
     print_r($response->getBody()->getContents());
  }
  catch (\GuzzleHttp\Exception\BadResponseException $e) {
@@ -882,22 +891,25 @@ fetch('https://api.shotstack.io/{version}/serve/assets/{id}',
 ```
 
 ```php
+<?php
+
 require 'vendor/autoload.php';
 
-$headers = [
+$headers = array(
     'x-api-key' => 'API_KEY',
-];
+);
 
 $client = new \GuzzleHttp\Client();
 
 // Define array of request body.
-$request_body = [];
+$request_body = array();
 
 try {
-    $response = $client->request('DELETE','https://api.shotstack.io/{version}/serve/assets/{id}', [
+    $response = $client->request('DELETE','https://api.shotstack.io/{version}/serve/assets/{id}', array(
         'headers' => $headers,
         'json' => $request_body,
-    ]);
+       )
+    );
     print_r($response->getBody()->getContents());
  }
  catch (\GuzzleHttp\Exception\BadResponseException $e) {
@@ -1044,23 +1056,26 @@ fetch('https://api.shotstack.io/{version}/serve/assets/render/{id}',
 ```
 
 ```php
+<?php
+
 require 'vendor/autoload.php';
 
-$headers = [
+$headers = array(
     'Accept' => 'application/json',
     'x-api-key' => 'API_KEY',
-];
+);
 
 $client = new \GuzzleHttp\Client();
 
 // Define array of request body.
-$request_body = [];
+$request_body = array();
 
 try {
-    $response = $client->request('GET','https://api.shotstack.io/{version}/serve/assets/render/{id}', [
+    $response = $client->request('GET','https://api.shotstack.io/{version}/serve/assets/render/{id}', array(
         'headers' => $headers,
         'json' => $request_body,
-    ]);
+       )
+    );
     print_r($response->getBody()->getContents());
  }
  catch (\GuzzleHttp\Exception\BadResponseException $e) {

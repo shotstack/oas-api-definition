@@ -45,14 +45,14 @@
     "markdown-it-emoji": "^1.4.0",
     "markdown-it-lazy-headers": "^0.1.3",
     "opn": "^5.5.0",
-    "sanitize-html": "^1.27.5",
+    "sanitize-html": "^2.4.0",
     "tiny-opts-parser": "0.0.3",
     "uglify-js": "^2.7.4",
     "yaml": "^1.10.2"
   },
   "devDependencies": {
-    "ejs-lint": "^0.2.0",
-    "node-sass": "^4.14.1",
+    "ejs-lint": "^1.2.0",
+    "node-sass": "^6.0.1",
     "node-sass-asset-functions": "^0.1.0"
   }
 }
