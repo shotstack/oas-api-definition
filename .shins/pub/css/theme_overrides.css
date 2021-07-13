@@ -1,6 +1,8 @@
 /* place your custom CSS overrides here */
 body {
-    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-family: 'Nunito Sans', serif;
+    font-weight: 300;
+    font-size: 1.2em;
 }
 
 .page-wrapper {
@@ -54,8 +56,12 @@ a {
     padding-top: 6px;
     padding-bottom: 6px;
     text-transform: uppercase;
-    font-size: 12px;
+    font-size: 1.2em;
     font-weight: bold;
+}
+
+.toc-wrapper .toc-h2 {
+	font-size: 1.2em;
 }
 
 .toc-link, .toc-footer li {
@@ -147,6 +153,11 @@ div .highlight {
 	border: 1px solid #dddddd;
 }
 
+.page-wrapper .lang-selector {
+	top: 0;
+    font-size: 0.9em;
+}
+
 .lang-selector a.active {
 	color: #25d3d0;
 	border-top: 2px solid #25d3d0;
@@ -156,9 +167,9 @@ div .highlight {
 
 h1#shotstack {
 	color: #333;
-    font-size: 40px;
-    font-weight: lighter;
-    text-transform: capitalize;
+    font-family: Kanit,sans-serif;
+	font-size: 3.5rem;
+    line-height: 1.1;
 }
 
 h1#shotstack::after {
