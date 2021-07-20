@@ -15,6 +15,9 @@ mkdir -p $DOCS_DIR
 
 cp $DOCS_DIR/index.html.md .shins/source/index.html.md
 
+# Replace Serve API URL's as overrides do not work
+sed -i -e 's/https:\/\/api.shotstack.io\/{version}\/assets\//https:\/\/api.shotstack.io\/serve\/{version}\/assets\//g' .shins/source/index.html.md
+
 # Build the Shins docs HTML
 cd .shins
 node shins.js \

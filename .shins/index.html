@@ -121,7 +121,7 @@
           </li>
         
           <li>
-            <a href="#shotstack-editing-api" class="toc-h1 toc-link" data-title="Editing API">Editing API</a>
+            <a href="#shotstack-edit" class="toc-h1 toc-link" data-title="Edit">Edit</a>
             
               <ul class="toc-list-h2">
                 
@@ -140,7 +140,7 @@
           </li>
         
           <li>
-            <a href="#shotstack-serve-api" class="toc-h1 toc-link" data-title="Serve API">Serve API</a>
+            <a href="#shotstack-serve" class="toc-h1 toc-link" data-title="Serve">Serve</a>
             
               <ul class="toc-list-h2">
                 
@@ -322,7 +322,7 @@
 <blockquote>
 <p>Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.</p>
 </blockquote>
-<p>The Shotstack API is a video editing service that allows for the automated creation of videos using JSON. You can configure an edit and POST it to the Shotstack API which will render your video and provide a file location when complete. For more details visit <a href="https://shotstack.io">shotstack.io</a> or checkout our <a href="https://shotstack.gitbook.io/docs/guides/getting-started">getting started</a> documentation.</p>
+<p>Shotstack is a video editing service that allows for the automated creation of videos using JSON. You can configure an edit and POST it to the API which will render your video and provide a file location when complete. For more details visit [shotstack.io](https://shotstack.io) or checkout our [getting started](https://shotstack.gitbook.io/docs/guides/getting-started) documentation. </p> <p> There are two main API's, one for editing videos and images (Edit API) and one for managing hosted assets (Serve API). </p> <p> The Edit API base URL is: <b>https://api.shotstack.io/{version}</b> </p> <p> The Serve API base URL is: <b>https://api.shotstack.io/serve/{version}</b> </p>
 <p>Base URLs:</p>
 <ul>
 <li>
@@ -330,6 +330,22 @@
 <ul>
 <li>
 <p><strong>version</strong> - Set the stage to <code>v1</code> for production usage without watermarks. Set to <code>stage</code> to use the development sandbox. Default: v1</p>
+<ul>
+<li>
+<p>v1</p>
+</li>
+<li>
+<p>stage</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="https://api.shotstack.io/serve/{version}">https://api.shotstack.io/serve/{version}</a></p>
+<ul>
+<li>
+<p><strong>version</strong> - Set the stage to <code>v1</code> for production usage. Set to <code>stage</code> to use the development sandbox. Default: v1</p>
 <ul>
 <li>
 <p>v1</p>
@@ -350,7 +366,7 @@
 </ul>
 </li>
 </ul>
-<h1 id="shotstack-editing-api">Editing API</h1>
+<h1 id="shotstack-edit">Edit</h1>
 <h2 id="render-video">Render Video</h2>
 <p><a id="opIdpostRender"></a></p>
 <blockquote>
@@ -965,19 +981,19 @@ System.out.println(response.toString());
 To perform this operation, you must be authenticated by means of one of the following methods:
 DeveloperKey
 </aside>
-<h1 id="shotstack-serve-api">Serve API</h1>
+<h1 id="shotstack-serve">Serve</h1>
 <h2 id="get-asset">Get Asset</h2>
 <p><a id="opIdgetAsset"></a></p>
 <blockquote>
 <p>Code samples</p>
 </blockquote>
 <pre class="highlight tab tab-shell"><code><span class="hljs-comment"># You can also use wget</span>
-curl -X GET https://api.shotstack.io/{version}/serve/assets/{id} \
+curl -X GET https://api.shotstack.io/serve/{version}/assets/{id} \
   -H <span class="hljs-string">'Accept: application/json'</span> \
   -H <span class="hljs-string">'x-api-key: API_KEY'</span>
 
 </code></pre>
-<pre class="highlight tab tab-http"><code><span class="hljs-keyword">GET</span> <span class="hljs-string">https://api.shotstack.io/{version}/serve/assets/{id}</span> HTTP/1.1
+<pre class="highlight tab tab-http"><code><span class="hljs-keyword">GET</span> <span class="hljs-string">https://api.shotstack.io/serve/{version}/assets/{id}</span> HTTP/1.1
 <span class="hljs-attribute">Host</span>: api.shotstack.io
 <span class="hljs-attribute">Accept</span>: application/json
 
@@ -989,7 +1005,7 @@ curl -X GET https://api.shotstack.io/{version}/serve/assets/{id} \
   <span class="hljs-string">'x-api-key'</span>:<span class="hljs-string">'API_KEY'</span>
 };
 
-fetch(<span class="hljs-string">'https://api.shotstack.io/{version}/serve/assets/{id}'</span>,
+fetch(<span class="hljs-string">'https://api.shotstack.io/serve/{version}/assets/{id}'</span>,
 {
   <span class="hljs-attr">method</span>: <span class="hljs-string">'GET'</span>,
 
@@ -1012,7 +1028,7 @@ $client = <span class="hljs-keyword">new</span> \GuzzleHttp\Client();
 $request_body = <span class="hljs-keyword">array</span>();
 
 <span class="hljs-keyword">try</span> {
-    $response = $client-&gt;request(<span class="hljs-string">'GET'</span>,<span class="hljs-string">'https://api.shotstack.io/{version}/serve/assets/{id}'</span>, <span class="hljs-keyword">array</span>(
+    $response = $client-&gt;request(<span class="hljs-string">'GET'</span>,<span class="hljs-string">'https://api.shotstack.io/serve/{version}/assets/{id}'</span>, <span class="hljs-keyword">array</span>(
         <span class="hljs-string">'headers'</span> =&gt; $headers,
         <span class="hljs-string">'json'</span> =&gt; $request_body,
        )
@@ -1035,7 +1051,7 @@ headers = {
   <span class="hljs-string">'x-api-key'</span> =&gt; <span class="hljs-string">'API_KEY'</span>
 }
 
-result = RestClient.get <span class="hljs-string">'https://api.shotstack.io/{version}/serve/assets/{id}'</span>,
+result = RestClient.get <span class="hljs-string">'https://api.shotstack.io/serve/{version}/assets/{id}'</span>,
   <span class="hljs-symbol">params:</span> {
   }, <span class="hljs-symbol">headers:</span> headers
 
@@ -1048,12 +1064,12 @@ headers = {
   <span class="hljs-string">'x-api-key'</span>: <span class="hljs-string">'API_KEY'</span>
 }
 
-r = requests.get(<span class="hljs-string">'https://api.shotstack.io/{version}/serve/assets/{id}'</span>, headers = headers)
+r = requests.get(<span class="hljs-string">'https://api.shotstack.io/serve/{version}/assets/{id}'</span>, headers = headers)
 
 print(r.json())
 
 </code></pre>
-<pre class="highlight tab tab-java"><code>URL obj = <span class="hljs-keyword">new</span> URL(<span class="hljs-string">"https://api.shotstack.io/{version}/serve/assets/{id}"</span>);
+<pre class="highlight tab tab-java"><code>URL obj = <span class="hljs-keyword">new</span> URL(<span class="hljs-string">"https://api.shotstack.io/serve/{version}/assets/{id}"</span>);
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod(<span class="hljs-string">"GET"</span>);
 <span class="hljs-keyword">int</span> responseCode = con.getResponseCode();
@@ -1083,7 +1099,7 @@ System.out.println(response.toString());
     }
 
     data := bytes.NewBuffer([]<span class="hljs-keyword">byte</span>{jsonReq})
-    req, err := http.NewRequest(<span class="hljs-string">"GET"</span>, <span class="hljs-string">"https://api.shotstack.io/{version}/serve/assets/{id}"</span>, data)
+    req, err := http.NewRequest(<span class="hljs-string">"GET"</span>, <span class="hljs-string">"https://api.shotstack.io/serve/{version}/assets/{id}"</span>, data)
     req.Header = headers
 
     client := &amp;http.Client{}
@@ -1092,7 +1108,7 @@ System.out.println(response.toString());
 }
 
 </code></pre>
-<p><code>GET /serve/assets/{id}</code></p>
+<p><code>GET /assets/{id}</code></p>
 <p>The Serve API is used to interact with, and delete hosted assets including videos, images, audio files,  thumbnails and poster images. Use this endpoint to fetch an asset by asset id. Note that an asset id is unique for each asset and different from the render id.</p>
 <h3 id="get-asset-parameters">Parameters</h3>
 <table>
@@ -1169,11 +1185,11 @@ DeveloperKey
 <p>Code samples</p>
 </blockquote>
 <pre class="highlight tab tab-shell"><code><span class="hljs-comment"># You can also use wget</span>
-curl -X DELETE https://api.shotstack.io/{version}/serve/assets/{id} \
+curl -X DELETE https://api.shotstack.io/serve/{version}/assets/{id} \
   -H <span class="hljs-string">'x-api-key: API_KEY'</span>
 
 </code></pre>
-<pre class="highlight tab tab-http"><code><span class="hljs-keyword">DELETE</span> <span class="hljs-string">https://api.shotstack.io/{version}/serve/assets/{id}</span> HTTP/1.1
+<pre class="highlight tab tab-http"><code><span class="hljs-keyword">DELETE</span> <span class="hljs-string">https://api.shotstack.io/serve/{version}/assets/{id}</span> HTTP/1.1
 <span class="hljs-attribute">Host</span>: api.shotstack.io
 
 </code></pre>
@@ -1183,7 +1199,7 @@ curl -X DELETE https://api.shotstack.io/{version}/serve/assets/{id} \
   <span class="hljs-string">'x-api-key'</span>:<span class="hljs-string">'API_KEY'</span>
 };
 
-fetch(<span class="hljs-string">'https://api.shotstack.io/{version}/serve/assets/{id}'</span>,
+fetch(<span class="hljs-string">'https://api.shotstack.io/serve/{version}/assets/{id}'</span>,
 {
   <span class="hljs-attr">method</span>: <span class="hljs-string">'DELETE'</span>,
 
@@ -1205,7 +1221,7 @@ $client = <span class="hljs-keyword">new</span> \GuzzleHttp\Client();
 $request_body = <span class="hljs-keyword">array</span>();
 
 <span class="hljs-keyword">try</span> {
-    $response = $client-&gt;request(<span class="hljs-string">'DELETE'</span>,<span class="hljs-string">'https://api.shotstack.io/{version}/serve/assets/{id}'</span>, <span class="hljs-keyword">array</span>(
+    $response = $client-&gt;request(<span class="hljs-string">'DELETE'</span>,<span class="hljs-string">'https://api.shotstack.io/serve/{version}/assets/{id}'</span>, <span class="hljs-keyword">array</span>(
         <span class="hljs-string">'headers'</span> =&gt; $headers,
         <span class="hljs-string">'json'</span> =&gt; $request_body,
        )
@@ -1227,7 +1243,7 @@ headers = {
   <span class="hljs-string">'x-api-key'</span> =&gt; <span class="hljs-string">'API_KEY'</span>
 }
 
-result = RestClient.delete <span class="hljs-string">'https://api.shotstack.io/{version}/serve/assets/{id}'</span>,
+result = RestClient.delete <span class="hljs-string">'https://api.shotstack.io/serve/{version}/assets/{id}'</span>,
   <span class="hljs-symbol">params:</span> {
   }, <span class="hljs-symbol">headers:</span> headers
 
@@ -1239,12 +1255,12 @@ headers = {
   <span class="hljs-string">'x-api-key'</span>: <span class="hljs-string">'API_KEY'</span>
 }
 
-r = requests.delete(<span class="hljs-string">'https://api.shotstack.io/{version}/serve/assets/{id}'</span>, headers = headers)
+r = requests.delete(<span class="hljs-string">'https://api.shotstack.io/serve/{version}/assets/{id}'</span>, headers = headers)
 
 print(r.json())
 
 </code></pre>
-<pre class="highlight tab tab-java"><code>URL obj = <span class="hljs-keyword">new</span> URL(<span class="hljs-string">"https://api.shotstack.io/{version}/serve/assets/{id}"</span>);
+<pre class="highlight tab tab-java"><code>URL obj = <span class="hljs-keyword">new</span> URL(<span class="hljs-string">"https://api.shotstack.io/serve/{version}/assets/{id}"</span>);
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod(<span class="hljs-string">"DELETE"</span>);
 <span class="hljs-keyword">int</span> responseCode = con.getResponseCode();
@@ -1273,7 +1289,7 @@ System.out.println(response.toString());
     }
 
     data := bytes.NewBuffer([]<span class="hljs-keyword">byte</span>{jsonReq})
-    req, err := http.NewRequest(<span class="hljs-string">"DELETE"</span>, <span class="hljs-string">"https://api.shotstack.io/{version}/serve/assets/{id}"</span>, data)
+    req, err := http.NewRequest(<span class="hljs-string">"DELETE"</span>, <span class="hljs-string">"https://api.shotstack.io/serve/{version}/assets/{id}"</span>, data)
     req.Header = headers
 
     client := &amp;http.Client{}
@@ -1282,7 +1298,7 @@ System.out.println(response.toString());
 }
 
 </code></pre>
-<p><code>DELETE /serve/assets/{id}</code></p>
+<p><code>DELETE /assets/{id}</code></p>
 <p>Delete an asset by it's render id. If a render creates multiple assets, such as thumbnail and poster images, each asset must be deleted individually by the asset id.</p>
 <h3 id="delete-asset-parameters">Parameters</h3>
 <table>
@@ -1334,12 +1350,12 @@ DeveloperKey
 <p>Code samples</p>
 </blockquote>
 <pre class="highlight tab tab-shell"><code><span class="hljs-comment"># You can also use wget</span>
-curl -X GET https://api.shotstack.io/{version}/serve/assets/render/{id} \
+curl -X GET https://api.shotstack.io/serve/{version}/assets/render/{id} \
   -H <span class="hljs-string">'Accept: application/json'</span> \
   -H <span class="hljs-string">'x-api-key: API_KEY'</span>
 
 </code></pre>
-<pre class="highlight tab tab-http"><code><span class="hljs-keyword">GET</span> <span class="hljs-string">https://api.shotstack.io/{version}/serve/assets/render/{id}</span> HTTP/1.1
+<pre class="highlight tab tab-http"><code><span class="hljs-keyword">GET</span> <span class="hljs-string">https://api.shotstack.io/serve/{version}/assets/render/{id}</span> HTTP/1.1
 <span class="hljs-attribute">Host</span>: api.shotstack.io
 <span class="hljs-attribute">Accept</span>: application/json
 
@@ -1351,7 +1367,7 @@ curl -X GET https://api.shotstack.io/{version}/serve/assets/render/{id} \
   <span class="hljs-string">'x-api-key'</span>:<span class="hljs-string">'API_KEY'</span>
 };
 
-fetch(<span class="hljs-string">'https://api.shotstack.io/{version}/serve/assets/render/{id}'</span>,
+fetch(<span class="hljs-string">'https://api.shotstack.io/serve/{version}/assets/render/{id}'</span>,
 {
   <span class="hljs-attr">method</span>: <span class="hljs-string">'GET'</span>,
 
@@ -1374,7 +1390,7 @@ $client = <span class="hljs-keyword">new</span> \GuzzleHttp\Client();
 $request_body = <span class="hljs-keyword">array</span>();
 
 <span class="hljs-keyword">try</span> {
-    $response = $client-&gt;request(<span class="hljs-string">'GET'</span>,<span class="hljs-string">'https://api.shotstack.io/{version}/serve/assets/render/{id}'</span>, <span class="hljs-keyword">array</span>(
+    $response = $client-&gt;request(<span class="hljs-string">'GET'</span>,<span class="hljs-string">'https://api.shotstack.io/serve/{version}/assets/render/{id}'</span>, <span class="hljs-keyword">array</span>(
         <span class="hljs-string">'headers'</span> =&gt; $headers,
         <span class="hljs-string">'json'</span> =&gt; $request_body,
        )
@@ -1397,7 +1413,7 @@ headers = {
   <span class="hljs-string">'x-api-key'</span> =&gt; <span class="hljs-string">'API_KEY'</span>
 }
 
-result = RestClient.get <span class="hljs-string">'https://api.shotstack.io/{version}/serve/assets/render/{id}'</span>,
+result = RestClient.get <span class="hljs-string">'https://api.shotstack.io/serve/{version}/assets/render/{id}'</span>,
   <span class="hljs-symbol">params:</span> {
   }, <span class="hljs-symbol">headers:</span> headers
 
@@ -1410,12 +1426,12 @@ headers = {
   <span class="hljs-string">'x-api-key'</span>: <span class="hljs-string">'API_KEY'</span>
 }
 
-r = requests.get(<span class="hljs-string">'https://api.shotstack.io/{version}/serve/assets/render/{id}'</span>, headers = headers)
+r = requests.get(<span class="hljs-string">'https://api.shotstack.io/serve/{version}/assets/render/{id}'</span>, headers = headers)
 
 print(r.json())
 
 </code></pre>
-<pre class="highlight tab tab-java"><code>URL obj = <span class="hljs-keyword">new</span> URL(<span class="hljs-string">"https://api.shotstack.io/{version}/serve/assets/render/{id}"</span>);
+<pre class="highlight tab tab-java"><code>URL obj = <span class="hljs-keyword">new</span> URL(<span class="hljs-string">"https://api.shotstack.io/serve/{version}/assets/render/{id}"</span>);
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod(<span class="hljs-string">"GET"</span>);
 <span class="hljs-keyword">int</span> responseCode = con.getResponseCode();
@@ -1445,7 +1461,7 @@ System.out.println(response.toString());
     }
 
     data := bytes.NewBuffer([]<span class="hljs-keyword">byte</span>{jsonReq})
-    req, err := http.NewRequest(<span class="hljs-string">"GET"</span>, <span class="hljs-string">"https://api.shotstack.io/{version}/serve/assets/render/{id}"</span>, data)
+    req, err := http.NewRequest(<span class="hljs-string">"GET"</span>, <span class="hljs-string">"https://api.shotstack.io/serve/{version}/assets/render/{id}"</span>, data)
     req.Header = headers
 
     client := &amp;http.Client{}
@@ -1454,7 +1470,7 @@ System.out.println(response.toString());
 }
 
 </code></pre>
-<p><code>GET /serve/assets/render/{id}</code></p>
+<p><code>GET /assets/render/{id}</code></p>
 <p>A render may generate more than one file, such as a video, thumbnail and poster image. When the assets are created the only known id is the render id returned by the original <a href="#render-video">render request</a>, status  request or webhook. This endpoint lets you look up one or more assets by the render id.</p>
 <h3 id="get-asset-by-render-id-parameters">Parameters</h3>
 <table>

@@ -32,7 +32,7 @@ headingLevel: 2
 
 > Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
 
-The Shotstack API is a video editing service that allows for the automated creation of videos using JSON. You can configure an edit and POST it to the Shotstack API which will render your video and provide a file location when complete. For more details visit [shotstack.io](https://shotstack.io) or checkout our [getting started](https://shotstack.gitbook.io/docs/guides/getting-started) documentation.
+<p>Shotstack is a video editing service that allows for the automated creation of videos using JSON. You can configure an edit and POST it to the API which will render your video and provide a file location when complete. For more details visit [shotstack.io](https://shotstack.io) or checkout our [getting started](https://shotstack.gitbook.io/docs/guides/getting-started) documentation. </p> <p> There are two main API's, one for editing videos and images (Edit API) and one for managing hosted assets (Serve API). </p> <p> The Edit API base URL is: <b>https://api.shotstack.io/{version}</b> </p> <p> The Serve API base URL is: <b>https://api.shotstack.io/serve/{version}</b> </p>
 
 Base URLs:
 
@@ -44,12 +44,20 @@ Base URLs:
 
         * stage
 
+* <a href="https://api.shotstack.io/serve/{version}">https://api.shotstack.io/serve/{version}</a>
+
+    * **version** - Set the stage to `v1` for production usage. Set to `stage` to use the development sandbox. Default: v1
+
+        * v1
+
+        * stage
+
 # Authentication
 
 * API Key (DeveloperKey)
     - Parameter Name: **x-api-key**, in: header. Set the **x-api-key** header with your provided key for the correct environment (v1 or stage). Include the header in all calls to the API that are secured with a key.
 
-<h1 id="shotstack-editing-api">Editing API</h1>
+<h1 id="shotstack-edit">Edit</h1>
 
 ## Render Video
 
@@ -654,7 +662,7 @@ To perform this operation, you must be authenticated by means of one of the foll
 DeveloperKey
 </aside>
 
-<h1 id="shotstack-serve-api">Serve API</h1>
+<h1 id="shotstack-serve">Serve</h1>
 
 ## Get Asset
 
@@ -664,14 +672,14 @@ DeveloperKey
 
 ```shell
 # You can also use wget
-curl -X GET https://api.shotstack.io/{version}/serve/assets/{id} \
+curl -X GET https://api.shotstack.io/serve/{version}/assets/{id} \
   -H 'Accept: application/json' \
   -H 'x-api-key: API_KEY'
 
 ```
 
 ```http
-GET https://api.shotstack.io/{version}/serve/assets/{id} HTTP/1.1
+GET https://api.shotstack.io/serve/{version}/assets/{id} HTTP/1.1
 Host: api.shotstack.io
 Accept: application/json
 
@@ -685,7 +693,7 @@ const headers = {
   'x-api-key':'API_KEY'
 };
 
-fetch('https://api.shotstack.io/{version}/serve/assets/{id}',
+fetch('https://api.shotstack.io/serve/{version}/assets/{id}',
 {
   method: 'GET',
 
@@ -715,7 +723,7 @@ $client = new \GuzzleHttp\Client();
 $request_body = array();
 
 try {
-    $response = $client->request('GET','https://api.shotstack.io/{version}/serve/assets/{id}', array(
+    $response = $client->request('GET','https://api.shotstack.io/serve/{version}/assets/{id}', array(
         'headers' => $headers,
         'json' => $request_body,
        )
@@ -740,7 +748,7 @@ headers = {
   'x-api-key' => 'API_KEY'
 }
 
-result = RestClient.get 'https://api.shotstack.io/{version}/serve/assets/{id}',
+result = RestClient.get 'https://api.shotstack.io/serve/{version}/assets/{id}',
   params: {
   }, headers: headers
 
@@ -755,14 +763,14 @@ headers = {
   'x-api-key': 'API_KEY'
 }
 
-r = requests.get('https://api.shotstack.io/{version}/serve/assets/{id}', headers = headers)
+r = requests.get('https://api.shotstack.io/serve/{version}/assets/{id}', headers = headers)
 
 print(r.json())
 
 ```
 
 ```java
-URL obj = new URL("https://api.shotstack.io/{version}/serve/assets/{id}");
+URL obj = new URL("https://api.shotstack.io/serve/{version}/assets/{id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -794,7 +802,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "https://api.shotstack.io/{version}/serve/assets/{id}", data)
+    req, err := http.NewRequest("GET", "https://api.shotstack.io/serve/{version}/assets/{id}", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -804,7 +812,7 @@ func main() {
 
 ```
 
-`GET /serve/assets/{id}`
+`GET /assets/{id}`
 
 The Serve API is used to interact with, and delete hosted assets including videos, images, audio files,  thumbnails and poster images. Use this endpoint to fetch an asset by asset id. Note that an asset id is unique for each asset and different from the render id.
 
@@ -858,13 +866,13 @@ DeveloperKey
 
 ```shell
 # You can also use wget
-curl -X DELETE https://api.shotstack.io/{version}/serve/assets/{id} \
+curl -X DELETE https://api.shotstack.io/serve/{version}/assets/{id} \
   -H 'x-api-key: API_KEY'
 
 ```
 
 ```http
-DELETE https://api.shotstack.io/{version}/serve/assets/{id} HTTP/1.1
+DELETE https://api.shotstack.io/serve/{version}/assets/{id} HTTP/1.1
 Host: api.shotstack.io
 
 ```
@@ -876,7 +884,7 @@ const headers = {
   'x-api-key':'API_KEY'
 };
 
-fetch('https://api.shotstack.io/{version}/serve/assets/{id}',
+fetch('https://api.shotstack.io/serve/{version}/assets/{id}',
 {
   method: 'DELETE',
 
@@ -905,7 +913,7 @@ $client = new \GuzzleHttp\Client();
 $request_body = array();
 
 try {
-    $response = $client->request('DELETE','https://api.shotstack.io/{version}/serve/assets/{id}', array(
+    $response = $client->request('DELETE','https://api.shotstack.io/serve/{version}/assets/{id}', array(
         'headers' => $headers,
         'json' => $request_body,
        )
@@ -929,7 +937,7 @@ headers = {
   'x-api-key' => 'API_KEY'
 }
 
-result = RestClient.delete 'https://api.shotstack.io/{version}/serve/assets/{id}',
+result = RestClient.delete 'https://api.shotstack.io/serve/{version}/assets/{id}',
   params: {
   }, headers: headers
 
@@ -943,14 +951,14 @@ headers = {
   'x-api-key': 'API_KEY'
 }
 
-r = requests.delete('https://api.shotstack.io/{version}/serve/assets/{id}', headers = headers)
+r = requests.delete('https://api.shotstack.io/serve/{version}/assets/{id}', headers = headers)
 
 print(r.json())
 
 ```
 
 ```java
-URL obj = new URL("https://api.shotstack.io/{version}/serve/assets/{id}");
+URL obj = new URL("https://api.shotstack.io/serve/{version}/assets/{id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("DELETE");
 int responseCode = con.getResponseCode();
@@ -981,7 +989,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("DELETE", "https://api.shotstack.io/{version}/serve/assets/{id}", data)
+    req, err := http.NewRequest("DELETE", "https://api.shotstack.io/serve/{version}/assets/{id}", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -991,7 +999,7 @@ func main() {
 
 ```
 
-`DELETE /serve/assets/{id}`
+`DELETE /assets/{id}`
 
 Delete an asset by it's render id. If a render creates multiple assets, such as thumbnail and poster images, each asset must be deleted individually by the asset id.
 
@@ -1020,14 +1028,14 @@ DeveloperKey
 
 ```shell
 # You can also use wget
-curl -X GET https://api.shotstack.io/{version}/serve/assets/render/{id} \
+curl -X GET https://api.shotstack.io/serve/{version}/assets/render/{id} \
   -H 'Accept: application/json' \
   -H 'x-api-key: API_KEY'
 
 ```
 
 ```http
-GET https://api.shotstack.io/{version}/serve/assets/render/{id} HTTP/1.1
+GET https://api.shotstack.io/serve/{version}/assets/render/{id} HTTP/1.1
 Host: api.shotstack.io
 Accept: application/json
 
@@ -1041,7 +1049,7 @@ const headers = {
   'x-api-key':'API_KEY'
 };
 
-fetch('https://api.shotstack.io/{version}/serve/assets/render/{id}',
+fetch('https://api.shotstack.io/serve/{version}/assets/render/{id}',
 {
   method: 'GET',
 
@@ -1071,7 +1079,7 @@ $client = new \GuzzleHttp\Client();
 $request_body = array();
 
 try {
-    $response = $client->request('GET','https://api.shotstack.io/{version}/serve/assets/render/{id}', array(
+    $response = $client->request('GET','https://api.shotstack.io/serve/{version}/assets/render/{id}', array(
         'headers' => $headers,
         'json' => $request_body,
        )
@@ -1096,7 +1104,7 @@ headers = {
   'x-api-key' => 'API_KEY'
 }
 
-result = RestClient.get 'https://api.shotstack.io/{version}/serve/assets/render/{id}',
+result = RestClient.get 'https://api.shotstack.io/serve/{version}/assets/render/{id}',
   params: {
   }, headers: headers
 
@@ -1111,14 +1119,14 @@ headers = {
   'x-api-key': 'API_KEY'
 }
 
-r = requests.get('https://api.shotstack.io/{version}/serve/assets/render/{id}', headers = headers)
+r = requests.get('https://api.shotstack.io/serve/{version}/assets/render/{id}', headers = headers)
 
 print(r.json())
 
 ```
 
 ```java
-URL obj = new URL("https://api.shotstack.io/{version}/serve/assets/render/{id}");
+URL obj = new URL("https://api.shotstack.io/serve/{version}/assets/render/{id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -1150,7 +1158,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "https://api.shotstack.io/{version}/serve/assets/render/{id}", data)
+    req, err := http.NewRequest("GET", "https://api.shotstack.io/serve/{version}/assets/render/{id}", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -1160,7 +1168,7 @@ func main() {
 
 ```
 
-`GET /serve/assets/render/{id}`
+`GET /assets/render/{id}`
 
 A render may generate more than one file, such as a video, thumbnail and poster image. When the assets are created the only known id is the render id returned by the original [render request](#render-video), status  request or webhook. This endpoint lets you look up one or more assets by the render id.
 
