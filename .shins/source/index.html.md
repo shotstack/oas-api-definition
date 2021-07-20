@@ -1001,7 +1001,7 @@ func main() {
 
 `DELETE /assets/{id}`
 
-Delete an asset by it's render id. If a render creates multiple assets, such as thumbnail and poster images, each asset must be deleted individually by the asset id.
+Delete an asset by its asset id. If a render creates multiple assets, such as thumbnail and poster images, each asset must be deleted individually by the asset id.
 
 <h3 id="delete-asset-parameters">Parameters</h3>
 
@@ -1573,7 +1573,7 @@ continued
 |fit|string|false|none|Set how the asset should be scaled to fit the viewport using one of the following options: <br>  <ul><br>    <li>`cover` - stretch the asset to fill the viewport without maintaining the aspect ratio.</li><br>    <li>`contain` - fit the entire asset within the viewport while maintaining the original aspect ratio.</li><br>    <li>`crop` - scale the asset to fill the viewport while maintaining the aspect ratio. The asset will be cropped if it exceeds the bounds of the viewport.</li><br>    <li>`none` - preserves the original asset dimensions and does not apply any scaling.</li><br>  </ul>|
 |scale|number|false|none|Scale the asset to a fraction of the viewport size - i.e. setting the scale to 0.5 will scale asset to half the size of the viewport. This is useful for picture-in-picture video and  scaling images such as logos and watermarks.|
 |position|string|false|none|Place the asset in one of nine predefined positions of the viewport. This is most effective for when the asset is scaled and you want to position the element to a specific position. <ul><br>  <li>`top` - top (center)</li><br>  <li>`topRight` - top right</li><br>  <li>`right` - right (center)</li><br>  <li>`bottomRight` - bottom right</li><br>  <li>`bottom` - bottom (center)</li><br>  <li>`bottomLeft` - bottom left</li><br>  <li>`left` - left (center)</li><br>  <li>`topLeft` - top left</li><br>  <li>`center` - center</li><br></ul>|
-|offset|[Offset](#schemaoffset)|false|none|Offset the location of the asset relative to it's position on the viewport. The offset distance is relative to the width of the viewport - for example an x offset of 0.5 will move the asset half the viewport width to the right.|
+|offset|[Offset](#schemaoffset)|false|none|Offset the location of the asset relative to its position on the viewport. The offset distance is relative to the width of the viewport - for example an x offset of 0.5 will move the asset half the viewport width to the right.|
 |transition|[Transition](#schematransition)|false|none|In and out transitions for a clip - i.e. fade in and fade out|
 |effect|string|false|none|A motion effect to apply to the Clip. <ul><br>  <li>`zoomIn` - slow zoom in</li><br>  <li>`zoomOut` - slow zoom out</li><br>  <li>`slideLeft` - slow slide (pan) left</li><br>  <li>`slideRight` - slow slide (pan) right</li><br>  <li>`slideUp` - slow slide (pan) up</li><br>  <li>`slideDown` - slow slide (pan) down</li><br></ul>|
 |filter|string|false|none|A filter effect to apply to the Clip. <ul><br>  <li>`boost` - boost contrast and saturation</li><br>  <li>`contrast` - increase contrast</li><br>  <li>`darken` - darken the scene</li><br>  <li>`greyscale` - remove colour</li><br>  <li>`lighten` - lighten the scene</li><br>  <li>`muted` - reduce saturation and contrast</li><br>  <li>`invert` - invert colors</li><br></ul>|
@@ -1713,7 +1713,7 @@ The TitleAsset clip type lets you create video titles from a text string and app
 |size|string|false|none|Set the relative size of the text using predefined sizes from xx-small to xx-large. <ul><br>  <li>`xx-small`</li><br>  <li>`x-small`</li><br>  <li>`small`</li><br>  <li>`medium`</li><br>  <li>`large`</li><br>  <li>`x-large`</li><br>  <li>`xx-large`</li><br></ul>|
 |background|string|false|none|Apply a background color behind the text. Set the text color using hexadecimal color notation. Transparency is supported by setting the first two characters of the hex string (opposite to HTML),  i.e. #80ffffff will be white with 50% transparency. Omit to use transparent background.|
 |position|string|false|none|Place the title in one of nine predefined positions of the viewport. <ul><br>  <li>`top` - top (center)</li><br>  <li>`topRight` - top right</li><br>  <li>`right` - right (center)</li><br>  <li>`bottomRight` - bottom right</li><br>  <li>`bottom` - bottom (center)</li><br>  <li>`bottomLeft` - bottom left</li><br>  <li>`left` - left (center)</li><br>  <li>`topLeft` - top left</li><br>  <li>`center` - center</li><br></ul>|
-|offset|[Offset](#schemaoffset)|false|none|Offset the location of the title relative to it's position on the screen.|
+|offset|[Offset](#schemaoffset)|false|none|Offset the location of the title relative to its position on the screen.|
 
 #### Enumerated Values
 
