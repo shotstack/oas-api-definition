@@ -70,7 +70,6 @@ Base URLs:
 curl -X POST https://api.shotstack.io/{version}/render \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
-  -H 'x-api-queue-id: ENTERPRISE_QUEUE_ID' \
   -H 'x-api-key: API_KEY'
 
 ```
@@ -80,7 +79,6 @@ POST https://api.shotstack.io/{version}/render HTTP/1.1
 Host: api.shotstack.io
 Content-Type: application/json
 Accept: application/json
-x-api-queue-id: ENTERPRISE_QUEUE_ID
 
 ```
 
@@ -161,7 +159,6 @@ const inputBody = {
 const headers = {
   'Content-Type':'application/json',
   'Accept':'application/json',
-  'x-api-queue-id':'ENTERPRISE_QUEUE_ID',
   'x-api-key':'API_KEY'
 };
 
@@ -187,7 +184,6 @@ require 'vendor/autoload.php';
 $headers = array(
     'Content-Type' => 'application/json',
     'Accept' => 'application/json',
-    'x-api-queue-id' => 'ENTERPRISE_QUEUE_ID',
     'x-api-key' => 'API_KEY',
 );
 
@@ -220,7 +216,6 @@ require 'json'
 headers = {
   'Content-Type' => 'application/json',
   'Accept' => 'application/json',
-  'x-api-queue-id' => 'ENTERPRISE_QUEUE_ID',
   'x-api-key' => 'API_KEY'
 }
 
@@ -237,7 +232,6 @@ import requests
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
-  'x-api-queue-id': 'ENTERPRISE_QUEUE_ID',
   'x-api-key': 'API_KEY'
 }
 
@@ -277,7 +271,6 @@ func main() {
     headers := map[string][]string{
         "Content-Type": []string{"application/json"},
         "Accept": []string{"application/json"},
-        "x-api-queue-id": []string{"ENTERPRISE_QUEUE_ID"},
         "x-api-key": []string{"API_KEY"},
     }
 
@@ -377,7 +370,6 @@ Queue and render the contents of a timeline as a video file.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|x-api-queue-id|header|string|false|The id of a dedicated queue (enterprise customers only).|
 |body|body|[Edit](#schemaedit)|true|The video edit specified using JSON.|
 
 > Example responses

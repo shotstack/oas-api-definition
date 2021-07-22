@@ -114,14 +114,6 @@ paths:
         required: true
       security:
         - DeveloperKey: []
-      parameters:
-        - in: header
-          name: x-api-queue-id
-          description: The id of a dedicated queue (enterprise customers only).
-          required: false
-          schema:
-            type: string
-          example: ENTERPRISE_QUEUE_ID
       tags:
         - Edit
   /render/{id}:
