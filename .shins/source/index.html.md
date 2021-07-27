@@ -32,7 +32,16 @@ headingLevel: 2
 
 > Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
 
-<p>Shotstack is a video editing service that allows for the automated creation of videos using JSON. You can configure an edit and POST it to the API which will render your video and provide a file location when complete. For more details visit [shotstack.io](https://shotstack.io) or checkout our [getting started](https://shotstack.gitbook.io/docs/guides/getting-started) documentation. </p> <p> There are two main API's, one for editing videos and images (Edit API) and one for managing hosted assets (Serve API). </p> <p> The Edit API base URL is: <b>https://api.shotstack.io/{version}</b> </p> <p> The Serve API base URL is: <b>https://api.shotstack.io/serve/{version}</b> </p>
+Shotstack is a video, image and audio editing service that allows for the automated generation of videos, images and audio using JSON and a RESTful API.
+
+You arrange and configure an edit and POST it to the API which will render your media and provide a file  location when complete.
+
+For more details visit [shotstack.io](https://shotstack.io) or checkout our [getting started](https://shotstack.gitbook.io/docs/guides/getting-started) documentation.
+There are two main API's, one for editing and generating assets (Edit API) and one for managing hosted assets (Serve API).
+
+The Edit API base URL is: <b>https://api.shotstack.io/{version}</b>
+
+The Serve API base URL is: <b>https://api.shotstack.io/serve/{version}</b>
 
 Base URLs:
 
@@ -59,7 +68,7 @@ Base URLs:
 
 <h1 id="shotstack-edit">Edit</h1>
 
-## Render Video
+## Render Asset
 
 <a id="opIdpostRender"></a>
 
@@ -139,8 +148,13 @@ const inputBody = {
     "format": "mp4",
     "resolution": "sd",
     "aspectRatio": "16:9",
+    "size": {
+      "width": 1200,
+      "height": 800
+    },
     "fps": 25,
     "scaleTo": "preview",
+    "quality": "medium",
     "range": {
       "start": 3,
       "length": 6
@@ -151,7 +165,13 @@ const inputBody = {
     "thumbnail": {
       "capture": 1,
       "scale": 0.3
-    }
+    },
+    "destinations": [
+      {
+        "provider": "shotstack",
+        "exclude": false
+      }
+    ]
   },
   "callback": "https://my-server.com/callback.php",
   "disk": "local"
@@ -287,7 +307,7 @@ func main() {
 
 `POST /render`
 
-Queue and render the contents of a timeline as a video file.
+Queue and render the contents of a timeline as a video, image or audio file.
 
 > Body parameter
 
@@ -347,8 +367,13 @@ Queue and render the contents of a timeline as a video file.
     "format": "mp4",
     "resolution": "sd",
     "aspectRatio": "16:9",
+    "size": {
+      "width": 1200,
+      "height": 800
+    },
     "fps": 25,
     "scaleTo": "preview",
+    "quality": "medium",
     "range": {
       "start": 3,
       "length": 6
@@ -359,18 +384,30 @@ Queue and render the contents of a timeline as a video file.
     "thumbnail": {
       "capture": 1,
       "scale": 0.3
-    }
+    },
+    "destinations": [
+      {
+        "provider": "shotstack",
+        "exclude": false
+      }
+    ]
   },
   "callback": "https://my-server.com/callback.php",
   "disk": "local"
 }
 ```
 
-<h3 id="render-video-parameters">Parameters</h3>
+<h3 id="render-asset-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|body|body|[Edit](#schemaedit)|true|The video edit specified using JSON.|
+|body|body|[Edit](#schemaedit)|true|The video, image or audio edit specified using JSON.|
+
+#### Detailed descriptions
+
+**body**: The video, image or audio edit specified using JSON.
+
+**base URL:** https://api.shotstack.io/{version}
 
 > Example responses
 
@@ -387,11 +424,11 @@ Queue and render the contents of a timeline as a video file.
 }
 ```
 
-<h3 id="render-video-responses">Responses</h3>
+<h3 id="render-asset-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|The queued video details|[QueuedResponse](#schemaqueuedresponse)|
+|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|The queued render details|[QueuedResponse](#schemaqueuedresponse)|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -548,7 +585,9 @@ func main() {
 
 `GET /render/{id}`
 
-Get the rendering status, video url and details of a timeline by ID.
+Get the rendering status, temporary asset url and details of a render by ID.
+
+**base URL:** https://api.shotstack.io/{version}
 
 <h3 id="get-render-status-parameters">Parameters</h3>
 
@@ -808,6 +847,8 @@ func main() {
 
 The Serve API is used to interact with, and delete hosted assets including videos, images, audio files,  thumbnails and poster images. Use this endpoint to fetch an asset by asset id. Note that an asset id is unique for each asset and different from the render id.
 
+**base URL:** https://api.shotstack.io/serve/{version}
+
 <h3 id="get-asset-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
@@ -995,6 +1036,8 @@ func main() {
 
 Delete an asset by its asset id. If a render creates multiple assets, such as thumbnail and poster images, each asset must be deleted individually by the asset id.
 
+**base URL:** https://api.shotstack.io/serve/{version}
+
 <h3 id="delete-asset-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
@@ -1164,6 +1207,8 @@ func main() {
 
 A render may generate more than one file, such as a video, thumbnail and poster image. When the assets are created the only known id is the render id returned by the original [render request](#render-video), status  request or webhook. This endpoint lets you look up one or more assets by the render id.
 
+**base URL:** https://api.shotstack.io/serve/{version}
+
 <h3 id="get-asset-by-render-id-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
@@ -1273,8 +1318,13 @@ DeveloperKey
     "format": "mp4",
     "resolution": "sd",
     "aspectRatio": "16:9",
+    "size": {
+      "width": 1200,
+      "height": 800
+    },
     "fps": 25,
     "scaleTo": "preview",
+    "quality": "medium",
     "range": {
       "start": 3,
       "length": 6
@@ -1285,7 +1335,13 @@ DeveloperKey
     "thumbnail": {
       "capture": 1,
       "scale": 0.3
-    }
+    },
+    "destinations": [
+      {
+        "provider": "shotstack",
+        "exclude": false
+      }
+    ]
   },
   "callback": "https://my-server.com/callback.php",
   "disk": "local"
@@ -1293,16 +1349,16 @@ DeveloperKey
 
 ```
 
-An edit defines the content of the video in a timeline and the output format.
+An edit defines the arrangement of a video on a timeline, an audio edit or an image design and the output format.
 
 ### Properties
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|timeline|[Timeline](#schematimeline)|true|none|A timeline represents the contents of a video edit over time, in seconds. A timeline consists of layers called tracks. Tracks are composed of titles, images or video segments referred to as clips which are placed along the track at specific starting point and lasting for a specific amount of time.|
+|timeline|[Timeline](#schematimeline)|true|none|A timeline represents the contents of a video edit over time, an audio edit over time, in seconds, or an image layout. A timeline consists of layers called tracks. Tracks are composed of titles, images, audio, html or video segments referred to as clips which are placed along the track at specific starting point and lasting for a specific amount of time.|
 |output|[Output](#schemaoutput)|true|none|The output format, render range and type of media to generate.|
 |callback|string|false|none|An optional webhook callback URL used to receive status notifications when a render completes or fails. See [webhooks](https://shotstack.gitbook.io/docs/guides/architecting-an-application/webhooks) for  more details.|
-|disk|string|false|none|The disk type to use for storing footage and assets for each render. See [disk types](https://shotstack.gitbook.io/docs/guides/architecting-an-application/disk-types) for more details. <ul><br>  <li>`local` - optimised for high speed rendering with up to 512MB storage</li><br>  <li>`mount` - optimised for larger file sizes and longer videos with 5GB for source footage and 512MB for output render</li><br></ul>|
+|disk|string|false|none|The disk type to use for storing footage and assets for each render. See [disk types](https://shotstack.gitbook.io/docs/guides/architecting-an-application/disk-types) for more details. <ul><br>  <li>`local` - optimized for high speed rendering with up to 512MB storage</li><br>  <li>`mount` - optimized for larger file sizes and longer videos with 5GB for source footage and 512MB for output render</li><br></ul>|
 
 #### Enumerated Values
 
@@ -1372,7 +1428,7 @@ An edit defines the content of the video in a timeline and the output format.
 
 ```
 
-A timeline represents the contents of a video edit over time, in seconds. A timeline consists of layers called tracks. Tracks are composed of titles, images or video segments referred to as clips which are placed along the track at specific starting point and lasting for a specific amount of time.
+A timeline represents the contents of a video edit over time, an audio edit over time, in seconds, or an image layout. A timeline consists of layers called tracks. Tracks are composed of titles, images, audio, html or video segments referred to as clips which are placed along the track at specific starting point and lasting for a specific amount of time.
 
 ### Properties
 
@@ -1530,7 +1586,7 @@ xor
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» *anonymous*|[ImageAsset](#schemaimageasset)|false|none|The ImageAsset is used to create video from images. The src must be a publicly accessible URL to an image resource such as a jpg or png file.|
+|» *anonymous*|[ImageAsset](#schemaimageasset)|false|none|The ImageAsset is used to create video from images to compose an image. The src must be a publicly accessible URL to an image resource such as a jpg or png file.|
 
 xor
 
@@ -1554,7 +1610,7 @@ xor
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» *anonymous*|[LumaAsset](#schemalumaasset)|false|none|The LumaAsset is used to create luma matte transitions between other assets. A luma matte is  a grey scale animated video where the black areas are transparent and the white areas solid. The luma matte animation should be provided as an mp4 video file. The src must be a publicly  accessible URL to the file.|
+|» *anonymous*|[LumaAsset](#schemalumaasset)|false|none|The LumaAsset is used to create luma matte masks, transitions and effects between other assets. A luma matte is a grey scale image or animated video where the black areas are transparent and the white areas solid. The luma matte animation should be provided as an mp4 video file. The src must be a publicly accessible URL to the file.|
 
 continued
 
@@ -1658,7 +1714,7 @@ The VideoAsset is used to create video sequences from video files. The src must 
 
 ```
 
-The ImageAsset is used to create video from images. The src must be a publicly accessible URL to an image resource such as a jpg or png file.
+The ImageAsset is used to create video from images to compose an image. The src must be a publicly accessible URL to an image resource such as a jpg or png file.
 
 ### Properties
 
@@ -1840,15 +1896,15 @@ The AudioAsset is used to add sound effects and audio at specific intervals on t
 
 ```
 
-The LumaAsset is used to create luma matte transitions between other assets. A luma matte is  a grey scale animated video where the black areas are transparent and the white areas solid. The luma matte animation should be provided as an mp4 video file. The src must be a publicly  accessible URL to the file.
+The LumaAsset is used to create luma matte masks, transitions and effects between other assets. A luma matte is a grey scale image or animated video where the black areas are transparent and the white areas solid. The luma matte animation should be provided as an mp4 video file. The src must be a publicly accessible URL to the file.
 
 ### Properties
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |type|string|true|none|The type of asset - set to `luma` for luma mattes.|
-|src|string|true|none|The luma matte video source URL. The URL must be publicly accessible or include credentials.|
-|trim|number|false|none|The start trim point of the luma video clip, in seconds (defaults to 0). Videos will start from the in trim point. The luma matte video will play until the file ends or the Clip length is reached.|
+|src|string|true|none|The luma matte source URL. The URL must be publicly accessible or include credentials.|
+|trim|number|false|none|The start trim point of the luma matte clip, in seconds (defaults to 0). Videos will start from the in trim point. A luma matte video will play until the file ends or the Clip length is reached.|
 
 <h2 id="tocS_Transition">Transition</h2>
 <!-- backwards compatibility -->
@@ -1871,38 +1927,134 @@ In and out transitions for a clip - i.e. fade in and fade out
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|in|string|false|none|The transition in. Available transitions are:<br>  <ul><br>    <li>`fade` - fade in</li><br>    <li>`reveal` - reveal from left to right</li><br>    <li>`wipeLeft` - fade across screen to the left</li><br>    <li>`wipeRight` - fade across screen to the right</li><br>    <li>`slideLeft` - move slightly left and fade in</li><br>    <li>`slideRight` - move slightly right and fade in</li><br>    <li>`slideUp` - move slightly up and fade in</li><br>    <li>`slideDown` - move slightly down and fade in</li><br>    <li>`carouselLeft` - slide in from right to left</li><br>    <li>`carouselRight` - slide in from left to right</li><br>    <li>`carouselUp` - slide in from bottom to top</li><br>    <li>`carouselDown` - slide in from top  to bottom</li><br>    <li>`zoom` - fast zoom in</li><br>  </ul>|
-|out|string|false|none|The transition out. Available transitions are:<br>  <ul><br>    <li>`fade` - fade out</li><br>    <li>`reveal` - reveal from right to left</li><br>    <li>`wipeLeft` - fade across screen to the left</li><br>    <li>`wipeRight` - fade across screen to the right</li><br>    <li>`slideLeft` - move slightly left and fade out</li><br>    <li>`slideRight` - move slightly right and fade out</li><br>    <li>`slideUp` - move slightly up and fade out</li><br>    <li>`slideDown` - move slightly down and fade out</li><br>    <li>`carouselLeft` - slide out from right to left</li><br>    <li>`carouselRight` - slide out from left to right</li><br>    <li>`carouselUp` - slide out from bottom to top</li><br>    <li>`carouselDown` - slide out from top  to bottom</li><br>    <li>`zoom` - fast zoom out</li><br>  </ul>|
+|in|string|false|none|The transition in. Available transitions are:<br>  <ul><br>    <li>`fade` - fade in</li><br>    <li>`reveal` - reveal from left to right</li><br>    <li>`wipeLeft` - fade across screen to the left</li><br>    <li>`wipeRight` - fade across screen to the right</li><br>    <li>`slideLeft` - move slightly left and fade in</li><br>    <li>`slideRight` - move slightly right and fade in</li><br>    <li>`slideUp` - move slightly up and fade in</li><br>    <li>`slideDown` - move slightly down and fade in</li><br>    <li>`carouselLeft` - slide in from right to left</li><br>    <li>`carouselRight` - slide in from left to right</li><br>    <li>`carouselUp` - slide in from bottom to top</li><br>    <li>`carouselDown` - slide in from top to bottom</li><br>    <li>`shuffleTopRight` - rotate in from top right</li><br>    <li>`shuffleRightTop` - rotate in from right top</li><br>    <li>`shuffleRightBottom` - rotate in from right bottom</li><br>    <li>`shuffleBottomRight` - rotate in from bottom right</li><br>    <li>`shuffleBottomLeft` - rotate in from bottom left</li><br>    <li>`shuffleLeftBottom` - rotate in from left bottom</li><br>    <li>`shuffleLeftTop` - rotate in from left top</li><br>    <li>`shuffleTopLeft` - rotate in from top left</li><br>    <li>`zoom` - fast zoom in</li><br>  </ul><br>The transition speed can also be controlled by appending `Fast` or `Slow` to the transition, e.g. `fadeFast` or `CarouselLeftSlow`.|
+|out|string|false|none|The transition out. Available transitions are:<br>  <ul><br>    <li>`fade` - fade out</li><br>    <li>`reveal` - reveal from right to left</li><br>    <li>`wipeLeft` - fade across screen to the left</li><br>    <li>`wipeRight` - fade across screen to the right</li><br>    <li>`slideLeft` - move slightly left and fade out</li><br>    <li>`slideRight` - move slightly right and fade out</li><br>    <li>`slideUp` - move slightly up and fade out</li><br>    <li>`slideDown` - move slightly down and fade out</li><br>    <li>`carouselLeft` - slide out from right to left</li><br>    <li>`carouselRight` - slide out from left to right</li><br>    <li>`carouselUp` - slide out from bottom to top</li><br>    <li>`carouselDown` - slide out from top  to bottom</li><br>    <li>`shuffleTopRight` - rotate out from top right</li><br>    <li>`shuffleRightTop` - rotate out from right top</li><br>    <li>`shuffleRightBottom` - rotate out from right bottom</li><br>    <li>`shuffleBottomRight` - rotate out from bottom right</li><br>    <li>`shuffleBottomLeft` - rotate out from bottom left</li><br>    <li>`shuffleLeftBottom` - rotate out from left bottom</li><br>    <li>`shuffleLeftTop` - rotate out from left top</li><br>    <li>`shuffleTopLeft` - rotate out from top left</li><br>    <li>`zoom` - fast zoom out</li><br>  </ul><br>The transition speed can also be controlled by appending `Fast` or `Slow` to the transition, e.g. `fadeFast` or `CarouselLeftSlow`.|
 
 #### Enumerated Values
 
 |Property|Value|
 |---|---|
 |in|fade|
+|in|fadeSlow|
+|in|fadeFast|
 |in|reveal|
+|in|revealSlow|
+|in|revealFast|
 |in|wipeLeft|
+|in|wipeLeftSlow|
+|in|wipeLeftFast|
 |in|wipeRight|
+|in|wipeRightSlow|
+|in|wipeRightFast|
 |in|slideLeft|
+|in|slideLeftSlow|
+|in|slideLeftFast|
 |in|slideRight|
+|in|slideRightSlow|
+|in|slideRightFast|
 |in|slideUp|
+|in|slideUpSlow|
+|in|slideUpFast|
 |in|slideDown|
+|in|slideDownSlow|
+|in|slideDownFast|
 |in|carouselLeft|
+|in|carouselLeftSlow|
+|in|carouselLeftFast|
 |in|carouselRight|
+|in|carouselRightSlow|
+|in|carouselRightFast|
 |in|carouselUp|
+|in|carouselUpSlow|
+|in|carouselUpFast|
 |in|carouselDown|
+|in|carouselDownSlow|
+|in|carouselDownFast|
+|in|shuffleTopRight|
+|in|shuffleTopRightSlow|
+|in|shuffleTopRightFast|
+|in|shuffleRightTop|
+|in|shuffleRightTopSlow|
+|in|shuffleRightTopFast|
+|in|shuffleRightBottom|
+|in|shuffleRightBottomSlow|
+|in|shuffleRightBottomFast|
+|in|shuffleBottomRight|
+|in|shuffleBottomRightSlow|
+|in|shuffleBottomRightFast|
+|in|shuffleBottomLeft|
+|in|shuffleBottomLeftSlow|
+|in|shuffleBottomLeftFast|
+|in|shuffleLeftBottom|
+|in|shuffleLeftBottomSlow|
+|in|shuffleLeftBottomFast|
+|in|shuffleLeftTop|
+|in|shuffleLeftTopSlow|
+|in|shuffleLeftTopFast|
+|in|shuffleTopLeft|
+|in|shuffleTopLeftSlow|
+|in|shuffleTopLeftFast|
 |in|zoom|
 |out|fade|
+|out|fadeSlow|
+|out|fadeFast|
 |out|reveal|
+|out|revealSlow|
+|out|revealFast|
 |out|wipeLeft|
+|out|wipeLeftSlow|
+|out|wipeLeftFast|
 |out|wipeRight|
+|out|wipeRightSlow|
+|out|wipeRightFast|
 |out|slideLeft|
+|out|slideLeftSlow|
+|out|slideLeftFast|
 |out|slideRight|
+|out|slideRightSlow|
+|out|slideRightFast|
 |out|slideUp|
+|out|slideUpSlow|
+|out|slideUpFast|
 |out|slideDown|
+|out|slideDownSlow|
+|out|slideDownFast|
 |out|carouselLeft|
+|out|carouselLeftSlow|
+|out|carouselLeftFast|
 |out|carouselRight|
+|out|carouselRightSlow|
+|out|carouselRightFast|
 |out|carouselUp|
+|out|carouselUpSlow|
+|out|carouselUpFast|
 |out|carouselDown|
+|out|carouselDownSlow|
+|out|carouselDownFast|
+|out|shuffleTopRight|
+|out|shuffleTopRightSlow|
+|out|shuffleTopRightFast|
+|out|shuffleRightTop|
+|out|shuffleRightTopSlow|
+|out|shuffleRightTopFast|
+|out|shuffleRightBottom|
+|out|shuffleRightBottomSlow|
+|out|shuffleRightBottomFast|
+|out|shuffleBottomRight|
+|out|shuffleBottomRightSlow|
+|out|shuffleBottomRightFast|
+|out|shuffleBottomLeft|
+|out|shuffleBottomLeftSlow|
+|out|shuffleBottomLeftFast|
+|out|shuffleLeftBottom|
+|out|shuffleLeftBottomSlow|
+|out|shuffleLeftBottomFast|
+|out|shuffleLeftTop|
+|out|shuffleLeftTopSlow|
+|out|shuffleLeftTopFast|
+|out|shuffleTopLeft|
+|out|shuffleTopLeftSlow|
+|out|shuffleTopLeftFast|
 |out|zoom|
 
 <h2 id="tocS_Font">Font</h2>
@@ -1991,8 +2143,13 @@ Crop the sides of an asset by a relative amount. The size of the crop is specifi
   "format": "mp4",
   "resolution": "sd",
   "aspectRatio": "16:9",
+  "size": {
+    "width": 1200,
+    "height": 800
+  },
   "fps": 25,
   "scaleTo": "preview",
+  "quality": "medium",
   "range": {
     "start": 3,
     "length": 6
@@ -2003,7 +2160,13 @@ Crop the sides of an asset by a relative amount. The size of the crop is specifi
   "thumbnail": {
     "capture": 1,
     "scale": 0.3
-  }
+  },
+  "destinations": [
+    {
+      "provider": "shotstack",
+      "exclude": false
+    }
+  ]
 }
 
 ```
@@ -2014,14 +2177,17 @@ The output format, render range and type of media to generate.
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|format|string|true|none|The output format and type of media file to generate. <ul><br>  <li>`mp4` - mp4 video file</li><br>  <li>`gif` - animated gif</li><br>  <li>`mp3` - mp3 audio file (no video)</li><br></ul>|
-|resolution|string|true|none|The output resolution of the video. <ul><br>  <li>`preview` - 512px x 288px @ 15fps</li><br>  <li>`mobile` - 640px x 360px @ 25fps</li><br>  <li>`sd` - 1024px x 576px @ 25fps</li><br>  <li>`hd` - 1280px x 720px @ 25fps</li><br>  <li>`1080` - 1920px x 1080px @ 25fps</li><br></ul>|
-|aspectRatio|string|false|none|The aspect ratio (shape) of the video. Useful for social media video. Options are: <ul><br>  <li>`16:9` - regular landscape/horizontal aspect ratio (default)</li><br>  <li>`9:16` - vertical/portrait aspect ratio</li><br>  <li>`1:1` - square aspect ratio</li><br>  <li>`4:5` - short vertical/portrait aspect ratio</li><br></ul>|
+|format|string|true|none|The output format and type of media file to generate. <ul><br>  <li>`mp4` - mp4 video file</li><br>  <li>`gif` - animated gif</li><br>  <li>`jpg` - jpg image file</li><br>  <li>`png` - png image file</li><br>  <li>`bmp` - bmp image file</li><br>  <li>`mp3` - mp3 audio file (audio only)</li><br></ul>|
+|resolution|string|false|none|The output resolution of the video or image. <ul><br>  <li>`preview` - 512px x 288px @ 15fps</li><br>  <li>`mobile` - 640px x 360px @ 25fps</li><br>  <li>`sd` - 1024px x 576px @ 25fps</li><br>  <li>`hd` - 1280px x 720px @ 25fps</li><br>  <li>`1080` - 1920px x 1080px @ 25fps</li><br></ul>|
+|aspectRatio|string|false|none|The aspect ratio (shape) of the video or image. Useful for social media output formats. Options are: <ul><br>  <li>`16:9` - regular landscape/horizontal aspect ratio (default)</li><br>  <li>`9:16` - vertical/portrait aspect ratio</li><br>  <li>`1:1` - square aspect ratio</li><br>  <li>`4:5` - short vertical/portrait aspect ratio</li><br>  <li>`4:3` - legacy TV aspect ratio</li><br></ul>|
+|size|[Size](#schemasize)|false|none|Set a custom size for a video or image. When using a custom size omit the `resolution` and `aspectRatio`. Custom sizes must be divisible by 2 based on the encoder specifications.|
 |fps|integer|false|none|Override the default frames per second. Useful for when the source footage is recorded at 30fps, i.e. on  mobile devices. Lower frame rates can be used to add cinematic quality (24fps) or to create smaller file size/faster render times or animated gifs (12 or 15fps). Default is 25fps. <ul><br>  <li>`12` - 12fps</li><br>  <li>`15` - 15fps</li><br>  <li>`24` - 24fps</li><br>  <li>`25` - 25fps</li><br>  <li>`30` - 30fps</li><br></ul>|
-|scaleTo|string|false|none|Override the resolution and scale the video to render at a different size. When using scaleTo the video should be edited at the resolution dimensions, i.e. use font sizes that look best at HD, then use scaleTo to output the video at SD and the text will be scaled to the correct size. This is useful if you want to create multiple video sizes. <ul><br>  <li>`preview` - 512px x 288px @ 15fps</li><br>  <li>`mobile` - 640px x 360px @ 25fps</li><br>  <li>`sd` - 1024px x 576px @25fps</li><br>  <li>`hd` - 1280px x 720px @25fps</li><br>  <li>`1080` - 1920px x 1080px @25fps</li><br></ul>|
-|range|[Range](#schemarange)|false|none|Specify a time range to render, i.e. to render only a portion of a video or audio file. Omit this setting to  export the entire video.|
+|scaleTo|string|false|none|Override the resolution and scale the video or image to render at a different size. When using scaleTo the asset should be edited at the resolution dimensions, i.e. use font sizes that look best at HD, then use scaleTo to output the file at SD and the text will be scaled to the correct size. This is useful if you want to create multiple asset sizes. <ul><br>  <li>`preview` - 512px x 288px @ 15fps</li><br>  <li>`mobile` - 640px x 360px @ 25fps</li><br>  <li>`sd` - 1024px x 576px @25fps</li><br>  <li>`hd` - 1280px x 720px @25fps</li><br>  <li>`1080` - 1920px x 1080px @25fps</li><br></ul>|
+|quality|string|false|none|Adjust the output quality of the video, image or audio. Adjusting quality affects  render speed, download speeds and storage requirements due to file size. The default `medium` provides the most optimized choice for all three  factors. <ul><br>  <li>`low` - slightly reduced quality, smaller file size</li><br>  <li>`medium` - optimized quality, render speeds and file size</li><br>  <li>`high` - slightly increased quality, larger file size</li><br></ul>|
+|range|[Range](#schemarange)|false|none|Specify a time range to render, i.e. to render only a portion of a video or audio file. Omit this setting to  export the entire video. Range can also be used to render a frame at a specific time point - setting a range and output format as `jpg` will output a single frame image at the range `start` point.|
 |poster|[Poster](#schemaposter)|false|none|Generate a poster image from a specific point on the timeline.|
 |thumbnail|[Thumbnail](#schemathumbnail)|false|none|Generate a thumbnail image from a specific point on the timeline.|
+|destinations|[anyOf]|false|none|A destination is a location where output files can be sent to for serving or hosting. By default all rendered assets are automatically sent to the Shotstack hosting destination. [DestinationShotstack](/#tocs_shotstackdestination) is currently the only option with plans to add more in the future such as S3, YouTube, Vimeo and Mux. If you do not require hosting you can opt-out using the  `exclude` property.|
 
 #### Enumerated Values
 
@@ -2030,6 +2196,9 @@ The output format, render range and type of media to generate.
 |format|mp4|
 |format|gif|
 |format|mp3|
+|format|jpg|
+|format|png|
+|format|bmp|
 |resolution|preview|
 |resolution|mobile|
 |resolution|sd|
@@ -2039,6 +2208,7 @@ The output format, render range and type of media to generate.
 |aspectRatio|9:16|
 |aspectRatio|1:1|
 |aspectRatio|4:5|
+|aspectRatio|4:3|
 |fps|12|
 |fps|15|
 |fps|24|
@@ -2049,6 +2219,33 @@ The output format, render range and type of media to generate.
 |scaleTo|sd|
 |scaleTo|hd|
 |scaleTo|1080|
+|quality|low|
+|quality|medium|
+|quality|high|
+
+<h2 id="tocS_Size">Size</h2>
+<!-- backwards compatibility -->
+<a id="schemasize"></a>
+<a id="schema_Size"></a>
+<a id="tocSsize"></a>
+<a id="tocssize"></a>
+
+```json
+{
+  "width": 1200,
+  "height": 800
+}
+
+```
+
+Set a custom size for a video or image. When using a custom size omit the `resolution` and `aspectRatio`. Custom sizes must be divisible by 2 based on the encoder specifications.
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|width|integer|false|none|Set a custom width for the video or image file. Value must be divisible by 2. Maximum video width is 1920px, maximum image width is 4096px.|
+|height|integer|false|none|Set a custom height for the video or image file. Value must be divisible by 2. Maximum video height is 1920px, maximum image height is 4096px.|
 
 <h2 id="tocS_Range">Range</h2>
 <!-- backwards compatibility -->
@@ -2065,14 +2262,14 @@ The output format, render range and type of media to generate.
 
 ```
 
-Specify a time range to render, i.e. to render only a portion of a video or audio file. Omit this setting to  export the entire video.
+Specify a time range to render, i.e. to render only a portion of a video or audio file. Omit this setting to  export the entire video. Range can also be used to render a frame at a specific time point - setting a range and output format as `jpg` will output a single frame image at the range `start` point.
 
 ### Properties
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |start|number(float)|false|none|The point on the timeline, in seconds, to start the render from - i.e. start at second 3.|
-|length|number(float)|false|none|The length of the portion of the video to render - i.e. render 6 seconds of the video.|
+|length|number(float)|false|none|The length of the portion of the video or audio to render - i.e. render 6 seconds of the video.|
 
 <h2 id="tocS_Poster">Poster</h2>
 <!-- backwards compatibility -->
@@ -2111,7 +2308,7 @@ Generate a poster image for the video at a specific point from the timeline. The
 
 ```
 
-Generate a thumbnail image for the video at a specific point from the timeline.
+Generate a thumbnail image for the video or image at a specific point from the timeline.
 
 ### Properties
 
@@ -2139,7 +2336,7 @@ Generate a thumbnail image for the video at a specific point from the timeline.
 
 ```
 
-The response received after a [render request](#render-video) is submitted. The render task is queued for rendering and a unique render id is returned.
+The response received after a [render request](#render-asset) is submitted. The render task is queued for rendering and a unique render id is returned.
 
 ### Properties
 
@@ -2250,8 +2447,13 @@ The response data returned with the [QueuedResponse](#tocs_queuedresponse).
         "format": "mp4",
         "resolution": "sd",
         "aspectRatio": "16:9",
+        "size": {
+          "width": 1200,
+          "height": 800
+        },
         "fps": 25,
         "scaleTo": "preview",
+        "quality": "medium",
         "range": {
           "start": 3,
           "length": 6
@@ -2262,7 +2464,13 @@ The response data returned with the [QueuedResponse](#tocs_queuedresponse).
         "thumbnail": {
           "capture": 1,
           "scale": 0.3
-        }
+        },
+        "destinations": [
+          {
+            "provider": "shotstack",
+            "exclude": false
+          }
+        ]
       },
       "callback": "https://my-server.com/callback.php",
       "disk": "local"
@@ -2358,8 +2566,13 @@ The response received after a [render status request](#get-render-status) is sub
       "format": "mp4",
       "resolution": "sd",
       "aspectRatio": "16:9",
+      "size": {
+        "width": 1200,
+        "height": 800
+      },
       "fps": 25,
       "scaleTo": "preview",
+      "quality": "medium",
       "range": {
         "start": 3,
         "length": 6
@@ -2370,7 +2583,13 @@ The response received after a [render status request](#get-render-status) is sub
       "thumbnail": {
         "capture": 1,
         "scale": 0.3
-      }
+      },
+      "destinations": [
+        {
+          "provider": "shotstack",
+          "exclude": false
+        }
+      ]
     },
     "callback": "https://my-server.com/callback.php",
     "disk": "local"
@@ -2390,11 +2609,11 @@ The response data returned with the [RenderResponse](#tocs_renderresponse) inclu
 |id|string|true|none|The id of the render task in UUID format.|
 |owner|string|true|none|The owner id of the render task.|
 |plan|string|false|none|The customer subscription plan.|
-|status|string|true|none|The status of the render task. <ul><br>  <li>`queued` - render is queued waiting to be rendered</li><br>  <li>`fetching` - assets are being fetched</li><br>  <li>`rendering` - the video is being rendered</li><br>  <li>`saving` - the final video is being saved to storage</li><br>  <li>`done` - the video is ready to be downloaded</li><br>  <li>`failed` - there was an error rendering the video</li><br></ul>|
+|status|string|true|none|The status of the render task. <ul><br>  <li>`queued` - render is queued waiting to be rendered</li><br>  <li>`fetching` - assets are being fetched</li><br>  <li>`rendering` - the asset is being rendered</li><br>  <li>`saving` - the final asset is being saved to storage</li><br>  <li>`done` - the asset is ready to be downloaded</li><br>  <li>`failed` - there was an error rendering the asset</li><br></ul>|
 |error|string|false|none|An error message, only displayed if an error occurred.|
-|duration|number|false|none|The output video length in seconds.|
-|renderTime|number|false|none|The time taken to render the video in milliseconds.|
-|url|string|false|none|The URL of the final video. This will only be available if status is done.|
+|duration|number|false|none|The output video or audio length in seconds.|
+|renderTime|number|false|none|The time taken to render the asset in milliseconds.|
+|url|string|false|none|The URL of the final asset. This will only be available if status is done. This is a temporary URL and will be deleted after 24 hours. By default all assets are copied to the Shotstack hosting and CDN destination.|
 |poster|string|false|none|The URL of the poster image if requested. This will only be available if status is done.|
 |thumbnail|string|false|none|The URL of the thumbnail image if requested. This will only be available if status is done.|
 |data|[Edit](#schemaedit)|true|none|The timeline and output data to be rendered.|
@@ -2564,4 +2783,28 @@ The list of asset attributes and their values.
 |status|ready|
 |status|failed|
 |status|deleted|
+
+<h2 id="tocS_ShotstackDestination">ShotstackDestination</h2>
+<!-- backwards compatibility -->
+<a id="schemashotstackdestination"></a>
+<a id="schema_ShotstackDestination"></a>
+<a id="tocSshotstackdestination"></a>
+<a id="tocsshotstackdestination"></a>
+
+```json
+{
+  "provider": "shotstack",
+  "exclude": false
+}
+
+```
+
+Send rendered assets to the Shotstack hosting and CDN service. This destination is enabled by default.
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|provider|string|false|none|The destination to send rendered assets to - set to `shotstack` for Shotstack hosting and CDN.|
+|exclude|boolean|false|none|Set to `true` to opt-out from the Shotstack hosting and CDN service. All files must be downloaded within 24 hours of rendering.|
 
