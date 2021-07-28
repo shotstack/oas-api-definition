@@ -1605,6 +1605,8 @@ components:
           default: false
           example: false
       type: object
+      required:
+        - provider
   responses: {}
   parameters: {}
   examples: {}

@@ -2805,6 +2805,6 @@ Send rendered assets to the Shotstack hosting and CDN service. This destination 
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|provider|string|false|none|The destination to send rendered assets to - set to `shotstack` for Shotstack hosting and CDN.|
+|provider|string|true|none|The destination to send rendered assets to - set to `shotstack` for Shotstack hosting and CDN.|
 |exclude|boolean|false|none|Set to `true` to opt-out from the Shotstack hosting and CDN service. All files must be downloaded within 24 hours of rendering.|
 
