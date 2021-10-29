@@ -326,6 +326,8 @@ components:
           $ref: "#/components/schemas/Timeline"
         output:
           $ref: "#/components/schemas/Output"
+        merge:
+          $ref: "#/components/schemas/Merge"
         callback:
           type: string
           description: >-
@@ -352,6 +354,9 @@ components:
         - timeline
         - output
       type: object
+    Merge:
+      type: object
+      additionalProperties: true
     Timeline:
       description: >-
         A timeline represents the contents of a video edit over time, an audio edit over time, in
@@ -1269,6 +1274,11 @@ components:
           type: string
           example: medium
           default: medium
+        repeat:
+          description: Loop settings for gif files. Set to `true` to loop, `false` to play only once.
+          type: boolean
+          example: true
+          default: true
         range:
           $ref: "#/components/schemas/Range"
         poster:
