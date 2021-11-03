@@ -455,8 +455,15 @@ components:
         asset:
           description: >-
             The type of asset to display for the duration of this Clip. Value
-            must be one of <b>TitleAsset</b>, <b>ImageAsset</b>, <b>VideoAsset</b>,
-            <b>HtmlAsset</b>, <b>AudioAsset</b> or <b>LumaAsset</b>
+            must be one of:
+              <ul>
+                <li><a href="#tocs_videoasset">VideoAsset</a></li>
+                <li><a href="#tocs_imageasset">ImageAsset</a></li>
+                <li><a href="#tocs_titleasset">TitleAsset</a></li>
+                <li><a href="#tocs_htmlasset">HtmlAsset</a></li>
+                <li><a href="#tocs_audioasset">AudioAsset</a></li>
+                <li><a href="#tocs_lumaasset">LumaAsset</a></li>
+              </ul>
           oneOf:
             - $ref: "#/components/schemas/VideoAsset"
             - $ref: "#/components/schemas/ImageAsset"
@@ -576,6 +583,12 @@ components:
           description: Sets the opacity of the Clip where 1 is opaque and 0 is transparent.
           type: number
           default: 1
+        transformation:
+          description: >-
+            A transformation lets you modify the visual properties of a clip. Available
+            transformations are <b>rotate</b>, <b>skew</b> and <b>flip</b>. Transformations
+            can be combined to create interesting new shapes and effects.
+          $ref: "#/components/schemas/Transformation"
       required:
         - asset
         - start
@@ -1376,6 +1389,85 @@ components:
         - capture
         - scale
       type: object
+    Transformation:
+      description: >-
+        Apply one or more transformations to a clip. Transformations alter the visual
+        properties of a clip and can be combined to create new shapes and effects.
+      type: object
+      properties:
+        rotate: 
+          $ref: "#/components/schemas/RotateTransformation"
+        skew:
+          $ref: "#/components/schemas/SkewTransformation"
+        flip:
+          $ref: "#/components/schemas/FlipTransformation"
+    RotateTransformation:
+      description: >-
+        Rotate a clip by the specified angle in degrees. Rotation origin
+        is set based on the clips `position`.
+      type: object
+      properties:
+        angle:
+          description: >-
+            The angle to rotate the clip. Can be 0 to 360, or 0 to -360. Using a
+            positive number rotates the clip clockwise, negative numbers
+            counter-clockwise.
+          type: integer
+          default: 0
+          example: 45
+    SkewTransformation:
+      description: >-
+        Skew a clip so its edges are sheared at an angle. Use values between 0 and 3.
+        Over 3 the clip will be skewed almost flat.
+      type: object
+      properties:
+        x:
+          description: Skew the clip along it's x axis.
+          type: number
+          format: float
+          default: 0
+          example: 0.5
+        y:
+          description: Skew the clip along it's y axis.
+          type: number
+          format: float
+          default: 0
+          example: 0.5
+    FlipTransformation:
+      description: >-
+        Flip a clip vertically or horizontally. Acts as a mirror effect of the clip along
+        the selected plane.
+      type: object
+      properties:
+        horizontal:
+          description: Flip a clip horizontally.
+          type: boolean
+          default: false
+          example: true
+        vertical:
+          description: Flip a clip vertically.
+          type: boolean
+          default: false
+          example: true
+    ShotstackDestination:
+      description: >-
+        Send rendered assets to the Shotstack hosting and CDN service. This destination is enabled by default.
+      properties:
+        provider:
+          description: The destination to send rendered assets to - set to `shotstack` for Shotstack hosting and CDN.
+          type: string
+          default: shotstack
+          example: shotstack
+        exclude:
+          description: >-
+            Set to `true` to opt-out from the Shotstack hosting and CDN service. All files must be downloaded within
+            24 hours of rendering.
+          type: boolean
+          default: false
+          example: false
+      type: object
+      required:
+        - provider
     QueuedResponse:
       description: >-
         The response received after a [render request](#render-asset) is submitted. The render task is queued for
@@ -1598,25 +1690,6 @@ components:
           type: string
           example: "2021-06-30T09:42:30.168Z"
       type: object
-    ShotstackDestination:
-      description: >-
-        Send rendered assets to the Shotstack hosting and CDN service. This destination is enabled by default.
-      properties:
-        provider:
-          description: The destination to send rendered assets to - set to `shotstack` for Shotstack hosting and CDN.
-          type: string
-          default: shotstack
-          example: shotstack
-        exclude:
-          description: >-
-            Set to `true` to opt-out from the Shotstack hosting and CDN service. All files must be downloaded within
-            24 hours of rendering.
-          type: boolean
-          default: false
-          example: false
-      type: object
-      required:
-        - provider
   responses: {}
   parameters: {}
   examples: {}

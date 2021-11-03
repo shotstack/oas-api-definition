@@ -22,10 +22,15 @@
 
     
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600&family=Kanit:wght@600&display=swap" />
-<meta name="theme-color" content="#F3F7F9" />
+    <meta name="theme-color" content="#F3F7F9" />
 {{TAGS}}
 <!-- Renderer: Shins v2.3.2-6 -->
 <!-- Generator: Widdershins v4.0.1 -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
 <!-- backwards compatibility -->
 <!-- backwards compatibility -->
 <!-- backwards compatibility -->
@@ -176,6 +181,11 @@
                   </li>
                 
                   <li>
+                    <a href="#tocs_merge" class="toc-h2 toc-link" data-title="">Merge</a>
+                    
+                  </li>
+                
+                  <li>
                     <a href="#tocs_timeline" class="toc-h2 toc-link" data-title="">Timeline</a>
                     
                   </li>
@@ -271,6 +281,31 @@
                   </li>
                 
                   <li>
+                    <a href="#tocs_transformation" class="toc-h2 toc-link" data-title="">Transformation</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#tocs_rotatetransformation" class="toc-h2 toc-link" data-title="">RotateTransformation</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#tocs_skewtransformation" class="toc-h2 toc-link" data-title="">SkewTransformation</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#tocs_fliptransformation" class="toc-h2 toc-link" data-title="">FlipTransformation</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#tocs_shotstackdestination" class="toc-h2 toc-link" data-title="">ShotstackDestination</a>
+                    
+                  </li>
+                
+                  <li>
                     <a href="#tocs_queuedresponse" class="toc-h2 toc-link" data-title="">QueuedResponse</a>
                     
                   </li>
@@ -307,11 +342,6 @@
                 
                   <li>
                     <a href="#tocs_assetresponseattributes" class="toc-h2 toc-link" data-title="">AssetResponseAttributes</a>
-                    
-                  </li>
-                
-                  <li>
-                    <a href="#tocs_shotstackdestination" class="toc-h2 toc-link" data-title="">ShotstackDestination</a>
                     
                   </li>
                 
@@ -447,7 +477,20 @@ curl -X POST https://api.shotstack.io/{version}/render \
             },
             <span class="hljs-string">"effect"</span>: <span class="hljs-string">"zoomIn"</span>,
             <span class="hljs-string">"filter"</span>: <span class="hljs-string">"greyscale"</span>,
-            <span class="hljs-string">"opacity"</span>: <span class="hljs-number">1</span>
+            <span class="hljs-string">"opacity"</span>: <span class="hljs-number">1</span>,
+            <span class="hljs-string">"transformation"</span>: {
+              <span class="hljs-string">"rotate"</span>: {
+                <span class="hljs-string">"angle"</span>: <span class="hljs-number">45</span>
+              },
+              <span class="hljs-string">"skew"</span>: {
+                <span class="hljs-string">"x"</span>: <span class="hljs-number">0.5</span>,
+                <span class="hljs-string">"y"</span>: <span class="hljs-number">0.5</span>
+              },
+              <span class="hljs-string">"flip"</span>: {
+                <span class="hljs-string">"horizontal"</span>: <span class="hljs-literal">true</span>,
+                <span class="hljs-string">"vertical"</span>: <span class="hljs-literal">true</span>
+              }
+            }
           }
         ]
       }
@@ -465,6 +508,7 @@ curl -X POST https://api.shotstack.io/{version}/render \
     <span class="hljs-string">"fps"</span>: <span class="hljs-number">25</span>,
     <span class="hljs-string">"scaleTo"</span>: <span class="hljs-string">"preview"</span>,
     <span class="hljs-string">"quality"</span>: <span class="hljs-string">"medium"</span>,
+    <span class="hljs-string">"repeat"</span>: <span class="hljs-literal">true</span>,
     <span class="hljs-string">"range"</span>: {
       <span class="hljs-string">"start"</span>: <span class="hljs-number">3</span>,
       <span class="hljs-string">"length"</span>: <span class="hljs-number">6</span>
@@ -483,6 +527,7 @@ curl -X POST https://api.shotstack.io/{version}/render \
       }
     ]
   },
+  <span class="hljs-string">"merge"</span>: {},
   <span class="hljs-string">"callback"</span>: <span class="hljs-string">"https://my-server.com/callback.php"</span>,
   <span class="hljs-string">"disk"</span>: <span class="hljs-string">"local"</span>
 };
@@ -648,7 +693,20 @@ System.out.println(response.toString());
             },
             <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"zoomIn"</span>,
             <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"greyscale"</span>,
-            <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">1</span>
+            <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">1</span>,
+            <span class="hljs-attr">"transformation"</span>: {
+              <span class="hljs-attr">"rotate"</span>: {
+                <span class="hljs-attr">"angle"</span>: <span class="hljs-number">45</span>
+              },
+              <span class="hljs-attr">"skew"</span>: {
+                <span class="hljs-attr">"x"</span>: <span class="hljs-number">0.5</span>,
+                <span class="hljs-attr">"y"</span>: <span class="hljs-number">0.5</span>
+              },
+              <span class="hljs-attr">"flip"</span>: {
+                <span class="hljs-attr">"horizontal"</span>: <span class="hljs-literal">true</span>,
+                <span class="hljs-attr">"vertical"</span>: <span class="hljs-literal">true</span>
+              }
+            }
           }
         ]
       }
@@ -666,6 +724,7 @@ System.out.println(response.toString());
     <span class="hljs-attr">"fps"</span>: <span class="hljs-number">25</span>,
     <span class="hljs-attr">"scaleTo"</span>: <span class="hljs-string">"preview"</span>,
     <span class="hljs-attr">"quality"</span>: <span class="hljs-string">"medium"</span>,
+    <span class="hljs-attr">"repeat"</span>: <span class="hljs-literal">true</span>,
     <span class="hljs-attr">"range"</span>: {
       <span class="hljs-attr">"start"</span>: <span class="hljs-number">3</span>,
       <span class="hljs-attr">"length"</span>: <span class="hljs-number">6</span>
@@ -684,6 +743,7 @@ System.out.println(response.toString());
       }
     ]
   },
+  <span class="hljs-attr">"merge"</span>: {},
   <span class="hljs-attr">"callback"</span>: <span class="hljs-string">"https://my-server.com/callback.php"</span>,
   <span class="hljs-attr">"disk"</span>: <span class="hljs-string">"local"</span>
 }
@@ -1625,7 +1685,20 @@ DeveloperKey
             },
             <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"zoomIn"</span>,
             <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"greyscale"</span>,
-            <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">1</span>
+            <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">1</span>,
+            <span class="hljs-attr">"transformation"</span>: {
+              <span class="hljs-attr">"rotate"</span>: {
+                <span class="hljs-attr">"angle"</span>: <span class="hljs-number">45</span>
+              },
+              <span class="hljs-attr">"skew"</span>: {
+                <span class="hljs-attr">"x"</span>: <span class="hljs-number">0.5</span>,
+                <span class="hljs-attr">"y"</span>: <span class="hljs-number">0.5</span>
+              },
+              <span class="hljs-attr">"flip"</span>: {
+                <span class="hljs-attr">"horizontal"</span>: <span class="hljs-literal">true</span>,
+                <span class="hljs-attr">"vertical"</span>: <span class="hljs-literal">true</span>
+              }
+            }
           }
         ]
       }
@@ -1643,6 +1716,7 @@ DeveloperKey
     <span class="hljs-attr">"fps"</span>: <span class="hljs-number">25</span>,
     <span class="hljs-attr">"scaleTo"</span>: <span class="hljs-string">"preview"</span>,
     <span class="hljs-attr">"quality"</span>: <span class="hljs-string">"medium"</span>,
+    <span class="hljs-attr">"repeat"</span>: <span class="hljs-literal">true</span>,
     <span class="hljs-attr">"range"</span>: {
       <span class="hljs-attr">"start"</span>: <span class="hljs-number">3</span>,
       <span class="hljs-attr">"length"</span>: <span class="hljs-number">6</span>
@@ -1661,6 +1735,7 @@ DeveloperKey
       }
     ]
   },
+  <span class="hljs-attr">"merge"</span>: {},
   <span class="hljs-attr">"callback"</span>: <span class="hljs-string">"https://my-server.com/callback.php"</span>,
   <span class="hljs-attr">"disk"</span>: <span class="hljs-string">"local"</span>
 }
@@ -1692,6 +1767,13 @@ DeveloperKey
 <td>true</td>
 <td>none</td>
 <td>The output format, render range and type of media to generate.</td>
+</tr>
+<tr>
+<td>merge</td>
+<td><a href="#schemamerge">Merge</a></td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
 </tr>
 <tr>
 <td>callback</td>
@@ -1728,6 +1810,16 @@ DeveloperKey
 </tr>
 </tbody>
 </table>
+<h2 id="tocs_merge">Merge</h2>
+<p><a id="schemamerge"></a>
+<a id="schema_Merge"></a>
+<a id="tocSmerge"></a>
+<a id="tocsmerge"></a></p>
+<pre class="highlight tab tab-json"><code>{}
+
+</code></pre>
+<h3 id="properties">Properties</h3>
+<p><em>None</em></p>
 <h2 id="tocs_timeline">Timeline</h2>
 <p><a id="schematimeline"></a>
 <a id="schema_Timeline"></a>
@@ -1776,7 +1868,20 @@ DeveloperKey
           },
           <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"zoomIn"</span>,
           <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"greyscale"</span>,
-          <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">1</span>
+          <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">1</span>,
+          <span class="hljs-attr">"transformation"</span>: {
+            <span class="hljs-attr">"rotate"</span>: {
+              <span class="hljs-attr">"angle"</span>: <span class="hljs-number">45</span>
+            },
+            <span class="hljs-attr">"skew"</span>: {
+              <span class="hljs-attr">"x"</span>: <span class="hljs-number">0.5</span>,
+              <span class="hljs-attr">"y"</span>: <span class="hljs-number">0.5</span>
+            },
+            <span class="hljs-attr">"flip"</span>: {
+              <span class="hljs-attr">"horizontal"</span>: <span class="hljs-literal">true</span>,
+              <span class="hljs-attr">"vertical"</span>: <span class="hljs-literal">true</span>
+            }
+          }
         }
       ]
     }
@@ -1941,7 +2046,20 @@ DeveloperKey
       },
       <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"zoomIn"</span>,
       <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"greyscale"</span>,
-      <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">1</span>
+      <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">1</span>,
+      <span class="hljs-attr">"transformation"</span>: {
+        <span class="hljs-attr">"rotate"</span>: {
+          <span class="hljs-attr">"angle"</span>: <span class="hljs-number">45</span>
+        },
+        <span class="hljs-attr">"skew"</span>: {
+          <span class="hljs-attr">"x"</span>: <span class="hljs-number">0.5</span>,
+          <span class="hljs-attr">"y"</span>: <span class="hljs-number">0.5</span>
+        },
+        <span class="hljs-attr">"flip"</span>: {
+          <span class="hljs-attr">"horizontal"</span>: <span class="hljs-literal">true</span>,
+          <span class="hljs-attr">"vertical"</span>: <span class="hljs-literal">true</span>
+        }
+      }
     }
   ]
 }
@@ -2002,7 +2120,20 @@ DeveloperKey
   },
   <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"zoomIn"</span>,
   <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"greyscale"</span>,
-  <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">1</span>
+  <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">1</span>,
+  <span class="hljs-attr">"transformation"</span>: {
+    <span class="hljs-attr">"rotate"</span>: {
+      <span class="hljs-attr">"angle"</span>: <span class="hljs-number">45</span>
+    },
+    <span class="hljs-attr">"skew"</span>: {
+      <span class="hljs-attr">"x"</span>: <span class="hljs-number">0.5</span>,
+      <span class="hljs-attr">"y"</span>: <span class="hljs-number">0.5</span>
+    },
+    <span class="hljs-attr">"flip"</span>: {
+      <span class="hljs-attr">"horizontal"</span>: <span class="hljs-literal">true</span>,
+      <span class="hljs-attr">"vertical"</span>: <span class="hljs-literal">true</span>
+    }
+  }
 }
 
 </code></pre>
@@ -2024,7 +2155,7 @@ DeveloperKey
 <td>any</td>
 <td>true</td>
 <td>none</td>
-<td>The type of asset to display for the duration of this Clip. Value must be one of <b>TitleAsset</b>, <b>ImageAsset</b>, <b>VideoAsset</b>, <b>HtmlAsset</b>, <b>AudioAsset</b> or <b>LumaAsset</b></td>
+<td>The type of asset to display for the duration of this Clip. Value must be one of:<br />  <ul><br />    <li><a href="#tocs_videoasset">VideoAsset</a></li><br />    <li><a href="#tocs_imageasset">ImageAsset</a></li><br />    <li><a href="#tocs_titleasset">TitleAsset</a></li><br />    <li><a href="#tocs_htmlasset">HtmlAsset</a></li><br />    <li><a href="#tocs_audioasset">AudioAsset</a></li><br />    <li><a href="#tocs_lumaasset">LumaAsset</a></li><br />  </ul></td>
 </tr>
 </tbody>
 </table>
@@ -2235,6 +2366,13 @@ DeveloperKey
 <td>false</td>
 <td>none</td>
 <td>Sets the opacity of the Clip where 1 is opaque and 0 is transparent.</td>
+</tr>
+<tr>
+<td>transformation</td>
+<td><a href="#schematransformation">Transformation</a></td>
+<td>false</td>
+<td>none</td>
+<td>A transformation lets you modify the visual properties of a clip. Available transformations are <b>rotate</b>, <b>skew</b> and <b>flip</b>. Transformations can be combined to create interesting new shapes and effects.</td>
 </tr>
 </tbody>
 </table>
@@ -3626,6 +3764,7 @@ DeveloperKey
   <span class="hljs-attr">"fps"</span>: <span class="hljs-number">25</span>,
   <span class="hljs-attr">"scaleTo"</span>: <span class="hljs-string">"preview"</span>,
   <span class="hljs-attr">"quality"</span>: <span class="hljs-string">"medium"</span>,
+  <span class="hljs-attr">"repeat"</span>: <span class="hljs-literal">true</span>,
   <span class="hljs-attr">"range"</span>: {
     <span class="hljs-attr">"start"</span>: <span class="hljs-number">3</span>,
     <span class="hljs-attr">"length"</span>: <span class="hljs-number">6</span>
@@ -3707,6 +3846,13 @@ DeveloperKey
 <td>false</td>
 <td>none</td>
 <td>Adjust the output quality of the video, image or audio. Adjusting quality affects  render speed, download speeds and storage requirements due to file size. The default <code>medium</code> provides the most optimized choice for all three  factors. <ul><br />  <li><code>low</code> - slightly reduced quality, smaller file size</li><br />  <li><code>medium</code> - optimized quality, render speeds and file size</li><br />  <li><code>high</code> - slightly increased quality, larger file size</li><br /></ul></td>
+</tr>
+<tr>
+<td>repeat</td>
+<td>boolean</td>
+<td>false</td>
+<td>none</td>
+<td>Loop settings for gif files. Set to <code>true</code> to loop, <code>false</code> to play only once.</td>
 </tr>
 <tr>
 <td>range</td>
@@ -4017,6 +4163,214 @@ DeveloperKey
 </tr>
 </tbody>
 </table>
+<h2 id="tocs_transformation">Transformation</h2>
+<p><a id="schematransformation"></a>
+<a id="schema_Transformation"></a>
+<a id="tocStransformation"></a>
+<a id="tocstransformation"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">"rotate"</span>: {
+    <span class="hljs-attr">"angle"</span>: <span class="hljs-number">45</span>
+  },
+  <span class="hljs-attr">"skew"</span>: {
+    <span class="hljs-attr">"x"</span>: <span class="hljs-number">0.5</span>,
+    <span class="hljs-attr">"y"</span>: <span class="hljs-number">0.5</span>
+  },
+  <span class="hljs-attr">"flip"</span>: {
+    <span class="hljs-attr">"horizontal"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"vertical"</span>: <span class="hljs-literal">true</span>
+  }
+}
+
+</code></pre>
+<p>Apply one or more transformations to a clip. Transformations alter the visual properties of a clip and can be combined to create new shapes and effects.</p>
+<h3 id="properties">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>rotate</td>
+<td><a href="#schemarotatetransformation">RotateTransformation</a></td>
+<td>false</td>
+<td>none</td>
+<td>Rotate a clip.</td>
+</tr>
+<tr>
+<td>skew</td>
+<td><a href="#schemaskewtransformation">SkewTransformation</a></td>
+<td>false</td>
+<td>none</td>
+<td>Skew a clip so its edges are sheared at an angle.</td>
+</tr>
+<tr>
+<td>flip</td>
+<td><a href="#schemafliptransformation">FlipTransformation</a></td>
+<td>false</td>
+<td>none</td>
+<td>Flip a clip vertically or horizontally.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocs_rotatetransformation">RotateTransformation</h2>
+<p><a id="schemarotatetransformation"></a>
+<a id="schema_RotateTransformation"></a>
+<a id="tocSrotatetransformation"></a>
+<a id="tocsrotatetransformation"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">"angle"</span>: <span class="hljs-number">45</span>
+}
+
+</code></pre>
+<p>Rotate a clip.</p>
+<h3 id="properties">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>angle</td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+<td>The angle to rotate the clip. Can be 0 to 360, or 0 to -360. Using a positive number rotates the clip clockwise, negative numbers counter-clockwise.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocs_skewtransformation">SkewTransformation</h2>
+<p><a id="schemaskewtransformation"></a>
+<a id="schema_SkewTransformation"></a>
+<a id="tocSskewtransformation"></a>
+<a id="tocsskewtransformation"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">"x"</span>: <span class="hljs-number">0.5</span>,
+  <span class="hljs-attr">"y"</span>: <span class="hljs-number">0.5</span>
+}
+
+</code></pre>
+<p>Skew a clip so its edges are sheared at an angle.</p>
+<h3 id="properties">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>number(float)</td>
+<td>false</td>
+<td>none</td>
+<td>Skew the clip along it's x axis.</td>
+</tr>
+<tr>
+<td>y</td>
+<td>number(float)</td>
+<td>false</td>
+<td>none</td>
+<td>Skew the clip along it's y axis.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocs_fliptransformation">FlipTransformation</h2>
+<p><a id="schemafliptransformation"></a>
+<a id="schema_FlipTransformation"></a>
+<a id="tocSfliptransformation"></a>
+<a id="tocsfliptransformation"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">"horizontal"</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">"vertical"</span>: <span class="hljs-literal">true</span>
+}
+
+</code></pre>
+<p>Flip a clip vertically or horizontally.</p>
+<h3 id="properties">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>horizontal</td>
+<td>boolean</td>
+<td>false</td>
+<td>none</td>
+<td>Flip a clip horizontally.</td>
+</tr>
+<tr>
+<td>vertical</td>
+<td>boolean</td>
+<td>false</td>
+<td>none</td>
+<td>Flip a clip vertically.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocs_shotstackdestination">ShotstackDestination</h2>
+<p><a id="schemashotstackdestination"></a>
+<a id="schema_ShotstackDestination"></a>
+<a id="tocSshotstackdestination"></a>
+<a id="tocsshotstackdestination"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">"provider"</span>: <span class="hljs-string">"shotstack"</span>,
+  <span class="hljs-attr">"exclude"</span>: <span class="hljs-literal">false</span>
+}
+
+</code></pre>
+<p>Send rendered assets to the Shotstack hosting and CDN service. This destination is enabled by default.</p>
+<h3 id="properties">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>provider</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>The destination to send rendered assets to - set to <code>shotstack</code> for Shotstack hosting and CDN.</td>
+</tr>
+<tr>
+<td>exclude</td>
+<td>boolean</td>
+<td>false</td>
+<td>none</td>
+<td>Set to <code>true</code> to opt-out from the Shotstack hosting and CDN service. All files must be downloaded within 24 hours of rendering.</td>
+</tr>
+</tbody>
+</table>
 <h2 id="tocs_queuedresponse">QueuedResponse</h2>
 <p><a id="schemaqueuedresponse"></a>
 <a id="schema_QueuedResponse"></a>
@@ -4171,7 +4525,20 @@ DeveloperKey
                 },
                 <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"zoomIn"</span>,
                 <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"greyscale"</span>,
-                <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">1</span>
+                <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">1</span>,
+                <span class="hljs-attr">"transformation"</span>: {
+                  <span class="hljs-attr">"rotate"</span>: {
+                    <span class="hljs-attr">"angle"</span>: <span class="hljs-number">45</span>
+                  },
+                  <span class="hljs-attr">"skew"</span>: {
+                    <span class="hljs-attr">"x"</span>: <span class="hljs-number">0.5</span>,
+                    <span class="hljs-attr">"y"</span>: <span class="hljs-number">0.5</span>
+                  },
+                  <span class="hljs-attr">"flip"</span>: {
+                    <span class="hljs-attr">"horizontal"</span>: <span class="hljs-literal">true</span>,
+                    <span class="hljs-attr">"vertical"</span>: <span class="hljs-literal">true</span>
+                  }
+                }
               }
             ]
           }
@@ -4189,6 +4556,7 @@ DeveloperKey
         <span class="hljs-attr">"fps"</span>: <span class="hljs-number">25</span>,
         <span class="hljs-attr">"scaleTo"</span>: <span class="hljs-string">"preview"</span>,
         <span class="hljs-attr">"quality"</span>: <span class="hljs-string">"medium"</span>,
+        <span class="hljs-attr">"repeat"</span>: <span class="hljs-literal">true</span>,
         <span class="hljs-attr">"range"</span>: {
           <span class="hljs-attr">"start"</span>: <span class="hljs-number">3</span>,
           <span class="hljs-attr">"length"</span>: <span class="hljs-number">6</span>
@@ -4207,6 +4575,7 @@ DeveloperKey
           }
         ]
       },
+      <span class="hljs-attr">"merge"</span>: {},
       <span class="hljs-attr">"callback"</span>: <span class="hljs-string">"https://my-server.com/callback.php"</span>,
       <span class="hljs-attr">"disk"</span>: <span class="hljs-string">"local"</span>
     },
@@ -4312,7 +4681,20 @@ DeveloperKey
               },
               <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"zoomIn"</span>,
               <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"greyscale"</span>,
-              <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">1</span>
+              <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">1</span>,
+              <span class="hljs-attr">"transformation"</span>: {
+                <span class="hljs-attr">"rotate"</span>: {
+                  <span class="hljs-attr">"angle"</span>: <span class="hljs-number">45</span>
+                },
+                <span class="hljs-attr">"skew"</span>: {
+                  <span class="hljs-attr">"x"</span>: <span class="hljs-number">0.5</span>,
+                  <span class="hljs-attr">"y"</span>: <span class="hljs-number">0.5</span>
+                },
+                <span class="hljs-attr">"flip"</span>: {
+                  <span class="hljs-attr">"horizontal"</span>: <span class="hljs-literal">true</span>,
+                  <span class="hljs-attr">"vertical"</span>: <span class="hljs-literal">true</span>
+                }
+              }
             }
           ]
         }
@@ -4330,6 +4712,7 @@ DeveloperKey
       <span class="hljs-attr">"fps"</span>: <span class="hljs-number">25</span>,
       <span class="hljs-attr">"scaleTo"</span>: <span class="hljs-string">"preview"</span>,
       <span class="hljs-attr">"quality"</span>: <span class="hljs-string">"medium"</span>,
+      <span class="hljs-attr">"repeat"</span>: <span class="hljs-literal">true</span>,
       <span class="hljs-attr">"range"</span>: {
         <span class="hljs-attr">"start"</span>: <span class="hljs-number">3</span>,
         <span class="hljs-attr">"length"</span>: <span class="hljs-number">6</span>
@@ -4348,6 +4731,7 @@ DeveloperKey
         }
       ]
     },
+    <span class="hljs-attr">"merge"</span>: {},
     <span class="hljs-attr">"callback"</span>: <span class="hljs-string">"https://my-server.com/callback.php"</span>,
     <span class="hljs-attr">"disk"</span>: <span class="hljs-string">"local"</span>
   },
@@ -4762,48 +5146,13 @@ DeveloperKey
 </tr>
 </tbody>
 </table>
-<h2 id="tocs_shotstackdestination">ShotstackDestination</h2>
-<p><a id="schemashotstackdestination"></a>
-<a id="schema_ShotstackDestination"></a>
-<a id="tocSshotstackdestination"></a>
-<a id="tocsshotstackdestination"></a></p>
-<pre class="highlight tab tab-json"><code>{
-  <span class="hljs-attr">"provider"</span>: <span class="hljs-string">"shotstack"</span>,
-  <span class="hljs-attr">"exclude"</span>: <span class="hljs-literal">false</span>
-}
-
-</code></pre>
-<p>Send rendered assets to the Shotstack hosting and CDN service. This destination is enabled by default.</p>
-<h3 id="properties">Properties</h3>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Restrictions</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>provider</td>
-<td>string</td>
-<td>true</td>
-<td>none</td>
-<td>The destination to send rendered assets to - set to <code>shotstack</code> for Shotstack hosting and CDN.</td>
-</tr>
-<tr>
-<td>exclude</td>
-<td>boolean</td>
-<td>false</td>
-<td>none</td>
-<td>Set to <code>true</code> to opt-out from the Shotstack hosting and CDN service. All files must be downloaded within 24 hours of rendering.</td>
-</tr>
-</tbody>
-</table>
 <!-- Renderer: Shins v2.3.2-6 -->
 <!-- Generator: Widdershins v4.0.1 -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
 <!-- backwards compatibility -->
 <!-- backwards compatibility -->
 <!-- backwards compatibility -->

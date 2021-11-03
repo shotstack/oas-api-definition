@@ -137,7 +137,20 @@ const inputBody = {
             },
             "effect": "zoomIn",
             "filter": "greyscale",
-            "opacity": 1
+            "opacity": 1,
+            "transformation": {
+              "rotate": {
+                "angle": 45
+              },
+              "skew": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "flip": {
+                "horizontal": true,
+                "vertical": true
+              }
+            }
           }
         ]
       }
@@ -155,6 +168,7 @@ const inputBody = {
     "fps": 25,
     "scaleTo": "preview",
     "quality": "medium",
+    "repeat": true,
     "range": {
       "start": 3,
       "length": 6
@@ -173,6 +187,7 @@ const inputBody = {
       }
     ]
   },
+  "merge": {},
   "callback": "https://my-server.com/callback.php",
   "disk": "local"
 };
@@ -356,7 +371,20 @@ Queue and render the contents of a timeline as a video, image or audio file.
             },
             "effect": "zoomIn",
             "filter": "greyscale",
-            "opacity": 1
+            "opacity": 1,
+            "transformation": {
+              "rotate": {
+                "angle": 45
+              },
+              "skew": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "flip": {
+                "horizontal": true,
+                "vertical": true
+              }
+            }
           }
         ]
       }
@@ -374,6 +402,7 @@ Queue and render the contents of a timeline as a video, image or audio file.
     "fps": 25,
     "scaleTo": "preview",
     "quality": "medium",
+    "repeat": true,
     "range": {
       "start": 3,
       "length": 6
@@ -392,6 +421,7 @@ Queue and render the contents of a timeline as a video, image or audio file.
       }
     ]
   },
+  "merge": {},
   "callback": "https://my-server.com/callback.php",
   "disk": "local"
 }
@@ -1307,7 +1337,20 @@ DeveloperKey
             },
             "effect": "zoomIn",
             "filter": "greyscale",
-            "opacity": 1
+            "opacity": 1,
+            "transformation": {
+              "rotate": {
+                "angle": 45
+              },
+              "skew": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "flip": {
+                "horizontal": true,
+                "vertical": true
+              }
+            }
           }
         ]
       }
@@ -1325,6 +1368,7 @@ DeveloperKey
     "fps": 25,
     "scaleTo": "preview",
     "quality": "medium",
+    "repeat": true,
     "range": {
       "start": 3,
       "length": 6
@@ -1343,6 +1387,7 @@ DeveloperKey
       }
     ]
   },
+  "merge": {},
   "callback": "https://my-server.com/callback.php",
   "disk": "local"
 }
@@ -1357,6 +1402,7 @@ An edit defines the arrangement of a video on a timeline, an audio edit or an im
 |---|---|---|---|---|
 |timeline|[Timeline](#schematimeline)|true|none|A timeline represents the contents of a video edit over time, an audio edit over time, in seconds, or an image layout. A timeline consists of layers called tracks. Tracks are composed of titles, images, audio, html or video segments referred to as clips which are placed along the track at specific starting point and lasting for a specific amount of time.|
 |output|[Output](#schemaoutput)|true|none|The output format, render range and type of media to generate.|
+|merge|[Merge](#schemamerge)|false|none|none|
 |callback|string|false|none|An optional webhook callback URL used to receive status notifications when a render completes or fails. See [webhooks](https://shotstack.gitbook.io/docs/guides/architecting-an-application/webhooks) for  more details.|
 |disk|string|false|none|The disk type to use for storing footage and assets for each render. See [disk types](https://shotstack.gitbook.io/docs/guides/architecting-an-application/disk-types) for more details. <ul><br>  <li>`local` - optimized for high speed rendering with up to 512MB storage</li><br>  <li>`mount` - optimized for larger file sizes and longer videos with 5GB for source footage and 512MB for output render</li><br></ul>|
 
@@ -1366,6 +1412,22 @@ An edit defines the arrangement of a video on a timeline, an audio edit or an im
 |---|---|
 |disk|local|
 |disk|mount|
+
+<h2 id="tocS_Merge">Merge</h2>
+<!-- backwards compatibility -->
+<a id="schemamerge"></a>
+<a id="schema_Merge"></a>
+<a id="tocSmerge"></a>
+<a id="tocsmerge"></a>
+
+```json
+{}
+
+```
+
+### Properties
+
+*None*
 
 <h2 id="tocS_Timeline">Timeline</h2>
 <!-- backwards compatibility -->
@@ -1418,7 +1480,20 @@ An edit defines the arrangement of a video on a timeline, an audio edit or an im
           },
           "effect": "zoomIn",
           "filter": "greyscale",
-          "opacity": 1
+          "opacity": 1,
+          "transformation": {
+            "rotate": {
+              "angle": 45
+            },
+            "skew": {
+              "x": 0.5,
+              "y": 0.5
+            },
+            "flip": {
+              "horizontal": true,
+              "vertical": true
+            }
+          }
         }
       ]
     }
@@ -1512,7 +1587,20 @@ A music or audio file in mp3 format that plays for the duration of the rendered 
       },
       "effect": "zoomIn",
       "filter": "greyscale",
-      "opacity": 1
+      "opacity": 1,
+      "transformation": {
+        "rotate": {
+          "angle": 45
+        },
+        "skew": {
+          "x": 0.5,
+          "y": 0.5
+        },
+        "flip": {
+          "horizontal": true,
+          "vertical": true
+        }
+      }
     }
   ]
 }
@@ -1563,7 +1651,20 @@ A track contains an array of clips. Tracks are layered on top of each other in t
   },
   "effect": "zoomIn",
   "filter": "greyscale",
-  "opacity": 1
+  "opacity": 1,
+  "transformation": {
+    "rotate": {
+      "angle": 45
+    },
+    "skew": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "flip": {
+      "horizontal": true,
+      "vertical": true
+    }
+  }
 }
 
 ```
@@ -1574,7 +1675,7 @@ A clip is a container for a specific type of asset, i.e. a title, image, video, 
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|asset|any|true|none|The type of asset to display for the duration of this Clip. Value must be one of <b>TitleAsset</b>, <b>ImageAsset</b>, <b>VideoAsset</b>, <b>HtmlAsset</b>, <b>AudioAsset</b> or <b>LumaAsset</b>|
+|asset|any|true|none|The type of asset to display for the duration of this Clip. Value must be one of:<br>  <ul><br>    <li><a href="#tocs_videoasset">VideoAsset</a></li><br>    <li><a href="#tocs_imageasset">ImageAsset</a></li><br>    <li><a href="#tocs_titleasset">TitleAsset</a></li><br>    <li><a href="#tocs_htmlasset">HtmlAsset</a></li><br>    <li><a href="#tocs_audioasset">AudioAsset</a></li><br>    <li><a href="#tocs_lumaasset">LumaAsset</a></li><br>  </ul>|
 
 oneOf
 
@@ -1626,6 +1727,7 @@ continued
 |effect|string|false|none|A motion effect to apply to the Clip. <ul><br>  <li>`zoomIn` - slow zoom in</li><br>  <li>`zoomOut` - slow zoom out</li><br>  <li>`slideLeft` - slow slide (pan) left</li><br>  <li>`slideRight` - slow slide (pan) right</li><br>  <li>`slideUp` - slow slide (pan) up</li><br>  <li>`slideDown` - slow slide (pan) down</li><br></ul>|
 |filter|string|false|none|A filter effect to apply to the Clip. <ul><br>  <li>`boost` - boost contrast and saturation</li><br>  <li>`contrast` - increase contrast</li><br>  <li>`darken` - darken the scene</li><br>  <li>`greyscale` - remove colour</li><br>  <li>`lighten` - lighten the scene</li><br>  <li>`muted` - reduce saturation and contrast</li><br>  <li>`invert` - invert colors</li><br></ul>|
 |opacity|number|false|none|Sets the opacity of the Clip where 1 is opaque and 0 is transparent.|
+|transformation|[Transformation](#schematransformation)|false|none|A transformation lets you modify the visual properties of a clip. Available transformations are <b>rotate</b>, <b>skew</b> and <b>flip</b>. Transformations can be combined to create interesting new shapes and effects.|
 
 #### Enumerated Values
 
@@ -2150,6 +2252,7 @@ Crop the sides of an asset by a relative amount. The size of the crop is specifi
   "fps": 25,
   "scaleTo": "preview",
   "quality": "medium",
+  "repeat": true,
   "range": {
     "start": 3,
     "length": 6
@@ -2184,6 +2287,7 @@ The output format, render range and type of media to generate.
 |fps|integer|false|none|Override the default frames per second. Useful for when the source footage is recorded at 30fps, i.e. on  mobile devices. Lower frame rates can be used to add cinematic quality (24fps) or to create smaller file size/faster render times or animated gifs (12 or 15fps). Default is 25fps. <ul><br>  <li>`12` - 12fps</li><br>  <li>`15` - 15fps</li><br>  <li>`24` - 24fps</li><br>  <li>`25` - 25fps</li><br>  <li>`30` - 30fps</li><br></ul>|
 |scaleTo|string|false|none|Override the resolution and scale the video or image to render at a different size. When using scaleTo the asset should be edited at the resolution dimensions, i.e. use font sizes that look best at HD, then use scaleTo to output the file at SD and the text will be scaled to the correct size. This is useful if you want to create multiple asset sizes. <ul><br>  <li>`preview` - 512px x 288px @ 15fps</li><br>  <li>`mobile` - 640px x 360px @ 25fps</li><br>  <li>`sd` - 1024px x 576px @25fps</li><br>  <li>`hd` - 1280px x 720px @25fps</li><br>  <li>`1080` - 1920px x 1080px @25fps</li><br></ul>|
 |quality|string|false|none|Adjust the output quality of the video, image or audio. Adjusting quality affects  render speed, download speeds and storage requirements due to file size. The default `medium` provides the most optimized choice for all three  factors. <ul><br>  <li>`low` - slightly reduced quality, smaller file size</li><br>  <li>`medium` - optimized quality, render speeds and file size</li><br>  <li>`high` - slightly increased quality, larger file size</li><br></ul>|
+|repeat|boolean|false|none|Loop settings for gif files. Set to `true` to loop, `false` to play only once.|
 |range|[Range](#schemarange)|false|none|Specify a time range to render, i.e. to render only a portion of a video or audio file. Omit this setting to  export the entire video. Range can also be used to render a frame at a specific time point - setting a range and output format as `jpg` will output a single frame image at the range `start` point.|
 |poster|[Poster](#schemaposter)|false|none|Generate a poster image from a specific point on the timeline.|
 |thumbnail|[Thumbnail](#schemathumbnail)|false|none|Generate a thumbnail image from a specific point on the timeline.|
@@ -2317,6 +2421,134 @@ Generate a thumbnail image for the video or image at a specific point from the t
 |capture|number|true|none|The point on the timeline in seconds to capture a single frame to use as the thumbnail image.|
 |scale|number|true|none|Scale the thumbnail size to a fraction of the viewport size - i.e. setting the scale to 0.5 will scale  the thumbnail to half the size of the viewport.|
 
+<h2 id="tocS_Transformation">Transformation</h2>
+<!-- backwards compatibility -->
+<a id="schematransformation"></a>
+<a id="schema_Transformation"></a>
+<a id="tocStransformation"></a>
+<a id="tocstransformation"></a>
+
+```json
+{
+  "rotate": {
+    "angle": 45
+  },
+  "skew": {
+    "x": 0.5,
+    "y": 0.5
+  },
+  "flip": {
+    "horizontal": true,
+    "vertical": true
+  }
+}
+
+```
+
+Apply one or more transformations to a clip. Transformations alter the visual properties of a clip and can be combined to create new shapes and effects.
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|rotate|[RotateTransformation](#schemarotatetransformation)|false|none|Rotate a clip.|
+|skew|[SkewTransformation](#schemaskewtransformation)|false|none|Skew a clip so its edges are sheared at an angle.|
+|flip|[FlipTransformation](#schemafliptransformation)|false|none|Flip a clip vertically or horizontally.|
+
+<h2 id="tocS_RotateTransformation">RotateTransformation</h2>
+<!-- backwards compatibility -->
+<a id="schemarotatetransformation"></a>
+<a id="schema_RotateTransformation"></a>
+<a id="tocSrotatetransformation"></a>
+<a id="tocsrotatetransformation"></a>
+
+```json
+{
+  "angle": 45
+}
+
+```
+
+Rotate a clip.
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|angle|integer|false|none|The angle to rotate the clip. Can be 0 to 360, or 0 to -360. Using a positive number rotates the clip clockwise, negative numbers counter-clockwise.|
+
+<h2 id="tocS_SkewTransformation">SkewTransformation</h2>
+<!-- backwards compatibility -->
+<a id="schemaskewtransformation"></a>
+<a id="schema_SkewTransformation"></a>
+<a id="tocSskewtransformation"></a>
+<a id="tocsskewtransformation"></a>
+
+```json
+{
+  "x": 0.5,
+  "y": 0.5
+}
+
+```
+
+Skew a clip so its edges are sheared at an angle.
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|x|number(float)|false|none|Skew the clip along it's x axis.|
+|y|number(float)|false|none|Skew the clip along it's y axis.|
+
+<h2 id="tocS_FlipTransformation">FlipTransformation</h2>
+<!-- backwards compatibility -->
+<a id="schemafliptransformation"></a>
+<a id="schema_FlipTransformation"></a>
+<a id="tocSfliptransformation"></a>
+<a id="tocsfliptransformation"></a>
+
+```json
+{
+  "horizontal": true,
+  "vertical": true
+}
+
+```
+
+Flip a clip vertically or horizontally.
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|horizontal|boolean|false|none|Flip a clip horizontally.|
+|vertical|boolean|false|none|Flip a clip vertically.|
+
+<h2 id="tocS_ShotstackDestination">ShotstackDestination</h2>
+<!-- backwards compatibility -->
+<a id="schemashotstackdestination"></a>
+<a id="schema_ShotstackDestination"></a>
+<a id="tocSshotstackdestination"></a>
+<a id="tocsshotstackdestination"></a>
+
+```json
+{
+  "provider": "shotstack",
+  "exclude": false
+}
+
+```
+
+Send rendered assets to the Shotstack hosting and CDN service. This destination is enabled by default.
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|provider|string|true|none|The destination to send rendered assets to - set to `shotstack` for Shotstack hosting and CDN.|
+|exclude|boolean|false|none|Set to `true` to opt-out from the Shotstack hosting and CDN service. All files must be downloaded within 24 hours of rendering.|
+
 <h2 id="tocS_QueuedResponse">QueuedResponse</h2>
 <!-- backwards compatibility -->
 <a id="schemaqueuedresponse"></a>
@@ -2436,7 +2668,20 @@ The response data returned with the [QueuedResponse](#tocs_queuedresponse).
                 },
                 "effect": "zoomIn",
                 "filter": "greyscale",
-                "opacity": 1
+                "opacity": 1,
+                "transformation": {
+                  "rotate": {
+                    "angle": 45
+                  },
+                  "skew": {
+                    "x": 0.5,
+                    "y": 0.5
+                  },
+                  "flip": {
+                    "horizontal": true,
+                    "vertical": true
+                  }
+                }
               }
             ]
           }
@@ -2454,6 +2699,7 @@ The response data returned with the [QueuedResponse](#tocs_queuedresponse).
         "fps": 25,
         "scaleTo": "preview",
         "quality": "medium",
+        "repeat": true,
         "range": {
           "start": 3,
           "length": 6
@@ -2472,6 +2718,7 @@ The response data returned with the [QueuedResponse](#tocs_queuedresponse).
           }
         ]
       },
+      "merge": {},
       "callback": "https://my-server.com/callback.php",
       "disk": "local"
     },
@@ -2555,7 +2802,20 @@ The response received after a [render status request](#get-render-status) is sub
               },
               "effect": "zoomIn",
               "filter": "greyscale",
-              "opacity": 1
+              "opacity": 1,
+              "transformation": {
+                "rotate": {
+                  "angle": 45
+                },
+                "skew": {
+                  "x": 0.5,
+                  "y": 0.5
+                },
+                "flip": {
+                  "horizontal": true,
+                  "vertical": true
+                }
+              }
             }
           ]
         }
@@ -2573,6 +2833,7 @@ The response received after a [render status request](#get-render-status) is sub
       "fps": 25,
       "scaleTo": "preview",
       "quality": "medium",
+      "repeat": true,
       "range": {
         "start": 3,
         "length": 6
@@ -2591,6 +2852,7 @@ The response received after a [render status request](#get-render-status) is sub
         }
       ]
     },
+    "merge": {},
     "callback": "https://my-server.com/callback.php",
     "disk": "local"
   },
@@ -2783,28 +3045,4 @@ The list of asset attributes and their values.
 |status|ready|
 |status|failed|
 |status|deleted|
-
-<h2 id="tocS_ShotstackDestination">ShotstackDestination</h2>
-<!-- backwards compatibility -->
-<a id="schemashotstackdestination"></a>
-<a id="schema_ShotstackDestination"></a>
-<a id="tocSshotstackdestination"></a>
-<a id="tocsshotstackdestination"></a>
-
-```json
-{
-  "provider": "shotstack",
-  "exclude": false
-}
-
-```
-
-Send rendered assets to the Shotstack hosting and CDN service. This destination is enabled by default.
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|provider|string|true|none|The destination to send rendered assets to - set to `shotstack` for Shotstack hosting and CDN.|
-|exclude|boolean|false|none|Set to `true` to opt-out from the Shotstack hosting and CDN service. All files must be downloaded within 24 hours of rendering.|
 
