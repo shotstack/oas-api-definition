@@ -327,7 +327,13 @@ components:
         output:
           $ref: "#/components/schemas/Output"
         merge:
-          $ref: "#/components/schemas/Merge"
+          description: >-
+            An array of key/value pairs that provides an easy way to create templates with placeholders.
+            The placeholders can be used to find and replace keys with values. For example you can search
+            for the placeholder `{{NAME}}` and replace it with the value `Jane`. 
+          type: array
+          items:
+            $ref: "#/components/schemas/MergeField"
         callback:
           type: string
           description: >-
@@ -354,9 +360,6 @@ components:
         - timeline
         - output
       type: object
-    Merge:
-      type: object
-      additionalProperties: true
     Timeline:
       description: >-
         A timeline represents the contents of a video edit over time, an audio edit over time, in
@@ -1468,6 +1471,25 @@ components:
       type: object
       required:
         - provider
+    MergeField:
+      description: >-
+        A merge field consists of a key; `find`, and a value; `replace`. Merge fields can be used to replace placeholders
+        within the JSON edit to create re-usable templates. Placeholders should be a string with double brace delimiters,
+        i.e. `"{{NAME}}"`. A placeholder can be used for any value within the JSON edit.
+      type: object
+      properties:
+        find:
+          description: The string to find <u>without</u> delimiters.
+          type: string
+          example: NAME
+        replace:
+          description: >-
+            The replacement value. The replacement can be any valid JSON type -
+            string, boolean, number, etc..
+          example: Jane
+      required:
+        - find
+        - replace
     QueuedResponse:
       description: >-
         The response received after a [render request](#render-asset) is submitted. The render task is queued for

@@ -187,7 +187,12 @@ const inputBody = {
       }
     ]
   },
-  "merge": {},
+  "merge": [
+    {
+      "find": "NAME",
+      "replace": "Jane"
+    }
+  ],
   "callback": "https://my-server.com/callback.php",
   "disk": "local"
 };
@@ -421,7 +426,12 @@ Queue and render the contents of a timeline as a video, image or audio file.
       }
     ]
   },
-  "merge": {},
+  "merge": [
+    {
+      "find": "NAME",
+      "replace": "Jane"
+    }
+  ],
   "callback": "https://my-server.com/callback.php",
   "disk": "local"
 }
@@ -1387,7 +1397,12 @@ DeveloperKey
       }
     ]
   },
-  "merge": {},
+  "merge": [
+    {
+      "find": "NAME",
+      "replace": "Jane"
+    }
+  ],
   "callback": "https://my-server.com/callback.php",
   "disk": "local"
 }
@@ -1402,7 +1417,7 @@ An edit defines the arrangement of a video on a timeline, an audio edit or an im
 |---|---|---|---|---|
 |timeline|[Timeline](#schematimeline)|true|none|A timeline represents the contents of a video edit over time, an audio edit over time, in seconds, or an image layout. A timeline consists of layers called tracks. Tracks are composed of titles, images, audio, html or video segments referred to as clips which are placed along the track at specific starting point and lasting for a specific amount of time.|
 |output|[Output](#schemaoutput)|true|none|The output format, render range and type of media to generate.|
-|merge|[Merge](#schemamerge)|false|none|none|
+|merge|[[MergeField](#schemamergefield)]|false|none|An array of key/value pairs that provides an easy way to create templates with placeholders. The placeholders can be used to find and replace keys with values. For example you can search for the placeholder `{{NAME}}` and replace it with the value `Jane`.|
 |callback|string|false|none|An optional webhook callback URL used to receive status notifications when a render completes or fails. See [webhooks](https://shotstack.gitbook.io/docs/guides/architecting-an-application/webhooks) for  more details.|
 |disk|string|false|none|The disk type to use for storing footage and assets for each render. See [disk types](https://shotstack.gitbook.io/docs/guides/architecting-an-application/disk-types) for more details. <ul><br>  <li>`local` - optimized for high speed rendering with up to 512MB storage</li><br>  <li>`mount` - optimized for larger file sizes and longer videos with 5GB for source footage and 512MB for output render</li><br></ul>|
 
@@ -1412,22 +1427,6 @@ An edit defines the arrangement of a video on a timeline, an audio edit or an im
 |---|---|
 |disk|local|
 |disk|mount|
-
-<h2 id="tocS_Merge">Merge</h2>
-<!-- backwards compatibility -->
-<a id="schemamerge"></a>
-<a id="schema_Merge"></a>
-<a id="tocSmerge"></a>
-<a id="tocsmerge"></a>
-
-```json
-{}
-
-```
-
-### Properties
-
-*None*
 
 <h2 id="tocS_Timeline">Timeline</h2>
 <!-- backwards compatibility -->
@@ -2451,9 +2450,9 @@ Apply one or more transformations to a clip. Transformations alter the visual pr
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|rotate|[RotateTransformation](#schemarotatetransformation)|false|none|Rotate a clip.|
-|skew|[SkewTransformation](#schemaskewtransformation)|false|none|Skew a clip so its edges are sheared at an angle.|
-|flip|[FlipTransformation](#schemafliptransformation)|false|none|Flip a clip vertically or horizontally.|
+|rotate|[RotateTransformation](#schemarotatetransformation)|false|none|Rotate a clip by the specified angle in degrees. Rotation origin is set based on the clips `position`.|
+|skew|[SkewTransformation](#schemaskewtransformation)|false|none|Skew a clip so its edges are sheared at an angle. Use values between 0 and 3. Over 3 the clip will be skewed almost flat.|
+|flip|[FlipTransformation](#schemafliptransformation)|false|none|Flip a clip vertically or horizontally. Acts as a mirror effect of the clip along the selected plane.|
 
 <h2 id="tocS_RotateTransformation">RotateTransformation</h2>
 <!-- backwards compatibility -->
@@ -2469,7 +2468,7 @@ Apply one or more transformations to a clip. Transformations alter the visual pr
 
 ```
 
-Rotate a clip.
+Rotate a clip by the specified angle in degrees. Rotation origin is set based on the clips `position`.
 
 ### Properties
 
@@ -2492,7 +2491,7 @@ Rotate a clip.
 
 ```
 
-Skew a clip so its edges are sheared at an angle.
+Skew a clip so its edges are sheared at an angle. Use values between 0 and 3. Over 3 the clip will be skewed almost flat.
 
 ### Properties
 
@@ -2516,7 +2515,7 @@ Skew a clip so its edges are sheared at an angle.
 
 ```
 
-Flip a clip vertically or horizontally.
+Flip a clip vertically or horizontally. Acts as a mirror effect of the clip along the selected plane.
 
 ### Properties
 
@@ -2548,6 +2547,30 @@ Send rendered assets to the Shotstack hosting and CDN service. This destination 
 |---|---|---|---|---|
 |provider|string|true|none|The destination to send rendered assets to - set to `shotstack` for Shotstack hosting and CDN.|
 |exclude|boolean|false|none|Set to `true` to opt-out from the Shotstack hosting and CDN service. All files must be downloaded within 24 hours of rendering.|
+
+<h2 id="tocS_MergeField">MergeField</h2>
+<!-- backwards compatibility -->
+<a id="schemamergefield"></a>
+<a id="schema_MergeField"></a>
+<a id="tocSmergefield"></a>
+<a id="tocsmergefield"></a>
+
+```json
+{
+  "find": "NAME",
+  "replace": "Jane"
+}
+
+```
+
+A merge field consists of a key; `find`, and a value; `replace`. Merge fields can be used to replace placeholders within the JSON edit to create re-usable templates. Placeholders should be a string with double brace delimiters, i.e. `"{{NAME}}"`. A placeholder can be used for any value within the JSON edit.
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|find|string|true|none|The string to find <u>without</u> delimiters.|
+|replace|any|true|none|The replacement value. The replacement can be any valid JSON type - string, boolean, number, etc..|
 
 <h2 id="tocS_QueuedResponse">QueuedResponse</h2>
 <!-- backwards compatibility -->
@@ -2718,7 +2741,12 @@ The response data returned with the [QueuedResponse](#tocs_queuedresponse).
           }
         ]
       },
-      "merge": {},
+      "merge": [
+        {
+          "find": "NAME",
+          "replace": "Jane"
+        }
+      ],
       "callback": "https://my-server.com/callback.php",
       "disk": "local"
     },
@@ -2852,7 +2880,12 @@ The response received after a [render status request](#get-render-status) is sub
         }
       ]
     },
-    "merge": {},
+    "merge": [
+      {
+        "find": "NAME",
+        "replace": "Jane"
+      }
+    ],
     "callback": "https://my-server.com/callback.php",
     "disk": "local"
   },
