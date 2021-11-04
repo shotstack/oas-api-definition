@@ -329,6 +329,8 @@ func main() {
 
 Queue and render the contents of a timeline as a video, image or audio file.
 
+**Base URL:** https://api.shotstack.io/{version}
+
 > Body parameter
 
 ```json
@@ -442,12 +444,6 @@ Queue and render the contents of a timeline as a video, image or audio file.
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |body|body|[Edit](#schemaedit)|true|The video, image or audio edit specified using JSON.|
-
-#### Detailed descriptions
-
-**body**: The video, image or audio edit specified using JSON.
-
-**base URL:** https://api.shotstack.io/{version}
 
 > Example responses
 
@@ -627,7 +623,7 @@ func main() {
 
 Get the rendering status, temporary asset url and details of a render by ID.
 
-**base URL:** https://api.shotstack.io/{version}
+**Base URL:** https://api.shotstack.io/{version}
 
 <h3 id="get-render-status-parameters">Parameters</h3>
 
@@ -729,6 +725,170 @@ Get the rendering status, temporary asset url and details of a render by ID.
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|The render status details|[RenderResponse](#schemarenderresponse)|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+DeveloperKey
+</aside>
+
+## Inspect Media
+
+<a id="opIdprobe"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://api.shotstack.io/{version}/probe/{url} \
+  -H 'x-api-key: API_KEY'
+
+```
+
+```http
+GET https://api.shotstack.io/{version}/probe/{url} HTTP/1.1
+Host: api.shotstack.io
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+
+const headers = {
+  'x-api-key':'API_KEY'
+};
+
+fetch('https://api.shotstack.io/{version}/probe/{url}',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```php
+<?php
+
+require 'vendor/autoload.php';
+
+$headers = array(
+    'x-api-key' => 'API_KEY',
+);
+
+$client = new \GuzzleHttp\Client();
+
+// Define array of request body.
+$request_body = array();
+
+try {
+    $response = $client->request('GET','https://api.shotstack.io/{version}/probe/{url}', array(
+        'headers' => $headers,
+        'json' => $request_body,
+       )
+    );
+    print_r($response->getBody()->getContents());
+ }
+ catch (\GuzzleHttp\Exception\BadResponseException $e) {
+    // handle exception or api errors.
+    print_r($e->getMessage());
+ }
+
+ // ...
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'x-api-key' => 'API_KEY'
+}
+
+result = RestClient.get 'https://api.shotstack.io/{version}/probe/{url}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'x-api-key': 'API_KEY'
+}
+
+r = requests.get('https://api.shotstack.io/{version}/probe/{url}', headers = headers)
+
+print(r.json())
+
+```
+
+```java
+URL obj = new URL("https://api.shotstack.io/{version}/probe/{url}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "x-api-key": []string{"API_KEY"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "https://api.shotstack.io/{version}/probe/{url}", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`GET /probe/{url}`
+
+Inspects any media asset (image, video, audio) on the internet using a hosted version of [FFprobe](https://ffmpeg.org/ffprobe.html).
+
+**Base URL:** https://api.shotstack.io/{version}
+
+<h3 id="inspect-media-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|url|path|string|true|The URL of the asset to inspect, must be **URL encoded**.|
+
+<h3 id="inspect-media-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|FFprobe response formatted as JSON.|None|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -889,7 +1049,7 @@ func main() {
 
 The Serve API is used to interact with, and delete hosted assets including videos, images, audio files,  thumbnails and poster images. Use this endpoint to fetch an asset by asset id. Note that an asset id is unique for each asset and different from the render id.
 
-**base URL:** https://api.shotstack.io/serve/{version}
+**Base URL:** https://api.shotstack.io/serve/{version}
 
 <h3 id="get-asset-parameters">Parameters</h3>
 
@@ -1078,7 +1238,7 @@ func main() {
 
 Delete an asset by its asset id. If a render creates multiple assets, such as thumbnail and poster images, each asset must be deleted individually by the asset id.
 
-**base URL:** https://api.shotstack.io/serve/{version}
+**Base URL:** https://api.shotstack.io/serve/{version}
 
 <h3 id="delete-asset-parameters">Parameters</h3>
 
@@ -1249,7 +1409,7 @@ func main() {
 
 A render may generate more than one file, such as a video, thumbnail and poster image. When the assets are created the only known id is the render id returned by the original [render request](#render-video), status  request or webhook. This endpoint lets you look up one or more assets by the render id.
 
-**base URL:** https://api.shotstack.io/serve/{version}
+**Base URL:** https://api.shotstack.io/serve/{version}
 
 <h3 id="get-asset-by-render-id-parameters">Parameters</h3>
 

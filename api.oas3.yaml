@@ -58,15 +58,16 @@ paths:
                   id: 2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7
               schema:
                 $ref: "#/components/schemas/QueuedResponse"
-      description: Queue and render the contents of a timeline as a video, image or audio file.
+      description: >-
+        Queue and render the contents of a timeline as a video, image or audio file.
+
+
+        **Base URL:** https://api.shotstack.io/{version}
       summary: Render Asset
       operationId: postRender
       requestBody:
         description: >-
           The video, image or audio edit specified using JSON.
-
-
-          **base URL:** https://api.shotstack.io/{version}
         content:
           application/json:
             example:
@@ -193,7 +194,7 @@ paths:
         Get the rendering status, temporary asset url and details of a render by ID.
 
 
-        **base URL:** https://api.shotstack.io/{version}
+        **Base URL:** https://api.shotstack.io/{version}
       operationId: getRender
       summary: Get Render Status
       security:
@@ -228,6 +229,31 @@ paths:
           Used when data is set to true, it will show the [merge fields](#tocs_mergefield)
           merged in to the data response.
         example: false
+  /probe/{url}:
+    get:
+      responses:
+        200:
+          description: FFprobe response formatted as JSON.
+      description: >-
+        Inspects any media asset (image, video, audio) on the internet using a hosted version
+        of [FFprobe](https://ffmpeg.org/ffprobe.html). The probe endpoint returns useful information
+        about an asset such as width, height, duration, rotation, framerate, etc...
+
+
+        **Base URL:** https://api.shotstack.io/{version}
+      operationId: probe
+      summary: Inspect Media
+      security:
+        - DeveloperKey: []
+      tags:
+        - Edit
+    parameters:
+      - in: path
+        name: url
+        required: true
+        schema:
+          type: string
+        description: The URL of the media to inspect, must be **URL encoded**.
   /assets/{id}:
     get:
       responses:
@@ -257,7 +283,7 @@ paths:
         for each asset and different from the render id.
 
 
-        **base URL:** https://api.shotstack.io/serve/{version}
+        **Base URL:** https://api.shotstack.io/serve/{version}
       operationId: getAsset
       summary: Get Asset
       security:
@@ -273,7 +299,7 @@ paths:
         each asset must be deleted individually by the asset id.
 
 
-        **base URL:** https://api.shotstack.io/serve/{version}
+        **Base URL:** https://api.shotstack.io/serve/{version}
       operationId: deleteAsset
       summary: Delete Asset
       security:
@@ -318,7 +344,7 @@ paths:
         request or webhook. This endpoint lets you look up one or more assets by the render id.
 
 
-        **base URL:** https://api.shotstack.io/serve/{version}
+        **Base URL:** https://api.shotstack.io/serve/{version}
       operationId: getAssetByRenderId
       summary: Get Asset by Render ID
       security:
@@ -1504,7 +1530,7 @@ components:
         replace:
           description: >-
             The replacement value. The replacement can be any valid JSON type -
-            string, boolean, number, etc..
+            string, boolean, number, etc...
           example: Jane
       required:
         - find
