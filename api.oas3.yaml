@@ -631,7 +631,7 @@ components:
           description: Sets the opacity of the Clip where 1 is opaque and 0 is transparent.
           type: number
           default: 1
-        transformation:
+        transform:
           description: >-
             A transformation lets you modify the visual properties of a clip. Available
             transformations are <b>rotate</b>, <b>skew</b> and <b>flip</b>. Transformations

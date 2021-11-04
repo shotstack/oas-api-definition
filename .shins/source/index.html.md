@@ -138,7 +138,7 @@ const inputBody = {
             "effect": "zoomIn",
             "filter": "greyscale",
             "opacity": 1,
-            "transformation": {
+            "transform": {
               "rotate": {
                 "angle": 45
               },
@@ -379,7 +379,7 @@ Queue and render the contents of a timeline as a video, image or audio file.
             "effect": "zoomIn",
             "filter": "greyscale",
             "opacity": 1,
-            "transformation": {
+            "transform": {
               "rotate": {
                 "angle": 45
               },
@@ -1510,7 +1510,7 @@ DeveloperKey
             "effect": "zoomIn",
             "filter": "greyscale",
             "opacity": 1,
-            "transformation": {
+            "transform": {
               "rotate": {
                 "angle": 45
               },
@@ -1642,7 +1642,7 @@ An edit defines the arrangement of a video on a timeline, an audio edit or an im
           "effect": "zoomIn",
           "filter": "greyscale",
           "opacity": 1,
-          "transformation": {
+          "transform": {
             "rotate": {
               "angle": 45
             },
@@ -1749,7 +1749,7 @@ A music or audio file in mp3 format that plays for the duration of the rendered 
       "effect": "zoomIn",
       "filter": "greyscale",
       "opacity": 1,
-      "transformation": {
+      "transform": {
         "rotate": {
           "angle": 45
         },
@@ -1813,7 +1813,7 @@ A track contains an array of clips. Tracks are layered on top of each other in t
   "effect": "zoomIn",
   "filter": "greyscale",
   "opacity": 1,
-  "transformation": {
+  "transform": {
     "rotate": {
       "angle": 45
     },
@@ -1888,7 +1888,7 @@ continued
 |effect|string|false|none|A motion effect to apply to the Clip. <ul><br>  <li>`zoomIn` - slow zoom in</li><br>  <li>`zoomOut` - slow zoom out</li><br>  <li>`slideLeft` - slow slide (pan) left</li><br>  <li>`slideRight` - slow slide (pan) right</li><br>  <li>`slideUp` - slow slide (pan) up</li><br>  <li>`slideDown` - slow slide (pan) down</li><br></ul>|
 |filter|string|false|none|A filter effect to apply to the Clip. <ul><br>  <li>`boost` - boost contrast and saturation</li><br>  <li>`contrast` - increase contrast</li><br>  <li>`darken` - darken the scene</li><br>  <li>`greyscale` - remove colour</li><br>  <li>`lighten` - lighten the scene</li><br>  <li>`muted` - reduce saturation and contrast</li><br>  <li>`invert` - invert colors</li><br></ul>|
 |opacity|number|false|none|Sets the opacity of the Clip where 1 is opaque and 0 is transparent.|
-|transformation|[Transformation](#schematransformation)|false|none|A transformation lets you modify the visual properties of a clip. Available transformations are <b>rotate</b>, <b>skew</b> and <b>flip</b>. Transformations can be combined to create interesting new shapes and effects.|
+|transform|[Transformation](#schematransformation)|false|none|A transformation lets you modify the visual properties of a clip. Available transformations are <b>rotate</b>, <b>skew</b> and <b>flip</b>. Transformations can be combined to create interesting new shapes and effects.|
 
 #### Enumerated Values
 
@@ -2854,7 +2854,7 @@ The response data returned with the [QueuedResponse](#tocs_queuedresponse).
                 "effect": "zoomIn",
                 "filter": "greyscale",
                 "opacity": 1,
-                "transformation": {
+                "transform": {
                   "rotate": {
                     "angle": 45
                   },
@@ -2993,7 +2993,7 @@ The response received after a [render status request](#get-render-status) is sub
               "effect": "zoomIn",
               "filter": "greyscale",
               "opacity": 1,
-              "transformation": {
+              "transform": {
                 "rotate": {
                   "angle": 45
                 },
