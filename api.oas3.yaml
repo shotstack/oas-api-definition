@@ -234,6 +234,10 @@ paths:
       responses:
         200:
           description: FFprobe response formatted as JSON.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProbeResponse"
       description: >-
         Inspects any media asset (image, video, audio) on the internet using a hosted version
         of [FFprobe](https://ffmpeg.org/ffprobe.html). The probe endpoint returns useful information
@@ -1671,6 +1675,27 @@ components:
         - data
         - created
         - updated
+      type: object
+    ProbeResponse:
+      description: >-
+        The response received after a [probe request](#inspect-media) is submitted. The probe requests returns data from FFprobe
+        formatted as JSON.
+      properties:
+        success:
+          description: "`true` if media successfully read, else `false`."
+          type: boolean
+          example: true
+        message:
+          description: "`Created`, `Bad Request` or an error message."
+          type: string
+          example: Created
+        response:
+          description: The response from FFmpeg in JSON format
+          type: object
+      required:
+        - success
+        - message
+        - response
       type: object
     AssetResponse:
       description: >-

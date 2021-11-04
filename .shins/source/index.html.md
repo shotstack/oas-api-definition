@@ -740,6 +740,7 @@ DeveloperKey
 ```shell
 # You can also use wget
 curl -X GET https://api.shotstack.io/{version}/probe/{url} \
+  -H 'Accept: application/json' \
   -H 'x-api-key: API_KEY'
 
 ```
@@ -747,6 +748,7 @@ curl -X GET https://api.shotstack.io/{version}/probe/{url} \
 ```http
 GET https://api.shotstack.io/{version}/probe/{url} HTTP/1.1
 Host: api.shotstack.io
+Accept: application/json
 
 ```
 
@@ -754,6 +756,7 @@ Host: api.shotstack.io
 const fetch = require('node-fetch');
 
 const headers = {
+  'Accept':'application/json',
   'x-api-key':'API_KEY'
 };
 
@@ -777,6 +780,7 @@ fetch('https://api.shotstack.io/{version}/probe/{url}',
 require 'vendor/autoload.php';
 
 $headers = array(
+    'Accept' => 'application/json',
     'x-api-key' => 'API_KEY',
 );
 
@@ -807,6 +811,7 @@ require 'rest-client'
 require 'json'
 
 headers = {
+  'Accept' => 'application/json',
   'x-api-key' => 'API_KEY'
 }
 
@@ -821,6 +826,7 @@ p JSON.parse(result)
 ```python
 import requests
 headers = {
+  'Accept': 'application/json',
   'x-api-key': 'API_KEY'
 }
 
@@ -858,6 +864,7 @@ import (
 func main() {
 
     headers := map[string][]string{
+        "Accept": []string{"application/json"},
         "x-api-key": []string{"API_KEY"},
     }
 
@@ -884,11 +891,23 @@ Inspects any media asset (image, video, audio) on the internet using a hosted ve
 |---|---|---|---|---|
 |url|path|string|true|The URL of the media to inspect, must be **URL encoded**.|
 
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "success": true,
+  "message": "Created",
+  "response": {}
+}
+```
+
 <h3 id="inspect-media-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|FFprobe response formatted as JSON.|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|FFprobe response formatted as JSON.|[ProbeResponse](#schemaproberesponse)|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -3087,6 +3106,32 @@ The response data returned with the [RenderResponse](#tocs_renderresponse) inclu
 |status|saving|
 |status|done|
 |status|failed|
+
+<h2 id="tocS_ProbeResponse">ProbeResponse</h2>
+<!-- backwards compatibility -->
+<a id="schemaproberesponse"></a>
+<a id="schema_ProbeResponse"></a>
+<a id="tocSproberesponse"></a>
+<a id="tocsproberesponse"></a>
+
+```json
+{
+  "success": true,
+  "message": "Created",
+  "response": {}
+}
+
+```
+
+The response received after a [probe request](#inspect-media) is submitted. The probe requests returns data from FFprobe formatted as JSON.
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|success|boolean|true|none|`true` if media successfully read, else `false`.|
+|message|string|true|none|`Created`, `Bad Request` or an error message.|
+|response|object|true|none|The response from FFmpeg in JSON format|
 
 <h2 id="tocS_AssetResponse">AssetResponse</h2>
 <!-- backwards compatibility -->

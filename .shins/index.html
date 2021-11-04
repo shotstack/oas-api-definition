@@ -60,6 +60,7 @@
 <!-- backwards compatibility -->
 <!-- backwards compatibility -->
 <!-- backwards compatibility -->
+<!-- backwards compatibility -->
   </head>
 
   <body data-languages="[&quot;shell&quot;,&quot;http&quot;,&quot;javascript--nodejs&quot;,&quot;php&quot;,&quot;ruby&quot;,&quot;python&quot;,&quot;java&quot;,&quot;go&quot;]">
@@ -327,6 +328,11 @@
                 
                   <li>
                     <a href="#tocs_renderresponsedata" class="toc-h2 toc-link" data-title="">RenderResponseData</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#tocs_proberesponse" class="toc-h2 toc-link" data-title="">ProbeResponse</a>
                     
                   </li>
                 
@@ -1104,16 +1110,19 @@ DeveloperKey
 </blockquote>
 <pre class="highlight tab tab-shell"><code><span class="hljs-comment"># You can also use wget</span>
 curl -X GET https://api.shotstack.io/{version}/probe/{url} \
+  -H <span class="hljs-string">'Accept: application/json'</span> \
   -H <span class="hljs-string">'x-api-key: API_KEY'</span>
 
 </code></pre>
 <pre class="highlight tab tab-http"><code><span class="hljs-keyword">GET</span> <span class="hljs-string">https://api.shotstack.io/{version}/probe/{url}</span> HTTP/1.1
 <span class="hljs-attribute">Host</span>: api.shotstack.io
+<span class="hljs-attribute">Accept</span>: application/json
 
 </code></pre>
 <pre class="highlight tab tab-javascript--nodejs"><code><span class="hljs-keyword">const</span> fetch = <span class="hljs-built_in">require</span>(<span class="hljs-string">'node-fetch'</span>);
 
 <span class="hljs-keyword">const</span> headers = {
+  <span class="hljs-string">'Accept'</span>:<span class="hljs-string">'application/json'</span>,
   <span class="hljs-string">'x-api-key'</span>:<span class="hljs-string">'API_KEY'</span>
 };
 
@@ -1130,7 +1139,8 @@ fetch(<span class="hljs-string">'https://api.shotstack.io/{version}/probe/{url}'
 });
 
 </code></pre>
-<pre class="highlight tab tab-php"><code> <span class="hljs-string">'API_KEY'</span>,
+<pre class="highlight tab tab-php"><code> <span class="hljs-string">'application/json'</span>,
+    <span class="hljs-string">'x-api-key'</span> =&gt; <span class="hljs-string">'API_KEY'</span>,
 );
 
 $client = <span class="hljs-keyword">new</span> \GuzzleHttp\Client();
@@ -1158,6 +1168,7 @@ $request_body = <span class="hljs-keyword">array</span>();
 <span class="hljs-keyword">require</span> <span class="hljs-string">'json'</span>
 
 headers = {
+  <span class="hljs-string">'Accept'</span> =&gt; <span class="hljs-string">'application/json'</span>,
   <span class="hljs-string">'x-api-key'</span> =&gt; <span class="hljs-string">'API_KEY'</span>
 }
 
@@ -1170,6 +1181,7 @@ p JSON.parse(result)
 </code></pre>
 <pre class="highlight tab tab-python"><code><span class="hljs-keyword">import</span> requests
 headers = {
+  <span class="hljs-string">'Accept'</span>: <span class="hljs-string">'application/json'</span>,
   <span class="hljs-string">'x-api-key'</span>: <span class="hljs-string">'API_KEY'</span>
 }
 
@@ -1203,6 +1215,7 @@ System.out.println(response.toString());
 <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
 
     headers := <span class="hljs-keyword">map</span>[<span class="hljs-keyword">string</span>][]<span class="hljs-keyword">string</span>{
+        <span class="hljs-string">"Accept"</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">"application/json"</span>},
         <span class="hljs-string">"x-api-key"</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">"API_KEY"</span>},
     }
 
@@ -1240,6 +1253,18 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
+<blockquote>
+<p>Example responses</p>
+</blockquote>
+<blockquote>
+<p>200 Response</p>
+</blockquote>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">"success"</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">"message"</span>: <span class="hljs-string">"Created"</span>,
+  <span class="hljs-attr">"response"</span>: {}
+}
+</code></pre>
 <h3 id="inspect-media-responses">Responses</h3>
 <table>
 <thead>
@@ -1255,7 +1280,7 @@ System.out.println(response.toString());
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
 <td>FFprobe response formatted as JSON.</td>
-<td>None</td>
+<td><a href="#schemaproberesponse">ProbeResponse</a></td>
 </tr>
 </tbody>
 </table>
@@ -5119,6 +5144,54 @@ DeveloperKey
 </tr>
 </tbody>
 </table>
+<h2 id="tocs_proberesponse">ProbeResponse</h2>
+<p><a id="schemaproberesponse"></a>
+<a id="schema_ProbeResponse"></a>
+<a id="tocSproberesponse"></a>
+<a id="tocsproberesponse"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">"success"</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">"message"</span>: <span class="hljs-string">"Created"</span>,
+  <span class="hljs-attr">"response"</span>: {}
+}
+
+</code></pre>
+<p>The response received after a <a href="#inspect-media">probe request</a> is submitted. The probe requests returns data from FFprobe formatted as JSON.</p>
+<h3 id="properties">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>success</td>
+<td>boolean</td>
+<td>true</td>
+<td>none</td>
+<td><code>true</code> if media successfully read, else <code>false</code>.</td>
+</tr>
+<tr>
+<td>message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td><code>Created</code>, <code>Bad Request</code> or an error message.</td>
+</tr>
+<tr>
+<td>response</td>
+<td>object</td>
+<td>true</td>
+<td>none</td>
+<td>The response from FFmpeg in JSON format</td>
+</tr>
+</tbody>
+</table>
 <h2 id="tocs_assetresponse">AssetResponse</h2>
 <p><a id="schemaassetresponse"></a>
 <a id="schema_AssetResponse"></a>
@@ -5386,6 +5459,7 @@ DeveloperKey
 </table>
 <!-- Renderer: Shins v2.3.2-6 -->
 <!-- Generator: Widdershins v4.0.1 -->
+<!-- backwards compatibility -->
 <!-- backwards compatibility -->
 <!-- backwards compatibility -->
 <!-- backwards compatibility -->
