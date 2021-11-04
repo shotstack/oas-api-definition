@@ -633,9 +633,9 @@ Get the rendering status, temporary asset url and details of a render by ID.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
+|id|path|string|true|The id of the timeline render task in UUID format|
 |data|query|boolean|false|Include the data parameter in the response. The data parameter includes the original timeline, output and other settings sent to the API.<br><br><b>Note:</b> the default is currently `true`, this is deprecated and the default will soon be `false`. If you rely on the data being returned in the response you should explicitly set the parameter to `true`.|
 |merged|query|boolean|false|Used when data is set to true, it will show the [merge fields](#tocs_mergefield) merged in to the data response.|
-|id|path|string|true|The id of the timeline render task in UUID format|
 
 > Example responses
 

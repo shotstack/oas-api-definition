@@ -124,26 +124,6 @@ paths:
         - Edit
   /render/{id}:
     get:
-      parameters:
-        - in: query
-          name: data
-          schema:
-            type: boolean
-          description: >-
-            Include the data parameter in the response. The data parameter includes the original
-            timeline, output and other settings sent to the API.<br><br><b>Note:</b> the default
-            is currently `true`, this is deprecated and the default will soon be `false`. If you
-            rely on the data being returned in the response you should explicitly set the
-            parameter to `true`.
-          example: false
-        - in: query
-          name: merged
-          schema:
-            type: boolean
-          description: >-
-            Used when data is set to true, it will show the [merge fields](#tocs_mergefield)
-            merged in to the data response.
-          example: false
       responses:
         "200":
           description: The render status details
@@ -221,14 +201,33 @@ paths:
       tags:
         - Edit
     parameters:
-      - name: id
-        in: path
+      - in: path
+        name: id
         required: true
         schema:
           pattern: >-
             ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
           type: string
         description: The id of the timeline render task in UUID format
+      - in: query
+        name: data
+        schema:
+          type: boolean
+        description: >-
+          Include the data parameter in the response. The data parameter includes the original
+          timeline, output and other settings sent to the API.<br><br><b>Note:</b> the default
+          is currently `true`, this is deprecated and the default will soon be `false`. If you
+          rely on the data being returned in the response you should explicitly set the
+          parameter to `true`.
+        example: false
+      - in: query
+        name: merged
+        schema:
+          type: boolean
+        description: >-
+          Used when data is set to true, it will show the [merge fields](#tocs_mergefield)
+          merged in to the data response.
+        example: false
   /assets/{id}:
     get:
       responses:
