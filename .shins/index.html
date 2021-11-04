@@ -962,6 +962,20 @@ System.out.println(response.toString());
 </thead>
 <tbody>
 <tr>
+<td>data</td>
+<td>query</td>
+<td>boolean</td>
+<td>false</td>
+<td>Include the data parameter in the response. The data parameter includes the original timeline, output and other settings sent to the API.<br /><br /><b>Note:</b> the default is currently <code>true</code>, this is deprecated and the default will soon be <code>false</code>. If you rely on the data being returned in the response you should explicitly set the parameter to <code>true</code>.</td>
+</tr>
+<tr>
+<td>merged</td>
+<td>query</td>
+<td>boolean</td>
+<td>false</td>
+<td>Used when data is set to true, it will show the <a href="#tocs_mergefield">merge fields</a> merged in to the data response.</td>
+</tr>
+<tr>
 <td>id</td>
 <td>path</td>
 <td>string</td>
