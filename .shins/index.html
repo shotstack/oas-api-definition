@@ -1217,7 +1217,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p><code>GET /probe/{url}</code></p>
-<p>Inspects any media asset (image, video, audio) on the internet using a hosted version of <a href="https://ffmpeg.org/ffprobe.html">FFprobe</a>.</p>
+<p>Inspects any media asset (image, video, audio) on the internet using a hosted version of <a href="https://ffmpeg.org/ffprobe.html">FFprobe</a>. The probe endpoint returns useful information about an asset such as width, height, duration, rotation, framerate, etc...</p>
 <p><strong>Base URL:</strong> <a href="https://api.shotstack.io/%7Bversion%7D">https://api.shotstack.io/{version}</a></p>
 <h3 id="inspect-media-parameters">Parameters</h3>
 <table>
@@ -1236,7 +1236,7 @@ System.out.println(response.toString());
 <td>path</td>
 <td>string</td>
 <td>true</td>
-<td>The URL of the asset to inspect, must be <strong>URL encoded</strong>.</td>
+<td>The URL of the media to inspect, must be <strong>URL encoded</strong>.</td>
 </tr>
 </tbody>
 </table>
@@ -4595,7 +4595,7 @@ DeveloperKey
 <td>any</td>
 <td>true</td>
 <td>none</td>
-<td>The replacement value. The replacement can be any valid JSON type - string, boolean, number, etc..</td>
+<td>The replacement value. The replacement can be any valid JSON type - string, boolean, number, etc...</td>
 </tr>
 </tbody>
 </table>

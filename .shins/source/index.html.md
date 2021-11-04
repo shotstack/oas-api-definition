@@ -874,7 +874,7 @@ func main() {
 
 `GET /probe/{url}`
 
-Inspects any media asset (image, video, audio) on the internet using a hosted version of [FFprobe](https://ffmpeg.org/ffprobe.html).
+Inspects any media asset (image, video, audio) on the internet using a hosted version of [FFprobe](https://ffmpeg.org/ffprobe.html). The probe endpoint returns useful information about an asset such as width, height, duration, rotation, framerate, etc...
 
 **Base URL:** https://api.shotstack.io/{version}
 
@@ -882,7 +882,7 @@ Inspects any media asset (image, video, audio) on the internet using a hosted ve
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|url|path|string|true|The URL of the asset to inspect, must be **URL encoded**.|
+|url|path|string|true|The URL of the media to inspect, must be **URL encoded**.|
 
 <h3 id="inspect-media-responses">Responses</h3>
 
@@ -2732,7 +2732,7 @@ A merge field consists of a key; `find`, and a value; `replace`. Merge fields ca
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |find|string|true|none|The string to find <u>without</u> delimiters.|
-|replace|any|true|none|The replacement value. The replacement can be any valid JSON type - string, boolean, number, etc..|
+|replace|any|true|none|The replacement value. The replacement can be any valid JSON type - string, boolean, number, etc...|
 
 <h2 id="tocS_QueuedResponse">QueuedResponse</h2>
 <!-- backwards compatibility -->
