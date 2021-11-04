@@ -3131,7 +3131,7 @@ The response received after a [probe request](#inspect-media) is submitted. The 
 |---|---|---|---|---|
 |success|boolean|true|none|`true` if media successfully read, else `false`.|
 |message|string|true|none|`Created`, `Bad Request` or an error message.|
-|response|object|true|none|The response from FFmpeg in JSON format|
+|response|object|true|none|The response from FFprobe in JSON format|
 
 <h2 id="tocS_AssetResponse">AssetResponse</h2>
 <!-- backwards compatibility -->

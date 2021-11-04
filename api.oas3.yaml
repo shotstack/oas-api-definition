@@ -1690,7 +1690,7 @@ components:
           type: string
           example: Created
         response:
-          description: The response from FFmpeg in JSON format
+          description: The response from FFprobe in JSON format
           type: object
       required:
         - success
