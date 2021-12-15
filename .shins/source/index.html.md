@@ -1729,6 +1729,28 @@ A music or audio file in mp3 format that plays for the duration of the rendered 
 |effect|fadeOut|
 |effect|fadeInFadeOut|
 
+<h2 id="tocS_Font">Font</h2>
+<!-- backwards compatibility -->
+<a id="schemafont"></a>
+<a id="schema_Font"></a>
+<a id="tocSfont"></a>
+<a id="tocsfont"></a>
+
+```json
+{
+  "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf"
+}
+
+```
+
+Download a custom font to use with the HTML asset type, using the font name in the CSS or font tag. See our [custom fonts](https://shotstack.io/learn/html-custom-fonts/) getting started guide for more details.
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|src|string|true|none|The URL of the font file. The URL must be publicly accessible or include credentials.|
+
 <h2 id="tocS_Track">Track</h2>
 <!-- backwards compatibility -->
 <a id="schematrack"></a>
@@ -2339,28 +2361,6 @@ In and out transitions for a clip - i.e. fade in and fade out
 |out|shuffleTopLeftFast|
 |out|zoom|
 
-<h2 id="tocS_Font">Font</h2>
-<!-- backwards compatibility -->
-<a id="schemafont"></a>
-<a id="schema_Font"></a>
-<a id="tocSfont"></a>
-<a id="tocsfont"></a>
-
-```json
-{
-  "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf"
-}
-
-```
-
-Download a custom font to use with the HTML asset type, using the font name in the CSS or font tag. See our [custom fonts](https://shotstack.io/learn/html-custom-fonts/) getting started guide for more details.
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|src|string|true|none|The URL of the font file. The URL must be publicly accessible or include credentials.|
-
 <h2 id="tocS_Offset">Offset</h2>
 <!-- backwards compatibility -->
 <a id="schemaoffset"></a>
@@ -2412,6 +2412,134 @@ Crop the sides of an asset by a relative amount. The size of the crop is specifi
 |bottom|number(float)|false|none|Crop from the bottom of the asset|
 |left|number(float)|false|none|Crop from the left of the asset|
 |right|number(float)|false|none|Crop from the left of the asset|
+
+<h2 id="tocS_Transformation">Transformation</h2>
+<!-- backwards compatibility -->
+<a id="schematransformation"></a>
+<a id="schema_Transformation"></a>
+<a id="tocStransformation"></a>
+<a id="tocstransformation"></a>
+
+```json
+{
+  "rotate": {
+    "angle": 45
+  },
+  "skew": {
+    "x": 0.5,
+    "y": 0.5
+  },
+  "flip": {
+    "horizontal": true,
+    "vertical": true
+  }
+}
+
+```
+
+Apply one or more transformations to a clip. Transformations alter the visual properties of a clip and can be combined to create new shapes and effects.
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|rotate|[RotateTransformation](#schemarotatetransformation)|false|none|Rotate a clip by the specified angle in degrees. Rotation origin is set based on the clips `position`.|
+|skew|[SkewTransformation](#schemaskewtransformation)|false|none|Skew a clip so its edges are sheared at an angle. Use values between 0 and 3. Over 3 the clip will be skewed almost flat.|
+|flip|[FlipTransformation](#schemafliptransformation)|false|none|Flip a clip vertically or horizontally. Acts as a mirror effect of the clip along the selected plane.|
+
+<h2 id="tocS_RotateTransformation">RotateTransformation</h2>
+<!-- backwards compatibility -->
+<a id="schemarotatetransformation"></a>
+<a id="schema_RotateTransformation"></a>
+<a id="tocSrotatetransformation"></a>
+<a id="tocsrotatetransformation"></a>
+
+```json
+{
+  "angle": 45
+}
+
+```
+
+Rotate a clip by the specified angle in degrees. Rotation origin is set based on the clips `position`.
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|angle|integer|false|none|The angle to rotate the clip. Can be 0 to 360, or 0 to -360. Using a positive number rotates the clip clockwise, negative numbers counter-clockwise.|
+
+<h2 id="tocS_SkewTransformation">SkewTransformation</h2>
+<!-- backwards compatibility -->
+<a id="schemaskewtransformation"></a>
+<a id="schema_SkewTransformation"></a>
+<a id="tocSskewtransformation"></a>
+<a id="tocsskewtransformation"></a>
+
+```json
+{
+  "x": 0.5,
+  "y": 0.5
+}
+
+```
+
+Skew a clip so its edges are sheared at an angle. Use values between 0 and 3. Over 3 the clip will be skewed almost flat.
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|x|number(float)|false|none|Skew the clip along it's x axis.|
+|y|number(float)|false|none|Skew the clip along it's y axis.|
+
+<h2 id="tocS_FlipTransformation">FlipTransformation</h2>
+<!-- backwards compatibility -->
+<a id="schemafliptransformation"></a>
+<a id="schema_FlipTransformation"></a>
+<a id="tocSfliptransformation"></a>
+<a id="tocsfliptransformation"></a>
+
+```json
+{
+  "horizontal": true,
+  "vertical": true
+}
+
+```
+
+Flip a clip vertically or horizontally. Acts as a mirror effect of the clip along the selected plane.
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|horizontal|boolean|false|none|Flip a clip horizontally.|
+|vertical|boolean|false|none|Flip a clip vertically.|
+
+<h2 id="tocS_MergeField">MergeField</h2>
+<!-- backwards compatibility -->
+<a id="schemamergefield"></a>
+<a id="schema_MergeField"></a>
+<a id="tocSmergefield"></a>
+<a id="tocsmergefield"></a>
+
+```json
+{
+  "find": "NAME",
+  "replace": "Jane"
+}
+
+```
+
+A merge field consists of a key; `find`, and a value; `replace`. Merge fields can be used to replace placeholders within the JSON edit to create re-usable templates. Placeholders should be a string with double brace delimiters, i.e. `"{{NAME}}"`. A placeholder can be used for any value within the JSON edit.
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|find|string|true|none|The string to find <u>without</u> delimiters.|
+|replace|any|true|none|The replacement value. The replacement can be any valid JSON type - string, boolean, number, etc...|
 
 <h2 id="tocS_Output">Output</h2>
 <!-- backwards compatibility -->
@@ -2601,110 +2729,6 @@ Generate a thumbnail image for the video or image at a specific point from the t
 |capture|number|true|none|The point on the timeline in seconds to capture a single frame to use as the thumbnail image.|
 |scale|number|true|none|Scale the thumbnail size to a fraction of the viewport size - i.e. setting the scale to 0.5 will scale  the thumbnail to half the size of the viewport.|
 
-<h2 id="tocS_Transformation">Transformation</h2>
-<!-- backwards compatibility -->
-<a id="schematransformation"></a>
-<a id="schema_Transformation"></a>
-<a id="tocStransformation"></a>
-<a id="tocstransformation"></a>
-
-```json
-{
-  "rotate": {
-    "angle": 45
-  },
-  "skew": {
-    "x": 0.5,
-    "y": 0.5
-  },
-  "flip": {
-    "horizontal": true,
-    "vertical": true
-  }
-}
-
-```
-
-Apply one or more transformations to a clip. Transformations alter the visual properties of a clip and can be combined to create new shapes and effects.
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|rotate|[RotateTransformation](#schemarotatetransformation)|false|none|Rotate a clip by the specified angle in degrees. Rotation origin is set based on the clips `position`.|
-|skew|[SkewTransformation](#schemaskewtransformation)|false|none|Skew a clip so its edges are sheared at an angle. Use values between 0 and 3. Over 3 the clip will be skewed almost flat.|
-|flip|[FlipTransformation](#schemafliptransformation)|false|none|Flip a clip vertically or horizontally. Acts as a mirror effect of the clip along the selected plane.|
-
-<h2 id="tocS_RotateTransformation">RotateTransformation</h2>
-<!-- backwards compatibility -->
-<a id="schemarotatetransformation"></a>
-<a id="schema_RotateTransformation"></a>
-<a id="tocSrotatetransformation"></a>
-<a id="tocsrotatetransformation"></a>
-
-```json
-{
-  "angle": 45
-}
-
-```
-
-Rotate a clip by the specified angle in degrees. Rotation origin is set based on the clips `position`.
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|angle|integer|false|none|The angle to rotate the clip. Can be 0 to 360, or 0 to -360. Using a positive number rotates the clip clockwise, negative numbers counter-clockwise.|
-
-<h2 id="tocS_SkewTransformation">SkewTransformation</h2>
-<!-- backwards compatibility -->
-<a id="schemaskewtransformation"></a>
-<a id="schema_SkewTransformation"></a>
-<a id="tocSskewtransformation"></a>
-<a id="tocsskewtransformation"></a>
-
-```json
-{
-  "x": 0.5,
-  "y": 0.5
-}
-
-```
-
-Skew a clip so its edges are sheared at an angle. Use values between 0 and 3. Over 3 the clip will be skewed almost flat.
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|x|number(float)|false|none|Skew the clip along it's x axis.|
-|y|number(float)|false|none|Skew the clip along it's y axis.|
-
-<h2 id="tocS_FlipTransformation">FlipTransformation</h2>
-<!-- backwards compatibility -->
-<a id="schemafliptransformation"></a>
-<a id="schema_FlipTransformation"></a>
-<a id="tocSfliptransformation"></a>
-<a id="tocsfliptransformation"></a>
-
-```json
-{
-  "horizontal": true,
-  "vertical": true
-}
-
-```
-
-Flip a clip vertically or horizontally. Acts as a mirror effect of the clip along the selected plane.
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|horizontal|boolean|false|none|Flip a clip horizontally.|
-|vertical|boolean|false|none|Flip a clip vertically.|
-
 <h2 id="tocS_ShotstackDestination">ShotstackDestination</h2>
 <!-- backwards compatibility -->
 <a id="schemashotstackdestination"></a>
@@ -2728,30 +2752,6 @@ Send rendered assets to the Shotstack hosting and CDN service. This destination 
 |---|---|---|---|---|
 |provider|string|true|none|The destination to send rendered assets to - set to `shotstack` for Shotstack hosting and CDN.|
 |exclude|boolean|false|none|Set to `true` to opt-out from the Shotstack hosting and CDN service. All files must be downloaded within 24 hours of rendering.|
-
-<h2 id="tocS_MergeField">MergeField</h2>
-<!-- backwards compatibility -->
-<a id="schemamergefield"></a>
-<a id="schema_MergeField"></a>
-<a id="tocSmergefield"></a>
-<a id="tocsmergefield"></a>
-
-```json
-{
-  "find": "NAME",
-  "replace": "Jane"
-}
-
-```
-
-A merge field consists of a key; `find`, and a value; `replace`. Merge fields can be used to replace placeholders within the JSON edit to create re-usable templates. Placeholders should be a string with double brace delimiters, i.e. `"{{NAME}}"`. A placeholder can be used for any value within the JSON edit.
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|find|string|true|none|The string to find <u>without</u> delimiters.|
-|replace|any|true|none|The replacement value. The replacement can be any valid JSON type - string, boolean, number, etc...|
 
 <h2 id="tocS_QueuedResponse">QueuedResponse</h2>
 <!-- backwards compatibility -->

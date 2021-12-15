@@ -197,6 +197,11 @@
                   </li>
                 
                   <li>
+                    <a href="#tocs_font" class="toc-h2 toc-link" data-title="">Font</a>
+                    
+                  </li>
+                
+                  <li>
                     <a href="#tocs_track" class="toc-h2 toc-link" data-title="">Track</a>
                     
                   </li>
@@ -242,17 +247,37 @@
                   </li>
                 
                   <li>
-                    <a href="#tocs_font" class="toc-h2 toc-link" data-title="">Font</a>
-                    
-                  </li>
-                
-                  <li>
                     <a href="#tocs_offset" class="toc-h2 toc-link" data-title="">Offset</a>
                     
                   </li>
                 
                   <li>
                     <a href="#tocs_crop" class="toc-h2 toc-link" data-title="">Crop</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#tocs_transformation" class="toc-h2 toc-link" data-title="">Transformation</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#tocs_rotatetransformation" class="toc-h2 toc-link" data-title="">RotateTransformation</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#tocs_skewtransformation" class="toc-h2 toc-link" data-title="">SkewTransformation</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#tocs_fliptransformation" class="toc-h2 toc-link" data-title="">FlipTransformation</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#tocs_mergefield" class="toc-h2 toc-link" data-title="">MergeField</a>
                     
                   </li>
                 
@@ -282,32 +307,7 @@
                   </li>
                 
                   <li>
-                    <a href="#tocs_transformation" class="toc-h2 toc-link" data-title="">Transformation</a>
-                    
-                  </li>
-                
-                  <li>
-                    <a href="#tocs_rotatetransformation" class="toc-h2 toc-link" data-title="">RotateTransformation</a>
-                    
-                  </li>
-                
-                  <li>
-                    <a href="#tocs_skewtransformation" class="toc-h2 toc-link" data-title="">SkewTransformation</a>
-                    
-                  </li>
-                
-                  <li>
-                    <a href="#tocs_fliptransformation" class="toc-h2 toc-link" data-title="">FlipTransformation</a>
-                    
-                  </li>
-                
-                  <li>
                     <a href="#tocs_shotstackdestination" class="toc-h2 toc-link" data-title="">ShotstackDestination</a>
-                    
-                  </li>
-                
-                  <li>
-                    <a href="#tocs_mergefield" class="toc-h2 toc-link" data-title="">MergeField</a>
                     
                   </li>
                 
@@ -2224,6 +2224,38 @@ DeveloperKey
 </tr>
 </tbody>
 </table>
+<h2 id="tocs_font">Font</h2>
+<p><a id="schemafont"></a>
+<a id="schema_Font"></a>
+<a id="tocSfont"></a>
+<a id="tocsfont"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf"</span>
+}
+
+</code></pre>
+<p>Download a custom font to use with the HTML asset type, using the font name in the CSS or font tag. See our <a href="https://shotstack.io/learn/html-custom-fonts/">custom fonts</a> getting started guide for more details.</p>
+<h3 id="properties">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>src</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>The URL of the font file. The URL must be publicly accessible or include credentials.</td>
+</tr>
+</tbody>
+</table>
 <h2 id="tocs_track">Track</h2>
 <p><a id="schematrack"></a>
 <a id="schema_Track"></a>
@@ -3833,38 +3865,6 @@ DeveloperKey
 </tr>
 </tbody>
 </table>
-<h2 id="tocs_font">Font</h2>
-<p><a id="schemafont"></a>
-<a id="schema_Font"></a>
-<a id="tocSfont"></a>
-<a id="tocsfont"></a></p>
-<pre class="highlight tab tab-json"><code>{
-  <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf"</span>
-}
-
-</code></pre>
-<p>Download a custom font to use with the HTML asset type, using the font name in the CSS or font tag. See our <a href="https://shotstack.io/learn/html-custom-fonts/">custom fonts</a> getting started guide for more details.</p>
-<h3 id="properties">Properties</h3>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Restrictions</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>src</td>
-<td>string</td>
-<td>true</td>
-<td>none</td>
-<td>The URL of the font file. The URL must be publicly accessible or include credentials.</td>
-</tr>
-</tbody>
-</table>
 <h2 id="tocs_offset">Offset</h2>
 <p><a id="schemaoffset"></a>
 <a id="schema_Offset"></a>
@@ -3958,6 +3958,214 @@ DeveloperKey
 <td>false</td>
 <td>none</td>
 <td>Crop from the left of the asset</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocs_transformation">Transformation</h2>
+<p><a id="schematransformation"></a>
+<a id="schema_Transformation"></a>
+<a id="tocStransformation"></a>
+<a id="tocstransformation"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">"rotate"</span>: {
+    <span class="hljs-attr">"angle"</span>: <span class="hljs-number">45</span>
+  },
+  <span class="hljs-attr">"skew"</span>: {
+    <span class="hljs-attr">"x"</span>: <span class="hljs-number">0.5</span>,
+    <span class="hljs-attr">"y"</span>: <span class="hljs-number">0.5</span>
+  },
+  <span class="hljs-attr">"flip"</span>: {
+    <span class="hljs-attr">"horizontal"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"vertical"</span>: <span class="hljs-literal">true</span>
+  }
+}
+
+</code></pre>
+<p>Apply one or more transformations to a clip. Transformations alter the visual properties of a clip and can be combined to create new shapes and effects.</p>
+<h3 id="properties">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>rotate</td>
+<td><a href="#schemarotatetransformation">RotateTransformation</a></td>
+<td>false</td>
+<td>none</td>
+<td>Rotate a clip by the specified angle in degrees. Rotation origin is set based on the clips <code>position</code>.</td>
+</tr>
+<tr>
+<td>skew</td>
+<td><a href="#schemaskewtransformation">SkewTransformation</a></td>
+<td>false</td>
+<td>none</td>
+<td>Skew a clip so its edges are sheared at an angle. Use values between 0 and 3. Over 3 the clip will be skewed almost flat.</td>
+</tr>
+<tr>
+<td>flip</td>
+<td><a href="#schemafliptransformation">FlipTransformation</a></td>
+<td>false</td>
+<td>none</td>
+<td>Flip a clip vertically or horizontally. Acts as a mirror effect of the clip along the selected plane.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocs_rotatetransformation">RotateTransformation</h2>
+<p><a id="schemarotatetransformation"></a>
+<a id="schema_RotateTransformation"></a>
+<a id="tocSrotatetransformation"></a>
+<a id="tocsrotatetransformation"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">"angle"</span>: <span class="hljs-number">45</span>
+}
+
+</code></pre>
+<p>Rotate a clip by the specified angle in degrees. Rotation origin is set based on the clips <code>position</code>.</p>
+<h3 id="properties">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>angle</td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+<td>The angle to rotate the clip. Can be 0 to 360, or 0 to -360. Using a positive number rotates the clip clockwise, negative numbers counter-clockwise.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocs_skewtransformation">SkewTransformation</h2>
+<p><a id="schemaskewtransformation"></a>
+<a id="schema_SkewTransformation"></a>
+<a id="tocSskewtransformation"></a>
+<a id="tocsskewtransformation"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">"x"</span>: <span class="hljs-number">0.5</span>,
+  <span class="hljs-attr">"y"</span>: <span class="hljs-number">0.5</span>
+}
+
+</code></pre>
+<p>Skew a clip so its edges are sheared at an angle. Use values between 0 and 3. Over 3 the clip will be skewed almost flat.</p>
+<h3 id="properties">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>number(float)</td>
+<td>false</td>
+<td>none</td>
+<td>Skew the clip along it's x axis.</td>
+</tr>
+<tr>
+<td>y</td>
+<td>number(float)</td>
+<td>false</td>
+<td>none</td>
+<td>Skew the clip along it's y axis.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocs_fliptransformation">FlipTransformation</h2>
+<p><a id="schemafliptransformation"></a>
+<a id="schema_FlipTransformation"></a>
+<a id="tocSfliptransformation"></a>
+<a id="tocsfliptransformation"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">"horizontal"</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">"vertical"</span>: <span class="hljs-literal">true</span>
+}
+
+</code></pre>
+<p>Flip a clip vertically or horizontally. Acts as a mirror effect of the clip along the selected plane.</p>
+<h3 id="properties">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>horizontal</td>
+<td>boolean</td>
+<td>false</td>
+<td>none</td>
+<td>Flip a clip horizontally.</td>
+</tr>
+<tr>
+<td>vertical</td>
+<td>boolean</td>
+<td>false</td>
+<td>none</td>
+<td>Flip a clip vertically.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocs_mergefield">MergeField</h2>
+<p><a id="schemamergefield"></a>
+<a id="schema_MergeField"></a>
+<a id="tocSmergefield"></a>
+<a id="tocsmergefield"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">"find"</span>: <span class="hljs-string">"NAME"</span>,
+  <span class="hljs-attr">"replace"</span>: <span class="hljs-string">"Jane"</span>
+}
+
+</code></pre>
+<p>A merge field consists of a key; <code>find</code>, and a value; <code>replace</code>. Merge fields can be used to replace placeholders within the JSON edit to create re-usable templates. Placeholders should be a string with double brace delimiters, i.e. <code>&quot;{{NAME}}&quot;</code>. A placeholder can be used for any value within the JSON edit.</p>
+<h3 id="properties">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>find</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>The string to find <u>without</u> delimiters.</td>
+</tr>
+<tr>
+<td>replace</td>
+<td>any</td>
+<td>true</td>
+<td>none</td>
+<td>The replacement value. The replacement can be any valid JSON type - string, boolean, number, etc...</td>
 </tr>
 </tbody>
 </table>
@@ -4376,174 +4584,6 @@ DeveloperKey
 </tr>
 </tbody>
 </table>
-<h2 id="tocs_transformation">Transformation</h2>
-<p><a id="schematransformation"></a>
-<a id="schema_Transformation"></a>
-<a id="tocStransformation"></a>
-<a id="tocstransformation"></a></p>
-<pre class="highlight tab tab-json"><code>{
-  <span class="hljs-attr">"rotate"</span>: {
-    <span class="hljs-attr">"angle"</span>: <span class="hljs-number">45</span>
-  },
-  <span class="hljs-attr">"skew"</span>: {
-    <span class="hljs-attr">"x"</span>: <span class="hljs-number">0.5</span>,
-    <span class="hljs-attr">"y"</span>: <span class="hljs-number">0.5</span>
-  },
-  <span class="hljs-attr">"flip"</span>: {
-    <span class="hljs-attr">"horizontal"</span>: <span class="hljs-literal">true</span>,
-    <span class="hljs-attr">"vertical"</span>: <span class="hljs-literal">true</span>
-  }
-}
-
-</code></pre>
-<p>Apply one or more transformations to a clip. Transformations alter the visual properties of a clip and can be combined to create new shapes and effects.</p>
-<h3 id="properties">Properties</h3>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Restrictions</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>rotate</td>
-<td><a href="#schemarotatetransformation">RotateTransformation</a></td>
-<td>false</td>
-<td>none</td>
-<td>Rotate a clip by the specified angle in degrees. Rotation origin is set based on the clips <code>position</code>.</td>
-</tr>
-<tr>
-<td>skew</td>
-<td><a href="#schemaskewtransformation">SkewTransformation</a></td>
-<td>false</td>
-<td>none</td>
-<td>Skew a clip so its edges are sheared at an angle. Use values between 0 and 3. Over 3 the clip will be skewed almost flat.</td>
-</tr>
-<tr>
-<td>flip</td>
-<td><a href="#schemafliptransformation">FlipTransformation</a></td>
-<td>false</td>
-<td>none</td>
-<td>Flip a clip vertically or horizontally. Acts as a mirror effect of the clip along the selected plane.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="tocs_rotatetransformation">RotateTransformation</h2>
-<p><a id="schemarotatetransformation"></a>
-<a id="schema_RotateTransformation"></a>
-<a id="tocSrotatetransformation"></a>
-<a id="tocsrotatetransformation"></a></p>
-<pre class="highlight tab tab-json"><code>{
-  <span class="hljs-attr">"angle"</span>: <span class="hljs-number">45</span>
-}
-
-</code></pre>
-<p>Rotate a clip by the specified angle in degrees. Rotation origin is set based on the clips <code>position</code>.</p>
-<h3 id="properties">Properties</h3>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Restrictions</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>angle</td>
-<td>integer</td>
-<td>false</td>
-<td>none</td>
-<td>The angle to rotate the clip. Can be 0 to 360, or 0 to -360. Using a positive number rotates the clip clockwise, negative numbers counter-clockwise.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="tocs_skewtransformation">SkewTransformation</h2>
-<p><a id="schemaskewtransformation"></a>
-<a id="schema_SkewTransformation"></a>
-<a id="tocSskewtransformation"></a>
-<a id="tocsskewtransformation"></a></p>
-<pre class="highlight tab tab-json"><code>{
-  <span class="hljs-attr">"x"</span>: <span class="hljs-number">0.5</span>,
-  <span class="hljs-attr">"y"</span>: <span class="hljs-number">0.5</span>
-}
-
-</code></pre>
-<p>Skew a clip so its edges are sheared at an angle. Use values between 0 and 3. Over 3 the clip will be skewed almost flat.</p>
-<h3 id="properties">Properties</h3>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Restrictions</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>x</td>
-<td>number(float)</td>
-<td>false</td>
-<td>none</td>
-<td>Skew the clip along it's x axis.</td>
-</tr>
-<tr>
-<td>y</td>
-<td>number(float)</td>
-<td>false</td>
-<td>none</td>
-<td>Skew the clip along it's y axis.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="tocs_fliptransformation">FlipTransformation</h2>
-<p><a id="schemafliptransformation"></a>
-<a id="schema_FlipTransformation"></a>
-<a id="tocSfliptransformation"></a>
-<a id="tocsfliptransformation"></a></p>
-<pre class="highlight tab tab-json"><code>{
-  <span class="hljs-attr">"horizontal"</span>: <span class="hljs-literal">true</span>,
-  <span class="hljs-attr">"vertical"</span>: <span class="hljs-literal">true</span>
-}
-
-</code></pre>
-<p>Flip a clip vertically or horizontally. Acts as a mirror effect of the clip along the selected plane.</p>
-<h3 id="properties">Properties</h3>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Restrictions</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>horizontal</td>
-<td>boolean</td>
-<td>false</td>
-<td>none</td>
-<td>Flip a clip horizontally.</td>
-</tr>
-<tr>
-<td>vertical</td>
-<td>boolean</td>
-<td>false</td>
-<td>none</td>
-<td>Flip a clip vertically.</td>
-</tr>
-</tbody>
-</table>
 <h2 id="tocs_shotstackdestination">ShotstackDestination</h2>
 <p><a id="schemashotstackdestination"></a>
 <a id="schema_ShotstackDestination"></a>
@@ -4581,46 +4621,6 @@ DeveloperKey
 <td>false</td>
 <td>none</td>
 <td>Set to <code>true</code> to opt-out from the Shotstack hosting and CDN service. All files must be downloaded within 24 hours of rendering.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="tocs_mergefield">MergeField</h2>
-<p><a id="schemamergefield"></a>
-<a id="schema_MergeField"></a>
-<a id="tocSmergefield"></a>
-<a id="tocsmergefield"></a></p>
-<pre class="highlight tab tab-json"><code>{
-  <span class="hljs-attr">"find"</span>: <span class="hljs-string">"NAME"</span>,
-  <span class="hljs-attr">"replace"</span>: <span class="hljs-string">"Jane"</span>
-}
-
-</code></pre>
-<p>A merge field consists of a key; <code>find</code>, and a value; <code>replace</code>. Merge fields can be used to replace placeholders within the JSON edit to create re-usable templates. Placeholders should be a string with double brace delimiters, i.e. <code>&quot;{{NAME}}&quot;</code>. A placeholder can be used for any value within the JSON edit.</p>
-<h3 id="properties">Properties</h3>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Restrictions</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>find</td>
-<td>string</td>
-<td>true</td>
-<td>none</td>
-<td>The string to find <u>without</u> delimiters.</td>
-</tr>
-<tr>
-<td>replace</td>
-<td>any</td>
-<td>true</td>
-<td>none</td>
-<td>The replacement value. The replacement can be any valid JSON type - string, boolean, number, etc...</td>
 </tr>
 </tbody>
 </table>
