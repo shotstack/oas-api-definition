@@ -1368,18 +1368,21 @@ components:
               <li>`12` - 12fps</li>
               <li>`15` - 15fps</li>
               <li>`24` - 24fps</li>
+              <li>`23.976` - 23.976fps</li>
               <li>`25` - 25fps</li>
+              <li>`29.97` - 29.97fps</li>
               <li>`30` - 30fps</li>
             </ul>
           enum:
             - 12
             - 15
+            - 23.976
             - 24
             - 25
+            - 29.97
             - 30
-          type: integer
+          type: number
           example: 25
-          default: 25
         scaleTo:
           description: >-
             Override the resolution and scale the video or image to render at a different size. When using scaleTo the
