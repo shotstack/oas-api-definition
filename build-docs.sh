@@ -1,3 +1,5 @@
+#!/bin/bash -e
+
 DOCS_DIR=build/docs
 OAS3_YAML=api.oas3.yaml
 OAS3_JSON=api.oas3.json
@@ -24,8 +26,8 @@ node shins.js \
     --logo ../assets/img/logo.svg \
     --logo-url https://shotstack.io \
     --customCss --minify
-
-cd -
+rm -f source/index.html.md-e
+cd ..
 
 mkdir -p $DOCS_DIR/source/images
 cp .shins/index.html ./$DOCS_DIR/.
@@ -35,7 +37,10 @@ cp -r .shins/source/images/navbar.png ./$DOCS_DIR/source/images/navbar.png
 cp -r .shins/source/fonts ./$DOCS_DIR/source/fonts
 
 # Insert Google Analytics
-sed -e "/{{TAGS}}/{r .tags" -e "d}" ./$DOCS_DIR/index.html > ./$DOCS_DIR/index.tmp.html && mv -f ./$DOCS_DIR/index.tmp.html ./$DOCS_DIR/index.html
+if [ -f .tags ]; then
+    sed -i.bak -e '/{{TAGS}}/r.tags' -e '/{{TAGS}}/d' ./$DOCS_DIR/index.html
+    rm -f ./$DOCS_DIR/index.html.bak
+fi
 
-rm ./$DOCS_DIR/index.html.md
-rm $OAS3_JSON
+rm -f ./$DOCS_DIR/index.html.md
+rm -f $OAS3_JSON
