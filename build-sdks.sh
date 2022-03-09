@@ -15,12 +15,26 @@ SPEC_FILE=./api.oas3.yaml
 BUILD_DIR=./build/sdks
 
 # Prepare build dir
-rm -r $BUILD_DIR
+rm -rf $BUILD_DIR
 mkdir -p $BUILD_DIR
 
+# Determine where the OpenAPI Generator is. This can vary depending
+# on how it has been installed (manually, source, Homebrew or NPM).
+OPENAPI_GENERATOR=`which openapi-generator-cli`
+if [ $? -ne 0 ]; then
+    OPENAPI_GENERATOR=`which openapi-generator`
+fi
+
+if [ "$OPENAPI_GENERATOR" = "" ]; then
+    >&2 echo "Can't find openapi-generator or openapi-generator-cli - is it installed?"
+    exit 1
+fi
+
+echo "- using OpenAPI generator $OPENAPI_GENERATOR"
+
 # PHP SDK
-openapi-generator-cli generate -i $SPEC_FILE -g php -o $BUILD_DIR/php \
-                  --invoker-package Shotstack\\\\Client
+$OPENAPI_GENERATOR generate -i $SPEC_FILE -g php -o $BUILD_DIR/php \
+                  --invoker-package Shotstack\\Client
 
 printf "\n========================================= \n"
 printf "\nPHP SDK Generated"
@@ -29,7 +43,7 @@ printf "\n-- OneOfTitleAssetImageAssetVideoAsset to Asset - see commit: http://t
 printf "\n========================================= \n"
 
 # Ruby SDK
-openapi-generator-cli generate -i $SPEC_FILE -g ruby -o $BUILD_DIR/ruby \
+$OPENAPI_GENERATOR generate -i $SPEC_FILE -g ruby -o $BUILD_DIR/ruby \
     --additional-properties=moduleName="Shotstack"
 
 printf "\n========================================= \n"
@@ -39,7 +53,7 @@ printf "\n-- OneOfTitleAssetImageAssetVideoAsset to Asset - see commit: http://t
 printf "\n========================================= \n"
 
 # Node SDK
-openapi-generator-cli generate -i $SPEC_FILE -g javascript -o $BUILD_DIR/node \
+$OPENAPI_GENERATOR generate -i $SPEC_FILE -g javascript -o $BUILD_DIR/node \
     --additional-properties=emitModelMethods=true,licenseName="MIT",projectName="shotstack-sdk",useES6=false,usePromises=true
 
 printf "\n========================================= \n"
