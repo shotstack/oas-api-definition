@@ -8,7 +8,7 @@
     "build": "./build-docs.sh && ./build-sdks.sh",
     "docs": "./build-docs.sh",
     "sdks": "./build-sdks.sh && ./update-sdks.sh",
-    "start": "cd .shins && npm run start",
+    "start": "./build-docs.sh && http-server build/docs/ -o",
     "deploy:docs": "aws s3 sync build/docs/ s3://shotstack.io/docs/api"
   },
   "repository": {
@@ -22,6 +22,7 @@
     "js-yaml": "^3.14.1"
   },
   "devDependencies": {
+    "http-server": "^14.1.0",
     "widdershins": "^4.0.1"
   }
 }
