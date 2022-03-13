@@ -4,7 +4,7 @@ Defines the Shotstack API and provides tooling for documentation and SDK generat
 
 ## Installation
 
-The project is built using NodeJS. To install the dependencies run the command:
+The project is built using Node.js. To install the dependencies run the command:
 
 ```
 npm install
@@ -12,13 +12,12 @@ npm install
 
 ## Generating Docs
 
-Requires the shins repo to be set up as a Git subtree. See instructions below.
-
-Once that is done build the docs using:
+Generate the docs using:
 
 ```
 npm run docs
 ```
+
 Generated docs are saved to build/docs directory
 
 You can preview the docs in the browser using:
@@ -27,15 +26,14 @@ You can preview the docs in the browser using:
 npm run start
 ```
 
-Note: The first time you start the server the docs will revert to default styling. Run `npm run docs` command again to apply Shotstack styling.
-
 Deploy docs using:
 
 ```
 npm run deploy:docs
 ```
 
-Note: this deploys to Shotstack's S3 docs bucket, if you wish to host your own documentation, modify the script within the `package.json` file.
+Note: this deploys to Shotstack's S3 docs bucket, if you wish to host your own documentation, modify the script within
+the `package.json` file.
 
 
 ## Generating SDK's
@@ -46,16 +44,41 @@ Requires the [OpenAPI Generator](https://openapi-generator.tech/) to be installe
 npm install @openapitools/openapi-generator-cli -g
 ```
 
+or
+
+```
+brew install openapi-generator
+```
+
 Once installed generate SDK's for PHP, Node and Ruby:
 
 ```
 npm run sdks
 ```
 
-Note: The generated SDK's need some modifications to work correctly, and need to be copied to the respective project repos at this stage.
+Note: The generated SDK's need some modifications to work correctly, and files need to be copied to the respective
+project repos.
 
+Copy the generated SDK files to each SDK project manually or run:
+
+```
+npm run sdks:update
+```
+
+Note: this overwrites all existing files.
+
+By default files are written to the following locations: `../shotstack-sdk-node`, `../shotstack-sdk-php` and
+`../shotstack-sdk-ruby`. To override the defaults and specify your own locations, run:
+
+```
+npm run sdks:update [NODE_SDK PATH PHP_SDK_PATH RUBY_SDK_PATH]
+```
+
+Note: you must provide all three paths in the correct order: Node, PHP, Ruby.
 
 ### Linking Shins as a Subtree
+
+This is for reference only, you should not need to follow these steps.
 
 Add our fork of Shins:
 ```

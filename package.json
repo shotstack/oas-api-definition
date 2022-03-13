@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "./build-docs.sh && ./build-sdks.sh",
     "docs": "./build-docs.sh",
-    "sdks": "./build-sdks.sh && ./update-sdks.sh",
+    "sdks": "./build-sdks.sh",
+    "sdks:update": "./update-sdks.sh ./",
     "start": "./build-docs.sh && http-server build/docs/ -o",
     "deploy:docs": "aws s3 sync build/docs/ s3://shotstack.io/docs/api"
   },
