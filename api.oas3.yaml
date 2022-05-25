@@ -12,7 +12,7 @@ info:
 
 
     For more details visit [shotstack.io](https://shotstack.io) or checkout our
-    [getting started](https://shotstack.gitbook.io/docs/guides/getting-started) documentation.
+    [getting started](https://shotstack.io/docs/guide/) documentation.
 
     There are two main API's, one for editing and generating assets (Edit API) and one for managing hosted assets
     (Serve API).
@@ -388,13 +388,13 @@ components:
           description: >-
             An optional webhook callback URL used to receive status notifications
             when a render completes or fails.
-            See [webhooks](https://shotstack.gitbook.io/docs/guides/architecting-an-application/webhooks) for 
+            See [webhooks](https://shotstack.io/docs/guide/architecting-an-application/webhooks) for 
             more details.
           example: https://my-server.com/callback.php
         disk:
           description: >-
             The disk type to use for storing footage and assets for each render.
-            See [disk types](https://shotstack.gitbook.io/docs/guides/architecting-an-application/disk-types)
+            See [disk types](https://shotstack.io/docs/guide/architecting-an-application/disk-types)
             for more details.
             <ul>
               <li>`local` - optimized for high speed rendering with up to 512MB storage</li>
@@ -444,7 +444,7 @@ components:
         cache:
           description: >-
             Disable the caching of ingested source footage and assets. See 
-            [caching](https://shotstack.gitbook.io/docs/guides/architecting-an-application/caching) for more details.
+            [caching](https://shotstack.io/docs/guide/architecting-an-application/caching) for more details.
           type: boolean
           default: true
       required:
@@ -840,13 +840,13 @@ components:
         html:
           description: >-
             The HTML text string. See list of
-            [supported HTML tags](https://shotstack.gitbook.io/docs/guides/architecting-an-application/html-support#supported-html-tags).
+            [supported HTML tags](https://shotstack.io/docs/guide/architecting-an-application/html-support#supported-html-tags).
           type: string
           example: "<p>Hello <b>World</b></p>"
         css:
           description: >-
             The CSS text string to apply styling to the HTML. See list of 
-            [support CSS properties](https://shotstack.gitbook.io/docs/guides/architecting-an-application/html-support#supported-html-tags).
+            [support CSS properties](https://shotstack.io/docs/guide/architecting-an-application/html-support#supported-css-properties).
           type: string
           example: "p { color: #ffffff; } b { color: #ffff00; }"
         width:

@@ -61,3 +61,13 @@ printf "\nNode SDK Generated"
 printf "\n\nNow fix:"
 printf "\n-- OneOfTitleAssetImageAssetVideoAsset to Asset - see commit history"
 printf "\n========================================= \n"
+
+# Python SDK
+$OPENAPI_GENERATOR generate -i $SPEC_FILE -g python -o $BUILD_DIR/python \
+    --additional-properties=packageName="shotstack_sdk",projectName="shotstack-sdk",pythonAttrNoneIfUnset=true
+
+printf "\n========================================= \n"
+printf "\nPython SDK Generated"
+printf "\n\nNow fix:"
+printf "\n-- OneOfTitleAssetImageAssetVideoAsset to Asset - see commit history"
+printf "\n========================================= \n"
