@@ -2755,6 +2755,58 @@ Send rendered assets to the Shotstack hosting and CDN service. This destination 
 |provider|string|true|none|The destination to send rendered assets to - set to `shotstack` for Shotstack hosting and CDN.|
 |exclude|boolean|false|none|Set to `true` to opt-out from the Shotstack hosting and CDN service. All files must be downloaded within 24 hours of rendering.|
 
+<h2 id="tocS_MuxDestination">MuxDestination</h2>
+<!-- backwards compatibility -->
+<a id="schemamuxdestination"></a>
+<a id="schema_MuxDestination"></a>
+<a id="tocSmuxdestination"></a>
+<a id="tocsmuxdestination"></a>
+
+```json
+{
+  "provider": "mux",
+  "options": {
+    "playbackPolicy": [
+      "public"
+    ]
+  }
+}
+
+```
+
+Send rendered videos to the [Mux](https://www.mux.com/) video hosting and streaming service. Add the `mux` destination provider to send the output video to Mux. Mux credentials are required and added via the [dashboard](https://dashboard.shotstack.io/integrations/mux), not in the request.
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|provider|string|true|none|The destination to send rendered assets to - set to `mux` for Mux.|
+|options|[MuxDestinationOptions](#schemamuxdestinationoptions)|false|none|Additional Mux configuration and features.|
+
+<h2 id="tocS_MuxDestinationOptions">MuxDestinationOptions</h2>
+<!-- backwards compatibility -->
+<a id="schemamuxdestinationoptions"></a>
+<a id="schema_MuxDestinationOptions"></a>
+<a id="tocSmuxdestinationoptions"></a>
+<a id="tocsmuxdestinationoptions"></a>
+
+```json
+{
+  "playbackPolicy": [
+    "public"
+  ]
+}
+
+```
+
+Pass additional options to control how Mux processes video. Currently supports playback policy option.
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|playbackPolicy|[string]|false|none|Sets the Mux `playback_policy` option. Value is an array of strings - use `public`, `signed`, or both.|
+
 <h2 id="tocS_QueuedResponse">QueuedResponse</h2>
 <!-- backwards compatibility -->
 <a id="schemaqueuedresponse"></a>

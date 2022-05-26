@@ -61,6 +61,8 @@
 <!-- backwards compatibility -->
 <!-- backwards compatibility -->
 <!-- backwards compatibility -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
   </head>
 
   <body data-languages="[&quot;shell&quot;,&quot;http&quot;,&quot;javascript--nodejs&quot;,&quot;php&quot;,&quot;ruby&quot;,&quot;python&quot;,&quot;java&quot;,&quot;go&quot;]">
@@ -308,6 +310,16 @@
                 
                   <li>
                     <a href="#tocs_shotstackdestination" class="toc-h2 toc-link" data-title="">ShotstackDestination</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#tocs_muxdestination" class="toc-h2 toc-link" data-title="">MuxDestination</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#tocs_muxdestinationoptions" class="toc-h2 toc-link" data-title="">MuxDestinationOptions</a>
                     
                   </li>
                 
@@ -4632,6 +4644,84 @@ DeveloperKey
 </tr>
 </tbody>
 </table>
+<h2 id="tocs_muxdestination">MuxDestination</h2>
+<p><a id="schemamuxdestination"></a>
+<a id="schema_MuxDestination"></a>
+<a id="tocSmuxdestination"></a>
+<a id="tocsmuxdestination"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">"provider"</span>: <span class="hljs-string">"mux"</span>,
+  <span class="hljs-attr">"options"</span>: {
+    <span class="hljs-attr">"playbackPolicy"</span>: [
+      <span class="hljs-string">"public"</span>
+    ]
+  }
+}
+
+</code></pre>
+<p>Send rendered videos to the <a href="https://www.mux.com/">Mux</a> video hosting and streaming service. Add the <code>mux</code> destination provider to send the output video to Mux. Mux credentials are required and added via the <a href="https://dashboard.shotstack.io/integrations/mux">dashboard</a>, not in the request.</p>
+<h3 id="properties">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>provider</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>The destination to send rendered assets to - set to <code>mux</code> for Mux.</td>
+</tr>
+<tr>
+<td>options</td>
+<td><a href="#schemamuxdestinationoptions">MuxDestinationOptions</a></td>
+<td>false</td>
+<td>none</td>
+<td>Additional Mux configuration and features.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocs_muxdestinationoptions">MuxDestinationOptions</h2>
+<p><a id="schemamuxdestinationoptions"></a>
+<a id="schema_MuxDestinationOptions"></a>
+<a id="tocSmuxdestinationoptions"></a>
+<a id="tocsmuxdestinationoptions"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">"playbackPolicy"</span>: [
+    <span class="hljs-string">"public"</span>
+  ]
+}
+
+</code></pre>
+<p>Pass additional options to control how Mux processes video. Currently supports playback policy option.</p>
+<h3 id="properties">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>playbackPolicy</td>
+<td>[string]</td>
+<td>false</td>
+<td>none</td>
+<td>Sets the Mux <code>playback_policy</code> option. Value is an array of strings - use <code>public</code>, <code>signed</code>, or both.</td>
+</tr>
+</tbody>
+</table>
 <h2 id="tocs_queuedresponse">QueuedResponse</h2>
 <p><a id="schemaqueuedresponse"></a>
 <a id="schema_QueuedResponse"></a>
@@ -5467,6 +5557,8 @@ DeveloperKey
 </table>
 <!-- Renderer: Shins v2.3.2-6 -->
 <!-- Generator: Widdershins v4.0.1 -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
 <!-- backwards compatibility -->
 <!-- backwards compatibility -->
 <!-- backwards compatibility -->

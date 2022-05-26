@@ -1542,6 +1542,36 @@ components:
       type: object
       required:
         - provider
+    MuxDestination:
+      description: >-
+        Send rendered videos to the [Mux](https://www.mux.com/) video hosting and streaming service. Add the
+        `mux` destination provider to send the output video to Mux. Mux credentials are required and added via
+        the [dashboard](https://dashboard.shotstack.io/integrations/mux), not in the request.
+      properties:
+        provider:
+          description: The destination to send rendered assets to - set to `mux` for Mux.
+          type: string
+          default: mux
+          example: mux
+        options:
+          description: Additional Mux configuration and features.
+          $ref: "#/components/schemas/MuxDestinationOptions"
+      type: object
+      required:
+        - provider
+    MuxDestinationOptions:
+      description: >-
+        Pass additional options to control how Mux processes video. Currently supports playback policy option.
+      properties:
+        playbackPolicy:
+          description: Sets the Mux `playback_policy` option. Value is an array of strings - use `public`, `signed`, or
+            both.
+          type: array
+          items:
+            type: string
+            enum:
+              - public
+              - signed
     QueuedResponse:
       description: >-
         The response received after a [render request](#render-asset) is submitted. The render task is queued for
