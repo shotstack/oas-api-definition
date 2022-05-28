@@ -61,6 +61,8 @@
 <!-- backwards compatibility -->
 <!-- backwards compatibility -->
 <!-- backwards compatibility -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
   </head>
 
   <body data-languages="[&quot;shell&quot;,&quot;http&quot;,&quot;javascript--nodejs&quot;,&quot;php&quot;,&quot;ruby&quot;,&quot;python&quot;,&quot;java&quot;,&quot;go&quot;]">
@@ -312,6 +314,16 @@
                   </li>
                 
                   <li>
+                    <a href="#tocs_muxdestination" class="toc-h2 toc-link" data-title="">MuxDestination</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#tocs_muxdestinationoptions" class="toc-h2 toc-link" data-title="">MuxDestinationOptions</a>
+                    
+                  </li>
+                
+                  <li>
                     <a href="#tocs_queuedresponse" class="toc-h2 toc-link" data-title="">QueuedResponse</a>
                     
                   </li>
@@ -377,7 +389,7 @@
 </blockquote>
 <p>Shotstack is a video, image and audio editing service that allows for the automated generation of videos, images and audio using JSON and a RESTful API.</p>
 <p>You arrange and configure an edit and POST it to the API which will render your media and provide a file  location when complete.</p>
-<p>For more details visit <a href="https://shotstack.io">shotstack.io</a> or checkout our <a href="https://shotstack.gitbook.io/docs/guides/getting-started">getting started</a> documentation.
+<p>For more details visit <a href="https://shotstack.io">shotstack.io</a> or checkout our <a href="https://shotstack.io/docs/guide/">getting started</a> documentation.
 There are two main API's, one for editing and generating assets (Edit API) and one for managing hosted assets (Serve API).</p>
 <p>The Edit API base URL is: <b><a href="https://api.shotstack.io/%7Bversion%7D">https://api.shotstack.io/{version}</a></b></p>
 <p>The Serve API base URL is: <b><a href="https://api.shotstack.io/serve/%7Bversion%7D">https://api.shotstack.io/serve/{version}</a></b></p>
@@ -2003,14 +2015,14 @@ DeveloperKey
 <td>string</td>
 <td>false</td>
 <td>none</td>
-<td>An optional webhook callback URL used to receive status notifications when a render completes or fails. See <a href="https://shotstack.gitbook.io/docs/guides/architecting-an-application/webhooks">webhooks</a> for  more details.</td>
+<td>An optional webhook callback URL used to receive status notifications when a render completes or fails. See <a href="https://shotstack.io/docs/guide/architecting-an-application/webhooks">webhooks</a> for  more details.</td>
 </tr>
 <tr>
 <td>disk</td>
 <td>string</td>
 <td>false</td>
 <td>none</td>
-<td>The disk type to use for storing footage and assets for each render. See <a href="https://shotstack.gitbook.io/docs/guides/architecting-an-application/disk-types">disk types</a> for more details. <ul><br />  <li><code>local</code> - optimized for high speed rendering with up to 512MB storage</li><br />  <li><code>mount</code> - optimized for larger file sizes and longer videos with 5GB for source footage and 512MB for output render</li><br /></ul></td>
+<td>The disk type to use for storing footage and assets for each render. See <a href="https://shotstack.io/docs/guide/architecting-an-application/disk-types">disk types</a> for more details. <ul><br />  <li><code>local</code> - optimized for high speed rendering with up to 512MB storage</li><br />  <li><code>mount</code> - optimized for larger file sizes and longer videos with 5GB for source footage and 512MB for output render</li><br /></ul></td>
 </tr>
 </tbody>
 </table>
@@ -2149,7 +2161,7 @@ DeveloperKey
 <td>boolean</td>
 <td>false</td>
 <td>none</td>
-<td>Disable the caching of ingested source footage and assets. See  <a href="https://shotstack.gitbook.io/docs/guides/architecting-an-application/caching">caching</a> for more details.</td>
+<td>Disable the caching of ingested source footage and assets. See  <a href="https://shotstack.io/docs/guide/architecting-an-application/caching">caching</a> for more details.</td>
 </tr>
 </tbody>
 </table>
@@ -3105,14 +3117,14 @@ DeveloperKey
 <td>string</td>
 <td>true</td>
 <td>none</td>
-<td>The HTML text string. See list of <a href="https://shotstack.gitbook.io/docs/guides/architecting-an-application/html-support#supported-html-tags">supported HTML tags</a>.</td>
+<td>The HTML text string. See list of <a href="https://shotstack.io/docs/guide/architecting-an-application/html-support#supported-html-tags">supported HTML tags</a>.</td>
 </tr>
 <tr>
 <td>css</td>
 <td>string</td>
 <td>false</td>
 <td>none</td>
-<td>The CSS text string to apply styling to the HTML. See list of  <a href="https://shotstack.gitbook.io/docs/guides/architecting-an-application/html-support#supported-html-tags">support CSS properties</a>.</td>
+<td>The CSS text string to apply styling to the HTML. See list of  <a href="https://shotstack.io/docs/guide/architecting-an-application/html-support#supported-css-properties">support CSS properties</a>.</td>
 </tr>
 <tr>
 <td>width</td>
@@ -4632,6 +4644,84 @@ DeveloperKey
 </tr>
 </tbody>
 </table>
+<h2 id="tocs_muxdestination">MuxDestination</h2>
+<p><a id="schemamuxdestination"></a>
+<a id="schema_MuxDestination"></a>
+<a id="tocSmuxdestination"></a>
+<a id="tocsmuxdestination"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">"provider"</span>: <span class="hljs-string">"mux"</span>,
+  <span class="hljs-attr">"options"</span>: {
+    <span class="hljs-attr">"playbackPolicy"</span>: [
+      <span class="hljs-string">"public"</span>
+    ]
+  }
+}
+
+</code></pre>
+<p>Send rendered videos to the <a href="https://www.mux.com/">Mux</a> video hosting and streaming service. Add the <code>mux</code> destination provider to send the output video to Mux. Mux credentials are required and added via the <a href="https://dashboard.shotstack.io/integrations/mux">dashboard</a>, not in the request.</p>
+<h3 id="properties">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>provider</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>The destination to send rendered assets to - set to <code>mux</code> for Mux.</td>
+</tr>
+<tr>
+<td>options</td>
+<td><a href="#schemamuxdestinationoptions">MuxDestinationOptions</a></td>
+<td>false</td>
+<td>none</td>
+<td>Additional Mux configuration and features.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocs_muxdestinationoptions">MuxDestinationOptions</h2>
+<p><a id="schemamuxdestinationoptions"></a>
+<a id="schema_MuxDestinationOptions"></a>
+<a id="tocSmuxdestinationoptions"></a>
+<a id="tocsmuxdestinationoptions"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">"playbackPolicy"</span>: [
+    <span class="hljs-string">"public"</span>
+  ]
+}
+
+</code></pre>
+<p>Pass additional options to control how Mux processes video. Currently supports playback policy option.</p>
+<h3 id="properties">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>playbackPolicy</td>
+<td>[string]</td>
+<td>false</td>
+<td>none</td>
+<td>Sets the Mux <code>playback_policy</code> option. Value is an array of strings - use <code>public</code>, <code>signed</code>, or both.</td>
+</tr>
+</tbody>
+</table>
 <h2 id="tocs_queuedresponse">QueuedResponse</h2>
 <p><a id="schemaqueuedresponse"></a>
 <a id="schema_QueuedResponse"></a>
@@ -5467,6 +5557,8 @@ DeveloperKey
 </table>
 <!-- Renderer: Shins v2.3.2-6 -->
 <!-- Generator: Widdershins v4.0.1 -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
 <!-- backwards compatibility -->
 <!-- backwards compatibility -->
 <!-- backwards compatibility -->

@@ -36,7 +36,7 @@ Shotstack is a video, image and audio editing service that allows for the automa
 
 You arrange and configure an edit and POST it to the API which will render your media and provide a file  location when complete.
 
-For more details visit [shotstack.io](https://shotstack.io) or checkout our [getting started](https://shotstack.gitbook.io/docs/guides/getting-started) documentation.
+For more details visit [shotstack.io](https://shotstack.io) or checkout our [getting started](https://shotstack.io/docs/guide/) documentation.
 There are two main API's, one for editing and generating assets (Edit API) and one for managing hosted assets (Serve API).
 
 The Edit API base URL is: <b>https://api.shotstack.io/{version}</b>
@@ -1599,8 +1599,8 @@ An edit defines the arrangement of a video on a timeline, an audio edit or an im
 |timeline|[Timeline](#schematimeline)|true|none|A timeline represents the contents of a video edit over time, an audio edit over time, in seconds, or an image layout. A timeline consists of layers called tracks. Tracks are composed of titles, images, audio, html or video segments referred to as clips which are placed along the track at specific starting point and lasting for a specific amount of time.|
 |output|[Output](#schemaoutput)|true|none|The output format, render range and type of media to generate.|
 |merge|[[MergeField](#schemamergefield)]|false|none|An array of key/value pairs that provides an easy way to create templates with placeholders. The placeholders can be used to find and replace keys with values. For example you can search for the placeholder `{{NAME}}` and replace it with the value `Jane`.|
-|callback|string|false|none|An optional webhook callback URL used to receive status notifications when a render completes or fails. See [webhooks](https://shotstack.gitbook.io/docs/guides/architecting-an-application/webhooks) for  more details.|
-|disk|string|false|none|The disk type to use for storing footage and assets for each render. See [disk types](https://shotstack.gitbook.io/docs/guides/architecting-an-application/disk-types) for more details. <ul><br>  <li>`local` - optimized for high speed rendering with up to 512MB storage</li><br>  <li>`mount` - optimized for larger file sizes and longer videos with 5GB for source footage and 512MB for output render</li><br></ul>|
+|callback|string|false|none|An optional webhook callback URL used to receive status notifications when a render completes or fails. See [webhooks](https://shotstack.io/docs/guide/architecting-an-application/webhooks) for  more details.|
+|disk|string|false|none|The disk type to use for storing footage and assets for each render. See [disk types](https://shotstack.io/docs/guide/architecting-an-application/disk-types) for more details. <ul><br>  <li>`local` - optimized for high speed rendering with up to 512MB storage</li><br>  <li>`mount` - optimized for larger file sizes and longer videos with 5GB for source footage and 512MB for output render</li><br></ul>|
 
 #### Enumerated Values
 
@@ -1693,7 +1693,7 @@ A timeline represents the contents of a video edit over time, an audio edit over
 |background|string|false|none|A hexadecimal value for the timeline background colour. Defaults to #000000 (black).|
 |fonts|[[Font](#schemafont)]|false|none|An array of custom fonts to be downloaded for use by the HTML assets.|
 |tracks|[[Track](#schematrack)]|true|none|A timeline consists of an array of tracks, each track containing clips. Tracks are layered on top of each other in the same order they are added to the array with the top most track layered over the top of those below it. Ensure that a track containing titles is the top most track so that it is displayed above videos and images.|
-|cache|boolean|false|none|Disable the caching of ingested source footage and assets. See  [caching](https://shotstack.gitbook.io/docs/guides/architecting-an-application/caching) for more details.|
+|cache|boolean|false|none|Disable the caching of ingested source footage and assets. See  [caching](https://shotstack.io/docs/guide/architecting-an-application/caching) for more details.|
 
 <h2 id="tocS_Soundtrack">Soundtrack</h2>
 <!-- backwards compatibility -->
@@ -2125,8 +2125,8 @@ The HtmlAsset clip type lets you create text based layout and formatting using H
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |type|string|true|none|The type of asset - set to `html` for HTML.|
-|html|string|true|none|The HTML text string. See list of [supported HTML tags](https://shotstack.gitbook.io/docs/guides/architecting-an-application/html-support#supported-html-tags).|
-|css|string|false|none|The CSS text string to apply styling to the HTML. See list of  [support CSS properties](https://shotstack.gitbook.io/docs/guides/architecting-an-application/html-support#supported-html-tags).|
+|html|string|true|none|The HTML text string. See list of [supported HTML tags](https://shotstack.io/docs/guide/architecting-an-application/html-support#supported-html-tags).|
+|css|string|false|none|The CSS text string to apply styling to the HTML. See list of  [support CSS properties](https://shotstack.io/docs/guide/architecting-an-application/html-support#supported-css-properties).|
 |width|integer|false|none|Set the width of the HTML asset bounding box in pixels. Text will wrap to fill the bounding box.|
 |height|integer|false|none|Set the width of the HTML asset bounding box in pixels. Text and elements will be masked if they exceed the  height of the bounding box.|
 |background|string|false|none|Apply a background color behind the HTML bounding box using. Set the text color using hexadecimal  color notation. Transparency is supported by setting the first two characters of the hex string  (opposite to HTML), i.e. #80ffffff will be white with 50% transparency.|
@@ -2754,6 +2754,58 @@ Send rendered assets to the Shotstack hosting and CDN service. This destination 
 |---|---|---|---|---|
 |provider|string|true|none|The destination to send rendered assets to - set to `shotstack` for Shotstack hosting and CDN.|
 |exclude|boolean|false|none|Set to `true` to opt-out from the Shotstack hosting and CDN service. All files must be downloaded within 24 hours of rendering.|
+
+<h2 id="tocS_MuxDestination">MuxDestination</h2>
+<!-- backwards compatibility -->
+<a id="schemamuxdestination"></a>
+<a id="schema_MuxDestination"></a>
+<a id="tocSmuxdestination"></a>
+<a id="tocsmuxdestination"></a>
+
+```json
+{
+  "provider": "mux",
+  "options": {
+    "playbackPolicy": [
+      "public"
+    ]
+  }
+}
+
+```
+
+Send rendered videos to the [Mux](https://www.mux.com/) video hosting and streaming service. Add the `mux` destination provider to send the output video to Mux. Mux credentials are required and added via the [dashboard](https://dashboard.shotstack.io/integrations/mux), not in the request.
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|provider|string|true|none|The destination to send rendered assets to - set to `mux` for Mux.|
+|options|[MuxDestinationOptions](#schemamuxdestinationoptions)|false|none|Additional Mux configuration and features.|
+
+<h2 id="tocS_MuxDestinationOptions">MuxDestinationOptions</h2>
+<!-- backwards compatibility -->
+<a id="schemamuxdestinationoptions"></a>
+<a id="schema_MuxDestinationOptions"></a>
+<a id="tocSmuxdestinationoptions"></a>
+<a id="tocsmuxdestinationoptions"></a>
+
+```json
+{
+  "playbackPolicy": [
+    "public"
+  ]
+}
+
+```
+
+Pass additional options to control how Mux processes video. Currently supports playback policy option.
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|playbackPolicy|[string]|false|none|Sets the Mux `playback_policy` option. Value is an array of strings - use `public`, `signed`, or both.|
 
 <h2 id="tocS_QueuedResponse">QueuedResponse</h2>
 <!-- backwards compatibility -->
