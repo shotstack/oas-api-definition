@@ -2599,7 +2599,19 @@ The output format, render range and type of media to generate.
 |range|[Range](#schemarange)|false|none|Specify a time range to render, i.e. to render only a portion of a video or audio file. Omit this setting to  export the entire video. Range can also be used to render a frame at a specific time point - setting a range and output format as `jpg` will output a single frame image at the range `start` point.|
 |poster|[Poster](#schemaposter)|false|none|Generate a poster image from a specific point on the timeline.|
 |thumbnail|[Thumbnail](#schemathumbnail)|false|none|Generate a thumbnail image from a specific point on the timeline.|
-|destinations|[anyOf]|false|none|A destination is a location where output files can be sent to for serving or hosting. By default all rendered assets are automatically sent to the Shotstack hosting destination. [DestinationShotstack](/#tocs_shotstackdestination) is currently the only option with plans to add more in the future such as S3, YouTube, Vimeo and Mux. If you do not require hosting you can opt-out using the  `exclude` property.|
+|destinations|[anyOf]|false|none|A destination is a location where output files can be sent to for serving or hosting. By default all rendered assets are automatically sent to the  [Shotstack hosting destination](https://shotstack.io/docs/guide/serving-assets/hosting). You can add other destinations to send assets to. The following destinations are available:<br>  <ul><br>    <li><a href="#tocs_shotstackdestination">DestinationShotstack</a></li><br>    <li><a href="#tocs_muxdestination">DestinationMux</a></li><br>  </ul>|
+
+anyOf
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» *anonymous*|[ShotstackDestination](#schemashotstackdestination)|false|none|Send rendered assets to the Shotstack hosting and CDN service. This destination is enabled by default.|
+
+or
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» *anonymous*|[MuxDestination](#schemamuxdestination)|false|none|Send rendered videos to the [Mux](https://www.mux.com/) video hosting and streaming service. Add the `mux` destination provider to send the output video to Mux. Mux credentials are required and added via the [dashboard](https://dashboard.shotstack.io/integrations/mux), not in the request.|
 
 #### Enumerated Values
 
