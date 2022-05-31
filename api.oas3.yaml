@@ -517,24 +517,7 @@ components:
         to it.
       properties:
         asset:
-          description: >-
-            The type of asset to display for the duration of this Clip. Value
-            must be one of:
-              <ul>
-                <li><a href="#tocs_videoasset">VideoAsset</a></li>
-                <li><a href="#tocs_imageasset">ImageAsset</a></li>
-                <li><a href="#tocs_titleasset">TitleAsset</a></li>
-                <li><a href="#tocs_htmlasset">HtmlAsset</a></li>
-                <li><a href="#tocs_audioasset">AudioAsset</a></li>
-                <li><a href="#tocs_lumaasset">LumaAsset</a></li>
-              </ul>
-          oneOf:
-            - $ref: "#/components/schemas/VideoAsset"
-            - $ref: "#/components/schemas/ImageAsset"
-            - $ref: "#/components/schemas/TitleAsset"
-            - $ref: "#/components/schemas/HtmlAsset"
-            - $ref: "#/components/schemas/AudioAsset"
-            - $ref: "#/components/schemas/LumaAsset"
+          $ref: "#/components/schemas/Asset"
         start:
           description: The start position of the Clip on the timeline, in seconds.
           type: number
@@ -658,6 +641,29 @@ components:
         - start
         - length
       type: object
+    Asset:
+      type: object
+      description: >-
+        The type of asset to display for the duration of this Clip. Value
+            must be one of:
+              <ul>
+                <li><a href="#tocs_videoasset">VideoAsset</a></li>
+                <li><a href="#tocs_imageasset">ImageAsset</a></li>
+                <li><a href="#tocs_titleasset">TitleAsset</a></li>
+                <li><a href="#tocs_htmlasset">HtmlAsset</a></li>
+                <li><a href="#tocs_audioasset">AudioAsset</a></li>
+                <li><a href="#tocs_lumaasset">LumaAsset</a></li>
+              </ul>
+      discriminator:
+        propertyName: asset
+      oneOf:
+        - $ref: "#/components/schemas/VideoAsset"
+        - $ref: "#/components/schemas/ImageAsset"
+        - $ref: "#/components/schemas/TitleAsset"
+        - $ref: "#/components/schemas/HtmlAsset"
+        - $ref: "#/components/schemas/AudioAsset"
+        - $ref: "#/components/schemas/LumaAsset"
+      additionalProperties: false
     VideoAsset:
       description: >-
         The VideoAsset is used to create video sequences from video files. The
@@ -1437,20 +1443,10 @@ components:
             Generate a thumbnail image from a specific point on the timeline.
           $ref: "#/components/schemas/Thumbnail"
         destinations:
-          description: >-
-            A destination is a location where output files can be sent to for serving or hosting. By default all
-            rendered assets are automatically sent to the 
-            [Shotstack hosting destination](https://shotstack.io/docs/guide/serving-assets/hosting). You can add other
-            destinations to send assets to. The following destinations are available:
-              <ul>
-                <li><a href="#tocs_shotstackdestination">DestinationShotstack</a></li>
-                <li><a href="#tocs_muxdestination">DestinationMux</a></li>
-              </ul>
           type: array
           items:
-            anyOf:
-              - $ref: "#/components/schemas/ShotstackDestination"
-              - $ref: "#/components/schemas/MuxDestination"
+            $ref: "#/components/schemas/Destinations"
+          additionalProperties: false
       required:
         - format
       type: object
@@ -1527,6 +1523,22 @@ components:
         - capture
         - scale
       type: object
+    Destinations:
+      type: object
+      description: >-
+        A destination is a location where output files can be sent to for serving or hosting. By default all
+        rendered assets are automatically sent to the 
+        [Shotstack hosting destination](https://shotstack.io/docs/guide/serving-assets/hosting). You can add other
+        destinations to send assets to. The following destinations are available:
+          <ul>
+            <li><a href="#tocs_shotstackdestination">DestinationShotstack</a></li>
+            <li><a href="#tocs_muxdestination">DestinationMux</a></li>
+          </ul>
+      discriminator:
+        propertyName: destinations
+      anyOf:
+        - $ref: "#/components/schemas/ShotstackDestination"
+        - $ref: "#/components/schemas/MuxDestination"
     ShotstackDestination:
       description: >-
         Send rendered assets to the Shotstack hosting and CDN service. This destination is enabled by default.

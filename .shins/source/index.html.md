@@ -1877,48 +1877,7 @@ A clip is a container for a specific type of asset, i.e. a title, image, video, 
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|asset|any|true|none|The type of asset to display for the duration of this Clip. Value must be one of:<br>  <ul><br>    <li><a href="#tocs_videoasset">VideoAsset</a></li><br>    <li><a href="#tocs_imageasset">ImageAsset</a></li><br>    <li><a href="#tocs_titleasset">TitleAsset</a></li><br>    <li><a href="#tocs_htmlasset">HtmlAsset</a></li><br>    <li><a href="#tocs_audioasset">AudioAsset</a></li><br>    <li><a href="#tocs_lumaasset">LumaAsset</a></li><br>  </ul>|
-
-oneOf
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» *anonymous*|[VideoAsset](#schemavideoasset)|false|none|The VideoAsset is used to create video sequences from video files. The src must be a publicly accessible URL to a video resource such as an mp4 file.|
-
-xor
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» *anonymous*|[ImageAsset](#schemaimageasset)|false|none|The ImageAsset is used to create video from images to compose an image. The src must be a publicly accessible URL to an image resource such as a jpg or png file.|
-
-xor
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» *anonymous*|[TitleAsset](#schematitleasset)|false|none|The TitleAsset clip type lets you create video titles from a text string and apply styling and positioning.|
-
-xor
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» *anonymous*|[HtmlAsset](#schemahtmlasset)|false|none|The HtmlAsset clip type lets you create text based layout and formatting using HTML and CSS. You can also set the height and width of a bounding box for the HTML content to sit within. Text and elements will wrap within the bounding box.|
-
-xor
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» *anonymous*|[AudioAsset](#schemaaudioasset)|false|none|The AudioAsset is used to add sound effects and audio at specific intervals on the timeline. The src must be a publicly accessible URL to an audio resource such  as an mp3 file.|
-
-xor
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» *anonymous*|[LumaAsset](#schemalumaasset)|false|none|The LumaAsset is used to create luma matte masks, transitions and effects between other assets. A luma matte is a grey scale image or animated video where the black areas are transparent and the white areas solid. The luma matte animation should be provided as an mp4 video file. The src must be a publicly accessible URL to the file.|
-
-continued
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
+|asset|[Asset](#schemaasset)|true|none|The type of asset to display for the duration of this Clip. Value<br>    must be one of:<br>      <ul><br>        <li><a href="#tocs_videoasset">VideoAsset</a></li><br>        <li><a href="#tocs_imageasset">ImageAsset</a></li><br>        <li><a href="#tocs_titleasset">TitleAsset</a></li><br>        <li><a href="#tocs_htmlasset">HtmlAsset</a></li><br>        <li><a href="#tocs_audioasset">AudioAsset</a></li><br>        <li><a href="#tocs_lumaasset">LumaAsset</a></li><br>      </ul>|
 |start|number|true|none|The start position of the Clip on the timeline, in seconds.|
 |length|number|true|none|The length, in seconds, the Clip should play for.|
 |fit|string|false|none|Set how the asset should be scaled to fit the viewport using one of the following options: <br>  <ul><br>    <li>`cover` - stretch the asset to fill the viewport without maintaining the aspect ratio.</li><br>    <li>`contain` - fit the entire asset within the viewport while maintaining the original aspect ratio.</li><br>    <li>`crop` - scale the asset to fill the viewport while maintaining the aspect ratio. The asset will be cropped if it exceeds the bounds of the viewport.</li><br>    <li>`none` - preserves the original asset dimensions and does not apply any scaling.</li><br>  </ul>|
@@ -1961,6 +1920,78 @@ continued
 |filter|lighten|
 |filter|muted|
 |filter|negative|
+
+<h2 id="tocS_Asset">Asset</h2>
+<!-- backwards compatibility -->
+<a id="schemaasset"></a>
+<a id="schema_Asset"></a>
+<a id="tocSasset"></a>
+<a id="tocsasset"></a>
+
+```json
+{
+  "type": "video",
+  "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4",
+  "trim": 2,
+  "volume": 1,
+  "crop": {
+    "top": 0.15,
+    "bottom": 0.15,
+    "left": 0,
+    "right": 0
+  }
+}
+
+```
+
+The type of asset to display for the duration of this Clip. Value
+    must be one of:
+      <ul>
+        <li><a href="#tocs_videoasset">VideoAsset</a></li>
+        <li><a href="#tocs_imageasset">ImageAsset</a></li>
+        <li><a href="#tocs_titleasset">TitleAsset</a></li>
+        <li><a href="#tocs_htmlasset">HtmlAsset</a></li>
+        <li><a href="#tocs_audioasset">AudioAsset</a></li>
+        <li><a href="#tocs_lumaasset">LumaAsset</a></li>
+      </ul>
+
+### Properties
+
+oneOf
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|*anonymous*|[VideoAsset](#schemavideoasset)|false|none|The VideoAsset is used to create video sequences from video files. The src must be a publicly accessible URL to a video resource such as an mp4 file.|
+
+xor
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|*anonymous*|[ImageAsset](#schemaimageasset)|false|none|The ImageAsset is used to create video from images to compose an image. The src must be a publicly accessible URL to an image resource such as a jpg or png file.|
+
+xor
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|*anonymous*|[TitleAsset](#schematitleasset)|false|none|The TitleAsset clip type lets you create video titles from a text string and apply styling and positioning.|
+
+xor
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|*anonymous*|[HtmlAsset](#schemahtmlasset)|false|none|The HtmlAsset clip type lets you create text based layout and formatting using HTML and CSS. You can also set the height and width of a bounding box for the HTML content to sit within. Text and elements will wrap within the bounding box.|
+
+xor
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|*anonymous*|[AudioAsset](#schemaaudioasset)|false|none|The AudioAsset is used to add sound effects and audio at specific intervals on the timeline. The src must be a publicly accessible URL to an audio resource such  as an mp3 file.|
+
+xor
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|*anonymous*|[LumaAsset](#schemalumaasset)|false|none|The LumaAsset is used to create luma matte masks, transitions and effects between other assets. A luma matte is a grey scale image or animated video where the black areas are transparent and the white areas solid. The luma matte animation should be provided as an mp4 video file. The src must be a publicly accessible URL to the file.|
 
 <h2 id="tocS_VideoAsset">VideoAsset</h2>
 <!-- backwards compatibility -->
@@ -2599,19 +2630,7 @@ The output format, render range and type of media to generate.
 |range|[Range](#schemarange)|false|none|Specify a time range to render, i.e. to render only a portion of a video or audio file. Omit this setting to  export the entire video. Range can also be used to render a frame at a specific time point - setting a range and output format as `jpg` will output a single frame image at the range `start` point.|
 |poster|[Poster](#schemaposter)|false|none|Generate a poster image from a specific point on the timeline.|
 |thumbnail|[Thumbnail](#schemathumbnail)|false|none|Generate a thumbnail image from a specific point on the timeline.|
-|destinations|[anyOf]|false|none|A destination is a location where output files can be sent to for serving or hosting. By default all rendered assets are automatically sent to the  [Shotstack hosting destination](https://shotstack.io/docs/guide/serving-assets/hosting). You can add other destinations to send assets to. The following destinations are available:<br>  <ul><br>    <li><a href="#tocs_shotstackdestination">DestinationShotstack</a></li><br>    <li><a href="#tocs_muxdestination">DestinationMux</a></li><br>  </ul>|
-
-anyOf
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» *anonymous*|[ShotstackDestination](#schemashotstackdestination)|false|none|Send rendered assets to the Shotstack hosting and CDN service. This destination is enabled by default.|
-
-or
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» *anonymous*|[MuxDestination](#schemamuxdestination)|false|none|Send rendered videos to the [Mux](https://www.mux.com/) video hosting and streaming service. Add the `mux` destination provider to send the output video to Mux. Mux credentials are required and added via the [dashboard](https://dashboard.shotstack.io/integrations/mux), not in the request.|
+|destinations|[[Destinations](#schemadestinations)]|false|none|[A destination is a location where output files can be sent to for serving or hosting. By default all rendered assets are automatically sent to the  [Shotstack hosting destination](https://shotstack.io/docs/guide/serving-assets/hosting). You can add other destinations to send assets to. The following destinations are available:<br>  <ul><br>    <li><a href="#tocs_shotstackdestination">DestinationShotstack</a></li><br>    <li><a href="#tocs_muxdestination">DestinationMux</a></li><br>  </ul>]|
 
 #### Enumerated Values
 
@@ -2648,6 +2667,41 @@ or
 |quality|low|
 |quality|medium|
 |quality|high|
+
+<h2 id="tocS_Destinations">Destinations</h2>
+<!-- backwards compatibility -->
+<a id="schemadestinations"></a>
+<a id="schema_Destinations"></a>
+<a id="tocSdestinations"></a>
+<a id="tocsdestinations"></a>
+
+```json
+{
+  "provider": "shotstack",
+  "exclude": false
+}
+
+```
+
+A destination is a location where output files can be sent to for serving or hosting. By default all rendered assets are automatically sent to the  [Shotstack hosting destination](https://shotstack.io/docs/guide/serving-assets/hosting). You can add other destinations to send assets to. The following destinations are available:
+  <ul>
+    <li><a href="#tocs_shotstackdestination">DestinationShotstack</a></li>
+    <li><a href="#tocs_muxdestination">DestinationMux</a></li>
+  </ul>
+
+### Properties
+
+anyOf
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|*anonymous*|[ShotstackDestination](#schemashotstackdestination)|false|none|Send rendered assets to the Shotstack hosting and CDN service. This destination is enabled by default.|
+
+or
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|*anonymous*|[MuxDestination](#schemamuxdestination)|false|none|Send rendered videos to the [Mux](https://www.mux.com/) video hosting and streaming service. Add the `mux` destination provider to send the output video to Mux. Mux credentials are required and added via the [dashboard](https://dashboard.shotstack.io/integrations/mux), not in the request.|
 
 <h2 id="tocS_Size">Size</h2>
 <!-- backwards compatibility -->
