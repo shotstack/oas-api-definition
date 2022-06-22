@@ -32,12 +32,17 @@ headingLevel: 2
 
 > Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
 
-Shotstack is a video, image and audio editing service that allows for the automated generation of videos, images and audio using JSON and a RESTful API.
+Shotstack is a video, image and audio editing service that allows for the automated
+generation of videos, images and audio using JSON and a RESTful API.
 
-You arrange and configure an edit and POST it to the API which will render your media and provide a file  location when complete.
+You arrange and configure an edit and POST it to the API which will render your media and provide a file 
+location when complete.
 
-For more details visit [shotstack.io](https://shotstack.io) or checkout our [getting started](https://shotstack.io/docs/guide/) documentation.
-There are two main API's, one for editing and generating assets (Edit API) and one for managing hosted assets (Serve API).
+For more details visit [shotstack.io](https://shotstack.io) or checkout our
+[getting started](https://shotstack.io/docs/guide/) documentation.
+
+There are two main API's, one for editing and generating assets (Edit API) and one for managing hosted assets
+(Serve API).
 
 The Edit API base URL is: <b>https://api.shotstack.io/{version}</b>
 
@@ -2361,7 +2366,9 @@ func main() {
 
 `GET /probe/{url}`
 
-Inspects any media asset (image, video, audio) on the internet using a hosted version of [FFprobe](https://ffmpeg.org/ffprobe.html). The probe endpoint returns useful information about an asset such as width, height, duration, rotation, framerate, etc...
+Inspects any media asset (image, video, audio) on the internet using a hosted version
+of [FFprobe](https://ffmpeg.org/ffprobe.html). The probe endpoint returns useful information
+about an asset such as width, height, duration, rotation, framerate, etc...
 
 **Base URL:** https://api.shotstack.io/{version}
 
@@ -2546,7 +2553,9 @@ func main() {
 
 `GET /assets/{id}`
 
-The Serve API is used to interact with, and delete hosted assets including videos, images, audio files,  thumbnails and poster images. Use this endpoint to fetch an asset by asset id. Note that an asset id is unique for each asset and different from the render id.
+The Serve API is used to interact with, and delete hosted assets including videos, images, audio files, 
+thumbnails and poster images. Use this endpoint to fetch an asset by asset id. Note that an asset id is unique
+for each asset and different from the render id.
 
 **Base URL:** https://api.shotstack.io/serve/{version}
 
@@ -2562,20 +2571,19 @@ The Serve API is used to interact with, and delete hosted assets including video
 
 ```json
 {
-  "response": {
-    "data": {
-      "type": "asset",
-      "attributes": {
-        "id": "a4482cbf-e321-42a2-ac8b-947d26886840",
-        "owner": "5ca6hu7s9k",
-        "region": "au",
-        "renderId": "2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7",
-        "filename": "2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4",
-        "url": "https://cdn.shotstack.io/au/v1/msgtwx8iw6/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4",
-        "status": "ready",
-        "created": "2021-05-06T03:33:48.600Z",
-        "updated": "2021-05-06T03:33:49.521Z"
-      }
+  "data": {
+    "type": "asset",
+    "attributes": {
+      "id": "a4482cbf-e321-42a2-ac8b-947d26886840",
+      "owner": "5ca6hu7s9k",
+      "region": "au",
+      "renderId": "2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7",
+      "providerId": "a4482cbf-e321-42a2-ac8b-947d26886840",
+      "filename": "2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4",
+      "url": "https://cdn.shotstack.io/au/v1/5ca6hu7s9k/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4",
+      "status": "ready",
+      "created": "2021-06-30T09:42:29.446Z",
+      "updated": "2021-06-30T09:42:30.168Z"
     }
   }
 }
@@ -2735,7 +2743,8 @@ func main() {
 
 `DELETE /assets/{id}`
 
-Delete an asset by its asset id. If a render creates multiple assets, such as thumbnail and poster images, each asset must be deleted individually by the asset id.
+Delete an asset by its asset id. If a render creates multiple assets, such as thumbnail and poster images,
+each asset must be deleted individually by the asset id.
 
 **Base URL:** https://api.shotstack.io/serve/{version}
 
@@ -2906,7 +2915,9 @@ func main() {
 
 `GET /assets/render/{id}`
 
-A render may generate more than one file, such as a video, thumbnail and poster image. When the assets are created the only known id is the render id returned by the original [render request](#render-video), status  request or webhook. This endpoint lets you look up one or more assets by the render id.
+A render may generate more than one file, such as a video, thumbnail and poster image. When the assets are
+created the only known id is the render id returned by the original [render request](#render-video), status 
+request or webhook. This endpoint lets you look up one or more assets by the render id.
 
 **Base URL:** https://api.shotstack.io/serve/{version}
 
@@ -2922,24 +2933,23 @@ A render may generate more than one file, such as a video, thumbnail and poster 
 
 ```json
 {
-  "response": {
-    "data": [
-      {
-        "type": "asset",
-        "attributes": {
-          "id": "a4482cbf-e321-42a2-ac8b-947d26886840",
-          "owner": "5ca6hu7s9k",
-          "region": "au",
-          "renderId": "2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7",
-          "filename": "2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4",
-          "url": "https://cdn.shotstack.io/au/v1/msgtwx8iw6/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4",
-          "status": "ready",
-          "created": "2021-05-06T03:33:48.600Z",
-          "updated": "2021-05-06T03:33:49.521Z"
-        }
+  "data": [
+    {
+      "type": "asset",
+      "attributes": {
+        "id": "a4482cbf-e321-42a2-ac8b-947d26886840",
+        "owner": "5ca6hu7s9k",
+        "region": "au",
+        "renderId": "2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7",
+        "providerId": "a4482cbf-e321-42a2-ac8b-947d26886840",
+        "filename": "2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4",
+        "url": "https://cdn.shotstack.io/au/v1/5ca6hu7s9k/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4",
+        "status": "ready",
+        "created": "2021-06-30T09:42:29.446Z",
+        "updated": "2021-06-30T09:42:30.168Z"
       }
-    ]
-  }
+    }
+  ]
 }
 ```
 
@@ -4470,14 +4480,14 @@ Pass additional options to control how Mux processes video. Currently supports p
 
 ```
 
-A template is a saved edit than can be loaded and re-used.
+A template is a saved [Edit](#tocs_edit) than can be loaded and re-used.
 
 ### Properties
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|name|string|true|none|An name for the template|
-|template|[Edit](#schemaedit)|true|none|An edit defines the arrangement of a video on a timeline, an audio edit or an image design and the output format.|
+|name|string|true|none|The template name|
+|template|[Edit](#schemaedit)|false|none|An edit defines the arrangement of a video on a timeline, an audio edit or an image design and the output format.|
 
 <h2 id="tocS_TemplateRender">TemplateRender</h2>
 <!-- backwards compatibility -->
@@ -4505,7 +4515,7 @@ Render a template by it's id and optional merge fields.
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|id|string|false|none|The id of the template to render in UUID format.|
+|id|string|true|none|The id of the template to render in UUID format.|
 |merge|[[MergeField](#schemamergefield)]|false|none|An array of key/value pairs that provides an easy way to create templates with placeholders. The placeholders can be used to find and replace keys with values. For example you can search for the placeholder `{{NAME}}` and replace it with the value `Jane`.|
 
 <h2 id="tocS_QueuedResponse">QueuedResponse</h2>

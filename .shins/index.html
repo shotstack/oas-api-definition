@@ -478,10 +478,14 @@
 <blockquote>
 <p>Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.</p>
 </blockquote>
-<p>Shotstack is a video, image and audio editing service that allows for the automated generation of videos, images and audio using JSON and a RESTful API.</p>
-<p>You arrange and configure an edit and POST it to the API which will render your media and provide a file  location when complete.</p>
-<p>For more details visit <a href="https://shotstack.io">shotstack.io</a> or checkout our <a href="https://shotstack.io/docs/guide/">getting started</a> documentation.
-There are two main API's, one for editing and generating assets (Edit API) and one for managing hosted assets (Serve API).</p>
+<p>Shotstack is a video, image and audio editing service that allows for the automated
+generation of videos, images and audio using JSON and a RESTful API.</p>
+<p>You arrange and configure an edit and POST it to the API which will render your media and provide a file
+location when complete.</p>
+<p>For more details visit <a href="https://shotstack.io">shotstack.io</a> or checkout our
+<a href="https://shotstack.io/docs/guide/">getting started</a> documentation.</p>
+<p>There are two main API's, one for editing and generating assets (Edit API) and one for managing hosted assets
+(Serve API).</p>
 <p>The Edit API base URL is: <b><a href="https://api.shotstack.io/%7Bversion%7D">https://api.shotstack.io/{version}</a></b></p>
 <p>The Serve API base URL is: <b><a href="https://api.shotstack.io/serve/%7Bversion%7D">https://api.shotstack.io/serve/{version}</a></b></p>
 <p>Base URLs:</p>
@@ -2811,7 +2815,9 @@ System.out.println(response.toString());
 
 </code></pre>
 <p><code>GET /probe/{url}</code></p>
-<p>Inspects any media asset (image, video, audio) on the internet using a hosted version of <a href="https://ffmpeg.org/ffprobe.html">FFprobe</a>. The probe endpoint returns useful information about an asset such as width, height, duration, rotation, framerate, etc...</p>
+<p>Inspects any media asset (image, video, audio) on the internet using a hosted version
+of <a href="https://ffmpeg.org/ffprobe.html">FFprobe</a>. The probe endpoint returns useful information
+about an asset such as width, height, duration, rotation, framerate, etc...</p>
 <p><strong>Base URL:</strong> <a href="https://api.shotstack.io/%7Bversion%7D">https://api.shotstack.io/{version}</a></p>
 <h3 id="inspect-media-parameters">Parameters</h3>
 <table>
@@ -2997,7 +3003,9 @@ System.out.println(response.toString());
 
 </code></pre>
 <p><code>GET /assets/{id}</code></p>
-<p>The Serve API is used to interact with, and delete hosted assets including videos, images, audio files,  thumbnails and poster images. Use this endpoint to fetch an asset by asset id. Note that an asset id is unique for each asset and different from the render id.</p>
+<p>The Serve API is used to interact with, and delete hosted assets including videos, images, audio files,
+thumbnails and poster images. Use this endpoint to fetch an asset by asset id. Note that an asset id is unique
+for each asset and different from the render id.</p>
 <p><strong>Base URL:</strong> <a href="https://api.shotstack.io/serve/%7Bversion%7D">https://api.shotstack.io/serve/{version}</a></p>
 <h3 id="get-asset-parameters">Parameters</h3>
 <table>
@@ -3027,20 +3035,19 @@ System.out.println(response.toString());
 <p>200 Response</p>
 </blockquote>
 <pre class="highlight tab tab-json"><code>{
-  <span class="hljs-attr">"response"</span>: {
-    <span class="hljs-attr">"data"</span>: {
-      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"asset"</span>,
-      <span class="hljs-attr">"attributes"</span>: {
-        <span class="hljs-attr">"id"</span>: <span class="hljs-string">"a4482cbf-e321-42a2-ac8b-947d26886840"</span>,
-        <span class="hljs-attr">"owner"</span>: <span class="hljs-string">"5ca6hu7s9k"</span>,
-        <span class="hljs-attr">"region"</span>: <span class="hljs-string">"au"</span>,
-        <span class="hljs-attr">"renderId"</span>: <span class="hljs-string">"2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7"</span>,
-        <span class="hljs-attr">"filename"</span>: <span class="hljs-string">"2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4"</span>,
-        <span class="hljs-attr">"url"</span>: <span class="hljs-string">"https://cdn.shotstack.io/au/v1/msgtwx8iw6/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4"</span>,
-        <span class="hljs-attr">"status"</span>: <span class="hljs-string">"ready"</span>,
-        <span class="hljs-attr">"created"</span>: <span class="hljs-string">"2021-05-06T03:33:48.600Z"</span>,
-        <span class="hljs-attr">"updated"</span>: <span class="hljs-string">"2021-05-06T03:33:49.521Z"</span>
-      }
+  <span class="hljs-attr">"data"</span>: {
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"asset"</span>,
+    <span class="hljs-attr">"attributes"</span>: {
+      <span class="hljs-attr">"id"</span>: <span class="hljs-string">"a4482cbf-e321-42a2-ac8b-947d26886840"</span>,
+      <span class="hljs-attr">"owner"</span>: <span class="hljs-string">"5ca6hu7s9k"</span>,
+      <span class="hljs-attr">"region"</span>: <span class="hljs-string">"au"</span>,
+      <span class="hljs-attr">"renderId"</span>: <span class="hljs-string">"2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7"</span>,
+      <span class="hljs-attr">"providerId"</span>: <span class="hljs-string">"a4482cbf-e321-42a2-ac8b-947d26886840"</span>,
+      <span class="hljs-attr">"filename"</span>: <span class="hljs-string">"2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4"</span>,
+      <span class="hljs-attr">"url"</span>: <span class="hljs-string">"https://cdn.shotstack.io/au/v1/5ca6hu7s9k/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4"</span>,
+      <span class="hljs-attr">"status"</span>: <span class="hljs-string">"ready"</span>,
+      <span class="hljs-attr">"created"</span>: <span class="hljs-string">"2021-06-30T09:42:29.446Z"</span>,
+      <span class="hljs-attr">"updated"</span>: <span class="hljs-string">"2021-06-30T09:42:30.168Z"</span>
     }
   }
 }
@@ -3188,7 +3195,8 @@ System.out.println(response.toString());
 
 </code></pre>
 <p><code>DELETE /assets/{id}</code></p>
-<p>Delete an asset by its asset id. If a render creates multiple assets, such as thumbnail and poster images, each asset must be deleted individually by the asset id.</p>
+<p>Delete an asset by its asset id. If a render creates multiple assets, such as thumbnail and poster images,
+each asset must be deleted individually by the asset id.</p>
 <p><strong>Base URL:</strong> <a href="https://api.shotstack.io/serve/%7Bversion%7D">https://api.shotstack.io/serve/{version}</a></p>
 <h3 id="delete-asset-parameters">Parameters</h3>
 <table>
@@ -3361,7 +3369,9 @@ System.out.println(response.toString());
 
 </code></pre>
 <p><code>GET /assets/render/{id}</code></p>
-<p>A render may generate more than one file, such as a video, thumbnail and poster image. When the assets are created the only known id is the render id returned by the original <a href="#render-video">render request</a>, status  request or webhook. This endpoint lets you look up one or more assets by the render id.</p>
+<p>A render may generate more than one file, such as a video, thumbnail and poster image. When the assets are
+created the only known id is the render id returned by the original <a href="#render-video">render request</a>, status
+request or webhook. This endpoint lets you look up one or more assets by the render id.</p>
 <p><strong>Base URL:</strong> <a href="https://api.shotstack.io/serve/%7Bversion%7D">https://api.shotstack.io/serve/{version}</a></p>
 <h3 id="get-asset-by-render-id-parameters">Parameters</h3>
 <table>
@@ -3391,24 +3401,23 @@ System.out.println(response.toString());
 <p>200 Response</p>
 </blockquote>
 <pre class="highlight tab tab-json"><code>{
-  <span class="hljs-attr">"response"</span>: {
-    <span class="hljs-attr">"data"</span>: [
-      {
-        <span class="hljs-attr">"type"</span>: <span class="hljs-string">"asset"</span>,
-        <span class="hljs-attr">"attributes"</span>: {
-          <span class="hljs-attr">"id"</span>: <span class="hljs-string">"a4482cbf-e321-42a2-ac8b-947d26886840"</span>,
-          <span class="hljs-attr">"owner"</span>: <span class="hljs-string">"5ca6hu7s9k"</span>,
-          <span class="hljs-attr">"region"</span>: <span class="hljs-string">"au"</span>,
-          <span class="hljs-attr">"renderId"</span>: <span class="hljs-string">"2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7"</span>,
-          <span class="hljs-attr">"filename"</span>: <span class="hljs-string">"2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4"</span>,
-          <span class="hljs-attr">"url"</span>: <span class="hljs-string">"https://cdn.shotstack.io/au/v1/msgtwx8iw6/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4"</span>,
-          <span class="hljs-attr">"status"</span>: <span class="hljs-string">"ready"</span>,
-          <span class="hljs-attr">"created"</span>: <span class="hljs-string">"2021-05-06T03:33:48.600Z"</span>,
-          <span class="hljs-attr">"updated"</span>: <span class="hljs-string">"2021-05-06T03:33:49.521Z"</span>
-        }
+  <span class="hljs-attr">"data"</span>: [
+    {
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"asset"</span>,
+      <span class="hljs-attr">"attributes"</span>: {
+        <span class="hljs-attr">"id"</span>: <span class="hljs-string">"a4482cbf-e321-42a2-ac8b-947d26886840"</span>,
+        <span class="hljs-attr">"owner"</span>: <span class="hljs-string">"5ca6hu7s9k"</span>,
+        <span class="hljs-attr">"region"</span>: <span class="hljs-string">"au"</span>,
+        <span class="hljs-attr">"renderId"</span>: <span class="hljs-string">"2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7"</span>,
+        <span class="hljs-attr">"providerId"</span>: <span class="hljs-string">"a4482cbf-e321-42a2-ac8b-947d26886840"</span>,
+        <span class="hljs-attr">"filename"</span>: <span class="hljs-string">"2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4"</span>,
+        <span class="hljs-attr">"url"</span>: <span class="hljs-string">"https://cdn.shotstack.io/au/v1/5ca6hu7s9k/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4"</span>,
+        <span class="hljs-attr">"status"</span>: <span class="hljs-string">"ready"</span>,
+        <span class="hljs-attr">"created"</span>: <span class="hljs-string">"2021-06-30T09:42:29.446Z"</span>,
+        <span class="hljs-attr">"updated"</span>: <span class="hljs-string">"2021-06-30T09:42:30.168Z"</span>
       }
-    ]
-  }
+    }
+  ]
 }
 </code></pre>
 <h3 id="get-asset-by-render-id-responses">Responses</h3>
@@ -6479,7 +6488,7 @@ must be one of:
 }
 
 </code></pre>
-<p>A template is a saved edit than can be loaded and re-used.</p>
+<p>A template is a saved <a href="#tocs_edit">Edit</a> than can be loaded and re-used.</p>
 <h3 id="properties">Properties</h3>
 <table>
 <thead>
@@ -6497,12 +6506,12 @@ must be one of:
 <td>string</td>
 <td>true</td>
 <td>none</td>
-<td>An name for the template</td>
+<td>The template name</td>
 </tr>
 <tr>
 <td>template</td>
 <td><a href="#schemaedit">Edit</a></td>
-<td>true</td>
+<td>false</td>
 <td>none</td>
 <td>An edit defines the arrangement of a video on a timeline, an audio edit or an image design and the output format.</td>
 </tr>
@@ -6540,7 +6549,7 @@ must be one of:
 <tr>
 <td>id</td>
 <td>string</td>
-<td>false</td>
+<td>true</td>
 <td>none</td>
 <td>The id of the template to render in UUID format.</td>
 </tr>

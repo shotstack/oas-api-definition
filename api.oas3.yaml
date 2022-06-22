@@ -1,15 +1,14 @@
 openapi: 3.0.0
+
 info:
   title: Shotstack
   version: v1
-  description: >-
+  description: |
     Shotstack is a video, image and audio editing service that allows for the automated
     generation of videos, images and audio using JSON and a RESTful API.
 
-
     You arrange and configure an edit and POST it to the API which will render your media and provide a file 
     location when complete.
-
 
     For more details visit [shotstack.io](https://shotstack.io) or checkout our
     [getting started](https://shotstack.io/docs/guide/) documentation.
@@ -17,9 +16,7 @@ info:
     There are two main API's, one for editing and generating assets (Edit API) and one for managing hosted assets
     (Serve API).
 
-
     The Edit API base URL is: <b>https://api.shotstack.io/{version}</b>
-    
     
     The Serve API base URL is: <b>https://api.shotstack.io/serve/{version}</b>
 
@@ -51,17 +48,10 @@ paths:
           description: The queued render details
           content:
             application/json:
-              example:
-                success: true
-                message: Created
-                response:
-                  message: Render Successfully Queued
-                  id: 2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7
               schema:
                 $ref: "#/components/schemas/QueuedResponse"
-      description: >-
+      description: |
         Queue and render the contents of an [Edit](#tocs_edit) as a video, image or audio file.
-
 
         **Base URL:** https://api.shotstack.io/{version}
       summary: Render Asset
@@ -80,6 +70,7 @@ paths:
         - DeveloperKey: []
       tags:
         - Edit
+
   /render/{id}:
     get:
       responses:
@@ -102,9 +93,8 @@ paths:
                   updated: "2020-10-30T09:42:39.168Z"
               schema:
                 $ref: "#/components/schemas/RenderResponse"
-      description: >-
+      description: |
         Get the rendering status, temporary asset url and details of a render by ID.
-
 
         **Base URL:** https://api.shotstack.io/{version}
       operationId: getRender
@@ -113,6 +103,7 @@ paths:
         - DeveloperKey: []
       tags:
         - Edit
+
     parameters:
       - in: path
         name: id
@@ -296,11 +287,10 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ProbeResponse"
-      description: >-
+      description: |
         Inspects any media asset (image, video, audio) on the internet using a hosted version
         of [FFprobe](https://ffmpeg.org/ffprobe.html). The probe endpoint returns useful information
         about an asset such as width, height, duration, rotation, framerate, etc...
-
 
         **Base URL:** https://api.shotstack.io/{version}
       operationId: probe
@@ -309,6 +299,7 @@ paths:
         - DeveloperKey: []
       tags:
         - Edit
+
     parameters:
       - in: path
         name: url
@@ -316,6 +307,7 @@ paths:
         schema:
           type: string
         description: The URL of the media to inspect, must be **URL encoded**.
+
   /assets/{id}:
     get:
       responses:
@@ -323,27 +315,12 @@ paths:
           description: Get asset by asset id
           content:
             application/json:
-              example:
-                response:
-                  data:
-                    type: asset
-                    attributes:
-                      id: a4482cbf-e321-42a2-ac8b-947d26886840
-                      owner: 5ca6hu7s9k
-                      region: au
-                      renderId: 2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7
-                      filename: 2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4
-                      url: https://cdn.shotstack.io/au/v1/msgtwx8iw6/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4
-                      status: ready
-                      created: "2021-05-06T03:33:48.600Z"
-                      updated: "2021-05-06T03:33:49.521Z"
               schema:
                 $ref: "#/components/schemas/AssetResponse"
-      description: >-
+      description: |
         The Serve API is used to interact with, and delete hosted assets including videos, images, audio files, 
         thumbnails and poster images. Use this endpoint to fetch an asset by asset id. Note that an asset id is unique
         for each asset and different from the render id.
-
 
         **Base URL:** https://api.shotstack.io/serve/{version}
       operationId: getAsset
@@ -352,14 +329,14 @@ paths:
         - DeveloperKey: []
       tags:
         - Serve
+
     delete:
       responses:
         "204":
           description: An empty response signifying the asset has been deleted
-      description: >-
+      description: |
         Delete an asset by its asset id. If a render creates multiple assets, such as thumbnail and poster images,
         each asset must be deleted individually by the asset id.
-
 
         **Base URL:** https://api.shotstack.io/serve/{version}
       operationId: deleteAsset
@@ -368,6 +345,7 @@ paths:
         - DeveloperKey: []
       tags:
         - Serve
+
     parameters:
       - name: id
         in: path
@@ -377,6 +355,7 @@ paths:
             ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
           type: string
         description: The id of the asset in UUID format
+
   /assets/render/{id}:
     get:
       responses:
@@ -384,27 +363,12 @@ paths:
           description: Get one or more assets by render id
           content:
             application/json:
-              example:
-                response:
-                  data:
-                    - type: asset
-                      attributes:
-                        id: a4482cbf-e321-42a2-ac8b-947d26886840
-                        owner: 5ca6hu7s9k
-                        region: au
-                        renderId: 2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7
-                        filename: 2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4
-                        url: https://cdn.shotstack.io/au/v1/msgtwx8iw6/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4
-                        status: ready
-                        created: "2021-05-06T03:33:48.600Z"
-                        updated: "2021-05-06T03:33:49.521Z"
               schema:
                 $ref: "#/components/schemas/AssetRenderResponse"
-      description: >-
+      description: |
         A render may generate more than one file, such as a video, thumbnail and poster image. When the assets are
         created the only known id is the render id returned by the original [render request](#render-video), status 
         request or webhook. This endpoint lets you look up one or more assets by the render id.
-
 
         **Base URL:** https://api.shotstack.io/serve/{version}
       operationId: getAssetByRenderId
@@ -413,6 +377,7 @@ paths:
         - DeveloperKey: []
       tags:
         - Serve
+
     parameters:
       - name: id
         in: path
@@ -422,6 +387,7 @@ paths:
             ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
           type: string
         description: The render id associated with the asset in UUID format
+
 components:
   schemas:
     Edit:
@@ -467,6 +433,7 @@ components:
         - timeline
         - output
       type: object
+
     Timeline:
       description: >-
         A timeline represents the contents of a video edit over time, an audio edit over time, in
@@ -508,6 +475,7 @@ components:
       required:
         - tracks
       type: object
+
     Soundtrack:
       description: >-
         A music or audio file in mp3 format that plays for the duration of the
@@ -541,6 +509,7 @@ components:
       required:
         - src
       type: object
+
     Font:
       description: >-
         Download a custom font to use with the HTML asset type, using the font name in the CSS or font tag. See our
@@ -553,6 +522,7 @@ components:
       required:
         - src
       type: object
+
     Track:
       description: >-
         A track contains an array of clips. Tracks are layered on top of each
@@ -567,6 +537,7 @@ components:
       required:
         - clips
       type: object
+
     Clip:
       description: >-
         A clip is a container for a specific type of asset, i.e. a title, image, video,
@@ -699,6 +670,7 @@ components:
         - start
         - length
       type: object
+
     Asset:
       type: object
       description: >-
@@ -722,6 +694,7 @@ components:
         - $ref: "#/components/schemas/AudioAsset"
         - $ref: "#/components/schemas/LumaAsset"
       additionalProperties: false
+
     VideoAsset:
       description: >-
         The VideoAsset is used to create video sequences from video files. The
@@ -757,6 +730,7 @@ components:
       required:
         - type
         - src
+
     ImageAsset:
       description: >-
         The ImageAsset is used to create video from images to compose an image. The src must be a
@@ -778,6 +752,7 @@ components:
       required:
         - type
         - src
+
     TitleAsset:
       description: >-
         The TitleAsset clip type lets you create video titles from a text string
@@ -890,6 +865,7 @@ components:
       required:
         - type
         - text
+
     HtmlAsset:
       description: >-
         The HtmlAsset clip type lets you create text based layout and formatting using
@@ -960,6 +936,7 @@ components:
       required:
         - type
         - html
+
     AudioAsset:
       description: >-
         The AudioAsset is used to add sound effects and audio at specific intervals on
@@ -1005,6 +982,7 @@ components:
       required:
         - type
         - src
+
     LumaAsset:
       description: >-
         The LumaAsset is used to create luma matte masks, transitions and effects between other assets.
@@ -1032,6 +1010,7 @@ components:
       required:
         - type
         - src
+
     Transition:
       description: In and out transitions for a clip - i.e. fade in and fade out
       properties:
@@ -1218,6 +1197,7 @@ components:
             - zoom
           type: string
       type: object
+
     Offset:
       description: >-
         Offsets the position of an asset horizontally or vertically by a
@@ -1250,6 +1230,7 @@ components:
           default: 0
           example: -0.2
       type: object
+
     Crop:
       description: >-
         Crop the sides of an asset by a relative amount. The size of the crop is specified using a scale between 0 and
@@ -1283,6 +1264,7 @@ components:
           minimum: 0
           maximum: 1
       type: object
+
     Transformation:
       description: >-
         Apply one or more transformations to a clip. Transformations alter the visual
@@ -1295,6 +1277,7 @@ components:
           $ref: "#/components/schemas/SkewTransformation"
         flip:
           $ref: "#/components/schemas/FlipTransformation"
+
     RotateTransformation:
       description: >-
         Rotate a clip by the specified angle in degrees. Rotation origin
@@ -1309,6 +1292,7 @@ components:
           type: integer
           default: 0
           example: 45
+
     SkewTransformation:
       description: >-
         Skew a clip so its edges are sheared at an angle. Use values between 0 and 3.
@@ -1327,6 +1311,7 @@ components:
           format: float
           default: 0
           example: 0.5
+
     FlipTransformation:
       description: >-
         Flip a clip vertically or horizontally. Acts as a mirror effect of the clip along
@@ -1343,6 +1328,7 @@ components:
           type: boolean
           default: false
           example: true
+
     MergeField:
       description: >-
         A merge field consists of a key; `find`, and a value; `replace`. Merge fields can be used to replace placeholders
@@ -1362,6 +1348,7 @@ components:
       required:
         - find
         - replace
+
     Output:
       description: The output format, render range and type of media to generate.
       properties:
@@ -1508,6 +1495,7 @@ components:
       required:
         - format
       type: object
+
     Size:
       description: >-
         Set a custom size for a video or image. When using a custom size omit the
@@ -1531,6 +1519,7 @@ components:
           maximum: 4096
           example: 800
       type: object
+
     Range:
       description: >-
         Specify a time range to render, i.e. to render only a portion of a video or audio file. Omit this setting to 
@@ -1552,6 +1541,7 @@ components:
           minimum: 0
           example: 6
       type: object
+
     Poster:
       description: >-
         Generate a poster image for the video at a specific point from the timeline. The poster image size
@@ -1564,6 +1554,7 @@ components:
       required:
         - capture
       type: object
+
     Thumbnail:
       description: Generate a thumbnail image for the video or image at a specific point from the timeline.
       properties:
@@ -1581,6 +1572,7 @@ components:
         - capture
         - scale
       type: object
+
     Destinations:
       type: object
       description: >-
@@ -1597,6 +1589,7 @@ components:
       anyOf:
         - $ref: "#/components/schemas/ShotstackDestination"
         - $ref: "#/components/schemas/MuxDestination"
+
     ShotstackDestination:
       description: >-
         Send rendered assets to the Shotstack hosting and CDN service. This destination is enabled by default.
@@ -1616,6 +1609,7 @@ components:
       type: object
       required:
         - provider
+
     MuxDestination:
       description: >-
         Send rendered videos to the [Mux](https://www.mux.com/) video hosting and streaming service. Add the
@@ -1633,6 +1627,7 @@ components:
       type: object
       required:
         - provider
+
     MuxDestinationOptions:
       description: >-
         Pass additional options to control how Mux processes video. Currently supports playback policy option.
@@ -1702,6 +1697,7 @@ components:
         - message
         - response
       type: object
+
     QueuedResponseData:
       description: The response data returned with the [QueuedResponse](#tocs_queuedresponse).
       properties:
@@ -1717,6 +1713,7 @@ components:
         - message
         - id
       type: object
+
     RenderResponse:
       description: >-
         The response received after a [render status request](#get-render-status) is submitted. The response includes 
@@ -1738,6 +1735,7 @@ components:
         - message
         - response
       type: object
+
     RenderResponseData:
       description: The response data returned with the [RenderResponse](#tocs_renderresponse) including status and URL.
       properties:
@@ -1992,6 +1990,7 @@ components:
         - message
         - response
       type: object
+
     AssetResponse:
       description: >-
         The response returned by the Serve API [get asset](#get-asset) request. Includes details of a hosted video,
@@ -2004,6 +2003,7 @@ components:
       required:
         - data
       type: object
+
     AssetRenderResponse:
       description: >-
         The response returned by the Serve API [get asset by render id](#get-asset-by-render-id) request. The response 
@@ -2018,6 +2018,7 @@ components:
       required:
         - data
       type: object
+
     AssetResponseData:
       description: The type of resource (an asset) and attributes of the asset.
       properties:
@@ -2032,6 +2033,7 @@ components:
         - type
         - attributes
       type: object
+
     AssetResponseAttributes:
       description: The list of asset attributes and their values.
       properties:
