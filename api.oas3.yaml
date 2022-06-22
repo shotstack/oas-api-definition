@@ -42,6 +42,7 @@ servers:
           - v1
           - stage
         default: v1
+
 paths:
   /render:
     post:
@@ -59,7 +60,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/QueuedResponse"
       description: >-
-        Queue and render the contents of a timeline as a video, image or audio file.
+        Queue and render the contents of an [Edit](#tocs_edit) as a video, image or audio file.
 
 
         **Base URL:** https://api.shotstack.io/{version}
@@ -71,51 +72,7 @@ paths:
         content:
           application/json:
             example:
-              timeline:
-                soundtrack:
-                  src: "https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3"
-                  effect: fadeInFadeOut
-                background: "#000000"
-                tracks:
-                  - clips:
-                      - asset:
-                          type: title
-                          text: Hello World
-                          style: minimal
-                        start: 0
-                        length: 4
-                        transition:
-                          in: fade
-                          out: fade
-                        effect: slideRight
-                      - asset:
-                          type: image
-                          src: >-
-                            https://s3-ap-northeast-1.amazonaws.com/my-bucket/my-image.jpg
-                        start: 3
-                        length: 4
-                        effect: zoomIn
-                        filter: greyscale
-                  - clips:
-                      - asset:
-                          type: video
-                          src: >-
-                            https://s3-ap-northeast-1.amazonaws.com/my-bucket/my-clip-1.mp4
-                          trim: 10.5
-                        start: 7
-                        length: 4.5
-                      - asset:
-                          type: video
-                          src: >-
-                            https://s3-ap-northeast-1.amazonaws.com/my-bucket/my-clip-2.mp4
-                          volume: 0.5
-                        start: 11.5
-                        length: 5
-                        transition:
-                          out: wipeLeft
-              output:
-                format: mp4
-                resolution: sd
+              $ref: "./definitions/edit.yaml"
             schema:
               $ref: "#/components/schemas/Edit"
         required: true
@@ -140,52 +97,7 @@ paths:
                   url: >-
                     https://shotstack-api-v1-output.s3-ap-southeast-2.amazonaws.com/5ca6hu7s9k/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4
                   data:
-                    timeline:
-                      soundtrack:
-                        src: >-
-                          https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3
-                        effect: fadeInFadeOut
-                      background: "#000000"
-                      tracks:
-                        - clips:
-                            - asset:
-                                type: title
-                                text: Hello World
-                                style: minimal
-                              start: 0
-                              length: 4
-                              transition:
-                                in: fade
-                                out: fade
-                              effect: slideRight
-                            - asset:
-                                type: image
-                                src: >-
-                                  https://s3-ap-northeast-1.amazonaws.com/my-bucket/my-image.jpg
-                              start: 3
-                              length: 4
-                              effect: zoomIn
-                              filter: greyscale
-                        - clips:
-                            - asset:
-                                type: video
-                                src: >-
-                                  https://s3-ap-northeast-1.amazonaws.com/my-bucket/my-clip-1.mp4
-                                trim: 10.5
-                              start: 7
-                              length: 4.5
-                            - asset:
-                                type: video
-                                src: >-
-                                  https://s3-ap-northeast-1.amazonaws.com/my-bucket/my-clip-2.mp4
-                                volume: 0.5
-                              start: 11.5
-                              length: 5
-                              transition:
-                                out: wipeLeft
-                    output:
-                      format: mp4
-                      resolution: sd
+                    $ref: "./definitions/edit.yaml"
                   created: "2020-10-30T09:42:29.446Z"
                   updated: "2020-10-30T09:42:39.168Z"
               schema:
@@ -229,6 +141,152 @@ paths:
           Used when data is set to true, it will show the [merge fields](#tocs_mergefield)
           merged in to the data response.
         example: false
+
+  /templates:
+    post:
+      description: |
+        Save an [Edit](#tocs_edit) as a re-usable template. Templates can be retrieved and modified in your application
+        before being rendered. [Merge fields](#tocs_mergefield) can be also used to merge data in to a template and
+        [render](#render-template) it in a single request.
+
+        **Base URL:** https://api.shotstack.io/{version}
+      summary: Create Template
+      operationId: postTemplate
+      requestBody:
+        description: >-
+          Create a template with a name and [Edit](#tocs_edit).
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Template"
+        required: true
+      responses:
+        "201":
+          description: The saved template status including the id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TemplateResponse"
+      security:
+        - DeveloperKey: []
+      tags:
+        - Edit
+
+    get:
+      description: |
+        Retrieve a list of templates stored against a users account. The API key is used to determine which templates
+        are associated to the user.
+
+        **Base URL:** https://api.shotstack.io/{version}
+      summary: List Templates
+      operationId: getTemplates
+      responses:
+        "200":
+          description: The list of templates stored against a users account
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TemplateListResponse"
+      security:
+        - DeveloperKey: []
+      tags:
+        - Edit
+
+  /templates/{id}:
+    get:
+      description: |
+        Retrieve a template by template id.
+
+        **Base URL:** https://api.shotstack.io/{version}
+      summary: Retrieve Template
+      operationId: getTemplate
+      responses:
+        "200":
+          description: The template details including the [Edit](#tocs_edit)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TemplateDataResponse"
+      security:
+        - DeveloperKey: []
+      tags:
+        - Edit
+
+    put:
+      description: |
+        Update an existing template by template id.
+
+        **Base URL:** https://api.shotstack.io/{version}
+      summary: Update Template
+      operationId: putTemplate
+      requestBody:
+        description: >-
+          Update an individual templates name and [Edit](#tocs_edit). Both template name and template must be
+          provided. If the template parameter is omitted a blank template will be saved.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Template"
+        required: true
+      responses:
+        "200":
+          description: Update a templates name and [Edit](#tocs_edit)
+          content:
+            application/json:
+              example:
+                success: true
+                message: OK
+                response:
+                  message: Template Successfully Updated
+                  id: f5493c17-d01f-445c-bb49-535fae65f219
+              schema:
+                $ref: "#/components/schemas/TemplateResponse"
+      security:
+        - DeveloperKey: []
+      tags:
+        - Edit
+
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+          type: string
+        description: The id of the template in UUID format
+
+  /templates/render:
+    post:
+      description: |
+        Render an asset from a template id and optional merge fields. Merge fields can be used to replace placeholder
+        variables within the [Edit](#tocs_edit).
+
+        **Base URL:** https://api.shotstack.io/{version}
+      summary: Render Template
+      operationId: postTemplateRender
+      requestBody:
+        description: >-
+          Render a template by template id.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TemplateRender"
+        required: true
+      responses:
+        "201":
+          description: >-
+            The queued status including the render id. Check the status of the render using the id and the 
+            [render status](#get-render-status) endpoint.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QueuedResponse"
+      security:
+        - DeveloperKey: []
+      tags:
+        - Edit
+
   /probe/{url}:
     get:
       responses:
@@ -1588,10 +1646,45 @@ components:
             enum:
               - public
               - signed
+
+    Template:
+      description: >-
+        A template is a saved [Edit](#tocs_edit) than can be loaded and re-used.
+      properties:
+        name:
+          type: string
+          description: The template name
+          example: My template
+        template:
+          $ref: "#/components/schemas/Edit"
+      required:
+        - name
+      type: object
+
+    TemplateRender:
+      description: >-
+        Render a template by it's id and optional merge fields.
+      properties:
+        id:
+          description: The id of the template to render in UUID format.
+          type: string
+          example: f5493c17-d01f-445c-bb49-535fae65f219
+        merge:
+          description: >-
+            An array of key/value pairs that provides an easy way to create templates with placeholders.
+            The placeholders can be used to find and replace keys with values. For example you can search
+            for the placeholder `{{NAME}}` and replace it with the value `Jane`. 
+          type: array
+          items:
+            $ref: "#/components/schemas/MergeField"
+      required:
+        - id
+      type: object
+
     QueuedResponse:
       description: >-
-        The response received after a [render request](#render-asset) is submitted. The render task is queued for
-        rendering and a unique render id is returned.
+        The response received after a [render request](#render-asset) or [template render](#render-template) is
+        submitted. The render task is queued for rendering and a unique render id is returned.
       properties:
         success:
           description: "`true` if successfully queued, else `false`."
@@ -1725,6 +1818,159 @@ components:
         - created
         - updated
       type: object
+
+    TemplateResponse:
+      description: >-
+        The response received after a [template](#create-a-template) is submitted. The template is saved and a unique
+        template id is returned.
+      properties:
+        success:
+          description: "`true` if successfully created, else `false`."
+          type: boolean
+          example: true
+        message:
+          description: "`Created`, `Bad Request` or an error message."
+          type: string
+          example: Created
+        response:
+          description: "`TemplateResponseData` or an error message."
+          $ref: "#/components/schemas/TemplateResponseData"
+      required:
+        - success
+        - message
+        - response
+      type: object
+
+    TemplateResponseData:
+      description: The response data returned with the [TemplateResponse](#tocs_templateresponse).
+      properties:
+        message:
+          description: Success response message or error details.
+          type: string
+          example: Template Successfully Created
+        id:
+          description: The unique id of the template in UUID format.
+          type: string
+          example: f5493c17-d01f-445c-bb49-535fae65f219
+      required:
+        - message
+        - id
+      type: object
+
+    TemplateDataResponse:
+      description: >-
+        The template data including the template name and Edit.
+      properties:
+        success:
+          description: "`true` if successfully created, else `false`."
+          type: boolean
+          example: true
+        message:
+          description: "`OK`, `Bad Request` or an error message."
+          type: string
+          example: OK
+        response:
+          description: "`TemplateDataResponseData` or an error message."
+          $ref: "#/components/schemas/TemplateDataResponseData"
+      required:
+        - success
+        - message
+        - response
+      type: object
+
+    TemplateDataResponseData:
+      description: The response data returned with the [TemplateDataResponse](#tocs_templatedataresponse).
+      properties:
+        id:
+          description:  The unique id of the template in UUID format.
+          type: string
+          example: f5493c17-d01f-445c-bb49-535fae65f219
+        name:
+          description: The template name.
+          type: string
+          example: My template
+        owner:
+          description: The owner id of the templates.
+          type: string
+          example: 5ca6hu7s9k
+        template:
+          description: The [Edit](#tocs_edit) template.
+          type: string
+          example:
+            $ref: "./definitions/edit.yaml"
+      required:
+        - id
+        - name
+        - owner
+        - template
+      type: object
+
+    TemplateListResponse:
+      description: >-
+        A list of previously saved templates.
+      properties:
+        success:
+          description: "`true` if successfully created, else `false`."
+          type: boolean
+          example: true
+        message:
+          description: "`Created`, `Bad Request` or an error message."
+          type: string
+          example: Created
+        response:
+          description: "`TemplateListResponseData` or an error message."
+          $ref: "#/components/schemas/TemplateListResponseData"
+      required:
+        - success
+        - message
+        - response
+      type: object
+
+    TemplateListResponseData:
+      description: The response data returned with the [TemplateListResponse](#tocs_templatelistresponse).
+      properties:
+        owner:
+          description: The owner id of the templates.
+          type: string
+          example: 5ca6hu7s9k
+        templates:
+          description: The list of templates.
+          type: array
+          items:
+            $ref: "#/components/schemas/TemplateListResponseItem"
+      required:
+        - owner
+        - templates
+      type: object
+
+    TemplateListResponseItem:
+      description: >- 
+        The individual template item returned with the 
+        [TemplateListResponseData](#tocs_templatelistresponsedata) templates list.
+      type: object
+      properties:
+        id:
+          description:  The unique id of the template in UUID format.
+          type: string
+          example: f5493c17-d01f-445c-bb49-535fae65f219
+        name:
+          description: The template name
+          type: string
+          example: My template
+        created:
+          description: The time the template was created.
+          type: string
+          example: "2022-06-10T12:50:21.455Z"
+        updated:
+          description: The time the template was last updated.
+          type: string
+          example: "2022-06-22T08:24:30.168Z"
+      required:
+        - id
+        - name
+        - created
+        - updated
+
     ProbeResponse:
       description: >-
         The response received after a [probe request](#inspect-media) is submitted. The probe requests returns data from FFprobe
@@ -1739,7 +1985,7 @@ components:
           type: string
           example: Created
         response:
-          description: The response from FFprobe in JSON format
+          description: The response from FFprobe in JSON format.
           type: object
       required:
         - success
@@ -1755,6 +2001,8 @@ components:
         data:
           description: An asset resource.
           $ref: "#/components/schemas/AssetResponseData"
+      required:
+        - data
       type: object
     AssetRenderResponse:
       description: >-
@@ -1767,6 +2015,8 @@ components:
           description: An array of asset resources grouped by render id.
           items:
             $ref: "#/components/schemas/AssetResponseData"
+      required:
+        - data
       type: object
     AssetResponseData:
       description: The type of resource (an asset) and attributes of the asset.
@@ -1778,6 +2028,9 @@ components:
         attributes:
           description: The asset attributes including render id, url, filename, file size, etc...
           $ref: "#/components/schemas/AssetResponseAttributes"
+      required:
+        - type
+        - attributes
       type: object
     AssetResponseAttributes:
       description: The list of asset attributes and their values.
@@ -1798,6 +2051,12 @@ components:
           description: The original render id that created the asset in UUID format. Multiple assets can share the same render id.
           type: string
           example: 2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7
+        providerId:
+          description: >-
+            The third party id of an asset transferred to an external provider, i.e. Mux, YouTube or S3. If the provider
+            is Shotstack, the providerID is the same as the asset id.
+          type: string
+          example: a4482cbf-e321-42a2-ac8b-947d26886840
         filename:
           description: The asset file name.
           type: string
@@ -1830,6 +2089,13 @@ components:
           description: The time the asset status was last updated.
           type: string
           example: "2021-06-30T09:42:30.168Z"
+      required:
+        - id
+        - owner
+        - filename
+        - status
+        - created
+        - updated
       type: object
   responses: {}
   parameters: {}
