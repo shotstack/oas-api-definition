@@ -2,11 +2,15 @@
 
 DOCS_DIR=build/docs
 OAS3_YAML=api.oas3.yaml
+OAS3_YAML_RESOLVED=api.oas3.resolved.yaml
 OAS3_JSON=api.oas3.json
 mkdir -p $DOCS_DIR
 
+# Resolve YAML files in to one master file
+./node_modules/.bin/speccy resolve $OAS3_YAML -o $OAS3_YAML_RESOLVED
+
 # Convert YAML to JSON
-./node_modules/.bin/js-yaml $OAS3_YAML > $OAS3_JSON
+./node_modules/.bin/js-yaml $OAS3_YAML_RESOLVED > $OAS3_JSON
 
 # Convert OpenAPI to doc to Shins Markdown
 ./node_modules/.bin/widdershins \
@@ -44,3 +48,4 @@ fi
 
 rm -f ./$DOCS_DIR/index.html.md
 rm -f $OAS3_JSON
+rm -f $OAS3_YAML_RESOLVED

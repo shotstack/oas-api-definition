@@ -3,3 +3,4 @@ build
 
 .tags
 copy-*-files.sh
+api.oas3.resolved.yaml
