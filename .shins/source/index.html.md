@@ -2000,6 +2000,170 @@ To perform this operation, you must be authenticated by means of one of the foll
 DeveloperKey
 </aside>
 
+## Delete Template
+
+<a id="opIddeleteTemplate"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X DELETE https://api.shotstack.io/{version}/templates/{id} \
+  -H 'x-api-key: API_KEY'
+
+```
+
+```http
+DELETE https://api.shotstack.io/{version}/templates/{id} HTTP/1.1
+Host: api.shotstack.io
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+
+const headers = {
+  'x-api-key':'API_KEY'
+};
+
+fetch('https://api.shotstack.io/{version}/templates/{id}',
+{
+  method: 'DELETE',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```php
+<?php
+
+require 'vendor/autoload.php';
+
+$headers = array(
+    'x-api-key' => 'API_KEY',
+);
+
+$client = new \GuzzleHttp\Client();
+
+// Define array of request body.
+$request_body = array();
+
+try {
+    $response = $client->request('DELETE','https://api.shotstack.io/{version}/templates/{id}', array(
+        'headers' => $headers,
+        'json' => $request_body,
+       )
+    );
+    print_r($response->getBody()->getContents());
+ }
+ catch (\GuzzleHttp\Exception\BadResponseException $e) {
+    // handle exception or api errors.
+    print_r($e->getMessage());
+ }
+
+ // ...
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'x-api-key' => 'API_KEY'
+}
+
+result = RestClient.delete 'https://api.shotstack.io/{version}/templates/{id}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'x-api-key': 'API_KEY'
+}
+
+r = requests.delete('https://api.shotstack.io/{version}/templates/{id}', headers = headers)
+
+print(r.json())
+
+```
+
+```java
+URL obj = new URL("https://api.shotstack.io/{version}/templates/{id}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("DELETE");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "x-api-key": []string{"API_KEY"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("DELETE", "https://api.shotstack.io/{version}/templates/{id}", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`DELETE /templates/{id}`
+
+Delete a template by its template id.
+
+**Base URL:** https://api.shotstack.io/{version}
+
+<h3 id="delete-template-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|id|path|string|true|The id of the template in UUID format|
+
+<h3 id="delete-template-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|An empty response signifying the template has been deleted|None|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+DeveloperKey
+</aside>
+
 ## Render Template
 
 <a id="opIdpostTemplateRender"></a>

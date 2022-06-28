@@ -236,6 +236,21 @@ paths:
         - DeveloperKey: []
       tags:
         - Edit
+    
+    delete:
+      responses:
+        "204":
+          description: An empty response signifying the template has been deleted
+      description: |
+        Delete a template by its template id.
+
+        **Base URL:** https://api.shotstack.io/{version}
+      operationId: deleteTemplate
+      summary: Delete Template
+      security:
+        - DeveloperKey: []
+      tags:
+        - Edit
 
     parameters:
       - in: path
