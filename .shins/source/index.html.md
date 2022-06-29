@@ -32,12 +32,17 @@ headingLevel: 2
 
 > Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
 
-Shotstack is a video, image and audio editing service that allows for the automated generation of videos, images and audio using JSON and a RESTful API.
+Shotstack is a video, image and audio editing service that allows for the automated
+generation of videos, images and audio using JSON and a RESTful API.
 
-You arrange and configure an edit and POST it to the API which will render your media and provide a file  location when complete.
+You arrange and configure an edit and POST it to the API which will render your media and provide a file 
+location when complete.
 
-For more details visit [shotstack.io](https://shotstack.io) or checkout our [getting started](https://shotstack.io/docs/guide/) documentation.
-There are two main API's, one for editing and generating assets (Edit API) and one for managing hosted assets (Serve API).
+For more details visit [shotstack.io](https://shotstack.io) or checkout our
+[getting started](https://shotstack.io/docs/guide/) documentation.
+
+There are two main API's, one for editing and generating assets (Edit API) and one for managing hosted assets
+(Serve API).
 
 The Edit API base URL is: <b>https://api.shotstack.io/{version}</b>
 
@@ -160,7 +165,7 @@ const inputBody = {
   "output": {
     "format": "mp4",
     "resolution": "sd",
-    "aspectRatio": "16:9",
+    "aspectRatio": 969,
     "size": {
       "width": 1200,
       "height": 800
@@ -327,7 +332,7 @@ func main() {
 
 `POST /render`
 
-Queue and render the contents of a timeline as a video, image or audio file.
+Queue and render the contents of an [Edit](#tocs_edit) as a video, image or audio file.
 
 **Base URL:** https://api.shotstack.io/{version}
 
@@ -401,7 +406,7 @@ Queue and render the contents of a timeline as a video, image or audio file.
   "output": {
     "format": "mp4",
     "resolution": "sd",
-    "aspectRatio": "16:9",
+    "aspectRatio": 969,
     "size": {
       "width": 1200,
       "height": 800
@@ -731,6 +736,1650 @@ To perform this operation, you must be authenticated by means of one of the foll
 DeveloperKey
 </aside>
 
+## Create Template
+
+<a id="opIdpostTemplate"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X POST https://api.shotstack.io/{version}/templates \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  -H 'x-api-key: API_KEY'
+
+```
+
+```http
+POST https://api.shotstack.io/{version}/templates HTTP/1.1
+Host: api.shotstack.io
+Content-Type: application/json
+Accept: application/json
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+const inputBody = {
+  "name": "My template",
+  "template": {
+    "timeline": {
+      "soundtrack": {
+        "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3",
+        "effect": "fadeIn",
+        "volume": 1
+      },
+      "background": "#000000",
+      "fonts": [
+        {
+          "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf"
+        }
+      ],
+      "tracks": [
+        {
+          "clips": [
+            {
+              "asset": {
+                "type": "video",
+                "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4",
+                "trim": 2,
+                "volume": 1,
+                "crop": {
+                  "top": 0.15,
+                  "bottom": 0.15,
+                  "left": 0,
+                  "right": 0
+                }
+              },
+              "start": 2,
+              "length": 5,
+              "fit": "crop",
+              "scale": 0,
+              "position": "center",
+              "offset": {
+                "x": 0.1,
+                "y": -0.2
+              },
+              "transition": {
+                "in": "fade",
+                "out": "fade"
+              },
+              "effect": "zoomIn",
+              "filter": "greyscale",
+              "opacity": 1,
+              "transform": {
+                "rotate": {
+                  "angle": 45
+                },
+                "skew": {
+                  "x": 0.5,
+                  "y": 0.5
+                },
+                "flip": {
+                  "horizontal": true,
+                  "vertical": true
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "cache": true
+    },
+    "output": {
+      "format": "mp4",
+      "resolution": "sd",
+      "aspectRatio": 969,
+      "size": {
+        "width": 1200,
+        "height": 800
+      },
+      "fps": 25,
+      "scaleTo": "preview",
+      "quality": "medium",
+      "repeat": true,
+      "range": {
+        "start": 3,
+        "length": 6
+      },
+      "poster": {
+        "capture": 1
+      },
+      "thumbnail": {
+        "capture": 1,
+        "scale": 0.3
+      },
+      "destinations": [
+        {
+          "provider": "shotstack",
+          "exclude": false
+        }
+      ]
+    },
+    "merge": [
+      {
+        "find": "NAME",
+        "replace": "Jane"
+      }
+    ],
+    "callback": "https://my-server.com/callback.php",
+    "disk": "local"
+  }
+};
+const headers = {
+  'Content-Type':'application/json',
+  'Accept':'application/json',
+  'x-api-key':'API_KEY'
+};
+
+fetch('https://api.shotstack.io/{version}/templates',
+{
+  method: 'POST',
+  body: JSON.stringify(inputBody),
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```php
+<?php
+
+require 'vendor/autoload.php';
+
+$headers = array(
+    'Content-Type' => 'application/json',
+    'Accept' => 'application/json',
+    'x-api-key' => 'API_KEY',
+);
+
+$client = new \GuzzleHttp\Client();
+
+// Define array of request body.
+$request_body = array();
+
+try {
+    $response = $client->request('POST','https://api.shotstack.io/{version}/templates', array(
+        'headers' => $headers,
+        'json' => $request_body,
+       )
+    );
+    print_r($response->getBody()->getContents());
+ }
+ catch (\GuzzleHttp\Exception\BadResponseException $e) {
+    // handle exception or api errors.
+    print_r($e->getMessage());
+ }
+
+ // ...
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Content-Type' => 'application/json',
+  'Accept' => 'application/json',
+  'x-api-key' => 'API_KEY'
+}
+
+result = RestClient.post 'https://api.shotstack.io/{version}/templates',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json',
+  'x-api-key': 'API_KEY'
+}
+
+r = requests.post('https://api.shotstack.io/{version}/templates', headers = headers)
+
+print(r.json())
+
+```
+
+```java
+URL obj = new URL("https://api.shotstack.io/{version}/templates");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Content-Type": []string{"application/json"},
+        "Accept": []string{"application/json"},
+        "x-api-key": []string{"API_KEY"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("POST", "https://api.shotstack.io/{version}/templates", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`POST /templates`
+
+Save an [Edit](#tocs_edit) as a re-usable template. Templates can be retrieved and modified in your application
+before being rendered. [Merge fields](#tocs_mergefield) can be also used to merge data in to a template and
+[render](#render-template) it in a single request.
+
+**Base URL:** https://api.shotstack.io/{version}
+
+> Body parameter
+
+```json
+{
+  "name": "My template",
+  "template": {
+    "timeline": {
+      "soundtrack": {
+        "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3",
+        "effect": "fadeIn",
+        "volume": 1
+      },
+      "background": "#000000",
+      "fonts": [
+        {
+          "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf"
+        }
+      ],
+      "tracks": [
+        {
+          "clips": [
+            {
+              "asset": {
+                "type": "video",
+                "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4",
+                "trim": 2,
+                "volume": 1,
+                "crop": {
+                  "top": 0.15,
+                  "bottom": 0.15,
+                  "left": 0,
+                  "right": 0
+                }
+              },
+              "start": 2,
+              "length": 5,
+              "fit": "crop",
+              "scale": 0,
+              "position": "center",
+              "offset": {
+                "x": 0.1,
+                "y": -0.2
+              },
+              "transition": {
+                "in": "fade",
+                "out": "fade"
+              },
+              "effect": "zoomIn",
+              "filter": "greyscale",
+              "opacity": 1,
+              "transform": {
+                "rotate": {
+                  "angle": 45
+                },
+                "skew": {
+                  "x": 0.5,
+                  "y": 0.5
+                },
+                "flip": {
+                  "horizontal": true,
+                  "vertical": true
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "cache": true
+    },
+    "output": {
+      "format": "mp4",
+      "resolution": "sd",
+      "aspectRatio": 969,
+      "size": {
+        "width": 1200,
+        "height": 800
+      },
+      "fps": 25,
+      "scaleTo": "preview",
+      "quality": "medium",
+      "repeat": true,
+      "range": {
+        "start": 3,
+        "length": 6
+      },
+      "poster": {
+        "capture": 1
+      },
+      "thumbnail": {
+        "capture": 1,
+        "scale": 0.3
+      },
+      "destinations": [
+        {
+          "provider": "shotstack",
+          "exclude": false
+        }
+      ]
+    },
+    "merge": [
+      {
+        "find": "NAME",
+        "replace": "Jane"
+      }
+    ],
+    "callback": "https://my-server.com/callback.php",
+    "disk": "local"
+  }
+}
+```
+
+<h3 id="create-template-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|body|body|[Template](#schematemplate)|true|Create a template with a name and [Edit](#tocs_edit).|
+
+> Example responses
+
+> 201 Response
+
+```json
+{
+  "success": true,
+  "message": "Created",
+  "response": {
+    "message": "Template Successfully Created",
+    "id": "f5493c17-d01f-445c-bb49-535fae65f219"
+  }
+}
+```
+
+<h3 id="create-template-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|The saved template status including the id|[TemplateResponse](#schematemplateresponse)|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+DeveloperKey
+</aside>
+
+## List Templates
+
+<a id="opIdgetTemplates"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://api.shotstack.io/{version}/templates \
+  -H 'Accept: application/json' \
+  -H 'x-api-key: API_KEY'
+
+```
+
+```http
+GET https://api.shotstack.io/{version}/templates HTTP/1.1
+Host: api.shotstack.io
+Accept: application/json
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json',
+  'x-api-key':'API_KEY'
+};
+
+fetch('https://api.shotstack.io/{version}/templates',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```php
+<?php
+
+require 'vendor/autoload.php';
+
+$headers = array(
+    'Accept' => 'application/json',
+    'x-api-key' => 'API_KEY',
+);
+
+$client = new \GuzzleHttp\Client();
+
+// Define array of request body.
+$request_body = array();
+
+try {
+    $response = $client->request('GET','https://api.shotstack.io/{version}/templates', array(
+        'headers' => $headers,
+        'json' => $request_body,
+       )
+    );
+    print_r($response->getBody()->getContents());
+ }
+ catch (\GuzzleHttp\Exception\BadResponseException $e) {
+    // handle exception or api errors.
+    print_r($e->getMessage());
+ }
+
+ // ...
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json',
+  'x-api-key' => 'API_KEY'
+}
+
+result = RestClient.get 'https://api.shotstack.io/{version}/templates',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'x-api-key': 'API_KEY'
+}
+
+r = requests.get('https://api.shotstack.io/{version}/templates', headers = headers)
+
+print(r.json())
+
+```
+
+```java
+URL obj = new URL("https://api.shotstack.io/{version}/templates");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        "x-api-key": []string{"API_KEY"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "https://api.shotstack.io/{version}/templates", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`GET /templates`
+
+Retrieve a list of templates stored against a users account. The API key is used to determine which templates
+are associated to the user.
+
+**Base URL:** https://api.shotstack.io/{version}
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "success": true,
+  "message": "Created",
+  "response": {
+    "owner": "5ca6hu7s9k",
+    "templates": [
+      {
+        "id": "f5493c17-d01f-445c-bb49-535fae65f219",
+        "name": "My template",
+        "created": "2022-06-10T12:50:21.455Z",
+        "updated": "2022-06-22T08:24:30.168Z"
+      }
+    ]
+  }
+}
+```
+
+<h3 id="list-templates-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|The list of templates stored against a users account|[TemplateListResponse](#schematemplatelistresponse)|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+DeveloperKey
+</aside>
+
+## Retrieve Template
+
+<a id="opIdgetTemplate"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://api.shotstack.io/{version}/templates/{id} \
+  -H 'Accept: application/json' \
+  -H 'x-api-key: API_KEY'
+
+```
+
+```http
+GET https://api.shotstack.io/{version}/templates/{id} HTTP/1.1
+Host: api.shotstack.io
+Accept: application/json
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json',
+  'x-api-key':'API_KEY'
+};
+
+fetch('https://api.shotstack.io/{version}/templates/{id}',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```php
+<?php
+
+require 'vendor/autoload.php';
+
+$headers = array(
+    'Accept' => 'application/json',
+    'x-api-key' => 'API_KEY',
+);
+
+$client = new \GuzzleHttp\Client();
+
+// Define array of request body.
+$request_body = array();
+
+try {
+    $response = $client->request('GET','https://api.shotstack.io/{version}/templates/{id}', array(
+        'headers' => $headers,
+        'json' => $request_body,
+       )
+    );
+    print_r($response->getBody()->getContents());
+ }
+ catch (\GuzzleHttp\Exception\BadResponseException $e) {
+    // handle exception or api errors.
+    print_r($e->getMessage());
+ }
+
+ // ...
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json',
+  'x-api-key' => 'API_KEY'
+}
+
+result = RestClient.get 'https://api.shotstack.io/{version}/templates/{id}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'x-api-key': 'API_KEY'
+}
+
+r = requests.get('https://api.shotstack.io/{version}/templates/{id}', headers = headers)
+
+print(r.json())
+
+```
+
+```java
+URL obj = new URL("https://api.shotstack.io/{version}/templates/{id}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        "x-api-key": []string{"API_KEY"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "https://api.shotstack.io/{version}/templates/{id}", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`GET /templates/{id}`
+
+Retrieve a template by template id.
+
+**Base URL:** https://api.shotstack.io/{version}
+
+<h3 id="retrieve-template-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|id|path|string|true|The id of the template in UUID format|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "success": true,
+  "message": "OK",
+  "response": {
+    "id": "f5493c17-d01f-445c-bb49-535fae65f219",
+    "name": "My template",
+    "owner": "5ca6hu7s9k",
+    "template": {
+      "timeline": {
+        "soundtrack": {
+          "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3",
+          "effect": "fadeInFadeOut"
+        },
+        "background": "#000000",
+        "tracks": [
+          {
+            "clips": [
+              {
+                "asset": {
+                  "type": "title",
+                  "text": "Hello World",
+                  "style": "minimal"
+                },
+                "start": 0,
+                "length": 4,
+                "transition": {
+                  "in": "fade",
+                  "out": "fade"
+                },
+                "effect": "slideRight"
+              },
+              {
+                "asset": {
+                  "type": "image",
+                  "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/my-image.jpg"
+                },
+                "start": 3,
+                "length": 4,
+                "effect": "zoomIn",
+                "filter": "greyscale"
+              }
+            ]
+          },
+          {
+            "clips": [
+              {
+                "asset": {
+                  "type": "video",
+                  "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/my-clip-1.mp4",
+                  "trim": 10.5
+                },
+                "start": 7,
+                "length": 4.5
+              },
+              {
+                "asset": {
+                  "type": "video",
+                  "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/my-clip-2.mp4",
+                  "volume": 0.5
+                },
+                "start": 11.5,
+                "length": 5,
+                "transition": {
+                  "out": "wipeLeft"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "output": {
+        "format": "mp4",
+        "resolution": "sd"
+      }
+    }
+  }
+}
+```
+
+<h3 id="retrieve-template-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|The template details including the [Edit](#tocs_edit)|[TemplateDataResponse](#schematemplatedataresponse)|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+DeveloperKey
+</aside>
+
+## Update Template
+
+<a id="opIdputTemplate"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X PUT https://api.shotstack.io/{version}/templates/{id} \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  -H 'x-api-key: API_KEY'
+
+```
+
+```http
+PUT https://api.shotstack.io/{version}/templates/{id} HTTP/1.1
+Host: api.shotstack.io
+Content-Type: application/json
+Accept: application/json
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+const inputBody = {
+  "name": "My template",
+  "template": {
+    "timeline": {
+      "soundtrack": {
+        "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3",
+        "effect": "fadeIn",
+        "volume": 1
+      },
+      "background": "#000000",
+      "fonts": [
+        {
+          "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf"
+        }
+      ],
+      "tracks": [
+        {
+          "clips": [
+            {
+              "asset": {
+                "type": "video",
+                "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4",
+                "trim": 2,
+                "volume": 1,
+                "crop": {
+                  "top": 0.15,
+                  "bottom": 0.15,
+                  "left": 0,
+                  "right": 0
+                }
+              },
+              "start": 2,
+              "length": 5,
+              "fit": "crop",
+              "scale": 0,
+              "position": "center",
+              "offset": {
+                "x": 0.1,
+                "y": -0.2
+              },
+              "transition": {
+                "in": "fade",
+                "out": "fade"
+              },
+              "effect": "zoomIn",
+              "filter": "greyscale",
+              "opacity": 1,
+              "transform": {
+                "rotate": {
+                  "angle": 45
+                },
+                "skew": {
+                  "x": 0.5,
+                  "y": 0.5
+                },
+                "flip": {
+                  "horizontal": true,
+                  "vertical": true
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "cache": true
+    },
+    "output": {
+      "format": "mp4",
+      "resolution": "sd",
+      "aspectRatio": 969,
+      "size": {
+        "width": 1200,
+        "height": 800
+      },
+      "fps": 25,
+      "scaleTo": "preview",
+      "quality": "medium",
+      "repeat": true,
+      "range": {
+        "start": 3,
+        "length": 6
+      },
+      "poster": {
+        "capture": 1
+      },
+      "thumbnail": {
+        "capture": 1,
+        "scale": 0.3
+      },
+      "destinations": [
+        {
+          "provider": "shotstack",
+          "exclude": false
+        }
+      ]
+    },
+    "merge": [
+      {
+        "find": "NAME",
+        "replace": "Jane"
+      }
+    ],
+    "callback": "https://my-server.com/callback.php",
+    "disk": "local"
+  }
+};
+const headers = {
+  'Content-Type':'application/json',
+  'Accept':'application/json',
+  'x-api-key':'API_KEY'
+};
+
+fetch('https://api.shotstack.io/{version}/templates/{id}',
+{
+  method: 'PUT',
+  body: JSON.stringify(inputBody),
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```php
+<?php
+
+require 'vendor/autoload.php';
+
+$headers = array(
+    'Content-Type' => 'application/json',
+    'Accept' => 'application/json',
+    'x-api-key' => 'API_KEY',
+);
+
+$client = new \GuzzleHttp\Client();
+
+// Define array of request body.
+$request_body = array();
+
+try {
+    $response = $client->request('PUT','https://api.shotstack.io/{version}/templates/{id}', array(
+        'headers' => $headers,
+        'json' => $request_body,
+       )
+    );
+    print_r($response->getBody()->getContents());
+ }
+ catch (\GuzzleHttp\Exception\BadResponseException $e) {
+    // handle exception or api errors.
+    print_r($e->getMessage());
+ }
+
+ // ...
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Content-Type' => 'application/json',
+  'Accept' => 'application/json',
+  'x-api-key' => 'API_KEY'
+}
+
+result = RestClient.put 'https://api.shotstack.io/{version}/templates/{id}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json',
+  'x-api-key': 'API_KEY'
+}
+
+r = requests.put('https://api.shotstack.io/{version}/templates/{id}', headers = headers)
+
+print(r.json())
+
+```
+
+```java
+URL obj = new URL("https://api.shotstack.io/{version}/templates/{id}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("PUT");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Content-Type": []string{"application/json"},
+        "Accept": []string{"application/json"},
+        "x-api-key": []string{"API_KEY"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("PUT", "https://api.shotstack.io/{version}/templates/{id}", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`PUT /templates/{id}`
+
+Update an existing template by template id.
+
+**Base URL:** https://api.shotstack.io/{version}
+
+> Body parameter
+
+```json
+{
+  "name": "My template",
+  "template": {
+    "timeline": {
+      "soundtrack": {
+        "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3",
+        "effect": "fadeIn",
+        "volume": 1
+      },
+      "background": "#000000",
+      "fonts": [
+        {
+          "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf"
+        }
+      ],
+      "tracks": [
+        {
+          "clips": [
+            {
+              "asset": {
+                "type": "video",
+                "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4",
+                "trim": 2,
+                "volume": 1,
+                "crop": {
+                  "top": 0.15,
+                  "bottom": 0.15,
+                  "left": 0,
+                  "right": 0
+                }
+              },
+              "start": 2,
+              "length": 5,
+              "fit": "crop",
+              "scale": 0,
+              "position": "center",
+              "offset": {
+                "x": 0.1,
+                "y": -0.2
+              },
+              "transition": {
+                "in": "fade",
+                "out": "fade"
+              },
+              "effect": "zoomIn",
+              "filter": "greyscale",
+              "opacity": 1,
+              "transform": {
+                "rotate": {
+                  "angle": 45
+                },
+                "skew": {
+                  "x": 0.5,
+                  "y": 0.5
+                },
+                "flip": {
+                  "horizontal": true,
+                  "vertical": true
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "cache": true
+    },
+    "output": {
+      "format": "mp4",
+      "resolution": "sd",
+      "aspectRatio": 969,
+      "size": {
+        "width": 1200,
+        "height": 800
+      },
+      "fps": 25,
+      "scaleTo": "preview",
+      "quality": "medium",
+      "repeat": true,
+      "range": {
+        "start": 3,
+        "length": 6
+      },
+      "poster": {
+        "capture": 1
+      },
+      "thumbnail": {
+        "capture": 1,
+        "scale": 0.3
+      },
+      "destinations": [
+        {
+          "provider": "shotstack",
+          "exclude": false
+        }
+      ]
+    },
+    "merge": [
+      {
+        "find": "NAME",
+        "replace": "Jane"
+      }
+    ],
+    "callback": "https://my-server.com/callback.php",
+    "disk": "local"
+  }
+}
+```
+
+<h3 id="update-template-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|body|body|[Template](#schematemplate)|true|Update an individual templates name and [Edit](#tocs_edit). Both template name and template must be provided. If the template parameter is omitted a blank template will be saved.|
+|id|path|string|true|The id of the template in UUID format|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "success": true,
+  "message": "OK",
+  "response": {
+    "message": "Template Successfully Updated",
+    "id": "f5493c17-d01f-445c-bb49-535fae65f219"
+  }
+}
+```
+
+<h3 id="update-template-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Update a templates name and [Edit](#tocs_edit)|[TemplateResponse](#schematemplateresponse)|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+DeveloperKey
+</aside>
+
+## Delete Template
+
+<a id="opIddeleteTemplate"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X DELETE https://api.shotstack.io/{version}/templates/{id} \
+  -H 'x-api-key: API_KEY'
+
+```
+
+```http
+DELETE https://api.shotstack.io/{version}/templates/{id} HTTP/1.1
+Host: api.shotstack.io
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+
+const headers = {
+  'x-api-key':'API_KEY'
+};
+
+fetch('https://api.shotstack.io/{version}/templates/{id}',
+{
+  method: 'DELETE',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```php
+<?php
+
+require 'vendor/autoload.php';
+
+$headers = array(
+    'x-api-key' => 'API_KEY',
+);
+
+$client = new \GuzzleHttp\Client();
+
+// Define array of request body.
+$request_body = array();
+
+try {
+    $response = $client->request('DELETE','https://api.shotstack.io/{version}/templates/{id}', array(
+        'headers' => $headers,
+        'json' => $request_body,
+       )
+    );
+    print_r($response->getBody()->getContents());
+ }
+ catch (\GuzzleHttp\Exception\BadResponseException $e) {
+    // handle exception or api errors.
+    print_r($e->getMessage());
+ }
+
+ // ...
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'x-api-key' => 'API_KEY'
+}
+
+result = RestClient.delete 'https://api.shotstack.io/{version}/templates/{id}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'x-api-key': 'API_KEY'
+}
+
+r = requests.delete('https://api.shotstack.io/{version}/templates/{id}', headers = headers)
+
+print(r.json())
+
+```
+
+```java
+URL obj = new URL("https://api.shotstack.io/{version}/templates/{id}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("DELETE");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "x-api-key": []string{"API_KEY"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("DELETE", "https://api.shotstack.io/{version}/templates/{id}", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`DELETE /templates/{id}`
+
+Delete a template by its template id.
+
+**Base URL:** https://api.shotstack.io/{version}
+
+<h3 id="delete-template-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|id|path|string|true|The id of the template in UUID format|
+
+<h3 id="delete-template-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|An empty response signifying the template has been deleted|None|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+DeveloperKey
+</aside>
+
+## Render Template
+
+<a id="opIdpostTemplateRender"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X POST https://api.shotstack.io/{version}/templates/render \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  -H 'x-api-key: API_KEY'
+
+```
+
+```http
+POST https://api.shotstack.io/{version}/templates/render HTTP/1.1
+Host: api.shotstack.io
+Content-Type: application/json
+Accept: application/json
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+const inputBody = {
+  "id": "f5493c17-d01f-445c-bb49-535fae65f219",
+  "merge": [
+    {
+      "find": "NAME",
+      "replace": "Jane"
+    }
+  ]
+};
+const headers = {
+  'Content-Type':'application/json',
+  'Accept':'application/json',
+  'x-api-key':'API_KEY'
+};
+
+fetch('https://api.shotstack.io/{version}/templates/render',
+{
+  method: 'POST',
+  body: JSON.stringify(inputBody),
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```php
+<?php
+
+require 'vendor/autoload.php';
+
+$headers = array(
+    'Content-Type' => 'application/json',
+    'Accept' => 'application/json',
+    'x-api-key' => 'API_KEY',
+);
+
+$client = new \GuzzleHttp\Client();
+
+// Define array of request body.
+$request_body = array();
+
+try {
+    $response = $client->request('POST','https://api.shotstack.io/{version}/templates/render', array(
+        'headers' => $headers,
+        'json' => $request_body,
+       )
+    );
+    print_r($response->getBody()->getContents());
+ }
+ catch (\GuzzleHttp\Exception\BadResponseException $e) {
+    // handle exception or api errors.
+    print_r($e->getMessage());
+ }
+
+ // ...
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Content-Type' => 'application/json',
+  'Accept' => 'application/json',
+  'x-api-key' => 'API_KEY'
+}
+
+result = RestClient.post 'https://api.shotstack.io/{version}/templates/render',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json',
+  'x-api-key': 'API_KEY'
+}
+
+r = requests.post('https://api.shotstack.io/{version}/templates/render', headers = headers)
+
+print(r.json())
+
+```
+
+```java
+URL obj = new URL("https://api.shotstack.io/{version}/templates/render");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Content-Type": []string{"application/json"},
+        "Accept": []string{"application/json"},
+        "x-api-key": []string{"API_KEY"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("POST", "https://api.shotstack.io/{version}/templates/render", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`POST /templates/render`
+
+Render an asset from a template id and optional merge fields. Merge fields can be used to replace placeholder
+variables within the [Edit](#tocs_edit).
+
+**Base URL:** https://api.shotstack.io/{version}
+
+> Body parameter
+
+```json
+{
+  "id": "f5493c17-d01f-445c-bb49-535fae65f219",
+  "merge": [
+    {
+      "find": "NAME",
+      "replace": "Jane"
+    }
+  ]
+}
+```
+
+<h3 id="render-template-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|body|body|[TemplateRender](#schematemplaterender)|true|Render a template by template id.|
+
+> Example responses
+
+> 201 Response
+
+```json
+{
+  "success": true,
+  "message": "Created",
+  "response": {
+    "message": "Render Successfully Queued",
+    "id": "2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7"
+  }
+}
+```
+
+<h3 id="render-template-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|The queued status including the render id. Check the status of the render using the id and the  [render status](#get-render-status) endpoint.|[QueuedResponse](#schemaqueuedresponse)|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+DeveloperKey
+</aside>
+
 ## Inspect Media
 
 <a id="opIdprobe"></a>
@@ -881,7 +2530,9 @@ func main() {
 
 `GET /probe/{url}`
 
-Inspects any media asset (image, video, audio) on the internet using a hosted version of [FFprobe](https://ffmpeg.org/ffprobe.html). The probe endpoint returns useful information about an asset such as width, height, duration, rotation, framerate, etc...
+Inspects any media asset (image, video, audio) on the internet using a hosted version
+of [FFprobe](https://ffmpeg.org/ffprobe.html). The probe endpoint returns useful information
+about an asset such as width, height, duration, rotation, framerate, etc...
 
 **Base URL:** https://api.shotstack.io/{version}
 
@@ -1066,7 +2717,9 @@ func main() {
 
 `GET /assets/{id}`
 
-The Serve API is used to interact with, and delete hosted assets including videos, images, audio files,  thumbnails and poster images. Use this endpoint to fetch an asset by asset id. Note that an asset id is unique for each asset and different from the render id.
+The Serve API is used to interact with, and delete hosted assets including videos, images, audio files, 
+thumbnails and poster images. Use this endpoint to fetch an asset by asset id. Note that an asset id is unique
+for each asset and different from the render id.
 
 **Base URL:** https://api.shotstack.io/serve/{version}
 
@@ -1082,20 +2735,19 @@ The Serve API is used to interact with, and delete hosted assets including video
 
 ```json
 {
-  "response": {
-    "data": {
-      "type": "asset",
-      "attributes": {
-        "id": "a4482cbf-e321-42a2-ac8b-947d26886840",
-        "owner": "5ca6hu7s9k",
-        "region": "au",
-        "renderId": "2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7",
-        "filename": "2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4",
-        "url": "https://cdn.shotstack.io/au/v1/msgtwx8iw6/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4",
-        "status": "ready",
-        "created": "2021-05-06T03:33:48.600Z",
-        "updated": "2021-05-06T03:33:49.521Z"
-      }
+  "data": {
+    "type": "asset",
+    "attributes": {
+      "id": "a4482cbf-e321-42a2-ac8b-947d26886840",
+      "owner": "5ca6hu7s9k",
+      "region": "au",
+      "renderId": "2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7",
+      "providerId": "a4482cbf-e321-42a2-ac8b-947d26886840",
+      "filename": "2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4",
+      "url": "https://cdn.shotstack.io/au/v1/5ca6hu7s9k/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4",
+      "status": "ready",
+      "created": "2021-06-30T09:42:29.446Z",
+      "updated": "2021-06-30T09:42:30.168Z"
     }
   }
 }
@@ -1255,7 +2907,8 @@ func main() {
 
 `DELETE /assets/{id}`
 
-Delete an asset by its asset id. If a render creates multiple assets, such as thumbnail and poster images, each asset must be deleted individually by the asset id.
+Delete an asset by its asset id. If a render creates multiple assets, such as thumbnail and poster images,
+each asset must be deleted individually by the asset id.
 
 **Base URL:** https://api.shotstack.io/serve/{version}
 
@@ -1426,7 +3079,9 @@ func main() {
 
 `GET /assets/render/{id}`
 
-A render may generate more than one file, such as a video, thumbnail and poster image. When the assets are created the only known id is the render id returned by the original [render request](#render-video), status  request or webhook. This endpoint lets you look up one or more assets by the render id.
+A render may generate more than one file, such as a video, thumbnail and poster image. When the assets are
+created the only known id is the render id returned by the original [render request](#render-video), status 
+request or webhook. This endpoint lets you look up one or more assets by the render id.
 
 **Base URL:** https://api.shotstack.io/serve/{version}
 
@@ -1442,24 +3097,23 @@ A render may generate more than one file, such as a video, thumbnail and poster 
 
 ```json
 {
-  "response": {
-    "data": [
-      {
-        "type": "asset",
-        "attributes": {
-          "id": "a4482cbf-e321-42a2-ac8b-947d26886840",
-          "owner": "5ca6hu7s9k",
-          "region": "au",
-          "renderId": "2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7",
-          "filename": "2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4",
-          "url": "https://cdn.shotstack.io/au/v1/msgtwx8iw6/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4",
-          "status": "ready",
-          "created": "2021-05-06T03:33:48.600Z",
-          "updated": "2021-05-06T03:33:49.521Z"
-        }
+  "data": [
+    {
+      "type": "asset",
+      "attributes": {
+        "id": "a4482cbf-e321-42a2-ac8b-947d26886840",
+        "owner": "5ca6hu7s9k",
+        "region": "au",
+        "renderId": "2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7",
+        "providerId": "a4482cbf-e321-42a2-ac8b-947d26886840",
+        "filename": "2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4",
+        "url": "https://cdn.shotstack.io/au/v1/5ca6hu7s9k/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4",
+        "status": "ready",
+        "created": "2021-06-30T09:42:29.446Z",
+        "updated": "2021-06-30T09:42:30.168Z"
       }
-    ]
-  }
+    }
+  ]
 }
 ```
 
@@ -1551,7 +3205,7 @@ DeveloperKey
   "output": {
     "format": "mp4",
     "resolution": "sd",
-    "aspectRatio": "16:9",
+    "aspectRatio": 969,
     "size": {
       "width": 1200,
       "height": 800
@@ -2583,7 +4237,7 @@ A merge field consists of a key; `find`, and a value; `replace`. Merge fields ca
 {
   "format": "mp4",
   "resolution": "sd",
-  "aspectRatio": "16:9",
+  "aspectRatio": 969,
   "size": {
     "width": 1200,
     "height": 800
@@ -2647,11 +4301,11 @@ The output format, render range and type of media to generate.
 |resolution|sd|
 |resolution|hd|
 |resolution|1080|
-|aspectRatio|16:9|
-|aspectRatio|9:16|
-|aspectRatio|1:1|
-|aspectRatio|4:5|
-|aspectRatio|4:3|
+|aspectRatio|969|
+|aspectRatio|556|
+|aspectRatio|61|
+|aspectRatio|245|
+|aspectRatio|243|
 |fps|12|
 |fps|15|
 |fps|23.976|
@@ -2667,41 +4321,6 @@ The output format, render range and type of media to generate.
 |quality|low|
 |quality|medium|
 |quality|high|
-
-<h2 id="tocS_Destinations">Destinations</h2>
-<!-- backwards compatibility -->
-<a id="schemadestinations"></a>
-<a id="schema_Destinations"></a>
-<a id="tocSdestinations"></a>
-<a id="tocsdestinations"></a>
-
-```json
-{
-  "provider": "shotstack",
-  "exclude": false
-}
-
-```
-
-A destination is a location where output files can be sent to for serving or hosting. By default all rendered assets are automatically sent to the  [Shotstack hosting destination](https://shotstack.io/docs/guide/serving-assets/hosting). You can add other destinations to send assets to. The following destinations are available:
-  <ul>
-    <li><a href="#tocs_shotstackdestination">DestinationShotstack</a></li>
-    <li><a href="#tocs_muxdestination">DestinationMux</a></li>
-  </ul>
-
-### Properties
-
-anyOf
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|*anonymous*|[ShotstackDestination](#schemashotstackdestination)|false|none|Send rendered assets to the Shotstack hosting and CDN service. This destination is enabled by default.|
-
-or
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|*anonymous*|[MuxDestination](#schemamuxdestination)|false|none|Send rendered videos to the [Mux](https://www.mux.com/) video hosting and streaming service. Add the `mux` destination provider to send the output video to Mux. Mux credentials are required and added via the [dashboard](https://dashboard.shotstack.io/integrations/mux), not in the request.|
 
 <h2 id="tocS_Size">Size</h2>
 <!-- backwards compatibility -->
@@ -2797,6 +4416,41 @@ Generate a thumbnail image for the video or image at a specific point from the t
 |capture|number|true|none|The point on the timeline in seconds to capture a single frame to use as the thumbnail image.|
 |scale|number|true|none|Scale the thumbnail size to a fraction of the viewport size - i.e. setting the scale to 0.5 will scale  the thumbnail to half the size of the viewport.|
 
+<h2 id="tocS_Destinations">Destinations</h2>
+<!-- backwards compatibility -->
+<a id="schemadestinations"></a>
+<a id="schema_Destinations"></a>
+<a id="tocSdestinations"></a>
+<a id="tocsdestinations"></a>
+
+```json
+{
+  "provider": "shotstack",
+  "exclude": false
+}
+
+```
+
+A destination is a location where output files can be sent to for serving or hosting. By default all rendered assets are automatically sent to the  [Shotstack hosting destination](https://shotstack.io/docs/guide/serving-assets/hosting). You can add other destinations to send assets to. The following destinations are available:
+  <ul>
+    <li><a href="#tocs_shotstackdestination">DestinationShotstack</a></li>
+    <li><a href="#tocs_muxdestination">DestinationMux</a></li>
+  </ul>
+
+### Properties
+
+anyOf
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|*anonymous*|[ShotstackDestination](#schemashotstackdestination)|false|none|Send rendered assets to the Shotstack hosting and CDN service. This destination is enabled by default.|
+
+or
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|*anonymous*|[MuxDestination](#schemamuxdestination)|false|none|Send rendered videos to the [Mux](https://www.mux.com/) video hosting and streaming service. Add the `mux` destination provider to send the output video to Mux. Mux credentials are required and added via the [dashboard](https://dashboard.shotstack.io/integrations/mux), not in the request.|
+
 <h2 id="tocS_ShotstackDestination">ShotstackDestination</h2>
 <!-- backwards compatibility -->
 <a id="schemashotstackdestination"></a>
@@ -2873,6 +4527,161 @@ Pass additional options to control how Mux processes video. Currently supports p
 |---|---|---|---|---|
 |playbackPolicy|[string]|false|none|Sets the Mux `playback_policy` option. Value is an array of strings - use `public`, `signed`, or both.|
 
+<h2 id="tocS_Template">Template</h2>
+<!-- backwards compatibility -->
+<a id="schematemplate"></a>
+<a id="schema_Template"></a>
+<a id="tocStemplate"></a>
+<a id="tocstemplate"></a>
+
+```json
+{
+  "name": "My template",
+  "template": {
+    "timeline": {
+      "soundtrack": {
+        "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3",
+        "effect": "fadeIn",
+        "volume": 1
+      },
+      "background": "#000000",
+      "fonts": [
+        {
+          "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf"
+        }
+      ],
+      "tracks": [
+        {
+          "clips": [
+            {
+              "asset": {
+                "type": "video",
+                "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4",
+                "trim": 2,
+                "volume": 1,
+                "crop": {
+                  "top": 0.15,
+                  "bottom": 0.15,
+                  "left": 0,
+                  "right": 0
+                }
+              },
+              "start": 2,
+              "length": 5,
+              "fit": "crop",
+              "scale": 0,
+              "position": "center",
+              "offset": {
+                "x": 0.1,
+                "y": -0.2
+              },
+              "transition": {
+                "in": "fade",
+                "out": "fade"
+              },
+              "effect": "zoomIn",
+              "filter": "greyscale",
+              "opacity": 1,
+              "transform": {
+                "rotate": {
+                  "angle": 45
+                },
+                "skew": {
+                  "x": 0.5,
+                  "y": 0.5
+                },
+                "flip": {
+                  "horizontal": true,
+                  "vertical": true
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "cache": true
+    },
+    "output": {
+      "format": "mp4",
+      "resolution": "sd",
+      "aspectRatio": 969,
+      "size": {
+        "width": 1200,
+        "height": 800
+      },
+      "fps": 25,
+      "scaleTo": "preview",
+      "quality": "medium",
+      "repeat": true,
+      "range": {
+        "start": 3,
+        "length": 6
+      },
+      "poster": {
+        "capture": 1
+      },
+      "thumbnail": {
+        "capture": 1,
+        "scale": 0.3
+      },
+      "destinations": [
+        {
+          "provider": "shotstack",
+          "exclude": false
+        }
+      ]
+    },
+    "merge": [
+      {
+        "find": "NAME",
+        "replace": "Jane"
+      }
+    ],
+    "callback": "https://my-server.com/callback.php",
+    "disk": "local"
+  }
+}
+
+```
+
+A template is a saved [Edit](#tocs_edit) than can be loaded and re-used.
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|name|string|true|none|The template name|
+|template|[Edit](#schemaedit)|false|none|An edit defines the arrangement of a video on a timeline, an audio edit or an image design and the output format.|
+
+<h2 id="tocS_TemplateRender">TemplateRender</h2>
+<!-- backwards compatibility -->
+<a id="schematemplaterender"></a>
+<a id="schema_TemplateRender"></a>
+<a id="tocStemplaterender"></a>
+<a id="tocstemplaterender"></a>
+
+```json
+{
+  "id": "f5493c17-d01f-445c-bb49-535fae65f219",
+  "merge": [
+    {
+      "find": "NAME",
+      "replace": "Jane"
+    }
+  ]
+}
+
+```
+
+Render a template by it's id and optional merge fields.
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|id|string|true|none|The id of the template to render in UUID format.|
+|merge|[[MergeField](#schemamergefield)]|false|none|An array of key/value pairs that provides an easy way to create templates with placeholders. The placeholders can be used to find and replace keys with values. For example you can search for the placeholder `{{NAME}}` and replace it with the value `Jane`.|
+
 <h2 id="tocS_QueuedResponse">QueuedResponse</h2>
 <!-- backwards compatibility -->
 <a id="schemaqueuedresponse"></a>
@@ -2892,7 +4701,7 @@ Pass additional options to control how Mux processes video. Currently supports p
 
 ```
 
-The response received after a [render request](#render-asset) is submitted. The render task is queued for rendering and a unique render id is returned.
+The response received after a [render request](#render-asset) or [template render](#render-template) is submitted. The render task is queued for rendering and a unique render id is returned.
 
 ### Properties
 
@@ -3015,7 +4824,7 @@ The response data returned with the [QueuedResponse](#tocs_queuedresponse).
       "output": {
         "format": "mp4",
         "resolution": "sd",
-        "aspectRatio": "16:9",
+        "aspectRatio": 969,
         "size": {
           "width": 1200,
           "height": 800
@@ -3154,7 +4963,7 @@ The response received after a [render status request](#get-render-status) is sub
     "output": {
       "format": "mp4",
       "resolution": "sd",
-      "aspectRatio": "16:9",
+      "aspectRatio": 969,
       "size": {
         "width": 1200,
         "height": 800
@@ -3227,6 +5036,347 @@ The response data returned with the [RenderResponse](#tocs_renderresponse) inclu
 |status|done|
 |status|failed|
 
+<h2 id="tocS_TemplateResponse">TemplateResponse</h2>
+<!-- backwards compatibility -->
+<a id="schematemplateresponse"></a>
+<a id="schema_TemplateResponse"></a>
+<a id="tocStemplateresponse"></a>
+<a id="tocstemplateresponse"></a>
+
+```json
+{
+  "success": true,
+  "message": "Created",
+  "response": {
+    "message": "Template Successfully Created",
+    "id": "f5493c17-d01f-445c-bb49-535fae65f219"
+  }
+}
+
+```
+
+The response received after a [template](#create-a-template) is submitted. The template is saved and a unique template id is returned.
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|success|boolean|true|none|`true` if successfully created, else `false`.|
+|message|string|true|none|`Created`, `Bad Request` or an error message.|
+|response|[TemplateResponseData](#schematemplateresponsedata)|true|none|`TemplateResponseData` or an error message.|
+
+<h2 id="tocS_TemplateResponseData">TemplateResponseData</h2>
+<!-- backwards compatibility -->
+<a id="schematemplateresponsedata"></a>
+<a id="schema_TemplateResponseData"></a>
+<a id="tocStemplateresponsedata"></a>
+<a id="tocstemplateresponsedata"></a>
+
+```json
+{
+  "message": "Template Successfully Created",
+  "id": "f5493c17-d01f-445c-bb49-535fae65f219"
+}
+
+```
+
+The response data returned with the [TemplateResponse](#tocs_templateresponse).
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|message|string|true|none|Success response message or error details.|
+|id|string|true|none|The unique id of the template in UUID format.|
+
+<h2 id="tocS_TemplateDataResponse">TemplateDataResponse</h2>
+<!-- backwards compatibility -->
+<a id="schematemplatedataresponse"></a>
+<a id="schema_TemplateDataResponse"></a>
+<a id="tocStemplatedataresponse"></a>
+<a id="tocstemplatedataresponse"></a>
+
+```json
+{
+  "success": true,
+  "message": "OK",
+  "response": {
+    "id": "f5493c17-d01f-445c-bb49-535fae65f219",
+    "name": "My template",
+    "owner": "5ca6hu7s9k",
+    "template": {
+      "timeline": {
+        "soundtrack": {
+          "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3",
+          "effect": "fadeInFadeOut"
+        },
+        "background": "#000000",
+        "tracks": [
+          {
+            "clips": [
+              {
+                "asset": {
+                  "type": "title",
+                  "text": "Hello World",
+                  "style": "minimal"
+                },
+                "start": 0,
+                "length": 4,
+                "transition": {
+                  "in": "fade",
+                  "out": "fade"
+                },
+                "effect": "slideRight"
+              },
+              {
+                "asset": {
+                  "type": "image",
+                  "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/my-image.jpg"
+                },
+                "start": 3,
+                "length": 4,
+                "effect": "zoomIn",
+                "filter": "greyscale"
+              }
+            ]
+          },
+          {
+            "clips": [
+              {
+                "asset": {
+                  "type": "video",
+                  "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/my-clip-1.mp4",
+                  "trim": 10.5
+                },
+                "start": 7,
+                "length": 4.5
+              },
+              {
+                "asset": {
+                  "type": "video",
+                  "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/my-clip-2.mp4",
+                  "volume": 0.5
+                },
+                "start": 11.5,
+                "length": 5,
+                "transition": {
+                  "out": "wipeLeft"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "output": {
+        "format": "mp4",
+        "resolution": "sd"
+      }
+    }
+  }
+}
+
+```
+
+The template data including the template name and Edit.
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|success|boolean|true|none|`true` if successfully created, else `false`.|
+|message|string|true|none|`OK`, `Bad Request` or an error message.|
+|response|[TemplateDataResponseData](#schematemplatedataresponsedata)|true|none|`TemplateDataResponseData` or an error message.|
+
+<h2 id="tocS_TemplateDataResponseData">TemplateDataResponseData</h2>
+<!-- backwards compatibility -->
+<a id="schematemplatedataresponsedata"></a>
+<a id="schema_TemplateDataResponseData"></a>
+<a id="tocStemplatedataresponsedata"></a>
+<a id="tocstemplatedataresponsedata"></a>
+
+```json
+{
+  "id": "f5493c17-d01f-445c-bb49-535fae65f219",
+  "name": "My template",
+  "owner": "5ca6hu7s9k",
+  "template": {
+    "timeline": {
+      "soundtrack": {
+        "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3",
+        "effect": "fadeInFadeOut"
+      },
+      "background": "#000000",
+      "tracks": [
+        {
+          "clips": [
+            {
+              "asset": {
+                "type": "title",
+                "text": "Hello World",
+                "style": "minimal"
+              },
+              "start": 0,
+              "length": 4,
+              "transition": {
+                "in": "fade",
+                "out": "fade"
+              },
+              "effect": "slideRight"
+            },
+            {
+              "asset": {
+                "type": "image",
+                "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/my-image.jpg"
+              },
+              "start": 3,
+              "length": 4,
+              "effect": "zoomIn",
+              "filter": "greyscale"
+            }
+          ]
+        },
+        {
+          "clips": [
+            {
+              "asset": {
+                "type": "video",
+                "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/my-clip-1.mp4",
+                "trim": 10.5
+              },
+              "start": 7,
+              "length": 4.5
+            },
+            {
+              "asset": {
+                "type": "video",
+                "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/my-clip-2.mp4",
+                "volume": 0.5
+              },
+              "start": 11.5,
+              "length": 5,
+              "transition": {
+                "out": "wipeLeft"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "output": {
+      "format": "mp4",
+      "resolution": "sd"
+    }
+  }
+}
+
+```
+
+The response data returned with the [TemplateDataResponse](#tocs_templatedataresponse).
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|id|string|true|none|The unique id of the template in UUID format.|
+|name|string|true|none|The template name.|
+|owner|string|true|none|The owner id of the templates.|
+|template|string|true|none|The [Edit](#tocs_edit) template.|
+
+<h2 id="tocS_TemplateListResponse">TemplateListResponse</h2>
+<!-- backwards compatibility -->
+<a id="schematemplatelistresponse"></a>
+<a id="schema_TemplateListResponse"></a>
+<a id="tocStemplatelistresponse"></a>
+<a id="tocstemplatelistresponse"></a>
+
+```json
+{
+  "success": true,
+  "message": "Created",
+  "response": {
+    "owner": "5ca6hu7s9k",
+    "templates": [
+      {
+        "id": "f5493c17-d01f-445c-bb49-535fae65f219",
+        "name": "My template",
+        "created": "2022-06-10T12:50:21.455Z",
+        "updated": "2022-06-22T08:24:30.168Z"
+      }
+    ]
+  }
+}
+
+```
+
+A list of previously saved templates.
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|success|boolean|true|none|`true` if successfully created, else `false`.|
+|message|string|true|none|`Created`, `Bad Request` or an error message.|
+|response|[TemplateListResponseData](#schematemplatelistresponsedata)|true|none|`TemplateListResponseData` or an error message.|
+
+<h2 id="tocS_TemplateListResponseData">TemplateListResponseData</h2>
+<!-- backwards compatibility -->
+<a id="schematemplatelistresponsedata"></a>
+<a id="schema_TemplateListResponseData"></a>
+<a id="tocStemplatelistresponsedata"></a>
+<a id="tocstemplatelistresponsedata"></a>
+
+```json
+{
+  "owner": "5ca6hu7s9k",
+  "templates": [
+    {
+      "id": "f5493c17-d01f-445c-bb49-535fae65f219",
+      "name": "My template",
+      "created": "2022-06-10T12:50:21.455Z",
+      "updated": "2022-06-22T08:24:30.168Z"
+    }
+  ]
+}
+
+```
+
+The response data returned with the [TemplateListResponse](#tocs_templatelistresponse).
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|owner|string|true|none|The owner id of the templates.|
+|templates|[[TemplateListResponseItem](#schematemplatelistresponseitem)]|true|none|The list of templates.|
+
+<h2 id="tocS_TemplateListResponseItem">TemplateListResponseItem</h2>
+<!-- backwards compatibility -->
+<a id="schematemplatelistresponseitem"></a>
+<a id="schema_TemplateListResponseItem"></a>
+<a id="tocStemplatelistresponseitem"></a>
+<a id="tocstemplatelistresponseitem"></a>
+
+```json
+{
+  "id": "f5493c17-d01f-445c-bb49-535fae65f219",
+  "name": "My template",
+  "created": "2022-06-10T12:50:21.455Z",
+  "updated": "2022-06-22T08:24:30.168Z"
+}
+
+```
+
+The individual template item returned with the  [TemplateListResponseData](#tocs_templatelistresponsedata) templates list.
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|id|string|true|none|The unique id of the template in UUID format.|
+|name|string|true|none|The template name|
+|created|string|true|none|The time the template was created.|
+|updated|string|true|none|The time the template was last updated.|
+
 <h2 id="tocS_ProbeResponse">ProbeResponse</h2>
 <!-- backwards compatibility -->
 <a id="schemaproberesponse"></a>
@@ -3251,7 +5401,7 @@ The response received after a [probe request](#inspect-media) is submitted. The 
 |---|---|---|---|---|
 |success|boolean|true|none|`true` if media successfully read, else `false`.|
 |message|string|true|none|`Created`, `Bad Request` or an error message.|
-|response|object|true|none|The response from FFprobe in JSON format|
+|response|object|true|none|The response from FFprobe in JSON format.|
 
 <h2 id="tocS_AssetResponse">AssetResponse</h2>
 <!-- backwards compatibility -->
@@ -3269,6 +5419,7 @@ The response received after a [probe request](#inspect-media) is submitted. The 
       "owner": "5ca6hu7s9k",
       "region": "au",
       "renderId": "2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7",
+      "providerId": "a4482cbf-e321-42a2-ac8b-947d26886840",
       "filename": "2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4",
       "url": "https://cdn.shotstack.io/au/v1/5ca6hu7s9k/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4",
       "status": "ready",
@@ -3286,7 +5437,7 @@ The response returned by the Serve API [get asset](#get-asset) request. Includes
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|data|[AssetResponseData](#schemaassetresponsedata)|false|none|An asset resource.|
+|data|[AssetResponseData](#schemaassetresponsedata)|true|none|An asset resource.|
 
 <h2 id="tocS_AssetRenderResponse">AssetRenderResponse</h2>
 <!-- backwards compatibility -->
@@ -3305,6 +5456,7 @@ The response returned by the Serve API [get asset](#get-asset) request. Includes
         "owner": "5ca6hu7s9k",
         "region": "au",
         "renderId": "2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7",
+        "providerId": "a4482cbf-e321-42a2-ac8b-947d26886840",
         "filename": "2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4",
         "url": "https://cdn.shotstack.io/au/v1/5ca6hu7s9k/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4",
         "status": "ready",
@@ -3323,7 +5475,7 @@ The response returned by the Serve API [get asset by render id](#get-asset-by-re
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|data|[[AssetResponseData](#schemaassetresponsedata)]|false|none|An array of asset resources grouped by render id.|
+|data|[[AssetResponseData](#schemaassetresponsedata)]|true|none|An array of asset resources grouped by render id.|
 
 <h2 id="tocS_AssetResponseData">AssetResponseData</h2>
 <!-- backwards compatibility -->
@@ -3340,6 +5492,7 @@ The response returned by the Serve API [get asset by render id](#get-asset-by-re
     "owner": "5ca6hu7s9k",
     "region": "au",
     "renderId": "2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7",
+    "providerId": "a4482cbf-e321-42a2-ac8b-947d26886840",
     "filename": "2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4",
     "url": "https://cdn.shotstack.io/au/v1/5ca6hu7s9k/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4",
     "status": "ready",
@@ -3356,8 +5509,8 @@ The type of resource (an asset) and attributes of the asset.
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|type|string|false|none|The type of resource, in this case it is an assets.|
-|attributes|[AssetResponseAttributes](#schemaassetresponseattributes)|false|none|The asset attributes including render id, url, filename, file size, etc...|
+|type|string|true|none|The type of resource, in this case it is an assets.|
+|attributes|[AssetResponseAttributes](#schemaassetresponseattributes)|true|none|The asset attributes including render id, url, filename, file size, etc...|
 
 <h2 id="tocS_AssetResponseAttributes">AssetResponseAttributes</h2>
 <!-- backwards compatibility -->
@@ -3372,6 +5525,7 @@ The type of resource (an asset) and attributes of the asset.
   "owner": "5ca6hu7s9k",
   "region": "au",
   "renderId": "2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7",
+  "providerId": "a4482cbf-e321-42a2-ac8b-947d26886840",
   "filename": "2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4",
   "url": "https://cdn.shotstack.io/au/v1/5ca6hu7s9k/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4",
   "status": "ready",
@@ -3387,15 +5541,16 @@ The list of asset attributes and their values.
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|id|string|false|none|The unique id of the hosted asset in UUID format.|
-|owner|string|false|none|The owner id of the render task.|
+|id|string|true|none|The unique id of the hosted asset in UUID format.|
+|owner|string|true|none|The owner id of the render task.|
 |region|string|false|none|The region the asset is hosted, currently only `au` (Australia).|
 |renderId|string|false|none|The original render id that created the asset in UUID format. Multiple assets can share the same render id.|
-|filename|string|false|none|The asset file name.|
+|providerId|string|false|none|The third party id of an asset transferred to an external provider, i.e. Mux, YouTube or S3. If the provider is Shotstack, the providerID is the same as the asset id.|
+|filename|string|true|none|The asset file name.|
 |url|string|false|none|The asset file name.|
-|status|string|false|none|The status of the asset. <ul><br>  <li>`importing` - the asset is being copied to the hosting service</li><br>  <li>`ready` - the asset is ready to be served to users</li><br>  <li>`failed` - the asset failed to copy or delete</li><br>  <li>`deleted` - the asset has been deleted</li><br></ul>|
-|created|string|false|none|The time the asset was created.|
-|updated|string|false|none|The time the asset status was last updated.|
+|status|string|true|none|The status of the asset. <ul><br>  <li>`importing` - the asset is being copied to the hosting service</li><br>  <li>`ready` - the asset is ready to be served to users</li><br>  <li>`failed` - the asset failed to copy or delete</li><br>  <li>`deleted` - the asset has been deleted</li><br></ul>|
+|created|string|true|none|The time the asset was created.|
+|updated|string|true|none|The time the asset status was last updated.|
 
 #### Enumerated Values
 

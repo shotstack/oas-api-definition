@@ -65,6 +65,15 @@
 <!-- backwards compatibility -->
 <!-- backwards compatibility -->
 <!-- backwards compatibility -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
   </head>
 
   <body data-languages="[&quot;shell&quot;,&quot;http&quot;,&quot;javascript--nodejs&quot;,&quot;php&quot;,&quot;ruby&quot;,&quot;python&quot;,&quot;java&quot;,&quot;go&quot;]">
@@ -144,6 +153,36 @@
                 
                   <li>
                     <a href="#get-render-status" class="toc-h2 toc-link" data-title="">Get Render Status</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#create-template" class="toc-h2 toc-link" data-title="">Create Template</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#list-templates" class="toc-h2 toc-link" data-title="">List Templates</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#retrieve-template" class="toc-h2 toc-link" data-title="">Retrieve Template</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#update-template" class="toc-h2 toc-link" data-title="">Update Template</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#delete-template" class="toc-h2 toc-link" data-title="">Delete Template</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#render-template" class="toc-h2 toc-link" data-title="">Render Template</a>
                     
                   </li>
                 
@@ -296,11 +335,6 @@
                   </li>
                 
                   <li>
-                    <a href="#tocs_destinations" class="toc-h2 toc-link" data-title="">Destinations</a>
-                    
-                  </li>
-                
-                  <li>
                     <a href="#tocs_size" class="toc-h2 toc-link" data-title="">Size</a>
                     
                   </li>
@@ -321,6 +355,11 @@
                   </li>
                 
                   <li>
+                    <a href="#tocs_destinations" class="toc-h2 toc-link" data-title="">Destinations</a>
+                    
+                  </li>
+                
+                  <li>
                     <a href="#tocs_shotstackdestination" class="toc-h2 toc-link" data-title="">ShotstackDestination</a>
                     
                   </li>
@@ -332,6 +371,16 @@
                 
                   <li>
                     <a href="#tocs_muxdestinationoptions" class="toc-h2 toc-link" data-title="">MuxDestinationOptions</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#tocs_template" class="toc-h2 toc-link" data-title="">Template</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#tocs_templaterender" class="toc-h2 toc-link" data-title="">TemplateRender</a>
                     
                   </li>
                 
@@ -352,6 +401,41 @@
                 
                   <li>
                     <a href="#tocs_renderresponsedata" class="toc-h2 toc-link" data-title="">RenderResponseData</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#tocs_templateresponse" class="toc-h2 toc-link" data-title="">TemplateResponse</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#tocs_templateresponsedata" class="toc-h2 toc-link" data-title="">TemplateResponseData</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#tocs_templatedataresponse" class="toc-h2 toc-link" data-title="">TemplateDataResponse</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#tocs_templatedataresponsedata" class="toc-h2 toc-link" data-title="">TemplateDataResponseData</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#tocs_templatelistresponse" class="toc-h2 toc-link" data-title="">TemplateListResponse</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#tocs_templatelistresponsedata" class="toc-h2 toc-link" data-title="">TemplateListResponseData</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#tocs_templatelistresponseitem" class="toc-h2 toc-link" data-title="">TemplateListResponseItem</a>
                     
                   </li>
                 
@@ -399,10 +483,14 @@
 <blockquote>
 <p>Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.</p>
 </blockquote>
-<p>Shotstack is a video, image and audio editing service that allows for the automated generation of videos, images and audio using JSON and a RESTful API.</p>
-<p>You arrange and configure an edit and POST it to the API which will render your media and provide a file  location when complete.</p>
-<p>For more details visit <a href="https://shotstack.io">shotstack.io</a> or checkout our <a href="https://shotstack.io/docs/guide/">getting started</a> documentation.
-There are two main API's, one for editing and generating assets (Edit API) and one for managing hosted assets (Serve API).</p>
+<p>Shotstack is a video, image and audio editing service that allows for the automated
+generation of videos, images and audio using JSON and a RESTful API.</p>
+<p>You arrange and configure an edit and POST it to the API which will render your media and provide a file
+location when complete.</p>
+<p>For more details visit <a href="https://shotstack.io">shotstack.io</a> or checkout our
+<a href="https://shotstack.io/docs/guide/">getting started</a> documentation.</p>
+<p>There are two main API's, one for editing and generating assets (Edit API) and one for managing hosted assets
+(Serve API).</p>
 <p>The Edit API base URL is: <b><a href="https://api.shotstack.io/%7Bversion%7D">https://api.shotstack.io/{version}</a></b></p>
 <p>The Serve API base URL is: <b><a href="https://api.shotstack.io/serve/%7Bversion%7D">https://api.shotstack.io/serve/{version}</a></b></p>
 <p>Base URLs:</p>
@@ -535,7 +623,7 @@ curl -X POST https://api.shotstack.io/{version}/render \
   <span class="hljs-string">"output"</span>: {
     <span class="hljs-string">"format"</span>: <span class="hljs-string">"mp4"</span>,
     <span class="hljs-string">"resolution"</span>: <span class="hljs-string">"sd"</span>,
-    <span class="hljs-string">"aspectRatio"</span>: <span class="hljs-string">"16:9"</span>,
+    <span class="hljs-string">"aspectRatio"</span>: <span class="hljs-number">969</span>,
     <span class="hljs-string">"size"</span>: {
       <span class="hljs-string">"width"</span>: <span class="hljs-number">1200</span>,
       <span class="hljs-string">"height"</span>: <span class="hljs-number">800</span>
@@ -685,7 +773,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p><code>POST /render</code></p>
-<p>Queue and render the contents of a timeline as a video, image or audio file.</p>
+<p>Queue and render the contents of an <a href="#tocs_edit">Edit</a> as a video, image or audio file.</p>
 <p><strong>Base URL:</strong> <a href="https://api.shotstack.io/%7Bversion%7D">https://api.shotstack.io/{version}</a></p>
 <blockquote>
 <p>Body parameter</p>
@@ -757,7 +845,7 @@ System.out.println(response.toString());
   <span class="hljs-attr">"output"</span>: {
     <span class="hljs-attr">"format"</span>: <span class="hljs-string">"mp4"</span>,
     <span class="hljs-attr">"resolution"</span>: <span class="hljs-string">"sd"</span>,
-    <span class="hljs-attr">"aspectRatio"</span>: <span class="hljs-string">"16:9"</span>,
+    <span class="hljs-attr">"aspectRatio"</span>: <span class="hljs-number">969</span>,
     <span class="hljs-attr">"size"</span>: {
       <span class="hljs-attr">"width"</span>: <span class="hljs-number">1200</span>,
       <span class="hljs-attr">"height"</span>: <span class="hljs-number">800</span>
@@ -1127,6 +1215,1650 @@ System.out.println(response.toString());
 To perform this operation, you must be authenticated by means of one of the following methods:
 DeveloperKey
 </aside>
+<h2 id="create-template">Create Template</h2>
+<p><a id="opIdpostTemplate"></a></p>
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre class="highlight tab tab-shell"><code><span class="hljs-comment"># You can also use wget</span>
+curl -X POST https://api.shotstack.io/{version}/templates \
+  -H <span class="hljs-string">'Content-Type: application/json'</span> \
+  -H <span class="hljs-string">'Accept: application/json'</span> \
+  -H <span class="hljs-string">'x-api-key: API_KEY'</span>
+
+</code></pre>
+<pre class="highlight tab tab-http"><code><span class="hljs-keyword">POST</span> <span class="hljs-string">https://api.shotstack.io/{version}/templates</span> HTTP/1.1
+<span class="hljs-attribute">Host</span>: api.shotstack.io
+<span class="hljs-attribute">Content-Type</span>: application/json
+<span class="hljs-attribute">Accept</span>: application/json
+
+</code></pre>
+<pre class="highlight tab tab-javascript--nodejs"><code><span class="hljs-keyword">const</span> fetch = <span class="hljs-built_in">require</span>(<span class="hljs-string">'node-fetch'</span>);
+<span class="hljs-keyword">const</span> inputBody = {
+  <span class="hljs-string">"name"</span>: <span class="hljs-string">"My template"</span>,
+  <span class="hljs-string">"template"</span>: {
+    <span class="hljs-string">"timeline"</span>: {
+      <span class="hljs-string">"soundtrack"</span>: {
+        <span class="hljs-string">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3"</span>,
+        <span class="hljs-string">"effect"</span>: <span class="hljs-string">"fadeIn"</span>,
+        <span class="hljs-string">"volume"</span>: <span class="hljs-number">1</span>
+      },
+      <span class="hljs-string">"background"</span>: <span class="hljs-string">"#000000"</span>,
+      <span class="hljs-string">"fonts"</span>: [
+        {
+          <span class="hljs-string">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf"</span>
+        }
+      ],
+      <span class="hljs-string">"tracks"</span>: [
+        {
+          <span class="hljs-string">"clips"</span>: [
+            {
+              <span class="hljs-string">"asset"</span>: {
+                <span class="hljs-string">"type"</span>: <span class="hljs-string">"video"</span>,
+                <span class="hljs-string">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4"</span>,
+                <span class="hljs-string">"trim"</span>: <span class="hljs-number">2</span>,
+                <span class="hljs-string">"volume"</span>: <span class="hljs-number">1</span>,
+                <span class="hljs-string">"crop"</span>: {
+                  <span class="hljs-string">"top"</span>: <span class="hljs-number">0.15</span>,
+                  <span class="hljs-string">"bottom"</span>: <span class="hljs-number">0.15</span>,
+                  <span class="hljs-string">"left"</span>: <span class="hljs-number">0</span>,
+                  <span class="hljs-string">"right"</span>: <span class="hljs-number">0</span>
+                }
+              },
+              <span class="hljs-string">"start"</span>: <span class="hljs-number">2</span>,
+              <span class="hljs-string">"length"</span>: <span class="hljs-number">5</span>,
+              <span class="hljs-string">"fit"</span>: <span class="hljs-string">"crop"</span>,
+              <span class="hljs-string">"scale"</span>: <span class="hljs-number">0</span>,
+              <span class="hljs-string">"position"</span>: <span class="hljs-string">"center"</span>,
+              <span class="hljs-string">"offset"</span>: {
+                <span class="hljs-string">"x"</span>: <span class="hljs-number">0.1</span>,
+                <span class="hljs-string">"y"</span>: <span class="hljs-number">-0.2</span>
+              },
+              <span class="hljs-string">"transition"</span>: {
+                <span class="hljs-string">"in"</span>: <span class="hljs-string">"fade"</span>,
+                <span class="hljs-string">"out"</span>: <span class="hljs-string">"fade"</span>
+              },
+              <span class="hljs-string">"effect"</span>: <span class="hljs-string">"zoomIn"</span>,
+              <span class="hljs-string">"filter"</span>: <span class="hljs-string">"greyscale"</span>,
+              <span class="hljs-string">"opacity"</span>: <span class="hljs-number">1</span>,
+              <span class="hljs-string">"transform"</span>: {
+                <span class="hljs-string">"rotate"</span>: {
+                  <span class="hljs-string">"angle"</span>: <span class="hljs-number">45</span>
+                },
+                <span class="hljs-string">"skew"</span>: {
+                  <span class="hljs-string">"x"</span>: <span class="hljs-number">0.5</span>,
+                  <span class="hljs-string">"y"</span>: <span class="hljs-number">0.5</span>
+                },
+                <span class="hljs-string">"flip"</span>: {
+                  <span class="hljs-string">"horizontal"</span>: <span class="hljs-literal">true</span>,
+                  <span class="hljs-string">"vertical"</span>: <span class="hljs-literal">true</span>
+                }
+              }
+            }
+          ]
+        }
+      ],
+      <span class="hljs-string">"cache"</span>: <span class="hljs-literal">true</span>
+    },
+    <span class="hljs-string">"output"</span>: {
+      <span class="hljs-string">"format"</span>: <span class="hljs-string">"mp4"</span>,
+      <span class="hljs-string">"resolution"</span>: <span class="hljs-string">"sd"</span>,
+      <span class="hljs-string">"aspectRatio"</span>: <span class="hljs-number">969</span>,
+      <span class="hljs-string">"size"</span>: {
+        <span class="hljs-string">"width"</span>: <span class="hljs-number">1200</span>,
+        <span class="hljs-string">"height"</span>: <span class="hljs-number">800</span>
+      },
+      <span class="hljs-string">"fps"</span>: <span class="hljs-number">25</span>,
+      <span class="hljs-string">"scaleTo"</span>: <span class="hljs-string">"preview"</span>,
+      <span class="hljs-string">"quality"</span>: <span class="hljs-string">"medium"</span>,
+      <span class="hljs-string">"repeat"</span>: <span class="hljs-literal">true</span>,
+      <span class="hljs-string">"range"</span>: {
+        <span class="hljs-string">"start"</span>: <span class="hljs-number">3</span>,
+        <span class="hljs-string">"length"</span>: <span class="hljs-number">6</span>
+      },
+      <span class="hljs-string">"poster"</span>: {
+        <span class="hljs-string">"capture"</span>: <span class="hljs-number">1</span>
+      },
+      <span class="hljs-string">"thumbnail"</span>: {
+        <span class="hljs-string">"capture"</span>: <span class="hljs-number">1</span>,
+        <span class="hljs-string">"scale"</span>: <span class="hljs-number">0.3</span>
+      },
+      <span class="hljs-string">"destinations"</span>: [
+        {
+          <span class="hljs-string">"provider"</span>: <span class="hljs-string">"shotstack"</span>,
+          <span class="hljs-string">"exclude"</span>: <span class="hljs-literal">false</span>
+        }
+      ]
+    },
+    <span class="hljs-string">"merge"</span>: [
+      {
+        <span class="hljs-string">"find"</span>: <span class="hljs-string">"NAME"</span>,
+        <span class="hljs-string">"replace"</span>: <span class="hljs-string">"Jane"</span>
+      }
+    ],
+    <span class="hljs-string">"callback"</span>: <span class="hljs-string">"https://my-server.com/callback.php"</span>,
+    <span class="hljs-string">"disk"</span>: <span class="hljs-string">"local"</span>
+  }
+};
+<span class="hljs-keyword">const</span> headers = {
+  <span class="hljs-string">'Content-Type'</span>:<span class="hljs-string">'application/json'</span>,
+  <span class="hljs-string">'Accept'</span>:<span class="hljs-string">'application/json'</span>,
+  <span class="hljs-string">'x-api-key'</span>:<span class="hljs-string">'API_KEY'</span>
+};
+
+fetch(<span class="hljs-string">'https://api.shotstack.io/{version}/templates'</span>,
+{
+  <span class="hljs-attr">method</span>: <span class="hljs-string">'POST'</span>,
+  <span class="hljs-attr">body</span>: <span class="hljs-built_in">JSON</span>.stringify(inputBody),
+  <span class="hljs-attr">headers</span>: headers
+})
+.then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">res</span>) </span>{
+    <span class="hljs-keyword">return</span> res.json();
+}).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">body</span>) </span>{
+    <span class="hljs-built_in">console</span>.log(body);
+});
+
+</code></pre>
+<pre class="highlight tab tab-php"><code> <span class="hljs-string">'application/json'</span>,
+    <span class="hljs-string">'Accept'</span> =&gt; <span class="hljs-string">'application/json'</span>,
+    <span class="hljs-string">'x-api-key'</span> =&gt; <span class="hljs-string">'API_KEY'</span>,
+);
+
+$client = <span class="hljs-keyword">new</span> \GuzzleHttp\Client();
+
+<span class="hljs-comment">// Define array of request body.</span>
+$request_body = <span class="hljs-keyword">array</span>();
+
+<span class="hljs-keyword">try</span> {
+    $response = $client-&gt;request(<span class="hljs-string">'POST'</span>,<span class="hljs-string">'https://api.shotstack.io/{version}/templates'</span>, <span class="hljs-keyword">array</span>(
+        <span class="hljs-string">'headers'</span> =&gt; $headers,
+        <span class="hljs-string">'json'</span> =&gt; $request_body,
+       )
+    );
+    print_r($response-&gt;getBody()-&gt;getContents());
+ }
+ <span class="hljs-keyword">catch</span> (\GuzzleHttp\<span class="hljs-keyword">Exception</span>\BadResponseException $e) {
+    <span class="hljs-comment">// handle exception or api errors.</span>
+    print_r($e-&gt;getMessage());
+ }
+
+ <span class="hljs-comment">// ...</span>
+
+</code></pre>
+<pre class="highlight tab tab-ruby"><code><span class="hljs-keyword">require</span> <span class="hljs-string">'rest-client'</span>
+<span class="hljs-keyword">require</span> <span class="hljs-string">'json'</span>
+
+headers = {
+  <span class="hljs-string">'Content-Type'</span> =&gt; <span class="hljs-string">'application/json'</span>,
+  <span class="hljs-string">'Accept'</span> =&gt; <span class="hljs-string">'application/json'</span>,
+  <span class="hljs-string">'x-api-key'</span> =&gt; <span class="hljs-string">'API_KEY'</span>
+}
+
+result = RestClient.post <span class="hljs-string">'https://api.shotstack.io/{version}/templates'</span>,
+  <span class="hljs-symbol">params:</span> {
+  }, <span class="hljs-symbol">headers:</span> headers
+
+p JSON.parse(result)
+
+</code></pre>
+<pre class="highlight tab tab-python"><code><span class="hljs-keyword">import</span> requests
+headers = {
+  <span class="hljs-string">'Content-Type'</span>: <span class="hljs-string">'application/json'</span>,
+  <span class="hljs-string">'Accept'</span>: <span class="hljs-string">'application/json'</span>,
+  <span class="hljs-string">'x-api-key'</span>: <span class="hljs-string">'API_KEY'</span>
+}
+
+r = requests.post(<span class="hljs-string">'https://api.shotstack.io/{version}/templates'</span>, headers = headers)
+
+print(r.json())
+
+</code></pre>
+<pre class="highlight tab tab-java"><code>URL obj = <span class="hljs-keyword">new</span> URL(<span class="hljs-string">"https://api.shotstack.io/{version}/templates"</span>);
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod(<span class="hljs-string">"POST"</span>);
+<span class="hljs-keyword">int</span> responseCode = con.getResponseCode();
+BufferedReader in = <span class="hljs-keyword">new</span> BufferedReader(
+    <span class="hljs-keyword">new</span> InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = <span class="hljs-keyword">new</span> StringBuffer();
+<span class="hljs-keyword">while</span> ((inputLine = in.readLine()) != <span class="hljs-keyword">null</span>) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+</code></pre>
+<pre class="highlight tab tab-go"><code><span class="hljs-keyword">package</span> main
+
+<span class="hljs-keyword">import</span> (
+       <span class="hljs-string">"bytes"</span>
+       <span class="hljs-string">"net/http"</span>
+)
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
+
+    headers := <span class="hljs-keyword">map</span>[<span class="hljs-keyword">string</span>][]<span class="hljs-keyword">string</span>{
+        <span class="hljs-string">"Content-Type"</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">"application/json"</span>},
+        <span class="hljs-string">"Accept"</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">"application/json"</span>},
+        <span class="hljs-string">"x-api-key"</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">"API_KEY"</span>},
+    }
+
+    data := bytes.NewBuffer([]<span class="hljs-keyword">byte</span>{jsonReq})
+    req, err := http.NewRequest(<span class="hljs-string">"POST"</span>, <span class="hljs-string">"https://api.shotstack.io/{version}/templates"</span>, data)
+    req.Header = headers
+
+    client := &amp;http.Client{}
+    resp, err := client.Do(req)
+    <span class="hljs-comment">// ...</span>
+}
+
+</code></pre>
+<p><code>POST /templates</code></p>
+<p>Save an <a href="#tocs_edit">Edit</a> as a re-usable template. Templates can be retrieved and modified in your application
+before being rendered. <a href="#tocs_mergefield">Merge fields</a> can be also used to merge data in to a template and
+<a href="#render-template">render</a> it in a single request.</p>
+<p><strong>Base URL:</strong> <a href="https://api.shotstack.io/%7Bversion%7D">https://api.shotstack.io/{version}</a></p>
+<blockquote>
+<p>Body parameter</p>
+</blockquote>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"My template"</span>,
+  <span class="hljs-attr">"template"</span>: {
+    <span class="hljs-attr">"timeline"</span>: {
+      <span class="hljs-attr">"soundtrack"</span>: {
+        <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3"</span>,
+        <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"fadeIn"</span>,
+        <span class="hljs-attr">"volume"</span>: <span class="hljs-number">1</span>
+      },
+      <span class="hljs-attr">"background"</span>: <span class="hljs-string">"#000000"</span>,
+      <span class="hljs-attr">"fonts"</span>: [
+        {
+          <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf"</span>
+        }
+      ],
+      <span class="hljs-attr">"tracks"</span>: [
+        {
+          <span class="hljs-attr">"clips"</span>: [
+            {
+              <span class="hljs-attr">"asset"</span>: {
+                <span class="hljs-attr">"type"</span>: <span class="hljs-string">"video"</span>,
+                <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4"</span>,
+                <span class="hljs-attr">"trim"</span>: <span class="hljs-number">2</span>,
+                <span class="hljs-attr">"volume"</span>: <span class="hljs-number">1</span>,
+                <span class="hljs-attr">"crop"</span>: {
+                  <span class="hljs-attr">"top"</span>: <span class="hljs-number">0.15</span>,
+                  <span class="hljs-attr">"bottom"</span>: <span class="hljs-number">0.15</span>,
+                  <span class="hljs-attr">"left"</span>: <span class="hljs-number">0</span>,
+                  <span class="hljs-attr">"right"</span>: <span class="hljs-number">0</span>
+                }
+              },
+              <span class="hljs-attr">"start"</span>: <span class="hljs-number">2</span>,
+              <span class="hljs-attr">"length"</span>: <span class="hljs-number">5</span>,
+              <span class="hljs-attr">"fit"</span>: <span class="hljs-string">"crop"</span>,
+              <span class="hljs-attr">"scale"</span>: <span class="hljs-number">0</span>,
+              <span class="hljs-attr">"position"</span>: <span class="hljs-string">"center"</span>,
+              <span class="hljs-attr">"offset"</span>: {
+                <span class="hljs-attr">"x"</span>: <span class="hljs-number">0.1</span>,
+                <span class="hljs-attr">"y"</span>: <span class="hljs-number">-0.2</span>
+              },
+              <span class="hljs-attr">"transition"</span>: {
+                <span class="hljs-attr">"in"</span>: <span class="hljs-string">"fade"</span>,
+                <span class="hljs-attr">"out"</span>: <span class="hljs-string">"fade"</span>
+              },
+              <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"zoomIn"</span>,
+              <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"greyscale"</span>,
+              <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">1</span>,
+              <span class="hljs-attr">"transform"</span>: {
+                <span class="hljs-attr">"rotate"</span>: {
+                  <span class="hljs-attr">"angle"</span>: <span class="hljs-number">45</span>
+                },
+                <span class="hljs-attr">"skew"</span>: {
+                  <span class="hljs-attr">"x"</span>: <span class="hljs-number">0.5</span>,
+                  <span class="hljs-attr">"y"</span>: <span class="hljs-number">0.5</span>
+                },
+                <span class="hljs-attr">"flip"</span>: {
+                  <span class="hljs-attr">"horizontal"</span>: <span class="hljs-literal">true</span>,
+                  <span class="hljs-attr">"vertical"</span>: <span class="hljs-literal">true</span>
+                }
+              }
+            }
+          ]
+        }
+      ],
+      <span class="hljs-attr">"cache"</span>: <span class="hljs-literal">true</span>
+    },
+    <span class="hljs-attr">"output"</span>: {
+      <span class="hljs-attr">"format"</span>: <span class="hljs-string">"mp4"</span>,
+      <span class="hljs-attr">"resolution"</span>: <span class="hljs-string">"sd"</span>,
+      <span class="hljs-attr">"aspectRatio"</span>: <span class="hljs-number">969</span>,
+      <span class="hljs-attr">"size"</span>: {
+        <span class="hljs-attr">"width"</span>: <span class="hljs-number">1200</span>,
+        <span class="hljs-attr">"height"</span>: <span class="hljs-number">800</span>
+      },
+      <span class="hljs-attr">"fps"</span>: <span class="hljs-number">25</span>,
+      <span class="hljs-attr">"scaleTo"</span>: <span class="hljs-string">"preview"</span>,
+      <span class="hljs-attr">"quality"</span>: <span class="hljs-string">"medium"</span>,
+      <span class="hljs-attr">"repeat"</span>: <span class="hljs-literal">true</span>,
+      <span class="hljs-attr">"range"</span>: {
+        <span class="hljs-attr">"start"</span>: <span class="hljs-number">3</span>,
+        <span class="hljs-attr">"length"</span>: <span class="hljs-number">6</span>
+      },
+      <span class="hljs-attr">"poster"</span>: {
+        <span class="hljs-attr">"capture"</span>: <span class="hljs-number">1</span>
+      },
+      <span class="hljs-attr">"thumbnail"</span>: {
+        <span class="hljs-attr">"capture"</span>: <span class="hljs-number">1</span>,
+        <span class="hljs-attr">"scale"</span>: <span class="hljs-number">0.3</span>
+      },
+      <span class="hljs-attr">"destinations"</span>: [
+        {
+          <span class="hljs-attr">"provider"</span>: <span class="hljs-string">"shotstack"</span>,
+          <span class="hljs-attr">"exclude"</span>: <span class="hljs-literal">false</span>
+        }
+      ]
+    },
+    <span class="hljs-attr">"merge"</span>: [
+      {
+        <span class="hljs-attr">"find"</span>: <span class="hljs-string">"NAME"</span>,
+        <span class="hljs-attr">"replace"</span>: <span class="hljs-string">"Jane"</span>
+      }
+    ],
+    <span class="hljs-attr">"callback"</span>: <span class="hljs-string">"https://my-server.com/callback.php"</span>,
+    <span class="hljs-attr">"disk"</span>: <span class="hljs-string">"local"</span>
+  }
+}
+</code></pre>
+<h3 id="create-template-parameters">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>In</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>body</td>
+<td>body</td>
+<td><a href="#schematemplate">Template</a></td>
+<td>true</td>
+<td>Create a template with a name and <a href="#tocs_edit">Edit</a>.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Example responses</p>
+</blockquote>
+<blockquote>
+<p>201 Response</p>
+</blockquote>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">"success"</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">"message"</span>: <span class="hljs-string">"Created"</span>,
+  <span class="hljs-attr">"response"</span>: {
+    <span class="hljs-attr">"message"</span>: <span class="hljs-string">"Template Successfully Created"</span>,
+    <span class="hljs-attr">"id"</span>: <span class="hljs-string">"f5493c17-d01f-445c-bb49-535fae65f219"</span>
+  }
+}
+</code></pre>
+<h3 id="create-template-responses">Responses</h3>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>201</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.2">Created</a></td>
+<td>The saved template status including the id</td>
+<td><a href="#schematemplateresponse">TemplateResponse</a></td>
+</tr>
+</tbody>
+</table>
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+DeveloperKey
+</aside>
+<h2 id="list-templates">List Templates</h2>
+<p><a id="opIdgetTemplates"></a></p>
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre class="highlight tab tab-shell"><code><span class="hljs-comment"># You can also use wget</span>
+curl -X GET https://api.shotstack.io/{version}/templates \
+  -H <span class="hljs-string">'Accept: application/json'</span> \
+  -H <span class="hljs-string">'x-api-key: API_KEY'</span>
+
+</code></pre>
+<pre class="highlight tab tab-http"><code><span class="hljs-keyword">GET</span> <span class="hljs-string">https://api.shotstack.io/{version}/templates</span> HTTP/1.1
+<span class="hljs-attribute">Host</span>: api.shotstack.io
+<span class="hljs-attribute">Accept</span>: application/json
+
+</code></pre>
+<pre class="highlight tab tab-javascript--nodejs"><code><span class="hljs-keyword">const</span> fetch = <span class="hljs-built_in">require</span>(<span class="hljs-string">'node-fetch'</span>);
+
+<span class="hljs-keyword">const</span> headers = {
+  <span class="hljs-string">'Accept'</span>:<span class="hljs-string">'application/json'</span>,
+  <span class="hljs-string">'x-api-key'</span>:<span class="hljs-string">'API_KEY'</span>
+};
+
+fetch(<span class="hljs-string">'https://api.shotstack.io/{version}/templates'</span>,
+{
+  <span class="hljs-attr">method</span>: <span class="hljs-string">'GET'</span>,
+
+  <span class="hljs-attr">headers</span>: headers
+})
+.then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">res</span>) </span>{
+    <span class="hljs-keyword">return</span> res.json();
+}).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">body</span>) </span>{
+    <span class="hljs-built_in">console</span>.log(body);
+});
+
+</code></pre>
+<pre class="highlight tab tab-php"><code> <span class="hljs-string">'application/json'</span>,
+    <span class="hljs-string">'x-api-key'</span> =&gt; <span class="hljs-string">'API_KEY'</span>,
+);
+
+$client = <span class="hljs-keyword">new</span> \GuzzleHttp\Client();
+
+<span class="hljs-comment">// Define array of request body.</span>
+$request_body = <span class="hljs-keyword">array</span>();
+
+<span class="hljs-keyword">try</span> {
+    $response = $client-&gt;request(<span class="hljs-string">'GET'</span>,<span class="hljs-string">'https://api.shotstack.io/{version}/templates'</span>, <span class="hljs-keyword">array</span>(
+        <span class="hljs-string">'headers'</span> =&gt; $headers,
+        <span class="hljs-string">'json'</span> =&gt; $request_body,
+       )
+    );
+    print_r($response-&gt;getBody()-&gt;getContents());
+ }
+ <span class="hljs-keyword">catch</span> (\GuzzleHttp\<span class="hljs-keyword">Exception</span>\BadResponseException $e) {
+    <span class="hljs-comment">// handle exception or api errors.</span>
+    print_r($e-&gt;getMessage());
+ }
+
+ <span class="hljs-comment">// ...</span>
+
+</code></pre>
+<pre class="highlight tab tab-ruby"><code><span class="hljs-keyword">require</span> <span class="hljs-string">'rest-client'</span>
+<span class="hljs-keyword">require</span> <span class="hljs-string">'json'</span>
+
+headers = {
+  <span class="hljs-string">'Accept'</span> =&gt; <span class="hljs-string">'application/json'</span>,
+  <span class="hljs-string">'x-api-key'</span> =&gt; <span class="hljs-string">'API_KEY'</span>
+}
+
+result = RestClient.get <span class="hljs-string">'https://api.shotstack.io/{version}/templates'</span>,
+  <span class="hljs-symbol">params:</span> {
+  }, <span class="hljs-symbol">headers:</span> headers
+
+p JSON.parse(result)
+
+</code></pre>
+<pre class="highlight tab tab-python"><code><span class="hljs-keyword">import</span> requests
+headers = {
+  <span class="hljs-string">'Accept'</span>: <span class="hljs-string">'application/json'</span>,
+  <span class="hljs-string">'x-api-key'</span>: <span class="hljs-string">'API_KEY'</span>
+}
+
+r = requests.get(<span class="hljs-string">'https://api.shotstack.io/{version}/templates'</span>, headers = headers)
+
+print(r.json())
+
+</code></pre>
+<pre class="highlight tab tab-java"><code>URL obj = <span class="hljs-keyword">new</span> URL(<span class="hljs-string">"https://api.shotstack.io/{version}/templates"</span>);
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod(<span class="hljs-string">"GET"</span>);
+<span class="hljs-keyword">int</span> responseCode = con.getResponseCode();
+BufferedReader in = <span class="hljs-keyword">new</span> BufferedReader(
+    <span class="hljs-keyword">new</span> InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = <span class="hljs-keyword">new</span> StringBuffer();
+<span class="hljs-keyword">while</span> ((inputLine = in.readLine()) != <span class="hljs-keyword">null</span>) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+</code></pre>
+<pre class="highlight tab tab-go"><code><span class="hljs-keyword">package</span> main
+
+<span class="hljs-keyword">import</span> (
+       <span class="hljs-string">"bytes"</span>
+       <span class="hljs-string">"net/http"</span>
+)
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
+
+    headers := <span class="hljs-keyword">map</span>[<span class="hljs-keyword">string</span>][]<span class="hljs-keyword">string</span>{
+        <span class="hljs-string">"Accept"</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">"application/json"</span>},
+        <span class="hljs-string">"x-api-key"</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">"API_KEY"</span>},
+    }
+
+    data := bytes.NewBuffer([]<span class="hljs-keyword">byte</span>{jsonReq})
+    req, err := http.NewRequest(<span class="hljs-string">"GET"</span>, <span class="hljs-string">"https://api.shotstack.io/{version}/templates"</span>, data)
+    req.Header = headers
+
+    client := &amp;http.Client{}
+    resp, err := client.Do(req)
+    <span class="hljs-comment">// ...</span>
+}
+
+</code></pre>
+<p><code>GET /templates</code></p>
+<p>Retrieve a list of templates stored against a users account. The API key is used to determine which templates
+are associated to the user.</p>
+<p><strong>Base URL:</strong> <a href="https://api.shotstack.io/%7Bversion%7D">https://api.shotstack.io/{version}</a></p>
+<blockquote>
+<p>Example responses</p>
+</blockquote>
+<blockquote>
+<p>200 Response</p>
+</blockquote>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">"success"</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">"message"</span>: <span class="hljs-string">"Created"</span>,
+  <span class="hljs-attr">"response"</span>: {
+    <span class="hljs-attr">"owner"</span>: <span class="hljs-string">"5ca6hu7s9k"</span>,
+    <span class="hljs-attr">"templates"</span>: [
+      {
+        <span class="hljs-attr">"id"</span>: <span class="hljs-string">"f5493c17-d01f-445c-bb49-535fae65f219"</span>,
+        <span class="hljs-attr">"name"</span>: <span class="hljs-string">"My template"</span>,
+        <span class="hljs-attr">"created"</span>: <span class="hljs-string">"2022-06-10T12:50:21.455Z"</span>,
+        <span class="hljs-attr">"updated"</span>: <span class="hljs-string">"2022-06-22T08:24:30.168Z"</span>
+      }
+    ]
+  }
+}
+</code></pre>
+<h3 id="list-templates-responses">Responses</h3>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>The list of templates stored against a users account</td>
+<td><a href="#schematemplatelistresponse">TemplateListResponse</a></td>
+</tr>
+</tbody>
+</table>
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+DeveloperKey
+</aside>
+<h2 id="retrieve-template">Retrieve Template</h2>
+<p><a id="opIdgetTemplate"></a></p>
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre class="highlight tab tab-shell"><code><span class="hljs-comment"># You can also use wget</span>
+curl -X GET https://api.shotstack.io/{version}/templates/{id} \
+  -H <span class="hljs-string">'Accept: application/json'</span> \
+  -H <span class="hljs-string">'x-api-key: API_KEY'</span>
+
+</code></pre>
+<pre class="highlight tab tab-http"><code><span class="hljs-keyword">GET</span> <span class="hljs-string">https://api.shotstack.io/{version}/templates/{id}</span> HTTP/1.1
+<span class="hljs-attribute">Host</span>: api.shotstack.io
+<span class="hljs-attribute">Accept</span>: application/json
+
+</code></pre>
+<pre class="highlight tab tab-javascript--nodejs"><code><span class="hljs-keyword">const</span> fetch = <span class="hljs-built_in">require</span>(<span class="hljs-string">'node-fetch'</span>);
+
+<span class="hljs-keyword">const</span> headers = {
+  <span class="hljs-string">'Accept'</span>:<span class="hljs-string">'application/json'</span>,
+  <span class="hljs-string">'x-api-key'</span>:<span class="hljs-string">'API_KEY'</span>
+};
+
+fetch(<span class="hljs-string">'https://api.shotstack.io/{version}/templates/{id}'</span>,
+{
+  <span class="hljs-attr">method</span>: <span class="hljs-string">'GET'</span>,
+
+  <span class="hljs-attr">headers</span>: headers
+})
+.then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">res</span>) </span>{
+    <span class="hljs-keyword">return</span> res.json();
+}).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">body</span>) </span>{
+    <span class="hljs-built_in">console</span>.log(body);
+});
+
+</code></pre>
+<pre class="highlight tab tab-php"><code> <span class="hljs-string">'application/json'</span>,
+    <span class="hljs-string">'x-api-key'</span> =&gt; <span class="hljs-string">'API_KEY'</span>,
+);
+
+$client = <span class="hljs-keyword">new</span> \GuzzleHttp\Client();
+
+<span class="hljs-comment">// Define array of request body.</span>
+$request_body = <span class="hljs-keyword">array</span>();
+
+<span class="hljs-keyword">try</span> {
+    $response = $client-&gt;request(<span class="hljs-string">'GET'</span>,<span class="hljs-string">'https://api.shotstack.io/{version}/templates/{id}'</span>, <span class="hljs-keyword">array</span>(
+        <span class="hljs-string">'headers'</span> =&gt; $headers,
+        <span class="hljs-string">'json'</span> =&gt; $request_body,
+       )
+    );
+    print_r($response-&gt;getBody()-&gt;getContents());
+ }
+ <span class="hljs-keyword">catch</span> (\GuzzleHttp\<span class="hljs-keyword">Exception</span>\BadResponseException $e) {
+    <span class="hljs-comment">// handle exception or api errors.</span>
+    print_r($e-&gt;getMessage());
+ }
+
+ <span class="hljs-comment">// ...</span>
+
+</code></pre>
+<pre class="highlight tab tab-ruby"><code><span class="hljs-keyword">require</span> <span class="hljs-string">'rest-client'</span>
+<span class="hljs-keyword">require</span> <span class="hljs-string">'json'</span>
+
+headers = {
+  <span class="hljs-string">'Accept'</span> =&gt; <span class="hljs-string">'application/json'</span>,
+  <span class="hljs-string">'x-api-key'</span> =&gt; <span class="hljs-string">'API_KEY'</span>
+}
+
+result = RestClient.get <span class="hljs-string">'https://api.shotstack.io/{version}/templates/{id}'</span>,
+  <span class="hljs-symbol">params:</span> {
+  }, <span class="hljs-symbol">headers:</span> headers
+
+p JSON.parse(result)
+
+</code></pre>
+<pre class="highlight tab tab-python"><code><span class="hljs-keyword">import</span> requests
+headers = {
+  <span class="hljs-string">'Accept'</span>: <span class="hljs-string">'application/json'</span>,
+  <span class="hljs-string">'x-api-key'</span>: <span class="hljs-string">'API_KEY'</span>
+}
+
+r = requests.get(<span class="hljs-string">'https://api.shotstack.io/{version}/templates/{id}'</span>, headers = headers)
+
+print(r.json())
+
+</code></pre>
+<pre class="highlight tab tab-java"><code>URL obj = <span class="hljs-keyword">new</span> URL(<span class="hljs-string">"https://api.shotstack.io/{version}/templates/{id}"</span>);
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod(<span class="hljs-string">"GET"</span>);
+<span class="hljs-keyword">int</span> responseCode = con.getResponseCode();
+BufferedReader in = <span class="hljs-keyword">new</span> BufferedReader(
+    <span class="hljs-keyword">new</span> InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = <span class="hljs-keyword">new</span> StringBuffer();
+<span class="hljs-keyword">while</span> ((inputLine = in.readLine()) != <span class="hljs-keyword">null</span>) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+</code></pre>
+<pre class="highlight tab tab-go"><code><span class="hljs-keyword">package</span> main
+
+<span class="hljs-keyword">import</span> (
+       <span class="hljs-string">"bytes"</span>
+       <span class="hljs-string">"net/http"</span>
+)
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
+
+    headers := <span class="hljs-keyword">map</span>[<span class="hljs-keyword">string</span>][]<span class="hljs-keyword">string</span>{
+        <span class="hljs-string">"Accept"</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">"application/json"</span>},
+        <span class="hljs-string">"x-api-key"</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">"API_KEY"</span>},
+    }
+
+    data := bytes.NewBuffer([]<span class="hljs-keyword">byte</span>{jsonReq})
+    req, err := http.NewRequest(<span class="hljs-string">"GET"</span>, <span class="hljs-string">"https://api.shotstack.io/{version}/templates/{id}"</span>, data)
+    req.Header = headers
+
+    client := &amp;http.Client{}
+    resp, err := client.Do(req)
+    <span class="hljs-comment">// ...</span>
+}
+
+</code></pre>
+<p><code>GET /templates/{id}</code></p>
+<p>Retrieve a template by template id.</p>
+<p><strong>Base URL:</strong> <a href="https://api.shotstack.io/%7Bversion%7D">https://api.shotstack.io/{version}</a></p>
+<h3 id="retrieve-template-parameters">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>In</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>path</td>
+<td>string</td>
+<td>true</td>
+<td>The id of the template in UUID format</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Example responses</p>
+</blockquote>
+<blockquote>
+<p>200 Response</p>
+</blockquote>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">"success"</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">"message"</span>: <span class="hljs-string">"OK"</span>,
+  <span class="hljs-attr">"response"</span>: {
+    <span class="hljs-attr">"id"</span>: <span class="hljs-string">"f5493c17-d01f-445c-bb49-535fae65f219"</span>,
+    <span class="hljs-attr">"name"</span>: <span class="hljs-string">"My template"</span>,
+    <span class="hljs-attr">"owner"</span>: <span class="hljs-string">"5ca6hu7s9k"</span>,
+    <span class="hljs-attr">"template"</span>: {
+      <span class="hljs-attr">"timeline"</span>: {
+        <span class="hljs-attr">"soundtrack"</span>: {
+          <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3"</span>,
+          <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"fadeInFadeOut"</span>
+        },
+        <span class="hljs-attr">"background"</span>: <span class="hljs-string">"#000000"</span>,
+        <span class="hljs-attr">"tracks"</span>: [
+          {
+            <span class="hljs-attr">"clips"</span>: [
+              {
+                <span class="hljs-attr">"asset"</span>: {
+                  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"title"</span>,
+                  <span class="hljs-attr">"text"</span>: <span class="hljs-string">"Hello World"</span>,
+                  <span class="hljs-attr">"style"</span>: <span class="hljs-string">"minimal"</span>
+                },
+                <span class="hljs-attr">"start"</span>: <span class="hljs-number">0</span>,
+                <span class="hljs-attr">"length"</span>: <span class="hljs-number">4</span>,
+                <span class="hljs-attr">"transition"</span>: {
+                  <span class="hljs-attr">"in"</span>: <span class="hljs-string">"fade"</span>,
+                  <span class="hljs-attr">"out"</span>: <span class="hljs-string">"fade"</span>
+                },
+                <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"slideRight"</span>
+              },
+              {
+                <span class="hljs-attr">"asset"</span>: {
+                  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"image"</span>,
+                  <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/my-image.jpg"</span>
+                },
+                <span class="hljs-attr">"start"</span>: <span class="hljs-number">3</span>,
+                <span class="hljs-attr">"length"</span>: <span class="hljs-number">4</span>,
+                <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"zoomIn"</span>,
+                <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"greyscale"</span>
+              }
+            ]
+          },
+          {
+            <span class="hljs-attr">"clips"</span>: [
+              {
+                <span class="hljs-attr">"asset"</span>: {
+                  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"video"</span>,
+                  <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/my-clip-1.mp4"</span>,
+                  <span class="hljs-attr">"trim"</span>: <span class="hljs-number">10.5</span>
+                },
+                <span class="hljs-attr">"start"</span>: <span class="hljs-number">7</span>,
+                <span class="hljs-attr">"length"</span>: <span class="hljs-number">4.5</span>
+              },
+              {
+                <span class="hljs-attr">"asset"</span>: {
+                  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"video"</span>,
+                  <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/my-clip-2.mp4"</span>,
+                  <span class="hljs-attr">"volume"</span>: <span class="hljs-number">0.5</span>
+                },
+                <span class="hljs-attr">"start"</span>: <span class="hljs-number">11.5</span>,
+                <span class="hljs-attr">"length"</span>: <span class="hljs-number">5</span>,
+                <span class="hljs-attr">"transition"</span>: {
+                  <span class="hljs-attr">"out"</span>: <span class="hljs-string">"wipeLeft"</span>
+                }
+              }
+            ]
+          }
+        ]
+      },
+      <span class="hljs-attr">"output"</span>: {
+        <span class="hljs-attr">"format"</span>: <span class="hljs-string">"mp4"</span>,
+        <span class="hljs-attr">"resolution"</span>: <span class="hljs-string">"sd"</span>
+      }
+    }
+  }
+}
+</code></pre>
+<h3 id="retrieve-template-responses">Responses</h3>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>The template details including the <a href="#tocs_edit">Edit</a></td>
+<td><a href="#schematemplatedataresponse">TemplateDataResponse</a></td>
+</tr>
+</tbody>
+</table>
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+DeveloperKey
+</aside>
+<h2 id="update-template">Update Template</h2>
+<p><a id="opIdputTemplate"></a></p>
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre class="highlight tab tab-shell"><code><span class="hljs-comment"># You can also use wget</span>
+curl -X PUT https://api.shotstack.io/{version}/templates/{id} \
+  -H <span class="hljs-string">'Content-Type: application/json'</span> \
+  -H <span class="hljs-string">'Accept: application/json'</span> \
+  -H <span class="hljs-string">'x-api-key: API_KEY'</span>
+
+</code></pre>
+<pre class="highlight tab tab-http"><code><span class="hljs-keyword">PUT</span> <span class="hljs-string">https://api.shotstack.io/{version}/templates/{id}</span> HTTP/1.1
+<span class="hljs-attribute">Host</span>: api.shotstack.io
+<span class="hljs-attribute">Content-Type</span>: application/json
+<span class="hljs-attribute">Accept</span>: application/json
+
+</code></pre>
+<pre class="highlight tab tab-javascript--nodejs"><code><span class="hljs-keyword">const</span> fetch = <span class="hljs-built_in">require</span>(<span class="hljs-string">'node-fetch'</span>);
+<span class="hljs-keyword">const</span> inputBody = {
+  <span class="hljs-string">"name"</span>: <span class="hljs-string">"My template"</span>,
+  <span class="hljs-string">"template"</span>: {
+    <span class="hljs-string">"timeline"</span>: {
+      <span class="hljs-string">"soundtrack"</span>: {
+        <span class="hljs-string">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3"</span>,
+        <span class="hljs-string">"effect"</span>: <span class="hljs-string">"fadeIn"</span>,
+        <span class="hljs-string">"volume"</span>: <span class="hljs-number">1</span>
+      },
+      <span class="hljs-string">"background"</span>: <span class="hljs-string">"#000000"</span>,
+      <span class="hljs-string">"fonts"</span>: [
+        {
+          <span class="hljs-string">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf"</span>
+        }
+      ],
+      <span class="hljs-string">"tracks"</span>: [
+        {
+          <span class="hljs-string">"clips"</span>: [
+            {
+              <span class="hljs-string">"asset"</span>: {
+                <span class="hljs-string">"type"</span>: <span class="hljs-string">"video"</span>,
+                <span class="hljs-string">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4"</span>,
+                <span class="hljs-string">"trim"</span>: <span class="hljs-number">2</span>,
+                <span class="hljs-string">"volume"</span>: <span class="hljs-number">1</span>,
+                <span class="hljs-string">"crop"</span>: {
+                  <span class="hljs-string">"top"</span>: <span class="hljs-number">0.15</span>,
+                  <span class="hljs-string">"bottom"</span>: <span class="hljs-number">0.15</span>,
+                  <span class="hljs-string">"left"</span>: <span class="hljs-number">0</span>,
+                  <span class="hljs-string">"right"</span>: <span class="hljs-number">0</span>
+                }
+              },
+              <span class="hljs-string">"start"</span>: <span class="hljs-number">2</span>,
+              <span class="hljs-string">"length"</span>: <span class="hljs-number">5</span>,
+              <span class="hljs-string">"fit"</span>: <span class="hljs-string">"crop"</span>,
+              <span class="hljs-string">"scale"</span>: <span class="hljs-number">0</span>,
+              <span class="hljs-string">"position"</span>: <span class="hljs-string">"center"</span>,
+              <span class="hljs-string">"offset"</span>: {
+                <span class="hljs-string">"x"</span>: <span class="hljs-number">0.1</span>,
+                <span class="hljs-string">"y"</span>: <span class="hljs-number">-0.2</span>
+              },
+              <span class="hljs-string">"transition"</span>: {
+                <span class="hljs-string">"in"</span>: <span class="hljs-string">"fade"</span>,
+                <span class="hljs-string">"out"</span>: <span class="hljs-string">"fade"</span>
+              },
+              <span class="hljs-string">"effect"</span>: <span class="hljs-string">"zoomIn"</span>,
+              <span class="hljs-string">"filter"</span>: <span class="hljs-string">"greyscale"</span>,
+              <span class="hljs-string">"opacity"</span>: <span class="hljs-number">1</span>,
+              <span class="hljs-string">"transform"</span>: {
+                <span class="hljs-string">"rotate"</span>: {
+                  <span class="hljs-string">"angle"</span>: <span class="hljs-number">45</span>
+                },
+                <span class="hljs-string">"skew"</span>: {
+                  <span class="hljs-string">"x"</span>: <span class="hljs-number">0.5</span>,
+                  <span class="hljs-string">"y"</span>: <span class="hljs-number">0.5</span>
+                },
+                <span class="hljs-string">"flip"</span>: {
+                  <span class="hljs-string">"horizontal"</span>: <span class="hljs-literal">true</span>,
+                  <span class="hljs-string">"vertical"</span>: <span class="hljs-literal">true</span>
+                }
+              }
+            }
+          ]
+        }
+      ],
+      <span class="hljs-string">"cache"</span>: <span class="hljs-literal">true</span>
+    },
+    <span class="hljs-string">"output"</span>: {
+      <span class="hljs-string">"format"</span>: <span class="hljs-string">"mp4"</span>,
+      <span class="hljs-string">"resolution"</span>: <span class="hljs-string">"sd"</span>,
+      <span class="hljs-string">"aspectRatio"</span>: <span class="hljs-number">969</span>,
+      <span class="hljs-string">"size"</span>: {
+        <span class="hljs-string">"width"</span>: <span class="hljs-number">1200</span>,
+        <span class="hljs-string">"height"</span>: <span class="hljs-number">800</span>
+      },
+      <span class="hljs-string">"fps"</span>: <span class="hljs-number">25</span>,
+      <span class="hljs-string">"scaleTo"</span>: <span class="hljs-string">"preview"</span>,
+      <span class="hljs-string">"quality"</span>: <span class="hljs-string">"medium"</span>,
+      <span class="hljs-string">"repeat"</span>: <span class="hljs-literal">true</span>,
+      <span class="hljs-string">"range"</span>: {
+        <span class="hljs-string">"start"</span>: <span class="hljs-number">3</span>,
+        <span class="hljs-string">"length"</span>: <span class="hljs-number">6</span>
+      },
+      <span class="hljs-string">"poster"</span>: {
+        <span class="hljs-string">"capture"</span>: <span class="hljs-number">1</span>
+      },
+      <span class="hljs-string">"thumbnail"</span>: {
+        <span class="hljs-string">"capture"</span>: <span class="hljs-number">1</span>,
+        <span class="hljs-string">"scale"</span>: <span class="hljs-number">0.3</span>
+      },
+      <span class="hljs-string">"destinations"</span>: [
+        {
+          <span class="hljs-string">"provider"</span>: <span class="hljs-string">"shotstack"</span>,
+          <span class="hljs-string">"exclude"</span>: <span class="hljs-literal">false</span>
+        }
+      ]
+    },
+    <span class="hljs-string">"merge"</span>: [
+      {
+        <span class="hljs-string">"find"</span>: <span class="hljs-string">"NAME"</span>,
+        <span class="hljs-string">"replace"</span>: <span class="hljs-string">"Jane"</span>
+      }
+    ],
+    <span class="hljs-string">"callback"</span>: <span class="hljs-string">"https://my-server.com/callback.php"</span>,
+    <span class="hljs-string">"disk"</span>: <span class="hljs-string">"local"</span>
+  }
+};
+<span class="hljs-keyword">const</span> headers = {
+  <span class="hljs-string">'Content-Type'</span>:<span class="hljs-string">'application/json'</span>,
+  <span class="hljs-string">'Accept'</span>:<span class="hljs-string">'application/json'</span>,
+  <span class="hljs-string">'x-api-key'</span>:<span class="hljs-string">'API_KEY'</span>
+};
+
+fetch(<span class="hljs-string">'https://api.shotstack.io/{version}/templates/{id}'</span>,
+{
+  <span class="hljs-attr">method</span>: <span class="hljs-string">'PUT'</span>,
+  <span class="hljs-attr">body</span>: <span class="hljs-built_in">JSON</span>.stringify(inputBody),
+  <span class="hljs-attr">headers</span>: headers
+})
+.then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">res</span>) </span>{
+    <span class="hljs-keyword">return</span> res.json();
+}).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">body</span>) </span>{
+    <span class="hljs-built_in">console</span>.log(body);
+});
+
+</code></pre>
+<pre class="highlight tab tab-php"><code> <span class="hljs-string">'application/json'</span>,
+    <span class="hljs-string">'Accept'</span> =&gt; <span class="hljs-string">'application/json'</span>,
+    <span class="hljs-string">'x-api-key'</span> =&gt; <span class="hljs-string">'API_KEY'</span>,
+);
+
+$client = <span class="hljs-keyword">new</span> \GuzzleHttp\Client();
+
+<span class="hljs-comment">// Define array of request body.</span>
+$request_body = <span class="hljs-keyword">array</span>();
+
+<span class="hljs-keyword">try</span> {
+    $response = $client-&gt;request(<span class="hljs-string">'PUT'</span>,<span class="hljs-string">'https://api.shotstack.io/{version}/templates/{id}'</span>, <span class="hljs-keyword">array</span>(
+        <span class="hljs-string">'headers'</span> =&gt; $headers,
+        <span class="hljs-string">'json'</span> =&gt; $request_body,
+       )
+    );
+    print_r($response-&gt;getBody()-&gt;getContents());
+ }
+ <span class="hljs-keyword">catch</span> (\GuzzleHttp\<span class="hljs-keyword">Exception</span>\BadResponseException $e) {
+    <span class="hljs-comment">// handle exception or api errors.</span>
+    print_r($e-&gt;getMessage());
+ }
+
+ <span class="hljs-comment">// ...</span>
+
+</code></pre>
+<pre class="highlight tab tab-ruby"><code><span class="hljs-keyword">require</span> <span class="hljs-string">'rest-client'</span>
+<span class="hljs-keyword">require</span> <span class="hljs-string">'json'</span>
+
+headers = {
+  <span class="hljs-string">'Content-Type'</span> =&gt; <span class="hljs-string">'application/json'</span>,
+  <span class="hljs-string">'Accept'</span> =&gt; <span class="hljs-string">'application/json'</span>,
+  <span class="hljs-string">'x-api-key'</span> =&gt; <span class="hljs-string">'API_KEY'</span>
+}
+
+result = RestClient.put <span class="hljs-string">'https://api.shotstack.io/{version}/templates/{id}'</span>,
+  <span class="hljs-symbol">params:</span> {
+  }, <span class="hljs-symbol">headers:</span> headers
+
+p JSON.parse(result)
+
+</code></pre>
+<pre class="highlight tab tab-python"><code><span class="hljs-keyword">import</span> requests
+headers = {
+  <span class="hljs-string">'Content-Type'</span>: <span class="hljs-string">'application/json'</span>,
+  <span class="hljs-string">'Accept'</span>: <span class="hljs-string">'application/json'</span>,
+  <span class="hljs-string">'x-api-key'</span>: <span class="hljs-string">'API_KEY'</span>
+}
+
+r = requests.put(<span class="hljs-string">'https://api.shotstack.io/{version}/templates/{id}'</span>, headers = headers)
+
+print(r.json())
+
+</code></pre>
+<pre class="highlight tab tab-java"><code>URL obj = <span class="hljs-keyword">new</span> URL(<span class="hljs-string">"https://api.shotstack.io/{version}/templates/{id}"</span>);
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod(<span class="hljs-string">"PUT"</span>);
+<span class="hljs-keyword">int</span> responseCode = con.getResponseCode();
+BufferedReader in = <span class="hljs-keyword">new</span> BufferedReader(
+    <span class="hljs-keyword">new</span> InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = <span class="hljs-keyword">new</span> StringBuffer();
+<span class="hljs-keyword">while</span> ((inputLine = in.readLine()) != <span class="hljs-keyword">null</span>) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+</code></pre>
+<pre class="highlight tab tab-go"><code><span class="hljs-keyword">package</span> main
+
+<span class="hljs-keyword">import</span> (
+       <span class="hljs-string">"bytes"</span>
+       <span class="hljs-string">"net/http"</span>
+)
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
+
+    headers := <span class="hljs-keyword">map</span>[<span class="hljs-keyword">string</span>][]<span class="hljs-keyword">string</span>{
+        <span class="hljs-string">"Content-Type"</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">"application/json"</span>},
+        <span class="hljs-string">"Accept"</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">"application/json"</span>},
+        <span class="hljs-string">"x-api-key"</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">"API_KEY"</span>},
+    }
+
+    data := bytes.NewBuffer([]<span class="hljs-keyword">byte</span>{jsonReq})
+    req, err := http.NewRequest(<span class="hljs-string">"PUT"</span>, <span class="hljs-string">"https://api.shotstack.io/{version}/templates/{id}"</span>, data)
+    req.Header = headers
+
+    client := &amp;http.Client{}
+    resp, err := client.Do(req)
+    <span class="hljs-comment">// ...</span>
+}
+
+</code></pre>
+<p><code>PUT /templates/{id}</code></p>
+<p>Update an existing template by template id.</p>
+<p><strong>Base URL:</strong> <a href="https://api.shotstack.io/%7Bversion%7D">https://api.shotstack.io/{version}</a></p>
+<blockquote>
+<p>Body parameter</p>
+</blockquote>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"My template"</span>,
+  <span class="hljs-attr">"template"</span>: {
+    <span class="hljs-attr">"timeline"</span>: {
+      <span class="hljs-attr">"soundtrack"</span>: {
+        <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3"</span>,
+        <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"fadeIn"</span>,
+        <span class="hljs-attr">"volume"</span>: <span class="hljs-number">1</span>
+      },
+      <span class="hljs-attr">"background"</span>: <span class="hljs-string">"#000000"</span>,
+      <span class="hljs-attr">"fonts"</span>: [
+        {
+          <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf"</span>
+        }
+      ],
+      <span class="hljs-attr">"tracks"</span>: [
+        {
+          <span class="hljs-attr">"clips"</span>: [
+            {
+              <span class="hljs-attr">"asset"</span>: {
+                <span class="hljs-attr">"type"</span>: <span class="hljs-string">"video"</span>,
+                <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4"</span>,
+                <span class="hljs-attr">"trim"</span>: <span class="hljs-number">2</span>,
+                <span class="hljs-attr">"volume"</span>: <span class="hljs-number">1</span>,
+                <span class="hljs-attr">"crop"</span>: {
+                  <span class="hljs-attr">"top"</span>: <span class="hljs-number">0.15</span>,
+                  <span class="hljs-attr">"bottom"</span>: <span class="hljs-number">0.15</span>,
+                  <span class="hljs-attr">"left"</span>: <span class="hljs-number">0</span>,
+                  <span class="hljs-attr">"right"</span>: <span class="hljs-number">0</span>
+                }
+              },
+              <span class="hljs-attr">"start"</span>: <span class="hljs-number">2</span>,
+              <span class="hljs-attr">"length"</span>: <span class="hljs-number">5</span>,
+              <span class="hljs-attr">"fit"</span>: <span class="hljs-string">"crop"</span>,
+              <span class="hljs-attr">"scale"</span>: <span class="hljs-number">0</span>,
+              <span class="hljs-attr">"position"</span>: <span class="hljs-string">"center"</span>,
+              <span class="hljs-attr">"offset"</span>: {
+                <span class="hljs-attr">"x"</span>: <span class="hljs-number">0.1</span>,
+                <span class="hljs-attr">"y"</span>: <span class="hljs-number">-0.2</span>
+              },
+              <span class="hljs-attr">"transition"</span>: {
+                <span class="hljs-attr">"in"</span>: <span class="hljs-string">"fade"</span>,
+                <span class="hljs-attr">"out"</span>: <span class="hljs-string">"fade"</span>
+              },
+              <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"zoomIn"</span>,
+              <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"greyscale"</span>,
+              <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">1</span>,
+              <span class="hljs-attr">"transform"</span>: {
+                <span class="hljs-attr">"rotate"</span>: {
+                  <span class="hljs-attr">"angle"</span>: <span class="hljs-number">45</span>
+                },
+                <span class="hljs-attr">"skew"</span>: {
+                  <span class="hljs-attr">"x"</span>: <span class="hljs-number">0.5</span>,
+                  <span class="hljs-attr">"y"</span>: <span class="hljs-number">0.5</span>
+                },
+                <span class="hljs-attr">"flip"</span>: {
+                  <span class="hljs-attr">"horizontal"</span>: <span class="hljs-literal">true</span>,
+                  <span class="hljs-attr">"vertical"</span>: <span class="hljs-literal">true</span>
+                }
+              }
+            }
+          ]
+        }
+      ],
+      <span class="hljs-attr">"cache"</span>: <span class="hljs-literal">true</span>
+    },
+    <span class="hljs-attr">"output"</span>: {
+      <span class="hljs-attr">"format"</span>: <span class="hljs-string">"mp4"</span>,
+      <span class="hljs-attr">"resolution"</span>: <span class="hljs-string">"sd"</span>,
+      <span class="hljs-attr">"aspectRatio"</span>: <span class="hljs-number">969</span>,
+      <span class="hljs-attr">"size"</span>: {
+        <span class="hljs-attr">"width"</span>: <span class="hljs-number">1200</span>,
+        <span class="hljs-attr">"height"</span>: <span class="hljs-number">800</span>
+      },
+      <span class="hljs-attr">"fps"</span>: <span class="hljs-number">25</span>,
+      <span class="hljs-attr">"scaleTo"</span>: <span class="hljs-string">"preview"</span>,
+      <span class="hljs-attr">"quality"</span>: <span class="hljs-string">"medium"</span>,
+      <span class="hljs-attr">"repeat"</span>: <span class="hljs-literal">true</span>,
+      <span class="hljs-attr">"range"</span>: {
+        <span class="hljs-attr">"start"</span>: <span class="hljs-number">3</span>,
+        <span class="hljs-attr">"length"</span>: <span class="hljs-number">6</span>
+      },
+      <span class="hljs-attr">"poster"</span>: {
+        <span class="hljs-attr">"capture"</span>: <span class="hljs-number">1</span>
+      },
+      <span class="hljs-attr">"thumbnail"</span>: {
+        <span class="hljs-attr">"capture"</span>: <span class="hljs-number">1</span>,
+        <span class="hljs-attr">"scale"</span>: <span class="hljs-number">0.3</span>
+      },
+      <span class="hljs-attr">"destinations"</span>: [
+        {
+          <span class="hljs-attr">"provider"</span>: <span class="hljs-string">"shotstack"</span>,
+          <span class="hljs-attr">"exclude"</span>: <span class="hljs-literal">false</span>
+        }
+      ]
+    },
+    <span class="hljs-attr">"merge"</span>: [
+      {
+        <span class="hljs-attr">"find"</span>: <span class="hljs-string">"NAME"</span>,
+        <span class="hljs-attr">"replace"</span>: <span class="hljs-string">"Jane"</span>
+      }
+    ],
+    <span class="hljs-attr">"callback"</span>: <span class="hljs-string">"https://my-server.com/callback.php"</span>,
+    <span class="hljs-attr">"disk"</span>: <span class="hljs-string">"local"</span>
+  }
+}
+</code></pre>
+<h3 id="update-template-parameters">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>In</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>body</td>
+<td>body</td>
+<td><a href="#schematemplate">Template</a></td>
+<td>true</td>
+<td>Update an individual templates name and <a href="#tocs_edit">Edit</a>. Both template name and template must be provided. If the template parameter is omitted a blank template will be saved.</td>
+</tr>
+<tr>
+<td>id</td>
+<td>path</td>
+<td>string</td>
+<td>true</td>
+<td>The id of the template in UUID format</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Example responses</p>
+</blockquote>
+<blockquote>
+<p>200 Response</p>
+</blockquote>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">"success"</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">"message"</span>: <span class="hljs-string">"OK"</span>,
+  <span class="hljs-attr">"response"</span>: {
+    <span class="hljs-attr">"message"</span>: <span class="hljs-string">"Template Successfully Updated"</span>,
+    <span class="hljs-attr">"id"</span>: <span class="hljs-string">"f5493c17-d01f-445c-bb49-535fae65f219"</span>
+  }
+}
+</code></pre>
+<h3 id="update-template-responses">Responses</h3>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>Update a templates name and <a href="#tocs_edit">Edit</a></td>
+<td><a href="#schematemplateresponse">TemplateResponse</a></td>
+</tr>
+</tbody>
+</table>
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+DeveloperKey
+</aside>
+<h2 id="delete-template">Delete Template</h2>
+<p><a id="opIddeleteTemplate"></a></p>
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre class="highlight tab tab-shell"><code><span class="hljs-comment"># You can also use wget</span>
+curl -X DELETE https://api.shotstack.io/{version}/templates/{id} \
+  -H <span class="hljs-string">'x-api-key: API_KEY'</span>
+
+</code></pre>
+<pre class="highlight tab tab-http"><code><span class="hljs-keyword">DELETE</span> <span class="hljs-string">https://api.shotstack.io/{version}/templates/{id}</span> HTTP/1.1
+<span class="hljs-attribute">Host</span>: api.shotstack.io
+
+</code></pre>
+<pre class="highlight tab tab-javascript--nodejs"><code><span class="hljs-keyword">const</span> fetch = <span class="hljs-built_in">require</span>(<span class="hljs-string">'node-fetch'</span>);
+
+<span class="hljs-keyword">const</span> headers = {
+  <span class="hljs-string">'x-api-key'</span>:<span class="hljs-string">'API_KEY'</span>
+};
+
+fetch(<span class="hljs-string">'https://api.shotstack.io/{version}/templates/{id}'</span>,
+{
+  <span class="hljs-attr">method</span>: <span class="hljs-string">'DELETE'</span>,
+
+  <span class="hljs-attr">headers</span>: headers
+})
+.then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">res</span>) </span>{
+    <span class="hljs-keyword">return</span> res.json();
+}).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">body</span>) </span>{
+    <span class="hljs-built_in">console</span>.log(body);
+});
+
+</code></pre>
+<pre class="highlight tab tab-php"><code> <span class="hljs-string">'API_KEY'</span>,
+);
+
+$client = <span class="hljs-keyword">new</span> \GuzzleHttp\Client();
+
+<span class="hljs-comment">// Define array of request body.</span>
+$request_body = <span class="hljs-keyword">array</span>();
+
+<span class="hljs-keyword">try</span> {
+    $response = $client-&gt;request(<span class="hljs-string">'DELETE'</span>,<span class="hljs-string">'https://api.shotstack.io/{version}/templates/{id}'</span>, <span class="hljs-keyword">array</span>(
+        <span class="hljs-string">'headers'</span> =&gt; $headers,
+        <span class="hljs-string">'json'</span> =&gt; $request_body,
+       )
+    );
+    print_r($response-&gt;getBody()-&gt;getContents());
+ }
+ <span class="hljs-keyword">catch</span> (\GuzzleHttp\<span class="hljs-keyword">Exception</span>\BadResponseException $e) {
+    <span class="hljs-comment">// handle exception or api errors.</span>
+    print_r($e-&gt;getMessage());
+ }
+
+ <span class="hljs-comment">// ...</span>
+
+</code></pre>
+<pre class="highlight tab tab-ruby"><code><span class="hljs-keyword">require</span> <span class="hljs-string">'rest-client'</span>
+<span class="hljs-keyword">require</span> <span class="hljs-string">'json'</span>
+
+headers = {
+  <span class="hljs-string">'x-api-key'</span> =&gt; <span class="hljs-string">'API_KEY'</span>
+}
+
+result = RestClient.delete <span class="hljs-string">'https://api.shotstack.io/{version}/templates/{id}'</span>,
+  <span class="hljs-symbol">params:</span> {
+  }, <span class="hljs-symbol">headers:</span> headers
+
+p JSON.parse(result)
+
+</code></pre>
+<pre class="highlight tab tab-python"><code><span class="hljs-keyword">import</span> requests
+headers = {
+  <span class="hljs-string">'x-api-key'</span>: <span class="hljs-string">'API_KEY'</span>
+}
+
+r = requests.delete(<span class="hljs-string">'https://api.shotstack.io/{version}/templates/{id}'</span>, headers = headers)
+
+print(r.json())
+
+</code></pre>
+<pre class="highlight tab tab-java"><code>URL obj = <span class="hljs-keyword">new</span> URL(<span class="hljs-string">"https://api.shotstack.io/{version}/templates/{id}"</span>);
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod(<span class="hljs-string">"DELETE"</span>);
+<span class="hljs-keyword">int</span> responseCode = con.getResponseCode();
+BufferedReader in = <span class="hljs-keyword">new</span> BufferedReader(
+    <span class="hljs-keyword">new</span> InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = <span class="hljs-keyword">new</span> StringBuffer();
+<span class="hljs-keyword">while</span> ((inputLine = in.readLine()) != <span class="hljs-keyword">null</span>) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+</code></pre>
+<pre class="highlight tab tab-go"><code><span class="hljs-keyword">package</span> main
+
+<span class="hljs-keyword">import</span> (
+       <span class="hljs-string">"bytes"</span>
+       <span class="hljs-string">"net/http"</span>
+)
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
+
+    headers := <span class="hljs-keyword">map</span>[<span class="hljs-keyword">string</span>][]<span class="hljs-keyword">string</span>{
+        <span class="hljs-string">"x-api-key"</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">"API_KEY"</span>},
+    }
+
+    data := bytes.NewBuffer([]<span class="hljs-keyword">byte</span>{jsonReq})
+    req, err := http.NewRequest(<span class="hljs-string">"DELETE"</span>, <span class="hljs-string">"https://api.shotstack.io/{version}/templates/{id}"</span>, data)
+    req.Header = headers
+
+    client := &amp;http.Client{}
+    resp, err := client.Do(req)
+    <span class="hljs-comment">// ...</span>
+}
+
+</code></pre>
+<p><code>DELETE /templates/{id}</code></p>
+<p>Delete a template by its template id.</p>
+<p><strong>Base URL:</strong> <a href="https://api.shotstack.io/%7Bversion%7D">https://api.shotstack.io/{version}</a></p>
+<h3 id="delete-template-parameters">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>In</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>path</td>
+<td>string</td>
+<td>true</td>
+<td>The id of the template in UUID format</td>
+</tr>
+</tbody>
+</table>
+<h3 id="delete-template-responses">Responses</h3>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>204</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.5">No Content</a></td>
+<td>An empty response signifying the template has been deleted</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+DeveloperKey
+</aside>
+<h2 id="render-template">Render Template</h2>
+<p><a id="opIdpostTemplateRender"></a></p>
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre class="highlight tab tab-shell"><code><span class="hljs-comment"># You can also use wget</span>
+curl -X POST https://api.shotstack.io/{version}/templates/render \
+  -H <span class="hljs-string">'Content-Type: application/json'</span> \
+  -H <span class="hljs-string">'Accept: application/json'</span> \
+  -H <span class="hljs-string">'x-api-key: API_KEY'</span>
+
+</code></pre>
+<pre class="highlight tab tab-http"><code><span class="hljs-keyword">POST</span> <span class="hljs-string">https://api.shotstack.io/{version}/templates/render</span> HTTP/1.1
+<span class="hljs-attribute">Host</span>: api.shotstack.io
+<span class="hljs-attribute">Content-Type</span>: application/json
+<span class="hljs-attribute">Accept</span>: application/json
+
+</code></pre>
+<pre class="highlight tab tab-javascript--nodejs"><code><span class="hljs-keyword">const</span> fetch = <span class="hljs-built_in">require</span>(<span class="hljs-string">'node-fetch'</span>);
+<span class="hljs-keyword">const</span> inputBody = {
+  <span class="hljs-string">"id"</span>: <span class="hljs-string">"f5493c17-d01f-445c-bb49-535fae65f219"</span>,
+  <span class="hljs-string">"merge"</span>: [
+    {
+      <span class="hljs-string">"find"</span>: <span class="hljs-string">"NAME"</span>,
+      <span class="hljs-string">"replace"</span>: <span class="hljs-string">"Jane"</span>
+    }
+  ]
+};
+<span class="hljs-keyword">const</span> headers = {
+  <span class="hljs-string">'Content-Type'</span>:<span class="hljs-string">'application/json'</span>,
+  <span class="hljs-string">'Accept'</span>:<span class="hljs-string">'application/json'</span>,
+  <span class="hljs-string">'x-api-key'</span>:<span class="hljs-string">'API_KEY'</span>
+};
+
+fetch(<span class="hljs-string">'https://api.shotstack.io/{version}/templates/render'</span>,
+{
+  <span class="hljs-attr">method</span>: <span class="hljs-string">'POST'</span>,
+  <span class="hljs-attr">body</span>: <span class="hljs-built_in">JSON</span>.stringify(inputBody),
+  <span class="hljs-attr">headers</span>: headers
+})
+.then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">res</span>) </span>{
+    <span class="hljs-keyword">return</span> res.json();
+}).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">body</span>) </span>{
+    <span class="hljs-built_in">console</span>.log(body);
+});
+
+</code></pre>
+<pre class="highlight tab tab-php"><code> <span class="hljs-string">'application/json'</span>,
+    <span class="hljs-string">'Accept'</span> =&gt; <span class="hljs-string">'application/json'</span>,
+    <span class="hljs-string">'x-api-key'</span> =&gt; <span class="hljs-string">'API_KEY'</span>,
+);
+
+$client = <span class="hljs-keyword">new</span> \GuzzleHttp\Client();
+
+<span class="hljs-comment">// Define array of request body.</span>
+$request_body = <span class="hljs-keyword">array</span>();
+
+<span class="hljs-keyword">try</span> {
+    $response = $client-&gt;request(<span class="hljs-string">'POST'</span>,<span class="hljs-string">'https://api.shotstack.io/{version}/templates/render'</span>, <span class="hljs-keyword">array</span>(
+        <span class="hljs-string">'headers'</span> =&gt; $headers,
+        <span class="hljs-string">'json'</span> =&gt; $request_body,
+       )
+    );
+    print_r($response-&gt;getBody()-&gt;getContents());
+ }
+ <span class="hljs-keyword">catch</span> (\GuzzleHttp\<span class="hljs-keyword">Exception</span>\BadResponseException $e) {
+    <span class="hljs-comment">// handle exception or api errors.</span>
+    print_r($e-&gt;getMessage());
+ }
+
+ <span class="hljs-comment">// ...</span>
+
+</code></pre>
+<pre class="highlight tab tab-ruby"><code><span class="hljs-keyword">require</span> <span class="hljs-string">'rest-client'</span>
+<span class="hljs-keyword">require</span> <span class="hljs-string">'json'</span>
+
+headers = {
+  <span class="hljs-string">'Content-Type'</span> =&gt; <span class="hljs-string">'application/json'</span>,
+  <span class="hljs-string">'Accept'</span> =&gt; <span class="hljs-string">'application/json'</span>,
+  <span class="hljs-string">'x-api-key'</span> =&gt; <span class="hljs-string">'API_KEY'</span>
+}
+
+result = RestClient.post <span class="hljs-string">'https://api.shotstack.io/{version}/templates/render'</span>,
+  <span class="hljs-symbol">params:</span> {
+  }, <span class="hljs-symbol">headers:</span> headers
+
+p JSON.parse(result)
+
+</code></pre>
+<pre class="highlight tab tab-python"><code><span class="hljs-keyword">import</span> requests
+headers = {
+  <span class="hljs-string">'Content-Type'</span>: <span class="hljs-string">'application/json'</span>,
+  <span class="hljs-string">'Accept'</span>: <span class="hljs-string">'application/json'</span>,
+  <span class="hljs-string">'x-api-key'</span>: <span class="hljs-string">'API_KEY'</span>
+}
+
+r = requests.post(<span class="hljs-string">'https://api.shotstack.io/{version}/templates/render'</span>, headers = headers)
+
+print(r.json())
+
+</code></pre>
+<pre class="highlight tab tab-java"><code>URL obj = <span class="hljs-keyword">new</span> URL(<span class="hljs-string">"https://api.shotstack.io/{version}/templates/render"</span>);
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod(<span class="hljs-string">"POST"</span>);
+<span class="hljs-keyword">int</span> responseCode = con.getResponseCode();
+BufferedReader in = <span class="hljs-keyword">new</span> BufferedReader(
+    <span class="hljs-keyword">new</span> InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = <span class="hljs-keyword">new</span> StringBuffer();
+<span class="hljs-keyword">while</span> ((inputLine = in.readLine()) != <span class="hljs-keyword">null</span>) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+</code></pre>
+<pre class="highlight tab tab-go"><code><span class="hljs-keyword">package</span> main
+
+<span class="hljs-keyword">import</span> (
+       <span class="hljs-string">"bytes"</span>
+       <span class="hljs-string">"net/http"</span>
+)
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
+
+    headers := <span class="hljs-keyword">map</span>[<span class="hljs-keyword">string</span>][]<span class="hljs-keyword">string</span>{
+        <span class="hljs-string">"Content-Type"</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">"application/json"</span>},
+        <span class="hljs-string">"Accept"</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">"application/json"</span>},
+        <span class="hljs-string">"x-api-key"</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">"API_KEY"</span>},
+    }
+
+    data := bytes.NewBuffer([]<span class="hljs-keyword">byte</span>{jsonReq})
+    req, err := http.NewRequest(<span class="hljs-string">"POST"</span>, <span class="hljs-string">"https://api.shotstack.io/{version}/templates/render"</span>, data)
+    req.Header = headers
+
+    client := &amp;http.Client{}
+    resp, err := client.Do(req)
+    <span class="hljs-comment">// ...</span>
+}
+
+</code></pre>
+<p><code>POST /templates/render</code></p>
+<p>Render an asset from a template id and optional merge fields. Merge fields can be used to replace placeholder
+variables within the <a href="#tocs_edit">Edit</a>.</p>
+<p><strong>Base URL:</strong> <a href="https://api.shotstack.io/%7Bversion%7D">https://api.shotstack.io/{version}</a></p>
+<blockquote>
+<p>Body parameter</p>
+</blockquote>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">"id"</span>: <span class="hljs-string">"f5493c17-d01f-445c-bb49-535fae65f219"</span>,
+  <span class="hljs-attr">"merge"</span>: [
+    {
+      <span class="hljs-attr">"find"</span>: <span class="hljs-string">"NAME"</span>,
+      <span class="hljs-attr">"replace"</span>: <span class="hljs-string">"Jane"</span>
+    }
+  ]
+}
+</code></pre>
+<h3 id="render-template-parameters">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>In</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>body</td>
+<td>body</td>
+<td><a href="#schematemplaterender">TemplateRender</a></td>
+<td>true</td>
+<td>Render a template by template id.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Example responses</p>
+</blockquote>
+<blockquote>
+<p>201 Response</p>
+</blockquote>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">"success"</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">"message"</span>: <span class="hljs-string">"Created"</span>,
+  <span class="hljs-attr">"response"</span>: {
+    <span class="hljs-attr">"message"</span>: <span class="hljs-string">"Render Successfully Queued"</span>,
+    <span class="hljs-attr">"id"</span>: <span class="hljs-string">"2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7"</span>
+  }
+}
+</code></pre>
+<h3 id="render-template-responses">Responses</h3>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>201</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.2">Created</a></td>
+<td>The queued status including the render id. Check the status of the render using the id and the  <a href="#get-render-status">render status</a> endpoint.</td>
+<td><a href="#schemaqueuedresponse">QueuedResponse</a></td>
+</tr>
+</tbody>
+</table>
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+DeveloperKey
+</aside>
 <h2 id="inspect-media">Inspect Media</h2>
 <p><a id="opIdprobe"></a></p>
 <blockquote>
@@ -1254,7 +2986,9 @@ System.out.println(response.toString());
 
 </code></pre>
 <p><code>GET /probe/{url}</code></p>
-<p>Inspects any media asset (image, video, audio) on the internet using a hosted version of <a href="https://ffmpeg.org/ffprobe.html">FFprobe</a>. The probe endpoint returns useful information about an asset such as width, height, duration, rotation, framerate, etc...</p>
+<p>Inspects any media asset (image, video, audio) on the internet using a hosted version
+of <a href="https://ffmpeg.org/ffprobe.html">FFprobe</a>. The probe endpoint returns useful information
+about an asset such as width, height, duration, rotation, framerate, etc...</p>
 <p><strong>Base URL:</strong> <a href="https://api.shotstack.io/%7Bversion%7D">https://api.shotstack.io/{version}</a></p>
 <h3 id="inspect-media-parameters">Parameters</h3>
 <table>
@@ -1440,7 +3174,9 @@ System.out.println(response.toString());
 
 </code></pre>
 <p><code>GET /assets/{id}</code></p>
-<p>The Serve API is used to interact with, and delete hosted assets including videos, images, audio files,  thumbnails and poster images. Use this endpoint to fetch an asset by asset id. Note that an asset id is unique for each asset and different from the render id.</p>
+<p>The Serve API is used to interact with, and delete hosted assets including videos, images, audio files,
+thumbnails and poster images. Use this endpoint to fetch an asset by asset id. Note that an asset id is unique
+for each asset and different from the render id.</p>
 <p><strong>Base URL:</strong> <a href="https://api.shotstack.io/serve/%7Bversion%7D">https://api.shotstack.io/serve/{version}</a></p>
 <h3 id="get-asset-parameters">Parameters</h3>
 <table>
@@ -1470,20 +3206,19 @@ System.out.println(response.toString());
 <p>200 Response</p>
 </blockquote>
 <pre class="highlight tab tab-json"><code>{
-  <span class="hljs-attr">"response"</span>: {
-    <span class="hljs-attr">"data"</span>: {
-      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"asset"</span>,
-      <span class="hljs-attr">"attributes"</span>: {
-        <span class="hljs-attr">"id"</span>: <span class="hljs-string">"a4482cbf-e321-42a2-ac8b-947d26886840"</span>,
-        <span class="hljs-attr">"owner"</span>: <span class="hljs-string">"5ca6hu7s9k"</span>,
-        <span class="hljs-attr">"region"</span>: <span class="hljs-string">"au"</span>,
-        <span class="hljs-attr">"renderId"</span>: <span class="hljs-string">"2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7"</span>,
-        <span class="hljs-attr">"filename"</span>: <span class="hljs-string">"2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4"</span>,
-        <span class="hljs-attr">"url"</span>: <span class="hljs-string">"https://cdn.shotstack.io/au/v1/msgtwx8iw6/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4"</span>,
-        <span class="hljs-attr">"status"</span>: <span class="hljs-string">"ready"</span>,
-        <span class="hljs-attr">"created"</span>: <span class="hljs-string">"2021-05-06T03:33:48.600Z"</span>,
-        <span class="hljs-attr">"updated"</span>: <span class="hljs-string">"2021-05-06T03:33:49.521Z"</span>
-      }
+  <span class="hljs-attr">"data"</span>: {
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"asset"</span>,
+    <span class="hljs-attr">"attributes"</span>: {
+      <span class="hljs-attr">"id"</span>: <span class="hljs-string">"a4482cbf-e321-42a2-ac8b-947d26886840"</span>,
+      <span class="hljs-attr">"owner"</span>: <span class="hljs-string">"5ca6hu7s9k"</span>,
+      <span class="hljs-attr">"region"</span>: <span class="hljs-string">"au"</span>,
+      <span class="hljs-attr">"renderId"</span>: <span class="hljs-string">"2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7"</span>,
+      <span class="hljs-attr">"providerId"</span>: <span class="hljs-string">"a4482cbf-e321-42a2-ac8b-947d26886840"</span>,
+      <span class="hljs-attr">"filename"</span>: <span class="hljs-string">"2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4"</span>,
+      <span class="hljs-attr">"url"</span>: <span class="hljs-string">"https://cdn.shotstack.io/au/v1/5ca6hu7s9k/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4"</span>,
+      <span class="hljs-attr">"status"</span>: <span class="hljs-string">"ready"</span>,
+      <span class="hljs-attr">"created"</span>: <span class="hljs-string">"2021-06-30T09:42:29.446Z"</span>,
+      <span class="hljs-attr">"updated"</span>: <span class="hljs-string">"2021-06-30T09:42:30.168Z"</span>
     }
   }
 }
@@ -1631,7 +3366,8 @@ System.out.println(response.toString());
 
 </code></pre>
 <p><code>DELETE /assets/{id}</code></p>
-<p>Delete an asset by its asset id. If a render creates multiple assets, such as thumbnail and poster images, each asset must be deleted individually by the asset id.</p>
+<p>Delete an asset by its asset id. If a render creates multiple assets, such as thumbnail and poster images,
+each asset must be deleted individually by the asset id.</p>
 <p><strong>Base URL:</strong> <a href="https://api.shotstack.io/serve/%7Bversion%7D">https://api.shotstack.io/serve/{version}</a></p>
 <h3 id="delete-asset-parameters">Parameters</h3>
 <table>
@@ -1804,7 +3540,9 @@ System.out.println(response.toString());
 
 </code></pre>
 <p><code>GET /assets/render/{id}</code></p>
-<p>A render may generate more than one file, such as a video, thumbnail and poster image. When the assets are created the only known id is the render id returned by the original <a href="#render-video">render request</a>, status  request or webhook. This endpoint lets you look up one or more assets by the render id.</p>
+<p>A render may generate more than one file, such as a video, thumbnail and poster image. When the assets are
+created the only known id is the render id returned by the original <a href="#render-video">render request</a>, status
+request or webhook. This endpoint lets you look up one or more assets by the render id.</p>
 <p><strong>Base URL:</strong> <a href="https://api.shotstack.io/serve/%7Bversion%7D">https://api.shotstack.io/serve/{version}</a></p>
 <h3 id="get-asset-by-render-id-parameters">Parameters</h3>
 <table>
@@ -1834,24 +3572,23 @@ System.out.println(response.toString());
 <p>200 Response</p>
 </blockquote>
 <pre class="highlight tab tab-json"><code>{
-  <span class="hljs-attr">"response"</span>: {
-    <span class="hljs-attr">"data"</span>: [
-      {
-        <span class="hljs-attr">"type"</span>: <span class="hljs-string">"asset"</span>,
-        <span class="hljs-attr">"attributes"</span>: {
-          <span class="hljs-attr">"id"</span>: <span class="hljs-string">"a4482cbf-e321-42a2-ac8b-947d26886840"</span>,
-          <span class="hljs-attr">"owner"</span>: <span class="hljs-string">"5ca6hu7s9k"</span>,
-          <span class="hljs-attr">"region"</span>: <span class="hljs-string">"au"</span>,
-          <span class="hljs-attr">"renderId"</span>: <span class="hljs-string">"2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7"</span>,
-          <span class="hljs-attr">"filename"</span>: <span class="hljs-string">"2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4"</span>,
-          <span class="hljs-attr">"url"</span>: <span class="hljs-string">"https://cdn.shotstack.io/au/v1/msgtwx8iw6/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4"</span>,
-          <span class="hljs-attr">"status"</span>: <span class="hljs-string">"ready"</span>,
-          <span class="hljs-attr">"created"</span>: <span class="hljs-string">"2021-05-06T03:33:48.600Z"</span>,
-          <span class="hljs-attr">"updated"</span>: <span class="hljs-string">"2021-05-06T03:33:49.521Z"</span>
-        }
+  <span class="hljs-attr">"data"</span>: [
+    {
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"asset"</span>,
+      <span class="hljs-attr">"attributes"</span>: {
+        <span class="hljs-attr">"id"</span>: <span class="hljs-string">"a4482cbf-e321-42a2-ac8b-947d26886840"</span>,
+        <span class="hljs-attr">"owner"</span>: <span class="hljs-string">"5ca6hu7s9k"</span>,
+        <span class="hljs-attr">"region"</span>: <span class="hljs-string">"au"</span>,
+        <span class="hljs-attr">"renderId"</span>: <span class="hljs-string">"2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7"</span>,
+        <span class="hljs-attr">"providerId"</span>: <span class="hljs-string">"a4482cbf-e321-42a2-ac8b-947d26886840"</span>,
+        <span class="hljs-attr">"filename"</span>: <span class="hljs-string">"2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4"</span>,
+        <span class="hljs-attr">"url"</span>: <span class="hljs-string">"https://cdn.shotstack.io/au/v1/5ca6hu7s9k/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4"</span>,
+        <span class="hljs-attr">"status"</span>: <span class="hljs-string">"ready"</span>,
+        <span class="hljs-attr">"created"</span>: <span class="hljs-string">"2021-06-30T09:42:29.446Z"</span>,
+        <span class="hljs-attr">"updated"</span>: <span class="hljs-string">"2021-06-30T09:42:30.168Z"</span>
       }
-    ]
-  }
+    }
+  ]
 }
 </code></pre>
 <h3 id="get-asset-by-render-id-responses">Responses</h3>
@@ -1950,7 +3687,7 @@ DeveloperKey
   <span class="hljs-attr">"output"</span>: {
     <span class="hljs-attr">"format"</span>: <span class="hljs-string">"mp4"</span>,
     <span class="hljs-attr">"resolution"</span>: <span class="hljs-string">"sd"</span>,
-    <span class="hljs-attr">"aspectRatio"</span>: <span class="hljs-string">"16:9"</span>,
+    <span class="hljs-attr">"aspectRatio"</span>: <span class="hljs-number">969</span>,
     <span class="hljs-attr">"size"</span>: {
       <span class="hljs-attr">"width"</span>: <span class="hljs-number">1200</span>,
       <span class="hljs-attr">"height"</span>: <span class="hljs-number">800</span>
@@ -4217,7 +5954,7 @@ must be one of:
 <pre class="highlight tab tab-json"><code>{
   <span class="hljs-attr">"format"</span>: <span class="hljs-string">"mp4"</span>,
   <span class="hljs-attr">"resolution"</span>: <span class="hljs-string">"sd"</span>,
-  <span class="hljs-attr">"aspectRatio"</span>: <span class="hljs-string">"16:9"</span>,
+  <span class="hljs-attr">"aspectRatio"</span>: <span class="hljs-number">969</span>,
   <span class="hljs-attr">"size"</span>: {
     <span class="hljs-attr">"width"</span>: <span class="hljs-number">1200</span>,
     <span class="hljs-attr">"height"</span>: <span class="hljs-number">800</span>
@@ -4400,23 +6137,23 @@ must be one of:
 </tr>
 <tr>
 <td>aspectRatio</td>
-<td>16:9</td>
+<td>969</td>
 </tr>
 <tr>
 <td>aspectRatio</td>
-<td>9:16</td>
+<td>556</td>
 </tr>
 <tr>
 <td>aspectRatio</td>
-<td>1:1</td>
+<td>61</td>
 </tr>
 <tr>
 <td>aspectRatio</td>
-<td>4:5</td>
+<td>245</td>
 </tr>
 <tr>
 <td>aspectRatio</td>
-<td>4:3</td>
+<td>243</td>
 </tr>
 <tr>
 <td>fps</td>
@@ -4477,65 +6214,6 @@ must be one of:
 <tr>
 <td>quality</td>
 <td>high</td>
-</tr>
-</tbody>
-</table>
-<h2 id="tocs_destinations">Destinations</h2>
-<p><a id="schemadestinations"></a>
-<a id="schema_Destinations"></a>
-<a id="tocSdestinations"></a>
-<a id="tocsdestinations"></a></p>
-<pre class="highlight tab tab-json"><code>{
-  <span class="hljs-attr">"provider"</span>: <span class="hljs-string">"shotstack"</span>,
-  <span class="hljs-attr">"exclude"</span>: <span class="hljs-literal">false</span>
-}
-
-</code></pre>
-<p>A destination is a location where output files can be sent to for serving or hosting. By default all rendered assets are automatically sent to the  <a href="https://shotstack.io/docs/guide/serving-assets/hosting">Shotstack hosting destination</a>. You can add other destinations to send assets to. The following destinations are available:</p>
-  <ul>
-    <li><a href="#tocs_shotstackdestination">DestinationShotstack</a></li>
-    <li><a href="#tocs_muxdestination">DestinationMux</a></li>
-  </ul>
-<h3 id="properties">Properties</h3>
-<p>anyOf</p>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Restrictions</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><em>anonymous</em></td>
-<td><a href="#schemashotstackdestination">ShotstackDestination</a></td>
-<td>false</td>
-<td>none</td>
-<td>Send rendered assets to the Shotstack hosting and CDN service. This destination is enabled by default.</td>
-</tr>
-</tbody>
-</table>
-<p>or</p>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Restrictions</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><em>anonymous</em></td>
-<td><a href="#schemamuxdestination">MuxDestination</a></td>
-<td>false</td>
-<td>none</td>
-<td>Send rendered videos to the <a href="https://www.mux.com/">Mux</a> video hosting and streaming service. Add the <code>mux</code> destination provider to send the output video to Mux. Mux credentials are required and added via the <a href="https://dashboard.shotstack.io/integrations/mux">dashboard</a>, not in the request.</td>
 </tr>
 </tbody>
 </table>
@@ -4691,6 +6369,65 @@ must be one of:
 </tr>
 </tbody>
 </table>
+<h2 id="tocs_destinations">Destinations</h2>
+<p><a id="schemadestinations"></a>
+<a id="schema_Destinations"></a>
+<a id="tocSdestinations"></a>
+<a id="tocsdestinations"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">"provider"</span>: <span class="hljs-string">"shotstack"</span>,
+  <span class="hljs-attr">"exclude"</span>: <span class="hljs-literal">false</span>
+}
+
+</code></pre>
+<p>A destination is a location where output files can be sent to for serving or hosting. By default all rendered assets are automatically sent to the  <a href="https://shotstack.io/docs/guide/serving-assets/hosting">Shotstack hosting destination</a>. You can add other destinations to send assets to. The following destinations are available:</p>
+  <ul>
+    <li><a href="#tocs_shotstackdestination">DestinationShotstack</a></li>
+    <li><a href="#tocs_muxdestination">DestinationMux</a></li>
+  </ul>
+<h3 id="properties">Properties</h3>
+<p>anyOf</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td><a href="#schemashotstackdestination">ShotstackDestination</a></td>
+<td>false</td>
+<td>none</td>
+<td>Send rendered assets to the Shotstack hosting and CDN service. This destination is enabled by default.</td>
+</tr>
+</tbody>
+</table>
+<p>or</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td><a href="#schemamuxdestination">MuxDestination</a></td>
+<td>false</td>
+<td>none</td>
+<td>Send rendered videos to the <a href="https://www.mux.com/">Mux</a> video hosting and streaming service. Add the <code>mux</code> destination provider to send the output video to Mux. Mux credentials are required and added via the <a href="https://dashboard.shotstack.io/integrations/mux">dashboard</a>, not in the request.</td>
+</tr>
+</tbody>
+</table>
 <h2 id="tocs_shotstackdestination">ShotstackDestination</h2>
 <p><a id="schemashotstackdestination"></a>
 <a id="schema_ShotstackDestination"></a>
@@ -4809,6 +6546,193 @@ must be one of:
 </tr>
 </tbody>
 </table>
+<h2 id="tocs_template">Template</h2>
+<p><a id="schematemplate"></a>
+<a id="schema_Template"></a>
+<a id="tocStemplate"></a>
+<a id="tocstemplate"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"My template"</span>,
+  <span class="hljs-attr">"template"</span>: {
+    <span class="hljs-attr">"timeline"</span>: {
+      <span class="hljs-attr">"soundtrack"</span>: {
+        <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3"</span>,
+        <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"fadeIn"</span>,
+        <span class="hljs-attr">"volume"</span>: <span class="hljs-number">1</span>
+      },
+      <span class="hljs-attr">"background"</span>: <span class="hljs-string">"#000000"</span>,
+      <span class="hljs-attr">"fonts"</span>: [
+        {
+          <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf"</span>
+        }
+      ],
+      <span class="hljs-attr">"tracks"</span>: [
+        {
+          <span class="hljs-attr">"clips"</span>: [
+            {
+              <span class="hljs-attr">"asset"</span>: {
+                <span class="hljs-attr">"type"</span>: <span class="hljs-string">"video"</span>,
+                <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4"</span>,
+                <span class="hljs-attr">"trim"</span>: <span class="hljs-number">2</span>,
+                <span class="hljs-attr">"volume"</span>: <span class="hljs-number">1</span>,
+                <span class="hljs-attr">"crop"</span>: {
+                  <span class="hljs-attr">"top"</span>: <span class="hljs-number">0.15</span>,
+                  <span class="hljs-attr">"bottom"</span>: <span class="hljs-number">0.15</span>,
+                  <span class="hljs-attr">"left"</span>: <span class="hljs-number">0</span>,
+                  <span class="hljs-attr">"right"</span>: <span class="hljs-number">0</span>
+                }
+              },
+              <span class="hljs-attr">"start"</span>: <span class="hljs-number">2</span>,
+              <span class="hljs-attr">"length"</span>: <span class="hljs-number">5</span>,
+              <span class="hljs-attr">"fit"</span>: <span class="hljs-string">"crop"</span>,
+              <span class="hljs-attr">"scale"</span>: <span class="hljs-number">0</span>,
+              <span class="hljs-attr">"position"</span>: <span class="hljs-string">"center"</span>,
+              <span class="hljs-attr">"offset"</span>: {
+                <span class="hljs-attr">"x"</span>: <span class="hljs-number">0.1</span>,
+                <span class="hljs-attr">"y"</span>: <span class="hljs-number">-0.2</span>
+              },
+              <span class="hljs-attr">"transition"</span>: {
+                <span class="hljs-attr">"in"</span>: <span class="hljs-string">"fade"</span>,
+                <span class="hljs-attr">"out"</span>: <span class="hljs-string">"fade"</span>
+              },
+              <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"zoomIn"</span>,
+              <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"greyscale"</span>,
+              <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">1</span>,
+              <span class="hljs-attr">"transform"</span>: {
+                <span class="hljs-attr">"rotate"</span>: {
+                  <span class="hljs-attr">"angle"</span>: <span class="hljs-number">45</span>
+                },
+                <span class="hljs-attr">"skew"</span>: {
+                  <span class="hljs-attr">"x"</span>: <span class="hljs-number">0.5</span>,
+                  <span class="hljs-attr">"y"</span>: <span class="hljs-number">0.5</span>
+                },
+                <span class="hljs-attr">"flip"</span>: {
+                  <span class="hljs-attr">"horizontal"</span>: <span class="hljs-literal">true</span>,
+                  <span class="hljs-attr">"vertical"</span>: <span class="hljs-literal">true</span>
+                }
+              }
+            }
+          ]
+        }
+      ],
+      <span class="hljs-attr">"cache"</span>: <span class="hljs-literal">true</span>
+    },
+    <span class="hljs-attr">"output"</span>: {
+      <span class="hljs-attr">"format"</span>: <span class="hljs-string">"mp4"</span>,
+      <span class="hljs-attr">"resolution"</span>: <span class="hljs-string">"sd"</span>,
+      <span class="hljs-attr">"aspectRatio"</span>: <span class="hljs-number">969</span>,
+      <span class="hljs-attr">"size"</span>: {
+        <span class="hljs-attr">"width"</span>: <span class="hljs-number">1200</span>,
+        <span class="hljs-attr">"height"</span>: <span class="hljs-number">800</span>
+      },
+      <span class="hljs-attr">"fps"</span>: <span class="hljs-number">25</span>,
+      <span class="hljs-attr">"scaleTo"</span>: <span class="hljs-string">"preview"</span>,
+      <span class="hljs-attr">"quality"</span>: <span class="hljs-string">"medium"</span>,
+      <span class="hljs-attr">"repeat"</span>: <span class="hljs-literal">true</span>,
+      <span class="hljs-attr">"range"</span>: {
+        <span class="hljs-attr">"start"</span>: <span class="hljs-number">3</span>,
+        <span class="hljs-attr">"length"</span>: <span class="hljs-number">6</span>
+      },
+      <span class="hljs-attr">"poster"</span>: {
+        <span class="hljs-attr">"capture"</span>: <span class="hljs-number">1</span>
+      },
+      <span class="hljs-attr">"thumbnail"</span>: {
+        <span class="hljs-attr">"capture"</span>: <span class="hljs-number">1</span>,
+        <span class="hljs-attr">"scale"</span>: <span class="hljs-number">0.3</span>
+      },
+      <span class="hljs-attr">"destinations"</span>: [
+        {
+          <span class="hljs-attr">"provider"</span>: <span class="hljs-string">"shotstack"</span>,
+          <span class="hljs-attr">"exclude"</span>: <span class="hljs-literal">false</span>
+        }
+      ]
+    },
+    <span class="hljs-attr">"merge"</span>: [
+      {
+        <span class="hljs-attr">"find"</span>: <span class="hljs-string">"NAME"</span>,
+        <span class="hljs-attr">"replace"</span>: <span class="hljs-string">"Jane"</span>
+      }
+    ],
+    <span class="hljs-attr">"callback"</span>: <span class="hljs-string">"https://my-server.com/callback.php"</span>,
+    <span class="hljs-attr">"disk"</span>: <span class="hljs-string">"local"</span>
+  }
+}
+
+</code></pre>
+<p>A template is a saved <a href="#tocs_edit">Edit</a> than can be loaded and re-used.</p>
+<h3 id="properties">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>The template name</td>
+</tr>
+<tr>
+<td>template</td>
+<td><a href="#schemaedit">Edit</a></td>
+<td>false</td>
+<td>none</td>
+<td>An edit defines the arrangement of a video on a timeline, an audio edit or an image design and the output format.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocs_templaterender">TemplateRender</h2>
+<p><a id="schematemplaterender"></a>
+<a id="schema_TemplateRender"></a>
+<a id="tocStemplaterender"></a>
+<a id="tocstemplaterender"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">"id"</span>: <span class="hljs-string">"f5493c17-d01f-445c-bb49-535fae65f219"</span>,
+  <span class="hljs-attr">"merge"</span>: [
+    {
+      <span class="hljs-attr">"find"</span>: <span class="hljs-string">"NAME"</span>,
+      <span class="hljs-attr">"replace"</span>: <span class="hljs-string">"Jane"</span>
+    }
+  ]
+}
+
+</code></pre>
+<p>Render a template by it's id and optional merge fields.</p>
+<h3 id="properties">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>The id of the template to render in UUID format.</td>
+</tr>
+<tr>
+<td>merge</td>
+<td>[<a href="#schemamergefield">MergeField</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>An array of key/value pairs that provides an easy way to create templates with placeholders. The placeholders can be used to find and replace keys with values. For example you can search for the placeholder <code>{{NAME}}</code> and replace it with the value <code>Jane</code>.</td>
+</tr>
+</tbody>
+</table>
 <h2 id="tocs_queuedresponse">QueuedResponse</h2>
 <p><a id="schemaqueuedresponse"></a>
 <a id="schema_QueuedResponse"></a>
@@ -4824,7 +6748,7 @@ must be one of:
 }
 
 </code></pre>
-<p>The response received after a <a href="#render-asset">render request</a> is submitted. The render task is queued for rendering and a unique render id is returned.</p>
+<p>The response received after a <a href="#render-asset">render request</a> or <a href="#render-template">template render</a> is submitted. The render task is queued for rendering and a unique render id is returned.</p>
 <h3 id="properties">Properties</h3>
 <table>
 <thead>
@@ -4986,7 +6910,7 @@ must be one of:
       <span class="hljs-attr">"output"</span>: {
         <span class="hljs-attr">"format"</span>: <span class="hljs-string">"mp4"</span>,
         <span class="hljs-attr">"resolution"</span>: <span class="hljs-string">"sd"</span>,
-        <span class="hljs-attr">"aspectRatio"</span>: <span class="hljs-string">"16:9"</span>,
+        <span class="hljs-attr">"aspectRatio"</span>: <span class="hljs-number">969</span>,
         <span class="hljs-attr">"size"</span>: {
           <span class="hljs-attr">"width"</span>: <span class="hljs-number">1200</span>,
           <span class="hljs-attr">"height"</span>: <span class="hljs-number">800</span>
@@ -5147,7 +7071,7 @@ must be one of:
     <span class="hljs-attr">"output"</span>: {
       <span class="hljs-attr">"format"</span>: <span class="hljs-string">"mp4"</span>,
       <span class="hljs-attr">"resolution"</span>: <span class="hljs-string">"sd"</span>,
-      <span class="hljs-attr">"aspectRatio"</span>: <span class="hljs-string">"16:9"</span>,
+      <span class="hljs-attr">"aspectRatio"</span>: <span class="hljs-number">969</span>,
       <span class="hljs-attr">"size"</span>: {
         <span class="hljs-attr">"width"</span>: <span class="hljs-number">1200</span>,
         <span class="hljs-attr">"height"</span>: <span class="hljs-number">800</span>
@@ -5329,6 +7253,501 @@ must be one of:
 </tr>
 </tbody>
 </table>
+<h2 id="tocs_templateresponse">TemplateResponse</h2>
+<p><a id="schematemplateresponse"></a>
+<a id="schema_TemplateResponse"></a>
+<a id="tocStemplateresponse"></a>
+<a id="tocstemplateresponse"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">"success"</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">"message"</span>: <span class="hljs-string">"Created"</span>,
+  <span class="hljs-attr">"response"</span>: {
+    <span class="hljs-attr">"message"</span>: <span class="hljs-string">"Template Successfully Created"</span>,
+    <span class="hljs-attr">"id"</span>: <span class="hljs-string">"f5493c17-d01f-445c-bb49-535fae65f219"</span>
+  }
+}
+
+</code></pre>
+<p>The response received after a <a href="#create-a-template">template</a> is submitted. The template is saved and a unique template id is returned.</p>
+<h3 id="properties">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>success</td>
+<td>boolean</td>
+<td>true</td>
+<td>none</td>
+<td><code>true</code> if successfully created, else <code>false</code>.</td>
+</tr>
+<tr>
+<td>message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td><code>Created</code>, <code>Bad Request</code> or an error message.</td>
+</tr>
+<tr>
+<td>response</td>
+<td><a href="#schematemplateresponsedata">TemplateResponseData</a></td>
+<td>true</td>
+<td>none</td>
+<td><code>TemplateResponseData</code> or an error message.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocs_templateresponsedata">TemplateResponseData</h2>
+<p><a id="schematemplateresponsedata"></a>
+<a id="schema_TemplateResponseData"></a>
+<a id="tocStemplateresponsedata"></a>
+<a id="tocstemplateresponsedata"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">"message"</span>: <span class="hljs-string">"Template Successfully Created"</span>,
+  <span class="hljs-attr">"id"</span>: <span class="hljs-string">"f5493c17-d01f-445c-bb49-535fae65f219"</span>
+}
+
+</code></pre>
+<p>The response data returned with the <a href="#tocs_templateresponse">TemplateResponse</a>.</p>
+<h3 id="properties">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>Success response message or error details.</td>
+</tr>
+<tr>
+<td>id</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>The unique id of the template in UUID format.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocs_templatedataresponse">TemplateDataResponse</h2>
+<p><a id="schematemplatedataresponse"></a>
+<a id="schema_TemplateDataResponse"></a>
+<a id="tocStemplatedataresponse"></a>
+<a id="tocstemplatedataresponse"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">"success"</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">"message"</span>: <span class="hljs-string">"OK"</span>,
+  <span class="hljs-attr">"response"</span>: {
+    <span class="hljs-attr">"id"</span>: <span class="hljs-string">"f5493c17-d01f-445c-bb49-535fae65f219"</span>,
+    <span class="hljs-attr">"name"</span>: <span class="hljs-string">"My template"</span>,
+    <span class="hljs-attr">"owner"</span>: <span class="hljs-string">"5ca6hu7s9k"</span>,
+    <span class="hljs-attr">"template"</span>: {
+      <span class="hljs-attr">"timeline"</span>: {
+        <span class="hljs-attr">"soundtrack"</span>: {
+          <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3"</span>,
+          <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"fadeInFadeOut"</span>
+        },
+        <span class="hljs-attr">"background"</span>: <span class="hljs-string">"#000000"</span>,
+        <span class="hljs-attr">"tracks"</span>: [
+          {
+            <span class="hljs-attr">"clips"</span>: [
+              {
+                <span class="hljs-attr">"asset"</span>: {
+                  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"title"</span>,
+                  <span class="hljs-attr">"text"</span>: <span class="hljs-string">"Hello World"</span>,
+                  <span class="hljs-attr">"style"</span>: <span class="hljs-string">"minimal"</span>
+                },
+                <span class="hljs-attr">"start"</span>: <span class="hljs-number">0</span>,
+                <span class="hljs-attr">"length"</span>: <span class="hljs-number">4</span>,
+                <span class="hljs-attr">"transition"</span>: {
+                  <span class="hljs-attr">"in"</span>: <span class="hljs-string">"fade"</span>,
+                  <span class="hljs-attr">"out"</span>: <span class="hljs-string">"fade"</span>
+                },
+                <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"slideRight"</span>
+              },
+              {
+                <span class="hljs-attr">"asset"</span>: {
+                  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"image"</span>,
+                  <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/my-image.jpg"</span>
+                },
+                <span class="hljs-attr">"start"</span>: <span class="hljs-number">3</span>,
+                <span class="hljs-attr">"length"</span>: <span class="hljs-number">4</span>,
+                <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"zoomIn"</span>,
+                <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"greyscale"</span>
+              }
+            ]
+          },
+          {
+            <span class="hljs-attr">"clips"</span>: [
+              {
+                <span class="hljs-attr">"asset"</span>: {
+                  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"video"</span>,
+                  <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/my-clip-1.mp4"</span>,
+                  <span class="hljs-attr">"trim"</span>: <span class="hljs-number">10.5</span>
+                },
+                <span class="hljs-attr">"start"</span>: <span class="hljs-number">7</span>,
+                <span class="hljs-attr">"length"</span>: <span class="hljs-number">4.5</span>
+              },
+              {
+                <span class="hljs-attr">"asset"</span>: {
+                  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"video"</span>,
+                  <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/my-clip-2.mp4"</span>,
+                  <span class="hljs-attr">"volume"</span>: <span class="hljs-number">0.5</span>
+                },
+                <span class="hljs-attr">"start"</span>: <span class="hljs-number">11.5</span>,
+                <span class="hljs-attr">"length"</span>: <span class="hljs-number">5</span>,
+                <span class="hljs-attr">"transition"</span>: {
+                  <span class="hljs-attr">"out"</span>: <span class="hljs-string">"wipeLeft"</span>
+                }
+              }
+            ]
+          }
+        ]
+      },
+      <span class="hljs-attr">"output"</span>: {
+        <span class="hljs-attr">"format"</span>: <span class="hljs-string">"mp4"</span>,
+        <span class="hljs-attr">"resolution"</span>: <span class="hljs-string">"sd"</span>
+      }
+    }
+  }
+}
+
+</code></pre>
+<p>The template data including the template name and Edit.</p>
+<h3 id="properties">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>success</td>
+<td>boolean</td>
+<td>true</td>
+<td>none</td>
+<td><code>true</code> if successfully created, else <code>false</code>.</td>
+</tr>
+<tr>
+<td>message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td><code>OK</code>, <code>Bad Request</code> or an error message.</td>
+</tr>
+<tr>
+<td>response</td>
+<td><a href="#schematemplatedataresponsedata">TemplateDataResponseData</a></td>
+<td>true</td>
+<td>none</td>
+<td><code>TemplateDataResponseData</code> or an error message.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocs_templatedataresponsedata">TemplateDataResponseData</h2>
+<p><a id="schematemplatedataresponsedata"></a>
+<a id="schema_TemplateDataResponseData"></a>
+<a id="tocStemplatedataresponsedata"></a>
+<a id="tocstemplatedataresponsedata"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">"id"</span>: <span class="hljs-string">"f5493c17-d01f-445c-bb49-535fae65f219"</span>,
+  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"My template"</span>,
+  <span class="hljs-attr">"owner"</span>: <span class="hljs-string">"5ca6hu7s9k"</span>,
+  <span class="hljs-attr">"template"</span>: {
+    <span class="hljs-attr">"timeline"</span>: {
+      <span class="hljs-attr">"soundtrack"</span>: {
+        <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3"</span>,
+        <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"fadeInFadeOut"</span>
+      },
+      <span class="hljs-attr">"background"</span>: <span class="hljs-string">"#000000"</span>,
+      <span class="hljs-attr">"tracks"</span>: [
+        {
+          <span class="hljs-attr">"clips"</span>: [
+            {
+              <span class="hljs-attr">"asset"</span>: {
+                <span class="hljs-attr">"type"</span>: <span class="hljs-string">"title"</span>,
+                <span class="hljs-attr">"text"</span>: <span class="hljs-string">"Hello World"</span>,
+                <span class="hljs-attr">"style"</span>: <span class="hljs-string">"minimal"</span>
+              },
+              <span class="hljs-attr">"start"</span>: <span class="hljs-number">0</span>,
+              <span class="hljs-attr">"length"</span>: <span class="hljs-number">4</span>,
+              <span class="hljs-attr">"transition"</span>: {
+                <span class="hljs-attr">"in"</span>: <span class="hljs-string">"fade"</span>,
+                <span class="hljs-attr">"out"</span>: <span class="hljs-string">"fade"</span>
+              },
+              <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"slideRight"</span>
+            },
+            {
+              <span class="hljs-attr">"asset"</span>: {
+                <span class="hljs-attr">"type"</span>: <span class="hljs-string">"image"</span>,
+                <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/my-image.jpg"</span>
+              },
+              <span class="hljs-attr">"start"</span>: <span class="hljs-number">3</span>,
+              <span class="hljs-attr">"length"</span>: <span class="hljs-number">4</span>,
+              <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"zoomIn"</span>,
+              <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"greyscale"</span>
+            }
+          ]
+        },
+        {
+          <span class="hljs-attr">"clips"</span>: [
+            {
+              <span class="hljs-attr">"asset"</span>: {
+                <span class="hljs-attr">"type"</span>: <span class="hljs-string">"video"</span>,
+                <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/my-clip-1.mp4"</span>,
+                <span class="hljs-attr">"trim"</span>: <span class="hljs-number">10.5</span>
+              },
+              <span class="hljs-attr">"start"</span>: <span class="hljs-number">7</span>,
+              <span class="hljs-attr">"length"</span>: <span class="hljs-number">4.5</span>
+            },
+            {
+              <span class="hljs-attr">"asset"</span>: {
+                <span class="hljs-attr">"type"</span>: <span class="hljs-string">"video"</span>,
+                <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/my-clip-2.mp4"</span>,
+                <span class="hljs-attr">"volume"</span>: <span class="hljs-number">0.5</span>
+              },
+              <span class="hljs-attr">"start"</span>: <span class="hljs-number">11.5</span>,
+              <span class="hljs-attr">"length"</span>: <span class="hljs-number">5</span>,
+              <span class="hljs-attr">"transition"</span>: {
+                <span class="hljs-attr">"out"</span>: <span class="hljs-string">"wipeLeft"</span>
+              }
+            }
+          ]
+        }
+      ]
+    },
+    <span class="hljs-attr">"output"</span>: {
+      <span class="hljs-attr">"format"</span>: <span class="hljs-string">"mp4"</span>,
+      <span class="hljs-attr">"resolution"</span>: <span class="hljs-string">"sd"</span>
+    }
+  }
+}
+
+</code></pre>
+<p>The response data returned with the <a href="#tocs_templatedataresponse">TemplateDataResponse</a>.</p>
+<h3 id="properties">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>The unique id of the template in UUID format.</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>The template name.</td>
+</tr>
+<tr>
+<td>owner</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>The owner id of the templates.</td>
+</tr>
+<tr>
+<td>template</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>The <a href="#tocs_edit">Edit</a> template.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocs_templatelistresponse">TemplateListResponse</h2>
+<p><a id="schematemplatelistresponse"></a>
+<a id="schema_TemplateListResponse"></a>
+<a id="tocStemplatelistresponse"></a>
+<a id="tocstemplatelistresponse"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">"success"</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">"message"</span>: <span class="hljs-string">"Created"</span>,
+  <span class="hljs-attr">"response"</span>: {
+    <span class="hljs-attr">"owner"</span>: <span class="hljs-string">"5ca6hu7s9k"</span>,
+    <span class="hljs-attr">"templates"</span>: [
+      {
+        <span class="hljs-attr">"id"</span>: <span class="hljs-string">"f5493c17-d01f-445c-bb49-535fae65f219"</span>,
+        <span class="hljs-attr">"name"</span>: <span class="hljs-string">"My template"</span>,
+        <span class="hljs-attr">"created"</span>: <span class="hljs-string">"2022-06-10T12:50:21.455Z"</span>,
+        <span class="hljs-attr">"updated"</span>: <span class="hljs-string">"2022-06-22T08:24:30.168Z"</span>
+      }
+    ]
+  }
+}
+
+</code></pre>
+<p>A list of previously saved templates.</p>
+<h3 id="properties">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>success</td>
+<td>boolean</td>
+<td>true</td>
+<td>none</td>
+<td><code>true</code> if successfully created, else <code>false</code>.</td>
+</tr>
+<tr>
+<td>message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td><code>Created</code>, <code>Bad Request</code> or an error message.</td>
+</tr>
+<tr>
+<td>response</td>
+<td><a href="#schematemplatelistresponsedata">TemplateListResponseData</a></td>
+<td>true</td>
+<td>none</td>
+<td><code>TemplateListResponseData</code> or an error message.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocs_templatelistresponsedata">TemplateListResponseData</h2>
+<p><a id="schematemplatelistresponsedata"></a>
+<a id="schema_TemplateListResponseData"></a>
+<a id="tocStemplatelistresponsedata"></a>
+<a id="tocstemplatelistresponsedata"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">"owner"</span>: <span class="hljs-string">"5ca6hu7s9k"</span>,
+  <span class="hljs-attr">"templates"</span>: [
+    {
+      <span class="hljs-attr">"id"</span>: <span class="hljs-string">"f5493c17-d01f-445c-bb49-535fae65f219"</span>,
+      <span class="hljs-attr">"name"</span>: <span class="hljs-string">"My template"</span>,
+      <span class="hljs-attr">"created"</span>: <span class="hljs-string">"2022-06-10T12:50:21.455Z"</span>,
+      <span class="hljs-attr">"updated"</span>: <span class="hljs-string">"2022-06-22T08:24:30.168Z"</span>
+    }
+  ]
+}
+
+</code></pre>
+<p>The response data returned with the <a href="#tocs_templatelistresponse">TemplateListResponse</a>.</p>
+<h3 id="properties">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>owner</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>The owner id of the templates.</td>
+</tr>
+<tr>
+<td>templates</td>
+<td>[<a href="#schematemplatelistresponseitem">TemplateListResponseItem</a>]</td>
+<td>true</td>
+<td>none</td>
+<td>The list of templates.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocs_templatelistresponseitem">TemplateListResponseItem</h2>
+<p><a id="schematemplatelistresponseitem"></a>
+<a id="schema_TemplateListResponseItem"></a>
+<a id="tocStemplatelistresponseitem"></a>
+<a id="tocstemplatelistresponseitem"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">"id"</span>: <span class="hljs-string">"f5493c17-d01f-445c-bb49-535fae65f219"</span>,
+  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"My template"</span>,
+  <span class="hljs-attr">"created"</span>: <span class="hljs-string">"2022-06-10T12:50:21.455Z"</span>,
+  <span class="hljs-attr">"updated"</span>: <span class="hljs-string">"2022-06-22T08:24:30.168Z"</span>
+}
+
+</code></pre>
+<p>The individual template item returned with the  <a href="#tocs_templatelistresponsedata">TemplateListResponseData</a> templates list.</p>
+<h3 id="properties">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>The unique id of the template in UUID format.</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>The template name</td>
+</tr>
+<tr>
+<td>created</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>The time the template was created.</td>
+</tr>
+<tr>
+<td>updated</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>The time the template was last updated.</td>
+</tr>
+</tbody>
+</table>
 <h2 id="tocs_proberesponse">ProbeResponse</h2>
 <p><a id="schemaproberesponse"></a>
 <a id="schema_ProbeResponse"></a>
@@ -5373,7 +7792,7 @@ must be one of:
 <td>object</td>
 <td>true</td>
 <td>none</td>
-<td>The response from FFprobe in JSON format</td>
+<td>The response from FFprobe in JSON format.</td>
 </tr>
 </tbody>
 </table>
@@ -5390,6 +7809,7 @@ must be one of:
       <span class="hljs-attr">"owner"</span>: <span class="hljs-string">"5ca6hu7s9k"</span>,
       <span class="hljs-attr">"region"</span>: <span class="hljs-string">"au"</span>,
       <span class="hljs-attr">"renderId"</span>: <span class="hljs-string">"2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7"</span>,
+      <span class="hljs-attr">"providerId"</span>: <span class="hljs-string">"a4482cbf-e321-42a2-ac8b-947d26886840"</span>,
       <span class="hljs-attr">"filename"</span>: <span class="hljs-string">"2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4"</span>,
       <span class="hljs-attr">"url"</span>: <span class="hljs-string">"https://cdn.shotstack.io/au/v1/5ca6hu7s9k/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4"</span>,
       <span class="hljs-attr">"status"</span>: <span class="hljs-string">"ready"</span>,
@@ -5416,7 +7836,7 @@ must be one of:
 <tr>
 <td>data</td>
 <td><a href="#schemaassetresponsedata">AssetResponseData</a></td>
-<td>false</td>
+<td>true</td>
 <td>none</td>
 <td>An asset resource.</td>
 </tr>
@@ -5436,6 +7856,7 @@ must be one of:
         <span class="hljs-attr">"owner"</span>: <span class="hljs-string">"5ca6hu7s9k"</span>,
         <span class="hljs-attr">"region"</span>: <span class="hljs-string">"au"</span>,
         <span class="hljs-attr">"renderId"</span>: <span class="hljs-string">"2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7"</span>,
+        <span class="hljs-attr">"providerId"</span>: <span class="hljs-string">"a4482cbf-e321-42a2-ac8b-947d26886840"</span>,
         <span class="hljs-attr">"filename"</span>: <span class="hljs-string">"2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4"</span>,
         <span class="hljs-attr">"url"</span>: <span class="hljs-string">"https://cdn.shotstack.io/au/v1/5ca6hu7s9k/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4"</span>,
         <span class="hljs-attr">"status"</span>: <span class="hljs-string">"ready"</span>,
@@ -5463,7 +7884,7 @@ must be one of:
 <tr>
 <td>data</td>
 <td>[<a href="#schemaassetresponsedata">AssetResponseData</a>]</td>
-<td>false</td>
+<td>true</td>
 <td>none</td>
 <td>An array of asset resources grouped by render id.</td>
 </tr>
@@ -5481,6 +7902,7 @@ must be one of:
     <span class="hljs-attr">"owner"</span>: <span class="hljs-string">"5ca6hu7s9k"</span>,
     <span class="hljs-attr">"region"</span>: <span class="hljs-string">"au"</span>,
     <span class="hljs-attr">"renderId"</span>: <span class="hljs-string">"2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7"</span>,
+    <span class="hljs-attr">"providerId"</span>: <span class="hljs-string">"a4482cbf-e321-42a2-ac8b-947d26886840"</span>,
     <span class="hljs-attr">"filename"</span>: <span class="hljs-string">"2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4"</span>,
     <span class="hljs-attr">"url"</span>: <span class="hljs-string">"https://cdn.shotstack.io/au/v1/5ca6hu7s9k/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4"</span>,
     <span class="hljs-attr">"status"</span>: <span class="hljs-string">"ready"</span>,
@@ -5506,14 +7928,14 @@ must be one of:
 <tr>
 <td>type</td>
 <td>string</td>
-<td>false</td>
+<td>true</td>
 <td>none</td>
 <td>The type of resource, in this case it is an assets.</td>
 </tr>
 <tr>
 <td>attributes</td>
 <td><a href="#schemaassetresponseattributes">AssetResponseAttributes</a></td>
-<td>false</td>
+<td>true</td>
 <td>none</td>
 <td>The asset attributes including render id, url, filename, file size, etc...</td>
 </tr>
@@ -5529,6 +7951,7 @@ must be one of:
   <span class="hljs-attr">"owner"</span>: <span class="hljs-string">"5ca6hu7s9k"</span>,
   <span class="hljs-attr">"region"</span>: <span class="hljs-string">"au"</span>,
   <span class="hljs-attr">"renderId"</span>: <span class="hljs-string">"2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7"</span>,
+  <span class="hljs-attr">"providerId"</span>: <span class="hljs-string">"a4482cbf-e321-42a2-ac8b-947d26886840"</span>,
   <span class="hljs-attr">"filename"</span>: <span class="hljs-string">"2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4"</span>,
   <span class="hljs-attr">"url"</span>: <span class="hljs-string">"https://cdn.shotstack.io/au/v1/5ca6hu7s9k/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4"</span>,
   <span class="hljs-attr">"status"</span>: <span class="hljs-string">"ready"</span>,
@@ -5553,14 +7976,14 @@ must be one of:
 <tr>
 <td>id</td>
 <td>string</td>
-<td>false</td>
+<td>true</td>
 <td>none</td>
 <td>The unique id of the hosted asset in UUID format.</td>
 </tr>
 <tr>
 <td>owner</td>
 <td>string</td>
-<td>false</td>
+<td>true</td>
 <td>none</td>
 <td>The owner id of the render task.</td>
 </tr>
@@ -5579,9 +8002,16 @@ must be one of:
 <td>The original render id that created the asset in UUID format. Multiple assets can share the same render id.</td>
 </tr>
 <tr>
-<td>filename</td>
+<td>providerId</td>
 <td>string</td>
 <td>false</td>
+<td>none</td>
+<td>The third party id of an asset transferred to an external provider, i.e. Mux, YouTube or S3. If the provider is Shotstack, the providerID is the same as the asset id.</td>
+</tr>
+<tr>
+<td>filename</td>
+<td>string</td>
+<td>true</td>
 <td>none</td>
 <td>The asset file name.</td>
 </tr>
@@ -5595,21 +8025,21 @@ must be one of:
 <tr>
 <td>status</td>
 <td>string</td>
-<td>false</td>
+<td>true</td>
 <td>none</td>
 <td>The status of the asset. <ul><br />  <li><code>importing</code> - the asset is being copied to the hosting service</li><br />  <li><code>ready</code> - the asset is ready to be served to users</li><br />  <li><code>failed</code> - the asset failed to copy or delete</li><br />  <li><code>deleted</code> - the asset has been deleted</li><br /></ul></td>
 </tr>
 <tr>
 <td>created</td>
 <td>string</td>
-<td>false</td>
+<td>true</td>
 <td>none</td>
 <td>The time the asset was created.</td>
 </tr>
 <tr>
 <td>updated</td>
 <td>string</td>
-<td>false</td>
+<td>true</td>
 <td>none</td>
 <td>The time the asset status was last updated.</td>
 </tr>
@@ -5644,6 +8074,15 @@ must be one of:
 </table>
 <!-- Renderer: Shins v2.3.2-6 -->
 <!-- Generator: Widdershins v4.0.1 -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
 <!-- backwards compatibility -->
 <!-- backwards compatibility -->
 <!-- backwards compatibility -->
