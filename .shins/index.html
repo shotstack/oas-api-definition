@@ -6043,7 +6043,7 @@ must be one of:
 <td>string</td>
 <td>false</td>
 <td>none</td>
-<td>Adjust the output quality of the video, image or audio. Adjusting quality affects  render speed, download speeds and storage requirements due to file size. The default <code>medium</code> provides the most optimized choice for all three  factors. <ul><br />  <li><code>low</code> - slightly reduced quality, smaller file size</li><br />  <li><code>medium</code> - optimized quality, render speeds and file size</li><br />  <li><code>high</code> - slightly increased quality, larger file size</li><br /></ul></td>
+<td>Adjust the output quality of the video, image or audio. Adjusting quality affects  render speed, download speeds and storage requirements due to file size. The default <code>medium</code> provides the most optimized choice for all three  factors. <ul><br />  <li><code>low</code> - slightly reduced quality, smaller file size</li><br />  <li><code>medium</code> (default) - optimized quality, render speeds and file size</li><br />  <li><code>high</code> - slightly increased quality, larger file size</li><br /></ul></td>
 </tr>
 <tr>
 <td>repeat</td>
@@ -7183,14 +7183,14 @@ must be one of:
 </tr>
 <tr>
 <td>poster</td>
-<td>string</td>
+<td>string¦null</td>
 <td>false</td>
 <td>none</td>
 <td>The URL of the poster image if requested. This will only be available if status is done.</td>
 </tr>
 <tr>
 <td>thumbnail</td>
-<td>string</td>
+<td>string¦null</td>
 <td>false</td>
 <td>none</td>
 <td>The URL of the thumbnail image if requested. This will only be available if status is done.</td>
