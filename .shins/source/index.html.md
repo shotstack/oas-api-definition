@@ -103,9 +103,9 @@ const inputBody = {
     "soundtrack": {
       "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3",
       "effect": "fadeIn",
-      "volume": 1
+      "volume": 0
     },
-    "background": "#000000",
+    "background": "string",
     "fonts": [
       {
         "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf"
@@ -129,9 +129,9 @@ const inputBody = {
             },
             "start": 2,
             "length": 5,
-            "fit": "crop",
+            "fit": "cover",
             "scale": 0,
-            "position": "center",
+            "position": "top",
             "offset": {
               "x": 0.1,
               "y": -0.2
@@ -142,7 +142,7 @@ const inputBody = {
             },
             "effect": "zoomIn",
             "filter": "greyscale",
-            "opacity": 1,
+            "opacity": 0,
             "transform": {
               "rotate": {
                 "angle": 45
@@ -344,9 +344,9 @@ Queue and render the contents of an [Edit](#tocs_edit) as a video, image or audi
     "soundtrack": {
       "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3",
       "effect": "fadeIn",
-      "volume": 1
+      "volume": 0
     },
-    "background": "#000000",
+    "background": "string",
     "fonts": [
       {
         "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf"
@@ -370,9 +370,9 @@ Queue and render the contents of an [Edit](#tocs_edit) as a video, image or audi
             },
             "start": 2,
             "length": 5,
-            "fit": "crop",
+            "fit": "cover",
             "scale": 0,
-            "position": "center",
+            "position": "top",
             "offset": {
               "x": 0.1,
               "y": -0.2
@@ -383,7 +383,7 @@ Queue and render the contents of an [Edit](#tocs_edit) as a video, image or audi
             },
             "effect": "zoomIn",
             "filter": "greyscale",
-            "opacity": 1,
+            "opacity": 0,
             "transform": {
               "rotate": {
                 "angle": 45
@@ -768,9 +768,9 @@ const inputBody = {
       "soundtrack": {
         "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3",
         "effect": "fadeIn",
-        "volume": 1
+        "volume": 0
       },
-      "background": "#000000",
+      "background": "string",
       "fonts": [
         {
           "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf"
@@ -794,9 +794,9 @@ const inputBody = {
               },
               "start": 2,
               "length": 5,
-              "fit": "crop",
+              "fit": "cover",
               "scale": 0,
-              "position": "center",
+              "position": "top",
               "offset": {
                 "x": 0.1,
                 "y": -0.2
@@ -807,7 +807,7 @@ const inputBody = {
               },
               "effect": "zoomIn",
               "filter": "greyscale",
-              "opacity": 1,
+              "opacity": 0,
               "transform": {
                 "rotate": {
                   "angle": 45
@@ -1014,9 +1014,9 @@ before being rendered. [Merge fields](#tocs_mergefield) can be also used to merg
       "soundtrack": {
         "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3",
         "effect": "fadeIn",
-        "volume": 1
+        "volume": 0
       },
-      "background": "#000000",
+      "background": "string",
       "fonts": [
         {
           "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf"
@@ -1040,9 +1040,9 @@ before being rendered. [Merge fields](#tocs_mergefield) can be also used to merg
               },
               "start": 2,
               "length": 5,
-              "fit": "crop",
+              "fit": "cover",
               "scale": 0,
-              "position": "center",
+              "position": "top",
               "offset": {
                 "x": 0.1,
                 "y": -0.2
@@ -1053,7 +1053,7 @@ before being rendered. [Merge fields](#tocs_mergefield) can be also used to merg
               },
               "effect": "zoomIn",
               "filter": "greyscale",
-              "opacity": 1,
+              "opacity": 0,
               "transform": {
                 "rotate": {
                   "angle": 45
@@ -1622,9 +1622,9 @@ const inputBody = {
       "soundtrack": {
         "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3",
         "effect": "fadeIn",
-        "volume": 1
+        "volume": 0
       },
-      "background": "#000000",
+      "background": "string",
       "fonts": [
         {
           "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf"
@@ -1648,9 +1648,9 @@ const inputBody = {
               },
               "start": 2,
               "length": 5,
-              "fit": "crop",
+              "fit": "cover",
               "scale": 0,
-              "position": "center",
+              "position": "top",
               "offset": {
                 "x": 0.1,
                 "y": -0.2
@@ -1661,7 +1661,7 @@ const inputBody = {
               },
               "effect": "zoomIn",
               "filter": "greyscale",
-              "opacity": 1,
+              "opacity": 0,
               "transform": {
                 "rotate": {
                   "angle": 45
@@ -1866,9 +1866,9 @@ Update an existing template by template id.
       "soundtrack": {
         "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3",
         "effect": "fadeIn",
-        "volume": 1
+        "volume": 0
       },
-      "background": "#000000",
+      "background": "string",
       "fonts": [
         {
           "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf"
@@ -1892,9 +1892,9 @@ Update an existing template by template id.
               },
               "start": 2,
               "length": 5,
-              "fit": "crop",
+              "fit": "cover",
               "scale": 0,
-              "position": "center",
+              "position": "top",
               "offset": {
                 "x": 0.1,
                 "y": -0.2
@@ -1905,7 +1905,7 @@ Update an existing template by template id.
               },
               "effect": "zoomIn",
               "filter": "greyscale",
-              "opacity": 1,
+              "opacity": 0,
               "transform": {
                 "rotate": {
                   "angle": 45
@@ -3143,9 +3143,9 @@ DeveloperKey
     "soundtrack": {
       "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3",
       "effect": "fadeIn",
-      "volume": 1
+      "volume": 0
     },
-    "background": "#000000",
+    "background": "string",
     "fonts": [
       {
         "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf"
@@ -3169,9 +3169,9 @@ DeveloperKey
             },
             "start": 2,
             "length": 5,
-            "fit": "crop",
+            "fit": "cover",
             "scale": 0,
-            "position": "center",
+            "position": "top",
             "offset": {
               "x": 0.1,
               "y": -0.2
@@ -3182,7 +3182,7 @@ DeveloperKey
             },
             "effect": "zoomIn",
             "filter": "greyscale",
-            "opacity": 1,
+            "opacity": 0,
             "transform": {
               "rotate": {
                 "angle": 45
@@ -3275,9 +3275,9 @@ An edit defines the arrangement of a video on a timeline, an audio edit or an im
   "soundtrack": {
     "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3",
     "effect": "fadeIn",
-    "volume": 1
+    "volume": 0
   },
-  "background": "#000000",
+  "background": "string",
   "fonts": [
     {
       "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf"
@@ -3301,9 +3301,9 @@ An edit defines the arrangement of a video on a timeline, an audio edit or an im
           },
           "start": 2,
           "length": 5,
-          "fit": "crop",
+          "fit": "cover",
           "scale": 0,
-          "position": "center",
+          "position": "top",
           "offset": {
             "x": 0.1,
             "y": -0.2
@@ -3314,7 +3314,7 @@ An edit defines the arrangement of a video on a timeline, an audio edit or an im
           },
           "effect": "zoomIn",
           "filter": "greyscale",
-          "opacity": 1,
+          "opacity": 0,
           "transform": {
             "rotate": {
               "angle": 45
@@ -3360,7 +3360,7 @@ A timeline represents the contents of a video edit over time, an audio edit over
 {
   "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3",
   "effect": "fadeIn",
-  "volume": 1
+  "volume": 0
 }
 
 ```
@@ -3430,9 +3430,9 @@ Download a custom font to use with the HTML asset type, using the font name in t
       },
       "start": 2,
       "length": 5,
-      "fit": "crop",
+      "fit": "cover",
       "scale": 0,
-      "position": "center",
+      "position": "top",
       "offset": {
         "x": 0.1,
         "y": -0.2
@@ -3443,7 +3443,7 @@ Download a custom font to use with the HTML asset type, using the font name in t
       },
       "effect": "zoomIn",
       "filter": "greyscale",
-      "opacity": 1,
+      "opacity": 0,
       "transform": {
         "rotate": {
           "angle": 45
@@ -3494,9 +3494,9 @@ A track contains an array of clips. Tracks are layered on top of each other in t
   },
   "start": 2,
   "length": 5,
-  "fit": "crop",
+  "fit": "cover",
   "scale": 0,
-  "position": "center",
+  "position": "top",
   "offset": {
     "x": 0.1,
     "y": -0.2
@@ -3507,7 +3507,7 @@ A track contains an array of clips. Tracks are layered on top of each other in t
   },
   "effect": "zoomIn",
   "filter": "greyscale",
-  "opacity": 1,
+  "opacity": 0,
   "transform": {
     "rotate": {
       "angle": 45
@@ -3534,7 +3534,7 @@ A clip is a container for a specific type of asset, i.e. a title, image, video, 
 |asset|[Asset](#schemaasset)|true|none|The type of asset to display for the duration of this Clip. Value<br>    must be one of:<br>      <ul><br>        <li><a href="#tocs_videoasset">VideoAsset</a></li><br>        <li><a href="#tocs_imageasset">ImageAsset</a></li><br>        <li><a href="#tocs_titleasset">TitleAsset</a></li><br>        <li><a href="#tocs_htmlasset">HtmlAsset</a></li><br>        <li><a href="#tocs_audioasset">AudioAsset</a></li><br>        <li><a href="#tocs_lumaasset">LumaAsset</a></li><br>      </ul>|
 |start|number|true|none|The start position of the Clip on the timeline, in seconds.|
 |length|number|true|none|The length, in seconds, the Clip should play for.|
-|fit|string|false|none|Set how the asset should be scaled to fit the viewport using one of the following options: <br>  <ul><br>    <li>`cover` - stretch the asset to fill the viewport without maintaining the aspect ratio.</li><br>    <li>`contain` - fit the entire asset within the viewport while maintaining the original aspect ratio.</li><br>    <li>`crop` - scale the asset to fill the viewport while maintaining the aspect ratio. The asset will be cropped if it exceeds the bounds of the viewport.</li><br>    <li>`none` - preserves the original asset dimensions and does not apply any scaling.</li><br>  </ul>|
+|fit|string|false|none|Set how the asset should be scaled to fit the viewport using one of the following options: <br>  <ul><br>    <li>`cover` - stretch the asset to fill the viewport without maintaining the aspect ratio.</li><br>    <li>`contain` - fit the entire asset within the viewport while maintaining the original aspect ratio.</li><br>    <li>`crop` (default) - scale the asset to fill the viewport while maintaining the aspect ratio. The asset will be cropped if it exceeds the bounds of the viewport.</li><br>    <li>`none` - preserves the original asset dimensions and does not apply any scaling.</li><br>  </ul>|
 |scale|number|false|none|Scale the asset to a fraction of the viewport size - i.e. setting the scale to 0.5 will scale asset to half the size of the viewport. This is useful for picture-in-picture video and  scaling images such as logos and watermarks.|
 |position|string|false|none|Place the asset in one of nine predefined positions of the viewport. This is most effective for when the asset is scaled and you want to position the element to a specific position. <ul><br>  <li>`top` - top (center)</li><br>  <li>`topRight` - top right</li><br>  <li>`right` - right (center)</li><br>  <li>`bottomRight` - bottom right</li><br>  <li>`bottom` - bottom (center)</li><br>  <li>`bottomLeft` - bottom left</li><br>  <li>`left` - left (center)</li><br>  <li>`topLeft` - top left</li><br>  <li>`center` - center</li><br></ul>|
 |offset|[Offset](#schemaoffset)|false|none|Offset the location of the asset relative to its position on the viewport. The offset distance is relative to the width of the viewport - for example an x offset of 0.5 will move the asset half the viewport width to the right.|
@@ -3725,10 +3725,10 @@ The ImageAsset is used to create video from images to compose an image. The src 
   "type": "title",
   "text": "Hello World",
   "style": "minimal",
-  "color": "#ffffff",
-  "size": "medium",
+  "color": "string",
+  "size": "xx-small",
   "background": "#000000",
-  "position": "center",
+  "position": "top",
   "offset": {
     "x": 0.1,
     "y": -0.2
@@ -3797,8 +3797,8 @@ The TitleAsset clip type lets you create video titles from a text string and app
   "css": "p { color: #ffffff; } b { color: #ffff00; }",
   "width": 400,
   "height": 200,
-  "background": "transparent",
-  "position": "center"
+  "background": "string",
+  "position": "top"
 }
 
 ```
@@ -3843,7 +3843,7 @@ The HtmlAsset clip type lets you create text based layout and formatting using H
   "type": "audio",
   "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/sound.mp3",
   "trim": 0,
-  "volume": 1,
+  "volume": 0,
   "effect": "fadeIn"
 }
 
@@ -4275,9 +4275,9 @@ The output format, render range and type of media to generate.
 |---|---|---|---|---|
 |format|string|true|none|The output format and type of media file to generate. <ul><br>  <li>`mp4` - mp4 video file</li><br>  <li>`gif` - animated gif</li><br>  <li>`jpg` - jpg image file</li><br>  <li>`png` - png image file</li><br>  <li>`bmp` - bmp image file</li><br>  <li>`mp3` - mp3 audio file (audio only)</li><br></ul>|
 |resolution|string|false|none|The output resolution of the video or image. <ul><br>  <li>`preview` - 512px x 288px @ 15fps</li><br>  <li>`mobile` - 640px x 360px @ 25fps</li><br>  <li>`sd` - 1024px x 576px @ 25fps</li><br>  <li>`hd` - 1280px x 720px @ 25fps</li><br>  <li>`1080` - 1920px x 1080px @ 25fps</li><br></ul>|
-|aspectRatio|string|false|none|The aspect ratio (shape) of the video or image. Useful for social media output formats. Options are: <ul><br>  <li>`16:9` - regular landscape/horizontal aspect ratio (default)</li><br>  <li>`9:16` - vertical/portrait aspect ratio</li><br>  <li>`1:1` - square aspect ratio</li><br>  <li>`4:5` - short vertical/portrait aspect ratio</li><br>  <li>`4:3` - legacy TV aspect ratio</li><br></ul>|
+|aspectRatio|string|false|none|The aspect ratio (shape) of the video or image. Useful for social media output formats. Options are: <ul><br>  <li>`16:9` (default) - regular landscape/horizontal aspect ratio</li><br>  <li>`9:16` - vertical/portrait aspect ratio</li><br>  <li>`1:1` - square aspect ratio</li><br>  <li>`4:5` - short vertical/portrait aspect ratio</li><br>  <li>`4:3` - legacy TV aspect ratio</li><br></ul>|
 |size|[Size](#schemasize)|false|none|Set a custom size for a video or image. When using a custom size omit the `resolution` and `aspectRatio`. Custom sizes must be divisible by 2 based on the encoder specifications.|
-|fps|number|false|none|Override the default frames per second. Useful for when the source footage is recorded at 30fps, i.e. on  mobile devices. Lower frame rates can be used to add cinematic quality (24fps) or to create smaller file size/faster render times or animated gifs (12 or 15fps). Default is 25fps. <ul><br>  <li>`12` - 12fps</li><br>  <li>`15` - 15fps</li><br>  <li>`24` - 24fps</li><br>  <li>`23.976` - 23.976fps</li><br>  <li>`25` - 25fps</li><br>  <li>`29.97` - 29.97fps</li><br>  <li>`30` - 30fps</li><br></ul>|
+|fps|number|false|none|Override the default frames per second. Useful for when the source footage is recorded at 30fps, i.e. on  mobile devices. Lower frame rates can be used to add cinematic quality (24fps) or to create smaller file size/faster render times or animated gifs (12 or 15fps). Default is 25fps. <ul><br>  <li>`12` - 12fps</li><br>  <li>`15` - 15fps</li><br>  <li>`24` - 24fps</li><br>  <li>`23.976` - 23.976fps</li><br>  <li>`25` (default) - 25fps</li><br>  <li>`29.97` - 29.97fps</li><br>  <li>`30` - 30fps</li><br></ul>|
 |scaleTo|string|false|none|Override the resolution and scale the video or image to render at a different size. When using scaleTo the asset should be edited at the resolution dimensions, i.e. use font sizes that look best at HD, then use scaleTo to output the file at SD and the text will be scaled to the correct size. This is useful if you want to create multiple asset sizes. <ul><br>  <li>`preview` - 512px x 288px @ 15fps</li><br>  <li>`mobile` - 640px x 360px @ 25fps</li><br>  <li>`sd` - 1024px x 576px @25fps</li><br>  <li>`hd` - 1280px x 720px @25fps</li><br>  <li>`1080` - 1920px x 1080px @25fps</li><br></ul>|
 |quality|string|false|none|Adjust the output quality of the video, image or audio. Adjusting quality affects  render speed, download speeds and storage requirements due to file size. The default `medium` provides the most optimized choice for all three  factors. <ul><br>  <li>`low` - slightly reduced quality, smaller file size</li><br>  <li>`medium` - optimized quality, render speeds and file size</li><br>  <li>`high` - slightly increased quality, larger file size</li><br></ul>|
 |repeat|boolean|false|none|Loop settings for gif files. Set to `true` to loop, `false` to play only once.|
@@ -4542,9 +4542,9 @@ Pass additional options to control how Mux processes video. Currently supports p
       "soundtrack": {
         "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3",
         "effect": "fadeIn",
-        "volume": 1
+        "volume": 0
       },
-      "background": "#000000",
+      "background": "string",
       "fonts": [
         {
           "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf"
@@ -4568,9 +4568,9 @@ Pass additional options to control how Mux processes video. Currently supports p
               },
               "start": 2,
               "length": 5,
-              "fit": "crop",
+              "fit": "cover",
               "scale": 0,
-              "position": "center",
+              "position": "top",
               "offset": {
                 "x": 0.1,
                 "y": -0.2
@@ -4581,7 +4581,7 @@ Pass additional options to control how Mux processes video. Currently supports p
               },
               "effect": "zoomIn",
               "filter": "greyscale",
-              "opacity": 1,
+              "opacity": 0,
               "transform": {
                 "rotate": {
                   "angle": 45
@@ -4762,9 +4762,9 @@ The response data returned with the [QueuedResponse](#tocs_queuedresponse).
         "soundtrack": {
           "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3",
           "effect": "fadeIn",
-          "volume": 1
+          "volume": 0
         },
-        "background": "#000000",
+        "background": "string",
         "fonts": [
           {
             "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf"
@@ -4788,9 +4788,9 @@ The response data returned with the [QueuedResponse](#tocs_queuedresponse).
                 },
                 "start": 2,
                 "length": 5,
-                "fit": "crop",
+                "fit": "cover",
                 "scale": 0,
-                "position": "center",
+                "position": "top",
                 "offset": {
                   "x": 0.1,
                   "y": -0.2
@@ -4801,7 +4801,7 @@ The response data returned with the [QueuedResponse](#tocs_queuedresponse).
                 },
                 "effect": "zoomIn",
                 "filter": "greyscale",
-                "opacity": 1,
+                "opacity": 0,
                 "transform": {
                   "rotate": {
                     "angle": 45
@@ -4901,9 +4901,9 @@ The response received after a [render status request](#get-render-status) is sub
       "soundtrack": {
         "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3",
         "effect": "fadeIn",
-        "volume": 1
+        "volume": 0
       },
-      "background": "#000000",
+      "background": "string",
       "fonts": [
         {
           "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf"
@@ -4927,9 +4927,9 @@ The response received after a [render status request](#get-render-status) is sub
               },
               "start": 2,
               "length": 5,
-              "fit": "crop",
+              "fit": "cover",
               "scale": 0,
-              "position": "center",
+              "position": "top",
               "offset": {
                 "x": 0.1,
                 "y": -0.2
@@ -4940,7 +4940,7 @@ The response received after a [render status request](#get-render-status) is sub
               },
               "effect": "zoomIn",
               "filter": "greyscale",
-              "opacity": 1,
+              "opacity": 0,
               "transform": {
                 "rotate": {
                   "angle": 45
@@ -5021,9 +5021,9 @@ The response data returned with the [RenderResponse](#tocs_renderresponse) inclu
 |url|string|false|none|The URL of the final asset. This will only be available if status is done. This is a temporary URL and will be deleted after 24 hours. By default all assets are copied to the Shotstack hosting and CDN destination.|
 |poster|string|false|none|The URL of the poster image if requested. This will only be available if status is done.|
 |thumbnail|string|false|none|The URL of the thumbnail image if requested. This will only be available if status is done.|
-|data|[Edit](#schemaedit)|true|none|The timeline and output data to be rendered.|
-|created|string|true|none|The time the render task was initially queued.|
-|updated|string|true|none|The time the render status was last updated.|
+|data|[Edit](#schemaedit)|false|none|The timeline and output data to be rendered.|
+|created|string|false|none|The time the render task was initially queued.|
+|updated|string|false|none|The time the render status was last updated.|
 
 #### Enumerated Values
 
@@ -5374,8 +5374,8 @@ The individual template item returned with the  [TemplateListResponseData](#tocs
 |---|---|---|---|---|
 |id|string|true|none|The unique id of the template in UUID format.|
 |name|string|true|none|The template name|
-|created|string|true|none|The time the template was created.|
-|updated|string|true|none|The time the template was last updated.|
+|created|string|false|none|The time the template was created.|
+|updated|string|false|none|The time the template was last updated.|
 
 <h2 id="tocS_ProbeResponse">ProbeResponse</h2>
 <!-- backwards compatibility -->
@@ -5546,11 +5546,11 @@ The list of asset attributes and their values.
 |region|string|false|none|The region the asset is hosted, currently only `au` (Australia).|
 |renderId|string|false|none|The original render id that created the asset in UUID format. Multiple assets can share the same render id.|
 |providerId|string|false|none|The third party id of an asset transferred to an external provider, i.e. Mux, YouTube or S3. If the provider is Shotstack, the providerID is the same as the asset id.|
-|filename|string|true|none|The asset file name.|
+|filename|string|false|none|The asset file name.|
 |url|string|false|none|The asset file name.|
 |status|string|true|none|The status of the asset. <ul><br>  <li>`importing` - the asset is being copied to the hosting service</li><br>  <li>`ready` - the asset is ready to be served to users</li><br>  <li>`failed` - the asset failed to copy or delete</li><br>  <li>`deleted` - the asset has been deleted</li><br></ul>|
-|created|string|true|none|The time the asset was created.|
-|updated|string|true|none|The time the asset status was last updated.|
+|created|string|false|none|The time the asset was created.|
+|updated|string|false|none|The time the asset status was last updated.|
 
 #### Enumerated Values
 

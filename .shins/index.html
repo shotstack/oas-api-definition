@@ -561,9 +561,9 @@ curl -X POST https://api.shotstack.io/{version}/render \
     <span class="hljs-string">"soundtrack"</span>: {
       <span class="hljs-string">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3"</span>,
       <span class="hljs-string">"effect"</span>: <span class="hljs-string">"fadeIn"</span>,
-      <span class="hljs-string">"volume"</span>: <span class="hljs-number">1</span>
+      <span class="hljs-string">"volume"</span>: <span class="hljs-number">0</span>
     },
-    <span class="hljs-string">"background"</span>: <span class="hljs-string">"#000000"</span>,
+    <span class="hljs-string">"background"</span>: <span class="hljs-string">"string"</span>,
     <span class="hljs-string">"fonts"</span>: [
       {
         <span class="hljs-string">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf"</span>
@@ -587,9 +587,9 @@ curl -X POST https://api.shotstack.io/{version}/render \
             },
             <span class="hljs-string">"start"</span>: <span class="hljs-number">2</span>,
             <span class="hljs-string">"length"</span>: <span class="hljs-number">5</span>,
-            <span class="hljs-string">"fit"</span>: <span class="hljs-string">"crop"</span>,
+            <span class="hljs-string">"fit"</span>: <span class="hljs-string">"cover"</span>,
             <span class="hljs-string">"scale"</span>: <span class="hljs-number">0</span>,
-            <span class="hljs-string">"position"</span>: <span class="hljs-string">"center"</span>,
+            <span class="hljs-string">"position"</span>: <span class="hljs-string">"top"</span>,
             <span class="hljs-string">"offset"</span>: {
               <span class="hljs-string">"x"</span>: <span class="hljs-number">0.1</span>,
               <span class="hljs-string">"y"</span>: <span class="hljs-number">-0.2</span>
@@ -600,7 +600,7 @@ curl -X POST https://api.shotstack.io/{version}/render \
             },
             <span class="hljs-string">"effect"</span>: <span class="hljs-string">"zoomIn"</span>,
             <span class="hljs-string">"filter"</span>: <span class="hljs-string">"greyscale"</span>,
-            <span class="hljs-string">"opacity"</span>: <span class="hljs-number">1</span>,
+            <span class="hljs-string">"opacity"</span>: <span class="hljs-number">0</span>,
             <span class="hljs-string">"transform"</span>: {
               <span class="hljs-string">"rotate"</span>: {
                 <span class="hljs-string">"angle"</span>: <span class="hljs-number">45</span>
@@ -783,9 +783,9 @@ System.out.println(response.toString());
     <span class="hljs-attr">"soundtrack"</span>: {
       <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3"</span>,
       <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"fadeIn"</span>,
-      <span class="hljs-attr">"volume"</span>: <span class="hljs-number">1</span>
+      <span class="hljs-attr">"volume"</span>: <span class="hljs-number">0</span>
     },
-    <span class="hljs-attr">"background"</span>: <span class="hljs-string">"#000000"</span>,
+    <span class="hljs-attr">"background"</span>: <span class="hljs-string">"string"</span>,
     <span class="hljs-attr">"fonts"</span>: [
       {
         <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf"</span>
@@ -809,9 +809,9 @@ System.out.println(response.toString());
             },
             <span class="hljs-attr">"start"</span>: <span class="hljs-number">2</span>,
             <span class="hljs-attr">"length"</span>: <span class="hljs-number">5</span>,
-            <span class="hljs-attr">"fit"</span>: <span class="hljs-string">"crop"</span>,
+            <span class="hljs-attr">"fit"</span>: <span class="hljs-string">"cover"</span>,
             <span class="hljs-attr">"scale"</span>: <span class="hljs-number">0</span>,
-            <span class="hljs-attr">"position"</span>: <span class="hljs-string">"center"</span>,
+            <span class="hljs-attr">"position"</span>: <span class="hljs-string">"top"</span>,
             <span class="hljs-attr">"offset"</span>: {
               <span class="hljs-attr">"x"</span>: <span class="hljs-number">0.1</span>,
               <span class="hljs-attr">"y"</span>: <span class="hljs-number">-0.2</span>
@@ -822,7 +822,7 @@ System.out.println(response.toString());
             },
             <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"zoomIn"</span>,
             <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"greyscale"</span>,
-            <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">1</span>,
+            <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">0</span>,
             <span class="hljs-attr">"transform"</span>: {
               <span class="hljs-attr">"rotate"</span>: {
                 <span class="hljs-attr">"angle"</span>: <span class="hljs-number">45</span>
@@ -1241,9 +1241,9 @@ curl -X POST https://api.shotstack.io/{version}/templates \
       <span class="hljs-string">"soundtrack"</span>: {
         <span class="hljs-string">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3"</span>,
         <span class="hljs-string">"effect"</span>: <span class="hljs-string">"fadeIn"</span>,
-        <span class="hljs-string">"volume"</span>: <span class="hljs-number">1</span>
+        <span class="hljs-string">"volume"</span>: <span class="hljs-number">0</span>
       },
-      <span class="hljs-string">"background"</span>: <span class="hljs-string">"#000000"</span>,
+      <span class="hljs-string">"background"</span>: <span class="hljs-string">"string"</span>,
       <span class="hljs-string">"fonts"</span>: [
         {
           <span class="hljs-string">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf"</span>
@@ -1267,9 +1267,9 @@ curl -X POST https://api.shotstack.io/{version}/templates \
               },
               <span class="hljs-string">"start"</span>: <span class="hljs-number">2</span>,
               <span class="hljs-string">"length"</span>: <span class="hljs-number">5</span>,
-              <span class="hljs-string">"fit"</span>: <span class="hljs-string">"crop"</span>,
+              <span class="hljs-string">"fit"</span>: <span class="hljs-string">"cover"</span>,
               <span class="hljs-string">"scale"</span>: <span class="hljs-number">0</span>,
-              <span class="hljs-string">"position"</span>: <span class="hljs-string">"center"</span>,
+              <span class="hljs-string">"position"</span>: <span class="hljs-string">"top"</span>,
               <span class="hljs-string">"offset"</span>: {
                 <span class="hljs-string">"x"</span>: <span class="hljs-number">0.1</span>,
                 <span class="hljs-string">"y"</span>: <span class="hljs-number">-0.2</span>
@@ -1280,7 +1280,7 @@ curl -X POST https://api.shotstack.io/{version}/templates \
               },
               <span class="hljs-string">"effect"</span>: <span class="hljs-string">"zoomIn"</span>,
               <span class="hljs-string">"filter"</span>: <span class="hljs-string">"greyscale"</span>,
-              <span class="hljs-string">"opacity"</span>: <span class="hljs-number">1</span>,
+              <span class="hljs-string">"opacity"</span>: <span class="hljs-number">0</span>,
               <span class="hljs-string">"transform"</span>: {
                 <span class="hljs-string">"rotate"</span>: {
                   <span class="hljs-string">"angle"</span>: <span class="hljs-number">45</span>
@@ -1468,9 +1468,9 @@ before being rendered. <a href="#tocs_mergefield">Merge fields</a> can be also u
       <span class="hljs-attr">"soundtrack"</span>: {
         <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3"</span>,
         <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"fadeIn"</span>,
-        <span class="hljs-attr">"volume"</span>: <span class="hljs-number">1</span>
+        <span class="hljs-attr">"volume"</span>: <span class="hljs-number">0</span>
       },
-      <span class="hljs-attr">"background"</span>: <span class="hljs-string">"#000000"</span>,
+      <span class="hljs-attr">"background"</span>: <span class="hljs-string">"string"</span>,
       <span class="hljs-attr">"fonts"</span>: [
         {
           <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf"</span>
@@ -1494,9 +1494,9 @@ before being rendered. <a href="#tocs_mergefield">Merge fields</a> can be also u
               },
               <span class="hljs-attr">"start"</span>: <span class="hljs-number">2</span>,
               <span class="hljs-attr">"length"</span>: <span class="hljs-number">5</span>,
-              <span class="hljs-attr">"fit"</span>: <span class="hljs-string">"crop"</span>,
+              <span class="hljs-attr">"fit"</span>: <span class="hljs-string">"cover"</span>,
               <span class="hljs-attr">"scale"</span>: <span class="hljs-number">0</span>,
-              <span class="hljs-attr">"position"</span>: <span class="hljs-string">"center"</span>,
+              <span class="hljs-attr">"position"</span>: <span class="hljs-string">"top"</span>,
               <span class="hljs-attr">"offset"</span>: {
                 <span class="hljs-attr">"x"</span>: <span class="hljs-number">0.1</span>,
                 <span class="hljs-attr">"y"</span>: <span class="hljs-number">-0.2</span>
@@ -1507,7 +1507,7 @@ before being rendered. <a href="#tocs_mergefield">Merge fields</a> can be also u
               },
               <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"zoomIn"</span>,
               <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"greyscale"</span>,
-              <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">1</span>,
+              <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">0</span>,
               <span class="hljs-attr">"transform"</span>: {
                 <span class="hljs-attr">"rotate"</span>: {
                   <span class="hljs-attr">"angle"</span>: <span class="hljs-number">45</span>
@@ -2085,9 +2085,9 @@ curl -X PUT https://api.shotstack.io/{version}/templates/{id} \
       <span class="hljs-string">"soundtrack"</span>: {
         <span class="hljs-string">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3"</span>,
         <span class="hljs-string">"effect"</span>: <span class="hljs-string">"fadeIn"</span>,
-        <span class="hljs-string">"volume"</span>: <span class="hljs-number">1</span>
+        <span class="hljs-string">"volume"</span>: <span class="hljs-number">0</span>
       },
-      <span class="hljs-string">"background"</span>: <span class="hljs-string">"#000000"</span>,
+      <span class="hljs-string">"background"</span>: <span class="hljs-string">"string"</span>,
       <span class="hljs-string">"fonts"</span>: [
         {
           <span class="hljs-string">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf"</span>
@@ -2111,9 +2111,9 @@ curl -X PUT https://api.shotstack.io/{version}/templates/{id} \
               },
               <span class="hljs-string">"start"</span>: <span class="hljs-number">2</span>,
               <span class="hljs-string">"length"</span>: <span class="hljs-number">5</span>,
-              <span class="hljs-string">"fit"</span>: <span class="hljs-string">"crop"</span>,
+              <span class="hljs-string">"fit"</span>: <span class="hljs-string">"cover"</span>,
               <span class="hljs-string">"scale"</span>: <span class="hljs-number">0</span>,
-              <span class="hljs-string">"position"</span>: <span class="hljs-string">"center"</span>,
+              <span class="hljs-string">"position"</span>: <span class="hljs-string">"top"</span>,
               <span class="hljs-string">"offset"</span>: {
                 <span class="hljs-string">"x"</span>: <span class="hljs-number">0.1</span>,
                 <span class="hljs-string">"y"</span>: <span class="hljs-number">-0.2</span>
@@ -2124,7 +2124,7 @@ curl -X PUT https://api.shotstack.io/{version}/templates/{id} \
               },
               <span class="hljs-string">"effect"</span>: <span class="hljs-string">"zoomIn"</span>,
               <span class="hljs-string">"filter"</span>: <span class="hljs-string">"greyscale"</span>,
-              <span class="hljs-string">"opacity"</span>: <span class="hljs-number">1</span>,
+              <span class="hljs-string">"opacity"</span>: <span class="hljs-number">0</span>,
               <span class="hljs-string">"transform"</span>: {
                 <span class="hljs-string">"rotate"</span>: {
                   <span class="hljs-string">"angle"</span>: <span class="hljs-number">45</span>
@@ -2310,9 +2310,9 @@ System.out.println(response.toString());
       <span class="hljs-attr">"soundtrack"</span>: {
         <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3"</span>,
         <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"fadeIn"</span>,
-        <span class="hljs-attr">"volume"</span>: <span class="hljs-number">1</span>
+        <span class="hljs-attr">"volume"</span>: <span class="hljs-number">0</span>
       },
-      <span class="hljs-attr">"background"</span>: <span class="hljs-string">"#000000"</span>,
+      <span class="hljs-attr">"background"</span>: <span class="hljs-string">"string"</span>,
       <span class="hljs-attr">"fonts"</span>: [
         {
           <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf"</span>
@@ -2336,9 +2336,9 @@ System.out.println(response.toString());
               },
               <span class="hljs-attr">"start"</span>: <span class="hljs-number">2</span>,
               <span class="hljs-attr">"length"</span>: <span class="hljs-number">5</span>,
-              <span class="hljs-attr">"fit"</span>: <span class="hljs-string">"crop"</span>,
+              <span class="hljs-attr">"fit"</span>: <span class="hljs-string">"cover"</span>,
               <span class="hljs-attr">"scale"</span>: <span class="hljs-number">0</span>,
-              <span class="hljs-attr">"position"</span>: <span class="hljs-string">"center"</span>,
+              <span class="hljs-attr">"position"</span>: <span class="hljs-string">"top"</span>,
               <span class="hljs-attr">"offset"</span>: {
                 <span class="hljs-attr">"x"</span>: <span class="hljs-number">0.1</span>,
                 <span class="hljs-attr">"y"</span>: <span class="hljs-number">-0.2</span>
@@ -2349,7 +2349,7 @@ System.out.println(response.toString());
               },
               <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"zoomIn"</span>,
               <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"greyscale"</span>,
-              <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">1</span>,
+              <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">0</span>,
               <span class="hljs-attr">"transform"</span>: {
                 <span class="hljs-attr">"rotate"</span>: {
                   <span class="hljs-attr">"angle"</span>: <span class="hljs-number">45</span>
@@ -3625,9 +3625,9 @@ DeveloperKey
     <span class="hljs-attr">"soundtrack"</span>: {
       <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3"</span>,
       <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"fadeIn"</span>,
-      <span class="hljs-attr">"volume"</span>: <span class="hljs-number">1</span>
+      <span class="hljs-attr">"volume"</span>: <span class="hljs-number">0</span>
     },
-    <span class="hljs-attr">"background"</span>: <span class="hljs-string">"#000000"</span>,
+    <span class="hljs-attr">"background"</span>: <span class="hljs-string">"string"</span>,
     <span class="hljs-attr">"fonts"</span>: [
       {
         <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf"</span>
@@ -3651,9 +3651,9 @@ DeveloperKey
             },
             <span class="hljs-attr">"start"</span>: <span class="hljs-number">2</span>,
             <span class="hljs-attr">"length"</span>: <span class="hljs-number">5</span>,
-            <span class="hljs-attr">"fit"</span>: <span class="hljs-string">"crop"</span>,
+            <span class="hljs-attr">"fit"</span>: <span class="hljs-string">"cover"</span>,
             <span class="hljs-attr">"scale"</span>: <span class="hljs-number">0</span>,
-            <span class="hljs-attr">"position"</span>: <span class="hljs-string">"center"</span>,
+            <span class="hljs-attr">"position"</span>: <span class="hljs-string">"top"</span>,
             <span class="hljs-attr">"offset"</span>: {
               <span class="hljs-attr">"x"</span>: <span class="hljs-number">0.1</span>,
               <span class="hljs-attr">"y"</span>: <span class="hljs-number">-0.2</span>
@@ -3664,7 +3664,7 @@ DeveloperKey
             },
             <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"zoomIn"</span>,
             <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"greyscale"</span>,
-            <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">1</span>,
+            <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">0</span>,
             <span class="hljs-attr">"transform"</span>: {
               <span class="hljs-attr">"rotate"</span>: {
                 <span class="hljs-attr">"angle"</span>: <span class="hljs-number">45</span>
@@ -3803,9 +3803,9 @@ DeveloperKey
   <span class="hljs-attr">"soundtrack"</span>: {
     <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3"</span>,
     <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"fadeIn"</span>,
-    <span class="hljs-attr">"volume"</span>: <span class="hljs-number">1</span>
+    <span class="hljs-attr">"volume"</span>: <span class="hljs-number">0</span>
   },
-  <span class="hljs-attr">"background"</span>: <span class="hljs-string">"#000000"</span>,
+  <span class="hljs-attr">"background"</span>: <span class="hljs-string">"string"</span>,
   <span class="hljs-attr">"fonts"</span>: [
     {
       <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf"</span>
@@ -3829,9 +3829,9 @@ DeveloperKey
           },
           <span class="hljs-attr">"start"</span>: <span class="hljs-number">2</span>,
           <span class="hljs-attr">"length"</span>: <span class="hljs-number">5</span>,
-          <span class="hljs-attr">"fit"</span>: <span class="hljs-string">"crop"</span>,
+          <span class="hljs-attr">"fit"</span>: <span class="hljs-string">"cover"</span>,
           <span class="hljs-attr">"scale"</span>: <span class="hljs-number">0</span>,
-          <span class="hljs-attr">"position"</span>: <span class="hljs-string">"center"</span>,
+          <span class="hljs-attr">"position"</span>: <span class="hljs-string">"top"</span>,
           <span class="hljs-attr">"offset"</span>: {
             <span class="hljs-attr">"x"</span>: <span class="hljs-number">0.1</span>,
             <span class="hljs-attr">"y"</span>: <span class="hljs-number">-0.2</span>
@@ -3842,7 +3842,7 @@ DeveloperKey
           },
           <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"zoomIn"</span>,
           <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"greyscale"</span>,
-          <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">1</span>,
+          <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">0</span>,
           <span class="hljs-attr">"transform"</span>: {
             <span class="hljs-attr">"rotate"</span>: {
               <span class="hljs-attr">"angle"</span>: <span class="hljs-number">45</span>
@@ -3922,7 +3922,7 @@ DeveloperKey
 <pre class="highlight tab tab-json"><code>{
   <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3"</span>,
   <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"fadeIn"</span>,
-  <span class="hljs-attr">"volume"</span>: <span class="hljs-number">1</span>
+  <span class="hljs-attr">"volume"</span>: <span class="hljs-number">0</span>
 }
 
 </code></pre>
@@ -4039,9 +4039,9 @@ DeveloperKey
       },
       <span class="hljs-attr">"start"</span>: <span class="hljs-number">2</span>,
       <span class="hljs-attr">"length"</span>: <span class="hljs-number">5</span>,
-      <span class="hljs-attr">"fit"</span>: <span class="hljs-string">"crop"</span>,
+      <span class="hljs-attr">"fit"</span>: <span class="hljs-string">"cover"</span>,
       <span class="hljs-attr">"scale"</span>: <span class="hljs-number">0</span>,
-      <span class="hljs-attr">"position"</span>: <span class="hljs-string">"center"</span>,
+      <span class="hljs-attr">"position"</span>: <span class="hljs-string">"top"</span>,
       <span class="hljs-attr">"offset"</span>: {
         <span class="hljs-attr">"x"</span>: <span class="hljs-number">0.1</span>,
         <span class="hljs-attr">"y"</span>: <span class="hljs-number">-0.2</span>
@@ -4052,7 +4052,7 @@ DeveloperKey
       },
       <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"zoomIn"</span>,
       <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"greyscale"</span>,
-      <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">1</span>,
+      <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">0</span>,
       <span class="hljs-attr">"transform"</span>: {
         <span class="hljs-attr">"rotate"</span>: {
           <span class="hljs-attr">"angle"</span>: <span class="hljs-number">45</span>
@@ -4113,9 +4113,9 @@ DeveloperKey
   },
   <span class="hljs-attr">"start"</span>: <span class="hljs-number">2</span>,
   <span class="hljs-attr">"length"</span>: <span class="hljs-number">5</span>,
-  <span class="hljs-attr">"fit"</span>: <span class="hljs-string">"crop"</span>,
+  <span class="hljs-attr">"fit"</span>: <span class="hljs-string">"cover"</span>,
   <span class="hljs-attr">"scale"</span>: <span class="hljs-number">0</span>,
-  <span class="hljs-attr">"position"</span>: <span class="hljs-string">"center"</span>,
+  <span class="hljs-attr">"position"</span>: <span class="hljs-string">"top"</span>,
   <span class="hljs-attr">"offset"</span>: {
     <span class="hljs-attr">"x"</span>: <span class="hljs-number">0.1</span>,
     <span class="hljs-attr">"y"</span>: <span class="hljs-number">-0.2</span>
@@ -4126,7 +4126,7 @@ DeveloperKey
   },
   <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"zoomIn"</span>,
   <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"greyscale"</span>,
-  <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">1</span>,
+  <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">0</span>,
   <span class="hljs-attr">"transform"</span>: {
     <span class="hljs-attr">"rotate"</span>: {
       <span class="hljs-attr">"angle"</span>: <span class="hljs-number">45</span>
@@ -4182,7 +4182,7 @@ DeveloperKey
 <td>string</td>
 <td>false</td>
 <td>none</td>
-<td>Set how the asset should be scaled to fit the viewport using one of the following options: <br />  <ul><br />    <li><code>cover</code> - stretch the asset to fill the viewport without maintaining the aspect ratio.</li><br />    <li><code>contain</code> - fit the entire asset within the viewport while maintaining the original aspect ratio.</li><br />    <li><code>crop</code> - scale the asset to fill the viewport while maintaining the aspect ratio. The asset will be cropped if it exceeds the bounds of the viewport.</li><br />    <li><code>none</code> - preserves the original asset dimensions and does not apply any scaling.</li><br />  </ul></td>
+<td>Set how the asset should be scaled to fit the viewport using one of the following options: <br />  <ul><br />    <li><code>cover</code> - stretch the asset to fill the viewport without maintaining the aspect ratio.</li><br />    <li><code>contain</code> - fit the entire asset within the viewport while maintaining the original aspect ratio.</li><br />    <li><code>crop</code> (default) - scale the asset to fill the viewport while maintaining the aspect ratio. The asset will be cropped if it exceeds the bounds of the viewport.</li><br />    <li><code>none</code> - preserves the original asset dimensions and does not apply any scaling.</li><br />  </ul></td>
 </tr>
 <tr>
 <td>scale</td>
@@ -4644,10 +4644,10 @@ must be one of:
   <span class="hljs-attr">"type"</span>: <span class="hljs-string">"title"</span>,
   <span class="hljs-attr">"text"</span>: <span class="hljs-string">"Hello World"</span>,
   <span class="hljs-attr">"style"</span>: <span class="hljs-string">"minimal"</span>,
-  <span class="hljs-attr">"color"</span>: <span class="hljs-string">"#ffffff"</span>,
-  <span class="hljs-attr">"size"</span>: <span class="hljs-string">"medium"</span>,
+  <span class="hljs-attr">"color"</span>: <span class="hljs-string">"string"</span>,
+  <span class="hljs-attr">"size"</span>: <span class="hljs-string">"xx-small"</span>,
   <span class="hljs-attr">"background"</span>: <span class="hljs-string">"#000000"</span>,
-  <span class="hljs-attr">"position"</span>: <span class="hljs-string">"center"</span>,
+  <span class="hljs-attr">"position"</span>: <span class="hljs-string">"top"</span>,
   <span class="hljs-attr">"offset"</span>: {
     <span class="hljs-attr">"x"</span>: <span class="hljs-number">0.1</span>,
     <span class="hljs-attr">"y"</span>: <span class="hljs-number">-0.2</span>
@@ -4852,8 +4852,8 @@ must be one of:
   <span class="hljs-attr">"css"</span>: <span class="hljs-string">"p { color: #ffffff; } b { color: #ffff00; }"</span>,
   <span class="hljs-attr">"width"</span>: <span class="hljs-number">400</span>,
   <span class="hljs-attr">"height"</span>: <span class="hljs-number">200</span>,
-  <span class="hljs-attr">"background"</span>: <span class="hljs-string">"transparent"</span>,
-  <span class="hljs-attr">"position"</span>: <span class="hljs-string">"center"</span>
+  <span class="hljs-attr">"background"</span>: <span class="hljs-string">"string"</span>,
+  <span class="hljs-attr">"position"</span>: <span class="hljs-string">"top"</span>
 }
 
 </code></pre>
@@ -4977,7 +4977,7 @@ must be one of:
   <span class="hljs-attr">"type"</span>: <span class="hljs-string">"audio"</span>,
   <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/sound.mp3"</span>,
   <span class="hljs-attr">"trim"</span>: <span class="hljs-number">0</span>,
-  <span class="hljs-attr">"volume"</span>: <span class="hljs-number">1</span>,
+  <span class="hljs-attr">"volume"</span>: <span class="hljs-number">0</span>,
   <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"fadeIn"</span>
 }
 
@@ -6015,7 +6015,7 @@ must be one of:
 <td>string</td>
 <td>false</td>
 <td>none</td>
-<td>The aspect ratio (shape) of the video or image. Useful for social media output formats. Options are: <ul><br />  <li><code>16:9</code> - regular landscape/horizontal aspect ratio (default)</li><br />  <li><code>9:16</code> - vertical/portrait aspect ratio</li><br />  <li><code>1:1</code> - square aspect ratio</li><br />  <li><code>4:5</code> - short vertical/portrait aspect ratio</li><br />  <li><code>4:3</code> - legacy TV aspect ratio</li><br /></ul></td>
+<td>The aspect ratio (shape) of the video or image. Useful for social media output formats. Options are: <ul><br />  <li><code>16:9</code> (default) - regular landscape/horizontal aspect ratio</li><br />  <li><code>9:16</code> - vertical/portrait aspect ratio</li><br />  <li><code>1:1</code> - square aspect ratio</li><br />  <li><code>4:5</code> - short vertical/portrait aspect ratio</li><br />  <li><code>4:3</code> - legacy TV aspect ratio</li><br /></ul></td>
 </tr>
 <tr>
 <td>size</td>
@@ -6029,7 +6029,7 @@ must be one of:
 <td>number</td>
 <td>false</td>
 <td>none</td>
-<td>Override the default frames per second. Useful for when the source footage is recorded at 30fps, i.e. on  mobile devices. Lower frame rates can be used to add cinematic quality (24fps) or to create smaller file size/faster render times or animated gifs (12 or 15fps). Default is 25fps. <ul><br />  <li><code>12</code> - 12fps</li><br />  <li><code>15</code> - 15fps</li><br />  <li><code>24</code> - 24fps</li><br />  <li><code>23.976</code> - 23.976fps</li><br />  <li><code>25</code> - 25fps</li><br />  <li><code>29.97</code> - 29.97fps</li><br />  <li><code>30</code> - 30fps</li><br /></ul></td>
+<td>Override the default frames per second. Useful for when the source footage is recorded at 30fps, i.e. on  mobile devices. Lower frame rates can be used to add cinematic quality (24fps) or to create smaller file size/faster render times or animated gifs (12 or 15fps). Default is 25fps. <ul><br />  <li><code>12</code> - 12fps</li><br />  <li><code>15</code> - 15fps</li><br />  <li><code>24</code> - 24fps</li><br />  <li><code>23.976</code> - 23.976fps</li><br />  <li><code>25</code> (default) - 25fps</li><br />  <li><code>29.97</code> - 29.97fps</li><br />  <li><code>30</code> - 30fps</li><br /></ul></td>
 </tr>
 <tr>
 <td>scaleTo</td>
@@ -6558,9 +6558,9 @@ must be one of:
       <span class="hljs-attr">"soundtrack"</span>: {
         <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3"</span>,
         <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"fadeIn"</span>,
-        <span class="hljs-attr">"volume"</span>: <span class="hljs-number">1</span>
+        <span class="hljs-attr">"volume"</span>: <span class="hljs-number">0</span>
       },
-      <span class="hljs-attr">"background"</span>: <span class="hljs-string">"#000000"</span>,
+      <span class="hljs-attr">"background"</span>: <span class="hljs-string">"string"</span>,
       <span class="hljs-attr">"fonts"</span>: [
         {
           <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf"</span>
@@ -6584,9 +6584,9 @@ must be one of:
               },
               <span class="hljs-attr">"start"</span>: <span class="hljs-number">2</span>,
               <span class="hljs-attr">"length"</span>: <span class="hljs-number">5</span>,
-              <span class="hljs-attr">"fit"</span>: <span class="hljs-string">"crop"</span>,
+              <span class="hljs-attr">"fit"</span>: <span class="hljs-string">"cover"</span>,
               <span class="hljs-attr">"scale"</span>: <span class="hljs-number">0</span>,
-              <span class="hljs-attr">"position"</span>: <span class="hljs-string">"center"</span>,
+              <span class="hljs-attr">"position"</span>: <span class="hljs-string">"top"</span>,
               <span class="hljs-attr">"offset"</span>: {
                 <span class="hljs-attr">"x"</span>: <span class="hljs-number">0.1</span>,
                 <span class="hljs-attr">"y"</span>: <span class="hljs-number">-0.2</span>
@@ -6597,7 +6597,7 @@ must be one of:
               },
               <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"zoomIn"</span>,
               <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"greyscale"</span>,
-              <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">1</span>,
+              <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">0</span>,
               <span class="hljs-attr">"transform"</span>: {
                 <span class="hljs-attr">"rotate"</span>: {
                   <span class="hljs-attr">"angle"</span>: <span class="hljs-number">45</span>
@@ -6848,9 +6848,9 @@ must be one of:
         <span class="hljs-attr">"soundtrack"</span>: {
           <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3"</span>,
           <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"fadeIn"</span>,
-          <span class="hljs-attr">"volume"</span>: <span class="hljs-number">1</span>
+          <span class="hljs-attr">"volume"</span>: <span class="hljs-number">0</span>
         },
-        <span class="hljs-attr">"background"</span>: <span class="hljs-string">"#000000"</span>,
+        <span class="hljs-attr">"background"</span>: <span class="hljs-string">"string"</span>,
         <span class="hljs-attr">"fonts"</span>: [
           {
             <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf"</span>
@@ -6874,9 +6874,9 @@ must be one of:
                 },
                 <span class="hljs-attr">"start"</span>: <span class="hljs-number">2</span>,
                 <span class="hljs-attr">"length"</span>: <span class="hljs-number">5</span>,
-                <span class="hljs-attr">"fit"</span>: <span class="hljs-string">"crop"</span>,
+                <span class="hljs-attr">"fit"</span>: <span class="hljs-string">"cover"</span>,
                 <span class="hljs-attr">"scale"</span>: <span class="hljs-number">0</span>,
-                <span class="hljs-attr">"position"</span>: <span class="hljs-string">"center"</span>,
+                <span class="hljs-attr">"position"</span>: <span class="hljs-string">"top"</span>,
                 <span class="hljs-attr">"offset"</span>: {
                   <span class="hljs-attr">"x"</span>: <span class="hljs-number">0.1</span>,
                   <span class="hljs-attr">"y"</span>: <span class="hljs-number">-0.2</span>
@@ -6887,7 +6887,7 @@ must be one of:
                 },
                 <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"zoomIn"</span>,
                 <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"greyscale"</span>,
-                <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">1</span>,
+                <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">0</span>,
                 <span class="hljs-attr">"transform"</span>: {
                   <span class="hljs-attr">"rotate"</span>: {
                     <span class="hljs-attr">"angle"</span>: <span class="hljs-number">45</span>
@@ -7009,9 +7009,9 @@ must be one of:
       <span class="hljs-attr">"soundtrack"</span>: {
         <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3"</span>,
         <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"fadeIn"</span>,
-        <span class="hljs-attr">"volume"</span>: <span class="hljs-number">1</span>
+        <span class="hljs-attr">"volume"</span>: <span class="hljs-number">0</span>
       },
-      <span class="hljs-attr">"background"</span>: <span class="hljs-string">"#000000"</span>,
+      <span class="hljs-attr">"background"</span>: <span class="hljs-string">"string"</span>,
       <span class="hljs-attr">"fonts"</span>: [
         {
           <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf"</span>
@@ -7035,9 +7035,9 @@ must be one of:
               },
               <span class="hljs-attr">"start"</span>: <span class="hljs-number">2</span>,
               <span class="hljs-attr">"length"</span>: <span class="hljs-number">5</span>,
-              <span class="hljs-attr">"fit"</span>: <span class="hljs-string">"crop"</span>,
+              <span class="hljs-attr">"fit"</span>: <span class="hljs-string">"cover"</span>,
               <span class="hljs-attr">"scale"</span>: <span class="hljs-number">0</span>,
-              <span class="hljs-attr">"position"</span>: <span class="hljs-string">"center"</span>,
+              <span class="hljs-attr">"position"</span>: <span class="hljs-string">"top"</span>,
               <span class="hljs-attr">"offset"</span>: {
                 <span class="hljs-attr">"x"</span>: <span class="hljs-number">0.1</span>,
                 <span class="hljs-attr">"y"</span>: <span class="hljs-number">-0.2</span>
@@ -7048,7 +7048,7 @@ must be one of:
               },
               <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"zoomIn"</span>,
               <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"greyscale"</span>,
-              <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">1</span>,
+              <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">0</span>,
               <span class="hljs-attr">"transform"</span>: {
                 <span class="hljs-attr">"rotate"</span>: {
                   <span class="hljs-attr">"angle"</span>: <span class="hljs-number">45</span>
@@ -7198,21 +7198,21 @@ must be one of:
 <tr>
 <td>data</td>
 <td><a href="#schemaedit">Edit</a></td>
-<td>true</td>
+<td>false</td>
 <td>none</td>
 <td>The timeline and output data to be rendered.</td>
 </tr>
 <tr>
 <td>created</td>
 <td>string</td>
-<td>true</td>
+<td>false</td>
 <td>none</td>
 <td>The time the render task was initially queued.</td>
 </tr>
 <tr>
 <td>updated</td>
 <td>string</td>
-<td>true</td>
+<td>false</td>
 <td>none</td>
 <td>The time the render status was last updated.</td>
 </tr>
@@ -7735,14 +7735,14 @@ must be one of:
 <tr>
 <td>created</td>
 <td>string</td>
-<td>true</td>
+<td>false</td>
 <td>none</td>
 <td>The time the template was created.</td>
 </tr>
 <tr>
 <td>updated</td>
 <td>string</td>
-<td>true</td>
+<td>false</td>
 <td>none</td>
 <td>The time the template was last updated.</td>
 </tr>
@@ -8011,7 +8011,7 @@ must be one of:
 <tr>
 <td>filename</td>
 <td>string</td>
-<td>true</td>
+<td>false</td>
 <td>none</td>
 <td>The asset file name.</td>
 </tr>
@@ -8032,14 +8032,14 @@ must be one of:
 <tr>
 <td>created</td>
 <td>string</td>
-<td>true</td>
+<td>false</td>
 <td>none</td>
 <td>The time the asset was created.</td>
 </tr>
 <tr>
 <td>updated</td>
 <td>string</td>
-<td>true</td>
+<td>false</td>
 <td>none</td>
 <td>The time the asset status was last updated.</td>
 </tr>
