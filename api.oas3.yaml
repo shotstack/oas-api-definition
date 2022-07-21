@@ -443,7 +443,6 @@ components:
           enum:
             - local
             - mount
-          default: local
       required:
         - timeline
         - output
@@ -465,7 +464,6 @@ components:
             A hexadecimal value for the timeline background colour. Defaults to
             #000000 (black).
           type: string
-          default: "#000000"
         fonts:
           description: An array of custom fonts to be downloaded for use by the HTML assets.
           type: array
@@ -486,7 +484,6 @@ components:
             Disable the caching of ingested source footage and assets. See 
             [caching](https://shotstack.io/docs/guide/architecting-an-application/caching) for more details.
           type: boolean
-          default: true
       required:
         - tracks
       type: object
@@ -520,7 +517,6 @@ components:
             Set the volume for the soundtrack between 0 and 1 where 0 is muted and 1
             is full volume (defaults to 1).
           type: number
-          default: 1
       required:
         - src
       type: object
@@ -571,13 +567,12 @@ components:
           type: number
           example: 5
         fit:
-          default: crop
           description: >-
             Set how the asset should be scaled to fit the viewport using one of the following options: 
               <ul>
                 <li>`cover` - stretch the asset to fill the viewport without maintaining the aspect ratio.</li>
                 <li>`contain` - fit the entire asset within the viewport while maintaining the original aspect ratio.</li>
-                <li>`crop` - scale the asset to fill the viewport while maintaining the aspect ratio. The asset will be cropped if it exceeds the bounds of the viewport.</li>
+                <li>`crop` (default) - scale the asset to fill the viewport while maintaining the aspect ratio. The asset will be cropped if it exceeds the bounds of the viewport.</li>
                 <li>`none` - preserves the original asset dimensions and does not apply any scaling.</li>
               </ul>
           enum:
@@ -594,7 +589,6 @@ components:
           type: number
           example: 0
         position:
-          default: center
           description: >-
             Place the asset in one of nine predefined positions of the viewport. This is most effective
             for when the asset is scaled and you want to position the element to a specific position.
@@ -673,7 +667,6 @@ components:
         opacity:
           description: Sets the opacity of the Clip where 1 is opaque and 0 is transparent.
           type: number
-          default: 1
         transform:
           description: >-
             A transformation lets you modify the visual properties of a clip. Available
@@ -810,14 +803,12 @@ components:
             - subtitle
           type: string
         color:
-          default: "#ffffff"
           description: >-
             Set the text color using hexadecimal color notation. Transparency is supported by setting the
             first two characters of the hex string (opposite to HTML),  i.e. #80ffffff will be white with 
             50% transparency.
           type: string
         size:
-          default: medium
           description: >-
             Set the relative size of the text using predefined sizes from
             xx-small to xx-large.
@@ -847,7 +838,6 @@ components:
           type: string
           example: "#000000"
         position:
-          default: center
           description: >-
             Place the title in one of nine predefined positions of the viewport.
             <ul>
@@ -921,9 +911,7 @@ components:
             color notation. Transparency is supported by setting the first two characters of the hex string 
             (opposite to HTML), i.e. #80ffffff will be white with 50% transparency.
           type: string
-          default: transparent
         position:
-          default: center
           description: >-
             Place the HTML in one of nine predefined positions within the HTML area.
             <ul>
@@ -980,7 +968,6 @@ components:
             Set the volume for the audio clip between 0 and 1 where 0 is muted and 1
             is full volume (defaults to 1).
           type: number
-          default: 1
         effect:
           description: >-
             The effect to apply to the audio asset
@@ -1229,7 +1216,6 @@ components:
           format: float
           minimum: -1
           maximum: 1
-          default: 0
           example: 0.1
         y:
           description: >-
@@ -1242,7 +1228,6 @@ components:
           format: float
           minimum: -1
           maximum: 1
-          default: 0
           example: -0.2
       type: object
 
@@ -1305,7 +1290,6 @@ components:
             positive number rotates the clip clockwise, negative numbers
             counter-clockwise.
           type: integer
-          default: 0
           example: 45
 
     SkewTransformation:
@@ -1318,13 +1302,11 @@ components:
           description: Skew the clip along it's x axis.
           type: number
           format: float
-          default: 0
           example: 0.5
         y:
           description: Skew the clip along it's y axis.
           type: number
           format: float
-          default: 0
           example: 0.5
 
     FlipTransformation:
@@ -1336,12 +1318,10 @@ components:
         horizontal:
           description: Flip a clip horizontally.
           type: boolean
-          default: false
           example: true
         vertical:
           description: Flip a clip vertically.
           type: boolean
-          default: false
           example: true
 
     MergeField:
@@ -1409,7 +1389,7 @@ components:
           description: >-
             The aspect ratio (shape) of the video or image. Useful for social media output formats. Options are:
             <ul>
-              <li>`16:9` - regular landscape/horizontal aspect ratio (default)</li>
+              <li>`16:9` (default) - regular landscape/horizontal aspect ratio</li>
               <li>`9:16` - vertical/portrait aspect ratio</li>
               <li>`1:1` - square aspect ratio</li>
               <li>`4:5` - short vertical/portrait aspect ratio</li>
@@ -1435,7 +1415,7 @@ components:
               <li>`15` - 15fps</li>
               <li>`24` - 24fps</li>
               <li>`23.976` - 23.976fps</li>
-              <li>`25` - 25fps</li>
+              <li>`25` (default) - 25fps</li>
               <li>`29.97` - 29.97fps</li>
               <li>`30` - 30fps</li>
             </ul>
@@ -1477,7 +1457,7 @@ components:
             factors.
             <ul>
               <li>`low` - slightly reduced quality, smaller file size</li>
-              <li>`medium` - optimized quality, render speeds and file size</li>
+              <li>`medium` (default) - optimized quality, render speeds and file size</li>
               <li>`high` - slightly increased quality, larger file size</li>
             </ul>
           enum:
@@ -1486,12 +1466,10 @@ components:
             - high
           type: string
           example: medium
-          default: medium
         repeat:
           description: Loop settings for gif files. Set to `true` to loop, `false` to play only once.
           type: boolean
           example: true
-          default: true
         range:
           $ref: "#/components/schemas/Range"
         poster:
@@ -1619,7 +1597,6 @@ components:
             Set to `true` to opt-out from the Shotstack hosting and CDN service. All files must be downloaded within
             24 hours of rendering.
           type: boolean
-          default: false
           example: false
       type: object
       required:
