@@ -1827,9 +1827,6 @@ components:
         - status
         - id
         - owner
-        - data
-        - created
-        - updated
       type: object
 
     TemplateResponse:
@@ -1981,8 +1978,6 @@ components:
       required:
         - id
         - name
-        - created
-        - updated
 
     ProbeResponse:
       description: >-
@@ -2109,10 +2104,7 @@ components:
       required:
         - id
         - owner
-        - filename
         - status
-        - created
-        - updated
       type: object
   responses: {}
   parameters: {}

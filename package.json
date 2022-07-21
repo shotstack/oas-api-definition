@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rm -R build",
     "build": "./build-docs.sh && ./build-sdks.sh",
     "docs": "./build-docs.sh",
     "sdks": "./build-sdks.sh",
