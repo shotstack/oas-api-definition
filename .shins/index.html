@@ -1969,69 +1969,104 @@ System.out.println(response.toString());
       <span class="hljs-attr">"timeline"</span>: {
         <span class="hljs-attr">"soundtrack"</span>: {
           <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3"</span>,
-          <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"fadeInFadeOut"</span>
+          <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"fadeIn"</span>,
+          <span class="hljs-attr">"volume"</span>: <span class="hljs-number">0</span>
         },
-        <span class="hljs-attr">"background"</span>: <span class="hljs-string">"#000000"</span>,
+        <span class="hljs-attr">"background"</span>: <span class="hljs-string">"string"</span>,
+        <span class="hljs-attr">"fonts"</span>: [
+          {
+            <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf"</span>
+          }
+        ],
         <span class="hljs-attr">"tracks"</span>: [
           {
             <span class="hljs-attr">"clips"</span>: [
               {
                 <span class="hljs-attr">"asset"</span>: {
-                  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"title"</span>,
-                  <span class="hljs-attr">"text"</span>: <span class="hljs-string">"Hello World"</span>,
-                  <span class="hljs-attr">"style"</span>: <span class="hljs-string">"minimal"</span>
+                  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"video"</span>,
+                  <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4"</span>,
+                  <span class="hljs-attr">"trim"</span>: <span class="hljs-number">2</span>,
+                  <span class="hljs-attr">"volume"</span>: <span class="hljs-number">1</span>,
+                  <span class="hljs-attr">"crop"</span>: {
+                    <span class="hljs-attr">"top"</span>: <span class="hljs-number">0.15</span>,
+                    <span class="hljs-attr">"bottom"</span>: <span class="hljs-number">0.15</span>,
+                    <span class="hljs-attr">"left"</span>: <span class="hljs-number">0</span>,
+                    <span class="hljs-attr">"right"</span>: <span class="hljs-number">0</span>
+                  }
                 },
-                <span class="hljs-attr">"start"</span>: <span class="hljs-number">0</span>,
-                <span class="hljs-attr">"length"</span>: <span class="hljs-number">4</span>,
+                <span class="hljs-attr">"start"</span>: <span class="hljs-number">2</span>,
+                <span class="hljs-attr">"length"</span>: <span class="hljs-number">5</span>,
+                <span class="hljs-attr">"fit"</span>: <span class="hljs-string">"cover"</span>,
+                <span class="hljs-attr">"scale"</span>: <span class="hljs-number">0</span>,
+                <span class="hljs-attr">"position"</span>: <span class="hljs-string">"top"</span>,
+                <span class="hljs-attr">"offset"</span>: {
+                  <span class="hljs-attr">"x"</span>: <span class="hljs-number">0.1</span>,
+                  <span class="hljs-attr">"y"</span>: <span class="hljs-number">-0.2</span>
+                },
                 <span class="hljs-attr">"transition"</span>: {
                   <span class="hljs-attr">"in"</span>: <span class="hljs-string">"fade"</span>,
                   <span class="hljs-attr">"out"</span>: <span class="hljs-string">"fade"</span>
                 },
-                <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"slideRight"</span>
-              },
-              {
-                <span class="hljs-attr">"asset"</span>: {
-                  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"image"</span>,
-                  <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/my-image.jpg"</span>
-                },
-                <span class="hljs-attr">"start"</span>: <span class="hljs-number">3</span>,
-                <span class="hljs-attr">"length"</span>: <span class="hljs-number">4</span>,
                 <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"zoomIn"</span>,
-                <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"greyscale"</span>
-              }
-            ]
-          },
-          {
-            <span class="hljs-attr">"clips"</span>: [
-              {
-                <span class="hljs-attr">"asset"</span>: {
-                  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"video"</span>,
-                  <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/my-clip-1.mp4"</span>,
-                  <span class="hljs-attr">"trim"</span>: <span class="hljs-number">10.5</span>
-                },
-                <span class="hljs-attr">"start"</span>: <span class="hljs-number">7</span>,
-                <span class="hljs-attr">"length"</span>: <span class="hljs-number">4.5</span>
-              },
-              {
-                <span class="hljs-attr">"asset"</span>: {
-                  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"video"</span>,
-                  <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/my-clip-2.mp4"</span>,
-                  <span class="hljs-attr">"volume"</span>: <span class="hljs-number">0.5</span>
-                },
-                <span class="hljs-attr">"start"</span>: <span class="hljs-number">11.5</span>,
-                <span class="hljs-attr">"length"</span>: <span class="hljs-number">5</span>,
-                <span class="hljs-attr">"transition"</span>: {
-                  <span class="hljs-attr">"out"</span>: <span class="hljs-string">"wipeLeft"</span>
+                <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"greyscale"</span>,
+                <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">0</span>,
+                <span class="hljs-attr">"transform"</span>: {
+                  <span class="hljs-attr">"rotate"</span>: {
+                    <span class="hljs-attr">"angle"</span>: <span class="hljs-number">45</span>
+                  },
+                  <span class="hljs-attr">"skew"</span>: {
+                    <span class="hljs-attr">"x"</span>: <span class="hljs-number">0.5</span>,
+                    <span class="hljs-attr">"y"</span>: <span class="hljs-number">0.5</span>
+                  },
+                  <span class="hljs-attr">"flip"</span>: {
+                    <span class="hljs-attr">"horizontal"</span>: <span class="hljs-literal">true</span>,
+                    <span class="hljs-attr">"vertical"</span>: <span class="hljs-literal">true</span>
+                  }
                 }
               }
             ]
           }
-        ]
+        ],
+        <span class="hljs-attr">"cache"</span>: <span class="hljs-literal">true</span>
       },
       <span class="hljs-attr">"output"</span>: {
         <span class="hljs-attr">"format"</span>: <span class="hljs-string">"mp4"</span>,
-        <span class="hljs-attr">"resolution"</span>: <span class="hljs-string">"sd"</span>
-      }
+        <span class="hljs-attr">"resolution"</span>: <span class="hljs-string">"sd"</span>,
+        <span class="hljs-attr">"aspectRatio"</span>: <span class="hljs-number">969</span>,
+        <span class="hljs-attr">"size"</span>: {
+          <span class="hljs-attr">"width"</span>: <span class="hljs-number">1200</span>,
+          <span class="hljs-attr">"height"</span>: <span class="hljs-number">800</span>
+        },
+        <span class="hljs-attr">"fps"</span>: <span class="hljs-number">25</span>,
+        <span class="hljs-attr">"scaleTo"</span>: <span class="hljs-string">"preview"</span>,
+        <span class="hljs-attr">"quality"</span>: <span class="hljs-string">"medium"</span>,
+        <span class="hljs-attr">"repeat"</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-attr">"range"</span>: {
+          <span class="hljs-attr">"start"</span>: <span class="hljs-number">3</span>,
+          <span class="hljs-attr">"length"</span>: <span class="hljs-number">6</span>
+        },
+        <span class="hljs-attr">"poster"</span>: {
+          <span class="hljs-attr">"capture"</span>: <span class="hljs-number">1</span>
+        },
+        <span class="hljs-attr">"thumbnail"</span>: {
+          <span class="hljs-attr">"capture"</span>: <span class="hljs-number">1</span>,
+          <span class="hljs-attr">"scale"</span>: <span class="hljs-number">0.3</span>
+        },
+        <span class="hljs-attr">"destinations"</span>: [
+          {
+            <span class="hljs-attr">"provider"</span>: <span class="hljs-string">"shotstack"</span>,
+            <span class="hljs-attr">"exclude"</span>: <span class="hljs-literal">false</span>
+          }
+        ]
+      },
+      <span class="hljs-attr">"merge"</span>: [
+        {
+          <span class="hljs-attr">"find"</span>: <span class="hljs-string">"NAME"</span>,
+          <span class="hljs-attr">"replace"</span>: <span class="hljs-string">"Jane"</span>
+        }
+      ],
+      <span class="hljs-attr">"callback"</span>: <span class="hljs-string">"https://my-server.com/callback.php"</span>,
+      <span class="hljs-attr">"disk"</span>: <span class="hljs-string">"local"</span>
     }
   }
 }
@@ -7360,69 +7395,104 @@ must be one of:
       <span class="hljs-attr">"timeline"</span>: {
         <span class="hljs-attr">"soundtrack"</span>: {
           <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3"</span>,
-          <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"fadeInFadeOut"</span>
+          <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"fadeIn"</span>,
+          <span class="hljs-attr">"volume"</span>: <span class="hljs-number">0</span>
         },
-        <span class="hljs-attr">"background"</span>: <span class="hljs-string">"#000000"</span>,
+        <span class="hljs-attr">"background"</span>: <span class="hljs-string">"string"</span>,
+        <span class="hljs-attr">"fonts"</span>: [
+          {
+            <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf"</span>
+          }
+        ],
         <span class="hljs-attr">"tracks"</span>: [
           {
             <span class="hljs-attr">"clips"</span>: [
               {
                 <span class="hljs-attr">"asset"</span>: {
-                  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"title"</span>,
-                  <span class="hljs-attr">"text"</span>: <span class="hljs-string">"Hello World"</span>,
-                  <span class="hljs-attr">"style"</span>: <span class="hljs-string">"minimal"</span>
+                  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"video"</span>,
+                  <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4"</span>,
+                  <span class="hljs-attr">"trim"</span>: <span class="hljs-number">2</span>,
+                  <span class="hljs-attr">"volume"</span>: <span class="hljs-number">1</span>,
+                  <span class="hljs-attr">"crop"</span>: {
+                    <span class="hljs-attr">"top"</span>: <span class="hljs-number">0.15</span>,
+                    <span class="hljs-attr">"bottom"</span>: <span class="hljs-number">0.15</span>,
+                    <span class="hljs-attr">"left"</span>: <span class="hljs-number">0</span>,
+                    <span class="hljs-attr">"right"</span>: <span class="hljs-number">0</span>
+                  }
                 },
-                <span class="hljs-attr">"start"</span>: <span class="hljs-number">0</span>,
-                <span class="hljs-attr">"length"</span>: <span class="hljs-number">4</span>,
+                <span class="hljs-attr">"start"</span>: <span class="hljs-number">2</span>,
+                <span class="hljs-attr">"length"</span>: <span class="hljs-number">5</span>,
+                <span class="hljs-attr">"fit"</span>: <span class="hljs-string">"cover"</span>,
+                <span class="hljs-attr">"scale"</span>: <span class="hljs-number">0</span>,
+                <span class="hljs-attr">"position"</span>: <span class="hljs-string">"top"</span>,
+                <span class="hljs-attr">"offset"</span>: {
+                  <span class="hljs-attr">"x"</span>: <span class="hljs-number">0.1</span>,
+                  <span class="hljs-attr">"y"</span>: <span class="hljs-number">-0.2</span>
+                },
                 <span class="hljs-attr">"transition"</span>: {
                   <span class="hljs-attr">"in"</span>: <span class="hljs-string">"fade"</span>,
                   <span class="hljs-attr">"out"</span>: <span class="hljs-string">"fade"</span>
                 },
-                <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"slideRight"</span>
-              },
-              {
-                <span class="hljs-attr">"asset"</span>: {
-                  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"image"</span>,
-                  <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/my-image.jpg"</span>
-                },
-                <span class="hljs-attr">"start"</span>: <span class="hljs-number">3</span>,
-                <span class="hljs-attr">"length"</span>: <span class="hljs-number">4</span>,
                 <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"zoomIn"</span>,
-                <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"greyscale"</span>
-              }
-            ]
-          },
-          {
-            <span class="hljs-attr">"clips"</span>: [
-              {
-                <span class="hljs-attr">"asset"</span>: {
-                  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"video"</span>,
-                  <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/my-clip-1.mp4"</span>,
-                  <span class="hljs-attr">"trim"</span>: <span class="hljs-number">10.5</span>
-                },
-                <span class="hljs-attr">"start"</span>: <span class="hljs-number">7</span>,
-                <span class="hljs-attr">"length"</span>: <span class="hljs-number">4.5</span>
-              },
-              {
-                <span class="hljs-attr">"asset"</span>: {
-                  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"video"</span>,
-                  <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/my-clip-2.mp4"</span>,
-                  <span class="hljs-attr">"volume"</span>: <span class="hljs-number">0.5</span>
-                },
-                <span class="hljs-attr">"start"</span>: <span class="hljs-number">11.5</span>,
-                <span class="hljs-attr">"length"</span>: <span class="hljs-number">5</span>,
-                <span class="hljs-attr">"transition"</span>: {
-                  <span class="hljs-attr">"out"</span>: <span class="hljs-string">"wipeLeft"</span>
+                <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"greyscale"</span>,
+                <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">0</span>,
+                <span class="hljs-attr">"transform"</span>: {
+                  <span class="hljs-attr">"rotate"</span>: {
+                    <span class="hljs-attr">"angle"</span>: <span class="hljs-number">45</span>
+                  },
+                  <span class="hljs-attr">"skew"</span>: {
+                    <span class="hljs-attr">"x"</span>: <span class="hljs-number">0.5</span>,
+                    <span class="hljs-attr">"y"</span>: <span class="hljs-number">0.5</span>
+                  },
+                  <span class="hljs-attr">"flip"</span>: {
+                    <span class="hljs-attr">"horizontal"</span>: <span class="hljs-literal">true</span>,
+                    <span class="hljs-attr">"vertical"</span>: <span class="hljs-literal">true</span>
+                  }
                 }
               }
             ]
           }
-        ]
+        ],
+        <span class="hljs-attr">"cache"</span>: <span class="hljs-literal">true</span>
       },
       <span class="hljs-attr">"output"</span>: {
         <span class="hljs-attr">"format"</span>: <span class="hljs-string">"mp4"</span>,
-        <span class="hljs-attr">"resolution"</span>: <span class="hljs-string">"sd"</span>
-      }
+        <span class="hljs-attr">"resolution"</span>: <span class="hljs-string">"sd"</span>,
+        <span class="hljs-attr">"aspectRatio"</span>: <span class="hljs-number">969</span>,
+        <span class="hljs-attr">"size"</span>: {
+          <span class="hljs-attr">"width"</span>: <span class="hljs-number">1200</span>,
+          <span class="hljs-attr">"height"</span>: <span class="hljs-number">800</span>
+        },
+        <span class="hljs-attr">"fps"</span>: <span class="hljs-number">25</span>,
+        <span class="hljs-attr">"scaleTo"</span>: <span class="hljs-string">"preview"</span>,
+        <span class="hljs-attr">"quality"</span>: <span class="hljs-string">"medium"</span>,
+        <span class="hljs-attr">"repeat"</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-attr">"range"</span>: {
+          <span class="hljs-attr">"start"</span>: <span class="hljs-number">3</span>,
+          <span class="hljs-attr">"length"</span>: <span class="hljs-number">6</span>
+        },
+        <span class="hljs-attr">"poster"</span>: {
+          <span class="hljs-attr">"capture"</span>: <span class="hljs-number">1</span>
+        },
+        <span class="hljs-attr">"thumbnail"</span>: {
+          <span class="hljs-attr">"capture"</span>: <span class="hljs-number">1</span>,
+          <span class="hljs-attr">"scale"</span>: <span class="hljs-number">0.3</span>
+        },
+        <span class="hljs-attr">"destinations"</span>: [
+          {
+            <span class="hljs-attr">"provider"</span>: <span class="hljs-string">"shotstack"</span>,
+            <span class="hljs-attr">"exclude"</span>: <span class="hljs-literal">false</span>
+          }
+        ]
+      },
+      <span class="hljs-attr">"merge"</span>: [
+        {
+          <span class="hljs-attr">"find"</span>: <span class="hljs-string">"NAME"</span>,
+          <span class="hljs-attr">"replace"</span>: <span class="hljs-string">"Jane"</span>
+        }
+      ],
+      <span class="hljs-attr">"callback"</span>: <span class="hljs-string">"https://my-server.com/callback.php"</span>,
+      <span class="hljs-attr">"disk"</span>: <span class="hljs-string">"local"</span>
     }
   }
 }
@@ -7477,69 +7547,104 @@ must be one of:
     <span class="hljs-attr">"timeline"</span>: {
       <span class="hljs-attr">"soundtrack"</span>: {
         <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3"</span>,
-        <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"fadeInFadeOut"</span>
+        <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"fadeIn"</span>,
+        <span class="hljs-attr">"volume"</span>: <span class="hljs-number">0</span>
       },
-      <span class="hljs-attr">"background"</span>: <span class="hljs-string">"#000000"</span>,
+      <span class="hljs-attr">"background"</span>: <span class="hljs-string">"string"</span>,
+      <span class="hljs-attr">"fonts"</span>: [
+        {
+          <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf"</span>
+        }
+      ],
       <span class="hljs-attr">"tracks"</span>: [
         {
           <span class="hljs-attr">"clips"</span>: [
             {
               <span class="hljs-attr">"asset"</span>: {
-                <span class="hljs-attr">"type"</span>: <span class="hljs-string">"title"</span>,
-                <span class="hljs-attr">"text"</span>: <span class="hljs-string">"Hello World"</span>,
-                <span class="hljs-attr">"style"</span>: <span class="hljs-string">"minimal"</span>
+                <span class="hljs-attr">"type"</span>: <span class="hljs-string">"video"</span>,
+                <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4"</span>,
+                <span class="hljs-attr">"trim"</span>: <span class="hljs-number">2</span>,
+                <span class="hljs-attr">"volume"</span>: <span class="hljs-number">1</span>,
+                <span class="hljs-attr">"crop"</span>: {
+                  <span class="hljs-attr">"top"</span>: <span class="hljs-number">0.15</span>,
+                  <span class="hljs-attr">"bottom"</span>: <span class="hljs-number">0.15</span>,
+                  <span class="hljs-attr">"left"</span>: <span class="hljs-number">0</span>,
+                  <span class="hljs-attr">"right"</span>: <span class="hljs-number">0</span>
+                }
               },
-              <span class="hljs-attr">"start"</span>: <span class="hljs-number">0</span>,
-              <span class="hljs-attr">"length"</span>: <span class="hljs-number">4</span>,
+              <span class="hljs-attr">"start"</span>: <span class="hljs-number">2</span>,
+              <span class="hljs-attr">"length"</span>: <span class="hljs-number">5</span>,
+              <span class="hljs-attr">"fit"</span>: <span class="hljs-string">"cover"</span>,
+              <span class="hljs-attr">"scale"</span>: <span class="hljs-number">0</span>,
+              <span class="hljs-attr">"position"</span>: <span class="hljs-string">"top"</span>,
+              <span class="hljs-attr">"offset"</span>: {
+                <span class="hljs-attr">"x"</span>: <span class="hljs-number">0.1</span>,
+                <span class="hljs-attr">"y"</span>: <span class="hljs-number">-0.2</span>
+              },
               <span class="hljs-attr">"transition"</span>: {
                 <span class="hljs-attr">"in"</span>: <span class="hljs-string">"fade"</span>,
                 <span class="hljs-attr">"out"</span>: <span class="hljs-string">"fade"</span>
               },
-              <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"slideRight"</span>
-            },
-            {
-              <span class="hljs-attr">"asset"</span>: {
-                <span class="hljs-attr">"type"</span>: <span class="hljs-string">"image"</span>,
-                <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/my-image.jpg"</span>
-              },
-              <span class="hljs-attr">"start"</span>: <span class="hljs-number">3</span>,
-              <span class="hljs-attr">"length"</span>: <span class="hljs-number">4</span>,
               <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"zoomIn"</span>,
-              <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"greyscale"</span>
-            }
-          ]
-        },
-        {
-          <span class="hljs-attr">"clips"</span>: [
-            {
-              <span class="hljs-attr">"asset"</span>: {
-                <span class="hljs-attr">"type"</span>: <span class="hljs-string">"video"</span>,
-                <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/my-clip-1.mp4"</span>,
-                <span class="hljs-attr">"trim"</span>: <span class="hljs-number">10.5</span>
-              },
-              <span class="hljs-attr">"start"</span>: <span class="hljs-number">7</span>,
-              <span class="hljs-attr">"length"</span>: <span class="hljs-number">4.5</span>
-            },
-            {
-              <span class="hljs-attr">"asset"</span>: {
-                <span class="hljs-attr">"type"</span>: <span class="hljs-string">"video"</span>,
-                <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/my-clip-2.mp4"</span>,
-                <span class="hljs-attr">"volume"</span>: <span class="hljs-number">0.5</span>
-              },
-              <span class="hljs-attr">"start"</span>: <span class="hljs-number">11.5</span>,
-              <span class="hljs-attr">"length"</span>: <span class="hljs-number">5</span>,
-              <span class="hljs-attr">"transition"</span>: {
-                <span class="hljs-attr">"out"</span>: <span class="hljs-string">"wipeLeft"</span>
+              <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"greyscale"</span>,
+              <span class="hljs-attr">"opacity"</span>: <span class="hljs-number">0</span>,
+              <span class="hljs-attr">"transform"</span>: {
+                <span class="hljs-attr">"rotate"</span>: {
+                  <span class="hljs-attr">"angle"</span>: <span class="hljs-number">45</span>
+                },
+                <span class="hljs-attr">"skew"</span>: {
+                  <span class="hljs-attr">"x"</span>: <span class="hljs-number">0.5</span>,
+                  <span class="hljs-attr">"y"</span>: <span class="hljs-number">0.5</span>
+                },
+                <span class="hljs-attr">"flip"</span>: {
+                  <span class="hljs-attr">"horizontal"</span>: <span class="hljs-literal">true</span>,
+                  <span class="hljs-attr">"vertical"</span>: <span class="hljs-literal">true</span>
+                }
               }
             }
           ]
         }
-      ]
+      ],
+      <span class="hljs-attr">"cache"</span>: <span class="hljs-literal">true</span>
     },
     <span class="hljs-attr">"output"</span>: {
       <span class="hljs-attr">"format"</span>: <span class="hljs-string">"mp4"</span>,
-      <span class="hljs-attr">"resolution"</span>: <span class="hljs-string">"sd"</span>
-    }
+      <span class="hljs-attr">"resolution"</span>: <span class="hljs-string">"sd"</span>,
+      <span class="hljs-attr">"aspectRatio"</span>: <span class="hljs-number">969</span>,
+      <span class="hljs-attr">"size"</span>: {
+        <span class="hljs-attr">"width"</span>: <span class="hljs-number">1200</span>,
+        <span class="hljs-attr">"height"</span>: <span class="hljs-number">800</span>
+      },
+      <span class="hljs-attr">"fps"</span>: <span class="hljs-number">25</span>,
+      <span class="hljs-attr">"scaleTo"</span>: <span class="hljs-string">"preview"</span>,
+      <span class="hljs-attr">"quality"</span>: <span class="hljs-string">"medium"</span>,
+      <span class="hljs-attr">"repeat"</span>: <span class="hljs-literal">true</span>,
+      <span class="hljs-attr">"range"</span>: {
+        <span class="hljs-attr">"start"</span>: <span class="hljs-number">3</span>,
+        <span class="hljs-attr">"length"</span>: <span class="hljs-number">6</span>
+      },
+      <span class="hljs-attr">"poster"</span>: {
+        <span class="hljs-attr">"capture"</span>: <span class="hljs-number">1</span>
+      },
+      <span class="hljs-attr">"thumbnail"</span>: {
+        <span class="hljs-attr">"capture"</span>: <span class="hljs-number">1</span>,
+        <span class="hljs-attr">"scale"</span>: <span class="hljs-number">0.3</span>
+      },
+      <span class="hljs-attr">"destinations"</span>: [
+        {
+          <span class="hljs-attr">"provider"</span>: <span class="hljs-string">"shotstack"</span>,
+          <span class="hljs-attr">"exclude"</span>: <span class="hljs-literal">false</span>
+        }
+      ]
+    },
+    <span class="hljs-attr">"merge"</span>: [
+      {
+        <span class="hljs-attr">"find"</span>: <span class="hljs-string">"NAME"</span>,
+        <span class="hljs-attr">"replace"</span>: <span class="hljs-string">"Jane"</span>
+      }
+    ],
+    <span class="hljs-attr">"callback"</span>: <span class="hljs-string">"https://my-server.com/callback.php"</span>,
+    <span class="hljs-attr">"disk"</span>: <span class="hljs-string">"local"</span>
   }
 }
 
@@ -7580,7 +7685,7 @@ must be one of:
 </tr>
 <tr>
 <td>template</td>
-<td>string</td>
+<td><a href="#schemaedit">Edit</a></td>
 <td>true</td>
 <td>none</td>
 <td>The <a href="#tocs_edit">Edit</a> template.</td>

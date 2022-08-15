@@ -1511,69 +1511,104 @@ Retrieve a template by template id.
       "timeline": {
         "soundtrack": {
           "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3",
-          "effect": "fadeInFadeOut"
+          "effect": "fadeIn",
+          "volume": 0
         },
-        "background": "#000000",
+        "background": "string",
+        "fonts": [
+          {
+            "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf"
+          }
+        ],
         "tracks": [
           {
             "clips": [
               {
                 "asset": {
-                  "type": "title",
-                  "text": "Hello World",
-                  "style": "minimal"
+                  "type": "video",
+                  "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4",
+                  "trim": 2,
+                  "volume": 1,
+                  "crop": {
+                    "top": 0.15,
+                    "bottom": 0.15,
+                    "left": 0,
+                    "right": 0
+                  }
                 },
-                "start": 0,
-                "length": 4,
+                "start": 2,
+                "length": 5,
+                "fit": "cover",
+                "scale": 0,
+                "position": "top",
+                "offset": {
+                  "x": 0.1,
+                  "y": -0.2
+                },
                 "transition": {
                   "in": "fade",
                   "out": "fade"
                 },
-                "effect": "slideRight"
-              },
-              {
-                "asset": {
-                  "type": "image",
-                  "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/my-image.jpg"
-                },
-                "start": 3,
-                "length": 4,
                 "effect": "zoomIn",
-                "filter": "greyscale"
-              }
-            ]
-          },
-          {
-            "clips": [
-              {
-                "asset": {
-                  "type": "video",
-                  "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/my-clip-1.mp4",
-                  "trim": 10.5
-                },
-                "start": 7,
-                "length": 4.5
-              },
-              {
-                "asset": {
-                  "type": "video",
-                  "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/my-clip-2.mp4",
-                  "volume": 0.5
-                },
-                "start": 11.5,
-                "length": 5,
-                "transition": {
-                  "out": "wipeLeft"
+                "filter": "greyscale",
+                "opacity": 0,
+                "transform": {
+                  "rotate": {
+                    "angle": 45
+                  },
+                  "skew": {
+                    "x": 0.5,
+                    "y": 0.5
+                  },
+                  "flip": {
+                    "horizontal": true,
+                    "vertical": true
+                  }
                 }
               }
             ]
           }
-        ]
+        ],
+        "cache": true
       },
       "output": {
         "format": "mp4",
-        "resolution": "sd"
-      }
+        "resolution": "sd",
+        "aspectRatio": 969,
+        "size": {
+          "width": 1200,
+          "height": 800
+        },
+        "fps": 25,
+        "scaleTo": "preview",
+        "quality": "medium",
+        "repeat": true,
+        "range": {
+          "start": 3,
+          "length": 6
+        },
+        "poster": {
+          "capture": 1
+        },
+        "thumbnail": {
+          "capture": 1,
+          "scale": 0.3
+        },
+        "destinations": [
+          {
+            "provider": "shotstack",
+            "exclude": false
+          }
+        ]
+      },
+      "merge": [
+        {
+          "find": "NAME",
+          "replace": "Jane"
+        }
+      ],
+      "callback": "https://my-server.com/callback.php",
+      "disk": "local"
     }
   }
 }
@@ -5108,69 +5143,104 @@ The response data returned with the [TemplateResponse](#tocs_templateresponse).
       "timeline": {
         "soundtrack": {
           "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3",
-          "effect": "fadeInFadeOut"
+          "effect": "fadeIn",
+          "volume": 0
         },
-        "background": "#000000",
+        "background": "string",
+        "fonts": [
+          {
+            "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf"
+          }
+        ],
         "tracks": [
           {
             "clips": [
               {
                 "asset": {
-                  "type": "title",
-                  "text": "Hello World",
-                  "style": "minimal"
+                  "type": "video",
+                  "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4",
+                  "trim": 2,
+                  "volume": 1,
+                  "crop": {
+                    "top": 0.15,
+                    "bottom": 0.15,
+                    "left": 0,
+                    "right": 0
+                  }
                 },
-                "start": 0,
-                "length": 4,
+                "start": 2,
+                "length": 5,
+                "fit": "cover",
+                "scale": 0,
+                "position": "top",
+                "offset": {
+                  "x": 0.1,
+                  "y": -0.2
+                },
                 "transition": {
                   "in": "fade",
                   "out": "fade"
                 },
-                "effect": "slideRight"
-              },
-              {
-                "asset": {
-                  "type": "image",
-                  "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/my-image.jpg"
-                },
-                "start": 3,
-                "length": 4,
                 "effect": "zoomIn",
-                "filter": "greyscale"
-              }
-            ]
-          },
-          {
-            "clips": [
-              {
-                "asset": {
-                  "type": "video",
-                  "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/my-clip-1.mp4",
-                  "trim": 10.5
-                },
-                "start": 7,
-                "length": 4.5
-              },
-              {
-                "asset": {
-                  "type": "video",
-                  "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/my-clip-2.mp4",
-                  "volume": 0.5
-                },
-                "start": 11.5,
-                "length": 5,
-                "transition": {
-                  "out": "wipeLeft"
+                "filter": "greyscale",
+                "opacity": 0,
+                "transform": {
+                  "rotate": {
+                    "angle": 45
+                  },
+                  "skew": {
+                    "x": 0.5,
+                    "y": 0.5
+                  },
+                  "flip": {
+                    "horizontal": true,
+                    "vertical": true
+                  }
                 }
               }
             ]
           }
-        ]
+        ],
+        "cache": true
       },
       "output": {
         "format": "mp4",
-        "resolution": "sd"
-      }
+        "resolution": "sd",
+        "aspectRatio": 969,
+        "size": {
+          "width": 1200,
+          "height": 800
+        },
+        "fps": 25,
+        "scaleTo": "preview",
+        "quality": "medium",
+        "repeat": true,
+        "range": {
+          "start": 3,
+          "length": 6
+        },
+        "poster": {
+          "capture": 1
+        },
+        "thumbnail": {
+          "capture": 1,
+          "scale": 0.3
+        },
+        "destinations": [
+          {
+            "provider": "shotstack",
+            "exclude": false
+          }
+        ]
+      },
+      "merge": [
+        {
+          "find": "NAME",
+          "replace": "Jane"
+        }
+      ],
+      "callback": "https://my-server.com/callback.php",
+      "disk": "local"
     }
   }
 }
@@ -5203,69 +5273,104 @@ The template data including the template name and Edit.
     "timeline": {
       "soundtrack": {
         "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3",
-        "effect": "fadeInFadeOut"
+        "effect": "fadeIn",
+        "volume": 0
       },
-      "background": "#000000",
+      "background": "string",
+      "fonts": [
+        {
+          "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf"
+        }
+      ],
       "tracks": [
         {
           "clips": [
             {
               "asset": {
-                "type": "title",
-                "text": "Hello World",
-                "style": "minimal"
+                "type": "video",
+                "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4",
+                "trim": 2,
+                "volume": 1,
+                "crop": {
+                  "top": 0.15,
+                  "bottom": 0.15,
+                  "left": 0,
+                  "right": 0
+                }
               },
-              "start": 0,
-              "length": 4,
+              "start": 2,
+              "length": 5,
+              "fit": "cover",
+              "scale": 0,
+              "position": "top",
+              "offset": {
+                "x": 0.1,
+                "y": -0.2
+              },
               "transition": {
                 "in": "fade",
                 "out": "fade"
               },
-              "effect": "slideRight"
-            },
-            {
-              "asset": {
-                "type": "image",
-                "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/my-image.jpg"
-              },
-              "start": 3,
-              "length": 4,
               "effect": "zoomIn",
-              "filter": "greyscale"
-            }
-          ]
-        },
-        {
-          "clips": [
-            {
-              "asset": {
-                "type": "video",
-                "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/my-clip-1.mp4",
-                "trim": 10.5
-              },
-              "start": 7,
-              "length": 4.5
-            },
-            {
-              "asset": {
-                "type": "video",
-                "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/my-clip-2.mp4",
-                "volume": 0.5
-              },
-              "start": 11.5,
-              "length": 5,
-              "transition": {
-                "out": "wipeLeft"
+              "filter": "greyscale",
+              "opacity": 0,
+              "transform": {
+                "rotate": {
+                  "angle": 45
+                },
+                "skew": {
+                  "x": 0.5,
+                  "y": 0.5
+                },
+                "flip": {
+                  "horizontal": true,
+                  "vertical": true
+                }
               }
             }
           ]
         }
-      ]
+      ],
+      "cache": true
     },
     "output": {
       "format": "mp4",
-      "resolution": "sd"
-    }
+      "resolution": "sd",
+      "aspectRatio": 969,
+      "size": {
+        "width": 1200,
+        "height": 800
+      },
+      "fps": 25,
+      "scaleTo": "preview",
+      "quality": "medium",
+      "repeat": true,
+      "range": {
+        "start": 3,
+        "length": 6
+      },
+      "poster": {
+        "capture": 1
+      },
+      "thumbnail": {
+        "capture": 1,
+        "scale": 0.3
+      },
+      "destinations": [
+        {
+          "provider": "shotstack",
+          "exclude": false
+        }
+      ]
+    },
+    "merge": [
+      {
+        "find": "NAME",
+        "replace": "Jane"
+      }
+    ],
+    "callback": "https://my-server.com/callback.php",
+    "disk": "local"
   }
 }
 
@@ -5280,7 +5385,7 @@ The response data returned with the [TemplateDataResponse](#tocs_templatedatares
 |id|string|true|none|The unique id of the template in UUID format.|
 |name|string|true|none|The template name.|
 |owner|string|true|none|The owner id of the templates.|
-|template|string|true|none|The [Edit](#tocs_edit) template.|
+|template|[Edit](#schemaedit)|true|none|The [Edit](#tocs_edit) template.|
 
 <h2 id="tocS_TemplateListResponse">TemplateListResponse</h2>
 <!-- backwards compatibility -->

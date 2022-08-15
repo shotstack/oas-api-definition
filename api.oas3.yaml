@@ -1884,7 +1884,7 @@ components:
           example: 5ca6hu7s9k
         template:
           description: The [Edit](#tocs_edit) template.
-          type: string
+          $ref: "#/components/schemas/Edit"
           example:
             $ref: "./definitions/edit.yaml"
       required:

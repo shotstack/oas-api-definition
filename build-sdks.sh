@@ -38,7 +38,7 @@ echo "- using OpenAPI generator $OPENAPI_GENERATOR"
 
 # PHP SDK
 $OPENAPI_GENERATOR generate -i $SPEC_FILE_RESOLVED -g php -o $BUILD_DIR/php \
-                  --invoker-package Shotstack\\Client
+                  --invoker-package Shotstack\\\\Client
 
 printf "\n========================================= \n"
 printf "\nPHP SDK Generated"
