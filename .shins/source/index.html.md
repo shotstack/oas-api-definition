@@ -3574,8 +3574,8 @@ A clip is a container for a specific type of asset, i.e. a title, image, video, 
 |position|string|false|none|Place the asset in one of nine predefined positions of the viewport. This is most effective for when the asset is scaled and you want to position the element to a specific position. <ul><br>  <li>`top` - top (center)</li><br>  <li>`topRight` - top right</li><br>  <li>`right` - right (center)</li><br>  <li>`bottomRight` - bottom right</li><br>  <li>`bottom` - bottom (center)</li><br>  <li>`bottomLeft` - bottom left</li><br>  <li>`left` - left (center)</li><br>  <li>`topLeft` - top left</li><br>  <li>`center` - center</li><br></ul>|
 |offset|[Offset](#schemaoffset)|false|none|Offset the location of the asset relative to its position on the viewport. The offset distance is relative to the width of the viewport - for example an x offset of 0.5 will move the asset half the viewport width to the right.|
 |transition|[Transition](#schematransition)|false|none|In and out transitions for a clip - i.e. fade in and fade out|
-|effect|string|false|none|A motion effect to apply to the Clip. <ul><br>  <li>`zoomIn` - slow zoom in</li><br>  <li>`zoomOut` - slow zoom out</li><br>  <li>`slideLeft` - slow slide (pan) left</li><br>  <li>`slideRight` - slow slide (pan) right</li><br>  <li>`slideUp` - slow slide (pan) up</li><br>  <li>`slideDown` - slow slide (pan) down</li><br></ul>|
-|filter|string|false|none|A filter effect to apply to the Clip. <ul><br>  <li>`boost` - boost contrast and saturation</li><br>  <li>`contrast` - increase contrast</li><br>  <li>`darken` - darken the scene</li><br>  <li>`greyscale` - remove colour</li><br>  <li>`lighten` - lighten the scene</li><br>  <li>`muted` - reduce saturation and contrast</li><br>  <li>`invert` - invert colors</li><br></ul>|
+|effect|string|false|none|A motion effect to apply to the Clip. <ul><br>  <li>`zoomIn` - slow zoom in</li><br>  <li>`zoomOut` - slow zoom out</li><br>  <li>`slideLeft` - slow slide (pan) left</li><br>  <li>`slideRight` - slow slide (pan) right</li><br>  <li>`slideUp` - slow slide (pan) up</li><br>  <li>`slideDown` - slow slide (pan) down</li><br></ul> The motion effect speed can also be controlled by appending `Fast` or `Slow` to the effect, e.g. `zoomInFast` or `slideRightSlow`.|
+|filter|string|false|none|A filter effect to apply to the Clip. <ul><br>  <li>`boost` - boost contrast and saturation</li><br>  <li>`contrast` - increase contrast</li><br>  <li>`darken` - darken the scene</li><br>  <li>`greyscale` - remove colour</li><br>  <li>`lighten` - lighten the scene</li><br>  <li>`muted` - reduce saturation and contrast</li><br>  <li>`negative` - negative colors</li><br></ul>|
 |opacity|number|false|none|Sets the opacity of the Clip where 1 is opaque and 0 is transparent.|
 |transform|[Transformation](#schematransformation)|false|none|A transformation lets you modify the visual properties of a clip. Available transformations are <b>rotate</b>, <b>skew</b> and <b>flip</b>. Transformations can be combined to create interesting new shapes and effects.|
 
@@ -3597,11 +3597,23 @@ A clip is a container for a specific type of asset, i.e. a title, image, video, 
 |position|topLeft|
 |position|center|
 |effect|zoomIn|
+|effect|zoomInSlow|
+|effect|zoomInFast|
 |effect|zoomOut|
+|effect|zoomOutSlow|
+|effect|zoomOutFast|
 |effect|slideLeft|
+|effect|slideLeftSLow|
+|effect|slideLeftFast|
 |effect|slideRight|
+|effect|slideRightSlow|
+|effect|slideRightFast|
 |effect|slideUp|
+|effect|slideUpSlow|
+|effect|slideUpFast|
 |effect|slideDown|
+|effect|slideDownSlow|
+|effect|slideDownFast|
 |filter|boost|
 |filter|contrast|
 |filter|darken|

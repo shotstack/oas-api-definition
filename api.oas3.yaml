@@ -634,13 +634,27 @@ components:
               <li>`slideUp` - slow slide (pan) up</li>
               <li>`slideDown` - slow slide (pan) down</li>
             </ul>
+            The motion effect speed can also be controlled by appending `Fast` or `Slow`
+            to the effect, e.g. `zoomInFast` or `slideRightSlow`.
           enum:
             - zoomIn
+            - zoomInSlow
+            - zoomInFast
             - zoomOut
+            - zoomOutSlow
+            - zoomOutFast
             - slideLeft
+            - slideLeftSLow
+            - slideLeftFast
             - slideRight
+            - slideRightSlow
+            - slideRightFast
             - slideUp
+            - slideUpSlow
+            - slideUpFast
             - slideDown
+            - slideDownSlow
+            - slideDownFast
           type: string
         filter:
           description: >-
@@ -652,7 +666,7 @@ components:
               <li>`greyscale` - remove colour</li>
               <li>`lighten` - lighten the scene</li>
               <li>`muted` - reduce saturation and contrast</li>
-              <li>`invert` - invert colors</li>
+              <li>`negative` - negative colors</li>
             </ul>
           enum:
             - boost
