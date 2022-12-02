@@ -74,6 +74,8 @@
 <!-- backwards compatibility -->
 <!-- backwards compatibility -->
 <!-- backwards compatibility -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
   </head>
 
   <body data-languages="[&quot;shell&quot;,&quot;http&quot;,&quot;javascript--nodejs&quot;,&quot;php&quot;,&quot;ruby&quot;,&quot;python&quot;,&quot;java&quot;,&quot;go&quot;]">
@@ -371,6 +373,16 @@
                 
                   <li>
                     <a href="#tocs_muxdestinationoptions" class="toc-h2 toc-link" data-title="">MuxDestinationOptions</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#tocs_s3destination" class="toc-h2 toc-link" data-title="">S3Destination</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#tocs_s3destinationoptions" class="toc-h2 toc-link" data-title="">S3DestinationOptions</a>
                     
                   </li>
                 
@@ -6161,7 +6173,7 @@ must be one of:
 <td>[<a href="#schemadestinations">Destinations</a>]</td>
 <td>false</td>
 <td>none</td>
-<td>[A destination is a location where output files can be sent to for serving or hosting. By default all rendered assets are automatically sent to the  <a href="https://shotstack.io/docs/guide/serving-assets/hosting">Shotstack hosting destination</a>. You can add other destinations to send assets to. The following destinations are available:<br />  <ul><br />    <li><a href="#tocs_shotstackdestination">DestinationShotstack</a></li><br />    <li><a href="#tocs_muxdestination">DestinationMux</a></li><br />  </ul>]</td>
+<td>Specify the storage locations and hosting services to send rendered videos to.</td>
 </tr>
 </tbody>
 </table>
@@ -6465,8 +6477,9 @@ must be one of:
 </code></pre>
 <p>A destination is a location where output files can be sent to for serving or hosting. By default all rendered assets are automatically sent to the  <a href="https://shotstack.io/docs/guide/serving-assets/hosting">Shotstack hosting destination</a>. You can add other destinations to send assets to. The following destinations are available:</p>
   <ul>
-    <li><a href="#tocs_shotstackdestination">DestinationShotstack</a></li>
-    <li><a href="#tocs_muxdestination">DestinationMux</a></li>
+    <li><a href="#tocs_shotstackdestination">ShotstackDestination</a></li>
+    <li><a href="#tocs_muxdestination">MuxDestination</a></li>
+    <li><a href="#tocs_s3destination">S3Destination</a></li>
   </ul>
 <h3 id="properties">Properties</h3>
 <p>anyOf</p>
@@ -6508,6 +6521,27 @@ must be one of:
 <td>false</td>
 <td>none</td>
 <td>Send rendered videos to the <a href="https://www.mux.com/">Mux</a> video hosting and streaming service. Add the <code>mux</code> destination provider to send the output video to Mux. Mux credentials are required and added via the <a href="https://dashboard.shotstack.io/integrations/mux">dashboard</a>, not in the request.</td>
+</tr>
+</tbody>
+</table>
+<p>or</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td><a href="#schemas3destination">S3Destination</a></td>
+<td>false</td>
+<td>none</td>
+<td>Send rendered videos to an <a href="https://www.mux.com/">Amazon S3</a> bucket. Send files to any region with your own prefix and filename. Add the <code>s3</code> destination provider to send the output video to S3. AWS credentials are required and added via the <a href="https://dashboard.shotstack.io/integrations/s3">dashboard</a>, not in the request.</td>
 </tr>
 </tbody>
 </table>
@@ -6626,6 +6660,116 @@ must be one of:
 <td>false</td>
 <td>none</td>
 <td>Sets the Mux <code>playback_policy</code> option. Value is an array of strings - use <code>public</code>, <code>signed</code>, or both.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocs_s3destination">S3Destination</h2>
+<p><a id="schemas3destination"></a>
+<a id="schema_S3Destination"></a>
+<a id="tocSs3destination"></a>
+<a id="tocss3destination"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">"provider"</span>: <span class="hljs-string">"s3"</span>,
+  <span class="hljs-attr">"options"</span>: {
+    <span class="hljs-attr">"region"</span>: <span class="hljs-string">"us-east-1"</span>,
+    <span class="hljs-attr">"bucket"</span>: <span class="hljs-string">"my-bucket"</span>,
+    <span class="hljs-attr">"prefix"</span>: <span class="hljs-string">"my-renders"</span>,
+    <span class="hljs-attr">"filename"</span>: <span class="hljs-string">"my-file"</span>,
+    <span class="hljs-attr">"acl"</span>: <span class="hljs-string">"public-read"</span>
+  }
+}
+
+</code></pre>
+<p>Send rendered videos to an <a href="https://www.mux.com/">Amazon S3</a> bucket. Send files to any region with your own prefix and filename. Add the <code>s3</code> destination provider to send the output video to S3. AWS credentials are required and added via the <a href="https://dashboard.shotstack.io/integrations/s3">dashboard</a>, not in the request.</p>
+<h3 id="properties">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>provider</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>The destination to send rendered assets to - set to <code>s3</code> for S3.</td>
+</tr>
+<tr>
+<td>options</td>
+<td><a href="#schemas3destinationoptions">S3DestinationOptions</a></td>
+<td>false</td>
+<td>none</td>
+<td>Additional S3 configuration options.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocs_s3destinationoptions">S3DestinationOptions</h2>
+<p><a id="schemas3destinationoptions"></a>
+<a id="schema_S3DestinationOptions"></a>
+<a id="tocSs3destinationoptions"></a>
+<a id="tocss3destinationoptions"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">"region"</span>: <span class="hljs-string">"us-east-1"</span>,
+  <span class="hljs-attr">"bucket"</span>: <span class="hljs-string">"my-bucket"</span>,
+  <span class="hljs-attr">"prefix"</span>: <span class="hljs-string">"my-renders"</span>,
+  <span class="hljs-attr">"filename"</span>: <span class="hljs-string">"my-file"</span>,
+  <span class="hljs-attr">"acl"</span>: <span class="hljs-string">"public-read"</span>
+}
+
+</code></pre>
+<p>Pass additional options to control how files are stored in S3.</p>
+<h3 id="properties">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>region</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>Choose the region to send the file to. Must be a valid [AWS region] string like <code>us-east-1</code> or <code>ap-southeast-2</code>.</td>
+</tr>
+<tr>
+<td>bucket</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>The bucket name to send files to. The bucket must exist in the AWS account before files can be sent.</td>
+</tr>
+<tr>
+<td>prefix</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>A prefix for the file being sent. This is typically a folder name, i.e. <code>videos</code> or <code>customerId/videos</code>.</td>
+</tr>
+<tr>
+<td>filename</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>Use your own filename instead of the default render ID filename. Note: omit the file extension as this will be appended depending n the output format. Also <code>poster.jpg</code> and <code>-thumb.jpg</code> will be appended for poster and thumbnail images.</td>
+</tr>
+<tr>
+<td>acl</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>Sets the S3 Access Control List (acl) permissions. Default is <code>private</code>. Must use a valid  S3 <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#canned-acl">Canned ACL</a>.</td>
 </tr>
 </tbody>
 </table>
@@ -8227,6 +8371,8 @@ must be one of:
 </table>
 <!-- Renderer: Shins v2.3.2-6 -->
 <!-- Generator: Widdershins v4.0.1 -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
 <!-- backwards compatibility -->
 <!-- backwards compatibility -->
 <!-- backwards compatibility -->

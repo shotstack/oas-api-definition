@@ -1495,6 +1495,8 @@ components:
             Generate a thumbnail image from a specific point on the timeline.
           $ref: "#/components/schemas/Thumbnail"
         destinations:
+          description: >-
+            Specify the storage locations and hosting services to send rendered videos to.
           type: array
           items:
             $ref: "#/components/schemas/Destinations"
@@ -1588,14 +1590,16 @@ components:
         [Shotstack hosting destination](https://shotstack.io/docs/guide/serving-assets/hosting). You can add other
         destinations to send assets to. The following destinations are available:
           <ul>
-            <li><a href="#tocs_shotstackdestination">DestinationShotstack</a></li>
-            <li><a href="#tocs_muxdestination">DestinationMux</a></li>
+            <li><a href="#tocs_shotstackdestination">ShotstackDestination</a></li>
+            <li><a href="#tocs_muxdestination">MuxDestination</a></li>
+            <li><a href="#tocs_s3destination">S3Destination</a></li>
           </ul>
       discriminator:
         propertyName: destinations
       anyOf:
         - $ref: "#/components/schemas/ShotstackDestination"
         - $ref: "#/components/schemas/MuxDestination"
+        - $ref: "#/components/schemas/S3Destination"
 
     ShotstackDestination:
       description: >-
@@ -1647,6 +1651,58 @@ components:
             enum:
               - public
               - signed
+
+    S3Destination:
+      description: >-
+        Send rendered videos to an [Amazon S3](https://www.mux.com/) bucket. Send files to any region with your own
+        prefix and filename. Add the `s3` destination provider to send the output video to S3. AWS credentials are
+        required and added via the [dashboard](https://dashboard.shotstack.io/integrations/s3), not in the request.
+      properties:
+        provider:
+          description: The destination to send rendered assets to - set to `s3` for S3.
+          type: string
+          default: s3
+          example: s3
+        options:
+          description: Additional S3 configuration options.
+          $ref: "#/components/schemas/S3DestinationOptions"
+      type: object
+      required:
+        - provider
+
+    S3DestinationOptions:
+      description: >-
+        Pass additional options to control how files are stored in S3.
+      properties:
+        region:
+          description: >-
+            Choose the region to send the file to. Must be a valid [AWS region] string like `us-east-1` or
+            `ap-southeast-2`.
+          type: string
+          example: us-east-1
+        bucket:
+          description: >-
+            The bucket name to send files to. The bucket must exist in the AWS account before files can be sent.
+          type: string
+          example: my-bucket
+        prefix:
+          description: >-
+            A prefix for the file being sent. This is typically a folder name, i.e. `videos` or `customerId/videos`.
+          type: string
+          example: my-renders
+        filename:
+          description: >-
+            Use your own filename instead of the default render ID filename. Note: omit the file extension as this will
+            be appended depending n the output format. Also `poster.jpg` and `-thumb.jpg` will be appended for poster
+            and thumbnail images.
+          type: string
+          example: my-file
+        acl:
+          description: >-
+            Sets the S3 Access Control List (acl) permissions. Default is `private`. Must use a valid 
+            S3 [Canned ACL](https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#canned-acl).
+          type: string
+          example: public-read
 
     Template:
       description: >-

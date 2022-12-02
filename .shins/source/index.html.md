@@ -4331,7 +4331,7 @@ The output format, render range and type of media to generate.
 |range|[Range](#schemarange)|false|none|Specify a time range to render, i.e. to render only a portion of a video or audio file. Omit this setting to  export the entire video. Range can also be used to render a frame at a specific time point - setting a range and output format as `jpg` will output a single frame image at the range `start` point.|
 |poster|[Poster](#schemaposter)|false|none|Generate a poster image from a specific point on the timeline.|
 |thumbnail|[Thumbnail](#schemathumbnail)|false|none|Generate a thumbnail image from a specific point on the timeline.|
-|destinations|[[Destinations](#schemadestinations)]|false|none|[A destination is a location where output files can be sent to for serving or hosting. By default all rendered assets are automatically sent to the  [Shotstack hosting destination](https://shotstack.io/docs/guide/serving-assets/hosting). You can add other destinations to send assets to. The following destinations are available:<br>  <ul><br>    <li><a href="#tocs_shotstackdestination">DestinationShotstack</a></li><br>    <li><a href="#tocs_muxdestination">DestinationMux</a></li><br>  </ul>]|
+|destinations|[[Destinations](#schemadestinations)]|false|none|Specify the storage locations and hosting services to send rendered videos to.|
 
 #### Enumerated Values
 
@@ -4480,8 +4480,9 @@ Generate a thumbnail image for the video or image at a specific point from the t
 
 A destination is a location where output files can be sent to for serving or hosting. By default all rendered assets are automatically sent to the  [Shotstack hosting destination](https://shotstack.io/docs/guide/serving-assets/hosting). You can add other destinations to send assets to. The following destinations are available:
   <ul>
-    <li><a href="#tocs_shotstackdestination">DestinationShotstack</a></li>
-    <li><a href="#tocs_muxdestination">DestinationMux</a></li>
+    <li><a href="#tocs_shotstackdestination">ShotstackDestination</a></li>
+    <li><a href="#tocs_muxdestination">MuxDestination</a></li>
+    <li><a href="#tocs_s3destination">S3Destination</a></li>
   </ul>
 
 ### Properties
@@ -4497,6 +4498,12 @@ or
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |*anonymous*|[MuxDestination](#schemamuxdestination)|false|none|Send rendered videos to the [Mux](https://www.mux.com/) video hosting and streaming service. Add the `mux` destination provider to send the output video to Mux. Mux credentials are required and added via the [dashboard](https://dashboard.shotstack.io/integrations/mux), not in the request.|
+
+or
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|*anonymous*|[S3Destination](#schemas3destination)|false|none|Send rendered videos to an [Amazon S3](https://www.mux.com/) bucket. Send files to any region with your own prefix and filename. Add the `s3` destination provider to send the output video to S3. AWS credentials are required and added via the [dashboard](https://dashboard.shotstack.io/integrations/s3), not in the request.|
 
 <h2 id="tocS_ShotstackDestination">ShotstackDestination</h2>
 <!-- backwards compatibility -->
@@ -4573,6 +4580,66 @@ Pass additional options to control how Mux processes video. Currently supports p
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |playbackPolicy|[string]|false|none|Sets the Mux `playback_policy` option. Value is an array of strings - use `public`, `signed`, or both.|
+
+<h2 id="tocS_S3Destination">S3Destination</h2>
+<!-- backwards compatibility -->
+<a id="schemas3destination"></a>
+<a id="schema_S3Destination"></a>
+<a id="tocSs3destination"></a>
+<a id="tocss3destination"></a>
+
+```json
+{
+  "provider": "s3",
+  "options": {
+    "region": "us-east-1",
+    "bucket": "my-bucket",
+    "prefix": "my-renders",
+    "filename": "my-file",
+    "acl": "public-read"
+  }
+}
+
+```
+
+Send rendered videos to an [Amazon S3](https://www.mux.com/) bucket. Send files to any region with your own prefix and filename. Add the `s3` destination provider to send the output video to S3. AWS credentials are required and added via the [dashboard](https://dashboard.shotstack.io/integrations/s3), not in the request.
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|provider|string|true|none|The destination to send rendered assets to - set to `s3` for S3.|
+|options|[S3DestinationOptions](#schemas3destinationoptions)|false|none|Additional S3 configuration options.|
+
+<h2 id="tocS_S3DestinationOptions">S3DestinationOptions</h2>
+<!-- backwards compatibility -->
+<a id="schemas3destinationoptions"></a>
+<a id="schema_S3DestinationOptions"></a>
+<a id="tocSs3destinationoptions"></a>
+<a id="tocss3destinationoptions"></a>
+
+```json
+{
+  "region": "us-east-1",
+  "bucket": "my-bucket",
+  "prefix": "my-renders",
+  "filename": "my-file",
+  "acl": "public-read"
+}
+
+```
+
+Pass additional options to control how files are stored in S3.
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|region|string|false|none|Choose the region to send the file to. Must be a valid [AWS region] string like `us-east-1` or `ap-southeast-2`.|
+|bucket|string|false|none|The bucket name to send files to. The bucket must exist in the AWS account before files can be sent.|
+|prefix|string|false|none|A prefix for the file being sent. This is typically a folder name, i.e. `videos` or `customerId/videos`.|
+|filename|string|false|none|Use your own filename instead of the default render ID filename. Note: omit the file extension as this will be appended depending n the output format. Also `poster.jpg` and `-thumb.jpg` will be appended for poster and thumbnail images.|
+|acl|string|false|none|Sets the S3 Access Control List (acl) permissions. Default is `private`. Must use a valid  S3 [Canned ACL](https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#canned-acl).|
 
 <h2 id="tocS_Template">Template</h2>
 <!-- backwards compatibility -->
