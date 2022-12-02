@@ -744,7 +744,7 @@ components:
         volume:
           description: >-
             Set the volume for the video clip between 0 and 1 where 0 is muted and 1
-            is full volume (defaults to 0).
+            is full volume (defaults to 1).
           type: number
           example: 1
         crop:
