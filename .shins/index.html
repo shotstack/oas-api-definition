@@ -590,6 +590,7 @@ curl -X POST https://api.shotstack.io/{version}/render \
               <span class="hljs-string">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4"</span>,
               <span class="hljs-string">"trim"</span>: <span class="hljs-number">2</span>,
               <span class="hljs-string">"volume"</span>: <span class="hljs-number">1</span>,
+              <span class="hljs-string">"volumeEffect"</span>: <span class="hljs-string">"fadeIn"</span>,
               <span class="hljs-string">"crop"</span>: {
                 <span class="hljs-string">"top"</span>: <span class="hljs-number">0.15</span>,
                 <span class="hljs-string">"bottom"</span>: <span class="hljs-number">0.15</span>,
@@ -644,6 +645,7 @@ curl -X POST https://api.shotstack.io/{version}/render \
     <span class="hljs-string">"scaleTo"</span>: <span class="hljs-string">"preview"</span>,
     <span class="hljs-string">"quality"</span>: <span class="hljs-string">"medium"</span>,
     <span class="hljs-string">"repeat"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-string">"mute"</span>: <span class="hljs-literal">false</span>,
     <span class="hljs-string">"range"</span>: {
       <span class="hljs-string">"start"</span>: <span class="hljs-number">3</span>,
       <span class="hljs-string">"length"</span>: <span class="hljs-number">6</span>
@@ -812,6 +814,7 @@ System.out.println(response.toString());
               <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4"</span>,
               <span class="hljs-attr">"trim"</span>: <span class="hljs-number">2</span>,
               <span class="hljs-attr">"volume"</span>: <span class="hljs-number">1</span>,
+              <span class="hljs-attr">"volumeEffect"</span>: <span class="hljs-string">"fadeIn"</span>,
               <span class="hljs-attr">"crop"</span>: {
                 <span class="hljs-attr">"top"</span>: <span class="hljs-number">0.15</span>,
                 <span class="hljs-attr">"bottom"</span>: <span class="hljs-number">0.15</span>,
@@ -866,6 +869,7 @@ System.out.println(response.toString());
     <span class="hljs-attr">"scaleTo"</span>: <span class="hljs-string">"preview"</span>,
     <span class="hljs-attr">"quality"</span>: <span class="hljs-string">"medium"</span>,
     <span class="hljs-attr">"repeat"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"mute"</span>: <span class="hljs-literal">false</span>,
     <span class="hljs-attr">"range"</span>: {
       <span class="hljs-attr">"start"</span>: <span class="hljs-number">3</span>,
       <span class="hljs-attr">"length"</span>: <span class="hljs-number">6</span>
@@ -1270,6 +1274,7 @@ curl -X POST https://api.shotstack.io/{version}/templates \
                 <span class="hljs-string">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4"</span>,
                 <span class="hljs-string">"trim"</span>: <span class="hljs-number">2</span>,
                 <span class="hljs-string">"volume"</span>: <span class="hljs-number">1</span>,
+                <span class="hljs-string">"volumeEffect"</span>: <span class="hljs-string">"fadeIn"</span>,
                 <span class="hljs-string">"crop"</span>: {
                   <span class="hljs-string">"top"</span>: <span class="hljs-number">0.15</span>,
                   <span class="hljs-string">"bottom"</span>: <span class="hljs-number">0.15</span>,
@@ -1324,6 +1329,7 @@ curl -X POST https://api.shotstack.io/{version}/templates \
       <span class="hljs-string">"scaleTo"</span>: <span class="hljs-string">"preview"</span>,
       <span class="hljs-string">"quality"</span>: <span class="hljs-string">"medium"</span>,
       <span class="hljs-string">"repeat"</span>: <span class="hljs-literal">true</span>,
+      <span class="hljs-string">"mute"</span>: <span class="hljs-literal">false</span>,
       <span class="hljs-string">"range"</span>: {
         <span class="hljs-string">"start"</span>: <span class="hljs-number">3</span>,
         <span class="hljs-string">"length"</span>: <span class="hljs-number">6</span>
@@ -1497,6 +1503,7 @@ before being rendered. <a href="#tocs_mergefield">Merge fields</a> can be also u
                 <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4"</span>,
                 <span class="hljs-attr">"trim"</span>: <span class="hljs-number">2</span>,
                 <span class="hljs-attr">"volume"</span>: <span class="hljs-number">1</span>,
+                <span class="hljs-attr">"volumeEffect"</span>: <span class="hljs-string">"fadeIn"</span>,
                 <span class="hljs-attr">"crop"</span>: {
                   <span class="hljs-attr">"top"</span>: <span class="hljs-number">0.15</span>,
                   <span class="hljs-attr">"bottom"</span>: <span class="hljs-number">0.15</span>,
@@ -1551,6 +1558,7 @@ before being rendered. <a href="#tocs_mergefield">Merge fields</a> can be also u
       <span class="hljs-attr">"scaleTo"</span>: <span class="hljs-string">"preview"</span>,
       <span class="hljs-attr">"quality"</span>: <span class="hljs-string">"medium"</span>,
       <span class="hljs-attr">"repeat"</span>: <span class="hljs-literal">true</span>,
+      <span class="hljs-attr">"mute"</span>: <span class="hljs-literal">false</span>,
       <span class="hljs-attr">"range"</span>: {
         <span class="hljs-attr">"start"</span>: <span class="hljs-number">3</span>,
         <span class="hljs-attr">"length"</span>: <span class="hljs-number">6</span>
@@ -1999,6 +2007,7 @@ System.out.println(response.toString());
                   <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4"</span>,
                   <span class="hljs-attr">"trim"</span>: <span class="hljs-number">2</span>,
                   <span class="hljs-attr">"volume"</span>: <span class="hljs-number">1</span>,
+                  <span class="hljs-attr">"volumeEffect"</span>: <span class="hljs-string">"fadeIn"</span>,
                   <span class="hljs-attr">"crop"</span>: {
                     <span class="hljs-attr">"top"</span>: <span class="hljs-number">0.15</span>,
                     <span class="hljs-attr">"bottom"</span>: <span class="hljs-number">0.15</span>,
@@ -2053,6 +2062,7 @@ System.out.println(response.toString());
         <span class="hljs-attr">"scaleTo"</span>: <span class="hljs-string">"preview"</span>,
         <span class="hljs-attr">"quality"</span>: <span class="hljs-string">"medium"</span>,
         <span class="hljs-attr">"repeat"</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-attr">"mute"</span>: <span class="hljs-literal">false</span>,
         <span class="hljs-attr">"range"</span>: {
           <span class="hljs-attr">"start"</span>: <span class="hljs-number">3</span>,
           <span class="hljs-attr">"length"</span>: <span class="hljs-number">6</span>
@@ -2149,6 +2159,7 @@ curl -X PUT https://api.shotstack.io/{version}/templates/{id} \
                 <span class="hljs-string">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4"</span>,
                 <span class="hljs-string">"trim"</span>: <span class="hljs-number">2</span>,
                 <span class="hljs-string">"volume"</span>: <span class="hljs-number">1</span>,
+                <span class="hljs-string">"volumeEffect"</span>: <span class="hljs-string">"fadeIn"</span>,
                 <span class="hljs-string">"crop"</span>: {
                   <span class="hljs-string">"top"</span>: <span class="hljs-number">0.15</span>,
                   <span class="hljs-string">"bottom"</span>: <span class="hljs-number">0.15</span>,
@@ -2203,6 +2214,7 @@ curl -X PUT https://api.shotstack.io/{version}/templates/{id} \
       <span class="hljs-string">"scaleTo"</span>: <span class="hljs-string">"preview"</span>,
       <span class="hljs-string">"quality"</span>: <span class="hljs-string">"medium"</span>,
       <span class="hljs-string">"repeat"</span>: <span class="hljs-literal">true</span>,
+      <span class="hljs-string">"mute"</span>: <span class="hljs-literal">false</span>,
       <span class="hljs-string">"range"</span>: {
         <span class="hljs-string">"start"</span>: <span class="hljs-number">3</span>,
         <span class="hljs-string">"length"</span>: <span class="hljs-number">6</span>
@@ -2374,6 +2386,7 @@ System.out.println(response.toString());
                 <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4"</span>,
                 <span class="hljs-attr">"trim"</span>: <span class="hljs-number">2</span>,
                 <span class="hljs-attr">"volume"</span>: <span class="hljs-number">1</span>,
+                <span class="hljs-attr">"volumeEffect"</span>: <span class="hljs-string">"fadeIn"</span>,
                 <span class="hljs-attr">"crop"</span>: {
                   <span class="hljs-attr">"top"</span>: <span class="hljs-number">0.15</span>,
                   <span class="hljs-attr">"bottom"</span>: <span class="hljs-number">0.15</span>,
@@ -2428,6 +2441,7 @@ System.out.println(response.toString());
       <span class="hljs-attr">"scaleTo"</span>: <span class="hljs-string">"preview"</span>,
       <span class="hljs-attr">"quality"</span>: <span class="hljs-string">"medium"</span>,
       <span class="hljs-attr">"repeat"</span>: <span class="hljs-literal">true</span>,
+      <span class="hljs-attr">"mute"</span>: <span class="hljs-literal">false</span>,
       <span class="hljs-attr">"range"</span>: {
         <span class="hljs-attr">"start"</span>: <span class="hljs-number">3</span>,
         <span class="hljs-attr">"length"</span>: <span class="hljs-number">6</span>
@@ -3689,6 +3703,7 @@ DeveloperKey
               <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4"</span>,
               <span class="hljs-attr">"trim"</span>: <span class="hljs-number">2</span>,
               <span class="hljs-attr">"volume"</span>: <span class="hljs-number">1</span>,
+              <span class="hljs-attr">"volumeEffect"</span>: <span class="hljs-string">"fadeIn"</span>,
               <span class="hljs-attr">"crop"</span>: {
                 <span class="hljs-attr">"top"</span>: <span class="hljs-number">0.15</span>,
                 <span class="hljs-attr">"bottom"</span>: <span class="hljs-number">0.15</span>,
@@ -3743,6 +3758,7 @@ DeveloperKey
     <span class="hljs-attr">"scaleTo"</span>: <span class="hljs-string">"preview"</span>,
     <span class="hljs-attr">"quality"</span>: <span class="hljs-string">"medium"</span>,
     <span class="hljs-attr">"repeat"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"mute"</span>: <span class="hljs-literal">false</span>,
     <span class="hljs-attr">"range"</span>: {
       <span class="hljs-attr">"start"</span>: <span class="hljs-number">3</span>,
       <span class="hljs-attr">"length"</span>: <span class="hljs-number">6</span>
@@ -3867,6 +3883,7 @@ DeveloperKey
             <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4"</span>,
             <span class="hljs-attr">"trim"</span>: <span class="hljs-number">2</span>,
             <span class="hljs-attr">"volume"</span>: <span class="hljs-number">1</span>,
+            <span class="hljs-attr">"volumeEffect"</span>: <span class="hljs-string">"fadeIn"</span>,
             <span class="hljs-attr">"crop"</span>: {
               <span class="hljs-attr">"top"</span>: <span class="hljs-number">0.15</span>,
               <span class="hljs-attr">"bottom"</span>: <span class="hljs-number">0.15</span>,
@@ -4077,6 +4094,7 @@ DeveloperKey
         <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4"</span>,
         <span class="hljs-attr">"trim"</span>: <span class="hljs-number">2</span>,
         <span class="hljs-attr">"volume"</span>: <span class="hljs-number">1</span>,
+        <span class="hljs-attr">"volumeEffect"</span>: <span class="hljs-string">"fadeIn"</span>,
         <span class="hljs-attr">"crop"</span>: {
           <span class="hljs-attr">"top"</span>: <span class="hljs-number">0.15</span>,
           <span class="hljs-attr">"bottom"</span>: <span class="hljs-number">0.15</span>,
@@ -4151,6 +4169,7 @@ DeveloperKey
     <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4"</span>,
     <span class="hljs-attr">"trim"</span>: <span class="hljs-number">2</span>,
     <span class="hljs-attr">"volume"</span>: <span class="hljs-number">1</span>,
+    <span class="hljs-attr">"volumeEffect"</span>: <span class="hljs-string">"fadeIn"</span>,
     <span class="hljs-attr">"crop"</span>: {
       <span class="hljs-attr">"top"</span>: <span class="hljs-number">0.15</span>,
       <span class="hljs-attr">"bottom"</span>: <span class="hljs-number">0.15</span>,
@@ -4208,7 +4227,7 @@ DeveloperKey
 <td><a href="#schemaasset">Asset</a></td>
 <td>true</td>
 <td>none</td>
-<td>The type of asset to display for the duration of this Clip. Value<br />    must be one of:<br />      <ul><br />        <li><a href="#tocs_videoasset">VideoAsset</a></li><br />        <li><a href="#tocs_imageasset">ImageAsset</a></li><br />        <li><a href="#tocs_titleasset">TitleAsset</a></li><br />        <li><a href="#tocs_htmlasset">HtmlAsset</a></li><br />        <li><a href="#tocs_audioasset">AudioAsset</a></li><br />        <li><a href="#tocs_lumaasset">LumaAsset</a></li><br />      </ul></td>
+<td>The type of asset to display for the duration of the Clip. Value must be one of: <ul><br />  <li><a href="#tocs_videoasset">VideoAsset</a></li><br />  <li><a href="#tocs_imageasset">ImageAsset</a></li><br />  <li><a href="#tocs_titleasset">TitleAsset</a></li><br />  <li><a href="#tocs_htmlasset">HtmlAsset</a></li><br />  <li><a href="#tocs_audioasset">AudioAsset</a></li><br />  <li><a href="#tocs_lumaasset">LumaAsset</a></li><br /></ul></td>
 </tr>
 <tr>
 <td>start</td>
@@ -4229,7 +4248,7 @@ DeveloperKey
 <td>string</td>
 <td>false</td>
 <td>none</td>
-<td>Set how the asset should be scaled to fit the viewport using one of the following options: <br />  <ul><br />    <li><code>cover</code> - stretch the asset to fill the viewport without maintaining the aspect ratio.</li><br />    <li><code>contain</code> - fit the entire asset within the viewport while maintaining the original aspect ratio.</li><br />    <li><code>crop</code> (default) - scale the asset to fill the viewport while maintaining the aspect ratio. The asset will be cropped if it exceeds the bounds of the viewport.</li><br />    <li><code>none</code> - preserves the original asset dimensions and does not apply any scaling.</li><br />  </ul></td>
+<td>Set how the asset should be scaled to fit the viewport using one of the following options: <br />  <ul><br />    <li><code>crop</code> <b>(default)</b> - scale the asset to fill the viewport while maintaining the aspect ratio. The asset will be cropped if it exceeds the bounds of the viewport.</li><br />    <li><code>cover</code> - stretch the asset to fill the viewport without maintaining the aspect ratio.</li><br />    <li><code>contain</code> - fit the entire asset within the viewport while maintaining the original aspect ratio.</li><br />    <li><code>none</code> - preserves the original asset dimensions and does not apply any scaling.</li><br />  </ul></td>
 </tr>
 <tr>
 <td>scale</td>
@@ -4462,6 +4481,7 @@ DeveloperKey
   <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4"</span>,
   <span class="hljs-attr">"trim"</span>: <span class="hljs-number">2</span>,
   <span class="hljs-attr">"volume"</span>: <span class="hljs-number">1</span>,
+  <span class="hljs-attr">"volumeEffect"</span>: <span class="hljs-string">"fadeIn"</span>,
   <span class="hljs-attr">"crop"</span>: {
     <span class="hljs-attr">"top"</span>: <span class="hljs-number">0.15</span>,
     <span class="hljs-attr">"bottom"</span>: <span class="hljs-number">0.15</span>,
@@ -4471,16 +4491,14 @@ DeveloperKey
 }
 
 </code></pre>
-<p>The type of asset to display for the duration of this Clip. Value
-must be one of:
-<ul>
-<li><a href="#tocs_videoasset">VideoAsset</a></li>
-<li><a href="#tocs_imageasset">ImageAsset</a></li>
-<li><a href="#tocs_titleasset">TitleAsset</a></li>
-<li><a href="#tocs_htmlasset">HtmlAsset</a></li>
-<li><a href="#tocs_audioasset">AudioAsset</a></li>
-<li><a href="#tocs_lumaasset">LumaAsset</a></li>
-</ul></p>
+<p>The type of asset to display for the duration of the Clip. Value must be one of: <ul></p>
+  <li><a href="#tocs_videoasset">VideoAsset</a></li>
+  <li><a href="#tocs_imageasset">ImageAsset</a></li>
+  <li><a href="#tocs_titleasset">TitleAsset</a></li>
+  <li><a href="#tocs_htmlasset">HtmlAsset</a></li>
+  <li><a href="#tocs_audioasset">AudioAsset</a></li>
+  <li><a href="#tocs_lumaasset">LumaAsset</a></li>
+</ul>
 <h3 id="properties">Properties</h3>
 <p>oneOf</p>
 <table>
@@ -4618,6 +4636,7 @@ must be one of:
   <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4"</span>,
   <span class="hljs-attr">"trim"</span>: <span class="hljs-number">2</span>,
   <span class="hljs-attr">"volume"</span>: <span class="hljs-number">1</span>,
+  <span class="hljs-attr">"volumeEffect"</span>: <span class="hljs-string">"fadeIn"</span>,
   <span class="hljs-attr">"crop"</span>: {
     <span class="hljs-attr">"top"</span>: <span class="hljs-number">0.15</span>,
     <span class="hljs-attr">"bottom"</span>: <span class="hljs-number">0.15</span>,
@@ -4669,11 +4688,41 @@ must be one of:
 <td>Set the volume for the video clip between 0 and 1 where 0 is muted and 1 is full volume (defaults to 1).</td>
 </tr>
 <tr>
+<td>volumeEffect</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>The volume effect to apply to the video asset <ul><br />  <li><code>fadeIn</code> - fade volume in only</li><br />  <li><code>fadeOut</code> - fade volume out only</li><br />  <li><code>fadeInFadeOut</code> - fade volume in and out</li><br /></ul></td>
+</tr>
+<tr>
 <td>crop</td>
 <td><a href="#schemacrop">Crop</a></td>
 <td>false</td>
 <td>none</td>
 <td>Crop the sides of an asset by a relative amount. The size of the crop is specified using a scale between 0 and 1, relative to the screen width - i.e a left crop of 0.5 will crop half of the asset from the left, a top crop  of 0.25 will crop the top by quarter of the asset.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="enumerated-values">Enumerated Values</h4>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>volumeEffect</td>
+<td>fadeIn</td>
+</tr>
+<tr>
+<td>volumeEffect</td>
+<td>fadeOut</td>
+</tr>
+<tr>
+<td>volumeEffect</td>
+<td>fadeInFadeOut</td>
 </tr>
 </tbody>
 </table>
@@ -5072,7 +5121,7 @@ must be one of:
   <span class="hljs-attr">"type"</span>: <span class="hljs-string">"audio"</span>,
   <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/sound.mp3"</span>,
   <span class="hljs-attr">"trim"</span>: <span class="hljs-number">0</span>,
-  <span class="hljs-attr">"volume"</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-attr">"volume"</span>: <span class="hljs-number">1</span>,
   <span class="hljs-attr">"effect"</span>: <span class="hljs-string">"fadeIn"</span>
 }
 
@@ -6058,6 +6107,7 @@ must be one of:
   <span class="hljs-attr">"scaleTo"</span>: <span class="hljs-string">"preview"</span>,
   <span class="hljs-attr">"quality"</span>: <span class="hljs-string">"medium"</span>,
   <span class="hljs-attr">"repeat"</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">"mute"</span>: <span class="hljs-literal">false</span>,
   <span class="hljs-attr">"range"</span>: {
     <span class="hljs-attr">"start"</span>: <span class="hljs-number">3</span>,
     <span class="hljs-attr">"length"</span>: <span class="hljs-number">6</span>
@@ -6117,7 +6167,7 @@ must be one of:
 <td><a href="#schemasize">Size</a></td>
 <td>false</td>
 <td>none</td>
-<td>Set a custom size for a video or image. When using a custom size omit the <code>resolution</code> and <code>aspectRatio</code>. Custom sizes must be divisible by 2 based on the encoder specifications.</td>
+<td>Set a custom size for a video or image in pixels. When using a custom size omit the <code>resolution</code> and <code>aspectRatio</code>. Custom sizes must be divisible by 2 based on the encoder specifications.</td>
 </tr>
 <tr>
 <td>fps</td>
@@ -6146,6 +6196,13 @@ must be one of:
 <td>false</td>
 <td>none</td>
 <td>Loop settings for gif files. Set to <code>true</code> to loop, <code>false</code> to play only once.</td>
+</tr>
+<tr>
+<td>mute</td>
+<td>boolean</td>
+<td>false</td>
+<td>none</td>
+<td>Mute the audio track of the output video. Set to <code>true</code> to mute, <code>false</code> to un-mute.</td>
 </tr>
 <tr>
 <td>range</td>
@@ -6323,7 +6380,7 @@ must be one of:
 }
 
 </code></pre>
-<p>Set a custom size for a video or image. When using a custom size omit the <code>resolution</code> and <code>aspectRatio</code>. Custom sizes must be divisible by 2 based on the encoder specifications.</p>
+<p>Set a custom size for a video or image in pixels. When using a custom size omit the <code>resolution</code> and <code>aspectRatio</code>. Custom sizes must be divisible by 2 based on the encoder specifications.</p>
 <h3 id="properties">Properties</h3>
 <table>
 <thead>
@@ -6341,14 +6398,14 @@ must be one of:
 <td>integer</td>
 <td>false</td>
 <td>none</td>
-<td>Set a custom width for the video or image file. Value must be divisible by 2. Maximum video width is 1920px, maximum image width is 4096px.</td>
+<td>Set a custom width for the video or image file in pixels. Value must be divisible by 2. Maximum video width is 1920px, maximum image width is 4096px.</td>
 </tr>
 <tr>
 <td>height</td>
 <td>integer</td>
 <td>false</td>
 <td>none</td>
-<td>Set a custom height for the video or image file. Value must be divisible by 2. Maximum video height is 1920px, maximum image height is 4096px.</td>
+<td>Set a custom height for the video or image file in pixels. Value must be divisible by 2. Maximum video height is 1920px, maximum image height is 4096px.</td>
 </tr>
 </tbody>
 </table>
@@ -6475,12 +6532,11 @@ must be one of:
 }
 
 </code></pre>
-<p>A destination is a location where output files can be sent to for serving or hosting. By default all rendered assets are automatically sent to the  <a href="https://shotstack.io/docs/guide/serving-assets/hosting">Shotstack hosting destination</a>. You can add other destinations to send assets to. The following destinations are available:</p>
-  <ul>
-    <li><a href="#tocs_shotstackdestination">ShotstackDestination</a></li>
-    <li><a href="#tocs_muxdestination">MuxDestination</a></li>
-    <li><a href="#tocs_s3destination">S3Destination</a></li>
-  </ul>
+<p>A destination is a location where output files can be sent to for serving or hosting. By default all rendered assets are automatically sent to the  <a href="https://shotstack.io/docs/guide/serving-assets/hosting">Shotstack hosting destination</a>. You can add other destinations to send assets to. The following destinations are available: <ul></p>
+  <li><a href="#tocs_shotstackdestination">ShotstackDestination</a></li>
+  <li><a href="#tocs_muxdestination">MuxDestination</a></li>
+  <li><a href="#tocs_s3destination">S3Destination</a></li>
+</ul>
 <h3 id="properties">Properties</h3>
 <p>anyOf</p>
 <table>
@@ -6499,7 +6555,7 @@ must be one of:
 <td><a href="#schemashotstackdestination">ShotstackDestination</a></td>
 <td>false</td>
 <td>none</td>
-<td>Send rendered assets to the Shotstack hosting and CDN service. This destination is enabled by default.</td>
+<td>Send rendered assets to the  <a href="https://shotstack.io/docs/guide/serving-assets/destinations/shotstack">Shotstack hosting and CDN</a> service.  This destination is enabled by default.</td>
 </tr>
 </tbody>
 </table>
@@ -6520,7 +6576,7 @@ must be one of:
 <td><a href="#schemamuxdestination">MuxDestination</a></td>
 <td>false</td>
 <td>none</td>
-<td>Send rendered videos to the <a href="https://www.mux.com/">Mux</a> video hosting and streaming service. Add the <code>mux</code> destination provider to send the output video to Mux. Mux credentials are required and added via the <a href="https://dashboard.shotstack.io/integrations/mux">dashboard</a>, not in the request.</td>
+<td>Send rendered videos to the <a href="https://shotstack.io/docs/guide/serving-assets/destinations/mux">Mux</a> video hosting and streaming service. Mux credentials are required and added via the <a href="https://dashboard.shotstack.io/integrations/mux">dashboard</a>, not in the request.</td>
 </tr>
 </tbody>
 </table>
@@ -6541,7 +6597,7 @@ must be one of:
 <td><a href="#schemas3destination">S3Destination</a></td>
 <td>false</td>
 <td>none</td>
-<td>Send rendered videos to an <a href="https://www.mux.com/">Amazon S3</a> bucket. Send files to any region with your own prefix and filename. Add the <code>s3</code> destination provider to send the output video to S3. AWS credentials are required and added via the <a href="https://dashboard.shotstack.io/integrations/s3">dashboard</a>, not in the request.</td>
+<td>Send rendered videos to an <a href="https://shotstack.io/docs/guide/serving-assets/destinations/s3">Amazon S3</a> bucket. Send files to any region with your own prefix and filename. AWS credentials are required and added via the <a href="https://dashboard.shotstack.io/integrations/s3">dashboard</a>, not in the request.</td>
 </tr>
 </tbody>
 </table>
@@ -6556,7 +6612,7 @@ must be one of:
 }
 
 </code></pre>
-<p>Send rendered assets to the Shotstack hosting and CDN service. This destination is enabled by default.</p>
+<p>Send rendered assets to the  <a href="https://shotstack.io/docs/guide/serving-assets/destinations/shotstack">Shotstack hosting and CDN</a> service.  This destination is enabled by default.</p>
 <h3 id="properties">Properties</h3>
 <table>
 <thead>
@@ -6600,7 +6656,7 @@ must be one of:
 }
 
 </code></pre>
-<p>Send rendered videos to the <a href="https://www.mux.com/">Mux</a> video hosting and streaming service. Add the <code>mux</code> destination provider to send the output video to Mux. Mux credentials are required and added via the <a href="https://dashboard.shotstack.io/integrations/mux">dashboard</a>, not in the request.</p>
+<p>Send rendered videos to the <a href="https://shotstack.io/docs/guide/serving-assets/destinations/mux">Mux</a> video hosting and streaming service. Mux credentials are required and added via the <a href="https://dashboard.shotstack.io/integrations/mux">dashboard</a>, not in the request.</p>
 <h3 id="properties">Properties</h3>
 <table>
 <thead>
@@ -6680,7 +6736,7 @@ must be one of:
 }
 
 </code></pre>
-<p>Send rendered videos to an <a href="https://www.mux.com/">Amazon S3</a> bucket. Send files to any region with your own prefix and filename. Add the <code>s3</code> destination provider to send the output video to S3. AWS credentials are required and added via the <a href="https://dashboard.shotstack.io/integrations/s3">dashboard</a>, not in the request.</p>
+<p>Send rendered videos to an <a href="https://shotstack.io/docs/guide/serving-assets/destinations/s3">Amazon S3</a> bucket. Send files to any region with your own prefix and filename. AWS credentials are required and added via the <a href="https://dashboard.shotstack.io/integrations/s3">dashboard</a>, not in the request.</p>
 <h3 id="properties">Properties</h3>
 <table>
 <thead>
@@ -6802,6 +6858,7 @@ must be one of:
                 <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4"</span>,
                 <span class="hljs-attr">"trim"</span>: <span class="hljs-number">2</span>,
                 <span class="hljs-attr">"volume"</span>: <span class="hljs-number">1</span>,
+                <span class="hljs-attr">"volumeEffect"</span>: <span class="hljs-string">"fadeIn"</span>,
                 <span class="hljs-attr">"crop"</span>: {
                   <span class="hljs-attr">"top"</span>: <span class="hljs-number">0.15</span>,
                   <span class="hljs-attr">"bottom"</span>: <span class="hljs-number">0.15</span>,
@@ -6856,6 +6913,7 @@ must be one of:
       <span class="hljs-attr">"scaleTo"</span>: <span class="hljs-string">"preview"</span>,
       <span class="hljs-attr">"quality"</span>: <span class="hljs-string">"medium"</span>,
       <span class="hljs-attr">"repeat"</span>: <span class="hljs-literal">true</span>,
+      <span class="hljs-attr">"mute"</span>: <span class="hljs-literal">false</span>,
       <span class="hljs-attr">"range"</span>: {
         <span class="hljs-attr">"start"</span>: <span class="hljs-number">3</span>,
         <span class="hljs-attr">"length"</span>: <span class="hljs-number">6</span>
@@ -7092,6 +7150,7 @@ must be one of:
                   <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4"</span>,
                   <span class="hljs-attr">"trim"</span>: <span class="hljs-number">2</span>,
                   <span class="hljs-attr">"volume"</span>: <span class="hljs-number">1</span>,
+                  <span class="hljs-attr">"volumeEffect"</span>: <span class="hljs-string">"fadeIn"</span>,
                   <span class="hljs-attr">"crop"</span>: {
                     <span class="hljs-attr">"top"</span>: <span class="hljs-number">0.15</span>,
                     <span class="hljs-attr">"bottom"</span>: <span class="hljs-number">0.15</span>,
@@ -7146,6 +7205,7 @@ must be one of:
         <span class="hljs-attr">"scaleTo"</span>: <span class="hljs-string">"preview"</span>,
         <span class="hljs-attr">"quality"</span>: <span class="hljs-string">"medium"</span>,
         <span class="hljs-attr">"repeat"</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-attr">"mute"</span>: <span class="hljs-literal">false</span>,
         <span class="hljs-attr">"range"</span>: {
           <span class="hljs-attr">"start"</span>: <span class="hljs-number">3</span>,
           <span class="hljs-attr">"length"</span>: <span class="hljs-number">6</span>
@@ -7253,6 +7313,7 @@ must be one of:
                 <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4"</span>,
                 <span class="hljs-attr">"trim"</span>: <span class="hljs-number">2</span>,
                 <span class="hljs-attr">"volume"</span>: <span class="hljs-number">1</span>,
+                <span class="hljs-attr">"volumeEffect"</span>: <span class="hljs-string">"fadeIn"</span>,
                 <span class="hljs-attr">"crop"</span>: {
                   <span class="hljs-attr">"top"</span>: <span class="hljs-number">0.15</span>,
                   <span class="hljs-attr">"bottom"</span>: <span class="hljs-number">0.15</span>,
@@ -7307,6 +7368,7 @@ must be one of:
       <span class="hljs-attr">"scaleTo"</span>: <span class="hljs-string">"preview"</span>,
       <span class="hljs-attr">"quality"</span>: <span class="hljs-string">"medium"</span>,
       <span class="hljs-attr">"repeat"</span>: <span class="hljs-literal">true</span>,
+      <span class="hljs-attr">"mute"</span>: <span class="hljs-literal">false</span>,
       <span class="hljs-attr">"range"</span>: {
         <span class="hljs-attr">"start"</span>: <span class="hljs-number">3</span>,
         <span class="hljs-attr">"length"</span>: <span class="hljs-number">6</span>
@@ -7605,6 +7667,7 @@ must be one of:
                   <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4"</span>,
                   <span class="hljs-attr">"trim"</span>: <span class="hljs-number">2</span>,
                   <span class="hljs-attr">"volume"</span>: <span class="hljs-number">1</span>,
+                  <span class="hljs-attr">"volumeEffect"</span>: <span class="hljs-string">"fadeIn"</span>,
                   <span class="hljs-attr">"crop"</span>: {
                     <span class="hljs-attr">"top"</span>: <span class="hljs-number">0.15</span>,
                     <span class="hljs-attr">"bottom"</span>: <span class="hljs-number">0.15</span>,
@@ -7659,6 +7722,7 @@ must be one of:
         <span class="hljs-attr">"scaleTo"</span>: <span class="hljs-string">"preview"</span>,
         <span class="hljs-attr">"quality"</span>: <span class="hljs-string">"medium"</span>,
         <span class="hljs-attr">"repeat"</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-attr">"mute"</span>: <span class="hljs-literal">false</span>,
         <span class="hljs-attr">"range"</span>: {
           <span class="hljs-attr">"start"</span>: <span class="hljs-number">3</span>,
           <span class="hljs-attr">"length"</span>: <span class="hljs-number">6</span>
@@ -7757,6 +7821,7 @@ must be one of:
                 <span class="hljs-attr">"src"</span>: <span class="hljs-string">"https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4"</span>,
                 <span class="hljs-attr">"trim"</span>: <span class="hljs-number">2</span>,
                 <span class="hljs-attr">"volume"</span>: <span class="hljs-number">1</span>,
+                <span class="hljs-attr">"volumeEffect"</span>: <span class="hljs-string">"fadeIn"</span>,
                 <span class="hljs-attr">"crop"</span>: {
                   <span class="hljs-attr">"top"</span>: <span class="hljs-number">0.15</span>,
                   <span class="hljs-attr">"bottom"</span>: <span class="hljs-number">0.15</span>,
@@ -7811,6 +7876,7 @@ must be one of:
       <span class="hljs-attr">"scaleTo"</span>: <span class="hljs-string">"preview"</span>,
       <span class="hljs-attr">"quality"</span>: <span class="hljs-string">"medium"</span>,
       <span class="hljs-attr">"repeat"</span>: <span class="hljs-literal">true</span>,
+      <span class="hljs-attr">"mute"</span>: <span class="hljs-literal">false</span>,
       <span class="hljs-attr">"range"</span>: {
         <span class="hljs-attr">"start"</span>: <span class="hljs-number">3</span>,
         <span class="hljs-attr">"length"</span>: <span class="hljs-number">6</span>

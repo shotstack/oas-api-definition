@@ -570,9 +570,9 @@ components:
           description: >-
             Set how the asset should be scaled to fit the viewport using one of the following options: 
               <ul>
+                <li>`crop` <b>(default)</b> - scale the asset to fill the viewport while maintaining the aspect ratio. The asset will be cropped if it exceeds the bounds of the viewport.</li>
                 <li>`cover` - stretch the asset to fill the viewport without maintaining the aspect ratio.</li>
                 <li>`contain` - fit the entire asset within the viewport while maintaining the original aspect ratio.</li>
-                <li>`crop` (default) - scale the asset to fill the viewport while maintaining the aspect ratio. The asset will be cropped if it exceeds the bounds of the viewport.</li>
                 <li>`none` - preserves the original asset dimensions and does not apply any scaling.</li>
               </ul>
           enum:
@@ -696,16 +696,16 @@ components:
     Asset:
       type: object
       description: >-
-        The type of asset to display for the duration of this Clip. Value
-            must be one of:
-              <ul>
-                <li><a href="#tocs_videoasset">VideoAsset</a></li>
-                <li><a href="#tocs_imageasset">ImageAsset</a></li>
-                <li><a href="#tocs_titleasset">TitleAsset</a></li>
-                <li><a href="#tocs_htmlasset">HtmlAsset</a></li>
-                <li><a href="#tocs_audioasset">AudioAsset</a></li>
-                <li><a href="#tocs_lumaasset">LumaAsset</a></li>
-              </ul>
+        The type of asset to display for the duration of the Clip. Value
+        must be one of:
+        <ul>
+          <li><a href="#tocs_videoasset">VideoAsset</a></li>
+          <li><a href="#tocs_imageasset">ImageAsset</a></li>
+          <li><a href="#tocs_titleasset">TitleAsset</a></li>
+          <li><a href="#tocs_htmlasset">HtmlAsset</a></li>
+          <li><a href="#tocs_audioasset">AudioAsset</a></li>
+          <li><a href="#tocs_lumaasset">LumaAsset</a></li>
+        </ul>
       discriminator:
         propertyName: asset
       oneOf:
@@ -747,6 +747,19 @@ components:
             is full volume (defaults to 1).
           type: number
           example: 1
+        volumeEffect:
+          description: >-
+            The volume effect to apply to the video asset
+            <ul>
+              <li>`fadeIn` - fade volume in only</li>
+              <li>`fadeOut` - fade volume out only</li>
+              <li>`fadeInFadeOut` - fade volume in and out</li>
+            </ul>
+          enum:
+            - fadeIn
+            - fadeOut
+            - fadeInFadeOut
+          type: string
         crop:
           $ref: "#/components/schemas/Crop"
       required:
@@ -982,6 +995,7 @@ components:
             Set the volume for the audio clip between 0 and 1 where 0 is muted and 1
             is full volume (defaults to 1).
           type: number
+          example: 1
         effect:
           description: >-
             The effect to apply to the audio asset
@@ -1222,26 +1236,26 @@ components:
         x:
           description: >-
             Offset an asset on the horizontal axis (left or right), range varies
-            from -1 to 1. Positive numbers move the asset right, negative left.
+            from -10 to 10. Positive numbers move the asset right, negative left.
             For all assets except titles the distance moved is relative to the width 
             of the viewport - i.e. an X offset of 0.5 will move the asset half the 
             screen width to the right.
           type: number
           format: float
-          minimum: -1
-          maximum: 1
+          minimum: -10
+          maximum: 10
           example: 0.1
         y:
           description: >-
             Offset an asset on the vertical axis (up or down), range varies from
-            -1 to 1. Positive numbers move the asset up, negative down.
+            -10 to 10. Positive numbers move the asset up, negative down.
             For all assets except titles the distance moved is relative to the height 
             of the viewport - i.e. an Y offset of 0.5 will move the asset up half the 
             screen height.
           type: number
           format: float
-          minimum: -1
-          maximum: 1
+          minimum: -10
+          maximum: 10
           example: -0.2
       type: object
 
@@ -1484,6 +1498,10 @@ components:
           description: Loop settings for gif files. Set to `true` to loop, `false` to play only once.
           type: boolean
           example: true
+        mute:
+          description: Mute the audio track of the output video. Set to `true` to mute, `false` to un-mute.
+          type: boolean
+          example: false
         range:
           $ref: "#/components/schemas/Range"
         poster:
@@ -1507,13 +1525,13 @@ components:
 
     Size:
       description: >-
-        Set a custom size for a video or image. When using a custom size omit the
+        Set a custom size for a video or image in pixels. When using a custom size omit the
         `resolution` and `aspectRatio`. Custom sizes must be divisible by 2 based
         on the encoder specifications.
       properties:
         width:
           description: >-
-            Set a custom width for the video or image file. Value must be divisible
+            Set a custom width for the video or image file in pixels. Value must be divisible
             by 2. Maximum video width is 1920px, maximum image width is 4096px.
           type: integer
           minimum: 0
@@ -1521,7 +1539,7 @@ components:
           example: 1200
         height:
           description: >-
-            Set a custom height for the video or image file. Value must be divisible
+            Set a custom height for the video or image file in pixels. Value must be divisible
             by 2. Maximum video height is 1920px, maximum image height is 4096px.
           type: integer
           minimum: 0
@@ -1589,11 +1607,11 @@ components:
         rendered assets are automatically sent to the 
         [Shotstack hosting destination](https://shotstack.io/docs/guide/serving-assets/hosting). You can add other
         destinations to send assets to. The following destinations are available:
-          <ul>
-            <li><a href="#tocs_shotstackdestination">ShotstackDestination</a></li>
-            <li><a href="#tocs_muxdestination">MuxDestination</a></li>
-            <li><a href="#tocs_s3destination">S3Destination</a></li>
-          </ul>
+        <ul>
+          <li><a href="#tocs_shotstackdestination">ShotstackDestination</a></li>
+          <li><a href="#tocs_muxdestination">MuxDestination</a></li>
+          <li><a href="#tocs_s3destination">S3Destination</a></li>
+        </ul>
       discriminator:
         propertyName: destinations
       anyOf:
@@ -1603,7 +1621,9 @@ components:
 
     ShotstackDestination:
       description: >-
-        Send rendered assets to the Shotstack hosting and CDN service. This destination is enabled by default.
+        Send rendered assets to the 
+        [Shotstack hosting and CDN](https://shotstack.io/docs/guide/serving-assets/destinations/shotstack) service. 
+        This destination is enabled by default.
       properties:
         provider:
           description: The destination to send rendered assets to - set to `shotstack` for Shotstack hosting and CDN.
@@ -1612,8 +1632,8 @@ components:
           example: shotstack
         exclude:
           description: >-
-            Set to `true` to opt-out from the Shotstack hosting and CDN service. All files must be downloaded within
-            24 hours of rendering.
+            Set to `true` to [opt-out](https://shotstack.io/docs/guide/serving-assets/self-host) from the Shotstack
+            hosting and CDN service. All files must be downloaded within 24 hours of rendering.
           type: boolean
           example: false
       type: object
@@ -1622,9 +1642,9 @@ components:
 
     MuxDestination:
       description: >-
-        Send rendered videos to the [Mux](https://www.mux.com/) video hosting and streaming service. Add the
-        `mux` destination provider to send the output video to Mux. Mux credentials are required and added via
-        the [dashboard](https://dashboard.shotstack.io/integrations/mux), not in the request.
+        Send rendered videos to the [Mux](https://shotstack.io/docs/guide/serving-assets/destinations/mux) video hosting
+        and streaming service. Mux credentials are required and added via the
+        [dashboard](https://dashboard.shotstack.io/integrations/mux), not in the request.
       properties:
         provider:
           description: The destination to send rendered assets to - set to `mux` for Mux.
@@ -1654,9 +1674,9 @@ components:
 
     S3Destination:
       description: >-
-        Send rendered videos to an [Amazon S3](https://www.mux.com/) bucket. Send files to any region with your own
-        prefix and filename. Add the `s3` destination provider to send the output video to S3. AWS credentials are
-        required and added via the [dashboard](https://dashboard.shotstack.io/integrations/s3), not in the request.
+        Send rendered videos to an [Amazon S3](https://shotstack.io/docs/guide/serving-assets/destinations/s3) bucket.
+        Send files to any region with your own prefix and filename. AWS credentials are required and added via the
+        [dashboard](https://dashboard.shotstack.io/integrations/s3), not in the request.
       properties:
         provider:
           description: The destination to send rendered assets to - set to `s3` for S3.

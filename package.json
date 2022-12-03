@@ -10,7 +10,7 @@
     "build:docs": "./build-docs.sh",
     "build:sdks": "./build-sdks.sh",
     "build:sdks:update": "./update-sdks.sh ./",
-    "start": "./build-docs.sh && http-server build/docs/ -o",
+    "start": "./build-docs.sh && http-server build/docs/ -o -c-1",
     "deploy:docs": "aws s3 sync build/docs/ s3://shotstack.io/docs/api"
   },
   "repository": {
