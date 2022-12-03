@@ -4559,7 +4559,7 @@ DeveloperKey
 <td><a href="#schematitleasset">TitleAsset</a></td>
 <td>false</td>
 <td>none</td>
-<td>The TitleAsset clip type lets you create video titles from a text string and apply styling and positioning.</td>
+<td><strong>Notice: The title asset is deprecated, use the <a href="#tocs_htmlasset">HTML asset</a> instead.</strong><br /><br />The TitleAsset clip type lets you create video titles from a text string<br />and apply styling and positioning.</td>
 </tr>
 </tbody>
 </table>
@@ -4799,7 +4799,9 @@ DeveloperKey
 }
 
 </code></pre>
-<p>The TitleAsset clip type lets you create video titles from a text string and apply styling and positioning.</p>
+<p><strong>Notice: The title asset is deprecated, use the <a href="#tocs_htmlasset">HTML asset</a> instead.</strong></p>
+<p>The TitleAsset clip type lets you create video titles from a text string
+and apply styling and positioning.</p>
 <h3 id="properties">Properties</h3>
 <table>
 <thead>
@@ -5815,14 +5817,14 @@ DeveloperKey
 <td>number(float)</td>
 <td>false</td>
 <td>none</td>
-<td>Offset an asset on the horizontal axis (left or right), range varies from -1 to 1. Positive numbers move the asset right, negative left. For all assets except titles the distance moved is relative to the width  of the viewport - i.e. an X offset of 0.5 will move the asset half the  screen width to the right.</td>
+<td>Offset an asset on the horizontal axis (left or right), range varies from -10 to 10. Positive numbers move the asset right, negative left. For all assets except titles the distance moved is relative to the width  of the viewport - i.e. an X offset of 0.5 will move the asset half the  screen width to the right.</td>
 </tr>
 <tr>
 <td>y</td>
 <td>number(float)</td>
 <td>false</td>
 <td>none</td>
-<td>Offset an asset on the vertical axis (up or down), range varies from -1 to 1. Positive numbers move the asset up, negative down. For all assets except titles the distance moved is relative to the height  of the viewport - i.e. an Y offset of 0.5 will move the asset up half the  screen height.</td>
+<td>Offset an asset on the vertical axis (up or down), range varies from -10 to 10. Positive numbers move the asset up, negative down. For all assets except titles the distance moved is relative to the height  of the viewport - i.e. an Y offset of 0.5 will move the asset up half the  screen height.</td>
 </tr>
 </tbody>
 </table>
@@ -6637,7 +6639,7 @@ DeveloperKey
 <td>boolean</td>
 <td>false</td>
 <td>none</td>
-<td>Set to <code>true</code> to opt-out from the Shotstack hosting and CDN service. All files must be downloaded within 24 hours of rendering.</td>
+<td>Set to <code>true</code> to <a href="https://shotstack.io/docs/guide/serving-assets/self-host">opt-out</a> from the Shotstack hosting and CDN service. All files must be downloaded within 24 hours of rendering.</td>
 </tr>
 </tbody>
 </table>

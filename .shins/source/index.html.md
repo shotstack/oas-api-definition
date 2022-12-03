@@ -3692,7 +3692,7 @@ xor
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|*anonymous*|[TitleAsset](#schematitleasset)|false|none|The TitleAsset clip type lets you create video titles from a text string and apply styling and positioning.|
+|*anonymous*|[TitleAsset](#schematitleasset)|false|none|**Notice: The title asset is deprecated, use the [HTML asset](#tocs_htmlasset) instead.**<br><br>The TitleAsset clip type lets you create video titles from a text string<br>and apply styling and positioning.|
 
 xor
 
@@ -3812,7 +3812,10 @@ The ImageAsset is used to create video from images to compose an image. The src 
 
 ```
 
-The TitleAsset clip type lets you create video titles from a text string and apply styling and positioning.
+**Notice: The title asset is deprecated, use the [HTML asset](#tocs_htmlasset) instead.**
+
+The TitleAsset clip type lets you create video titles from a text string
+and apply styling and positioning.
 
 ### Properties
 
@@ -4142,8 +4145,8 @@ Offsets the position of an asset horizontally or vertically by a relative distan
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|x|number(float)|false|none|Offset an asset on the horizontal axis (left or right), range varies from -1 to 1. Positive numbers move the asset right, negative left. For all assets except titles the distance moved is relative to the width  of the viewport - i.e. an X offset of 0.5 will move the asset half the  screen width to the right.|
-|y|number(float)|false|none|Offset an asset on the vertical axis (up or down), range varies from -1 to 1. Positive numbers move the asset up, negative down. For all assets except titles the distance moved is relative to the height  of the viewport - i.e. an Y offset of 0.5 will move the asset up half the  screen height.|
+|x|number(float)|false|none|Offset an asset on the horizontal axis (left or right), range varies from -10 to 10. Positive numbers move the asset right, negative left. For all assets except titles the distance moved is relative to the width  of the viewport - i.e. an X offset of 0.5 will move the asset half the  screen width to the right.|
+|y|number(float)|false|none|Offset an asset on the vertical axis (up or down), range varies from -10 to 10. Positive numbers move the asset up, negative down. For all assets except titles the distance moved is relative to the height  of the viewport - i.e. an Y offset of 0.5 will move the asset up half the  screen height.|
 
 <h2 id="tocS_Crop">Crop</h2>
 <!-- backwards compatibility -->
@@ -4556,7 +4559,7 @@ Send rendered assets to the  [Shotstack hosting and CDN](https://shotstack.io/do
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |provider|string|true|none|The destination to send rendered assets to - set to `shotstack` for Shotstack hosting and CDN.|
-|exclude|boolean|false|none|Set to `true` to opt-out from the Shotstack hosting and CDN service. All files must be downloaded within 24 hours of rendering.|
+|exclude|boolean|false|none|Set to `true` to [opt-out](https://shotstack.io/docs/guide/serving-assets/self-host) from the Shotstack hosting and CDN service. All files must be downloaded within 24 hours of rendering.|
 
 <h2 id="tocS_MuxDestination">MuxDestination</h2>
 <!-- backwards compatibility -->

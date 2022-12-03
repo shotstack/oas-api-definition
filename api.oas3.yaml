@@ -789,7 +789,10 @@ components:
         - src
 
     TitleAsset:
-      description: >-
+      deprecated: true
+      description: |
+        **Notice: The title asset is deprecated, use the [HTML asset](#tocs_htmlasset) instead.**
+
         The TitleAsset clip type lets you create video titles from a text string
         and apply styling and positioning.
       type: object
