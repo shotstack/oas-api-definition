@@ -495,14 +495,10 @@
 <blockquote>
 <p>Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.</p>
 </blockquote>
-<p>Shotstack is a video, image and audio editing service that allows for the automated
-generation of videos, images and audio using JSON and a RESTful API.</p>
-<p>You arrange and configure an edit and POST it to the API which will render your media and provide a file
-location when complete.</p>
-<p>For more details visit <a href="https://shotstack.io">shotstack.io</a> or checkout our
-<a href="https://shotstack.io/docs/guide/">getting started</a> documentation.</p>
-<p>There are two main API's, one for editing and generating assets (Edit API) and one for managing hosted assets
-(Serve API).</p>
+<p>Shotstack is a video, image and audio editing service that allows for the automated generation of videos, images and audio using JSON and a RESTful API.</p>
+<p>You arrange and configure an edit and POST it to the API which will render your media and provide a file  location when complete.</p>
+<p>For more details visit <a href="https://shotstack.io">shotstack.io</a> or checkout our <a href="https://shotstack.io/docs/guide/">getting started</a> documentation.</p>
+<p>There are two main API's, one for editing and generating assets (Edit API) and one for managing hosted assets (Serve API).</p>
 <p>The Edit API base URL is: <b><a href="https://api.shotstack.io/%7Bversion%7D">https://api.shotstack.io/{version}</a></b></p>
 <p>The Serve API base URL is: <b><a href="https://api.shotstack.io/serve/%7Bversion%7D">https://api.shotstack.io/serve/{version}</a></b></p>
 <p>Base URLs:</p>
@@ -3834,7 +3830,7 @@ DeveloperKey
 <td>string</td>
 <td>false</td>
 <td>none</td>
-<td>The disk type to use for storing footage and assets for each render. See <a href="https://shotstack.io/docs/guide/architecting-an-application/disk-types">disk types</a> for more details. <ul><br />  <li><code>local</code> - optimized for high speed rendering with up to 512MB storage</li><br />  <li><code>mount</code> - optimized for larger file sizes and longer videos with 5GB for source footage and 512MB for output render</li><br /></ul></td>
+<td><strong>Notice: This option is now deprecated and will be removed. Disk types are handled automatically. Setting a disk type has no effect.</strong><br /><br />The disk type to use for storing footage and assets for each render. See <a href="https://shotstack.io/docs/guide/architecting-an-application/disk-types">disk types</a> for more details.<br /><ul><br />  <li><code>local</code> - optimized for high speed rendering with up to 512MB storage</li><br />  <li><code>mount</code> - optimized for larger file sizes and longer videos with 5GB for source footage and 512MB for output render</li><br /></ul></td>
 </tr>
 </tbody>
 </table>
@@ -4227,7 +4223,7 @@ DeveloperKey
 <td><a href="#schemaasset">Asset</a></td>
 <td>true</td>
 <td>none</td>
-<td>The type of asset to display for the duration of the Clip. Value must be one of: <ul><br />  <li><a href="#tocs_videoasset">VideoAsset</a></li><br />  <li><a href="#tocs_imageasset">ImageAsset</a></li><br />  <li><a href="#tocs_titleasset">TitleAsset</a></li><br />  <li><a href="#tocs_htmlasset">HtmlAsset</a></li><br />  <li><a href="#tocs_audioasset">AudioAsset</a></li><br />  <li><a href="#tocs_lumaasset">LumaAsset</a></li><br /></ul></td>
+<td>The type of asset to display for the duration of the Clip. Value must be one of:<br />  <ul><br />    <li><a href="#tocs_videoasset">VideoAsset</a></li><br />    <li><a href="#tocs_imageasset">ImageAsset</a></li><br />    <li><a href="#tocs_titleasset">TitleAsset</a></li><br />    <li><a href="#tocs_htmlasset">HtmlAsset</a></li><br />    <li><a href="#tocs_audioasset">AudioAsset</a></li><br />    <li><a href="#tocs_lumaasset">LumaAsset</a></li><br />  </ul></td>
 </tr>
 <tr>
 <td>start</td>
@@ -4491,14 +4487,15 @@ DeveloperKey
 }
 
 </code></pre>
-<p>The type of asset to display for the duration of the Clip. Value must be one of: <ul></p>
-  <li><a href="#tocs_videoasset">VideoAsset</a></li>
-  <li><a href="#tocs_imageasset">ImageAsset</a></li>
-  <li><a href="#tocs_titleasset">TitleAsset</a></li>
-  <li><a href="#tocs_htmlasset">HtmlAsset</a></li>
-  <li><a href="#tocs_audioasset">AudioAsset</a></li>
-  <li><a href="#tocs_lumaasset">LumaAsset</a></li>
-</ul>
+<p>The type of asset to display for the duration of the Clip. Value must be one of:</p>
+  <ul>
+    <li><a href="#tocs_videoasset">VideoAsset</a></li>
+    <li><a href="#tocs_imageasset">ImageAsset</a></li>
+    <li><a href="#tocs_titleasset">TitleAsset</a></li>
+    <li><a href="#tocs_htmlasset">HtmlAsset</a></li>
+    <li><a href="#tocs_audioasset">AudioAsset</a></li>
+    <li><a href="#tocs_lumaasset">LumaAsset</a></li>
+  </ul>
 <h3 id="properties">Properties</h3>
 <p>oneOf</p>
 <table>
@@ -4559,7 +4556,7 @@ DeveloperKey
 <td><a href="#schematitleasset">TitleAsset</a></td>
 <td>false</td>
 <td>none</td>
-<td><strong>Notice: The title asset is deprecated, use the <a href="#tocs_htmlasset">HTML asset</a> instead.</strong><br /><br />The TitleAsset clip type lets you create video titles from a text string<br />and apply styling and positioning.</td>
+<td><strong>Notice: The title asset is deprecated, use the <a href="#tocs_htmlasset">HTML asset</a> instead.</strong><br /><br />The TitleAsset clip type lets you create video titles from a text string and apply styling and positioning.</td>
 </tr>
 </tbody>
 </table>
@@ -4800,8 +4797,7 @@ DeveloperKey
 
 </code></pre>
 <p><strong>Notice: The title asset is deprecated, use the <a href="#tocs_htmlasset">HTML asset</a> instead.</strong></p>
-<p>The TitleAsset clip type lets you create video titles from a text string
-and apply styling and positioning.</p>
+<p>The TitleAsset clip type lets you create video titles from a text string and apply styling and positioning.</p>
 <h3 id="properties">Properties</h3>
 <table>
 <thead>
@@ -6797,14 +6793,14 @@ and apply styling and positioning.</p>
 <tr>
 <td>region</td>
 <td>string</td>
-<td>false</td>
+<td>true</td>
 <td>none</td>
-<td>Choose the region to send the file to. Must be a valid [AWS region] string like <code>us-east-1</code> or <code>ap-southeast-2</code>.</td>
+<td>Choose the region to send the file to. Must be a valid  <a href="https://docs.aws.amazon.com/general/latest/gr/s3.html#s3_region">AWS region</a> string like <code>us-east-1</code> or <code>ap-southeast-2</code>.</td>
 </tr>
 <tr>
 <td>bucket</td>
 <td>string</td>
-<td>false</td>
+<td>true</td>
 <td>none</td>
 <td>The bucket name to send files to. The bucket must exist in the AWS account before files can be sent.</td>
 </tr>
@@ -6991,7 +6987,7 @@ and apply styling and positioning.</p>
 }
 
 </code></pre>
-<p>Render a template by it's id and optional merge fields.</p>
+<p>Configure the id and optional merge fields to render a template by id.</p>
 <h3 id="properties">Properties</h3>
 <table>
 <thead>
@@ -7559,7 +7555,7 @@ and apply styling and positioning.</p>
 }
 
 </code></pre>
-<p>The response received after a <a href="#create-a-template">template</a> is submitted. The template is saved and a unique template id is returned.</p>
+<p>The response received after a <a href="#create-template">template</a> is submitted. The template is saved and a unique template id is returned.</p>
 <h3 id="properties">Properties</h3>
 <table>
 <thead>
@@ -7756,7 +7752,7 @@ and apply styling and positioning.</p>
 }
 
 </code></pre>
-<p>The template data including the template name and Edit.</p>
+<p>The template data including the template name and <a href="#tocs_edit">Edit</a>.</p>
 <h3 id="properties">Properties</h3>
 <table>
 <thead>

@@ -32,17 +32,13 @@ headingLevel: 2
 
 > Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
 
-Shotstack is a video, image and audio editing service that allows for the automated
-generation of videos, images and audio using JSON and a RESTful API.
+Shotstack is a video, image and audio editing service that allows for the automated generation of videos, images and audio using JSON and a RESTful API.
 
-You arrange and configure an edit and POST it to the API which will render your media and provide a file 
-location when complete.
+You arrange and configure an edit and POST it to the API which will render your media and provide a file  location when complete.
 
-For more details visit [shotstack.io](https://shotstack.io) or checkout our
-[getting started](https://shotstack.io/docs/guide/) documentation.
+For more details visit [shotstack.io](https://shotstack.io) or checkout our [getting started](https://shotstack.io/docs/guide/) documentation.
 
-There are two main API's, one for editing and generating assets (Edit API) and one for managing hosted assets
-(Serve API).
+There are two main API's, one for editing and generating assets (Edit API) and one for managing hosted assets (Serve API).
 
 The Edit API base URL is: <b>https://api.shotstack.io/{version}</b>
 
@@ -3305,7 +3301,7 @@ An edit defines the arrangement of a video on a timeline, an audio edit or an im
 |output|[Output](#schemaoutput)|true|none|The output format, render range and type of media to generate.|
 |merge|[[MergeField](#schemamergefield)]|false|none|An array of key/value pairs that provides an easy way to create templates with placeholders. The placeholders can be used to find and replace keys with values. For example you can search for the placeholder `{{NAME}}` and replace it with the value `Jane`.|
 |callback|string|false|none|An optional webhook callback URL used to receive status notifications when a render completes or fails. See [webhooks](https://shotstack.io/docs/guide/architecting-an-application/webhooks) for  more details.|
-|disk|string|false|none|The disk type to use for storing footage and assets for each render. See [disk types](https://shotstack.io/docs/guide/architecting-an-application/disk-types) for more details. <ul><br>  <li>`local` - optimized for high speed rendering with up to 512MB storage</li><br>  <li>`mount` - optimized for larger file sizes and longer videos with 5GB for source footage and 512MB for output render</li><br></ul>|
+|disk|string|false|none|**Notice: This option is now deprecated and will be removed. Disk types are handled automatically. Setting a disk type has no effect.**<br><br>The disk type to use for storing footage and assets for each render. See [disk types](https://shotstack.io/docs/guide/architecting-an-application/disk-types) for more details.<br><ul><br>  <li>`local` - optimized for high speed rendering with up to 512MB storage</li><br>  <li>`mount` - optimized for larger file sizes and longer videos with 5GB for source footage and 512MB for output render</li><br></ul>|
 
 #### Enumerated Values
 
@@ -3585,7 +3581,7 @@ A clip is a container for a specific type of asset, i.e. a title, image, video, 
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|asset|[Asset](#schemaasset)|true|none|The type of asset to display for the duration of the Clip. Value must be one of: <ul><br>  <li><a href="#tocs_videoasset">VideoAsset</a></li><br>  <li><a href="#tocs_imageasset">ImageAsset</a></li><br>  <li><a href="#tocs_titleasset">TitleAsset</a></li><br>  <li><a href="#tocs_htmlasset">HtmlAsset</a></li><br>  <li><a href="#tocs_audioasset">AudioAsset</a></li><br>  <li><a href="#tocs_lumaasset">LumaAsset</a></li><br></ul>|
+|asset|[Asset](#schemaasset)|true|none|The type of asset to display for the duration of the Clip. Value must be one of:<br>  <ul><br>    <li><a href="#tocs_videoasset">VideoAsset</a></li><br>    <li><a href="#tocs_imageasset">ImageAsset</a></li><br>    <li><a href="#tocs_titleasset">TitleAsset</a></li><br>    <li><a href="#tocs_htmlasset">HtmlAsset</a></li><br>    <li><a href="#tocs_audioasset">AudioAsset</a></li><br>    <li><a href="#tocs_lumaasset">LumaAsset</a></li><br>  </ul>|
 |start|number|true|none|The start position of the Clip on the timeline, in seconds.|
 |length|number|true|none|The length, in seconds, the Clip should play for.|
 |fit|string|false|none|Set how the asset should be scaled to fit the viewport using one of the following options: <br>  <ul><br>    <li>`crop` <b>(default)</b> - scale the asset to fill the viewport while maintaining the aspect ratio. The asset will be cropped if it exceeds the bounds of the viewport.</li><br>    <li>`cover` - stretch the asset to fill the viewport without maintaining the aspect ratio.</li><br>    <li>`contain` - fit the entire asset within the viewport while maintaining the original aspect ratio.</li><br>    <li>`none` - preserves the original asset dimensions and does not apply any scaling.</li><br>  </ul>|
@@ -3665,14 +3661,15 @@ A clip is a container for a specific type of asset, i.e. a title, image, video, 
 
 ```
 
-The type of asset to display for the duration of the Clip. Value must be one of: <ul>
-  <li><a href="#tocs_videoasset">VideoAsset</a></li>
-  <li><a href="#tocs_imageasset">ImageAsset</a></li>
-  <li><a href="#tocs_titleasset">TitleAsset</a></li>
-  <li><a href="#tocs_htmlasset">HtmlAsset</a></li>
-  <li><a href="#tocs_audioasset">AudioAsset</a></li>
-  <li><a href="#tocs_lumaasset">LumaAsset</a></li>
-</ul>
+The type of asset to display for the duration of the Clip. Value must be one of:
+  <ul>
+    <li><a href="#tocs_videoasset">VideoAsset</a></li>
+    <li><a href="#tocs_imageasset">ImageAsset</a></li>
+    <li><a href="#tocs_titleasset">TitleAsset</a></li>
+    <li><a href="#tocs_htmlasset">HtmlAsset</a></li>
+    <li><a href="#tocs_audioasset">AudioAsset</a></li>
+    <li><a href="#tocs_lumaasset">LumaAsset</a></li>
+  </ul>
 
 ### Properties
 
@@ -3692,7 +3689,7 @@ xor
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|*anonymous*|[TitleAsset](#schematitleasset)|false|none|**Notice: The title asset is deprecated, use the [HTML asset](#tocs_htmlasset) instead.**<br><br>The TitleAsset clip type lets you create video titles from a text string<br>and apply styling and positioning.|
+|*anonymous*|[TitleAsset](#schematitleasset)|false|none|**Notice: The title asset is deprecated, use the [HTML asset](#tocs_htmlasset) instead.**<br><br>The TitleAsset clip type lets you create video titles from a text string and apply styling and positioning.|
 
 xor
 
@@ -3814,8 +3811,7 @@ The ImageAsset is used to create video from images to compose an image. The src 
 
 **Notice: The title asset is deprecated, use the [HTML asset](#tocs_htmlasset) instead.**
 
-The TitleAsset clip type lets you create video titles from a text string
-and apply styling and positioning.
+The TitleAsset clip type lets you create video titles from a text string and apply styling and positioning.
 
 ### Properties
 
@@ -4667,8 +4663,8 @@ Pass additional options to control how files are stored in S3.
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|region|string|false|none|Choose the region to send the file to. Must be a valid [AWS region] string like `us-east-1` or `ap-southeast-2`.|
-|bucket|string|false|none|The bucket name to send files to. The bucket must exist in the AWS account before files can be sent.|
+|region|string|true|none|Choose the region to send the file to. Must be a valid  [AWS region](https://docs.aws.amazon.com/general/latest/gr/s3.html#s3_region) string like `us-east-1` or `ap-southeast-2`.|
+|bucket|string|true|none|The bucket name to send files to. The bucket must exist in the AWS account before files can be sent.|
 |prefix|string|false|none|A prefix for the file being sent. This is typically a folder name, i.e. `videos` or `customerId/videos`.|
 |filename|string|false|none|Use your own filename instead of the default render ID filename. Note: omit the file extension as this will be appended depending n the output format. Also `poster.jpg` and `-thumb.jpg` will be appended for poster and thumbnail images.|
 |acl|string|false|none|Sets the S3 Access Control List (acl) permissions. Default is `private`. Must use a valid  S3 [Canned ACL](https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#canned-acl).|
@@ -4821,7 +4817,7 @@ A template is a saved [Edit](#tocs_edit) than can be loaded and re-used.
 
 ```
 
-Render a template by it's id and optional merge fields.
+Configure the id and optional merge fields to render a template by id.
 
 ### Properties
 
@@ -5207,7 +5203,7 @@ The response data returned with the [RenderResponse](#tocs_renderresponse) inclu
 
 ```
 
-The response received after a [template](#create-a-template) is submitted. The template is saved and a unique template id is returned.
+The response received after a [template](#create-template) is submitted. The template is saved and a unique template id is returned.
 
 ### Properties
 
@@ -5366,7 +5362,7 @@ The response data returned with the [TemplateResponse](#tocs_templateresponse).
 
 ```
 
-The template data including the template name and Edit.
+The template data including the template name and [Edit](#tocs_edit).
 
 ### Properties
 
