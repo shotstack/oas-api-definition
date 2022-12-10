@@ -42,9 +42,6 @@ $OPENAPI_GENERATOR generate -i $SPEC_FILE_RESOLVED -g php -o $BUILD_DIR/php \
 
 printf "\n========================================= \n"
 printf "\nPHP SDK Generated"
-printf "\n\nNow fix:"
-printf "\n-- OneOfTitleAssetImageAssetVideoAsset to Asset - see commit: http://tiny.cc/8jyu6y\n"
-printf "\n========================================= \n"
 
 # Ruby SDK
 $OPENAPI_GENERATOR generate -i $SPEC_FILE_RESOLVED -g ruby -o $BUILD_DIR/ruby \
@@ -52,9 +49,6 @@ $OPENAPI_GENERATOR generate -i $SPEC_FILE_RESOLVED -g ruby -o $BUILD_DIR/ruby \
 
 printf "\n========================================= \n"
 printf "\nRuby SDK Generated"
-printf "\n\nNow fix:"
-printf "\n-- OneOfTitleAssetImageAssetVideoAsset to Asset - see commit: http://tiny.cc/5i4w6y\n"
-printf "\n========================================= \n"
 
 # Node SDK
 $OPENAPI_GENERATOR generate -i $SPEC_FILE_RESOLVED -g javascript -o $BUILD_DIR/node \
@@ -62,9 +56,6 @@ $OPENAPI_GENERATOR generate -i $SPEC_FILE_RESOLVED -g javascript -o $BUILD_DIR/n
 
 printf "\n========================================= \n"
 printf "\nNode SDK Generated"
-printf "\n\nNow fix:"
-printf "\n-- OneOfTitleAssetImageAssetVideoAsset to Asset - see commit history"
-printf "\n========================================= \n"
 
 # Python SDK
 $OPENAPI_GENERATOR generate -i $SPEC_FILE_RESOLVED -g python -o $BUILD_DIR/python \
@@ -72,9 +63,6 @@ $OPENAPI_GENERATOR generate -i $SPEC_FILE_RESOLVED -g python -o $BUILD_DIR/pytho
 
 printf "\n========================================= \n"
 printf "\nPython SDK Generated"
-printf "\n\nNow fix:"
-printf "\n-- OneOfTitleAssetImageAssetVideoAsset to Asset - see commit history"
-printf "\n========================================= \n"
 
 # Cleanup
 rm -f $SPEC_FILE_RESOLVED
