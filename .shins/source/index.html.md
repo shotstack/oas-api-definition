@@ -32,17 +32,13 @@ headingLevel: 2
 
 > Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
 
-Shotstack is a video, image and audio editing service that allows for the automated
-generation of videos, images and audio using JSON and a RESTful API.
+Shotstack is a video, image and audio editing service that allows for the automated generation of videos, images and audio using JSON and a RESTful API.
 
-You arrange and configure an edit and POST it to the API which will render your media and provide a file 
-location when complete.
+You arrange and configure an edit and POST it to the API which will render your media and provide a file  location when complete.
 
-For more details visit [shotstack.io](https://shotstack.io) or checkout our
-[getting started](https://shotstack.io/docs/guide/) documentation.
+For more details visit [shotstack.io](https://shotstack.io) or checkout our [getting started](https://shotstack.io/docs/guide/) documentation.
 
-There are two main API's, one for editing and generating assets (Edit API) and one for managing hosted assets
-(Serve API).
+There are two main API's, one for editing and generating assets (Edit API) and one for managing hosted assets (Serve API).
 
 The Edit API base URL is: <b>https://api.shotstack.io/{version}</b>
 
@@ -120,6 +116,7 @@ const inputBody = {
               "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4",
               "trim": 2,
               "volume": 1,
+              "volumeEffect": "fadeIn",
               "crop": {
                 "top": 0.15,
                 "bottom": 0.15,
@@ -174,6 +171,7 @@ const inputBody = {
     "scaleTo": "preview",
     "quality": "medium",
     "repeat": true,
+    "mute": false,
     "range": {
       "start": 3,
       "length": 6
@@ -361,6 +359,7 @@ Queue and render the contents of an [Edit](#tocs_edit) as a video, image or audi
               "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4",
               "trim": 2,
               "volume": 1,
+              "volumeEffect": "fadeIn",
               "crop": {
                 "top": 0.15,
                 "bottom": 0.15,
@@ -415,6 +414,7 @@ Queue and render the contents of an [Edit](#tocs_edit) as a video, image or audi
     "scaleTo": "preview",
     "quality": "medium",
     "repeat": true,
+    "mute": false,
     "range": {
       "start": 3,
       "length": 6
@@ -785,6 +785,7 @@ const inputBody = {
                 "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4",
                 "trim": 2,
                 "volume": 1,
+                "volumeEffect": "fadeIn",
                 "crop": {
                   "top": 0.15,
                   "bottom": 0.15,
@@ -839,6 +840,7 @@ const inputBody = {
       "scaleTo": "preview",
       "quality": "medium",
       "repeat": true,
+      "mute": false,
       "range": {
         "start": 3,
         "length": 6
@@ -1031,6 +1033,7 @@ before being rendered. [Merge fields](#tocs_mergefield) can be also used to merg
                 "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4",
                 "trim": 2,
                 "volume": 1,
+                "volumeEffect": "fadeIn",
                 "crop": {
                   "top": 0.15,
                   "bottom": 0.15,
@@ -1085,6 +1088,7 @@ before being rendered. [Merge fields](#tocs_mergefield) can be also used to merg
       "scaleTo": "preview",
       "quality": "medium",
       "repeat": true,
+      "mute": false,
       "range": {
         "start": 3,
         "length": 6
@@ -1529,6 +1533,7 @@ Retrieve a template by template id.
                   "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4",
                   "trim": 2,
                   "volume": 1,
+                  "volumeEffect": "fadeIn",
                   "crop": {
                     "top": 0.15,
                     "bottom": 0.15,
@@ -1583,6 +1588,7 @@ Retrieve a template by template id.
         "scaleTo": "preview",
         "quality": "medium",
         "repeat": true,
+        "mute": false,
         "range": {
           "start": 3,
           "length": 6
@@ -1674,6 +1680,7 @@ const inputBody = {
                 "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4",
                 "trim": 2,
                 "volume": 1,
+                "volumeEffect": "fadeIn",
                 "crop": {
                   "top": 0.15,
                   "bottom": 0.15,
@@ -1728,6 +1735,7 @@ const inputBody = {
       "scaleTo": "preview",
       "quality": "medium",
       "repeat": true,
+      "mute": false,
       "range": {
         "start": 3,
         "length": 6
@@ -1918,6 +1926,7 @@ Update an existing template by template id.
                 "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4",
                 "trim": 2,
                 "volume": 1,
+                "volumeEffect": "fadeIn",
                 "crop": {
                   "top": 0.15,
                   "bottom": 0.15,
@@ -1972,6 +1981,7 @@ Update an existing template by template id.
       "scaleTo": "preview",
       "quality": "medium",
       "repeat": true,
+      "mute": false,
       "range": {
         "start": 3,
         "length": 6
@@ -3195,6 +3205,7 @@ DeveloperKey
               "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4",
               "trim": 2,
               "volume": 1,
+              "volumeEffect": "fadeIn",
               "crop": {
                 "top": 0.15,
                 "bottom": 0.15,
@@ -3249,6 +3260,7 @@ DeveloperKey
     "scaleTo": "preview",
     "quality": "medium",
     "repeat": true,
+    "mute": false,
     "range": {
       "start": 3,
       "length": 6
@@ -3289,7 +3301,7 @@ An edit defines the arrangement of a video on a timeline, an audio edit or an im
 |output|[Output](#schemaoutput)|true|none|The output format, render range and type of media to generate.|
 |merge|[[MergeField](#schemamergefield)]|false|none|An array of key/value pairs that provides an easy way to create templates with placeholders. The placeholders can be used to find and replace keys with values. For example you can search for the placeholder `{{NAME}}` and replace it with the value `Jane`.|
 |callback|string|false|none|An optional webhook callback URL used to receive status notifications when a render completes or fails. See [webhooks](https://shotstack.io/docs/guide/architecting-an-application/webhooks) for  more details.|
-|disk|string|false|none|The disk type to use for storing footage and assets for each render. See [disk types](https://shotstack.io/docs/guide/architecting-an-application/disk-types) for more details. <ul><br>  <li>`local` - optimized for high speed rendering with up to 512MB storage</li><br>  <li>`mount` - optimized for larger file sizes and longer videos with 5GB for source footage and 512MB for output render</li><br></ul>|
+|disk|string|false|none|**Notice: This option is now deprecated and will be removed. Disk types are handled automatically. Setting a disk type has no effect.**<br><br>The disk type to use for storing footage and assets for each render. See [disk types](https://shotstack.io/docs/guide/architecting-an-application/disk-types) for more details.<br><ul><br>  <li>`local` - optimized for high speed rendering with up to 512MB storage</li><br>  <li>`mount` - optimized for larger file sizes and longer videos with 5GB for source footage and 512MB for output render</li><br></ul>|
 
 #### Enumerated Values
 
@@ -3327,6 +3339,7 @@ An edit defines the arrangement of a video on a timeline, an audio edit or an im
             "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4",
             "trim": 2,
             "volume": 1,
+            "volumeEffect": "fadeIn",
             "crop": {
               "top": 0.15,
               "bottom": 0.15,
@@ -3456,6 +3469,7 @@ Download a custom font to use with the HTML asset type, using the font name in t
         "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4",
         "trim": 2,
         "volume": 1,
+        "volumeEffect": "fadeIn",
         "crop": {
           "top": 0.15,
           "bottom": 0.15,
@@ -3520,6 +3534,7 @@ A track contains an array of clips. Tracks are layered on top of each other in t
     "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4",
     "trim": 2,
     "volume": 1,
+    "volumeEffect": "fadeIn",
     "crop": {
       "top": 0.15,
       "bottom": 0.15,
@@ -3566,10 +3581,10 @@ A clip is a container for a specific type of asset, i.e. a title, image, video, 
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|asset|[Asset](#schemaasset)|true|none|The type of asset to display for the duration of this Clip. Value<br>    must be one of:<br>      <ul><br>        <li><a href="#tocs_videoasset">VideoAsset</a></li><br>        <li><a href="#tocs_imageasset">ImageAsset</a></li><br>        <li><a href="#tocs_titleasset">TitleAsset</a></li><br>        <li><a href="#tocs_htmlasset">HtmlAsset</a></li><br>        <li><a href="#tocs_audioasset">AudioAsset</a></li><br>        <li><a href="#tocs_lumaasset">LumaAsset</a></li><br>      </ul>|
+|asset|[Asset](#schemaasset)|true|none|The type of asset to display for the duration of the Clip. Value must be one of:<br>  <ul><br>    <li><a href="#tocs_videoasset">VideoAsset</a></li><br>    <li><a href="#tocs_imageasset">ImageAsset</a></li><br>    <li><a href="#tocs_titleasset">TitleAsset</a></li><br>    <li><a href="#tocs_htmlasset">HtmlAsset</a></li><br>    <li><a href="#tocs_audioasset">AudioAsset</a></li><br>    <li><a href="#tocs_lumaasset">LumaAsset</a></li><br>  </ul>|
 |start|number|true|none|The start position of the Clip on the timeline, in seconds.|
 |length|number|true|none|The length, in seconds, the Clip should play for.|
-|fit|string|false|none|Set how the asset should be scaled to fit the viewport using one of the following options: <br>  <ul><br>    <li>`cover` - stretch the asset to fill the viewport without maintaining the aspect ratio.</li><br>    <li>`contain` - fit the entire asset within the viewport while maintaining the original aspect ratio.</li><br>    <li>`crop` (default) - scale the asset to fill the viewport while maintaining the aspect ratio. The asset will be cropped if it exceeds the bounds of the viewport.</li><br>    <li>`none` - preserves the original asset dimensions and does not apply any scaling.</li><br>  </ul>|
+|fit|string|false|none|Set how the asset should be scaled to fit the viewport using one of the following options: <br>  <ul><br>    <li>`crop` <b>(default)</b> - scale the asset to fill the viewport while maintaining the aspect ratio. The asset will be cropped if it exceeds the bounds of the viewport.</li><br>    <li>`cover` - stretch the asset to fill the viewport without maintaining the aspect ratio.</li><br>    <li>`contain` - fit the entire asset within the viewport while maintaining the original aspect ratio.</li><br>    <li>`none` - preserves the original asset dimensions and does not apply any scaling.</li><br>  </ul>|
 |scale|number|false|none|Scale the asset to a fraction of the viewport size - i.e. setting the scale to 0.5 will scale asset to half the size of the viewport. This is useful for picture-in-picture video and  scaling images such as logos and watermarks.|
 |position|string|false|none|Place the asset in one of nine predefined positions of the viewport. This is most effective for when the asset is scaled and you want to position the element to a specific position. <ul><br>  <li>`top` - top (center)</li><br>  <li>`topRight` - top right</li><br>  <li>`right` - right (center)</li><br>  <li>`bottomRight` - bottom right</li><br>  <li>`bottom` - bottom (center)</li><br>  <li>`bottomLeft` - bottom left</li><br>  <li>`left` - left (center)</li><br>  <li>`topLeft` - top left</li><br>  <li>`center` - center</li><br></ul>|
 |offset|[Offset](#schemaoffset)|false|none|Offset the location of the asset relative to its position on the viewport. The offset distance is relative to the width of the viewport - for example an x offset of 0.5 will move the asset half the viewport width to the right.|
@@ -3635,6 +3650,7 @@ A clip is a container for a specific type of asset, i.e. a title, image, video, 
   "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4",
   "trim": 2,
   "volume": 1,
+  "volumeEffect": "fadeIn",
   "crop": {
     "top": 0.15,
     "bottom": 0.15,
@@ -3645,16 +3661,15 @@ A clip is a container for a specific type of asset, i.e. a title, image, video, 
 
 ```
 
-The type of asset to display for the duration of this Clip. Value
-    must be one of:
-      <ul>
-        <li><a href="#tocs_videoasset">VideoAsset</a></li>
-        <li><a href="#tocs_imageasset">ImageAsset</a></li>
-        <li><a href="#tocs_titleasset">TitleAsset</a></li>
-        <li><a href="#tocs_htmlasset">HtmlAsset</a></li>
-        <li><a href="#tocs_audioasset">AudioAsset</a></li>
-        <li><a href="#tocs_lumaasset">LumaAsset</a></li>
-      </ul>
+The type of asset to display for the duration of the Clip. Value must be one of:
+  <ul>
+    <li><a href="#tocs_videoasset">VideoAsset</a></li>
+    <li><a href="#tocs_imageasset">ImageAsset</a></li>
+    <li><a href="#tocs_titleasset">TitleAsset</a></li>
+    <li><a href="#tocs_htmlasset">HtmlAsset</a></li>
+    <li><a href="#tocs_audioasset">AudioAsset</a></li>
+    <li><a href="#tocs_lumaasset">LumaAsset</a></li>
+  </ul>
 
 ### Properties
 
@@ -3674,7 +3689,7 @@ xor
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|*anonymous*|[TitleAsset](#schematitleasset)|false|none|The TitleAsset clip type lets you create video titles from a text string and apply styling and positioning.|
+|*anonymous*|[TitleAsset](#schematitleasset)|false|none|**Notice: The title asset is deprecated, use the [HTML asset](#tocs_htmlasset) instead.**<br><br>The TitleAsset clip type lets you create video titles from a text string and apply styling and positioning.|
 
 xor
 
@@ -3707,6 +3722,7 @@ xor
   "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4",
   "trim": 2,
   "volume": 1,
+  "volumeEffect": "fadeIn",
   "crop": {
     "top": 0.15,
     "bottom": 0.15,
@@ -3726,8 +3742,17 @@ The VideoAsset is used to create video sequences from video files. The src must 
 |type|string|true|none|The type of asset - set to `video` for videos.|
 |src|string|true|none|The video source URL. The URL must be publicly accessible or include credentials.|
 |trim|number|false|none|The start trim point of the video clip, in seconds (defaults to 0). Videos will start from the in trim point. The video will play until the file ends or the Clip length is reached.|
-|volume|number|false|none|Set the volume for the video clip between 0 and 1 where 0 is muted and 1 is full volume (defaults to 0).|
+|volume|number|false|none|Set the volume for the video clip between 0 and 1 where 0 is muted and 1 is full volume (defaults to 1).|
+|volumeEffect|string|false|none|The volume effect to apply to the video asset <ul><br>  <li>`fadeIn` - fade volume in only</li><br>  <li>`fadeOut` - fade volume out only</li><br>  <li>`fadeInFadeOut` - fade volume in and out</li><br></ul>|
 |crop|[Crop](#schemacrop)|false|none|Crop the sides of an asset by a relative amount. The size of the crop is specified using a scale between 0 and 1, relative to the screen width - i.e a left crop of 0.5 will crop half of the asset from the left, a top crop  of 0.25 will crop the top by quarter of the asset.|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|volumeEffect|fadeIn|
+|volumeEffect|fadeOut|
+|volumeEffect|fadeInFadeOut|
 
 <h2 id="tocS_ImageAsset">ImageAsset</h2>
 <!-- backwards compatibility -->
@@ -3783,6 +3808,8 @@ The ImageAsset is used to create video from images to compose an image. The src 
 }
 
 ```
+
+**Notice: The title asset is deprecated, use the [HTML asset](#tocs_htmlasset) instead.**
 
 The TitleAsset clip type lets you create video titles from a text string and apply styling and positioning.
 
@@ -3890,7 +3917,7 @@ The HtmlAsset clip type lets you create text based layout and formatting using H
   "type": "audio",
   "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/sound.mp3",
   "trim": 0,
-  "volume": 0,
+  "volume": 1,
   "effect": "fadeIn"
 }
 
@@ -4114,8 +4141,8 @@ Offsets the position of an asset horizontally or vertically by a relative distan
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|x|number(float)|false|none|Offset an asset on the horizontal axis (left or right), range varies from -1 to 1. Positive numbers move the asset right, negative left. For all assets except titles the distance moved is relative to the width  of the viewport - i.e. an X offset of 0.5 will move the asset half the  screen width to the right.|
-|y|number(float)|false|none|Offset an asset on the vertical axis (up or down), range varies from -1 to 1. Positive numbers move the asset up, negative down. For all assets except titles the distance moved is relative to the height  of the viewport - i.e. an Y offset of 0.5 will move the asset up half the  screen height.|
+|x|number(float)|false|none|Offset an asset on the horizontal axis (left or right), range varies from -10 to 10. Positive numbers move the asset right, negative left. For all assets except titles the distance moved is relative to the width  of the viewport - i.e. an X offset of 0.5 will move the asset half the  screen width to the right.|
+|y|number(float)|false|none|Offset an asset on the vertical axis (up or down), range varies from -10 to 10. Positive numbers move the asset up, negative down. For all assets except titles the distance moved is relative to the height  of the viewport - i.e. an Y offset of 0.5 will move the asset up half the  screen height.|
 
 <h2 id="tocS_Crop">Crop</h2>
 <!-- backwards compatibility -->
@@ -4293,6 +4320,7 @@ A merge field consists of a key; `find`, and a value; `replace`. Merge fields ca
   "scaleTo": "preview",
   "quality": "medium",
   "repeat": true,
+  "mute": false,
   "range": {
     "start": 3,
     "length": 6
@@ -4323,15 +4351,16 @@ The output format, render range and type of media to generate.
 |format|string|true|none|The output format and type of media file to generate. <ul><br>  <li>`mp4` - mp4 video file</li><br>  <li>`gif` - animated gif</li><br>  <li>`jpg` - jpg image file</li><br>  <li>`png` - png image file</li><br>  <li>`bmp` - bmp image file</li><br>  <li>`mp3` - mp3 audio file (audio only)</li><br></ul>|
 |resolution|string|false|none|The output resolution of the video or image. <ul><br>  <li>`preview` - 512px x 288px @ 15fps</li><br>  <li>`mobile` - 640px x 360px @ 25fps</li><br>  <li>`sd` - 1024px x 576px @ 25fps</li><br>  <li>`hd` - 1280px x 720px @ 25fps</li><br>  <li>`1080` - 1920px x 1080px @ 25fps</li><br></ul>|
 |aspectRatio|string|false|none|The aspect ratio (shape) of the video or image. Useful for social media output formats. Options are: <ul><br>  <li>`16:9` (default) - regular landscape/horizontal aspect ratio</li><br>  <li>`9:16` - vertical/portrait aspect ratio</li><br>  <li>`1:1` - square aspect ratio</li><br>  <li>`4:5` - short vertical/portrait aspect ratio</li><br>  <li>`4:3` - legacy TV aspect ratio</li><br></ul>|
-|size|[Size](#schemasize)|false|none|Set a custom size for a video or image. When using a custom size omit the `resolution` and `aspectRatio`. Custom sizes must be divisible by 2 based on the encoder specifications.|
+|size|[Size](#schemasize)|false|none|Set a custom size for a video or image in pixels. When using a custom size omit the `resolution` and `aspectRatio`. Custom sizes must be divisible by 2 based on the encoder specifications.|
 |fps|number|false|none|Override the default frames per second. Useful for when the source footage is recorded at 30fps, i.e. on  mobile devices. Lower frame rates can be used to add cinematic quality (24fps) or to create smaller file size/faster render times or animated gifs (12 or 15fps). Default is 25fps. <ul><br>  <li>`12` - 12fps</li><br>  <li>`15` - 15fps</li><br>  <li>`24` - 24fps</li><br>  <li>`23.976` - 23.976fps</li><br>  <li>`25` (default) - 25fps</li><br>  <li>`29.97` - 29.97fps</li><br>  <li>`30` - 30fps</li><br></ul>|
 |scaleTo|string|false|none|Override the resolution and scale the video or image to render at a different size. When using scaleTo the asset should be edited at the resolution dimensions, i.e. use font sizes that look best at HD, then use scaleTo to output the file at SD and the text will be scaled to the correct size. This is useful if you want to create multiple asset sizes. <ul><br>  <li>`preview` - 512px x 288px @ 15fps</li><br>  <li>`mobile` - 640px x 360px @ 25fps</li><br>  <li>`sd` - 1024px x 576px @25fps</li><br>  <li>`hd` - 1280px x 720px @25fps</li><br>  <li>`1080` - 1920px x 1080px @25fps</li><br></ul>|
 |quality|string|false|none|Adjust the output quality of the video, image or audio. Adjusting quality affects  render speed, download speeds and storage requirements due to file size. The default `medium` provides the most optimized choice for all three  factors. <ul><br>  <li>`low` - slightly reduced quality, smaller file size</li><br>  <li>`medium` (default) - optimized quality, render speeds and file size</li><br>  <li>`high` - slightly increased quality, larger file size</li><br></ul>|
 |repeat|boolean|false|none|Loop settings for gif files. Set to `true` to loop, `false` to play only once.|
+|mute|boolean|false|none|Mute the audio track of the output video. Set to `true` to mute, `false` to un-mute.|
 |range|[Range](#schemarange)|false|none|Specify a time range to render, i.e. to render only a portion of a video or audio file. Omit this setting to  export the entire video. Range can also be used to render a frame at a specific time point - setting a range and output format as `jpg` will output a single frame image at the range `start` point.|
 |poster|[Poster](#schemaposter)|false|none|Generate a poster image from a specific point on the timeline.|
 |thumbnail|[Thumbnail](#schemathumbnail)|false|none|Generate a thumbnail image from a specific point on the timeline.|
-|destinations|[[Destinations](#schemadestinations)]|false|none|[A destination is a location where output files can be sent to for serving or hosting. By default all rendered assets are automatically sent to the  [Shotstack hosting destination](https://shotstack.io/docs/guide/serving-assets/hosting). You can add other destinations to send assets to. The following destinations are available:<br>  <ul><br>    <li><a href="#tocs_shotstackdestination">DestinationShotstack</a></li><br>    <li><a href="#tocs_muxdestination">DestinationMux</a></li><br>  </ul>]|
+|destinations|[[Destinations](#schemadestinations)]|false|none|Specify the storage locations and hosting services to send rendered videos to.|
 
 #### Enumerated Values
 
@@ -4384,14 +4413,14 @@ The output format, render range and type of media to generate.
 
 ```
 
-Set a custom size for a video or image. When using a custom size omit the `resolution` and `aspectRatio`. Custom sizes must be divisible by 2 based on the encoder specifications.
+Set a custom size for a video or image in pixels. When using a custom size omit the `resolution` and `aspectRatio`. Custom sizes must be divisible by 2 based on the encoder specifications.
 
 ### Properties
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|width|integer|false|none|Set a custom width for the video or image file. Value must be divisible by 2. Maximum video width is 1920px, maximum image width is 4096px.|
-|height|integer|false|none|Set a custom height for the video or image file. Value must be divisible by 2. Maximum video height is 1920px, maximum image height is 4096px.|
+|width|integer|false|none|Set a custom width for the video or image file in pixels. Value must be divisible by 2. Maximum video width is 1920px, maximum image width is 4096px.|
+|height|integer|false|none|Set a custom height for the video or image file in pixels. Value must be divisible by 2. Maximum video height is 1920px, maximum image height is 4096px.|
 
 <h2 id="tocS_Range">Range</h2>
 <!-- backwards compatibility -->
@@ -4478,11 +4507,11 @@ Generate a thumbnail image for the video or image at a specific point from the t
 
 ```
 
-A destination is a location where output files can be sent to for serving or hosting. By default all rendered assets are automatically sent to the  [Shotstack hosting destination](https://shotstack.io/docs/guide/serving-assets/hosting). You can add other destinations to send assets to. The following destinations are available:
-  <ul>
-    <li><a href="#tocs_shotstackdestination">DestinationShotstack</a></li>
-    <li><a href="#tocs_muxdestination">DestinationMux</a></li>
-  </ul>
+A destination is a location where output files can be sent to for serving or hosting. By default all rendered assets are automatically sent to the  [Shotstack hosting destination](https://shotstack.io/docs/guide/serving-assets/hosting). You can add other destinations to send assets to. The following destinations are available: <ul>
+  <li><a href="#tocs_shotstackdestination">ShotstackDestination</a></li>
+  <li><a href="#tocs_muxdestination">MuxDestination</a></li>
+  <li><a href="#tocs_s3destination">S3Destination</a></li>
+</ul>
 
 ### Properties
 
@@ -4490,13 +4519,19 @@ anyOf
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|*anonymous*|[ShotstackDestination](#schemashotstackdestination)|false|none|Send rendered assets to the Shotstack hosting and CDN service. This destination is enabled by default.|
+|*anonymous*|[ShotstackDestination](#schemashotstackdestination)|false|none|Send rendered assets to the  [Shotstack hosting and CDN](https://shotstack.io/docs/guide/serving-assets/destinations/shotstack) service.  This destination is enabled by default.|
 
 or
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|*anonymous*|[MuxDestination](#schemamuxdestination)|false|none|Send rendered videos to the [Mux](https://www.mux.com/) video hosting and streaming service. Add the `mux` destination provider to send the output video to Mux. Mux credentials are required and added via the [dashboard](https://dashboard.shotstack.io/integrations/mux), not in the request.|
+|*anonymous*|[MuxDestination](#schemamuxdestination)|false|none|Send rendered videos to the [Mux](https://shotstack.io/docs/guide/serving-assets/destinations/mux) video hosting and streaming service. Mux credentials are required and added via the [dashboard](https://dashboard.shotstack.io/integrations/mux), not in the request.|
+
+or
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|*anonymous*|[S3Destination](#schemas3destination)|false|none|Send rendered videos to an [Amazon S3](https://shotstack.io/docs/guide/serving-assets/destinations/s3) bucket. Send files to any region with your own prefix and filename. AWS credentials are required and added via the [dashboard](https://dashboard.shotstack.io/integrations/s3), not in the request.|
 
 <h2 id="tocS_ShotstackDestination">ShotstackDestination</h2>
 <!-- backwards compatibility -->
@@ -4513,14 +4548,14 @@ or
 
 ```
 
-Send rendered assets to the Shotstack hosting and CDN service. This destination is enabled by default.
+Send rendered assets to the  [Shotstack hosting and CDN](https://shotstack.io/docs/guide/serving-assets/destinations/shotstack) service.  This destination is enabled by default.
 
 ### Properties
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |provider|string|true|none|The destination to send rendered assets to - set to `shotstack` for Shotstack hosting and CDN.|
-|exclude|boolean|false|none|Set to `true` to opt-out from the Shotstack hosting and CDN service. All files must be downloaded within 24 hours of rendering.|
+|exclude|boolean|false|none|Set to `true` to [opt-out](https://shotstack.io/docs/guide/serving-assets/self-host) from the Shotstack hosting and CDN service. All files must be downloaded within 24 hours of rendering.|
 
 <h2 id="tocS_MuxDestination">MuxDestination</h2>
 <!-- backwards compatibility -->
@@ -4541,7 +4576,7 @@ Send rendered assets to the Shotstack hosting and CDN service. This destination 
 
 ```
 
-Send rendered videos to the [Mux](https://www.mux.com/) video hosting and streaming service. Add the `mux` destination provider to send the output video to Mux. Mux credentials are required and added via the [dashboard](https://dashboard.shotstack.io/integrations/mux), not in the request.
+Send rendered videos to the [Mux](https://shotstack.io/docs/guide/serving-assets/destinations/mux) video hosting and streaming service. Mux credentials are required and added via the [dashboard](https://dashboard.shotstack.io/integrations/mux), not in the request.
 
 ### Properties
 
@@ -4573,6 +4608,66 @@ Pass additional options to control how Mux processes video. Currently supports p
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |playbackPolicy|[string]|false|none|Sets the Mux `playback_policy` option. Value is an array of strings - use `public`, `signed`, or both.|
+
+<h2 id="tocS_S3Destination">S3Destination</h2>
+<!-- backwards compatibility -->
+<a id="schemas3destination"></a>
+<a id="schema_S3Destination"></a>
+<a id="tocSs3destination"></a>
+<a id="tocss3destination"></a>
+
+```json
+{
+  "provider": "s3",
+  "options": {
+    "region": "us-east-1",
+    "bucket": "my-bucket",
+    "prefix": "my-renders",
+    "filename": "my-file",
+    "acl": "public-read"
+  }
+}
+
+```
+
+Send rendered videos to an [Amazon S3](https://shotstack.io/docs/guide/serving-assets/destinations/s3) bucket. Send files to any region with your own prefix and filename. AWS credentials are required and added via the [dashboard](https://dashboard.shotstack.io/integrations/s3), not in the request.
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|provider|string|true|none|The destination to send rendered assets to - set to `s3` for S3.|
+|options|[S3DestinationOptions](#schemas3destinationoptions)|false|none|Additional S3 configuration options.|
+
+<h2 id="tocS_S3DestinationOptions">S3DestinationOptions</h2>
+<!-- backwards compatibility -->
+<a id="schemas3destinationoptions"></a>
+<a id="schema_S3DestinationOptions"></a>
+<a id="tocSs3destinationoptions"></a>
+<a id="tocss3destinationoptions"></a>
+
+```json
+{
+  "region": "us-east-1",
+  "bucket": "my-bucket",
+  "prefix": "my-renders",
+  "filename": "my-file",
+  "acl": "public-read"
+}
+
+```
+
+Pass additional options to control how files are stored in S3.
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|region|string|true|none|Choose the region to send the file to. Must be a valid  [AWS region](https://docs.aws.amazon.com/general/latest/gr/s3.html#s3_region) string like `us-east-1` or `ap-southeast-2`.|
+|bucket|string|true|none|The bucket name to send files to. The bucket must exist in the AWS account before files can be sent.|
+|prefix|string|false|none|A prefix for the file being sent. This is typically a folder name, i.e. `videos` or `customerId/videos`.|
+|filename|string|false|none|Use your own filename instead of the default render ID filename. Note: omit the file extension as this will be appended depending n the output format. Also `poster.jpg` and `-thumb.jpg` will be appended for poster and thumbnail images.|
+|acl|string|false|none|Sets the S3 Access Control List (acl) permissions. Default is `private`. Must use a valid  S3 [Canned ACL](https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#canned-acl).|
 
 <h2 id="tocS_Template">Template</h2>
 <!-- backwards compatibility -->
@@ -4606,6 +4701,7 @@ Pass additional options to control how Mux processes video. Currently supports p
                 "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4",
                 "trim": 2,
                 "volume": 1,
+                "volumeEffect": "fadeIn",
                 "crop": {
                   "top": 0.15,
                   "bottom": 0.15,
@@ -4660,6 +4756,7 @@ Pass additional options to control how Mux processes video. Currently supports p
       "scaleTo": "preview",
       "quality": "medium",
       "repeat": true,
+      "mute": false,
       "range": {
         "start": 3,
         "length": 6
@@ -4720,7 +4817,7 @@ A template is a saved [Edit](#tocs_edit) than can be loaded and re-used.
 
 ```
 
-Render a template by it's id and optional merge fields.
+Configure the id and optional merge fields to render a template by id.
 
 ### Properties
 
@@ -4826,6 +4923,7 @@ The response data returned with the [QueuedResponse](#tocs_queuedresponse).
                   "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4",
                   "trim": 2,
                   "volume": 1,
+                  "volumeEffect": "fadeIn",
                   "crop": {
                     "top": 0.15,
                     "bottom": 0.15,
@@ -4880,6 +4978,7 @@ The response data returned with the [QueuedResponse](#tocs_queuedresponse).
         "scaleTo": "preview",
         "quality": "medium",
         "repeat": true,
+        "mute": false,
         "range": {
           "start": 3,
           "length": 6
@@ -4965,6 +5064,7 @@ The response received after a [render status request](#get-render-status) is sub
                 "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4",
                 "trim": 2,
                 "volume": 1,
+                "volumeEffect": "fadeIn",
                 "crop": {
                   "top": 0.15,
                   "bottom": 0.15,
@@ -5019,6 +5119,7 @@ The response received after a [render status request](#get-render-status) is sub
       "scaleTo": "preview",
       "quality": "medium",
       "repeat": true,
+      "mute": false,
       "range": {
         "start": 3,
         "length": 6
@@ -5102,7 +5203,7 @@ The response data returned with the [RenderResponse](#tocs_renderresponse) inclu
 
 ```
 
-The response received after a [template](#create-a-template) is submitted. The template is saved and a unique template id is returned.
+The response received after a [template](#create-template) is submitted. The template is saved and a unique template id is returned.
 
 ### Properties
 
@@ -5173,6 +5274,7 @@ The response data returned with the [TemplateResponse](#tocs_templateresponse).
                   "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4",
                   "trim": 2,
                   "volume": 1,
+                  "volumeEffect": "fadeIn",
                   "crop": {
                     "top": 0.15,
                     "bottom": 0.15,
@@ -5227,6 +5329,7 @@ The response data returned with the [TemplateResponse](#tocs_templateresponse).
         "scaleTo": "preview",
         "quality": "medium",
         "repeat": true,
+        "mute": false,
         "range": {
           "start": 3,
           "length": 6
@@ -5259,7 +5362,7 @@ The response data returned with the [TemplateResponse](#tocs_templateresponse).
 
 ```
 
-The template data including the template name and Edit.
+The template data including the template name and [Edit](#tocs_edit).
 
 ### Properties
 
@@ -5303,6 +5406,7 @@ The template data including the template name and Edit.
                 "src": "https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4",
                 "trim": 2,
                 "volume": 1,
+                "volumeEffect": "fadeIn",
                 "crop": {
                   "top": 0.15,
                   "bottom": 0.15,
@@ -5357,6 +5461,7 @@ The template data including the template name and Edit.
       "scaleTo": "preview",
       "quality": "medium",
       "repeat": true,
+      "mute": false,
       "range": {
         "start": 3,
         "length": 6

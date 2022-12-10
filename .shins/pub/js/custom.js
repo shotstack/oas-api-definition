@@ -1,19 +1,11 @@
-function formatClipAssets() {
-    var $oneOf = $('p:contains("oneOf")');
-    var $xor = $('p:contains("xor")');
-    var $continued = $('p:contains("continued")');
-    var $assetRow = $oneOf.prev().find('tbody tr').remove().clone();
+function hideDiscriminatorTables() {
+    var $discriminatorTable = $('em:contains("anonymous")').closest('table');
 
-    $oneOf.next().remove();
-    $oneOf.remove();
-    $xor.next().remove();
-    $xor.remove();
-
-    $continued.next('table').prepend($assetRow);
-    $continued.prev('table').remove();
-    $continued.remove();
+    $discriminatorTable.prevUntil('#properties').remove();
+    $discriminatorTable.prev().remove();
+    $discriminatorTable.remove();
 }
 
 $(document).ready(function() {
-    formatClipAssets();
+    hideDiscriminatorTables();
 });

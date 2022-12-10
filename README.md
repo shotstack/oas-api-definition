@@ -15,7 +15,7 @@ npm install
 Generate the docs using:
 
 ```
-npm run docs
+npm run build:docs
 ```
 
 Generated docs are saved to build/docs directory
@@ -53,7 +53,7 @@ brew install openapi-generator
 Once installed generate SDK's for PHP, Node and Ruby:
 
 ```
-npm run sdks
+npm run build:sdks
 ```
 
 Note: The generated SDK's need some modifications to work correctly, and files need to be copied to the respective
@@ -62,7 +62,7 @@ project repos.
 Copy the generated SDK files to each SDK project manually or run:
 
 ```
-npm run sdks:update
+npm run build:sdks:update
 ```
 
 Note: this overwrites all existing files.
@@ -71,7 +71,7 @@ By default files are written to the following locations: `../shotstack-sdk-node`
 `../shotstack-sdk-ruby`. To override the defaults and specify your own locations, run:
 
 ```
-npm run sdks:update [NODE_SDK PATH PHP_SDK_PATH RUBY_SDK_PATH]
+npm run build:sdks:update [NODE_SDK PATH PHP_SDK_PATH RUBY_SDK_PATH]
 ```
 
 Note: you must provide all three paths in the correct order: Node, PHP, Ruby.
