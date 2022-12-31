@@ -24,6 +24,8 @@
     "js-yaml": "^3.14.1"
   },
   "devDependencies": {
+    "@apidevtools/swagger-cli": "^4.0.4",
+    "ajv": "^8.11.2",
     "http-server": "^14.1.0",
     "speccy": "^0.11.0",
     "widdershins": "^4.0.1"
