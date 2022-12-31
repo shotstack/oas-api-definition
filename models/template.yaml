@@ -1,0 +1,13 @@
+    Template:
+      description: >-
+        A template is a saved [Edit](#tocs_edit) than can be loaded and re-used.
+      properties:
+        name:
+          type: string
+          description: The template name
+          example: My template
+        template:
+          $ref: "./edit.yaml#/Edit"
+      required:
+        - name
+      type: object

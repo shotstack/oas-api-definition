@@ -1,0 +1,18 @@
+    Destinations:
+      type: object
+      description: >-
+        A destination is a location where output files can be sent to for serving or hosting. By default all
+        rendered assets are automatically sent to the 
+        [Shotstack hosting destination](https://shotstack.io/docs/guide/serving-assets/hosting). You can add other
+        destinations to send assets to. The following destinations are available:
+        <ul>
+          <li><a href="#tocs_shotstackdestination">ShotstackDestination</a></li>
+          <li><a href="#tocs_muxdestination">MuxDestination</a></li>
+          <li><a href="#tocs_s3destination">S3Destination</a></li>
+        </ul>
+      discriminator:
+        propertyName: destinations
+      anyOf:
+        - $ref: "./shotstackdestination.yaml#/ShotstackDestination"
+        - $ref: "./muxdestination.yaml#/MuxDestination"
+        - $ref: "./s3destination.yaml#/S3Destination"

@@ -1,0 +1,80 @@
+
+    RenderResponseData:
+      description: The response data returned with the [RenderResponse](#tocs_renderresponse) including status and URL.
+      properties:
+        id:
+          description: The id of the render task in UUID format.
+          type: string
+          example: 2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7
+        owner:
+          description: The owner id of the render task.
+          type: string
+          example: 5ca6hu7s9k
+        plan:
+          description: The customer subscription plan.
+          type: string
+          example: basic
+        status:
+          description: >-
+            The status of the render task.
+            <ul>
+              <li>`queued` - render is queued waiting to be rendered</li>
+              <li>`fetching` - assets are being fetched</li>
+              <li>`rendering` - the asset is being rendered</li>
+              <li>`saving` - the final asset is being saved to storage</li>
+              <li>`done` - the asset is ready to be downloaded</li>
+              <li>`failed` - there was an error rendering the asset</li>
+            </ul>
+          enum:
+            - queued
+            - fetching
+            - rendering
+            - saving
+            - done
+            - failed
+          type: string
+          example: done
+        error:
+          description: An error message, only displayed if an error occurred.
+          type: string
+          example: ""
+        duration:
+          description: The output video or audio length in seconds.
+          type: number
+          example: 8.50
+        renderTime:
+          description: The time taken to render the asset in milliseconds.
+          type: number
+          example: 9433.44
+        url:
+          description: >-
+            The URL of the final asset. This will only be available if status is done. This is a temporary URL and will
+            be deleted after 24 hours. By default all assets are copied to the Shotstack hosting and CDN destination.
+          type: string
+          example: https://shotstack-api-v1-output.s3-ap-southeast-2.amazonaws.com/5ca6hu7s9k/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4
+        poster:
+          description: The URL of the poster image if requested. This will only be available if status is done.
+          type: string
+          nullable: true
+          example: https://shotstack-api-v1-output.s3-ap-southeast-2.amazonaws.com/5ca6hu7s9k/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7-poster.jpg
+        thumbnail:
+          description: The URL of the thumbnail image if requested. This will only be available if status is done.
+          type: string
+          nullable: true
+          example: https://shotstack-api-v1-output.s3-ap-southeast-2.amazonaws.com/5ca6hu7s9k/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7-thumb.jpg
+        data:
+          description: The timeline and output data to be rendered.
+          $ref: "#/components/schemas/Edit"
+        created:
+          description: The time the render task was initially queued.
+          type: string
+          example: "2020-10-30T09:42:29.446Z"
+        updated:
+          description: The time the render status was last updated.
+          type: string
+          example: "2020-10-30T09:42:39.168Z"
+      required:
+        - status
+        - id
+        - owner
+      type: object

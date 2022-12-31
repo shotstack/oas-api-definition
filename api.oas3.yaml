@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: 3.0.1
 
 info:
   title: Shotstack
@@ -402,88 +402,10 @@ paths:
 components:
   schemas:
     Edit:
-      description: >-
-        An edit defines the arrangement of a video on a timeline, an audio edit or an image design and the output
-        format.
-      properties:
-        timeline:
-          $ref: "#/components/schemas/Timeline"
-        output:
-          $ref: "#/components/schemas/Output"
-        merge:
-          description: >-
-            An array of key/value pairs that provides an easy way to create templates with placeholders.
-            The placeholders can be used to find and replace keys with values. For example you can search
-            for the placeholder `{{NAME}}` and replace it with the value `Jane`. 
-          type: array
-          items:
-            $ref: "#/components/schemas/MergeField"
-        callback:
-          type: string
-          description: >-
-            An optional webhook callback URL used to receive status notifications
-            when a render completes or fails.
-            See [webhooks](https://shotstack.io/docs/guide/architecting-an-application/webhooks) for 
-            more details.
-          example: https://my-server.com/callback.php
-        disk:
-          description: |
-            **Notice: This option is now deprecated and will be removed. Disk types are handled automatically. Setting a disk type has no effect.**
-
-            The disk type to use for storing footage and assets for each render. See [disk types](https://shotstack.io/docs/guide/architecting-an-application/disk-types) for more details.
-            <ul>
-              <li>`local` - optimized for high speed rendering with up to 512MB storage</li>
-              <li>`mount` - optimized for larger file sizes and longer videos with 5GB for source footage and 512MB for output render</li>
-            </ul>
-          type: string
-          enum:
-            - local
-            - mount
-          deprecated: true
-      required:
-        - timeline
-        - output
-      type: object
+      $ref: "./models/edit.yaml#/Edit"
 
     Timeline:
-      description: >-
-        A timeline represents the contents of a video edit over time, an audio edit over time, in
-        seconds, or an image layout. A timeline consists of layers called tracks. Tracks are
-        composed of titles, images, audio, html or video segments referred to as clips which
-        are placed along the track at specific starting point and lasting for a
-        specific amount of time.
-      properties:
-        soundtrack:
-          description: A music or audio soundtrack file in mp3 format.
-          $ref: "#/components/schemas/Soundtrack"
-        background:
-          description: >-
-            A hexadecimal value for the timeline background colour. Defaults to
-            #000000 (black).
-          type: string
-        fonts:
-          description: An array of custom fonts to be downloaded for use by the HTML assets.
-          type: array
-          items:
-            $ref: "#/components/schemas/Font"
-        tracks:
-          description: >-
-            A timeline consists of an array of tracks, each track containing
-            clips. Tracks are layered on top of each other in the same order
-            they are added to the array with the top most track layered over the
-            top of those below it. Ensure that a track containing titles is the
-            top most track so that it is displayed above videos and images.
-          type: array
-          items:
-            $ref: "#/components/schemas/Track"
-        cache:
-          description: >-
-            Disable the caching of ingested source footage and assets. See 
-            [caching](https://shotstack.io/docs/guide/architecting-an-application/caching) for more details.
-          type: boolean
-      required:
-        - tracks
-      type: object
+      $ref: "./models/timeline.yaml#/Timeline"
 
     Soundtrack:
       $ref: "./models/soundtrack.yaml#/Soundtrack"
@@ -492,370 +414,22 @@ components:
       $ref: "./models/font.yaml#/Font"
 
     Track:
-      description: >-
-        A track contains an array of clips. Tracks are layered on top of each
-        other in the order in the array. The top most track will render on top
-        of those below it.
-      properties:
-        clips:
-          description: "An array of Clips comprising of TitleClip, ImageClip or VideoClip."
-          type: array
-          items:
-            $ref: "#/components/schemas/Clip"
-      required:
-        - clips
-      type: object
+      $ref: "./models/track.yaml#/Track"
 
     Clip:
-      description: >-
-        A clip is a container for a specific type of asset, i.e. a title, image, video,
-        audio or html. You use a Clip to define when an asset will display on the
-        timeline, how long it will play for and transitions, filters and effects to apply
-        to it.
-      properties:
-        asset:
-          $ref: "#/components/schemas/Asset"
-        start:
-          description: The start position of the Clip on the timeline, in seconds.
-          type: number
-          example: 2
-        length:
-          description: The length, in seconds, the Clip should play for.
-          type: number
-          example: 5
-        fit:
-          description: >-
-            Set how the asset should be scaled to fit the viewport using one of the following options: 
-              <ul>
-                <li>`crop` <b>(default)</b> - scale the asset to fill the viewport while maintaining the aspect ratio. The asset will be cropped if it exceeds the bounds of the viewport.</li>
-                <li>`cover` - stretch the asset to fill the viewport without maintaining the aspect ratio.</li>
-                <li>`contain` - fit the entire asset within the viewport while maintaining the original aspect ratio.</li>
-                <li>`none` - preserves the original asset dimensions and does not apply any scaling.</li>
-              </ul>
-          enum:
-            - cover
-            - contain
-            - crop
-            - none
-          type: string
-        scale:
-          description: >-
-            Scale the asset to a fraction of the viewport size - i.e. setting the scale to 0.5 will scale
-            asset to half the size of the viewport. This is useful for picture-in-picture video and 
-            scaling images such as logos and watermarks.
-          type: number
-          example: 0
-        position:
-          description: >-
-            Place the asset in one of nine predefined positions of the viewport. This is most effective
-            for when the asset is scaled and you want to position the element to a specific position.
-            <ul>
-              <li>`top` - top (center)</li>
-              <li>`topRight` - top right</li>
-              <li>`right` - right (center)</li>
-              <li>`bottomRight` - bottom right</li>
-              <li>`bottom` - bottom (center)</li>
-              <li>`bottomLeft` - bottom left</li>
-              <li>`left` - left (center)</li>
-              <li>`topLeft` - top left</li>
-              <li>`center` - center</li>
-            </ul>
-          enum:
-            - top
-            - topRight
-            - right
-            - bottomRight
-            - bottom
-            - bottomLeft
-            - left
-            - topLeft
-            - center
-          type: string
-        offset:
-          description: >-
-            Offset the location of the asset relative to its position on the
-            viewport. The offset distance is relative to the width of the viewport -
-            for example an x offset of 0.5 will move the asset half the viewport width
-            to the right.
-          $ref: "#/components/schemas/Offset"
-        transition:
-          $ref: "#/components/schemas/Transition"
-        effect:
-          description: >-
-            A motion effect to apply to the Clip.
-            <ul>
-              <li>`zoomIn` - slow zoom in</li>
-              <li>`zoomOut` - slow zoom out</li>
-              <li>`slideLeft` - slow slide (pan) left</li>
-              <li>`slideRight` - slow slide (pan) right</li>
-              <li>`slideUp` - slow slide (pan) up</li>
-              <li>`slideDown` - slow slide (pan) down</li>
-            </ul>
-            The motion effect speed can also be controlled by appending `Fast` or `Slow`
-            to the effect, e.g. `zoomInFast` or `slideRightSlow`.
-          enum:
-            - zoomIn
-            - zoomInSlow
-            - zoomInFast
-            - zoomOut
-            - zoomOutSlow
-            - zoomOutFast
-            - slideLeft
-            - slideLeftSLow
-            - slideLeftFast
-            - slideRight
-            - slideRightSlow
-            - slideRightFast
-            - slideUp
-            - slideUpSlow
-            - slideUpFast
-            - slideDown
-            - slideDownSlow
-            - slideDownFast
-          type: string
-        filter:
-          description: >-
-            A filter effect to apply to the Clip.
-            <ul>
-              <li>`boost` - boost contrast and saturation</li>
-              <li>`contrast` - increase contrast</li>
-              <li>`darken` - darken the scene</li>
-              <li>`greyscale` - remove colour</li>
-              <li>`lighten` - lighten the scene</li>
-              <li>`muted` - reduce saturation and contrast</li>
-              <li>`negative` - negative colors</li>
-            </ul>
-          enum:
-            - boost
-            - contrast
-            - darken
-            - greyscale
-            - lighten
-            - muted
-            - negative
-          type: string
-          example: greyscale
-        opacity:
-          description: Sets the opacity of the Clip where 1 is opaque and 0 is transparent.
-          type: number
-        transform:
-          description: >-
-            A transformation lets you modify the visual properties of a clip. Available
-            transformations are <b>rotate</b>, <b>skew</b> and <b>flip</b>. Transformations
-            can be combined to create interesting new shapes and effects.
-          $ref: "#/components/schemas/Transformation"
-      required:
-        - asset
-        - start
-        - length
-      type: object
+      $ref: "./models/clip.yaml#/Clip"
 
     Asset:
-      type: object
-      description: >-
-        The type of asset to display for the duration of the Clip. Value
-        must be one of:
-        <ul>
-          <li><a href="#tocs_videoasset">VideoAsset</a></li>
-          <li><a href="#tocs_imageasset">ImageAsset</a></li>
-          <li><a href="#tocs_titleasset">TitleAsset</a></li>
-          <li><a href="#tocs_htmlasset">HtmlAsset</a></li>
-          <li><a href="#tocs_audioasset">AudioAsset</a></li>
-          <li><a href="#tocs_lumaasset">LumaAsset</a></li>
-        </ul>
-      discriminator:
-        propertyName: asset
-      oneOf:
-        - $ref: "#/components/schemas/VideoAsset"
-        - $ref: "#/components/schemas/ImageAsset"
-        - $ref: "#/components/schemas/TitleAsset"
-        - $ref: "#/components/schemas/HtmlAsset"
-        - $ref: "#/components/schemas/AudioAsset"
-        - $ref: "#/components/schemas/LumaAsset"
-      additionalProperties: false
+      $ref: "./models/asset.yaml#/Asset"
 
     VideoAsset:
-      description: >-
-        The VideoAsset is used to create video sequences from video files. The
-        src must be a publicly accessible URL to a video resource such as an mp4
-        file.
-      type: object
-      properties:
-        type:
-          default: video
-          description: The type of asset - set to `video` for videos.
-          type: string
-        src:
-          description: >-
-            The video source URL. The URL must be publicly accessible or include
-            credentials.
-          type: string
-          example: https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4
-        trim:
-          description: >-
-            The start trim point of the video clip, in seconds (defaults to 0). Videos
-            will start from the in trim point. The video will play until the
-            file ends or the Clip length is reached.
-          type: number
-          example: 2
-        volume:
-          description: >-
-            Set the volume for the video clip between 0 and 1 where 0 is muted and 1
-            is full volume (defaults to 1).
-          type: number
-          example: 1
-        volumeEffect:
-          description: >-
-            The volume effect to apply to the video asset
-            <ul>
-              <li>`fadeIn` - fade volume in only</li>
-              <li>`fadeOut` - fade volume out only</li>
-              <li>`fadeInFadeOut` - fade volume in and out</li>
-            </ul>
-          enum:
-            - fadeIn
-            - fadeOut
-            - fadeInFadeOut
-          type: string
-        crop:
-          $ref: "#/components/schemas/Crop"
-      required:
-        - type
-        - src
+      $ref: "./models/videoasset.yaml#/VideoAsset"
 
     ImageAsset:
-      description: >-
-        The ImageAsset is used to create video from images to compose an image. The src must be a
-        publicly accessible URL to an image resource such as a jpg or png file.
-      type: object
-      properties:
-        type:
-          default: image
-          description: The type of asset - set to `image` for images.
-          type: string
-        src:
-          description: >-
-            The image source URL. The URL must be publicly accessible or include
-            credentials.
-          type: string
-          example: https://s3-ap-northeast-1.amazonaws.com/my-bucket/image.jpg
-        crop:
-          $ref: "#/components/schemas/Crop"
-      required:
-        - type
-        - src
+      $ref: "./models/imageasset.yaml#/ImageAsset"
 
     TitleAsset:
-      deprecated: true
-      description: |
-        **Notice: The title asset is deprecated, use the [HTML asset](#tocs_htmlasset) instead.**
-
-        The TitleAsset clip type lets you create video titles from a text string and apply styling and positioning.
-      type: object
-      properties:
-        type:
-          default: title
-          description: The type of asset - set to `title` for titles.
-          type: string
-        text:
-          description: The title text string - i.e. "My Title".
-          type: string
-          example: Hello World
-        style:
-          description: >-
-            Uses a preset to apply font properties and styling to the title.
-            <ul>
-              <li>`minimal`</li>
-              <li>`blockbuster`</li>
-              <li>`vogue`</li>
-              <li>`sketchy`</li>
-              <li>`skinny`</li>
-              <li>`chunk`</li>
-              <li>`chunkLight`</li>
-              <li>`marker`</li>
-              <li>`future`</li>
-              <li>`subtitle`</li>
-            </ul>
-          enum:
-            - minimal
-            - blockbuster
-            - vogue
-            - sketchy
-            - skinny
-            - chunk
-            - chunkLight
-            - marker
-            - future
-            - subtitle
-          type: string
-        color:
-          description: >-
-            Set the text color using hexadecimal color notation. Transparency is supported by setting the
-            first two characters of the hex string (opposite to HTML),  i.e. #80ffffff will be white with 
-            50% transparency.
-          type: string
-        size:
-          description: >-
-            Set the relative size of the text using predefined sizes from
-            xx-small to xx-large.
-            <ul>
-              <li>`xx-small`</li>
-              <li>`x-small`</li>
-              <li>`small`</li>
-              <li>`medium`</li>
-              <li>`large`</li>
-              <li>`x-large`</li>
-              <li>`xx-large`</li>
-            </ul>
-          enum:
-            - xx-small
-            - x-small
-            - small
-            - medium
-            - large
-            - x-large
-            - xx-large
-          type: string
-        background:
-          description: >-
-            Apply a background color behind the text. Set the text color using hexadecimal color notation.
-            Transparency is supported by setting the first two characters of the hex string (opposite to HTML), 
-            i.e. #80ffffff will be white with 50% transparency. Omit to use transparent background.
-          type: string
-          example: "#000000"
-        position:
-          description: >-
-            Place the title in one of nine predefined positions of the viewport.
-            <ul>
-              <li>`top` - top (center)</li>
-              <li>`topRight` - top right</li>
-              <li>`right` - right (center)</li>
-              <li>`bottomRight` - bottom right</li>
-              <li>`bottom` - bottom (center)</li>
-              <li>`bottomLeft` - bottom left</li>
-              <li>`left` - left (center)</li>
-              <li>`topLeft` - top left</li>
-              <li>`center` - center</li>
-            </ul>
-          enum:
-            - top
-            - topRight
-            - right
-            - bottomRight
-            - bottom
-            - bottomLeft
-            - left
-            - topLeft
-            - center
-          type: string
-        offset:
-          description: >-
-            Offset the location of the title relative to its position on the
-            screen.
-          $ref: "#/components/schemas/Offset"
-      required:
-        - type
-        - text
+      $ref: "./models/titleasset.yaml#/TitleAsset"
 
     HtmlAsset:
       $ref: "./models/htmlasset.yaml#/HtmlAsset"
@@ -876,17 +450,7 @@ components:
       $ref: "./models/crop.yaml#/Crop"
 
     Transformation:
-      description: >-
-        Apply one or more transformations to a clip. Transformations alter the visual
-        properties of a clip and can be combined to create new shapes and effects.
-      type: object
-      properties:
-        rotate: 
-          $ref: "#/components/schemas/RotateTransformation"
-        skew:
-          $ref: "#/components/schemas/SkewTransformation"
-        flip:
-          $ref: "#/components/schemas/FlipTransformation"
+      $ref: "./models/transformation.yaml#/Transformation"
 
     RotateTransformation:
       $ref: "./models/rotatetransformation.yaml#/RotateTransformation"
@@ -901,155 +465,7 @@ components:
       $ref: "./models/mergefield.yaml#/MergeField"
 
     Output:
-      description: The output format, render range and type of media to generate.
-      properties:
-        format:
-          description: >-
-            The output format and type of media file to generate.
-            <ul>
-              <li>`mp4` - mp4 video file</li>
-              <li>`gif` - animated gif</li>
-              <li>`jpg` - jpg image file</li>
-              <li>`png` - png image file</li>
-              <li>`bmp` - bmp image file</li>
-              <li>`mp3` - mp3 audio file (audio only)</li>
-            </ul>
-          enum:
-            - mp4
-            - gif
-            - mp3
-            - jpg
-            - png
-            - bmp
-          type: string
-          example: mp4
-        resolution:
-          description: >-
-            The output resolution of the video or image.
-            <ul>
-              <li>`preview` - 512px x 288px @ 15fps</li>
-              <li>`mobile` - 640px x 360px @ 25fps</li>
-              <li>`sd` - 1024px x 576px @ 25fps</li>
-              <li>`hd` - 1280px x 720px @ 25fps</li>
-              <li>`1080` - 1920px x 1080px @ 25fps</li>
-            </ul>
-          enum:
-            - preview
-            - mobile
-            - sd
-            - hd
-            - "1080"
-          type: string
-          example: sd
-        aspectRatio:
-          description: >-
-            The aspect ratio (shape) of the video or image. Useful for social media output formats. Options are:
-            <ul>
-              <li>`16:9` (default) - regular landscape/horizontal aspect ratio</li>
-              <li>`9:16` - vertical/portrait aspect ratio</li>
-              <li>`1:1` - square aspect ratio</li>
-              <li>`4:5` - short vertical/portrait aspect ratio</li>
-              <li>`4:3` - legacy TV aspect ratio</li>
-            </ul>
-          enum:
-            - "16:9"
-            - "9:16"
-            - "1:1"
-            - "4:5"
-            - "4:3"
-          type: string
-          example: "16:9"
-        size:
-          $ref: "#/components/schemas/Size"
-        fps:
-          description: >-
-            Override the default frames per second. Useful for when the source footage is recorded at 30fps, i.e. on 
-            mobile devices. Lower frame rates can be used to add cinematic quality (24fps) or to create smaller file
-            size/faster render times or animated gifs (12 or 15fps). Default is 25fps.
-            <ul>
-              <li>`12` - 12fps</li>
-              <li>`15` - 15fps</li>
-              <li>`24` - 24fps</li>
-              <li>`23.976` - 23.976fps</li>
-              <li>`25` (default) - 25fps</li>
-              <li>`29.97` - 29.97fps</li>
-              <li>`30` - 30fps</li>
-            </ul>
-          enum:
-            - 12
-            - 15
-            - 23.976
-            - 24
-            - 25
-            - 29.97
-            - 30
-          type: number
-          example: 25
-        scaleTo:
-          description: >-
-            Override the resolution and scale the video or image to render at a different size. When using scaleTo the
-            asset should be edited at the resolution dimensions, i.e. use font sizes that look best at HD, then use
-            scaleTo to output the file at SD and the text will be scaled to the correct size. This is useful if you
-            want to create multiple asset sizes.
-            <ul>
-              <li>`preview` - 512px x 288px @ 15fps</li>
-              <li>`mobile` - 640px x 360px @ 25fps</li>
-              <li>`sd` - 1024px x 576px @25fps</li>
-              <li>`hd` - 1280px x 720px @25fps</li>
-              <li>`1080` - 1920px x 1080px @25fps</li>
-            </ul>
-          enum:
-            - preview
-            - mobile
-            - sd
-            - hd
-            - "1080"
-          type: string
-        quality:
-          description: >-
-            Adjust the output quality of the video, image or audio. Adjusting quality affects 
-            render speed, download speeds and storage requirements due to file size.
-            The default `medium` provides the most optimized choice for all three 
-            factors.
-            <ul>
-              <li>`low` - slightly reduced quality, smaller file size</li>
-              <li>`medium` (default) - optimized quality, render speeds and file size</li>
-              <li>`high` - slightly increased quality, larger file size</li>
-            </ul>
-          enum:
-            - low
-            - medium
-            - high
-          type: string
-          example: medium
-        repeat:
-          description: Loop settings for gif files. Set to `true` to loop, `false` to play only once.
-          type: boolean
-          example: true
-        mute:
-          description: Mute the audio track of the output video. Set to `true` to mute, `false` to un-mute.
-          type: boolean
-          example: false
-        range:
-          $ref: "#/components/schemas/Range"
-        poster:
-          description: >-
-            Generate a poster image from a specific point on the timeline.
-          $ref: "#/components/schemas/Poster"
-        thumbnail:
-          description: >-
-            Generate a thumbnail image from a specific point on the timeline.
-          $ref: "#/components/schemas/Thumbnail"
-        destinations:
-          description: >-
-            Specify the storage locations and hosting services to send rendered videos to.
-          type: array
-          items:
-            $ref: "#/components/schemas/Destinations"
-          additionalProperties: false
-      required:
-        - format
-      type: object
+      $ref: "./models/output.yaml#/Output"
 
     Size:
       $ref: "./models/size.yaml#/Size"
@@ -1064,102 +480,28 @@ components:
       $ref: "./models/thumbnail.yaml#/Thumbnail"
 
     Destinations:
-      type: object
-      description: >-
-        A destination is a location where output files can be sent to for serving or hosting. By default all
-        rendered assets are automatically sent to the 
-        [Shotstack hosting destination](https://shotstack.io/docs/guide/serving-assets/hosting). You can add other
-        destinations to send assets to. The following destinations are available:
-        <ul>
-          <li><a href="#tocs_shotstackdestination">ShotstackDestination</a></li>
-          <li><a href="#tocs_muxdestination">MuxDestination</a></li>
-          <li><a href="#tocs_s3destination">S3Destination</a></li>
-        </ul>
-      discriminator:
-        propertyName: destinations
-      anyOf:
-        - $ref: "#/components/schemas/ShotstackDestination"
-        - $ref: "#/components/schemas/MuxDestination"
-        - $ref: "#/components/schemas/S3Destination"
+      $ref: "./models/destinations.yaml#/Destinations"
 
     ShotstackDestination:
       $ref: "./models/shotstackdestination.yaml#/ShotstackDestination"
 
     MuxDestination:
-      description: >-
-        Send rendered videos to the [Mux](https://shotstack.io/docs/guide/serving-assets/destinations/mux) video hosting
-        and streaming service. Mux credentials are required and added via the
-        [dashboard](https://dashboard.shotstack.io/integrations/mux), not in the request.
-      properties:
-        provider:
-          description: The destination to send rendered assets to - set to `mux` for Mux.
-          type: string
-          default: mux
-          example: mux
-        options:
-          description: Additional Mux configuration and features.
-          $ref: "#/components/schemas/MuxDestinationOptions"
-      type: object
-      required:
-        - provider
+      $ref: "./models/muxdestination.yaml#/MuxDestination"
 
     MuxDestinationOptions:
       $ref: "./models/muxdestinationoptions.yaml#/MuxDestinationOptions"
 
     S3Destination:
-      description: >-
-        Send rendered videos to an [Amazon S3](https://shotstack.io/docs/guide/serving-assets/destinations/s3) bucket.
-        Send files to any region with your own prefix and filename. AWS credentials are required and added via the
-        [dashboard](https://dashboard.shotstack.io/integrations/s3), not in the request.
-      properties:
-        provider:
-          description: The destination to send rendered assets to - set to `s3` for S3.
-          type: string
-          default: s3
-          example: s3
-        options:
-          description: Additional S3 configuration options.
-          $ref: "#/components/schemas/S3DestinationOptions"
-      type: object
-      required:
-        - provider
+      $ref: "./models/s3destination.yaml#/S3Destination"
 
     S3DestinationOptions:
       $ref: "./models/s3destinationoptions.yaml#/S3DestinationOptions"
 
     Template:
-      description: >-
-        A template is a saved [Edit](#tocs_edit) than can be loaded and re-used.
-      properties:
-        name:
-          type: string
-          description: The template name
-          example: My template
-        template:
-          $ref: "#/components/schemas/Edit"
-      required:
-        - name
-      type: object
+      $ref: "./models/template.yaml#/Template"
 
     TemplateRender:
-      description: >-
-        Configure the id and optional merge fields to render a template by id.
-      properties:
-        id:
-          description: The id of the template to render in UUID format.
-          type: string
-          example: f5493c17-d01f-445c-bb49-535fae65f219
-        merge:
-          description: >-
-            An array of key/value pairs that provides an easy way to create templates with placeholders.
-            The placeholders can be used to find and replace keys with values. For example you can search
-            for the placeholder `{{NAME}}` and replace it with the value `Jane`. 
-          type: array
-          items:
-            $ref: "./models/mergefield.yaml#/MergeField"
-      required:
-        - id
-      type: object
+      $ref: "./models/templaterender.yaml#/TemplateRender"
 
     QueuedResponse:
       description: >-

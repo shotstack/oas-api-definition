@@ -1,0 +1,21 @@
+    ImageAsset:
+      description: >-
+        The ImageAsset is used to create video from images to compose an image. The src must be a
+        publicly accessible URL to an image resource such as a jpg or png file.
+      type: object
+      properties:
+        type:
+          default: image
+          description: The type of asset - set to `image` for images.
+          type: string
+        src:
+          description: >-
+            The image source URL. The URL must be publicly accessible or include
+            credentials.
+          type: string
+          example: https://s3-ap-northeast-1.amazonaws.com/my-bucket/image.jpg
+        crop:
+          $ref: "./crop.yaml#/Crop"
+      required:
+        - type
+        - src
