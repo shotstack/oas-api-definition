@@ -1,0 +1,14 @@
+    FlipTransformation:
+      description: >-
+        Flip a clip vertically or horizontally. Acts as a mirror effect of the clip along
+        the selected plane.
+      type: object
+      properties:
+        horizontal:
+          description: Flip a clip horizontally.
+          type: boolean
+          example: true
+        vertical:
+          description: Flip a clip vertically.
+          type: boolean
+          example: true

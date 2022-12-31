@@ -1,0 +1,15 @@
+    QueuedResponseData:
+      description: The response data returned with the [QueuedResponse](#tocs_queuedresponse).
+      properties:
+        message:
+          description: Success response message or error details.
+          type: string
+          example: Render Successfully Queued
+        id:
+          description: The id of the render task in UUID format.
+          type: string
+          example: 2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7
+      required:
+        - message
+        - id
+      type: object

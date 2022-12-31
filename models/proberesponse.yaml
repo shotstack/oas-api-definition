@@ -1,0 +1,21 @@
+    ProbeResponse:
+      description: >-
+        The response received after a [probe request](#inspect-media) is submitted. The probe requests returns data from FFprobe
+        formatted as JSON.
+      properties:
+        success:
+          description: "`true` if media successfully read, else `false`."
+          type: boolean
+          example: true
+        message:
+          description: "`Created`, `Bad Request` or an error message."
+          type: string
+          example: Created
+        response:
+          description: The response from FFprobe in JSON format.
+          type: object
+      required:
+        - success
+        - message
+        - response
+      type: object

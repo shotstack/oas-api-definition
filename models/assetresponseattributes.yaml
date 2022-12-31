@@ -1,0 +1,62 @@
+    AssetResponseAttributes:
+      description: The list of asset attributes and their values.
+      properties:
+        id:
+          description: The unique id of the hosted asset in UUID format.
+          type: string
+          example: a4482cbf-e321-42a2-ac8b-947d26886840
+        owner:
+          description: The owner id of the render task.
+          type: string
+          example: 5ca6hu7s9k
+        region:
+          description: The region the asset is hosted, currently only `au` (Australia).
+          type: string
+          example: au
+        renderId:
+          description: The original render id that created the asset in UUID format. Multiple assets can share the same render id.
+          type: string
+          example: 2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7
+        providerId:
+          description: >-
+            The third party id of an asset transferred to an external provider, i.e. Mux, YouTube or S3. If the provider
+            is Shotstack, the providerID is the same as the asset id.
+          type: string
+          example: a4482cbf-e321-42a2-ac8b-947d26886840
+        filename:
+          description: The asset file name.
+          type: string
+          example: 2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4
+        url:
+          description: The asset file name.
+          type: string
+          example: https://cdn.shotstack.io/au/v1/5ca6hu7s9k/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4
+        status:
+          description: >-
+            The status of the asset.
+            <ul>
+              <li>`importing` - the asset is being copied to the hosting service</li>
+              <li>`ready` - the asset is ready to be served to users</li>
+              <li>`failed` - the asset failed to copy or delete</li>
+              <li>`deleted` - the asset has been deleted</li>
+            </ul>
+          enum:
+            - importing
+            - ready
+            - failed
+            - deleted
+          type: string
+          example: ready
+        created:
+          description: The time the asset was created.
+          type: string
+          example: "2021-06-30T09:42:29.446Z"
+        updated:
+          description: The time the asset status was last updated.
+          type: string
+          example: "2021-06-30T09:42:30.168Z"
+      required:
+        - id
+        - owner
+        - status
+      type: object

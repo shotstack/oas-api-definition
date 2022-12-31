@@ -486,50 +486,10 @@ components:
       type: object
 
     Soundtrack:
-      description: >-
-        A music or audio file in mp3 format that plays for the duration of the
-        rendered video or the length of the audio file, which ever is shortest.
-      properties:
-        src:
-          description: >-
-            The URL of the mp3 audio file. The URL must be publicly accessible
-            or include credentials.
-          type: string
-          example: https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3
-        effect:
-          description: >-
-            The effect to apply to the audio file
-            <ul>
-              <li>`fadeIn` - fade volume in only</li>
-              <li>`fadeOut` - fade volume out only</li>
-              <li>`fadeInFadeOut` - fade volume in and out</li>
-            </ul>
-          enum:
-            - fadeIn
-            - fadeOut
-            - fadeInFadeOut
-          type: string
-        volume:
-          description: >-
-            Set the volume for the soundtrack between 0 and 1 where 0 is muted and 1
-            is full volume (defaults to 1).
-          type: number
-      required:
-        - src
-      type: object
+      $ref: "./models/soundtrack.yaml#/Soundtrack"
 
     Font:
-      description: >-
-        Download a custom font to use with the HTML asset type, using the font name in the CSS or font tag. See our
-        [custom fonts](https://shotstack.io/learn/html-custom-fonts/) getting started guide for more details.
-      properties:
-        src:
-          description: The URL of the font file. The URL must be publicly accessible or include credentials.
-          type: string
-          example: https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf
-      required:
-        - src
-      type: object
+      $ref: "./models/font.yaml#/Font"
 
     Track:
       description: >-
@@ -898,399 +858,22 @@ components:
         - text
 
     HtmlAsset:
-      description: >-
-        The HtmlAsset clip type lets you create text based layout and formatting using
-        HTML and CSS. You can also set the height and width of a bounding box for the HTML
-        content to sit within. Text and elements will wrap within the bounding box.
-      type: object
-      properties:
-        type:
-          default: html
-          description: The type of asset - set to `html` for HTML.
-          type: string
-        html:
-          description: >-
-            The HTML text string. See list of
-            [supported HTML tags](https://shotstack.io/docs/guide/architecting-an-application/html-support#supported-html-tags).
-          type: string
-          example: "<p>Hello <b>World</b></p>"
-        css:
-          description: >-
-            The CSS text string to apply styling to the HTML. See list of 
-            [support CSS properties](https://shotstack.io/docs/guide/architecting-an-application/html-support#supported-css-properties).
-          type: string
-          example: "p { color: #ffffff; } b { color: #ffff00; }"
-        width:
-          description: >-
-            Set the width of the HTML asset bounding box in pixels. Text will wrap to fill the bounding box.
-          type: integer
-          example: 400
-        height:
-          description: >-
-            Set the width of the HTML asset bounding box in pixels. Text and elements will be masked if they exceed the 
-            height of the bounding box.
-          type: integer
-          example: 200
-        background:
-          description: >-
-            Apply a background color behind the HTML bounding box using. Set the text color using hexadecimal 
-            color notation. Transparency is supported by setting the first two characters of the hex string 
-            (opposite to HTML), i.e. #80ffffff will be white with 50% transparency.
-          type: string
-        position:
-          description: >-
-            Place the HTML in one of nine predefined positions within the HTML area.
-            <ul>
-              <li>`top` - top (center)</li>
-              <li>`topRight` - top right</li>
-              <li>`right` - right (center)</li>
-              <li>`bottomRight` - bottom right</li>
-              <li>`bottom` - bottom (center)</li>
-              <li>`bottomLeft` - bottom left</li>
-              <li>`left` - left (center)</li>
-              <li>`topLeft` - top left</li>
-              <li>`center` - center</li>
-            </ul>
-          enum:
-            - top
-            - topRight
-            - right
-            - bottomRight
-            - bottom
-            - bottomLeft
-            - left
-            - topLeft
-            - center
-          type: string
-      required:
-        - type
-        - html
+      $ref: "./models/htmlasset.yaml#/HtmlAsset"
 
     AudioAsset:
-      description: >-
-        The AudioAsset is used to add sound effects and audio at specific intervals on
-        the timeline. The src must be a publicly accessible URL to an audio resource such 
-        as an mp3 file.
-      type: object
-      properties:
-        type:
-          default: audio
-          description: The type of asset - set to `audio` for audio assets.
-          type: string
-        src:
-          description: >-
-            The audio source URL. The URL must be publicly accessible or include
-            credentials.
-          type: string
-          example: https://s3-ap-northeast-1.amazonaws.com/my-bucket/sound.mp3
-        trim:
-          description: >-
-            The start trim point of the audio clip, in seconds (defaults to 0). Audio
-            will start from the in trim point. The audio will play until the
-            file ends or the Clip length is reached.
-          type: number
-        volume:
-          description: >-
-            Set the volume for the audio clip between 0 and 1 where 0 is muted and 1
-            is full volume (defaults to 1).
-          type: number
-          example: 1
-        effect:
-          description: >-
-            The effect to apply to the audio asset
-            <ul>
-              <li>`fadeIn` - fade volume in only</li>
-              <li>`fadeOut` - fade volume out only</li>
-              <li>`fadeInFadeOut` - fade volume in and out</li>
-            </ul>
-          enum:
-            - fadeIn
-            - fadeOut
-            - fadeInFadeOut
-          type: string
-      required:
-        - type
-        - src
+      $ref: "./models/audioasset.yaml#/AudioAsset"
 
     LumaAsset:
-      description: >-
-        The LumaAsset is used to create luma matte masks, transitions and effects between other assets.
-        A luma matte is a grey scale image or animated video where the black areas are transparent and the white
-        areas solid. The luma matte animation should be provided as an mp4 video file. The src must be a
-        publicly accessible URL to the file.
-      type: object
-      properties:
-        type:
-          default: luma
-          description: The type of asset - set to `luma` for luma mattes.
-          type: string
-        src:
-          description: >-
-            The luma matte source URL. The URL must be publicly accessible or include
-            credentials.
-          type: string
-          example: https://s3-ap-northeast-1.amazonaws.com/my-bucket/mask.mp4
-        trim:
-          description: >-
-            The start trim point of the luma matte clip, in seconds (defaults to 0). Videos
-            will start from the in trim point. A luma matte video will play until the
-            file ends or the Clip length is reached.
-          type: number
-      required:
-        - type
-        - src
+      $ref: "./models/lumaasset.yaml#/LumaAsset"
 
     Transition:
-      description: In and out transitions for a clip - i.e. fade in and fade out
-      properties:
-        in:
-          description: >-
-            The transition in. Available transitions are:
-              <ul>
-                <li>`fade` - fade in</li>
-                <li>`reveal` - reveal from left to right</li>
-                <li>`wipeLeft` - fade across screen to the left</li>
-                <li>`wipeRight` - fade across screen to the right</li>
-                <li>`slideLeft` - move slightly left and fade in</li>
-                <li>`slideRight` - move slightly right and fade in</li>
-                <li>`slideUp` - move slightly up and fade in</li>
-                <li>`slideDown` - move slightly down and fade in</li>
-                <li>`carouselLeft` - slide in from right to left</li>
-                <li>`carouselRight` - slide in from left to right</li>
-                <li>`carouselUp` - slide in from bottom to top</li>
-                <li>`carouselDown` - slide in from top to bottom</li>
-                <li>`shuffleTopRight` - rotate in from top right</li>
-                <li>`shuffleRightTop` - rotate in from right top</li>
-                <li>`shuffleRightBottom` - rotate in from right bottom</li>
-                <li>`shuffleBottomRight` - rotate in from bottom right</li>
-                <li>`shuffleBottomLeft` - rotate in from bottom left</li>
-                <li>`shuffleLeftBottom` - rotate in from left bottom</li>
-                <li>`shuffleLeftTop` - rotate in from left top</li>
-                <li>`shuffleTopLeft` - rotate in from top left</li>
-                <li>`zoom` - fast zoom in</li>
-              </ul>
-            The transition speed can also be controlled by appending `Fast` or `Slow`
-            to the transition, e.g. `fadeFast` or `CarouselLeftSlow`.
-          enum:
-            - fade
-            - fadeSlow
-            - fadeFast
-            - reveal
-            - revealSlow
-            - revealFast
-            - wipeLeft
-            - wipeLeftSlow
-            - wipeLeftFast
-            - wipeRight
-            - wipeRightSlow
-            - wipeRightFast
-            - slideLeft
-            - slideLeftSlow
-            - slideLeftFast
-            - slideRight
-            - slideRightSlow
-            - slideRightFast
-            - slideUp
-            - slideUpSlow
-            - slideUpFast
-            - slideDown
-            - slideDownSlow
-            - slideDownFast
-            - carouselLeft
-            - carouselLeftSlow
-            - carouselLeftFast
-            - carouselRight
-            - carouselRightSlow
-            - carouselRightFast
-            - carouselUp
-            - carouselUpSlow
-            - carouselUpFast
-            - carouselDown
-            - carouselDownSlow
-            - carouselDownFast
-            - shuffleTopRight
-            - shuffleTopRightSlow
-            - shuffleTopRightFast
-            - shuffleRightTop
-            - shuffleRightTopSlow
-            - shuffleRightTopFast
-            - shuffleRightBottom
-            - shuffleRightBottomSlow
-            - shuffleRightBottomFast
-            - shuffleBottomRight
-            - shuffleBottomRightSlow
-            - shuffleBottomRightFast
-            - shuffleBottomLeft
-            - shuffleBottomLeftSlow
-            - shuffleBottomLeftFast
-            - shuffleLeftBottom
-            - shuffleLeftBottomSlow
-            - shuffleLeftBottomFast
-            - shuffleLeftTop
-            - shuffleLeftTopSlow
-            - shuffleLeftTopFast
-            - shuffleTopLeft
-            - shuffleTopLeftSlow
-            - shuffleTopLeftFast
-            - zoom
-          type: string
-        out:
-          description: >-
-            The transition out. Available transitions are:
-              <ul>
-                <li>`fade` - fade out</li>
-                <li>`reveal` - reveal from right to left</li>
-                <li>`wipeLeft` - fade across screen to the left</li>
-                <li>`wipeRight` - fade across screen to the right</li>
-                <li>`slideLeft` - move slightly left and fade out</li>
-                <li>`slideRight` - move slightly right and fade out</li>
-                <li>`slideUp` - move slightly up and fade out</li>
-                <li>`slideDown` - move slightly down and fade out</li>
-                <li>`carouselLeft` - slide out from right to left</li>
-                <li>`carouselRight` - slide out from left to right</li>
-                <li>`carouselUp` - slide out from bottom to top</li>
-                <li>`carouselDown` - slide out from top  to bottom</li>
-                <li>`shuffleTopRight` - rotate out from top right</li>
-                <li>`shuffleRightTop` - rotate out from right top</li>
-                <li>`shuffleRightBottom` - rotate out from right bottom</li>
-                <li>`shuffleBottomRight` - rotate out from bottom right</li>
-                <li>`shuffleBottomLeft` - rotate out from bottom left</li>
-                <li>`shuffleLeftBottom` - rotate out from left bottom</li>
-                <li>`shuffleLeftTop` - rotate out from left top</li>
-                <li>`shuffleTopLeft` - rotate out from top left</li>
-                <li>`zoom` - fast zoom out</li>
-              </ul>
-            The transition speed can also be controlled by appending `Fast` or `Slow`
-            to the transition, e.g. `fadeFast` or `CarouselLeftSlow`.
-          enum:
-            - fade
-            - fadeSlow
-            - fadeFast
-            - reveal
-            - revealSlow
-            - revealFast
-            - wipeLeft
-            - wipeLeftSlow
-            - wipeLeftFast
-            - wipeRight
-            - wipeRightSlow
-            - wipeRightFast
-            - slideLeft
-            - slideLeftSlow
-            - slideLeftFast
-            - slideRight
-            - slideRightSlow
-            - slideRightFast
-            - slideUp
-            - slideUpSlow
-            - slideUpFast
-            - slideDown
-            - slideDownSlow
-            - slideDownFast
-            - carouselLeft
-            - carouselLeftSlow
-            - carouselLeftFast
-            - carouselRight
-            - carouselRightSlow
-            - carouselRightFast
-            - carouselUp
-            - carouselUpSlow
-            - carouselUpFast
-            - carouselDown
-            - carouselDownSlow
-            - carouselDownFast
-            - shuffleTopRight
-            - shuffleTopRightSlow
-            - shuffleTopRightFast
-            - shuffleRightTop
-            - shuffleRightTopSlow
-            - shuffleRightTopFast
-            - shuffleRightBottom
-            - shuffleRightBottomSlow
-            - shuffleRightBottomFast
-            - shuffleBottomRight
-            - shuffleBottomRightSlow
-            - shuffleBottomRightFast
-            - shuffleBottomLeft
-            - shuffleBottomLeftSlow
-            - shuffleBottomLeftFast
-            - shuffleLeftBottom
-            - shuffleLeftBottomSlow
-            - shuffleLeftBottomFast
-            - shuffleLeftTop
-            - shuffleLeftTopSlow
-            - shuffleLeftTopFast
-            - shuffleTopLeft
-            - shuffleTopLeftSlow
-            - shuffleTopLeftFast
-            - zoom
-          type: string
-      type: object
+      $ref: "./models/transition.yaml#/Transition"
 
     Offset:
-      description: >-
-        Offsets the position of an asset horizontally or vertically by a
-        relative distance.
-      properties:
-        x:
-          description: >-
-            Offset an asset on the horizontal axis (left or right), range varies
-            from -10 to 10. Positive numbers move the asset right, negative left.
-            For all assets except titles the distance moved is relative to the width 
-            of the viewport - i.e. an X offset of 0.5 will move the asset half the 
-            screen width to the right.
-          type: number
-          format: float
-          minimum: -10
-          maximum: 10
-          example: 0.1
-        y:
-          description: >-
-            Offset an asset on the vertical axis (up or down), range varies from
-            -10 to 10. Positive numbers move the asset up, negative down.
-            For all assets except titles the distance moved is relative to the height 
-            of the viewport - i.e. an Y offset of 0.5 will move the asset up half the 
-            screen height.
-          type: number
-          format: float
-          minimum: -10
-          maximum: 10
-          example: -0.2
-      type: object
+      $ref: "./models/offset.yaml#/Offset"
 
     Crop:
-      description: >-
-        Crop the sides of an asset by a relative amount. The size of the crop is specified using a scale between 0 and
-        1, relative to the screen width - i.e a left crop of 0.5 will crop half of the asset from the left, a top crop 
-        of 0.25 will crop the top by quarter of the asset.
-      properties:
-        top:
-          description: Crop from the top of the asset
-          type: number
-          format: float
-          minimum: 0
-          maximum: 1
-          example: 0.15
-        bottom:
-          description: Crop from the bottom of the asset
-          type: number
-          format: float
-          minimum: 0
-          maximum: 1
-          example: 0.15
-        left:
-          description: Crop from the left of the asset
-          type: number
-          format: float
-          minimum: 0
-          maximum: 1
-        right:
-          description: Crop from the left of the asset
-          type: number
-          format: float
-          minimum: 0
-          maximum: 1
-      type: object
+      $ref: "./models/crop.yaml#/Crop"
 
     Transformation:
       description: >-
@@ -1306,70 +889,16 @@ components:
           $ref: "#/components/schemas/FlipTransformation"
 
     RotateTransformation:
-      description: >-
-        Rotate a clip by the specified angle in degrees. Rotation origin
-        is set based on the clips `position`.
-      type: object
-      properties:
-        angle:
-          description: >-
-            The angle to rotate the clip. Can be 0 to 360, or 0 to -360. Using a
-            positive number rotates the clip clockwise, negative numbers
-            counter-clockwise.
-          type: integer
-          example: 45
+      $ref: "./models/rotatetransformation.yaml#/RotateTransformation"
 
     SkewTransformation:
-      description: >-
-        Skew a clip so its edges are sheared at an angle. Use values between 0 and 3.
-        Over 3 the clip will be skewed almost flat.
-      type: object
-      properties:
-        x:
-          description: Skew the clip along it's x axis.
-          type: number
-          format: float
-          example: 0.5
-        y:
-          description: Skew the clip along it's y axis.
-          type: number
-          format: float
-          example: 0.5
+      $ref: "./models/skewtransformation.yaml#/SkewTransformation"
 
     FlipTransformation:
-      description: >-
-        Flip a clip vertically or horizontally. Acts as a mirror effect of the clip along
-        the selected plane.
-      type: object
-      properties:
-        horizontal:
-          description: Flip a clip horizontally.
-          type: boolean
-          example: true
-        vertical:
-          description: Flip a clip vertically.
-          type: boolean
-          example: true
+      $ref: "./models/fliptransformation.yaml#/FlipTransformation"
 
     MergeField:
-      description: >-
-        A merge field consists of a key; `find`, and a value; `replace`. Merge fields can be used to replace placeholders
-        within the JSON edit to create re-usable templates. Placeholders should be a string with double brace delimiters,
-        i.e. `"{{NAME}}"`. A placeholder can be used for any value within the JSON edit.
-      type: object
-      properties:
-        find:
-          description: The string to find <u>without</u> delimiters.
-          type: string
-          example: NAME
-        replace:
-          description: >-
-            The replacement value. The replacement can be any valid JSON type -
-            string, boolean, number, etc...
-          example: Jane
-      required:
-        - find
-        - replace
+      $ref: "./models/mergefield.yaml#/MergeField"
 
     Output:
       description: The output format, render range and type of media to generate.
@@ -1523,81 +1052,16 @@ components:
       type: object
 
     Size:
-      description: >-
-        Set a custom size for a video or image in pixels. When using a custom size omit the
-        `resolution` and `aspectRatio`. Custom sizes must be divisible by 2 based
-        on the encoder specifications.
-      properties:
-        width:
-          description: >-
-            Set a custom width for the video or image file in pixels. Value must be divisible
-            by 2. Maximum video width is 1920px, maximum image width is 4096px.
-          type: integer
-          minimum: 0
-          maximum: 4096
-          example: 1200
-        height:
-          description: >-
-            Set a custom height for the video or image file in pixels. Value must be divisible
-            by 2. Maximum video height is 1920px, maximum image height is 4096px.
-          type: integer
-          minimum: 0
-          maximum: 4096
-          example: 800
-      type: object
+      $ref: "./models/size.yaml#/Size"
 
     Range:
-      description: >-
-        Specify a time range to render, i.e. to render only a portion of a video or audio file. Omit this setting to 
-        export the entire video. Range can also be used to render a frame at a specific time point - setting a range and
-        output format as `jpg` will output a single frame image at the range `start` point.
-      properties:
-        start:
-          description: >-
-            The point on the timeline, in seconds, to start the render from - i.e. start at second 3.
-          type: number
-          format: float
-          minimum: 0
-          example: 3
-        length:
-          description: >-
-            The length of the portion of the video or audio to render - i.e. render 6 seconds of the video.
-          type: number
-          format: float
-          minimum: 0
-          example: 6
-      type: object
+      $ref: "./models/range.yaml#/Range"
 
     Poster:
-      description: >-
-        Generate a poster image for the video at a specific point from the timeline. The poster image size
-        will match the size of the output video.
-      properties:
-        capture:
-          description: The point on the timeline in seconds to capture a single frame to use as the poster image.
-          type: number
-          example: 1
-      required:
-        - capture
-      type: object
+      $ref: "./models/poster.yaml#/Poster"
 
     Thumbnail:
-      description: Generate a thumbnail image for the video or image at a specific point from the timeline.
-      properties:
-        capture:
-          description: The point on the timeline in seconds to capture a single frame to use as the thumbnail image.
-          type: number
-          example: 1
-        scale:
-          description: >-
-            Scale the thumbnail size to a fraction of the viewport size - i.e. setting the scale to 0.5 will scale 
-            the thumbnail to half the size of the viewport.
-          type: number
-          example: 0.3
-      required:
-        - capture
-        - scale
-      type: object
+      $ref: "./models/thumbnail.yaml#/Thumbnail"
 
     Destinations:
       type: object
@@ -1619,25 +1083,7 @@ components:
         - $ref: "#/components/schemas/S3Destination"
 
     ShotstackDestination:
-      description: >-
-        Send rendered assets to the 
-        [Shotstack hosting and CDN](https://shotstack.io/docs/guide/serving-assets/destinations/shotstack) service. 
-        This destination is enabled by default.
-      properties:
-        provider:
-          description: The destination to send rendered assets to - set to `shotstack` for Shotstack hosting and CDN.
-          type: string
-          default: shotstack
-          example: shotstack
-        exclude:
-          description: >-
-            Set to `true` to [opt-out](https://shotstack.io/docs/guide/serving-assets/self-host) from the Shotstack
-            hosting and CDN service. All files must be downloaded within 24 hours of rendering.
-          type: boolean
-          example: false
-      type: object
-      required:
-        - provider
+      $ref: "./models/shotstackdestination.yaml#/ShotstackDestination"
 
     MuxDestination:
       description: >-
@@ -1658,18 +1104,7 @@ components:
         - provider
 
     MuxDestinationOptions:
-      description: >-
-        Pass additional options to control how Mux processes video. Currently supports playback policy option.
-      properties:
-        playbackPolicy:
-          description: Sets the Mux `playback_policy` option. Value is an array of strings - use `public`, `signed`, or
-            both.
-          type: array
-          items:
-            type: string
-            enum:
-              - public
-              - signed
+      $ref: "./models/muxdestinationoptions.yaml#/MuxDestinationOptions"
 
     S3Destination:
       description: >-
@@ -1690,42 +1125,7 @@ components:
         - provider
 
     S3DestinationOptions:
-      description: >-
-        Pass additional options to control how files are stored in S3.
-      properties:
-        region:
-          description: >-
-            Choose the region to send the file to. Must be a valid 
-            [AWS region](https://docs.aws.amazon.com/general/latest/gr/s3.html#s3_region) string like `us-east-1` or
-            `ap-southeast-2`.
-          type: string
-          example: us-east-1
-        bucket:
-          description: >-
-            The bucket name to send files to. The bucket must exist in the AWS account before files can be sent.
-          type: string
-          example: my-bucket
-        prefix:
-          description: >-
-            A prefix for the file being sent. This is typically a folder name, i.e. `videos` or `customerId/videos`.
-          type: string
-          example: my-renders
-        filename:
-          description: >-
-            Use your own filename instead of the default render ID filename. Note: omit the file extension as this will
-            be appended depending n the output format. Also `poster.jpg` and `-thumb.jpg` will be appended for poster
-            and thumbnail images.
-          type: string
-          example: my-file
-        acl:
-          description: >-
-            Sets the S3 Access Control List (acl) permissions. Default is `private`. Must use a valid 
-            S3 [Canned ACL](https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#canned-acl).
-          type: string
-          example: public-read
-      required:
-        - region
-        - bucket
+      $ref: "./models/s3destinationoptions.yaml#/S3DestinationOptions"
 
     Template:
       description: >-
@@ -1756,7 +1156,7 @@ components:
             for the placeholder `{{NAME}}` and replace it with the value `Jane`. 
           type: array
           items:
-            $ref: "#/components/schemas/MergeField"
+            $ref: "./models/mergefield.yaml#/MergeField"
       required:
         - id
       type: object
@@ -1784,20 +1184,7 @@ components:
       type: object
 
     QueuedResponseData:
-      description: The response data returned with the [QueuedResponse](#tocs_queuedresponse).
-      properties:
-        message:
-          description: Success response message or error details.
-          type: string
-          example: Render Successfully Queued
-        id:
-          description: The id of the render task in UUID format.
-          type: string
-          example: 2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7
-      required:
-        - message
-        - id
-      type: object
+      $ref: "./models/queuedresponsedata.yaml#/QueuedResponseData"
 
     RenderResponse:
       description: >-
@@ -1924,27 +1311,14 @@ components:
       type: object
 
     TemplateResponseData:
-      description: The response data returned with the [TemplateResponse](#tocs_templateresponse).
-      properties:
-        message:
-          description: Success response message or error details.
-          type: string
-          example: Template Successfully Created
-        id:
-          description: The unique id of the template in UUID format.
-          type: string
-          example: f5493c17-d01f-445c-bb49-535fae65f219
-      required:
-        - message
-        - id
-      type: object
+      $ref: "./models/templateresponsedata.yaml#/TemplateResponseData"
 
     TemplateDataResponse:
       description: >-
         The template data including the template name and [Edit](#tocs_edit).
       properties:
         success:
-          description: "`true` if successfully created, else `false`."
+          description: "`true` if successfully returned, else `false`."
           type: boolean
           example: true
         message:
@@ -1992,13 +1366,13 @@ components:
         A list of previously saved templates.
       properties:
         success:
-          description: "`true` if successfully created, else `false`."
+          description: "`true` if successfully returned, else `false`."
           type: boolean
           example: true
         message:
-          description: "`Created`, `Bad Request` or an error message."
+          description: "`OK`, `Bad Request` or an error message."
           type: string
-          example: Created
+          example: OK
         response:
           description: "`TemplateListResponseData` or an error message."
           $ref: "#/components/schemas/TemplateListResponseData"
@@ -2026,52 +1400,10 @@ components:
       type: object
 
     TemplateListResponseItem:
-      description: >- 
-        The individual template item returned with the 
-        [TemplateListResponseData](#tocs_templatelistresponsedata) templates list.
-      type: object
-      properties:
-        id:
-          description:  The unique id of the template in UUID format.
-          type: string
-          example: f5493c17-d01f-445c-bb49-535fae65f219
-        name:
-          description: The template name
-          type: string
-          example: My template
-        created:
-          description: The time the template was created.
-          type: string
-          example: "2022-06-10T12:50:21.455Z"
-        updated:
-          description: The time the template was last updated.
-          type: string
-          example: "2022-06-22T08:24:30.168Z"
-      required:
-        - id
-        - name
+      $ref: "./models/templatelistresponseitem.yaml#/TemplateListResponseItem"
 
     ProbeResponse:
-      description: >-
-        The response received after a [probe request](#inspect-media) is submitted. The probe requests returns data from FFprobe
-        formatted as JSON.
-      properties:
-        success:
-          description: "`true` if media successfully read, else `false`."
-          type: boolean
-          example: true
-        message:
-          description: "`Created`, `Bad Request` or an error message."
-          type: string
-          example: Created
-        response:
-          description: The response from FFprobe in JSON format.
-          type: object
-      required:
-        - success
-        - message
-        - response
-      type: object
+      $ref: "./models/proberesponse.yaml#/ProbeResponse"
 
     AssetResponse:
       description: >-
@@ -2117,67 +1449,8 @@ components:
       type: object
 
     AssetResponseAttributes:
-      description: The list of asset attributes and their values.
-      properties:
-        id:
-          description: The unique id of the hosted asset in UUID format.
-          type: string
-          example: a4482cbf-e321-42a2-ac8b-947d26886840
-        owner:
-          description: The owner id of the render task.
-          type: string
-          example: 5ca6hu7s9k
-        region:
-          description: The region the asset is hosted, currently only `au` (Australia).
-          type: string
-          example: au
-        renderId:
-          description: The original render id that created the asset in UUID format. Multiple assets can share the same render id.
-          type: string
-          example: 2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7
-        providerId:
-          description: >-
-            The third party id of an asset transferred to an external provider, i.e. Mux, YouTube or S3. If the provider
-            is Shotstack, the providerID is the same as the asset id.
-          type: string
-          example: a4482cbf-e321-42a2-ac8b-947d26886840
-        filename:
-          description: The asset file name.
-          type: string
-          example: 2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4
-        url:
-          description: The asset file name.
-          type: string
-          example: https://cdn.shotstack.io/au/v1/5ca6hu7s9k/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4
-        status:
-          description: >-
-            The status of the asset.
-            <ul>
-              <li>`importing` - the asset is being copied to the hosting service</li>
-              <li>`ready` - the asset is ready to be served to users</li>
-              <li>`failed` - the asset failed to copy or delete</li>
-              <li>`deleted` - the asset has been deleted</li>
-            </ul>
-          enum:
-            - importing
-            - ready
-            - failed
-            - deleted
-          type: string
-          example: ready
-        created:
-          description: The time the asset was created.
-          type: string
-          example: "2021-06-30T09:42:29.446Z"
-        updated:
-          description: The time the asset status was last updated.
-          type: string
-          example: "2021-06-30T09:42:30.168Z"
-      required:
-        - id
-        - owner
-        - status
-      type: object
+      $ref: "./models/assetresponseattributes.yaml#/AssetResponseAttributes"
+
   responses: {}
   parameters: {}
   examples: {}
