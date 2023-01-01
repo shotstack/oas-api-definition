@@ -402,106 +402,106 @@ paths:
 components:
   schemas:
     Edit:
-      $ref: "./models/edit.yaml#/Edit"
+      $ref: "./schemas/edit.yaml#/Edit"
 
     Timeline:
-      $ref: "./models/timeline.yaml#/Timeline"
+      $ref: "./schemas/timeline.yaml#/Timeline"
 
     Soundtrack:
-      $ref: "./models/soundtrack.yaml#/Soundtrack"
+      $ref: "./schemas/soundtrack.yaml#/Soundtrack"
 
     Font:
-      $ref: "./models/font.yaml#/Font"
+      $ref: "./schemas/font.yaml#/Font"
 
     Track:
-      $ref: "./models/track.yaml#/Track"
+      $ref: "./schemas/track.yaml#/Track"
 
     Clip:
-      $ref: "./models/clip.yaml#/Clip"
+      $ref: "./schemas/clip.yaml#/Clip"
 
     Asset:
-      $ref: "./models/asset.yaml#/Asset"
+      $ref: "./schemas/asset.yaml#/Asset"
 
     VideoAsset:
-      $ref: "./models/videoasset.yaml#/VideoAsset"
+      $ref: "./schemas/videoasset.yaml#/VideoAsset"
 
     ImageAsset:
-      $ref: "./models/imageasset.yaml#/ImageAsset"
+      $ref: "./schemas/imageasset.yaml#/ImageAsset"
 
     TitleAsset:
-      $ref: "./models/titleasset.yaml#/TitleAsset"
+      $ref: "./schemas/titleasset.yaml#/TitleAsset"
 
     HtmlAsset:
-      $ref: "./models/htmlasset.yaml#/HtmlAsset"
+      $ref: "./schemas/htmlasset.yaml#/HtmlAsset"
 
     AudioAsset:
-      $ref: "./models/audioasset.yaml#/AudioAsset"
+      $ref: "./schemas/audioasset.yaml#/AudioAsset"
 
     LumaAsset:
-      $ref: "./models/lumaasset.yaml#/LumaAsset"
+      $ref: "./schemas/lumaasset.yaml#/LumaAsset"
 
     Transition:
-      $ref: "./models/transition.yaml#/Transition"
+      $ref: "./schemas/transition.yaml#/Transition"
 
     Offset:
-      $ref: "./models/offset.yaml#/Offset"
+      $ref: "./schemas/offset.yaml#/Offset"
 
     Crop:
-      $ref: "./models/crop.yaml#/Crop"
+      $ref: "./schemas/crop.yaml#/Crop"
 
     Transformation:
-      $ref: "./models/transformation.yaml#/Transformation"
+      $ref: "./schemas/transformation.yaml#/Transformation"
 
     RotateTransformation:
-      $ref: "./models/rotatetransformation.yaml#/RotateTransformation"
+      $ref: "./schemas/rotatetransformation.yaml#/RotateTransformation"
 
     SkewTransformation:
-      $ref: "./models/skewtransformation.yaml#/SkewTransformation"
+      $ref: "./schemas/skewtransformation.yaml#/SkewTransformation"
 
     FlipTransformation:
-      $ref: "./models/fliptransformation.yaml#/FlipTransformation"
+      $ref: "./schemas/fliptransformation.yaml#/FlipTransformation"
 
     MergeField:
-      $ref: "./models/mergefield.yaml#/MergeField"
+      $ref: "./schemas/mergefield.yaml#/MergeField"
 
     Output:
-      $ref: "./models/output.yaml#/Output"
+      $ref: "./schemas/output.yaml#/Output"
 
     Size:
-      $ref: "./models/size.yaml#/Size"
+      $ref: "./schemas/size.yaml#/Size"
 
     Range:
-      $ref: "./models/range.yaml#/Range"
+      $ref: "./schemas/range.yaml#/Range"
 
     Poster:
-      $ref: "./models/poster.yaml#/Poster"
+      $ref: "./schemas/poster.yaml#/Poster"
 
     Thumbnail:
-      $ref: "./models/thumbnail.yaml#/Thumbnail"
+      $ref: "./schemas/thumbnail.yaml#/Thumbnail"
 
     Destinations:
-      $ref: "./models/destinations.yaml#/Destinations"
+      $ref: "./schemas/destinations.yaml#/Destinations"
 
     ShotstackDestination:
-      $ref: "./models/shotstackdestination.yaml#/ShotstackDestination"
+      $ref: "./schemas/shotstackdestination.yaml#/ShotstackDestination"
 
     MuxDestination:
-      $ref: "./models/muxdestination.yaml#/MuxDestination"
+      $ref: "./schemas/muxdestination.yaml#/MuxDestination"
 
     MuxDestinationOptions:
-      $ref: "./models/muxdestinationoptions.yaml#/MuxDestinationOptions"
+      $ref: "./schemas/muxdestinationoptions.yaml#/MuxDestinationOptions"
 
     S3Destination:
-      $ref: "./models/s3destination.yaml#/S3Destination"
+      $ref: "./schemas/s3destination.yaml#/S3Destination"
 
     S3DestinationOptions:
-      $ref: "./models/s3destinationoptions.yaml#/S3DestinationOptions"
+      $ref: "./schemas/s3destinationoptions.yaml#/S3DestinationOptions"
 
     Template:
-      $ref: "./models/template.yaml#/Template"
+      $ref: "./schemas/template.yaml#/Template"
 
     TemplateRender:
-      $ref: "./models/templaterender.yaml#/TemplateRender"
+      $ref: "./schemas/templaterender.yaml#/TemplateRender"
 
     QueuedResponse:
       description: >-
@@ -526,7 +526,7 @@ components:
       type: object
 
     QueuedResponseData:
-      $ref: "./models/queuedresponsedata.yaml#/QueuedResponseData"
+      $ref: "./schemas/queuedresponsedata.yaml#/QueuedResponseData"
 
     RenderResponse:
       description: >-
@@ -653,7 +653,7 @@ components:
       type: object
 
     TemplateResponseData:
-      $ref: "./models/templateresponsedata.yaml#/TemplateResponseData"
+      $ref: "./schemas/templateresponsedata.yaml#/TemplateResponseData"
 
     TemplateDataResponse:
       description: >-
@@ -742,10 +742,10 @@ components:
       type: object
 
     TemplateListResponseItem:
-      $ref: "./models/templatelistresponseitem.yaml#/TemplateListResponseItem"
+      $ref: "./schemas/templatelistresponseitem.yaml#/TemplateListResponseItem"
 
     ProbeResponse:
-      $ref: "./models/proberesponse.yaml#/ProbeResponse"
+      $ref: "./schemas/proberesponse.yaml#/ProbeResponse"
 
     AssetResponse:
       description: >-
@@ -791,7 +791,7 @@ components:
       type: object
 
     AssetResponseAttributes:
-      $ref: "./models/assetresponseattributes.yaml#/AssetResponseAttributes"
+      $ref: "./schemas/assetresponseattributes.yaml#/AssetResponseAttributes"
 
   responses: {}
   parameters: {}
