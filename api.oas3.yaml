@@ -526,7 +526,7 @@ components:
       type: object
 
     QueuedResponseData:
-      $ref: "./schemas/queuedresponsedata.yaml#/QueuedResponseData"
+      $ref: "./schemas/responses/queuedresponsedata.yaml#/QueuedResponseData"
 
     RenderResponse:
       description: >-
@@ -653,7 +653,7 @@ components:
       type: object
 
     TemplateResponseData:
-      $ref: "./schemas/templateresponsedata.yaml#/TemplateResponseData"
+      $ref: "./schemas/responses/templateresponsedata.yaml#/TemplateResponseData"
 
     TemplateDataResponse:
       description: >-
@@ -742,10 +742,10 @@ components:
       type: object
 
     TemplateListResponseItem:
-      $ref: "./schemas/templatelistresponseitem.yaml#/TemplateListResponseItem"
+      $ref: "./schemas/responses/templatelistresponseitem.yaml#/TemplateListResponseItem"
 
     ProbeResponse:
-      $ref: "./schemas/proberesponse.yaml#/ProbeResponse"
+      $ref: "./schemas/responses/proberesponse.yaml#/ProbeResponse"
 
     AssetResponse:
       description: >-
@@ -791,7 +791,7 @@ components:
       type: object
 
     AssetResponseAttributes:
-      $ref: "./schemas/assetresponseattributes.yaml#/AssetResponseAttributes"
+      $ref: "./schemas/responses/assetresponseattributes.yaml#/AssetResponseAttributes"
 
   responses: {}
   parameters: {}
