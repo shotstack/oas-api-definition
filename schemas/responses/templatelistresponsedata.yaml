@@ -1,0 +1,16 @@
+    TemplateListResponseData:
+      description: The response data returned with the [TemplateListResponse](#tocs_templatelistresponse).
+      properties:
+        owner:
+          description: The owner id of the templates.
+          type: string
+          example: 5ca6hu7s9k
+        templates:
+          description: The list of templates.
+          type: array
+          items:
+            $ref: "./templatelistresponseitem.yaml#/TemplateListResponseItem"
+      required:
+        - owner
+        - templates
+      type: object

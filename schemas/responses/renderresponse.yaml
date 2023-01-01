@@ -1,0 +1,21 @@
+    RenderResponse:
+      description: >-
+        The response received after a [render status request](#get-render-status) is submitted. The response includes 
+        details about status of a render and the output URL.
+      properties:
+        success:
+          description: "`true` if status available, else `false`."
+          type: boolean
+          example: true
+        message:
+          description: "`OK` or an error message."
+          type: string
+          example: OK
+        response:
+          description: "`RenderResponse` or an error message."
+          $ref: "./renderresponsedata.yaml#/RenderResponseData"
+      required:
+        - success
+        - message
+        - response
+      type: object

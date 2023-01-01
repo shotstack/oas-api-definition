@@ -503,243 +503,36 @@ components:
     TemplateRender:
       $ref: "./schemas/templaterender.yaml#/TemplateRender"
 
+    # Response schemas
     QueuedResponse:
-      description: >-
-        The response received after a [render request](#render-asset) or [template render](#render-template) is
-        submitted. The render task is queued for rendering and a unique render id is returned.
-      properties:
-        success:
-          description: "`true` if successfully queued, else `false`."
-          type: boolean
-          example: true
-        message:
-          description: "`Created`, `Bad Request` or an error message."
-          type: string
-          example: Created
-        response:
-          description: "`QueuedResponseData` or an error message."
-          $ref: "#/components/schemas/QueuedResponseData"
-      required:
-        - success
-        - message
-        - response
-      type: object
+      $ref: "./schemas/responses/queuedresponse.yaml#/QueuedResponse"
 
     QueuedResponseData:
       $ref: "./schemas/responses/queuedresponsedata.yaml#/QueuedResponseData"
 
     RenderResponse:
-      description: >-
-        The response received after a [render status request](#get-render-status) is submitted. The response includes 
-        details about status of a render and the output URL.
-      properties:
-        success:
-          description: "`true` if status available, else `false`."
-          type: boolean
-          example: true
-        message:
-          description: "`OK` or an error message."
-          type: string
-          example: OK
-        response:
-          description: "`RenderResponse` or an error message."
-          $ref: "#/components/schemas/RenderResponseData"
-      required:
-        - success
-        - message
-        - response
-      type: object
+      $ref: "./schemas/responses/renderresponse.yaml#/RenderResponse"
 
     RenderResponseData:
-      description: The response data returned with the [RenderResponse](#tocs_renderresponse) including status and URL.
-      properties:
-        id:
-          description: The id of the render task in UUID format.
-          type: string
-          example: 2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7
-        owner:
-          description: The owner id of the render task.
-          type: string
-          example: 5ca6hu7s9k
-        plan:
-          description: The customer subscription plan.
-          type: string
-          example: basic
-        status:
-          description: >-
-            The status of the render task.
-            <ul>
-              <li>`queued` - render is queued waiting to be rendered</li>
-              <li>`fetching` - assets are being fetched</li>
-              <li>`rendering` - the asset is being rendered</li>
-              <li>`saving` - the final asset is being saved to storage</li>
-              <li>`done` - the asset is ready to be downloaded</li>
-              <li>`failed` - there was an error rendering the asset</li>
-            </ul>
-          enum:
-            - queued
-            - fetching
-            - rendering
-            - saving
-            - done
-            - failed
-          type: string
-          example: done
-        error:
-          description: An error message, only displayed if an error occurred.
-          type: string
-          example: ""
-        duration:
-          description: The output video or audio length in seconds.
-          type: number
-          example: 8.50
-        renderTime:
-          description: The time taken to render the asset in milliseconds.
-          type: number
-          example: 9433.44
-        url:
-          description: >-
-            The URL of the final asset. This will only be available if status is done. This is a temporary URL and will
-            be deleted after 24 hours. By default all assets are copied to the Shotstack hosting and CDN destination.
-          type: string
-          example: https://shotstack-api-v1-output.s3-ap-southeast-2.amazonaws.com/5ca6hu7s9k/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4
-        poster:
-          description: The URL of the poster image if requested. This will only be available if status is done.
-          type: string
-          nullable: true
-          example: https://shotstack-api-v1-output.s3-ap-southeast-2.amazonaws.com/5ca6hu7s9k/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7-poster.jpg
-        thumbnail:
-          description: The URL of the thumbnail image if requested. This will only be available if status is done.
-          type: string
-          nullable: true
-          example: https://shotstack-api-v1-output.s3-ap-southeast-2.amazonaws.com/5ca6hu7s9k/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7-thumb.jpg
-        data:
-          description: The timeline and output data to be rendered.
-          $ref: "#/components/schemas/Edit"
-        created:
-          description: The time the render task was initially queued.
-          type: string
-          example: "2020-10-30T09:42:29.446Z"
-        updated:
-          description: The time the render status was last updated.
-          type: string
-          example: "2020-10-30T09:42:39.168Z"
-      required:
-        - status
-        - id
-        - owner
-      type: object
+      $ref: "./schemas/responses/renderresponsedata.yaml#/RenderResponseData"
 
     TemplateResponse:
-      description: >-
-        The response received after a [template](#create-template) is submitted. The template is saved and a unique
-        template id is returned.
-      properties:
-        success:
-          description: "`true` if successfully created, else `false`."
-          type: boolean
-          example: true
-        message:
-          description: "`Created`, `Bad Request` or an error message."
-          type: string
-          example: Created
-        response:
-          description: "`TemplateResponseData` or an error message."
-          $ref: "#/components/schemas/TemplateResponseData"
-      required:
-        - success
-        - message
-        - response
-      type: object
+      $ref: "./schemas/responses/templateresponse.yaml#/TemplateResponse"
 
     TemplateResponseData:
       $ref: "./schemas/responses/templateresponsedata.yaml#/TemplateResponseData"
 
     TemplateDataResponse:
-      description: >-
-        The template data including the template name and [Edit](#tocs_edit).
-      properties:
-        success:
-          description: "`true` if successfully returned, else `false`."
-          type: boolean
-          example: true
-        message:
-          description: "`OK`, `Bad Request` or an error message."
-          type: string
-          example: OK
-        response:
-          description: "`TemplateDataResponseData` or an error message."
-          $ref: "#/components/schemas/TemplateDataResponseData"
-      required:
-        - success
-        - message
-        - response
-      type: object
+      $ref: "./schemas/responses/templatedataresponse.yaml#/TemplateDataResponse"
 
     TemplateDataResponseData:
-      description: The response data returned with the [TemplateDataResponse](#tocs_templatedataresponse).
-      properties:
-        id:
-          description:  The unique id of the template in UUID format.
-          type: string
-          example: f5493c17-d01f-445c-bb49-535fae65f219
-        name:
-          description: The template name.
-          type: string
-          example: My template
-        owner:
-          description: The owner id of the templates.
-          type: string
-          example: 5ca6hu7s9k
-        template:
-          description: The [Edit](#tocs_edit) template.
-          $ref: "#/components/schemas/Edit"
-          example:
-            $ref: "./definitions/edit.yaml"
-      required:
-        - id
-        - name
-        - owner
-        - template
-      type: object
+      $ref: "./schemas/responses/templatedataresponsedata.yaml#/TemplateDataResponseData"
 
     TemplateListResponse:
-      description: >-
-        A list of previously saved templates.
-      properties:
-        success:
-          description: "`true` if successfully returned, else `false`."
-          type: boolean
-          example: true
-        message:
-          description: "`OK`, `Bad Request` or an error message."
-          type: string
-          example: OK
-        response:
-          description: "`TemplateListResponseData` or an error message."
-          $ref: "#/components/schemas/TemplateListResponseData"
-      required:
-        - success
-        - message
-        - response
-      type: object
+      $ref: "./schemas/responses/templatelistresponse.yaml#/TemplateListResponse"
 
     TemplateListResponseData:
-      description: The response data returned with the [TemplateListResponse](#tocs_templatelistresponse).
-      properties:
-        owner:
-          description: The owner id of the templates.
-          type: string
-          example: 5ca6hu7s9k
-        templates:
-          description: The list of templates.
-          type: array
-          items:
-            $ref: "#/components/schemas/TemplateListResponseItem"
-      required:
-        - owner
-        - templates
-      type: object
+      $ref: "./schemas/responses/templatelistresponsedata.yaml#/TemplateListResponseData"
 
     TemplateListResponseItem:
       $ref: "./schemas/responses/templatelistresponseitem.yaml#/TemplateListResponseItem"
@@ -748,47 +541,13 @@ components:
       $ref: "./schemas/responses/proberesponse.yaml#/ProbeResponse"
 
     AssetResponse:
-      description: >-
-        The response returned by the Serve API [get asset](#get-asset) request. Includes details of a hosted video,
-        image, audio file, thumbnail or poster image. The response follows the [json:api](https://jsonapi.org/)
-        specification.
-      properties:
-        data:
-          description: An asset resource.
-          $ref: "#/components/schemas/AssetResponseData"
-      required:
-        - data
-      type: object
+      $ref: "./schemas/responses/assetresponse.yaml#/AssetResponse"
 
     AssetRenderResponse:
-      description: >-
-        The response returned by the Serve API [get asset by render id](#get-asset-by-render-id) request. The response 
-        is an array of asset resources, including video, image, audio, thumbnail and poster image. The response follows 
-        the [json:api](https://jsonapi.org/) specification.
-      properties:
-        data:
-          type: array
-          description: An array of asset resources grouped by render id.
-          items:
-            $ref: "#/components/schemas/AssetResponseData"
-      required:
-        - data
-      type: object
+      $ref: "./schemas/responses/assetrenderresponse.yaml#/AssetRenderResponse"
 
     AssetResponseData:
-      description: The type of resource (an asset) and attributes of the asset.
-      properties:
-        type:
-          description: The type of resource, in this case it is an assets.
-          type: string
-          example: asset
-        attributes:
-          description: The asset attributes including render id, url, filename, file size, etc...
-          $ref: "#/components/schemas/AssetResponseAttributes"
-      required:
-        - type
-        - attributes
-      type: object
+      $ref: "./schemas/responses/assetresponsedata.yaml#/AssetResponseData"
 
     AssetResponseAttributes:
       $ref: "./schemas/responses/assetresponseattributes.yaml#/AssetResponseAttributes"

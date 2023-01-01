@@ -1,0 +1,14 @@
+    AssetResponseData:
+      description: The type of resource (an asset) and attributes of the asset.
+      properties:
+        type:
+          description: The type of resource, in this case it is an assets.
+          type: string
+          example: asset
+        attributes:
+          description: The asset attributes including render id, url, filename, file size, etc...
+          $ref: "./assetresponseattributes.yaml#/AssetResponseAttributes"
+      required:
+        - type
+        - attributes
+      type: object

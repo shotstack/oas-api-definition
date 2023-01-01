@@ -1,0 +1,20 @@
+    TemplateListResponse:
+      description: >-
+        A list of previously saved templates.
+      properties:
+        success:
+          description: "`true` if successfully returned, else `false`."
+          type: boolean
+          example: true
+        message:
+          description: "`OK`, `Bad Request` or an error message."
+          type: string
+          example: OK
+        response:
+          description: "`TemplateListResponseData` or an error message."
+          $ref: "./templatelistresponsedata.yaml#/TemplateListResponseData"
+      required:
+        - success
+        - message
+        - response
+      type: object

@@ -64,7 +64,7 @@
           example: https://shotstack-api-v1-output.s3-ap-southeast-2.amazonaws.com/5ca6hu7s9k/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7-thumb.jpg
         data:
           description: The timeline and output data to be rendered.
-          $ref: "#/components/schemas/Edit"
+          $ref: "../edit.yaml#/Edit"
         created:
           description: The time the render task was initially queued.
           type: string
