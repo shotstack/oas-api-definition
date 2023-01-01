@@ -1,0 +1,27 @@
+    get:
+      responses:
+        200:
+          description: FFprobe response formatted as JSON.
+          content:
+            application/json:
+              schema:
+                $ref: "../schemas/responses/proberesponse.yaml#/ProbeResponse"
+      description: |
+        Inspects any media asset (image, video, audio) on the internet using a hosted version
+        of [FFprobe](https://ffmpeg.org/ffprobe.html). The probe endpoint returns useful information
+        about an asset such as width, height, duration, rotation, framerate, etc...
+
+        **Base URL:** https://api.shotstack.io/{version}
+      operationId: probe
+      summary: Inspect Media
+      security:
+        - DeveloperKey: []
+      tags:
+        - Edit
+    parameters:
+      - in: path
+        name: url
+        required: true
+        schema:
+          type: string
+        description: The URL of the media to inspect, must be **URL encoded**.

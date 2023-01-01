@@ -1,0 +1,46 @@
+    get:
+      responses:
+        "200":
+          description: Get asset by asset id
+          content:
+            application/json:
+              schema:
+                $ref: "../schemas/responses/assetresponse.yaml#/AssetResponse"
+      description: |
+        The Serve API is used to interact with, and delete hosted assets including videos, images, audio files, 
+        thumbnails and poster images. Use this endpoint to fetch an asset by asset id. Note that an asset id is unique
+        for each asset and different from the render id.
+
+        **Base URL:** https://api.shotstack.io/serve/{version}
+      operationId: getAsset
+      summary: Get Asset
+      security:
+        - DeveloperKey: []
+      tags:
+        - Serve
+
+    delete:
+      responses:
+        "204":
+          description: An empty response signifying the asset has been deleted
+      description: |
+        Delete an asset by its asset id. If a render creates multiple assets, such as thumbnail and poster images,
+        each asset must be deleted individually by the asset id.
+
+        **Base URL:** https://api.shotstack.io/serve/{version}
+      operationId: deleteAsset
+      summary: Delete Asset
+      security:
+        - DeveloperKey: []
+      tags:
+        - Serve
+
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+          type: string
+        description: The id of the asset in UUID format

@@ -1,0 +1,48 @@
+    post:
+      description: |
+        Save an [Edit](#tocs_edit) as a re-usable template. Templates can be retrieved and modified in your application
+        before being rendered. [Merge fields](#tocs_mergefield) can be also used to merge data in to a template and
+        [render](#render-template) it in a single request.
+
+        **Base URL:** https://api.shotstack.io/{version}
+      summary: Create Template
+      operationId: postTemplate
+      requestBody:
+        description: >-
+          Create a template with a name and [Edit](#tocs_edit).
+        content:
+          application/json:
+            schema:
+              $ref: "../schemas/template.yaml#/Template"
+        required: true
+      responses:
+        "201":
+          description: The saved template status including the id
+          content:
+            application/json:
+              schema:
+                $ref: "../schemas/responses/templateresponse.yaml#/TemplateResponse"
+      security:
+        - DeveloperKey: []
+      tags:
+        - Edit
+
+    get:
+      description: |
+        Retrieve a list of templates stored against a users account. The API key is used to determine which templates
+        are associated to the user.
+
+        **Base URL:** https://api.shotstack.io/{version}
+      summary: List Templates
+      operationId: getTemplates
+      responses:
+        "200":
+          description: The list of templates stored against a users account
+          content:
+            application/json:
+              schema:
+                $ref: "../schemas/responses/templatelistresponse.yaml#/TemplateListResponse"
+      security:
+        - DeveloperKey: []
+      tags:
+        - Edit

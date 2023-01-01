@@ -1,0 +1,60 @@
+    get:
+      responses:
+        "200":
+          description: The render status details
+          content:
+            application/json:
+              example:
+                success: true
+                message: OK
+                response:
+                  status: rendering
+                  id: 2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7
+                  owner: 5ca6hu7s9k
+                  url: >-
+                    https://shotstack-api-v1-output.s3-ap-southeast-2.amazonaws.com/5ca6hu7s9k/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4
+                  data:
+                    $ref: "../definitions/edit.yaml"
+                  created: "2020-10-30T09:42:29.446Z"
+                  updated: "2020-10-30T09:42:39.168Z"
+              schema:
+                $ref: "../schemas/responses/renderresponse.yaml#/RenderResponse"
+      description: |
+        Get the rendering status, temporary asset url and details of a render by ID.
+
+        **Base URL:** https://api.shotstack.io/{version}
+      operationId: getRender
+      summary: Get Render Status
+      security:
+        - DeveloperKey: []
+      tags:
+        - Edit
+
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+          type: string
+        description: The id of the timeline render task in UUID format
+      - in: query
+        name: data
+        schema:
+          type: boolean
+        description: >-
+          Include the data parameter in the response. The data parameter includes the original
+          timeline, output and other settings sent to the API.<br><br><b>Note:</b> the default
+          is currently `true`, this is deprecated and the default will soon be `false`. If you
+          rely on the data being returned in the response you should explicitly set the
+          parameter to `true`.
+        example: false
+      - in: query
+        name: merged
+        schema:
+          type: boolean
+        description: >-
+          Used when data is set to true, it will show the [merge fields](#tocs_mergefield)
+          merged in to the data response.
+        example: false
