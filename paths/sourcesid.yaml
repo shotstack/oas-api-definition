@@ -20,18 +20,17 @@
     delete:
       responses:
         "204":
-          description: An empty response signifying the asset has been deleted
+          description: An empty response signifying the ingested source file has been deleted.
       description: |
-        Delete an asset by its asset id. If a render creates multiple assets, such as thumbnail and poster images,
-        each asset must be deleted individually by the asset id.
+        Delete an ingested source file by its id.
 
-        **Base URL:** https://api.shotstack.io/serve/{version}
-      operationId: deleteAsset
-      summary: Delete Asset
+        **Base URL:** https://api.shotstack.io/ingest/{version}
+      operationId: deleteSource
+      summary: Delete Source
       security:
         - DeveloperKey: []
       tags:
-        - Serve
+        - Ingest
 
     parameters:
       - name: id
@@ -39,6 +38,6 @@
         required: true
         schema:
           pattern: >-
-            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+            ^[0-9a-zA-Z]{8}-[0-9a-zA-Z]{4}-[0-9a-zA-Z]{4}-[0-9a-zA-Z]{4}-[0-9a-zA-Z]{12}$
           type: string
-        description: The id of the asset in UUID format
+        description: The id of the source file in [KSUID](https://github.com/segmentio/ksuid#what-is-a-ksuid) format.
