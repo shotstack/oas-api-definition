@@ -1,0 +1,26 @@
+    TemplateDataResponseData:
+      description: The response data returned with the [TemplateDataResponse](#tocs_templatedataresponse).
+      properties:
+        id:
+          description:  The unique id of the template in UUID format.
+          type: string
+          example: f5493c17-d01f-445c-bb49-535fae65f219
+        name:
+          description: The template name.
+          type: string
+          example: My template
+        owner:
+          description: The owner id of the templates.
+          type: string
+          example: 5ca6hu7s9k
+        template:
+          description: The [Edit](#tocs_edit) template.
+          $ref: "../edit.yaml#/Edit"
+          example:
+            $ref: ".../../definitions/edit.yaml"
+      required:
+        - id
+        - name
+        - owner
+        - template
+      type: object

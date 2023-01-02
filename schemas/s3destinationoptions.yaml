@@ -1,0 +1,37 @@
+    S3DestinationOptions:
+      description: >-
+        Pass additional options to control how files are stored in S3.
+      properties:
+        region:
+          description: >-
+            Choose the region to send the file to. Must be a valid 
+            [AWS region](https://docs.aws.amazon.com/general/latest/gr/s3.html#s3_region) string like `us-east-1` or
+            `ap-southeast-2`.
+          type: string
+          example: us-east-1
+        bucket:
+          description: >-
+            The bucket name to send files to. The bucket must exist in the AWS account before files can be sent.
+          type: string
+          example: my-bucket
+        prefix:
+          description: >-
+            A prefix for the file being sent. This is typically a folder name, i.e. `videos` or `customerId/videos`.
+          type: string
+          example: my-renders
+        filename:
+          description: >-
+            Use your own filename instead of the default render ID filename. Note: omit the file extension as this will
+            be appended depending n the output format. Also `poster.jpg` and `-thumb.jpg` will be appended for poster
+            and thumbnail images.
+          type: string
+          example: my-file
+        acl:
+          description: >-
+            Sets the S3 Access Control List (acl) permissions. Default is `private`. Must use a valid 
+            S3 [Canned ACL](https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#canned-acl).
+          type: string
+          example: public-read
+      required:
+        - region
+        - bucket

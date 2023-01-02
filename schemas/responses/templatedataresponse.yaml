@@ -1,0 +1,20 @@
+    TemplateDataResponse:
+      description: >-
+        The template data including the template name and [Edit](#tocs_edit).
+      properties:
+        success:
+          description: "`true` if successfully returned, else `false`."
+          type: boolean
+          example: true
+        message:
+          description: "`OK`, `Bad Request` or an error message."
+          type: string
+          example: OK
+        response:
+          description: "`TemplateDataResponseData` or an error message."
+          $ref: "./templatedataresponsedata.yaml#/TemplateDataResponseData"
+      required:
+        - success
+        - message
+        - response
+      type: object

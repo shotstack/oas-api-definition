@@ -1,0 +1,28 @@
+    post:
+      responses:
+        "201":
+          description: The queued render details
+          content:
+            application/json:
+              schema:
+                $ref: "../schemas/responses/queuedresponse.yaml#/QueuedResponse"
+      description: |
+        Queue and render the contents of an [Edit](#tocs_edit) as a video, image or audio file.
+
+        **Base URL:** https://api.shotstack.io/{version}
+      summary: Render Asset
+      operationId: postRender
+      requestBody:
+        description: >-
+          The video, image or audio edit specified using JSON.
+        content:
+          application/json:
+            example:
+              $ref: "../definitions/edit.yaml"
+            schema:
+              $ref: "../schemas/edit.yaml#/Edit"
+        required: true
+      security:
+        - DeveloperKey: []
+      tags:
+        - Edit

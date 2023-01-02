@@ -1,0 +1,13 @@
+    MuxDestinationOptions:
+      description: >-
+        Pass additional options to control how Mux processes video. Currently supports playback policy option.
+      properties:
+        playbackPolicy:
+          description: Sets the Mux `playback_policy` option. Value is an array of strings - use `public`, `signed`, or
+            both.
+          type: array
+          items:
+            type: string
+            enum:
+              - public
+              - signed

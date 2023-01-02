@@ -1,0 +1,29 @@
+    post:
+      description: |
+        Render an asset from a template id and optional merge fields. Merge fields can be used to replace placeholder
+        variables within the [Edit](#tocs_edit).
+
+        **Base URL:** https://api.shotstack.io/{version}
+      summary: Render Template
+      operationId: postTemplateRender
+      requestBody:
+        description: >-
+          Render a template by template id.
+        content:
+          application/json:
+            schema:
+              $ref: "../schemas/templaterender.yaml#/TemplateRender"
+        required: true
+      responses:
+        "201":
+          description: >-
+            The queued status including the render id. Check the status of the render using the id and the 
+            [render status](#get-render-status) endpoint.
+          content:
+            application/json:
+              schema:
+                $ref: "../schemas/responses/queuedresponse.yaml#/QueuedResponse"
+      security:
+        - DeveloperKey: []
+      tags:
+        - Edit

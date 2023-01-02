@@ -1,0 +1,19 @@
+    TemplateRender:
+      description: >-
+        Configure the id and optional merge fields to render a template by id.
+      properties:
+        id:
+          description: The id of the template to render in UUID format.
+          type: string
+          example: f5493c17-d01f-445c-bb49-535fae65f219
+        merge:
+          description: >-
+            An array of key/value pairs that provides an easy way to create templates with placeholders.
+            The placeholders can be used to find and replace keys with values. For example you can search
+            for the placeholder `{{NAME}}` and replace it with the value `Jane`. 
+          type: array
+          items:
+            $ref: "./mergefield.yaml#/MergeField"
+      required:
+        - id
+      type: object

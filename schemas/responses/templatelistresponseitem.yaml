@@ -1,0 +1,25 @@
+    TemplateListResponseItem:
+      description: >- 
+        The individual template item returned with the 
+        [TemplateListResponseData](#tocs_templatelistresponsedata) templates list.
+      type: object
+      properties:
+        id:
+          description:  The unique id of the template in UUID format.
+          type: string
+          example: f5493c17-d01f-445c-bb49-535fae65f219
+        name:
+          description: The template name
+          type: string
+          example: My template
+        created:
+          description: The time the template was created.
+          type: string
+          example: "2022-06-10T12:50:21.455Z"
+        updated:
+          description: The time the template was last updated.
+          type: string
+          example: "2022-06-22T08:24:30.168Z"
+      required:
+        - id
+        - name

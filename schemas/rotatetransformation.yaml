@@ -1,0 +1,13 @@
+    RotateTransformation:
+      description: >-
+        Rotate a clip by the specified angle in degrees. Rotation origin
+        is set based on the clips `position`.
+      type: object
+      properties:
+        angle:
+          description: >-
+            The angle to rotate the clip. Can be 0 to 360, or 0 to -360. Using a
+            positive number rotates the clip clockwise, negative numbers
+            counter-clockwise.
+          type: integer
+          example: 45

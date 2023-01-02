@@ -1,0 +1,21 @@
+    QueuedResponse:
+      description: >-
+        The response received after a [render request](#render-asset) or [template render](#render-template) is
+        submitted. The render task is queued for rendering and a unique render id is returned.
+      properties:
+        success:
+          description: "`true` if successfully queued, else `false`."
+          type: boolean
+          example: true
+        message:
+          description: "`Created`, `Bad Request` or an error message."
+          type: string
+          example: Created
+        response:
+          description: "`QueuedResponseData` or an error message."
+          $ref: "./queuedresponsedata.yaml#/QueuedResponseData"
+      required:
+        - success
+        - message
+        - response
+      type: object

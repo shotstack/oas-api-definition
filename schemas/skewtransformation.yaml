@@ -1,0 +1,16 @@
+    SkewTransformation:
+      description: >-
+        Skew a clip so its edges are sheared at an angle. Use values between 0 and 3.
+        Over 3 the clip will be skewed almost flat.
+      type: object
+      properties:
+        x:
+          description: Skew the clip along it's x axis.
+          type: number
+          format: float
+          example: 0.5
+        y:
+          description: Skew the clip along it's y axis.
+          type: number
+          format: float
+          example: 0.5

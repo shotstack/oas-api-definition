@@ -1,0 +1,48 @@
+    VideoAsset:
+      description: >-
+        The VideoAsset is used to create video sequences from video files. The
+        src must be a publicly accessible URL to a video resource such as an mp4
+        file.
+      type: object
+      properties:
+        type:
+          default: video
+          description: The type of asset - set to `video` for videos.
+          type: string
+        src:
+          description: >-
+            The video source URL. The URL must be publicly accessible or include
+            credentials.
+          type: string
+          example: https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4
+        trim:
+          description: >-
+            The start trim point of the video clip, in seconds (defaults to 0). Videos
+            will start from the in trim point. The video will play until the
+            file ends or the Clip length is reached.
+          type: number
+          example: 2
+        volume:
+          description: >-
+            Set the volume for the video clip between 0 and 1 where 0 is muted and 1
+            is full volume (defaults to 1).
+          type: number
+          example: 1
+        volumeEffect:
+          description: >-
+            The volume effect to apply to the video asset
+            <ul>
+              <li>`fadeIn` - fade volume in only</li>
+              <li>`fadeOut` - fade volume out only</li>
+              <li>`fadeInFadeOut` - fade volume in and out</li>
+            </ul>
+          enum:
+            - fadeIn
+            - fadeOut
+            - fadeInFadeOut
+          type: string
+        crop:
+          $ref: "./crop.yaml#/Crop"
+      required:
+        - type
+        - src

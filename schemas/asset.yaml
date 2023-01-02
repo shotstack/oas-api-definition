@@ -1,0 +1,23 @@
+    Asset:
+      type: object
+      description: >-
+        The type of asset to display for the duration of the Clip. Value
+        must be one of:
+        <ul>
+          <li><a href="#tocs_videoasset">VideoAsset</a></li>
+          <li><a href="#tocs_imageasset">ImageAsset</a></li>
+          <li><a href="#tocs_titleasset">TitleAsset</a></li>
+          <li><a href="#tocs_htmlasset">HtmlAsset</a></li>
+          <li><a href="#tocs_audioasset">AudioAsset</a></li>
+          <li><a href="#tocs_lumaasset">LumaAsset</a></li>
+        </ul>
+      discriminator:
+        propertyName: asset
+      oneOf:
+        - $ref: "./videoasset.yaml#/VideoAsset"
+        - $ref: "./imageasset.yaml#/ImageAsset"
+        - $ref: "./titleasset.yaml#/TitleAsset"
+        - $ref: "./htmlasset.yaml#/HtmlAsset"
+        - $ref: "./audioasset.yaml#/AudioAsset"
+        - $ref: "./lumaasset.yaml#/LumaAsset"
+      additionalProperties: false

@@ -1,0 +1,150 @@
+    Output:
+      description: The output format, render range and type of media to generate.
+      properties:
+        format:
+          description: >-
+            The output format and type of media file to generate.
+            <ul>
+              <li>`mp4` - mp4 video file</li>
+              <li>`gif` - animated gif</li>
+              <li>`jpg` - jpg image file</li>
+              <li>`png` - png image file</li>
+              <li>`bmp` - bmp image file</li>
+              <li>`mp3` - mp3 audio file (audio only)</li>
+            </ul>
+          enum:
+            - mp4
+            - gif
+            - mp3
+            - jpg
+            - png
+            - bmp
+          type: string
+          example: mp4
+        resolution:
+          description: >-
+            The output resolution of the video or image.
+            <ul>
+              <li>`preview` - 512px x 288px @ 15fps</li>
+              <li>`mobile` - 640px x 360px @ 25fps</li>
+              <li>`sd` - 1024px x 576px @ 25fps</li>
+              <li>`hd` - 1280px x 720px @ 25fps</li>
+              <li>`1080` - 1920px x 1080px @ 25fps</li>
+            </ul>
+          enum:
+            - preview
+            - mobile
+            - sd
+            - hd
+            - "1080"
+          type: string
+          example: sd
+        aspectRatio:
+          description: >-
+            The aspect ratio (shape) of the video or image. Useful for social media output formats. Options are:
+            <ul>
+              <li>`16:9` (default) - regular landscape/horizontal aspect ratio</li>
+              <li>`9:16` - vertical/portrait aspect ratio</li>
+              <li>`1:1` - square aspect ratio</li>
+              <li>`4:5` - short vertical/portrait aspect ratio</li>
+              <li>`4:3` - legacy TV aspect ratio</li>
+            </ul>
+          enum:
+            - "16:9"
+            - "9:16"
+            - "1:1"
+            - "4:5"
+            - "4:3"
+          type: string
+          example: "16:9"
+        size:
+          $ref: "./size.yaml#/Size"
+        fps:
+          description: >-
+            Override the default frames per second. Useful for when the source footage is recorded at 30fps, i.e. on 
+            mobile devices. Lower frame rates can be used to add cinematic quality (24fps) or to create smaller file
+            size/faster render times or animated gifs (12 or 15fps). Default is 25fps.
+            <ul>
+              <li>`12` - 12fps</li>
+              <li>`15` - 15fps</li>
+              <li>`24` - 24fps</li>
+              <li>`23.976` - 23.976fps</li>
+              <li>`25` (default) - 25fps</li>
+              <li>`29.97` - 29.97fps</li>
+              <li>`30` - 30fps</li>
+            </ul>
+          enum:
+            - 12
+            - 15
+            - 23.976
+            - 24
+            - 25
+            - 29.97
+            - 30
+          type: number
+          example: 25
+        scaleTo:
+          description: >-
+            Override the resolution and scale the video or image to render at a different size. When using scaleTo the
+            asset should be edited at the resolution dimensions, i.e. use font sizes that look best at HD, then use
+            scaleTo to output the file at SD and the text will be scaled to the correct size. This is useful if you
+            want to create multiple asset sizes.
+            <ul>
+              <li>`preview` - 512px x 288px @ 15fps</li>
+              <li>`mobile` - 640px x 360px @ 25fps</li>
+              <li>`sd` - 1024px x 576px @25fps</li>
+              <li>`hd` - 1280px x 720px @25fps</li>
+              <li>`1080` - 1920px x 1080px @25fps</li>
+            </ul>
+          enum:
+            - preview
+            - mobile
+            - sd
+            - hd
+            - "1080"
+          type: string
+        quality:
+          description: >-
+            Adjust the output quality of the video, image or audio. Adjusting quality affects 
+            render speed, download speeds and storage requirements due to file size.
+            The default `medium` provides the most optimized choice for all three 
+            factors.
+            <ul>
+              <li>`low` - slightly reduced quality, smaller file size</li>
+              <li>`medium` (default) - optimized quality, render speeds and file size</li>
+              <li>`high` - slightly increased quality, larger file size</li>
+            </ul>
+          enum:
+            - low
+            - medium
+            - high
+          type: string
+          example: medium
+        repeat:
+          description: Loop settings for gif files. Set to `true` to loop, `false` to play only once.
+          type: boolean
+          example: true
+        mute:
+          description: Mute the audio track of the output video. Set to `true` to mute, `false` to un-mute.
+          type: boolean
+          example: false
+        range:
+          $ref: "./range.yaml#/Range"
+        poster:
+          description: >-
+            Generate a poster image from a specific point on the timeline.
+          $ref: "./poster.yaml#/Poster"
+        thumbnail:
+          description: >-
+            Generate a thumbnail image from a specific point on the timeline.
+          $ref: "./thumbnail.yaml#/Thumbnail"
+        destinations:
+          description: >-
+            Specify the storage locations and hosting services to send rendered videos to.
+          type: array
+          items:
+            $ref: "./destinations.yaml#/Destinations"
+          additionalProperties: false
+      required:
+        - format
+      type: object

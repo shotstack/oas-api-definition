@@ -1,0 +1,14 @@
+    Track:
+      description: >-
+        A track contains an array of clips. Tracks are layered on top of each
+        other in the order in the array. The top most track will render on top
+        of those below it.
+      properties:
+        clips:
+          description: "An array of Clips comprising of TitleClip, ImageClip or VideoClip."
+          type: array
+          items:
+            $ref: "./clip.yaml#/Clip"
+      required:
+        - clips
+      type: object

@@ -1,0 +1,32 @@
+    Soundtrack:
+      description: >-
+        A music or audio file in mp3 format that plays for the duration of the
+        rendered video or the length of the audio file, which ever is shortest.
+      properties:
+        src:
+          description: >-
+            The URL of the mp3 audio file. The URL must be publicly accessible
+            or include credentials.
+          type: string
+          example: https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3
+        effect:
+          description: >-
+            The effect to apply to the audio file
+            <ul>
+              <li>`fadeIn` - fade volume in only</li>
+              <li>`fadeOut` - fade volume out only</li>
+              <li>`fadeInFadeOut` - fade volume in and out</li>
+            </ul>
+          enum:
+            - fadeIn
+            - fadeOut
+            - fadeInFadeOut
+          type: string
+        volume:
+          description: >-
+            Set the volume for the soundtrack between 0 and 1 where 0 is muted and 1
+            is full volume (defaults to 1).
+          type: number
+      required:
+        - src
+      type: object

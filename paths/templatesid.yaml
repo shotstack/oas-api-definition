@@ -1,0 +1,77 @@
+    get:
+      description: |
+        Retrieve a template by template id.
+
+        **Base URL:** https://api.shotstack.io/{version}
+      summary: Retrieve Template
+      operationId: getTemplate
+      responses:
+        "200":
+          description: The template details including the [Edit](#tocs_edit)
+          content:
+            application/json:
+              schema:
+                $ref: "../schemas/responses/templatedataresponse.yaml#/TemplateDataResponse"
+      security:
+        - DeveloperKey: []
+      tags:
+        - Edit
+
+    put:
+      description: |
+        Update an existing template by template id.
+
+        **Base URL:** https://api.shotstack.io/{version}
+      summary: Update Template
+      operationId: putTemplate
+      requestBody:
+        description: >-
+          Update an individual templates name and [Edit](#tocs_edit). Both template name and template must be
+          provided. If the template parameter is omitted a blank template will be saved.
+        content:
+          application/json:
+            schema:
+              $ref: "../schemas/template.yaml#/Template"
+        required: true
+      responses:
+        "200":
+          description: Update a templates name and [Edit](#tocs_edit)
+          content:
+            application/json:
+              example:
+                success: true
+                message: OK
+                response:
+                  message: Template Successfully Updated
+                  id: f5493c17-d01f-445c-bb49-535fae65f219
+              schema:
+                $ref: "../schemas/responses/templateresponse.yaml#/TemplateResponse"
+      security:
+        - DeveloperKey: []
+      tags:
+        - Edit
+
+    delete:
+      responses:
+        "204":
+          description: An empty response signifying the template has been deleted
+      description: |
+        Delete a template by its template id.
+
+        **Base URL:** https://api.shotstack.io/{version}
+      operationId: deleteTemplate
+      summary: Delete Template
+      security:
+        - DeveloperKey: []
+      tags:
+        - Edit
+
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+          type: string
+        description: The id of the template in UUID format

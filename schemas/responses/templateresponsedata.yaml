@@ -1,0 +1,15 @@
+    TemplateResponseData:
+      description: The response data returned with the [TemplateResponse](#tocs_templateresponse).
+      properties:
+        message:
+          description: Success response message or error details.
+          type: string
+          example: Template Successfully Created
+        id:
+          description: The unique id of the template in UUID format.
+          type: string
+          example: f5493c17-d01f-445c-bb49-535fae65f219
+      required:
+        - message
+        - id
+      type: object
