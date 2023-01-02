@@ -251,6 +251,15 @@ components:
     QueuedSourceResponseData:
       $ref: "./schemas/ingest/responses/queuedsourceresponsedata.yaml#/QueuedSourceResponseData"
 
+    SourceListResponse:
+      $ref: "./schemas/ingest/responses/sourcelistresponse.yaml#/SourceListResponse"
+
+    SourceListResponseData:
+      $ref: "./schemas/ingest/responses/sourcelistresponsedata.yaml#/SourceListResponseData"
+
+    SourceListResponseItem:
+      $ref: "./schemas/ingest/responses/sourcelistresponseattributes.yaml#/SourceListResponseAttributes"
+
     IngestErrorResponse:
       $ref: "./schemas/ingest/responses/ingesterrorresponse.yaml#/IngestErrorResponse"
 

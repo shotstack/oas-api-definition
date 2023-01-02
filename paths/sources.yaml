@@ -33,3 +33,23 @@
         - DeveloperKey: []
       tags:
         - Ingest
+
+    get:
+      description: |
+        Retrieve a list of ingested source files stored against a users account. The API key is used to determine which
+        files are associated to the user.
+
+        **Base URL:** https://api.shotstack.io/ingest/{version}
+      summary: List Sources
+      operationId: getSources
+      responses:
+        "200":
+          description: The list of ingested source files stored against a users account
+          content:
+            application/json:
+              schema:
+                $ref: "../schemas/ingest/responses/sourcelistresponse.yaml#/SourceListResponse"
+      security:
+        - DeveloperKey: []
+      tags:
+        - Ingest

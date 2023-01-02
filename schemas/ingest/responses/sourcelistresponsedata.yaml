@@ -1,0 +1,15 @@
+    SourceListResponseData:
+      description: The type of resource (a source), it's id and attributes of the source file.
+      properties:
+        type:
+          description: The type of resource, in this case it is a source.
+          type: string
+          example: source
+        attributes:
+          description: The source attributes including its url, status, width, height, duration, etc...
+          $ref: "./sourcelistresponseattributes.yaml#/SourceListResponseAttributes"
+      required:
+        - type
+        - id
+        - attributes
+      type: object

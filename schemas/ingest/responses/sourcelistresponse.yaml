@@ -1,0 +1,12 @@
+    SourceListResponse:
+      description: >-
+        A list of ingested source files.
+      properties:
+        data:
+          description: An array of ingested source files.
+          type: array
+          items:
+            $ref: "./sourcelistresponsedata.yaml#/SourceListResponseData"
+      required:
+        - data
+      type: object
