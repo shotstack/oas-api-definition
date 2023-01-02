@@ -1,4 +1,4 @@
-    SourceListResponseAttributes:
+    SourceResponseAttributes:
       description: The type of resource (a source), it's id and attributes of the source file.
       properties:
         id:

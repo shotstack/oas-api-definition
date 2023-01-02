@@ -1,0 +1,44 @@
+    get:
+      responses:
+        "200":
+          description: Get source by id
+          content:
+            application/json:
+              schema:
+                $ref: "../schemas/ingest/responses/sourceresponse.yaml#/SourceResponse"
+      description: |
+        Fetch a source file details by its id.
+
+        **Base URL:** https://api.shotstack.io/ingest/{version}
+      operationId: getSource
+      summary: Get Source
+      security:
+        - DeveloperKey: []
+      tags:
+        - Ingest
+
+    delete:
+      responses:
+        "204":
+          description: An empty response signifying the asset has been deleted
+      description: |
+        Delete an asset by its asset id. If a render creates multiple assets, such as thumbnail and poster images,
+        each asset must be deleted individually by the asset id.
+
+        **Base URL:** https://api.shotstack.io/serve/{version}
+      operationId: deleteAsset
+      summary: Delete Asset
+      security:
+        - DeveloperKey: []
+      tags:
+        - Serve
+
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+          type: string
+        description: The id of the asset in UUID format

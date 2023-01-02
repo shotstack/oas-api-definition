@@ -86,6 +86,9 @@ paths:
   /sources:
     $ref: "./paths/sources.yaml"
 
+  /sources/{id}:
+    $ref: "./paths/sourcesid.yaml"
+
 components:
   schemas:
     # Request schemas
@@ -257,8 +260,17 @@ components:
     SourceListResponseData:
       $ref: "./schemas/ingest/responses/sourcelistresponsedata.yaml#/SourceListResponseData"
 
-    SourceListResponseItem:
+    SourceListResponseAttributes:
       $ref: "./schemas/ingest/responses/sourcelistresponseattributes.yaml#/SourceListResponseAttributes"
+
+    SourceResponse:
+      $ref: "./schemas/ingest/responses/sourceresponse.yaml#/SourceResponse"
+
+    SourceResponseData:
+      $ref: "./schemas/ingest/responses/sourceresponsedata.yaml#/SourceResponseData"
+
+    SourceResponseAttributes:
+      $ref: "./schemas/ingest/responses/sourceresponseattributes.yaml#/SourceResponseAttributes"
 
     IngestErrorResponse:
       $ref: "./schemas/ingest/responses/ingesterrorresponse.yaml#/IngestErrorResponse"
