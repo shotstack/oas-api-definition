@@ -1,0 +1,12 @@
+    IngestErrorResponse:
+      description: >-
+        Error response data for validation and other errors returned by the Ingest API.
+      properties:
+        errors:
+          description: An array of errors.
+          type: array
+          items:
+            $ref: "./ingesterrorresponsedata.yaml#/IngestErrorResponseData"
+      required:
+        - data
+      type: object

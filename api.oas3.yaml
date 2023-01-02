@@ -10,14 +10,19 @@ info:
 
     For more details visit [shotstack.io](https://shotstack.io) or checkout our [getting started](https://shotstack.io/docs/guide/) documentation.
 
-    There are two main API's, one for editing and generating assets (Edit API) and one for managing hosted assets (Serve API).
+    There are three API's, one for editing and generating assets (Edit API) and one for managing hosted assets (Serve API).
 
-    The Edit API base URL is: <b>https://api.shotstack.io/{version}</b>
-    
+    **Edit API** - for editing videos, images and audio assets.<br>
+    The Edit API base URL is: <b>https://api.shotstack.io/edit/{version}</b>
+
+    **Serve API** - for managing hosted assets.<br>
     The Serve API base URL is: <b>https://api.shotstack.io/serve/{version}</b>
 
+    **Ingest API** - for ingesting/uploading and transforming source assets.<br>
+    The Serve API base URL is: <b>https://api.shotstack.io/ingest/{version}</b>
+
 servers:
-  - url: https://api.shotstack.io/{version}
+  - url: https://api.shotstack.io/edit/{version}
     variables:
       version:
         description: >-
@@ -35,6 +40,23 @@ servers:
           - v1
           - stage
         default: v1
+  - url: https://api.shotstack.io/ingest/{version}
+    variables:
+      version:
+        description: >-
+          Set the stage to `v1` for production usage. Set to `stage` to use the development sandbox.
+        enum:
+          - v1
+          - stage
+        default: v1
+
+tags:
+  - name: Edit
+    description: To edit videos you use the Edit API.
+  - name: Serve
+    description: Manage assets edited and generated via the Shotstack APIs.
+  - name: Ingest
+    description: Ingest and transform source footage to use with Shotstack APIs.
 
 paths:
   /render:
@@ -60,6 +82,9 @@ paths:
 
   /assets/render/{id}:
     $ref: "./paths/assetsrenderid.yaml"
+
+  /sources:
+    $ref: "./paths/sources.yaml"
 
 components:
   schemas:
@@ -166,6 +191,10 @@ components:
     TemplateRender:
       $ref: "./schemas/templaterender.yaml#/TemplateRender"
 
+    # Ingest schemas
+    Source:
+      $ref: "./schemas/ingest/source.yaml#/Source"
+
     # Response schemas
     QueuedResponse:
       $ref: "./schemas/responses/queuedresponse.yaml#/QueuedResponse"
@@ -214,6 +243,19 @@ components:
 
     AssetResponseAttributes:
       $ref: "./schemas/responses/assetresponseattributes.yaml#/AssetResponseAttributes"
+
+    # Ingest schema responses
+    QueuedSourceResponse:
+      $ref: "./schemas/ingest/responses/queuedsourceresponse.yaml#/QueuedSourceResponse"
+
+    QueuedSourceResponseData:
+      $ref: "./schemas/ingest/responses/queuedsourceresponsedata.yaml#/QueuedSourceResponseData"
+
+    IngestErrorResponse:
+      $ref: "./schemas/ingest/responses/ingesterrorresponse.yaml#/IngestErrorResponse"
+
+    IngestErrorResponseData:
+      $ref: "./schemas/ingest/responses/ingesterrorresponsedata.yaml#/IngestErrorResponseData"
 
   responses: {}
   parameters: {}

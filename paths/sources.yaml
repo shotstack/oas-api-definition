@@ -1,0 +1,35 @@
+    post:
+      responses:
+        "201":
+          description: The queued source file details
+          content:
+            application/json:
+              schema:
+                $ref: "../schemas/ingest/responses/queuedsourceresponse.yaml#/QueuedSourceResponse"
+        "400":
+          description: A list of validation and other errors
+          content:
+            application/json:
+              schema:
+                $ref: "../schemas/ingest/responses/ingesterrorresponse.yaml#/IngestErrorResponse"
+      description: |
+        Queue a source file to be fetched and stored by Shotstack. Source files can be videos, images, audio files
+        and fonts.
+
+        **Base URL:** https://api.shotstack.io/ingest/{version}
+      summary: Fetch Source
+      operationId: postSource
+      requestBody:
+        description: >-
+          Ingest a video, image, audio or font file from the provided URL.
+        content:
+          application/json:
+            example:
+              $ref: "../definitions/source.yaml"
+            schema:
+              $ref: "../schemas/ingest/source.yaml#/Source"
+        required: true
+      security:
+        - DeveloperKey: []
+      tags:
+        - Ingest
