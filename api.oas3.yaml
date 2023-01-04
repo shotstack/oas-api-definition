@@ -89,6 +89,9 @@ paths:
   /sources/{id}:
     $ref: "./paths/sourcesid.yaml"
 
+  /upload:
+    $ref: "./paths/upload.yaml"
+
 components:
   schemas:
     # Request schemas
@@ -271,6 +274,15 @@ components:
 
     SourceResponseAttributes:
       $ref: "./schemas/ingest/responses/sourceresponseattributes.yaml#/SourceResponseAttributes"
+
+    UploadResponse:
+      $ref: "./schemas/ingest/responses/uploadresponse.yaml#/UploadResponse"
+
+    UploadResponseData:
+      $ref: "./schemas/ingest/responses/uploadresponsedata.yaml#/UploadResponseData"
+
+    UploadResponseAttributes:
+      $ref: "./schemas/ingest/responses/uploadresponseattributes.yaml#/UploadResponseAttributes"
 
     IngestErrorResponse:
       $ref: "./schemas/ingest/responses/ingesterrorresponse.yaml#/IngestErrorResponse"

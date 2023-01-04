@@ -1,0 +1,23 @@
+    post:
+      responses:
+        "200":
+          description: The id and signed URL to upload to.
+          content:
+            application/json:
+              schema:
+                $ref: "../schemas/ingest/responses/uploadresponse.yaml#/UploadResponse"
+      description: |
+        Request a signed URL to upload a file to. Use the signed URL to send a PUT request with the binary file. Using 
+        Curl you can use a command like:
+            
+        `curl -X PUT -T video.mp4 {data.attributes.url}`
+            
+        Where **data.attributes.url** is the signed URL returned in the response.
+
+        **Base URL:** https://api.shotstack.io/ingest/{version}
+      summary: Direct Upload
+      operationId: getUploadSignedUrl
+      security:
+        - DeveloperKey: []
+      tags:
+        - Ingest

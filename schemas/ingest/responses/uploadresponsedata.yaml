@@ -1,0 +1,19 @@
+    UploadResponseData:
+      description: The type of resource (an upload), it's id and attributes of the upload request.
+      properties:
+        type:
+          description: The type of resource, in this case it is an upload.
+          type: string
+          example: upload
+        id:
+          description: The upload file id.
+          type: string
+          example: zzytey4v-32km-kq1z-aftr-3kcuqi0brad2
+        attributes:
+          description: The upload attributes including the signed URL.
+          $ref: "./uploadresponseattributes.yaml#/UploadResponseAttributes"
+      required:
+        - type
+        - id
+        - attributes
+      type: object
