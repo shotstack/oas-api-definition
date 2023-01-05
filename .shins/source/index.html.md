@@ -38,15 +38,20 @@ You arrange and configure an edit and POST it to the API which will render your 
 
 For more details visit [shotstack.io](https://shotstack.io) or checkout our [getting started](https://shotstack.io/docs/guide/) documentation.
 
-There are two main API's, one for editing and generating assets (Edit API) and one for managing hosted assets (Serve API).
+There are three API's, one for editing and generating assets (Edit API) and one for managing hosted assets (Serve API).
 
-The Edit API base URL is: <b>https://api.shotstack.io/{version}</b>
+**Edit API** - for editing videos, images and audio assets.<br>
+The Edit API base URL is: <b>https://api.shotstack.io/edit/{version}</b>
 
+**Serve API** - for managing hosted assets.<br>
 The Serve API base URL is: <b>https://api.shotstack.io/serve/{version}</b>
+
+**Ingest API** - for ingesting/uploading and transforming source assets.<br>
+The Serve API base URL is: <b>https://api.shotstack.io/ingest/{version}</b>
 
 Base URLs:
 
-* <a href="https://api.shotstack.io/{version}">https://api.shotstack.io/{version}</a>
+* <a href="https://api.shotstack.io/edit/{version}">https://api.shotstack.io/edit/{version}</a>
 
     * **version** - Set the stage to `v1` for production usage without watermarks. Set to `stage` to use the development sandbox. Default: v1
 
@@ -62,12 +67,22 @@ Base URLs:
 
         * stage
 
+* <a href="https://api.shotstack.io/ingest/{version}">https://api.shotstack.io/ingest/{version}</a>
+
+    * **version** - Set the stage to `v1` for production usage. Set to `stage` to use the development sandbox. Default: v1
+
+        * v1
+
+        * stage
+
 # Authentication
 
 * API Key (DeveloperKey)
     - Parameter Name: **x-api-key**, in: header. Set the **x-api-key** header with your provided key for the correct environment (v1 or stage). Include the header in all calls to the API that are secured with a key.
 
 <h1 id="shotstack-edit">Edit</h1>
+
+To edit videos you use the Edit API.
 
 ## Render Asset
 
@@ -77,7 +92,7 @@ Base URLs:
 
 ```shell
 # You can also use wget
-curl -X POST https://api.shotstack.io/{version}/render \
+curl -X POST https://api.shotstack.io/edit/{version}/render \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
   -H 'x-api-key: API_KEY'
@@ -85,7 +100,7 @@ curl -X POST https://api.shotstack.io/{version}/render \
 ```
 
 ```http
-POST https://api.shotstack.io/{version}/render HTTP/1.1
+POST https://api.shotstack.io/edit/{version}/render HTTP/1.1
 Host: api.shotstack.io
 Content-Type: application/json
 Accept: application/json
@@ -162,7 +177,7 @@ const inputBody = {
   "output": {
     "format": "mp4",
     "resolution": "sd",
-    "aspectRatio": 969,
+    "aspectRatio": "16:9",
     "size": {
       "width": 1200,
       "height": 800
@@ -205,7 +220,7 @@ const headers = {
   'x-api-key':'API_KEY'
 };
 
-fetch('https://api.shotstack.io/{version}/render',
+fetch('https://api.shotstack.io/edit/{version}/render',
 {
   method: 'POST',
   body: JSON.stringify(inputBody),
@@ -236,7 +251,7 @@ $client = new \GuzzleHttp\Client();
 $request_body = array();
 
 try {
-    $response = $client->request('POST','https://api.shotstack.io/{version}/render', array(
+    $response = $client->request('POST','https://api.shotstack.io/edit/{version}/render', array(
         'headers' => $headers,
         'json' => $request_body,
        )
@@ -262,7 +277,7 @@ headers = {
   'x-api-key' => 'API_KEY'
 }
 
-result = RestClient.post 'https://api.shotstack.io/{version}/render',
+result = RestClient.post 'https://api.shotstack.io/edit/{version}/render',
   params: {
   }, headers: headers
 
@@ -278,14 +293,14 @@ headers = {
   'x-api-key': 'API_KEY'
 }
 
-r = requests.post('https://api.shotstack.io/{version}/render', headers = headers)
+r = requests.post('https://api.shotstack.io/edit/{version}/render', headers = headers)
 
 print(r.json())
 
 ```
 
 ```java
-URL obj = new URL("https://api.shotstack.io/{version}/render");
+URL obj = new URL("https://api.shotstack.io/edit/{version}/render");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -318,7 +333,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("POST", "https://api.shotstack.io/{version}/render", data)
+    req, err := http.NewRequest("POST", "https://api.shotstack.io/edit/{version}/render", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -405,7 +420,7 @@ Queue and render the contents of an [Edit](#tocs_edit) as a video, image or audi
   "output": {
     "format": "mp4",
     "resolution": "sd",
-    "aspectRatio": 969,
+    "aspectRatio": "16:9",
     "size": {
       "width": 1200,
       "height": 800
@@ -484,14 +499,14 @@ DeveloperKey
 
 ```shell
 # You can also use wget
-curl -X GET https://api.shotstack.io/{version}/render/{id} \
+curl -X GET https://api.shotstack.io/edit/{version}/render/{id} \
   -H 'Accept: application/json' \
   -H 'x-api-key: API_KEY'
 
 ```
 
 ```http
-GET https://api.shotstack.io/{version}/render/{id} HTTP/1.1
+GET https://api.shotstack.io/edit/{version}/render/{id} HTTP/1.1
 Host: api.shotstack.io
 Accept: application/json
 
@@ -505,7 +520,7 @@ const headers = {
   'x-api-key':'API_KEY'
 };
 
-fetch('https://api.shotstack.io/{version}/render/{id}',
+fetch('https://api.shotstack.io/edit/{version}/render/{id}',
 {
   method: 'GET',
 
@@ -535,7 +550,7 @@ $client = new \GuzzleHttp\Client();
 $request_body = array();
 
 try {
-    $response = $client->request('GET','https://api.shotstack.io/{version}/render/{id}', array(
+    $response = $client->request('GET','https://api.shotstack.io/edit/{version}/render/{id}', array(
         'headers' => $headers,
         'json' => $request_body,
        )
@@ -560,7 +575,7 @@ headers = {
   'x-api-key' => 'API_KEY'
 }
 
-result = RestClient.get 'https://api.shotstack.io/{version}/render/{id}',
+result = RestClient.get 'https://api.shotstack.io/edit/{version}/render/{id}',
   params: {
   }, headers: headers
 
@@ -575,14 +590,14 @@ headers = {
   'x-api-key': 'API_KEY'
 }
 
-r = requests.get('https://api.shotstack.io/{version}/render/{id}', headers = headers)
+r = requests.get('https://api.shotstack.io/edit/{version}/render/{id}', headers = headers)
 
 print(r.json())
 
 ```
 
 ```java
-URL obj = new URL("https://api.shotstack.io/{version}/render/{id}");
+URL obj = new URL("https://api.shotstack.io/edit/{version}/render/{id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -614,7 +629,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "https://api.shotstack.io/{version}/render/{id}", data)
+    req, err := http.NewRequest("GET", "https://api.shotstack.io/edit/{version}/render/{id}", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -744,7 +759,7 @@ DeveloperKey
 
 ```shell
 # You can also use wget
-curl -X POST https://api.shotstack.io/{version}/templates \
+curl -X POST https://api.shotstack.io/edit/{version}/templates \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
   -H 'x-api-key: API_KEY'
@@ -752,7 +767,7 @@ curl -X POST https://api.shotstack.io/{version}/templates \
 ```
 
 ```http
-POST https://api.shotstack.io/{version}/templates HTTP/1.1
+POST https://api.shotstack.io/edit/{version}/templates HTTP/1.1
 Host: api.shotstack.io
 Content-Type: application/json
 Accept: application/json
@@ -831,7 +846,7 @@ const inputBody = {
     "output": {
       "format": "mp4",
       "resolution": "sd",
-      "aspectRatio": 969,
+      "aspectRatio": "16:9",
       "size": {
         "width": 1200,
         "height": 800
@@ -875,7 +890,7 @@ const headers = {
   'x-api-key':'API_KEY'
 };
 
-fetch('https://api.shotstack.io/{version}/templates',
+fetch('https://api.shotstack.io/edit/{version}/templates',
 {
   method: 'POST',
   body: JSON.stringify(inputBody),
@@ -906,7 +921,7 @@ $client = new \GuzzleHttp\Client();
 $request_body = array();
 
 try {
-    $response = $client->request('POST','https://api.shotstack.io/{version}/templates', array(
+    $response = $client->request('POST','https://api.shotstack.io/edit/{version}/templates', array(
         'headers' => $headers,
         'json' => $request_body,
        )
@@ -932,7 +947,7 @@ headers = {
   'x-api-key' => 'API_KEY'
 }
 
-result = RestClient.post 'https://api.shotstack.io/{version}/templates',
+result = RestClient.post 'https://api.shotstack.io/edit/{version}/templates',
   params: {
   }, headers: headers
 
@@ -948,14 +963,14 @@ headers = {
   'x-api-key': 'API_KEY'
 }
 
-r = requests.post('https://api.shotstack.io/{version}/templates', headers = headers)
+r = requests.post('https://api.shotstack.io/edit/{version}/templates', headers = headers)
 
 print(r.json())
 
 ```
 
 ```java
-URL obj = new URL("https://api.shotstack.io/{version}/templates");
+URL obj = new URL("https://api.shotstack.io/edit/{version}/templates");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -988,7 +1003,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("POST", "https://api.shotstack.io/{version}/templates", data)
+    req, err := http.NewRequest("POST", "https://api.shotstack.io/edit/{version}/templates", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -1079,7 +1094,7 @@ before being rendered. [Merge fields](#tocs_mergefield) can be also used to merg
     "output": {
       "format": "mp4",
       "resolution": "sd",
-      "aspectRatio": 969,
+      "aspectRatio": "16:9",
       "size": {
         "width": 1200,
         "height": 800
@@ -1159,14 +1174,14 @@ DeveloperKey
 
 ```shell
 # You can also use wget
-curl -X GET https://api.shotstack.io/{version}/templates \
+curl -X GET https://api.shotstack.io/edit/{version}/templates \
   -H 'Accept: application/json' \
   -H 'x-api-key: API_KEY'
 
 ```
 
 ```http
-GET https://api.shotstack.io/{version}/templates HTTP/1.1
+GET https://api.shotstack.io/edit/{version}/templates HTTP/1.1
 Host: api.shotstack.io
 Accept: application/json
 
@@ -1180,7 +1195,7 @@ const headers = {
   'x-api-key':'API_KEY'
 };
 
-fetch('https://api.shotstack.io/{version}/templates',
+fetch('https://api.shotstack.io/edit/{version}/templates',
 {
   method: 'GET',
 
@@ -1210,7 +1225,7 @@ $client = new \GuzzleHttp\Client();
 $request_body = array();
 
 try {
-    $response = $client->request('GET','https://api.shotstack.io/{version}/templates', array(
+    $response = $client->request('GET','https://api.shotstack.io/edit/{version}/templates', array(
         'headers' => $headers,
         'json' => $request_body,
        )
@@ -1235,7 +1250,7 @@ headers = {
   'x-api-key' => 'API_KEY'
 }
 
-result = RestClient.get 'https://api.shotstack.io/{version}/templates',
+result = RestClient.get 'https://api.shotstack.io/edit/{version}/templates',
   params: {
   }, headers: headers
 
@@ -1250,14 +1265,14 @@ headers = {
   'x-api-key': 'API_KEY'
 }
 
-r = requests.get('https://api.shotstack.io/{version}/templates', headers = headers)
+r = requests.get('https://api.shotstack.io/edit/{version}/templates', headers = headers)
 
 print(r.json())
 
 ```
 
 ```java
-URL obj = new URL("https://api.shotstack.io/{version}/templates");
+URL obj = new URL("https://api.shotstack.io/edit/{version}/templates");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -1289,7 +1304,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "https://api.shotstack.io/{version}/templates", data)
+    req, err := http.NewRequest("GET", "https://api.shotstack.io/edit/{version}/templates", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -1313,7 +1328,7 @@ are associated to the user.
 ```json
 {
   "success": true,
-  "message": "Created",
+  "message": "OK",
   "response": {
     "owner": "5ca6hu7s9k",
     "templates": [
@@ -1347,14 +1362,14 @@ DeveloperKey
 
 ```shell
 # You can also use wget
-curl -X GET https://api.shotstack.io/{version}/templates/{id} \
+curl -X GET https://api.shotstack.io/edit/{version}/templates/{id} \
   -H 'Accept: application/json' \
   -H 'x-api-key: API_KEY'
 
 ```
 
 ```http
-GET https://api.shotstack.io/{version}/templates/{id} HTTP/1.1
+GET https://api.shotstack.io/edit/{version}/templates/{id} HTTP/1.1
 Host: api.shotstack.io
 Accept: application/json
 
@@ -1368,7 +1383,7 @@ const headers = {
   'x-api-key':'API_KEY'
 };
 
-fetch('https://api.shotstack.io/{version}/templates/{id}',
+fetch('https://api.shotstack.io/edit/{version}/templates/{id}',
 {
   method: 'GET',
 
@@ -1398,7 +1413,7 @@ $client = new \GuzzleHttp\Client();
 $request_body = array();
 
 try {
-    $response = $client->request('GET','https://api.shotstack.io/{version}/templates/{id}', array(
+    $response = $client->request('GET','https://api.shotstack.io/edit/{version}/templates/{id}', array(
         'headers' => $headers,
         'json' => $request_body,
        )
@@ -1423,7 +1438,7 @@ headers = {
   'x-api-key' => 'API_KEY'
 }
 
-result = RestClient.get 'https://api.shotstack.io/{version}/templates/{id}',
+result = RestClient.get 'https://api.shotstack.io/edit/{version}/templates/{id}',
   params: {
   }, headers: headers
 
@@ -1438,14 +1453,14 @@ headers = {
   'x-api-key': 'API_KEY'
 }
 
-r = requests.get('https://api.shotstack.io/{version}/templates/{id}', headers = headers)
+r = requests.get('https://api.shotstack.io/edit/{version}/templates/{id}', headers = headers)
 
 print(r.json())
 
 ```
 
 ```java
-URL obj = new URL("https://api.shotstack.io/{version}/templates/{id}");
+URL obj = new URL("https://api.shotstack.io/edit/{version}/templates/{id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -1477,7 +1492,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "https://api.shotstack.io/{version}/templates/{id}", data)
+    req, err := http.NewRequest("GET", "https://api.shotstack.io/edit/{version}/templates/{id}", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -1579,7 +1594,7 @@ Retrieve a template by template id.
       "output": {
         "format": "mp4",
         "resolution": "sd",
-        "aspectRatio": 969,
+        "aspectRatio": "16:9",
         "size": {
           "width": 1200,
           "height": 800
@@ -1639,7 +1654,7 @@ DeveloperKey
 
 ```shell
 # You can also use wget
-curl -X PUT https://api.shotstack.io/{version}/templates/{id} \
+curl -X PUT https://api.shotstack.io/edit/{version}/templates/{id} \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
   -H 'x-api-key: API_KEY'
@@ -1647,7 +1662,7 @@ curl -X PUT https://api.shotstack.io/{version}/templates/{id} \
 ```
 
 ```http
-PUT https://api.shotstack.io/{version}/templates/{id} HTTP/1.1
+PUT https://api.shotstack.io/edit/{version}/templates/{id} HTTP/1.1
 Host: api.shotstack.io
 Content-Type: application/json
 Accept: application/json
@@ -1726,7 +1741,7 @@ const inputBody = {
     "output": {
       "format": "mp4",
       "resolution": "sd",
-      "aspectRatio": 969,
+      "aspectRatio": "16:9",
       "size": {
         "width": 1200,
         "height": 800
@@ -1770,7 +1785,7 @@ const headers = {
   'x-api-key':'API_KEY'
 };
 
-fetch('https://api.shotstack.io/{version}/templates/{id}',
+fetch('https://api.shotstack.io/edit/{version}/templates/{id}',
 {
   method: 'PUT',
   body: JSON.stringify(inputBody),
@@ -1801,7 +1816,7 @@ $client = new \GuzzleHttp\Client();
 $request_body = array();
 
 try {
-    $response = $client->request('PUT','https://api.shotstack.io/{version}/templates/{id}', array(
+    $response = $client->request('PUT','https://api.shotstack.io/edit/{version}/templates/{id}', array(
         'headers' => $headers,
         'json' => $request_body,
        )
@@ -1827,7 +1842,7 @@ headers = {
   'x-api-key' => 'API_KEY'
 }
 
-result = RestClient.put 'https://api.shotstack.io/{version}/templates/{id}',
+result = RestClient.put 'https://api.shotstack.io/edit/{version}/templates/{id}',
   params: {
   }, headers: headers
 
@@ -1843,14 +1858,14 @@ headers = {
   'x-api-key': 'API_KEY'
 }
 
-r = requests.put('https://api.shotstack.io/{version}/templates/{id}', headers = headers)
+r = requests.put('https://api.shotstack.io/edit/{version}/templates/{id}', headers = headers)
 
 print(r.json())
 
 ```
 
 ```java
-URL obj = new URL("https://api.shotstack.io/{version}/templates/{id}");
+URL obj = new URL("https://api.shotstack.io/edit/{version}/templates/{id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("PUT");
 int responseCode = con.getResponseCode();
@@ -1883,7 +1898,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("PUT", "https://api.shotstack.io/{version}/templates/{id}", data)
+    req, err := http.NewRequest("PUT", "https://api.shotstack.io/edit/{version}/templates/{id}", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -1972,7 +1987,7 @@ Update an existing template by template id.
     "output": {
       "format": "mp4",
       "resolution": "sd",
-      "aspectRatio": 969,
+      "aspectRatio": "16:9",
       "size": {
         "width": 1200,
         "height": 800
@@ -2053,13 +2068,13 @@ DeveloperKey
 
 ```shell
 # You can also use wget
-curl -X DELETE https://api.shotstack.io/{version}/templates/{id} \
+curl -X DELETE https://api.shotstack.io/edit/{version}/templates/{id} \
   -H 'x-api-key: API_KEY'
 
 ```
 
 ```http
-DELETE https://api.shotstack.io/{version}/templates/{id} HTTP/1.1
+DELETE https://api.shotstack.io/edit/{version}/templates/{id} HTTP/1.1
 Host: api.shotstack.io
 
 ```
@@ -2071,7 +2086,7 @@ const headers = {
   'x-api-key':'API_KEY'
 };
 
-fetch('https://api.shotstack.io/{version}/templates/{id}',
+fetch('https://api.shotstack.io/edit/{version}/templates/{id}',
 {
   method: 'DELETE',
 
@@ -2100,7 +2115,7 @@ $client = new \GuzzleHttp\Client();
 $request_body = array();
 
 try {
-    $response = $client->request('DELETE','https://api.shotstack.io/{version}/templates/{id}', array(
+    $response = $client->request('DELETE','https://api.shotstack.io/edit/{version}/templates/{id}', array(
         'headers' => $headers,
         'json' => $request_body,
        )
@@ -2124,7 +2139,7 @@ headers = {
   'x-api-key' => 'API_KEY'
 }
 
-result = RestClient.delete 'https://api.shotstack.io/{version}/templates/{id}',
+result = RestClient.delete 'https://api.shotstack.io/edit/{version}/templates/{id}',
   params: {
   }, headers: headers
 
@@ -2138,14 +2153,14 @@ headers = {
   'x-api-key': 'API_KEY'
 }
 
-r = requests.delete('https://api.shotstack.io/{version}/templates/{id}', headers = headers)
+r = requests.delete('https://api.shotstack.io/edit/{version}/templates/{id}', headers = headers)
 
 print(r.json())
 
 ```
 
 ```java
-URL obj = new URL("https://api.shotstack.io/{version}/templates/{id}");
+URL obj = new URL("https://api.shotstack.io/edit/{version}/templates/{id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("DELETE");
 int responseCode = con.getResponseCode();
@@ -2176,7 +2191,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("DELETE", "https://api.shotstack.io/{version}/templates/{id}", data)
+    req, err := http.NewRequest("DELETE", "https://api.shotstack.io/edit/{version}/templates/{id}", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -2217,7 +2232,7 @@ DeveloperKey
 
 ```shell
 # You can also use wget
-curl -X POST https://api.shotstack.io/{version}/templates/render \
+curl -X POST https://api.shotstack.io/edit/{version}/templates/render \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
   -H 'x-api-key: API_KEY'
@@ -2225,7 +2240,7 @@ curl -X POST https://api.shotstack.io/{version}/templates/render \
 ```
 
 ```http
-POST https://api.shotstack.io/{version}/templates/render HTTP/1.1
+POST https://api.shotstack.io/edit/{version}/templates/render HTTP/1.1
 Host: api.shotstack.io
 Content-Type: application/json
 Accept: application/json
@@ -2249,7 +2264,7 @@ const headers = {
   'x-api-key':'API_KEY'
 };
 
-fetch('https://api.shotstack.io/{version}/templates/render',
+fetch('https://api.shotstack.io/edit/{version}/templates/render',
 {
   method: 'POST',
   body: JSON.stringify(inputBody),
@@ -2280,7 +2295,7 @@ $client = new \GuzzleHttp\Client();
 $request_body = array();
 
 try {
-    $response = $client->request('POST','https://api.shotstack.io/{version}/templates/render', array(
+    $response = $client->request('POST','https://api.shotstack.io/edit/{version}/templates/render', array(
         'headers' => $headers,
         'json' => $request_body,
        )
@@ -2306,7 +2321,7 @@ headers = {
   'x-api-key' => 'API_KEY'
 }
 
-result = RestClient.post 'https://api.shotstack.io/{version}/templates/render',
+result = RestClient.post 'https://api.shotstack.io/edit/{version}/templates/render',
   params: {
   }, headers: headers
 
@@ -2322,14 +2337,14 @@ headers = {
   'x-api-key': 'API_KEY'
 }
 
-r = requests.post('https://api.shotstack.io/{version}/templates/render', headers = headers)
+r = requests.post('https://api.shotstack.io/edit/{version}/templates/render', headers = headers)
 
 print(r.json())
 
 ```
 
 ```java
-URL obj = new URL("https://api.shotstack.io/{version}/templates/render");
+URL obj = new URL("https://api.shotstack.io/edit/{version}/templates/render");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -2362,7 +2377,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("POST", "https://api.shotstack.io/{version}/templates/render", data)
+    req, err := http.NewRequest("POST", "https://api.shotstack.io/edit/{version}/templates/render", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -2433,14 +2448,14 @@ DeveloperKey
 
 ```shell
 # You can also use wget
-curl -X GET https://api.shotstack.io/{version}/probe/{url} \
+curl -X GET https://api.shotstack.io/edit/{version}/probe/{url} \
   -H 'Accept: application/json' \
   -H 'x-api-key: API_KEY'
 
 ```
 
 ```http
-GET https://api.shotstack.io/{version}/probe/{url} HTTP/1.1
+GET https://api.shotstack.io/edit/{version}/probe/{url} HTTP/1.1
 Host: api.shotstack.io
 Accept: application/json
 
@@ -2454,7 +2469,7 @@ const headers = {
   'x-api-key':'API_KEY'
 };
 
-fetch('https://api.shotstack.io/{version}/probe/{url}',
+fetch('https://api.shotstack.io/edit/{version}/probe/{url}',
 {
   method: 'GET',
 
@@ -2484,7 +2499,7 @@ $client = new \GuzzleHttp\Client();
 $request_body = array();
 
 try {
-    $response = $client->request('GET','https://api.shotstack.io/{version}/probe/{url}', array(
+    $response = $client->request('GET','https://api.shotstack.io/edit/{version}/probe/{url}', array(
         'headers' => $headers,
         'json' => $request_body,
        )
@@ -2509,7 +2524,7 @@ headers = {
   'x-api-key' => 'API_KEY'
 }
 
-result = RestClient.get 'https://api.shotstack.io/{version}/probe/{url}',
+result = RestClient.get 'https://api.shotstack.io/edit/{version}/probe/{url}',
   params: {
   }, headers: headers
 
@@ -2524,14 +2539,14 @@ headers = {
   'x-api-key': 'API_KEY'
 }
 
-r = requests.get('https://api.shotstack.io/{version}/probe/{url}', headers = headers)
+r = requests.get('https://api.shotstack.io/edit/{version}/probe/{url}', headers = headers)
 
 print(r.json())
 
 ```
 
 ```java
-URL obj = new URL("https://api.shotstack.io/{version}/probe/{url}");
+URL obj = new URL("https://api.shotstack.io/edit/{version}/probe/{url}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -2563,7 +2578,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "https://api.shotstack.io/{version}/probe/{url}", data)
+    req, err := http.NewRequest("GET", "https://api.shotstack.io/edit/{version}/probe/{url}", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -2611,6 +2626,8 @@ DeveloperKey
 </aside>
 
 <h1 id="shotstack-serve">Serve</h1>
+
+Manage assets edited and generated via the Shotstack APIs.
 
 ## Get Asset
 
@@ -3173,10 +3190,959 @@ To perform this operation, you must be authenticated by means of one of the foll
 DeveloperKey
 </aside>
 
+<h1 id="shotstack-ingest">Ingest</h1>
+
+Ingest and transform source footage to use with Shotstack APIs.
+
+## Fetch Source
+
+<a id="opIdpostSource"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X POST https://api.shotstack.io/ingest/{version}/sources \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  -H 'x-api-key: API_KEY'
+
+```
+
+```http
+POST https://api.shotstack.io/ingest/{version}/sources HTTP/1.1
+Host: api.shotstack.io
+Content-Type: application/json
+Accept: application/json
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+const inputBody = {
+  "url": "https://github.com/shotstack/test-media/raw/main/captioning/scott-ko.mp4"
+};
+const headers = {
+  'Content-Type':'application/json',
+  'Accept':'application/json',
+  'x-api-key':'API_KEY'
+};
+
+fetch('https://api.shotstack.io/ingest/{version}/sources',
+{
+  method: 'POST',
+  body: JSON.stringify(inputBody),
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```php
+<?php
+
+require 'vendor/autoload.php';
+
+$headers = array(
+    'Content-Type' => 'application/json',
+    'Accept' => 'application/json',
+    'x-api-key' => 'API_KEY',
+);
+
+$client = new \GuzzleHttp\Client();
+
+// Define array of request body.
+$request_body = array();
+
+try {
+    $response = $client->request('POST','https://api.shotstack.io/ingest/{version}/sources', array(
+        'headers' => $headers,
+        'json' => $request_body,
+       )
+    );
+    print_r($response->getBody()->getContents());
+ }
+ catch (\GuzzleHttp\Exception\BadResponseException $e) {
+    // handle exception or api errors.
+    print_r($e->getMessage());
+ }
+
+ // ...
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Content-Type' => 'application/json',
+  'Accept' => 'application/json',
+  'x-api-key' => 'API_KEY'
+}
+
+result = RestClient.post 'https://api.shotstack.io/ingest/{version}/sources',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json',
+  'x-api-key': 'API_KEY'
+}
+
+r = requests.post('https://api.shotstack.io/ingest/{version}/sources', headers = headers)
+
+print(r.json())
+
+```
+
+```java
+URL obj = new URL("https://api.shotstack.io/ingest/{version}/sources");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Content-Type": []string{"application/json"},
+        "Accept": []string{"application/json"},
+        "x-api-key": []string{"API_KEY"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("POST", "https://api.shotstack.io/ingest/{version}/sources", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`POST /sources`
+
+Queue a source file to be fetched and stored by Shotstack. Source files can be videos, images, audio files
+and fonts.
+
+**Base URL:** https://api.shotstack.io/ingest/{version}
+
+> Body parameter
+
+```json
+{
+  "url": "https://github.com/shotstack/test-media/raw/main/captioning/scott-ko.mp4"
+}
+```
+
+<h3 id="fetch-source-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|body|body|[Source](#schemasource)|true|Ingest a video, image, audio or font file from the provided URL.|
+
+> Example responses
+
+> 201 Response
+
+```json
+{
+  "data": {
+    "type": "source",
+    "id": "zzytey4v-32km-kq1z-aftr-3kcuqi0brad2"
+  }
+}
+```
+
+<h3 id="fetch-source-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|The queued source file details|[QueuedSourceResponse](#schemaqueuedsourceresponse)|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|A list of validation and other errors|[IngestErrorResponse](#schemaingesterrorresponse)|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+DeveloperKey
+</aside>
+
+## List Sources
+
+<a id="opIdgetSources"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://api.shotstack.io/ingest/{version}/sources \
+  -H 'Accept: application/json' \
+  -H 'x-api-key: API_KEY'
+
+```
+
+```http
+GET https://api.shotstack.io/ingest/{version}/sources HTTP/1.1
+Host: api.shotstack.io
+Accept: application/json
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json',
+  'x-api-key':'API_KEY'
+};
+
+fetch('https://api.shotstack.io/ingest/{version}/sources',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```php
+<?php
+
+require 'vendor/autoload.php';
+
+$headers = array(
+    'Accept' => 'application/json',
+    'x-api-key' => 'API_KEY',
+);
+
+$client = new \GuzzleHttp\Client();
+
+// Define array of request body.
+$request_body = array();
+
+try {
+    $response = $client->request('GET','https://api.shotstack.io/ingest/{version}/sources', array(
+        'headers' => $headers,
+        'json' => $request_body,
+       )
+    );
+    print_r($response->getBody()->getContents());
+ }
+ catch (\GuzzleHttp\Exception\BadResponseException $e) {
+    // handle exception or api errors.
+    print_r($e->getMessage());
+ }
+
+ // ...
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json',
+  'x-api-key' => 'API_KEY'
+}
+
+result = RestClient.get 'https://api.shotstack.io/ingest/{version}/sources',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'x-api-key': 'API_KEY'
+}
+
+r = requests.get('https://api.shotstack.io/ingest/{version}/sources', headers = headers)
+
+print(r.json())
+
+```
+
+```java
+URL obj = new URL("https://api.shotstack.io/ingest/{version}/sources");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        "x-api-key": []string{"API_KEY"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "https://api.shotstack.io/ingest/{version}/sources", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`GET /sources`
+
+Retrieve a list of ingested source files stored against a users account. The API key is used to determine which
+files are associated to the user.
+
+**Base URL:** https://api.shotstack.io/ingest/{version}
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "data": [
+    {
+      "type": "source",
+      "id": "zzytey4v-32km-kq1z-aftr-3kcuqi0brad2",
+      "attributes": {
+        "id": "zzytey4v-32km-kq1z-aftr-3kcuqi0brad2",
+        "owner": "5ca6hu7s9k",
+        "input": "https://github.com/shotstack/test-media/raw/main/captioning/scott-ko.mp4",
+        "source": "https://shotstack-ingest-api-v1-sources.s3.ap-southeast-2.amazonaws.com/5ca6hu7s9k/zzytey4v-32km-kq1z-aftr-3kcuqi0brad2/source.mp4",
+        "status": "ready",
+        "width": 1920,
+        "height": 1080,
+        "duration": 25.86,
+        "fps": 23.967,
+        "created": "2023-01-02T01:47:18.973Z",
+        "updated": "2023-01-02T01:47:37.260Z"
+      }
+    }
+  ]
+}
+```
+
+<h3 id="list-sources-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|The list of ingested source files stored against a users account|[SourceListResponse](#schemasourcelistresponse)|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+DeveloperKey
+</aside>
+
+## Get Source
+
+<a id="opIdgetSource"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://api.shotstack.io/ingest/{version}/sources/{id} \
+  -H 'Accept: application/json' \
+  -H 'x-api-key: API_KEY'
+
+```
+
+```http
+GET https://api.shotstack.io/ingest/{version}/sources/{id} HTTP/1.1
+Host: api.shotstack.io
+Accept: application/json
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json',
+  'x-api-key':'API_KEY'
+};
+
+fetch('https://api.shotstack.io/ingest/{version}/sources/{id}',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```php
+<?php
+
+require 'vendor/autoload.php';
+
+$headers = array(
+    'Accept' => 'application/json',
+    'x-api-key' => 'API_KEY',
+);
+
+$client = new \GuzzleHttp\Client();
+
+// Define array of request body.
+$request_body = array();
+
+try {
+    $response = $client->request('GET','https://api.shotstack.io/ingest/{version}/sources/{id}', array(
+        'headers' => $headers,
+        'json' => $request_body,
+       )
+    );
+    print_r($response->getBody()->getContents());
+ }
+ catch (\GuzzleHttp\Exception\BadResponseException $e) {
+    // handle exception or api errors.
+    print_r($e->getMessage());
+ }
+
+ // ...
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json',
+  'x-api-key' => 'API_KEY'
+}
+
+result = RestClient.get 'https://api.shotstack.io/ingest/{version}/sources/{id}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'x-api-key': 'API_KEY'
+}
+
+r = requests.get('https://api.shotstack.io/ingest/{version}/sources/{id}', headers = headers)
+
+print(r.json())
+
+```
+
+```java
+URL obj = new URL("https://api.shotstack.io/ingest/{version}/sources/{id}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        "x-api-key": []string{"API_KEY"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "https://api.shotstack.io/ingest/{version}/sources/{id}", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`GET /sources/{id}`
+
+Fetch a source file details by its id.
+
+**Base URL:** https://api.shotstack.io/ingest/{version}
+
+<h3 id="get-source-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|id|path|string|true|The id of the source file in [KSUID](https://github.com/segmentio/ksuid#what-is-a-ksuid) format.|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "data": {
+    "type": "source",
+    "id": "zzytey4v-32km-kq1z-aftr-3kcuqi0brad2",
+    "attributes": {
+      "id": "zzytey4v-32km-kq1z-aftr-3kcuqi0brad2",
+      "owner": "5ca6hu7s9k",
+      "input": "https://github.com/shotstack/test-media/raw/main/captioning/scott-ko.mp4",
+      "source": "https://shotstack-ingest-api-v1-sources.s3.ap-southeast-2.amazonaws.com/5ca6hu7s9k/zzytey4v-32km-kq1z-aftr-3kcuqi0brad2/source.mp4",
+      "status": "ready",
+      "width": 1920,
+      "height": 1080,
+      "duration": 25.86,
+      "fps": 23.967,
+      "created": "2023-01-02T01:47:18.973Z",
+      "updated": "2023-01-02T01:47:37.260Z"
+    }
+  }
+}
+```
+
+<h3 id="get-source-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Get source by id|[SourceResponse](#schemasourceresponse)|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+DeveloperKey
+</aside>
+
+## Delete Source
+
+<a id="opIddeleteSource"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X DELETE https://api.shotstack.io/ingest/{version}/sources/{id} \
+  -H 'x-api-key: API_KEY'
+
+```
+
+```http
+DELETE https://api.shotstack.io/ingest/{version}/sources/{id} HTTP/1.1
+Host: api.shotstack.io
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+
+const headers = {
+  'x-api-key':'API_KEY'
+};
+
+fetch('https://api.shotstack.io/ingest/{version}/sources/{id}',
+{
+  method: 'DELETE',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```php
+<?php
+
+require 'vendor/autoload.php';
+
+$headers = array(
+    'x-api-key' => 'API_KEY',
+);
+
+$client = new \GuzzleHttp\Client();
+
+// Define array of request body.
+$request_body = array();
+
+try {
+    $response = $client->request('DELETE','https://api.shotstack.io/ingest/{version}/sources/{id}', array(
+        'headers' => $headers,
+        'json' => $request_body,
+       )
+    );
+    print_r($response->getBody()->getContents());
+ }
+ catch (\GuzzleHttp\Exception\BadResponseException $e) {
+    // handle exception or api errors.
+    print_r($e->getMessage());
+ }
+
+ // ...
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'x-api-key' => 'API_KEY'
+}
+
+result = RestClient.delete 'https://api.shotstack.io/ingest/{version}/sources/{id}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'x-api-key': 'API_KEY'
+}
+
+r = requests.delete('https://api.shotstack.io/ingest/{version}/sources/{id}', headers = headers)
+
+print(r.json())
+
+```
+
+```java
+URL obj = new URL("https://api.shotstack.io/ingest/{version}/sources/{id}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("DELETE");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "x-api-key": []string{"API_KEY"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("DELETE", "https://api.shotstack.io/ingest/{version}/sources/{id}", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`DELETE /sources/{id}`
+
+Delete an ingested source file by its id.
+
+**Base URL:** https://api.shotstack.io/ingest/{version}
+
+<h3 id="delete-source-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|id|path|string|true|The id of the source file in [KSUID](https://github.com/segmentio/ksuid#what-is-a-ksuid) format.|
+
+<h3 id="delete-source-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|An empty response signifying the ingested source file has been deleted.|None|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+DeveloperKey
+</aside>
+
+## Direct Upload
+
+<a id="opIdgetUploadSignedUrl"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X POST https://api.shotstack.io/edit/{version}/upload \
+  -H 'Accept: application/json' \
+  -H 'x-api-key: API_KEY'
+
+```
+
+```http
+POST https://api.shotstack.io/edit/{version}/upload HTTP/1.1
+Host: api.shotstack.io
+Accept: application/json
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json',
+  'x-api-key':'API_KEY'
+};
+
+fetch('https://api.shotstack.io/edit/{version}/upload',
+{
+  method: 'POST',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```php
+<?php
+
+require 'vendor/autoload.php';
+
+$headers = array(
+    'Accept' => 'application/json',
+    'x-api-key' => 'API_KEY',
+);
+
+$client = new \GuzzleHttp\Client();
+
+// Define array of request body.
+$request_body = array();
+
+try {
+    $response = $client->request('POST','https://api.shotstack.io/edit/{version}/upload', array(
+        'headers' => $headers,
+        'json' => $request_body,
+       )
+    );
+    print_r($response->getBody()->getContents());
+ }
+ catch (\GuzzleHttp\Exception\BadResponseException $e) {
+    // handle exception or api errors.
+    print_r($e->getMessage());
+ }
+
+ // ...
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json',
+  'x-api-key' => 'API_KEY'
+}
+
+result = RestClient.post 'https://api.shotstack.io/edit/{version}/upload',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'x-api-key': 'API_KEY'
+}
+
+r = requests.post('https://api.shotstack.io/edit/{version}/upload', headers = headers)
+
+print(r.json())
+
+```
+
+```java
+URL obj = new URL("https://api.shotstack.io/edit/{version}/upload");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        "x-api-key": []string{"API_KEY"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("POST", "https://api.shotstack.io/edit/{version}/upload", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`POST /upload`
+
+Request a signed URL to upload a file to. Use the signed URL to send a PUT request with the binary file. Using 
+Curl you can use a command like:
+    
+`curl -X PUT -T video.mp4 {data.attributes.url}`
+    
+Where **data.attributes.url** is the signed URL returned in the response.
+
+**Base URL:** https://api.shotstack.io/ingest/{version}
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "data": {
+    "type": "upload",
+    "id": "zzytey4v-32km-kq1z-aftr-3kcuqi0brad2",
+    "attributes": {
+      "id": "zzytey4v-32km-kq1z-aftr-3kcuqi0brad2",
+      "url": "https://shotstack-ingest-api-v1-sources.s3.ap-southeast-2.amazonaws.com/5ca6hu7s9k/zzytey4v-32km-kq1z-aftr-3kcuqi0brad2/source?AWSAccessKeyId=ASIAWJV3NVDML6LI2ZVG&Expires=1672819007&Signature=9M76gBA%2FghV8ZYvGTp3alo5Ya%2Fk%3D&x-amz-acl=public-read&x-amz-security-token=IQoJb3JpZ2luX2VjEJ%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDmFwLXNvdXRoZWFzdC0yIkcwRQIhAJHrqMCRk7ACXuXmJICTkADbx11e2wUP0RZ3KRdN3%2BGwAiAYt%2FIHlM8rcplCgvsvqH%2BBtSrlCW%2BUeZstwuwgq45Y3iqbAwjo%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAMaDDQzMzExNTIxMTk5MiIMtFX%2Bb1klptd8HXQvKu8Cd0xpHti7cRWkPxQz3foEWSYu1U8In64Qsi6TFK%2BmiOhVnUkHK%2BLSIwF1yQFMK2oTzVXwrEFEsyqlf%2FPZ9j3OL9eLlB7G5AqbC16hjXXR3psipp0dE2uvCV2d%2BIDYgcf1MKmzE0FDfN4wyTez%2Bd%2F3y8nfAtWB%2FCB0wU8AtKNUI7hwNbCYMgCa8QUeAH2UOrriDaN379vKXK%2B1XVplhhuvLX3aC1D0St2U6lC5yaDtZbLGEyymQPhgpp5Mam6jVzHVXXX4%2FvkQSNWbDMuMFd13fqdut9uMPkq4vhZgCmyQsibC7AnrK21QopLY%2F0vhHvPUhSkzRDKjiQou0vDrbTnT4yJLY5RCs9G65yisi6jbyUUbJTUgrME7PPPihs7kM5L%2FGjhmKqe9rNPuzKC%2FISRcmVtAPleX7tqPI7H%2BuEIobS%2FE%2B1jV4oNUFQA549prw3546FXds%2FgCLKRU%2BvxUyi2yKS8U0QC%2FNLMg2p9c81%2BaDCCqxtSdBjqdAcxGASzQwP6hHbfzC2hlnxn%2Bnf4MddgpIPFxvpV18Sy9vUYSU52mrsZK%2FxPcxrg1AM94v0aaW%2FaRE1ESTF2hXJrAJZkDNDPEBQBmcP3ylj4Bf5MsP%2FCspFoF6TvXZPYkH1lSlWHT8OTOugLji7%2F9qb9a6bKzFJqvcS0EiT7v5LCOMOpVA%2FAg9RM0yerN4Zot%2FREHgCSzajNII9Xio%2F0%3D",
+      "expires": "2023-01-02T02:47:37.260Z"
+    }
+  }
+}
+```
+
+<h3 id="direct-upload-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|The id and signed URL to upload to.|[UploadResponse](#schemauploadresponse)|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+DeveloperKey
+</aside>
+
 # Schemas
 
 <h2 id="tocS_Edit">Edit</h2>
-<!-- backwards compatibility -->
 <a id="schemaedit"></a>
 <a id="schema_Edit"></a>
 <a id="tocSedit"></a>
@@ -3251,7 +4217,7 @@ DeveloperKey
   "output": {
     "format": "mp4",
     "resolution": "sd",
-    "aspectRatio": 969,
+    "aspectRatio": "16:9",
     "size": {
       "width": 1200,
       "height": 800
@@ -3311,7 +4277,6 @@ An edit defines the arrangement of a video on a timeline, an audio edit or an im
 |disk|mount|
 
 <h2 id="tocS_Timeline">Timeline</h2>
-<!-- backwards compatibility -->
 <a id="schematimeline"></a>
 <a id="schema_Timeline"></a>
 <a id="tocStimeline"></a>
@@ -3398,7 +4363,6 @@ A timeline represents the contents of a video edit over time, an audio edit over
 |cache|boolean|false|none|Disable the caching of ingested source footage and assets. See  [caching](https://shotstack.io/docs/guide/architecting-an-application/caching) for more details.|
 
 <h2 id="tocS_Soundtrack">Soundtrack</h2>
-<!-- backwards compatibility -->
 <a id="schemasoundtrack"></a>
 <a id="schema_Soundtrack"></a>
 <a id="tocSsoundtrack"></a>
@@ -3432,7 +4396,6 @@ A music or audio file in mp3 format that plays for the duration of the rendered 
 |effect|fadeInFadeOut|
 
 <h2 id="tocS_Font">Font</h2>
-<!-- backwards compatibility -->
 <a id="schemafont"></a>
 <a id="schema_Font"></a>
 <a id="tocSfont"></a>
@@ -3454,7 +4417,6 @@ Download a custom font to use with the HTML asset type, using the font name in t
 |src|string|true|none|The URL of the font file. The URL must be publicly accessible or include credentials.|
 
 <h2 id="tocS_Track">Track</h2>
-<!-- backwards compatibility -->
 <a id="schematrack"></a>
 <a id="schema_Track"></a>
 <a id="tocStrack"></a>
@@ -3521,7 +4483,6 @@ A track contains an array of clips. Tracks are layered on top of each other in t
 |clips|[[Clip](#schemaclip)]|true|none|An array of Clips comprising of TitleClip, ImageClip or VideoClip.|
 
 <h2 id="tocS_Clip">Clip</h2>
-<!-- backwards compatibility -->
 <a id="schemaclip"></a>
 <a id="schema_Clip"></a>
 <a id="tocSclip"></a>
@@ -3581,7 +4542,7 @@ A clip is a container for a specific type of asset, i.e. a title, image, video, 
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|asset|[Asset](#schemaasset)|true|none|The type of asset to display for the duration of the Clip. Value must be one of:<br>  <ul><br>    <li><a href="#tocs_videoasset">VideoAsset</a></li><br>    <li><a href="#tocs_imageasset">ImageAsset</a></li><br>    <li><a href="#tocs_titleasset">TitleAsset</a></li><br>    <li><a href="#tocs_htmlasset">HtmlAsset</a></li><br>    <li><a href="#tocs_audioasset">AudioAsset</a></li><br>    <li><a href="#tocs_lumaasset">LumaAsset</a></li><br>  </ul>|
+|asset|[Asset](#schemaasset)|true|none|The type of asset to display for the duration of the Clip. Value must be one of: <ul><br>  <li><a href="#tocs_videoasset">VideoAsset</a></li><br>  <li><a href="#tocs_imageasset">ImageAsset</a></li><br>  <li><a href="#tocs_titleasset">TitleAsset</a></li><br>  <li><a href="#tocs_htmlasset">HtmlAsset</a></li><br>  <li><a href="#tocs_audioasset">AudioAsset</a></li><br>  <li><a href="#tocs_lumaasset">LumaAsset</a></li><br></ul>|
 |start|number|true|none|The start position of the Clip on the timeline, in seconds.|
 |length|number|true|none|The length, in seconds, the Clip should play for.|
 |fit|string|false|none|Set how the asset should be scaled to fit the viewport using one of the following options: <br>  <ul><br>    <li>`crop` <b>(default)</b> - scale the asset to fill the viewport while maintaining the aspect ratio. The asset will be cropped if it exceeds the bounds of the viewport.</li><br>    <li>`cover` - stretch the asset to fill the viewport without maintaining the aspect ratio.</li><br>    <li>`contain` - fit the entire asset within the viewport while maintaining the original aspect ratio.</li><br>    <li>`none` - preserves the original asset dimensions and does not apply any scaling.</li><br>  </ul>|
@@ -3638,7 +4599,6 @@ A clip is a container for a specific type of asset, i.e. a title, image, video, 
 |filter|negative|
 
 <h2 id="tocS_Asset">Asset</h2>
-<!-- backwards compatibility -->
 <a id="schemaasset"></a>
 <a id="schema_Asset"></a>
 <a id="tocSasset"></a>
@@ -3661,15 +4621,14 @@ A clip is a container for a specific type of asset, i.e. a title, image, video, 
 
 ```
 
-The type of asset to display for the duration of the Clip. Value must be one of:
-  <ul>
-    <li><a href="#tocs_videoasset">VideoAsset</a></li>
-    <li><a href="#tocs_imageasset">ImageAsset</a></li>
-    <li><a href="#tocs_titleasset">TitleAsset</a></li>
-    <li><a href="#tocs_htmlasset">HtmlAsset</a></li>
-    <li><a href="#tocs_audioasset">AudioAsset</a></li>
-    <li><a href="#tocs_lumaasset">LumaAsset</a></li>
-  </ul>
+The type of asset to display for the duration of the Clip. Value must be one of: <ul>
+  <li><a href="#tocs_videoasset">VideoAsset</a></li>
+  <li><a href="#tocs_imageasset">ImageAsset</a></li>
+  <li><a href="#tocs_titleasset">TitleAsset</a></li>
+  <li><a href="#tocs_htmlasset">HtmlAsset</a></li>
+  <li><a href="#tocs_audioasset">AudioAsset</a></li>
+  <li><a href="#tocs_lumaasset">LumaAsset</a></li>
+</ul>
 
 ### Properties
 
@@ -3710,7 +4669,6 @@ xor
 |*anonymous*|[LumaAsset](#schemalumaasset)|false|none|The LumaAsset is used to create luma matte masks, transitions and effects between other assets. A luma matte is a grey scale image or animated video where the black areas are transparent and the white areas solid. The luma matte animation should be provided as an mp4 video file. The src must be a publicly accessible URL to the file.|
 
 <h2 id="tocS_VideoAsset">VideoAsset</h2>
-<!-- backwards compatibility -->
 <a id="schemavideoasset"></a>
 <a id="schema_VideoAsset"></a>
 <a id="tocSvideoasset"></a>
@@ -3755,7 +4713,6 @@ The VideoAsset is used to create video sequences from video files. The src must 
 |volumeEffect|fadeInFadeOut|
 
 <h2 id="tocS_ImageAsset">ImageAsset</h2>
-<!-- backwards compatibility -->
 <a id="schemaimageasset"></a>
 <a id="schema_ImageAsset"></a>
 <a id="tocSimageasset"></a>
@@ -3786,7 +4743,6 @@ The ImageAsset is used to create video from images to compose an image. The src 
 |crop|[Crop](#schemacrop)|false|none|Crop the sides of an asset by a relative amount. The size of the crop is specified using a scale between 0 and 1, relative to the screen width - i.e a left crop of 0.5 will crop half of the asset from the left, a top crop  of 0.25 will crop the top by quarter of the asset.|
 
 <h2 id="tocS_TitleAsset">TitleAsset</h2>
-<!-- backwards compatibility -->
 <a id="schematitleasset"></a>
 <a id="schema_TitleAsset"></a>
 <a id="tocStitleasset"></a>
@@ -3858,7 +4814,6 @@ The TitleAsset clip type lets you create video titles from a text string and app
 |position|center|
 
 <h2 id="tocS_HtmlAsset">HtmlAsset</h2>
-<!-- backwards compatibility -->
 <a id="schemahtmlasset"></a>
 <a id="schema_HtmlAsset"></a>
 <a id="tocShtmlasset"></a>
@@ -3906,7 +4861,6 @@ The HtmlAsset clip type lets you create text based layout and formatting using H
 |position|center|
 
 <h2 id="tocS_AudioAsset">AudioAsset</h2>
-<!-- backwards compatibility -->
 <a id="schemaaudioasset"></a>
 <a id="schema_AudioAsset"></a>
 <a id="tocSaudioasset"></a>
@@ -3944,7 +4898,6 @@ The AudioAsset is used to add sound effects and audio at specific intervals on t
 |effect|fadeInFadeOut|
 
 <h2 id="tocS_LumaAsset">LumaAsset</h2>
-<!-- backwards compatibility -->
 <a id="schemalumaasset"></a>
 <a id="schema_LumaAsset"></a>
 <a id="tocSlumaasset"></a>
@@ -3970,7 +4923,6 @@ The LumaAsset is used to create luma matte masks, transitions and effects betwee
 |trim|number|false|none|The start trim point of the luma matte clip, in seconds (defaults to 0). Videos will start from the in trim point. A luma matte video will play until the file ends or the Clip length is reached.|
 
 <h2 id="tocS_Transition">Transition</h2>
-<!-- backwards compatibility -->
 <a id="schematransition"></a>
 <a id="schema_Transition"></a>
 <a id="tocStransition"></a>
@@ -4121,7 +5073,6 @@ In and out transitions for a clip - i.e. fade in and fade out
 |out|zoom|
 
 <h2 id="tocS_Offset">Offset</h2>
-<!-- backwards compatibility -->
 <a id="schemaoffset"></a>
 <a id="schema_Offset"></a>
 <a id="tocSoffset"></a>
@@ -4145,7 +5096,6 @@ Offsets the position of an asset horizontally or vertically by a relative distan
 |y|number(float)|false|none|Offset an asset on the vertical axis (up or down), range varies from -10 to 10. Positive numbers move the asset up, negative down. For all assets except titles the distance moved is relative to the height  of the viewport - i.e. an Y offset of 0.5 will move the asset up half the  screen height.|
 
 <h2 id="tocS_Crop">Crop</h2>
-<!-- backwards compatibility -->
 <a id="schemacrop"></a>
 <a id="schema_Crop"></a>
 <a id="tocScrop"></a>
@@ -4173,7 +5123,6 @@ Crop the sides of an asset by a relative amount. The size of the crop is specifi
 |right|number(float)|false|none|Crop from the left of the asset|
 
 <h2 id="tocS_Transformation">Transformation</h2>
-<!-- backwards compatibility -->
 <a id="schematransformation"></a>
 <a id="schema_Transformation"></a>
 <a id="tocStransformation"></a>
@@ -4207,7 +5156,6 @@ Apply one or more transformations to a clip. Transformations alter the visual pr
 |flip|[FlipTransformation](#schemafliptransformation)|false|none|Flip a clip vertically or horizontally. Acts as a mirror effect of the clip along the selected plane.|
 
 <h2 id="tocS_RotateTransformation">RotateTransformation</h2>
-<!-- backwards compatibility -->
 <a id="schemarotatetransformation"></a>
 <a id="schema_RotateTransformation"></a>
 <a id="tocSrotatetransformation"></a>
@@ -4229,7 +5177,6 @@ Rotate a clip by the specified angle in degrees. Rotation origin is set based on
 |angle|integer|false|none|The angle to rotate the clip. Can be 0 to 360, or 0 to -360. Using a positive number rotates the clip clockwise, negative numbers counter-clockwise.|
 
 <h2 id="tocS_SkewTransformation">SkewTransformation</h2>
-<!-- backwards compatibility -->
 <a id="schemaskewtransformation"></a>
 <a id="schema_SkewTransformation"></a>
 <a id="tocSskewtransformation"></a>
@@ -4253,7 +5200,6 @@ Skew a clip so its edges are sheared at an angle. Use values between 0 and 3. Ov
 |y|number(float)|false|none|Skew the clip along it's y axis.|
 
 <h2 id="tocS_FlipTransformation">FlipTransformation</h2>
-<!-- backwards compatibility -->
 <a id="schemafliptransformation"></a>
 <a id="schema_FlipTransformation"></a>
 <a id="tocSfliptransformation"></a>
@@ -4277,7 +5223,6 @@ Flip a clip vertically or horizontally. Acts as a mirror effect of the clip alon
 |vertical|boolean|false|none|Flip a clip vertically.|
 
 <h2 id="tocS_MergeField">MergeField</h2>
-<!-- backwards compatibility -->
 <a id="schemamergefield"></a>
 <a id="schema_MergeField"></a>
 <a id="tocSmergefield"></a>
@@ -4301,7 +5246,6 @@ A merge field consists of a key; `find`, and a value; `replace`. Merge fields ca
 |replace|any|true|none|The replacement value. The replacement can be any valid JSON type - string, boolean, number, etc...|
 
 <h2 id="tocS_Output">Output</h2>
-<!-- backwards compatibility -->
 <a id="schemaoutput"></a>
 <a id="schema_Output"></a>
 <a id="tocSoutput"></a>
@@ -4311,7 +5255,7 @@ A merge field consists of a key; `find`, and a value; `replace`. Merge fields ca
 {
   "format": "mp4",
   "resolution": "sd",
-  "aspectRatio": 969,
+  "aspectRatio": "16:9",
   "size": {
     "width": 1200,
     "height": 800
@@ -4377,11 +5321,11 @@ The output format, render range and type of media to generate.
 |resolution|sd|
 |resolution|hd|
 |resolution|1080|
-|aspectRatio|969|
-|aspectRatio|556|
-|aspectRatio|61|
-|aspectRatio|245|
-|aspectRatio|243|
+|aspectRatio|16:9|
+|aspectRatio|9:16|
+|aspectRatio|1:1|
+|aspectRatio|4:5|
+|aspectRatio|4:3|
 |fps|12|
 |fps|15|
 |fps|23.976|
@@ -4399,7 +5343,6 @@ The output format, render range and type of media to generate.
 |quality|high|
 
 <h2 id="tocS_Size">Size</h2>
-<!-- backwards compatibility -->
 <a id="schemasize"></a>
 <a id="schema_Size"></a>
 <a id="tocSsize"></a>
@@ -4423,7 +5366,6 @@ Set a custom size for a video or image in pixels. When using a custom size omit 
 |height|integer|false|none|Set a custom height for the video or image file in pixels. Value must be divisible by 2. Maximum video height is 1920px, maximum image height is 4096px.|
 
 <h2 id="tocS_Range">Range</h2>
-<!-- backwards compatibility -->
 <a id="schemarange"></a>
 <a id="schema_Range"></a>
 <a id="tocSrange"></a>
@@ -4447,7 +5389,6 @@ Specify a time range to render, i.e. to render only a portion of a video or audi
 |length|number(float)|false|none|The length of the portion of the video or audio to render - i.e. render 6 seconds of the video.|
 
 <h2 id="tocS_Poster">Poster</h2>
-<!-- backwards compatibility -->
 <a id="schemaposter"></a>
 <a id="schema_Poster"></a>
 <a id="tocSposter"></a>
@@ -4469,7 +5410,6 @@ Generate a poster image for the video at a specific point from the timeline. The
 |capture|number|true|none|The point on the timeline in seconds to capture a single frame to use as the poster image.|
 
 <h2 id="tocS_Thumbnail">Thumbnail</h2>
-<!-- backwards compatibility -->
 <a id="schemathumbnail"></a>
 <a id="schema_Thumbnail"></a>
 <a id="tocSthumbnail"></a>
@@ -4493,7 +5433,6 @@ Generate a thumbnail image for the video or image at a specific point from the t
 |scale|number|true|none|Scale the thumbnail size to a fraction of the viewport size - i.e. setting the scale to 0.5 will scale  the thumbnail to half the size of the viewport.|
 
 <h2 id="tocS_Destinations">Destinations</h2>
-<!-- backwards compatibility -->
 <a id="schemadestinations"></a>
 <a id="schema_Destinations"></a>
 <a id="tocSdestinations"></a>
@@ -4534,7 +5473,6 @@ or
 |*anonymous*|[S3Destination](#schemas3destination)|false|none|Send rendered videos to an [Amazon S3](https://shotstack.io/docs/guide/serving-assets/destinations/s3) bucket. Send files to any region with your own prefix and filename. AWS credentials are required and added via the [dashboard](https://dashboard.shotstack.io/integrations/s3), not in the request.|
 
 <h2 id="tocS_ShotstackDestination">ShotstackDestination</h2>
-<!-- backwards compatibility -->
 <a id="schemashotstackdestination"></a>
 <a id="schema_ShotstackDestination"></a>
 <a id="tocSshotstackdestination"></a>
@@ -4558,7 +5496,6 @@ Send rendered assets to the  [Shotstack hosting and CDN](https://shotstack.io/do
 |exclude|boolean|false|none|Set to `true` to [opt-out](https://shotstack.io/docs/guide/serving-assets/self-host) from the Shotstack hosting and CDN service. All files must be downloaded within 24 hours of rendering.|
 
 <h2 id="tocS_MuxDestination">MuxDestination</h2>
-<!-- backwards compatibility -->
 <a id="schemamuxdestination"></a>
 <a id="schema_MuxDestination"></a>
 <a id="tocSmuxdestination"></a>
@@ -4586,7 +5523,6 @@ Send rendered videos to the [Mux](https://shotstack.io/docs/guide/serving-assets
 |options|[MuxDestinationOptions](#schemamuxdestinationoptions)|false|none|Additional Mux configuration and features.|
 
 <h2 id="tocS_MuxDestinationOptions">MuxDestinationOptions</h2>
-<!-- backwards compatibility -->
 <a id="schemamuxdestinationoptions"></a>
 <a id="schema_MuxDestinationOptions"></a>
 <a id="tocSmuxdestinationoptions"></a>
@@ -4610,7 +5546,6 @@ Pass additional options to control how Mux processes video. Currently supports p
 |playbackPolicy|[string]|false|none|Sets the Mux `playback_policy` option. Value is an array of strings - use `public`, `signed`, or both.|
 
 <h2 id="tocS_S3Destination">S3Destination</h2>
-<!-- backwards compatibility -->
 <a id="schemas3destination"></a>
 <a id="schema_S3Destination"></a>
 <a id="tocSs3destination"></a>
@@ -4640,7 +5575,6 @@ Send rendered videos to an [Amazon S3](https://shotstack.io/docs/guide/serving-a
 |options|[S3DestinationOptions](#schemas3destinationoptions)|false|none|Additional S3 configuration options.|
 
 <h2 id="tocS_S3DestinationOptions">S3DestinationOptions</h2>
-<!-- backwards compatibility -->
 <a id="schemas3destinationoptions"></a>
 <a id="schema_S3DestinationOptions"></a>
 <a id="tocSs3destinationoptions"></a>
@@ -4670,7 +5604,6 @@ Pass additional options to control how files are stored in S3.
 |acl|string|false|none|Sets the S3 Access Control List (acl) permissions. Default is `private`. Must use a valid  S3 [Canned ACL](https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#canned-acl).|
 
 <h2 id="tocS_Template">Template</h2>
-<!-- backwards compatibility -->
 <a id="schematemplate"></a>
 <a id="schema_Template"></a>
 <a id="tocStemplate"></a>
@@ -4747,7 +5680,7 @@ Pass additional options to control how files are stored in S3.
     "output": {
       "format": "mp4",
       "resolution": "sd",
-      "aspectRatio": 969,
+      "aspectRatio": "16:9",
       "size": {
         "width": 1200,
         "height": 800
@@ -4798,7 +5731,6 @@ A template is a saved [Edit](#tocs_edit) than can be loaded and re-used.
 |template|[Edit](#schemaedit)|false|none|An edit defines the arrangement of a video on a timeline, an audio edit or an image design and the output format.|
 
 <h2 id="tocS_TemplateRender">TemplateRender</h2>
-<!-- backwards compatibility -->
 <a id="schematemplaterender"></a>
 <a id="schema_TemplateRender"></a>
 <a id="tocStemplaterender"></a>
@@ -4826,8 +5758,28 @@ Configure the id and optional merge fields to render a template by id.
 |id|string|true|none|The id of the template to render in UUID format.|
 |merge|[[MergeField](#schemamergefield)]|false|none|An array of key/value pairs that provides an easy way to create templates with placeholders. The placeholders can be used to find and replace keys with values. For example you can search for the placeholder `{{NAME}}` and replace it with the value `Jane`.|
 
+<h2 id="tocS_Source">Source</h2>
+<a id="schemasource"></a>
+<a id="schema_Source"></a>
+<a id="tocSsource"></a>
+<a id="tocssource"></a>
+
+```json
+{
+  "url": "https://github.com/shotstack/test-media/raw/main/captioning/scott-ko.mp4"
+}
+
+```
+
+The details of the file to be ingested
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|url|string|false|none|The URL of the file to be ingested. The URL must be publicly accessible or include credentials.|
+
 <h2 id="tocS_QueuedResponse">QueuedResponse</h2>
-<!-- backwards compatibility -->
 <a id="schemaqueuedresponse"></a>
 <a id="schema_QueuedResponse"></a>
 <a id="tocSqueuedresponse"></a>
@@ -4856,7 +5808,6 @@ The response received after a [render request](#render-asset) or [template rende
 |response|[QueuedResponseData](#schemaqueuedresponsedata)|true|none|`QueuedResponseData` or an error message.|
 
 <h2 id="tocS_QueuedResponseData">QueuedResponseData</h2>
-<!-- backwards compatibility -->
 <a id="schemaqueuedresponsedata"></a>
 <a id="schema_QueuedResponseData"></a>
 <a id="tocSqueuedresponsedata"></a>
@@ -4880,7 +5831,6 @@ The response data returned with the [QueuedResponse](#tocs_queuedresponse).
 |id|string|true|none|The id of the render task in UUID format.|
 
 <h2 id="tocS_RenderResponse">RenderResponse</h2>
-<!-- backwards compatibility -->
 <a id="schemarenderresponse"></a>
 <a id="schema_RenderResponse"></a>
 <a id="tocSrenderresponse"></a>
@@ -4969,7 +5919,7 @@ The response data returned with the [QueuedResponse](#tocs_queuedresponse).
       "output": {
         "format": "mp4",
         "resolution": "sd",
-        "aspectRatio": 969,
+        "aspectRatio": "16:9",
         "size": {
           "width": 1200,
           "height": 800
@@ -5024,7 +5974,6 @@ The response received after a [render status request](#get-render-status) is sub
 |response|[RenderResponseData](#schemarenderresponsedata)|true|none|`RenderResponse` or an error message.|
 
 <h2 id="tocS_RenderResponseData">RenderResponseData</h2>
-<!-- backwards compatibility -->
 <a id="schemarenderresponsedata"></a>
 <a id="schema_RenderResponseData"></a>
 <a id="tocSrenderresponsedata"></a>
@@ -5110,7 +6059,7 @@ The response received after a [render status request](#get-render-status) is sub
     "output": {
       "format": "mp4",
       "resolution": "sd",
-      "aspectRatio": 969,
+      "aspectRatio": "16:9",
       "size": {
         "width": 1200,
         "height": 800
@@ -5185,7 +6134,6 @@ The response data returned with the [RenderResponse](#tocs_renderresponse) inclu
 |status|failed|
 
 <h2 id="tocS_TemplateResponse">TemplateResponse</h2>
-<!-- backwards compatibility -->
 <a id="schematemplateresponse"></a>
 <a id="schema_TemplateResponse"></a>
 <a id="tocStemplateresponse"></a>
@@ -5214,7 +6162,6 @@ The response received after a [template](#create-template) is submitted. The tem
 |response|[TemplateResponseData](#schematemplateresponsedata)|true|none|`TemplateResponseData` or an error message.|
 
 <h2 id="tocS_TemplateResponseData">TemplateResponseData</h2>
-<!-- backwards compatibility -->
 <a id="schematemplateresponsedata"></a>
 <a id="schema_TemplateResponseData"></a>
 <a id="tocStemplateresponsedata"></a>
@@ -5238,7 +6185,6 @@ The response data returned with the [TemplateResponse](#tocs_templateresponse).
 |id|string|true|none|The unique id of the template in UUID format.|
 
 <h2 id="tocS_TemplateDataResponse">TemplateDataResponse</h2>
-<!-- backwards compatibility -->
 <a id="schematemplatedataresponse"></a>
 <a id="schema_TemplateDataResponse"></a>
 <a id="tocStemplatedataresponse"></a>
@@ -5320,7 +6266,7 @@ The response data returned with the [TemplateResponse](#tocs_templateresponse).
       "output": {
         "format": "mp4",
         "resolution": "sd",
-        "aspectRatio": 969,
+        "aspectRatio": "16:9",
         "size": {
           "width": 1200,
           "height": 800
@@ -5368,12 +6314,11 @@ The template data including the template name and [Edit](#tocs_edit).
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|success|boolean|true|none|`true` if successfully created, else `false`.|
+|success|boolean|true|none|`true` if successfully returned, else `false`.|
 |message|string|true|none|`OK`, `Bad Request` or an error message.|
 |response|[TemplateDataResponseData](#schematemplatedataresponsedata)|true|none|`TemplateDataResponseData` or an error message.|
 
 <h2 id="tocS_TemplateDataResponseData">TemplateDataResponseData</h2>
-<!-- backwards compatibility -->
 <a id="schematemplatedataresponsedata"></a>
 <a id="schema_TemplateDataResponseData"></a>
 <a id="tocStemplatedataresponsedata"></a>
@@ -5452,7 +6397,7 @@ The template data including the template name and [Edit](#tocs_edit).
     "output": {
       "format": "mp4",
       "resolution": "sd",
-      "aspectRatio": 969,
+      "aspectRatio": "16:9",
       "size": {
         "width": 1200,
         "height": 800
@@ -5505,7 +6450,6 @@ The response data returned with the [TemplateDataResponse](#tocs_templatedatares
 |template|[Edit](#schemaedit)|true|none|The [Edit](#tocs_edit) template.|
 
 <h2 id="tocS_TemplateListResponse">TemplateListResponse</h2>
-<!-- backwards compatibility -->
 <a id="schematemplatelistresponse"></a>
 <a id="schema_TemplateListResponse"></a>
 <a id="tocStemplatelistresponse"></a>
@@ -5514,7 +6458,7 @@ The response data returned with the [TemplateDataResponse](#tocs_templatedatares
 ```json
 {
   "success": true,
-  "message": "Created",
+  "message": "OK",
   "response": {
     "owner": "5ca6hu7s9k",
     "templates": [
@@ -5536,12 +6480,11 @@ A list of previously saved templates.
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|success|boolean|true|none|`true` if successfully created, else `false`.|
-|message|string|true|none|`Created`, `Bad Request` or an error message.|
+|success|boolean|true|none|`true` if successfully returned, else `false`.|
+|message|string|true|none|`OK`, `Bad Request` or an error message.|
 |response|[TemplateListResponseData](#schematemplatelistresponsedata)|true|none|`TemplateListResponseData` or an error message.|
 
 <h2 id="tocS_TemplateListResponseData">TemplateListResponseData</h2>
-<!-- backwards compatibility -->
 <a id="schematemplatelistresponsedata"></a>
 <a id="schema_TemplateListResponseData"></a>
 <a id="tocStemplatelistresponsedata"></a>
@@ -5572,7 +6515,6 @@ The response data returned with the [TemplateListResponse](#tocs_templatelistres
 |templates|[[TemplateListResponseItem](#schematemplatelistresponseitem)]|true|none|The list of templates.|
 
 <h2 id="tocS_TemplateListResponseItem">TemplateListResponseItem</h2>
-<!-- backwards compatibility -->
 <a id="schematemplatelistresponseitem"></a>
 <a id="schema_TemplateListResponseItem"></a>
 <a id="tocStemplatelistresponseitem"></a>
@@ -5600,7 +6542,6 @@ The individual template item returned with the  [TemplateListResponseData](#tocs
 |updated|string|false|none|The time the template was last updated.|
 
 <h2 id="tocS_ProbeResponse">ProbeResponse</h2>
-<!-- backwards compatibility -->
 <a id="schemaproberesponse"></a>
 <a id="schema_ProbeResponse"></a>
 <a id="tocSproberesponse"></a>
@@ -5626,7 +6567,6 @@ The response received after a [probe request](#inspect-media) is submitted. The 
 |response|object|true|none|The response from FFprobe in JSON format.|
 
 <h2 id="tocS_AssetResponse">AssetResponse</h2>
-<!-- backwards compatibility -->
 <a id="schemaassetresponse"></a>
 <a id="schema_AssetResponse"></a>
 <a id="tocSassetresponse"></a>
@@ -5662,7 +6602,6 @@ The response returned by the Serve API [get asset](#get-asset) request. Includes
 |data|[AssetResponseData](#schemaassetresponsedata)|true|none|An asset resource.|
 
 <h2 id="tocS_AssetRenderResponse">AssetRenderResponse</h2>
-<!-- backwards compatibility -->
 <a id="schemaassetrenderresponse"></a>
 <a id="schema_AssetRenderResponse"></a>
 <a id="tocSassetrenderresponse"></a>
@@ -5700,7 +6639,6 @@ The response returned by the Serve API [get asset by render id](#get-asset-by-re
 |data|[[AssetResponseData](#schemaassetresponsedata)]|true|none|An array of asset resources grouped by render id.|
 
 <h2 id="tocS_AssetResponseData">AssetResponseData</h2>
-<!-- backwards compatibility -->
 <a id="schemaassetresponsedata"></a>
 <a id="schema_AssetResponseData"></a>
 <a id="tocSassetresponsedata"></a>
@@ -5735,7 +6673,6 @@ The type of resource (an asset) and attributes of the asset.
 |attributes|[AssetResponseAttributes](#schemaassetresponseattributes)|true|none|The asset attributes including render id, url, filename, file size, etc...|
 
 <h2 id="tocS_AssetResponseAttributes">AssetResponseAttributes</h2>
-<!-- backwards compatibility -->
 <a id="schemaassetresponseattributes"></a>
 <a id="schema_AssetResponseAttributes"></a>
 <a id="tocSassetresponseattributes"></a>
@@ -5782,4 +6719,438 @@ The list of asset attributes and their values.
 |status|ready|
 |status|failed|
 |status|deleted|
+
+<h2 id="tocS_QueuedSourceResponse">QueuedSourceResponse</h2>
+<a id="schemaqueuedsourceresponse"></a>
+<a id="schema_QueuedSourceResponse"></a>
+<a id="tocSqueuedsourceresponse"></a>
+<a id="tocsqueuedsourceresponse"></a>
+
+```json
+{
+  "data": {
+    "type": "source",
+    "id": "zzytey4v-32km-kq1z-aftr-3kcuqi0brad2"
+  }
+}
+
+```
+
+The response returned by the Ingest API [fetch source](#fetch-source) request. Includes the id of the source file. The response follows the [json:api](https://jsonapi.org/) specification.
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|data|[QueuedSourceResponseData](#schemaqueuedsourceresponsedata)|true|none|An source resource.|
+
+<h2 id="tocS_QueuedSourceResponseData">QueuedSourceResponseData</h2>
+<a id="schemaqueuedsourceresponsedata"></a>
+<a id="schema_QueuedSourceResponseData"></a>
+<a id="tocSqueuedsourceresponsedata"></a>
+<a id="tocsqueuedsourceresponsedata"></a>
+
+```json
+{
+  "type": "source",
+  "id": "zzytey4v-32km-kq1z-aftr-3kcuqi0brad2"
+}
+
+```
+
+The type of resource (a source) and the newly created source id. Returned with [QueuedSourceResponse](#tocs_queuedsourceresponse).
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|type|string|true|none|The type of resource, in this case it is a source.|
+|id|string|true|none|The source id|
+
+<h2 id="tocS_SourceListResponse">SourceListResponse</h2>
+<a id="schemasourcelistresponse"></a>
+<a id="schema_SourceListResponse"></a>
+<a id="tocSsourcelistresponse"></a>
+<a id="tocssourcelistresponse"></a>
+
+```json
+{
+  "data": [
+    {
+      "type": "source",
+      "id": "zzytey4v-32km-kq1z-aftr-3kcuqi0brad2",
+      "attributes": {
+        "id": "zzytey4v-32km-kq1z-aftr-3kcuqi0brad2",
+        "owner": "5ca6hu7s9k",
+        "input": "https://github.com/shotstack/test-media/raw/main/captioning/scott-ko.mp4",
+        "source": "https://shotstack-ingest-api-v1-sources.s3.ap-southeast-2.amazonaws.com/5ca6hu7s9k/zzytey4v-32km-kq1z-aftr-3kcuqi0brad2/source.mp4",
+        "status": "ready",
+        "width": 1920,
+        "height": 1080,
+        "duration": 25.86,
+        "fps": 23.967,
+        "created": "2023-01-02T01:47:18.973Z",
+        "updated": "2023-01-02T01:47:37.260Z"
+      }
+    }
+  ]
+}
+
+```
+
+A list of ingested source files.
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|data|[[SourceListResponseData](#schemasourcelistresponsedata)]|true|none|An array of ingested source files.|
+
+<h2 id="tocS_SourceListResponseData">SourceListResponseData</h2>
+<a id="schemasourcelistresponsedata"></a>
+<a id="schema_SourceListResponseData"></a>
+<a id="tocSsourcelistresponsedata"></a>
+<a id="tocssourcelistresponsedata"></a>
+
+```json
+{
+  "type": "source",
+  "id": "zzytey4v-32km-kq1z-aftr-3kcuqi0brad2",
+  "attributes": {
+    "id": "zzytey4v-32km-kq1z-aftr-3kcuqi0brad2",
+    "owner": "5ca6hu7s9k",
+    "input": "https://github.com/shotstack/test-media/raw/main/captioning/scott-ko.mp4",
+    "source": "https://shotstack-ingest-api-v1-sources.s3.ap-southeast-2.amazonaws.com/5ca6hu7s9k/zzytey4v-32km-kq1z-aftr-3kcuqi0brad2/source.mp4",
+    "status": "ready",
+    "width": 1920,
+    "height": 1080,
+    "duration": 25.86,
+    "fps": 23.967,
+    "created": "2023-01-02T01:47:18.973Z",
+    "updated": "2023-01-02T01:47:37.260Z"
+  }
+}
+
+```
+
+The type of resource (a source), it's id and attributes of the source file.
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|type|string|true|none|The type of resource, in this case it is a source.|
+|id|string|true|none|The source file id.|
+|attributes|[SourceListResponseAttributes](#schemasourcelistresponseattributes)|true|none|The source attributes including its url, status, width, height, duration, etc...|
+
+<h2 id="tocS_SourceListResponseAttributes">SourceListResponseAttributes</h2>
+<a id="schemasourcelistresponseattributes"></a>
+<a id="schema_SourceListResponseAttributes"></a>
+<a id="tocSsourcelistresponseattributes"></a>
+<a id="tocssourcelistresponseattributes"></a>
+
+```json
+{
+  "id": "zzytey4v-32km-kq1z-aftr-3kcuqi0brad2",
+  "owner": "5ca6hu7s9k",
+  "input": "https://github.com/shotstack/test-media/raw/main/captioning/scott-ko.mp4",
+  "source": "https://shotstack-ingest-api-v1-sources.s3.ap-southeast-2.amazonaws.com/5ca6hu7s9k/zzytey4v-32km-kq1z-aftr-3kcuqi0brad2/source.mp4",
+  "status": "ready",
+  "width": 1920,
+  "height": 1080,
+  "duration": 25.86,
+  "fps": 23.967,
+  "created": "2023-01-02T01:47:18.973Z",
+  "updated": "2023-01-02T01:47:37.260Z"
+}
+
+```
+
+The type of resource (a source), it's id and attributes of the source file.
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|id|string|true|none|The source id.|
+|owner|string|true|none|The owner id of the source file.|
+|input|string|false|none|The original URL of an ingested source file. Only displayed for files ingested using the fetch source endpoint. Not displayed for direct uploads.|
+|source|string|false|none|The URL of the source file hosted by Shotstack. The file at the URL can be used by the Edit API. Source file URL's consist of a base URL (AWS bucket), owner id, source id and a file named source. The extension varies depending on the type of file ingested.|
+|status|any|false|none|The status of the source file ingestion task. <ul><br>  <li>`queued` - ingestion task is queued waiting to be fetched</li><br>  <li>`importing` - the source file is being downloaded</li><br>  <li>`ready` - the source file has been ingested and stored</li><br>  <li>`failed` - there was an error ingesting the source file</li><br>  <li>`deleted` - the source file has been deleted</li><br></ul>|
+|width|integer|false|none|The width in pixels of the ingested source file, if a video or image.|
+|height|string|false|none|The height in pixels of the ingested source file, if a video or image.|
+|duration|number(float)|false|none|The duration in seconds of the ingested source file, if a video or audio file.|
+|fps|number(float)|false|none|The frame rate in frames per second of the source file, if a video file.|
+|created|string|false|none|The time the ingestion task was initially queued.|
+|updated|string|false|none|The time the ingestion status was last updated.|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|status|queued|
+|status|importing|
+|status|ready|
+|status|failed|
+|status|deleted|
+
+<h2 id="tocS_SourceResponse">SourceResponse</h2>
+<a id="schemasourceresponse"></a>
+<a id="schema_SourceResponse"></a>
+<a id="tocSsourceresponse"></a>
+<a id="tocssourceresponse"></a>
+
+```json
+{
+  "data": {
+    "type": "source",
+    "id": "zzytey4v-32km-kq1z-aftr-3kcuqi0brad2",
+    "attributes": {
+      "id": "zzytey4v-32km-kq1z-aftr-3kcuqi0brad2",
+      "owner": "5ca6hu7s9k",
+      "input": "https://github.com/shotstack/test-media/raw/main/captioning/scott-ko.mp4",
+      "source": "https://shotstack-ingest-api-v1-sources.s3.ap-southeast-2.amazonaws.com/5ca6hu7s9k/zzytey4v-32km-kq1z-aftr-3kcuqi0brad2/source.mp4",
+      "status": "ready",
+      "width": 1920,
+      "height": 1080,
+      "duration": 25.86,
+      "fps": 23.967,
+      "created": "2023-01-02T01:47:18.973Z",
+      "updated": "2023-01-02T01:47:37.260Z"
+    }
+  }
+}
+
+```
+
+The response returned by the Ingest API [get source](#get-source) request. Includes details of the ingested source file. The response follows the [json:api](https://jsonapi.org/) specification.
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|data|[SourceResponseData](#schemasourceresponsedata)|true|none|A source resource.|
+
+<h2 id="tocS_SourceResponseData">SourceResponseData</h2>
+<a id="schemasourceresponsedata"></a>
+<a id="schema_SourceResponseData"></a>
+<a id="tocSsourceresponsedata"></a>
+<a id="tocssourceresponsedata"></a>
+
+```json
+{
+  "type": "source",
+  "id": "zzytey4v-32km-kq1z-aftr-3kcuqi0brad2",
+  "attributes": {
+    "id": "zzytey4v-32km-kq1z-aftr-3kcuqi0brad2",
+    "owner": "5ca6hu7s9k",
+    "input": "https://github.com/shotstack/test-media/raw/main/captioning/scott-ko.mp4",
+    "source": "https://shotstack-ingest-api-v1-sources.s3.ap-southeast-2.amazonaws.com/5ca6hu7s9k/zzytey4v-32km-kq1z-aftr-3kcuqi0brad2/source.mp4",
+    "status": "ready",
+    "width": 1920,
+    "height": 1080,
+    "duration": 25.86,
+    "fps": 23.967,
+    "created": "2023-01-02T01:47:18.973Z",
+    "updated": "2023-01-02T01:47:37.260Z"
+  }
+}
+
+```
+
+The type of resource (a source), it's id and attributes of the source file.
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|type|string|true|none|The type of resource, in this case it is a source.|
+|id|string|true|none|The source file id.|
+|attributes|[SourceResponseAttributes](#schemasourceresponseattributes)|true|none|The source attributes including its url, status, width, height, duration, etc...|
+
+<h2 id="tocS_SourceResponseAttributes">SourceResponseAttributes</h2>
+<a id="schemasourceresponseattributes"></a>
+<a id="schema_SourceResponseAttributes"></a>
+<a id="tocSsourceresponseattributes"></a>
+<a id="tocssourceresponseattributes"></a>
+
+```json
+{
+  "id": "zzytey4v-32km-kq1z-aftr-3kcuqi0brad2",
+  "owner": "5ca6hu7s9k",
+  "input": "https://github.com/shotstack/test-media/raw/main/captioning/scott-ko.mp4",
+  "source": "https://shotstack-ingest-api-v1-sources.s3.ap-southeast-2.amazonaws.com/5ca6hu7s9k/zzytey4v-32km-kq1z-aftr-3kcuqi0brad2/source.mp4",
+  "status": "ready",
+  "width": 1920,
+  "height": 1080,
+  "duration": 25.86,
+  "fps": 23.967,
+  "created": "2023-01-02T01:47:18.973Z",
+  "updated": "2023-01-02T01:47:37.260Z"
+}
+
+```
+
+The id and attributes of the source file.
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|id|string|true|none|The source id.|
+|owner|string|true|none|The owner id of the source file.|
+|input|string|false|none|The original URL of an ingested source file. Only displayed for files ingested using the fetch source endpoint. Not displayed for direct uploads.|
+|source|string|false|none|The URL of the source file hosted by Shotstack. The file at the URL can be used by the Edit API. Source file URL's consist of a base URL (AWS bucket), owner id, source id and a file named source. The extension varies depending on the type of file ingested.|
+|status|any|false|none|The status of the source file ingestion task. <ul><br>  <li>`queued` - ingestion task is queued waiting to be fetched</li><br>  <li>`importing` - the source file is being downloaded</li><br>  <li>`ready` - the source file has been ingested and stored</li><br>  <li>`failed` - there was an error ingesting the source file</li><br>  <li>`deleted` - the source file has been deleted</li><br></ul>|
+|width|integer|false|none|The width in pixels of the ingested source file, if a video or image.|
+|height|string|false|none|The height in pixels of the ingested source file, if a video or image.|
+|duration|number(float)|false|none|The duration in seconds of the ingested source file, if a video or audio file.|
+|fps|number(float)|false|none|The frame rate in frames per second of the source file, if a video file.|
+|created|string|false|none|The time the ingestion task was initially queued.|
+|updated|string|false|none|The time the ingestion status was last updated.|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|status|queued|
+|status|importing|
+|status|ready|
+|status|failed|
+|status|deleted|
+
+<h2 id="tocS_UploadResponse">UploadResponse</h2>
+<a id="schemauploadresponse"></a>
+<a id="schema_UploadResponse"></a>
+<a id="tocSuploadresponse"></a>
+<a id="tocsuploadresponse"></a>
+
+```json
+{
+  "data": {
+    "type": "upload",
+    "id": "zzytey4v-32km-kq1z-aftr-3kcuqi0brad2",
+    "attributes": {
+      "id": "zzytey4v-32km-kq1z-aftr-3kcuqi0brad2",
+      "url": "https://shotstack-ingest-api-v1-sources.s3.ap-southeast-2.amazonaws.com/5ca6hu7s9k/zzytey4v-32km-kq1z-aftr-3kcuqi0brad2/source?AWSAccessKeyId=ASIAWJV3NVDML6LI2ZVG&Expires=1672819007&Signature=9M76gBA%2FghV8ZYvGTp3alo5Ya%2Fk%3D&x-amz-acl=public-read&x-amz-security-token=IQoJb3JpZ2luX2VjEJ%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDmFwLXNvdXRoZWFzdC0yIkcwRQIhAJHrqMCRk7ACXuXmJICTkADbx11e2wUP0RZ3KRdN3%2BGwAiAYt%2FIHlM8rcplCgvsvqH%2BBtSrlCW%2BUeZstwuwgq45Y3iqbAwjo%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAMaDDQzMzExNTIxMTk5MiIMtFX%2Bb1klptd8HXQvKu8Cd0xpHti7cRWkPxQz3foEWSYu1U8In64Qsi6TFK%2BmiOhVnUkHK%2BLSIwF1yQFMK2oTzVXwrEFEsyqlf%2FPZ9j3OL9eLlB7G5AqbC16hjXXR3psipp0dE2uvCV2d%2BIDYgcf1MKmzE0FDfN4wyTez%2Bd%2F3y8nfAtWB%2FCB0wU8AtKNUI7hwNbCYMgCa8QUeAH2UOrriDaN379vKXK%2B1XVplhhuvLX3aC1D0St2U6lC5yaDtZbLGEyymQPhgpp5Mam6jVzHVXXX4%2FvkQSNWbDMuMFd13fqdut9uMPkq4vhZgCmyQsibC7AnrK21QopLY%2F0vhHvPUhSkzRDKjiQou0vDrbTnT4yJLY5RCs9G65yisi6jbyUUbJTUgrME7PPPihs7kM5L%2FGjhmKqe9rNPuzKC%2FISRcmVtAPleX7tqPI7H%2BuEIobS%2FE%2B1jV4oNUFQA549prw3546FXds%2FgCLKRU%2BvxUyi2yKS8U0QC%2FNLMg2p9c81%2BaDCCqxtSdBjqdAcxGASzQwP6hHbfzC2hlnxn%2Bnf4MddgpIPFxvpV18Sy9vUYSU52mrsZK%2FxPcxrg1AM94v0aaW%2FaRE1ESTF2hXJrAJZkDNDPEBQBmcP3ylj4Bf5MsP%2FCspFoF6TvXZPYkH1lSlWHT8OTOugLji7%2F9qb9a6bKzFJqvcS0EiT7v5LCOMOpVA%2FAg9RM0yerN4Zot%2FREHgCSzajNII9Xio%2F0%3D",
+      "expires": "2023-01-02T02:47:37.260Z"
+    }
+  }
+}
+
+```
+
+The response returned by the Ingest API [direct upload](#direct-upload) request. Includes the id of the file and the signed url to send the binary file to. The response follows the [json:api](https://jsonapi.org/) specification.
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|data|[UploadResponseData](#schemauploadresponsedata)|true|none|An upload resource.|
+
+<h2 id="tocS_UploadResponseData">UploadResponseData</h2>
+<a id="schemauploadresponsedata"></a>
+<a id="schema_UploadResponseData"></a>
+<a id="tocSuploadresponsedata"></a>
+<a id="tocsuploadresponsedata"></a>
+
+```json
+{
+  "type": "upload",
+  "id": "zzytey4v-32km-kq1z-aftr-3kcuqi0brad2",
+  "attributes": {
+    "id": "zzytey4v-32km-kq1z-aftr-3kcuqi0brad2",
+    "url": "https://shotstack-ingest-api-v1-sources.s3.ap-southeast-2.amazonaws.com/5ca6hu7s9k/zzytey4v-32km-kq1z-aftr-3kcuqi0brad2/source?AWSAccessKeyId=ASIAWJV3NVDML6LI2ZVG&Expires=1672819007&Signature=9M76gBA%2FghV8ZYvGTp3alo5Ya%2Fk%3D&x-amz-acl=public-read&x-amz-security-token=IQoJb3JpZ2luX2VjEJ%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDmFwLXNvdXRoZWFzdC0yIkcwRQIhAJHrqMCRk7ACXuXmJICTkADbx11e2wUP0RZ3KRdN3%2BGwAiAYt%2FIHlM8rcplCgvsvqH%2BBtSrlCW%2BUeZstwuwgq45Y3iqbAwjo%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAMaDDQzMzExNTIxMTk5MiIMtFX%2Bb1klptd8HXQvKu8Cd0xpHti7cRWkPxQz3foEWSYu1U8In64Qsi6TFK%2BmiOhVnUkHK%2BLSIwF1yQFMK2oTzVXwrEFEsyqlf%2FPZ9j3OL9eLlB7G5AqbC16hjXXR3psipp0dE2uvCV2d%2BIDYgcf1MKmzE0FDfN4wyTez%2Bd%2F3y8nfAtWB%2FCB0wU8AtKNUI7hwNbCYMgCa8QUeAH2UOrriDaN379vKXK%2B1XVplhhuvLX3aC1D0St2U6lC5yaDtZbLGEyymQPhgpp5Mam6jVzHVXXX4%2FvkQSNWbDMuMFd13fqdut9uMPkq4vhZgCmyQsibC7AnrK21QopLY%2F0vhHvPUhSkzRDKjiQou0vDrbTnT4yJLY5RCs9G65yisi6jbyUUbJTUgrME7PPPihs7kM5L%2FGjhmKqe9rNPuzKC%2FISRcmVtAPleX7tqPI7H%2BuEIobS%2FE%2B1jV4oNUFQA549prw3546FXds%2FgCLKRU%2BvxUyi2yKS8U0QC%2FNLMg2p9c81%2BaDCCqxtSdBjqdAcxGASzQwP6hHbfzC2hlnxn%2Bnf4MddgpIPFxvpV18Sy9vUYSU52mrsZK%2FxPcxrg1AM94v0aaW%2FaRE1ESTF2hXJrAJZkDNDPEBQBmcP3ylj4Bf5MsP%2FCspFoF6TvXZPYkH1lSlWHT8OTOugLji7%2F9qb9a6bKzFJqvcS0EiT7v5LCOMOpVA%2FAg9RM0yerN4Zot%2FREHgCSzajNII9Xio%2F0%3D",
+    "expires": "2023-01-02T02:47:37.260Z"
+  }
+}
+
+```
+
+The type of resource (an upload), it's id and attributes of the upload request.
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|type|string|true|none|The type of resource, in this case it is an upload.|
+|id|string|true|none|The upload file id.|
+|attributes|[UploadResponseAttributes](#schemauploadresponseattributes)|true|none|The upload attributes including the signed URL.|
+
+<h2 id="tocS_UploadResponseAttributes">UploadResponseAttributes</h2>
+<a id="schemauploadresponseattributes"></a>
+<a id="schema_UploadResponseAttributes"></a>
+<a id="tocSuploadresponseattributes"></a>
+<a id="tocsuploadresponseattributes"></a>
+
+```json
+{
+  "id": "zzytey4v-32km-kq1z-aftr-3kcuqi0brad2",
+  "url": "https://shotstack-ingest-api-v1-sources.s3.ap-southeast-2.amazonaws.com/5ca6hu7s9k/zzytey4v-32km-kq1z-aftr-3kcuqi0brad2/source?AWSAccessKeyId=ASIAWJV3NVDML6LI2ZVG&Expires=1672819007&Signature=9M76gBA%2FghV8ZYvGTp3alo5Ya%2Fk%3D&x-amz-acl=public-read&x-amz-security-token=IQoJb3JpZ2luX2VjEJ%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDmFwLXNvdXRoZWFzdC0yIkcwRQIhAJHrqMCRk7ACXuXmJICTkADbx11e2wUP0RZ3KRdN3%2BGwAiAYt%2FIHlM8rcplCgvsvqH%2BBtSrlCW%2BUeZstwuwgq45Y3iqbAwjo%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAMaDDQzMzExNTIxMTk5MiIMtFX%2Bb1klptd8HXQvKu8Cd0xpHti7cRWkPxQz3foEWSYu1U8In64Qsi6TFK%2BmiOhVnUkHK%2BLSIwF1yQFMK2oTzVXwrEFEsyqlf%2FPZ9j3OL9eLlB7G5AqbC16hjXXR3psipp0dE2uvCV2d%2BIDYgcf1MKmzE0FDfN4wyTez%2Bd%2F3y8nfAtWB%2FCB0wU8AtKNUI7hwNbCYMgCa8QUeAH2UOrriDaN379vKXK%2B1XVplhhuvLX3aC1D0St2U6lC5yaDtZbLGEyymQPhgpp5Mam6jVzHVXXX4%2FvkQSNWbDMuMFd13fqdut9uMPkq4vhZgCmyQsibC7AnrK21QopLY%2F0vhHvPUhSkzRDKjiQou0vDrbTnT4yJLY5RCs9G65yisi6jbyUUbJTUgrME7PPPihs7kM5L%2FGjhmKqe9rNPuzKC%2FISRcmVtAPleX7tqPI7H%2BuEIobS%2FE%2B1jV4oNUFQA549prw3546FXds%2FgCLKRU%2BvxUyi2yKS8U0QC%2FNLMg2p9c81%2BaDCCqxtSdBjqdAcxGASzQwP6hHbfzC2hlnxn%2Bnf4MddgpIPFxvpV18Sy9vUYSU52mrsZK%2FxPcxrg1AM94v0aaW%2FaRE1ESTF2hXJrAJZkDNDPEBQBmcP3ylj4Bf5MsP%2FCspFoF6TvXZPYkH1lSlWHT8OTOugLji7%2F9qb9a6bKzFJqvcS0EiT7v5LCOMOpVA%2FAg9RM0yerN4Zot%2FREHgCSzajNII9Xio%2F0%3D",
+  "expires": "2023-01-02T02:47:37.260Z"
+}
+
+```
+
+The id and attributes of the upload file including the signed URL to send the binary file data to.
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|id|string|true|none|The source id.|
+|url|string|true|none|The signed URL to use in a PUT request to send the binary file to.|
+|expires|string|true|none|The time the upload request will expire. The signed URL will expire after one hour. Upload must complete within one hour.|
+
+<h2 id="tocS_IngestErrorResponse">IngestErrorResponse</h2>
+<a id="schemaingesterrorresponse"></a>
+<a id="schema_IngestErrorResponse"></a>
+<a id="tocSingesterrorresponse"></a>
+<a id="tocsingesterrorresponse"></a>
+
+```json
+{
+  "errors": [
+    {
+      "status": "400",
+      "title": "Validation Error",
+      "detail": "\"url\" is required"
+    }
+  ]
+}
+
+```
+
+Error response data for validation and other errors returned by the Ingest API.
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|errors|[[IngestErrorResponseData](#schemaingesterrorresponsedata)]|false|none|An array of errors.|
+
+<h2 id="tocS_IngestErrorResponseData">IngestErrorResponseData</h2>
+<a id="schemaingesterrorresponsedata"></a>
+<a id="schema_IngestErrorResponseData"></a>
+<a id="tocSingesterrorresponsedata"></a>
+<a id="tocsingesterrorresponsedata"></a>
+
+```json
+{
+  "status": "400",
+  "title": "Validation Error",
+  "detail": "\"url\" is required"
+}
+
+```
+
+Individual errors returned by the Ingest API.
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|status|string|true|none|The http status code.|
+|title|string|true|none|A short summary of the error.|
+|detail|string|true|none|A detailed description of the error.|
 

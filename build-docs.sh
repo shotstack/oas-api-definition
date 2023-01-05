@@ -39,8 +39,8 @@ cp -r .shins/source/fonts ./$DOCS_DIR/source/fonts
 
 # Insert Google Analytics
 if [ -f .tags ]; then
-    sed -i.bak -e '/{{TAGS}}/r.tags' -e '/{{TAGS}}/d' ./$DOCS_DIR/index.html
-    rm -f ./$DOCS_DIR/index.html.bak
+    sed -i.tmp -e '/{{TAGS}}/r.tags' -e '/{{TAGS}}/d' ./$DOCS_DIR/index.html
+    rm -f ./$DOCS_DIR/index.html.tmp
 fi
 
 rm -f ./$DOCS_DIR/index.html.md
