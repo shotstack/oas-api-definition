@@ -8,5 +8,5 @@
           items:
             $ref: "./ingesterrorresponsedata.yaml#/IngestErrorResponseData"
       required:
-        - data
+        - errors
       type: object

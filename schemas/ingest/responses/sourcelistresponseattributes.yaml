@@ -1,5 +1,5 @@
     SourceListResponseAttributes:
-      description: The type of resource (a source), it's id and attributes of the source file.
+      description: The attributes of the source file including URL, metadata and status.
       properties:
         id:
           description: The source id.
@@ -11,8 +11,8 @@
           example: 5ca6hu7s9k
         input:
           description: >-
-            The original URL of an ingested source file. Only displayed for files ingested using the fetch
-            source endpoint. Not displayed for direct uploads.
+            The original URL of an ingested source file, where it originated. Only displayed for files ingested using
+            the [fetch source](#fetch-source) endpoint. Not displayed for direct uploads.
           type: string
           example: https://github.com/shotstack/test-media/raw/main/captioning/scott-ko.mp4
         source:

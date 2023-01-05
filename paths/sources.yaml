@@ -13,8 +13,8 @@
               schema:
                 $ref: "../schemas/ingest/responses/ingesterrorresponse.yaml#/IngestErrorResponse"
       description: |
-        Queue a source file to be fetched and stored by Shotstack. Source files can be videos, images, audio files
-        and fonts.
+        Queue a source file to be fetched from a URL and stored by Shotstack. Source files can be videos, images, audio
+        files and fonts.
 
         **Base URL:** https://api.shotstack.io/ingest/{version}
       summary: Fetch Source
@@ -36,8 +36,7 @@
 
     get:
       description: |
-        Retrieve a list of ingested source files stored against a users account. The API key is used to determine which
-        files are associated to the user.
+        Retrieve a list of ingested source files stored against a users account and stage.
 
         **Base URL:** https://api.shotstack.io/ingest/{version}
       summary: List Sources

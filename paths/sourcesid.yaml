@@ -1,13 +1,13 @@
     get:
       responses:
         "200":
-          description: Get source by id
+          description: Get source file details by id
           content:
             application/json:
               schema:
                 $ref: "../schemas/ingest/responses/sourceresponse.yaml#/SourceResponse"
       description: |
-        Fetch a source file details by its id.
+        Fetch a source file details and status by its id.
 
         **Base URL:** https://api.shotstack.io/ingest/{version}
       operationId: getSource

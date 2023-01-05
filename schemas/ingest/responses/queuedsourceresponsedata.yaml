@@ -8,7 +8,7 @@
           type: string
           example: source
         id:
-          description: The source id
+          description: The source id.
           type: string
           example: zzytey4v-32km-kq1z-aftr-3kcuqi0brad2
       required:
