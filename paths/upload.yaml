@@ -12,7 +12,7 @@
             
         `curl -X PUT -T video.mp4 {data.attributes.url}`
             
-        Where **video.mp4** is the file you want to upload and **data.attributes.url** is the signed URL returned in the
+        Where **video.mp4** is the file you want to upload and **{data.attributes.url}** is the signed URL returned in the
         response.
 
         **Base URL:** https://api.shotstack.io/ingest/{version}
