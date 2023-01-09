@@ -1,0 +1,12 @@
+    SourceListResponse:
+      description: >-
+        A list of all ingested source files fetched or uploaded to a users account.
+      properties:
+        data:
+          description: An array of ingested source files.
+          type: array
+          items:
+            $ref: "./sourcelistresponsedata.yaml#/SourceListResponseData"
+      required:
+        - data
+      type: object

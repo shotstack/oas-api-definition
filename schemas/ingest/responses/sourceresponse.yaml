@@ -1,0 +1,11 @@
+    SourceResponse:
+      description: >-
+        The response returned by the Ingest API [get source](#get-source) request. Includes details of the ingested
+        source file. The response follows the [json:api](https://jsonapi.org/) specification.
+      properties:
+        data:
+          description: A source resource.
+          $ref: "./sourceresponsedata.yaml#/SourceResponseData"
+      required:
+        - data
+      type: object

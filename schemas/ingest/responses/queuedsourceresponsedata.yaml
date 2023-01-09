@@ -1,0 +1,17 @@
+    QueuedSourceResponseData:
+      description: >-
+        The type of resource (a source) and the newly created source id. Returned with
+        [QueuedSourceResponse](#tocs_queuedsourceresponse).
+      properties:
+        type:
+          description: The type of resource, in this case it is a source.
+          type: string
+          example: source
+        id:
+          description: The source id.
+          type: string
+          example: zzytey4v-32km-kq1z-aftr-3kcuqi0brad2
+      required:
+        - type
+        - id
+      type: object

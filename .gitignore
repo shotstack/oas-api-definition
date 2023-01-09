@@ -3,4 +3,5 @@ build
 
 .tags
 copy-*-files.sh
-api.oas3.resolved.yaml
+.shins/index.html
+.shins/source/index.html.md

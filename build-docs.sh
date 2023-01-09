@@ -17,8 +17,9 @@ mkdir -p $DOCS_DIR
 
 cp $DOCS_DIR/index.html.md .shins/source/index.html.md
 
-# Replace Serve API URL's as overrides do not work
-sed -i -e 's/https:\/\/api.shotstack.io\/{version}\/assets\//https:\/\/api.shotstack.io\/serve\/{version}\/assets\//g' .shins/source/index.html.md
+# Replace Serve and Ingest API URL's as overrides do not work
+sed -i -e 's/https:\/\/api.shotstack.io\/edit\/{version}\/assets/https:\/\/api.shotstack.io\/serve\/{version}\/assets/g' .shins/source/index.html.md
+sed -i -e 's/https:\/\/api.shotstack.io\/edit\/{version}\/sources/https:\/\/api.shotstack.io\/ingest\/{version}\/sources/g' .shins/source/index.html.md
 
 # Build the Shins docs HTML
 cd .shins
@@ -38,8 +39,8 @@ cp -r .shins/source/fonts ./$DOCS_DIR/source/fonts
 
 # Insert Google Analytics
 if [ -f .tags ]; then
-    sed -i.bak -e '/{{TAGS}}/r.tags' -e '/{{TAGS}}/d' ./$DOCS_DIR/index.html
-    rm -f ./$DOCS_DIR/index.html.bak
+    sed -i.tmp -e '/{{TAGS}}/r.tags' -e '/{{TAGS}}/d' ./$DOCS_DIR/index.html
+    rm -f ./$DOCS_DIR/index.html.tmp
 fi
 
 rm -f ./$DOCS_DIR/index.html.md

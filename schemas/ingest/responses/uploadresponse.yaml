@@ -1,0 +1,12 @@
+    UploadResponse:
+      description: >-
+        The response returned by the Ingest API [direct upload](#direct-upload) request. Includes the id of the file and
+        the signed url to send the binary file to. The response follows the [json:api](https://jsonapi.org/)
+        specification.
+      properties:
+        data:
+          description: An upload resource.
+          $ref: "./uploadresponsedata.yaml#/UploadResponseData"
+      required:
+        - data
+      type: object

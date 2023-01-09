@@ -1,0 +1,10 @@
+    Source:
+      description: >-
+        The details of the file to be ingested
+      properties:
+        url:
+          description: >-
+            The URL of the file to be ingested. The URL must be publicly accessible or include credentials.
+          type: string
+          example: https://github.com/shotstack/test-media/raw/main/captioning/scott-ko.mp4
+      type: object

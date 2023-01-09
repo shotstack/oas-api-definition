@@ -29,8 +29,7 @@
 
     get:
       description: |
-        Retrieve a list of templates stored against a users account. The API key is used to determine which templates
-        are associated to the user.
+        Retrieve a list of templates stored against a users account and stage.
 
         **Base URL:** https://api.shotstack.io/{version}
       summary: List Templates

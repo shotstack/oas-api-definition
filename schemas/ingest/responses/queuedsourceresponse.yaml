@@ -1,0 +1,11 @@
+    QueuedSourceResponse:
+      description: >-
+        The response returned by the Ingest API [fetch source](#fetch-source) request. Includes the id of the source
+        file. The response follows the [json:api](https://jsonapi.org/) specification.
+      properties:
+        data:
+          description: A source resource.
+          $ref: "./queuedsourceresponsedata.yaml#/QueuedSourceResponseData"
+      required:
+        - data
+      type: object

@@ -1,0 +1,43 @@
+    get:
+      responses:
+        "200":
+          description: Get source file details by id
+          content:
+            application/json:
+              schema:
+                $ref: "../schemas/ingest/responses/sourceresponse.yaml#/SourceResponse"
+      description: |
+        Fetch a source file details and status by its id.
+
+        **Base URL:** https://api.shotstack.io/ingest/{version}
+      operationId: getSource
+      summary: Get Source
+      security:
+        - DeveloperKey: []
+      tags:
+        - Ingest
+
+    delete:
+      responses:
+        "204":
+          description: An empty response signifying the ingested source file has been deleted.
+      description: |
+        Delete an ingested source file by its id.
+
+        **Base URL:** https://api.shotstack.io/ingest/{version}
+      operationId: deleteSource
+      summary: Delete Source
+      security:
+        - DeveloperKey: []
+      tags:
+        - Ingest
+
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          pattern: >-
+            ^[0-9a-zA-Z]{8}-[0-9a-zA-Z]{4}-[0-9a-zA-Z]{4}-[0-9a-zA-Z]{4}-[0-9a-zA-Z]{12}$
+          type: string
+        description: The id of the source file in [KSUID](https://github.com/segmentio/ksuid#what-is-a-ksuid) format.
