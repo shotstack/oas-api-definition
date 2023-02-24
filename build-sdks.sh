@@ -12,12 +12,15 @@
 
 # Setup variables
 SPEC_FILE=./api.oas3.yaml
-SPEC_FILE_RESOLVED=./api.oas3.resolved.yaml
+SPEC_FILE_JSON=./api.oas3.json
 BUILD_DIR=./build/sdks
 
 # Prepare build dir
 rm -rf $BUILD_DIR
 mkdir -p $BUILD_DIR
+
+# Resolve YAML files in to one master JSON file
+./node_modules/.bin/swagger-cli bundle -o $SPEC_FILE_JSON $SPEC_FILE
 
 # Determine where the OpenAPI Generator is. This can vary depending
 # on how it has been installed (manually, source, Homebrew or NPM).
@@ -34,35 +37,35 @@ fi
 echo "- using OpenAPI generator $OPENAPI_GENERATOR"
 
 # Resolve YAML files in to one master file
-./node_modules/.bin/speccy resolve $SPEC_FILE -o $SPEC_FILE_RESOLVED
+./node_modules/.bin/swagger-cli bundle -o $SPEC_FILE_JSON $SPEC_FILE
 
 # PHP SDK
-$OPENAPI_GENERATOR generate -i $SPEC_FILE_RESOLVED -g php -o $BUILD_DIR/php \
+$OPENAPI_GENERATOR generate -i $SPEC_FILE_JSON -g php -o $BUILD_DIR/php \
                   --invoker-package Shotstack\\\\Client
 
 printf "\n========================================= \n"
 printf "\nPHP SDK Generated"
 
 # Ruby SDK
-$OPENAPI_GENERATOR generate -i $SPEC_FILE_RESOLVED -g ruby -o $BUILD_DIR/ruby \
+$OPENAPI_GENERATOR generate -i $SPEC_FILE_JSON -g ruby -o $BUILD_DIR/ruby \
     --additional-properties=moduleName="Shotstack"
 
 printf "\n========================================= \n"
 printf "\nRuby SDK Generated"
 
 # Node SDK
-$OPENAPI_GENERATOR generate -i $SPEC_FILE_RESOLVED -g javascript -o $BUILD_DIR/node \
+$OPENAPI_GENERATOR generate -i $SPEC_FILE_JSON -g javascript -o $BUILD_DIR/node \
     --additional-properties=emitModelMethods=true,licenseName="MIT",projectName="shotstack-sdk",useES6=false,usePromises=true
 
 printf "\n========================================= \n"
 printf "\nNode SDK Generated"
 
 # Python SDK
-$OPENAPI_GENERATOR generate -i $SPEC_FILE_RESOLVED -g python -o $BUILD_DIR/python \
+$OPENAPI_GENERATOR generate -i $SPEC_FILE_JSON -g python -o $BUILD_DIR/python \
     --additional-properties=packageName="shotstack_sdk",projectName="shotstack-sdk",pythonAttrNoneIfUnset=true
 
 printf "\n========================================= \n"
 printf "\nPython SDK Generated"
 
 # Cleanup
-rm -f $SPEC_FILE_RESOLVED
+rm -f $SPEC_FILE_JSON
