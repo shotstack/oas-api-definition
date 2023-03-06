@@ -1,0 +1,101 @@
+    Rendition:
+      description: >-
+        A rendition is a new output file that is generated from the source. The rendition can be encoded to a different
+        format and have transformations applied to it such as resizing, cropping, etc...
+      properties:
+        format:
+          description: >-
+            The output format to encode the file to. You can only encode a file to the same type, i.e. a video to a
+            video or an image to an image. You can't encode a video as an image. The following formats are available:
+            <ul>
+              <li>`mp4` - mp4 video file (video only)</li>
+              <li>`jpg` - jpg image file (image only)</li>
+              <li>`png` - png image file (image only)</li>
+              <li>`mp3` - mp3 audio file (audio only)</li>
+            </ul>
+          enum:
+            - mp4
+            - mp3
+            - jpg
+            - png
+          type: string
+          example: mp4
+        size:
+          $ref: "../size.yaml#/Size"
+        fit:
+          description: >-
+            Set how the rendition should be scaled and cropped when using a size with an aspect ratio that is different
+            from the source. Fit applies to both videos and images.
+            <ul>
+              <li>`crop` <b>(default)</b> - scale the rendition to fill the output area while maintaining the aspect ratio. The rendition will be cropped if it exceeds the bounds of the output.</li>
+              <li>`cover` - stretch the rendition to fill the output without maintaining the aspect ratio.</li>
+              <li>`contain` - fit the entire rendition within the output while maintaining the original aspect ratio.</li>
+            </ul>
+          enum:
+            - cover
+            - contain
+            - crop
+          type: string
+          example: crop
+        resolution:
+          description: >-
+            The output resolution of the video or image. This is a convenience property that sets the width and height
+            based on industry standard resolutions. The following resolutions are available:
+            <ul>
+              <li>`preview` - 512px x 288px</li>
+              <li>`mobile` - 640px x 360px</li>
+              <li>`sd` - 1024px x 576px</li>
+              <li>`hd` - 1280px x 720px</li>
+              <li>`fhd` - 1920px x 1080px</li>
+            </ul>
+          enum:
+            - preview
+            - mobile
+            - sd
+            - hd
+            - fhd
+          example: null
+        quality:
+          description: >-
+            Adjust the visual quality of the video or image. The higher the value, the sharper the image quality but
+            the larger file size and slower the encoding process. When specifying quality, the goal is to balance
+            file size vs visual quality.
+
+            Quality is a value between 1 and 100 where 1 is fully compressed with low image quality and 100 is close to
+            lossless with high image quality and large file size. Sane values are between 50 and 75. Omitting the
+            quality parameter will result in an asset optimised for encoding speed, file size and visual quality.
+          type: integer
+          minimum: 1
+          maximum: 100
+          example: 70
+        fps:
+          description: >-
+            Change the frame rate of a video asset.
+            <ul>
+              <li>`12` - 12fps</li>
+              <li>`15` - 15fps</li>
+              <li>`24` - 24fps</li>
+              <li>`23.976` - 23.976fps</li>
+              <li>`25` (default) - 25fps</li>
+              <li>`29.97` - 29.97fps</li>
+              <li>`30` - 30fps</li>
+              <li>`48` - 48fps</li>
+              <li>`50` - 50fps</li>
+              <li>`59.94` - 59.94fps</li>
+              <li>`60` - 60fps</li>
+            </ul>
+          enum:
+            - 12
+            - 15
+            - 23.976
+            - 24
+            - 25
+            - 29.97
+            - 30
+            - 48
+            - 50
+            - 59.94
+            - 60
+          type: number
+          example: 25
+      type: object

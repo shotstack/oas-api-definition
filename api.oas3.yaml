@@ -215,6 +215,12 @@ components:
     Source:
       $ref: "./schemas/ingest/source.yaml#/Source"
 
+    Outputs:
+      $ref: "./schemas/ingest/outputs.yaml#/Outputs"
+
+    Rendition:
+      $ref: "./schemas/ingest/rendition.yaml#/Rendition"
+
     # Response schemas
     QueuedResponse:
       $ref: "./schemas/responses/queuedresponse.yaml#/QueuedResponse"

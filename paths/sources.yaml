@@ -14,14 +14,15 @@
                 $ref: "../schemas/ingest/responses/ingesterrorresponse.yaml#/IngestErrorResponse"
       description: |
         Queue a source file to be fetched from a URL and stored by Shotstack. Source files can be videos, images, audio
-        files and fonts.
+        files and fonts. Once ingested, new [output renditions](#tocs_outputs) can be created from the source file.
 
         **Base URL:** https://api.shotstack.io/ingest/{version}
       summary: Fetch Source
       operationId: postSource
       requestBody:
         description: >-
-          Ingest a video, image, audio or font file from the provided URL.
+          Ingest a video, image, audio or font file from the provided URL. Optionally provide a list of output
+          renditions.
         content:
           application/json:
             example:

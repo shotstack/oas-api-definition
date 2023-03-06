@@ -1,10 +1,16 @@
     Source:
       description: >-
-        The details of the file to be ingested
+        The details of the file to be ingested and any transformations to be applied. Once the source file has been
+        ingested, new renditions can be created from it. The renditions are specified in the **outputs** property.
+        
+        A rendition is a new version, generated from the source. This can be used to create new sizes and aspect ratios
+        tht serve different purposes within an application.
       properties:
         url:
           description: >-
             The URL of the file to be ingested. The URL must be publicly accessible or include credentials.
           type: string
           example: https://github.com/shotstack/test-media/raw/main/captioning/scott-ko.mp4
+        outputs:
+          $ref: "./outputs.yaml#/Outputs"
       type: object
