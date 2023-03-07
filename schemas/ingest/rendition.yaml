@@ -54,7 +54,7 @@
             - sd
             - hd
             - fhd
-          example: null
+          example: sd
         quality:
           description: >-
             Adjust the visual quality of the video or image. The higher the value, the sharper the image quality but
