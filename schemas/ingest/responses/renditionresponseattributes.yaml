@@ -38,6 +38,7 @@
           example: 4120.36
         transformation:
           description: The transformation applied to the source file to create the rendition.
+          $ref: ../rendition.yaml#/Rendition
         width:
           description: The width in pixels of the ingested source file, if a video or image.
           type: integer
