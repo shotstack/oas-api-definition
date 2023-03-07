@@ -9,7 +9,7 @@
             Set a custom width for the video or image file in pixels. Value must be divisible
             by 2. Maximum video width is 1920px, maximum image width is 4096px.
           type: integer
-          minimum: 0
+          minimum: 1
           maximum: 4096
           example: 1200
         height:
@@ -17,7 +17,7 @@
             Set a custom height for the video or image file in pixels. Value must be divisible
             by 2. Maximum video height is 1920px, maximum image height is 4096px.
           type: integer
-          minimum: 0
+          minimum: 1
           maximum: 4096
           example: 800
       type: object

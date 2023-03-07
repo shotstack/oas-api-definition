@@ -1,0 +1,11 @@
+    Outputs:
+      description: >-
+        The output renditions and transformations that should be generated from the source file.
+      properties:
+        renditions:
+          description: >-
+            The output renditions and transformations that should be generated from the source file.
+          type: array
+          items:
+            $ref: "./rendition.yaml#/Rendition"
+      type: object

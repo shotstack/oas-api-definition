@@ -6,7 +6,7 @@
           description: An array of ingested source files.
           type: array
           items:
-            $ref: "./sourcelistresponsedata.yaml#/SourceListResponseData"
+            $ref: "./sourceresponsedata.yaml#/SourceResponseData"
       required:
         - data
       type: object

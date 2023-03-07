@@ -1,0 +1,63 @@
+    RenditionResponseAttributes:
+      description: The id and attributes of the generated rendition file.
+      properties:
+        id:
+          description: The rendition id.
+          type: string
+          example: zzyaqh5d-0jjq-va0n-aajo-3zwlje2q3uqd
+        status:
+          description: >-
+            The status of the rendition transformation task.
+            <ul>
+              <li>`waiting` - rendition task is waiting for source file to become available</li>
+              <li>`queued` - rendition task is queued waiting to be processed</li>
+              <li>`processing` - the rendition is being processed</li>
+              <li>`ready` - the rendition is ready to be downloaded</li>
+              <li>`failed` - there was an error creating the rendition</li>
+              <li>`deleted` - the rendition has been deleted</li>
+            </ul>
+          example: ready
+          enum:
+            - queued
+            - importing
+            - ready
+            - failed
+            - deleted
+            - overwritten
+        url:
+          description: >-
+            The URL of the rendition file hosted by Shotstack. The file at the URL can be used by the Edit API. Source
+            file URL's consist of a base URL (AWS bucket), owner id, source id and a file name with the rendition id and
+            extension.
+          type: string
+          example: https://shotstack-ingest-api-v1-sources.s3.ap-southeast-2.amazonaws.com/5ca6hu7s9k/zzytey4v-32km-kq1z-aftr-3kcuqi0brad2/zzyaqh5d-0jjq-va0n-aajo-3zwlje2q3uqd.mp4
+        executionTime:
+          description: The time in milliseconds it took to process the rendition.
+          type: number
+          format: float
+          example: 4120.36
+        transformation:
+          description: The transformation applied to the source file to create the rendition.
+          $ref: ../rendition.yaml#/Rendition
+        width:
+          description: The width in pixels of the ingested source file, if a video or image.
+          type: integer
+          example: 1920
+        height:
+          description: The height in pixels of the ingested source file, if a video or image.
+          type: integer
+          example: 1080
+        duration:
+          description: The duration in seconds of the ingested source file, if a video or audio file.
+          type: number
+          format: float
+          example: 25.86
+        fps:
+          description: The frame rate in frames per second of the source file, if a video file.
+          type: number
+          format: float
+          example: 23.967
+      required:
+        - id
+        - owner
+      type: object
