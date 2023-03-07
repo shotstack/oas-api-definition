@@ -280,12 +280,6 @@ components:
     SourceListResponse:
       $ref: "./schemas/ingest/responses/sourcelistresponse.yaml#/SourceListResponse"
 
-    SourceListResponseData:
-      $ref: "./schemas/ingest/responses/sourcelistresponsedata.yaml#/SourceListResponseData"
-
-    SourceListResponseAttributes:
-      $ref: "./schemas/ingest/responses/sourcelistresponseattributes.yaml#/SourceListResponseAttributes"
-
     SourceResponse:
       $ref: "./schemas/ingest/responses/sourceresponse.yaml#/SourceResponse"
 
@@ -294,6 +288,12 @@ components:
 
     SourceResponseAttributes:
       $ref: "./schemas/ingest/responses/sourceresponseattributes.yaml#/SourceResponseAttributes"
+
+    OutputsResponse:
+      $ref: "./schemas/ingest/responses/outputsresponse.yaml#/OutputsResponse"
+
+    RenditionResponseAttributes:
+      $ref: "./schemas/ingest/responses/renditionresponseattributes.yaml#/RenditionResponseAttributes"
 
     UploadResponse:
       $ref: "./schemas/ingest/responses/uploadresponse.yaml#/UploadResponse"

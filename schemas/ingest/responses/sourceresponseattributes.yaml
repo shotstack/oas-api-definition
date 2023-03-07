@@ -39,6 +39,12 @@
             - ready
             - failed
             - deleted
+            - overwritten
+        outputs:
+          description: >-
+            The list of outputs generated from the source file. Currently supports renditions which are versions of the
+            source file with different transformations applied.
+          $ref: ./outputsresponse.yaml#/OutputsResponse
         width:
           description: The width in pixels of the ingested source file, if a video or image.
           type: integer
