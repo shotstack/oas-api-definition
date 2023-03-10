@@ -93,7 +93,7 @@
             - zoomOutSlow
             - zoomOutFast
             - slideLeft
-            - slideLeftSLow
+            - slideLeftSlow
             - slideLeftFast
             - slideRight
             - slideRightSlow
