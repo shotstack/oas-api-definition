@@ -13,4 +13,10 @@
           example: https://github.com/shotstack/test-media/raw/main/captioning/scott-ko.mp4
         outputs:
           $ref: "./outputs.yaml#/Outputs"
+        callback:
+          type: string
+          description: >-
+            An optional webhook callback URL used to receive status notifications when sources are uploaded and
+            renditions processed.
+          example: https://my-server.com/callback.php
       type: object

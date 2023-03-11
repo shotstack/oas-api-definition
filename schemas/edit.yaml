@@ -18,10 +18,11 @@
         callback:
           type: string
           description: >-
-            An optional webhook callback URL used to receive status notifications
-            when a render completes or fails.
-            See [webhooks](https://shotstack.io/docs/guide/architecting-an-application/webhooks) for 
-            more details.
+            An optional webhook callback URL used to receive status notifications when a render completes or fails.
+            Notifications are also sent when a rendered video is sent to an output 
+            [destination](https://shotstack.io/docs/guide/serving-assets/destinations/).
+
+            See [webhooks](https://shotstack.io/docs/guide/architecting-an-application/webhooks) for more details.
           example: https://my-server.com/callback.php
         disk:
           description: |
