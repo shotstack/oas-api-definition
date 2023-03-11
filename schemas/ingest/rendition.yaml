@@ -98,4 +98,10 @@
             - 60
           type: number
           example: 25
+        filename:
+          description: >-
+            A custom name for the generated rendition file. The file extension will be automatically added based
+            on the format of the rendition. If no filename is provided, the rendition ID will be used.
+          type: string
+          example: my-video
       type: object
