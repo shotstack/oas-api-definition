@@ -13,6 +13,8 @@
           example: https://github.com/shotstack/test-media/raw/main/captioning/scott-ko.mp4
         outputs:
           $ref: "./outputs.yaml#/Outputs"
+        destinations:
+          $ref: "../destinations.yaml#/Destinations"
         callback:
           type: string
           description: >-
