@@ -11,3 +11,7 @@
             enum:
               - public
               - signed
+        passthrough:
+          description: Sets the Mux `passthrough` option. Max 255 characters.
+          type: string
+          maxLength: 255
