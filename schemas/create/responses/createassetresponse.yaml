@@ -1,0 +1,15 @@
+CreateAssetResponse:
+  description: The created asset
+  properties:
+    id:
+      description: The asset id
+      type: string
+      example: 01gz0-tj679-xj30t-hr8zk-3hasvk
+    type:
+      description: The type of resource, in this case an asset
+      type: string
+      example: "asset"
+    attributes:
+      description: The asset attributes including the URL.
+      $ref: "./createassetresponsedata.yaml#/CreateAssetResponseData"
+  required: ["id", "type", "attributes"]

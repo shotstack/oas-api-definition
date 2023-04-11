@@ -1,0 +1,31 @@
+CreateAssetResponseData:
+  description: The response data returned with the [CreateAssetResponse](#tocs_createassetresponse)
+  properties:
+    owner: 
+      description: The owner id of the asset.
+      type: string
+      example: nvknodbfq0
+    provider:
+      description: The provider of the asset.
+      type: string
+      enum: ["shotstack", "eleven-labs", "movio"]
+    type:
+      description: The type of the asset.
+      type: string
+      enum: ["text-to-speech", "text-to-video-avatar"]
+    url:
+      description: The url of the asset. This value is only included if the create operation was a success.
+      type: string
+    status:
+      description: The status of the asset. If the status is "done", a url is included in the response.
+      type: string
+      enum: ["queued", "processing", "saving", "done", "failed"]
+    created:
+      description: The time the ingestion task was initially queued.
+      type: string
+      example: "2023-01-02T01:47:18.973Z"
+    updated:
+      description: The time the ingestion status was last updated.
+      type: string
+      example: "2023-01-02T01:47:37.260Z"
+  required: ["owner", "provider", "type", "status", "created", "updated"]

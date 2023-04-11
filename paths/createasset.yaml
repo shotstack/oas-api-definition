@@ -1,0 +1,34 @@
+post:
+  description: |
+    The Create API is used to create assets like text-to-speech and text-to-video-avatar
+    from multiple providers to be used with the Edit API. Use this endpoint to queue
+    an asset creation. The generated asset is available via the Shotstack CDN.
+    
+    **Base URL:** https://api.shotstack.io/create/{version}
+  summary: Queue Create Asset
+  operationId: postCreateAsset
+  requestBody:
+    description: >-
+      Create an asset with the specified provider, type and the associated options.
+    content:
+      application/json:
+        schema:
+          $ref: "../schemas/create/createasset.yaml#/CreateAsset"
+    required: true
+  responses:
+    "201":
+      description: The created asset details
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/create/responses/createassetresponse.yaml#/CreateAssetResponse"
+    "400":
+      description: A list of validation and other errors
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/create/responses/createasseterrorresponse.yaml#/CreateAssetErrorResponse"
+  security:
+    - DeveloperKey: []
+  tags:
+    - Create

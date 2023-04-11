@@ -51,6 +51,15 @@ servers:
           - v1
           - stage
         default: v1
+  - url: https://api.shotstack.io/create/{version}
+    variables:
+      version:
+        description: >-
+          Set the stage to **v1** for production usage. Set to **stage** to use the development sandbox.
+        enum:
+          - v1
+          - stage
+        default: v1
 
 tags:
   - name: Edit
@@ -71,6 +80,11 @@ tags:
       Edit API. Instead of hosting your own assets or building your own uploader you can use the Ingest API. The Ingest
       API provides endpoints to fetch and upload files and check their status and URLs. All ingested files are available
       directly from an S3 bucket URL or via CDN (Serve API).
+
+  - name: Create
+    description: >-
+      The Create API is used to create assets like text-to-speech and text-to-video-avatar from multiple providers to be
+      used with the Edit API. The generated assets are available directly from an S3 bucket URL
 
 paths:
   /render:
@@ -105,6 +119,12 @@ paths:
 
   /upload:
     $ref: "./paths/upload.yaml"
+
+  /createassets:
+    $ref: "./paths/createasset.yaml"
+
+  /createassets/{id}:
+    $ref: "./paths/createassetid.yaml"
 
 components:
   schemas:
@@ -221,7 +241,20 @@ components:
     Rendition:
       $ref: "./schemas/ingest/rendition.yaml#/Rendition"
 
-    # Response schemas
+    # Create schemas
+    CreateAsset:
+      $ref: "./schemas/create/createasset.yaml#/CreateAsset"
+
+    ShotstackTextToSpeech:
+      $ref: "./schemas/create/shotstacktexttospeech.yaml#/ShotstackTextToSpeech"
+
+    ElevenLabsTextToSpeech:
+      $ref: "./schemas/create/elevenlabstexttospeech.yaml#/ElevenLabsTextToSpeech"
+
+    MovioTextToVideoAvatar:
+      $ref: "./schemas/create/moviotexttovideoavatar.yaml#/MovioTextToVideoAvatar"
+
+    # Edit response schemas
     QueuedResponse:
       $ref: "./schemas/responses/queuedresponse.yaml#/QueuedResponse"
 
@@ -270,7 +303,7 @@ components:
     AssetResponseAttributes:
       $ref: "./schemas/responses/assetresponseattributes.yaml#/AssetResponseAttributes"
 
-    # Ingest schema responses
+    # Ingest response schemas
     QueuedSourceResponse:
       $ref: "./schemas/ingest/responses/queuedsourceresponse.yaml#/QueuedSourceResponse"
 
@@ -309,6 +342,19 @@ components:
 
     IngestErrorResponseData:
       $ref: "./schemas/ingest/responses/ingesterrorresponsedata.yaml#/IngestErrorResponseData"
+
+    # Create response schemas
+    CreateAssetResponse:
+      $ref: "./schemas/create/responses/createassetresponse.yaml#/CreateAssetResponse"
+
+    CreateAssetResponseData:
+      $ref: "./schemas/create/responses/createassetresponsedata.yaml#/CreateAssetResponseData"
+    
+    CreateAssetErrorResponse:
+      $ref: "./schemas/create/responses/createasseterrorresponse.yaml#/CreateAssetErrorResponse"
+
+    CreateAssetErrorResponseData:
+      $ref: "./schemas/create/responses/createasseterrorresponsedata.yaml#/CreateAssetErrorResponseData"
 
   responses: {}
   parameters: {}

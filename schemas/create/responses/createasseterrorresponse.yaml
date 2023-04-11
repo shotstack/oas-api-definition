@@ -1,0 +1,11 @@
+CreateAssetErrorResponse:
+  type: object
+  description: >-
+    Error response data for validation and other errors returned by the Create API.
+  properties:
+    errors:
+      description: An array of errors.
+      type: array
+      items:
+        $ref: "./createasseterrorresponsedata.yaml#/CreateAssetErrorResponseData"
+  required: ["errors"]
