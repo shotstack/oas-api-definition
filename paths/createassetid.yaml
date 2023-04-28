@@ -1,6 +1,6 @@
 get:
   description: |
-    The Create API is used to create assets like text-to-speech and text-to-video-avatar
+    The Create API is used to create assets like text-to-speech and text-to-avatar
     from multiple providers to be used with the Edit API. Use this endpoint to get the
     status and the url of the created asset using the asset id.
 

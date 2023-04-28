@@ -12,7 +12,7 @@ CreateAssetResponseData:
     type:
       description: The type of the asset.
       type: string
-      enum: ["text-to-speech", "text-to-video-avatar"]
+      enum: ["text-to-speech", "text-to-avatar"]
     url:
       description: The url of the asset. This value is only included if the create operation was a success.
       type: string

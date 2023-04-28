@@ -13,7 +13,7 @@ HeygenTextToVideoAvatar:
         type:
           type: string
           description: The type of asset to generate.
-          enum: ["text-to-video-avatar"]
+          enum: ["text-to-avatar"]
         text:
           type: string
           description: The text to display in the video.

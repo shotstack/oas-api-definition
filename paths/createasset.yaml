@@ -1,6 +1,6 @@
 post:
   description: |
-    The Create API is used to create assets like text-to-speech and text-to-video-avatar
+    The Create API is used to create assets like text-to-speech and text-to-avatar
     from multiple providers to be used with the Edit API. Use this endpoint to queue
     an asset creation. The generated asset is available via the Shotstack CDN.
     
