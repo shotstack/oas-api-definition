@@ -251,8 +251,8 @@ components:
     ElevenLabsTextToSpeech:
       $ref: "./schemas/create/elevenlabstexttospeech.yaml#/ElevenLabsTextToSpeech"
 
-    MovioTextToVideoAvatar:
-      $ref: "./schemas/create/moviotexttovideoavatar.yaml#/MovioTextToVideoAvatar"
+    HeygenTextToVideoAvatar:
+      $ref: "./schemas/create/heygentexttovideoavatar.yaml#/HeygenTextToVideoAvatar"
 
     # Edit response schemas
     QueuedResponse:

@@ -1,5 +1,5 @@
 CreateAssetResponseData:
-  description: The response data returned with the [CreateAssetResponse](#tocs_createassetresponse)
+  description: The response data returned with the CreateAssetResponse
   properties:
     owner: 
       description: The owner id of the asset.
@@ -8,7 +8,7 @@ CreateAssetResponseData:
     provider:
       description: The provider of the asset.
       type: string
-      enum: ["shotstack", "eleven-labs", "movio"]
+      enum: ["shotstack", "eleven-labs", "heygen"]
     type:
       description: The type of the asset.
       type: string

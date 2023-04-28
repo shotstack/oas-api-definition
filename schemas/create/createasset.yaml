@@ -2,16 +2,11 @@ CreateAsset:
   type: object
   description: >-
     The type of asset to create. The `type` and `provider` properties are used to
-    determine the type and provider of asset to be created. Value must be one of:
-    <ul>
-      <li><a href="tocs_shotstacktexttospeech">ShotstackTextToSpeech</a></li>
-      <li><a href="tocs_elevenlabstexttospeech">ElevenLabsTextToSpeech</a></li>
-      <li><a href="tocs_moviotexttovideoavatar">MovioTextToVideoAvatar</a></li>
-    </ul>
+    determine the type and provider of asset to be created.
   discriminator:
     propertyName: provider
   oneOf:
     - $ref: "./shotstacktexttospeech.yaml#/ShotstackTextToSpeech"
     - $ref: "./elevenlabstexttospeech.yaml#/ElevenLabsTextToSpeech"
-    - $ref: "./moviotexttovideoavatar.yaml#/MovioTextToVideoAvatar"
+    - $ref: "./heygentexttovideoavatar.yaml#/HeygenTextToVideoAvatar"
   additionalProperties: false

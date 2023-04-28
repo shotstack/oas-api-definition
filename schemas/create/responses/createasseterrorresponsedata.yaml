@@ -14,5 +14,5 @@ CreateAssetErrorResponseData:
     detail:
       description: A detailed description of the error.
       type: string
-      example: Invalid discriminator value. Expected 'shotstack' | 'eleven-labs' | 'movio' at \"body/provider\".
+      example: Invalid discriminator value. Expected 'shotstack' | 'eleven-labs' | 'heygen' at \"body/provider\".
   required: ["status", "title", "detail"]
