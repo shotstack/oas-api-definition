@@ -7,6 +7,6 @@ CreateAsset:
     propertyName: provider
   oneOf:
     - $ref: "./shotstacktexttospeech.yaml#/ShotstackTextToSpeech"
-    - $ref: "./elevenlabstexttospeech.yaml#/ElevenLabsTextToSpeech"
-    - $ref: "./heygentexttovideoavatar.yaml#/HeygenTextToVideoAvatar"
+    # - $ref: "./elevenlabstexttospeech.yaml#/ElevenLabsTextToSpeech"
+    # - $ref: "./heygentexttovideoavatar.yaml#/HeygenTextToVideoAvatar"
   additionalProperties: false

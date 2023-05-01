@@ -248,11 +248,11 @@ components:
     ShotstackTextToSpeech:
       $ref: "./schemas/create/shotstacktexttospeech.yaml#/ShotstackTextToSpeech"
 
-    ElevenLabsTextToSpeech:
-      $ref: "./schemas/create/elevenlabstexttospeech.yaml#/ElevenLabsTextToSpeech"
+    # ElevenLabsTextToSpeech:
+    #   $ref: "./schemas/create/elevenlabstexttospeech.yaml#/ElevenLabsTextToSpeech"
 
-    HeygenTextToVideoAvatar:
-      $ref: "./schemas/create/heygentexttovideoavatar.yaml#/HeygenTextToVideoAvatar"
+    # HeygenTextToVideoAvatar:
+    #   $ref: "./schemas/create/heygentexttovideoavatar.yaml#/HeygenTextToVideoAvatar"
 
     # Edit response schemas
     QueuedResponse:
