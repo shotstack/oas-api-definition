@@ -6,7 +6,8 @@ CreateAsset:
   discriminator:
     propertyName: provider
   oneOf:
-    - $ref: "./shotstacktexttospeech.yaml#/ShotstackTextToSpeech"
+    - $ref: './shotstacktexttospeech.yaml#/ShotstackTextToSpeech'
     # - $ref: "./elevenlabstexttospeech.yaml#/ElevenLabsTextToSpeech"
-    # - $ref: "./heygentexttovideoavatar.yaml#/HeygenTextToVideoAvatar"
+    # - $ref: "./heygentexttoavatar.yaml#/HeygenTextToAvatar"
+    # - $ref: "./didtexttoavatar.yaml#/DIdTextToAvatar"
   additionalProperties: false

@@ -251,8 +251,11 @@ components:
     # ElevenLabsTextToSpeech:
     #   $ref: "./schemas/create/elevenlabstexttospeech.yaml#/ElevenLabsTextToSpeech"
 
-    # HeygenTextToVideoAvatar:
-    #   $ref: "./schemas/create/heygentexttovideoavatar.yaml#/HeygenTextToVideoAvatar"
+    # HeygenTextToAvatar:
+    #   $ref: "./schemas/create/heygentexttoavatar.yaml#/HeygenTextToAvatar"
+
+    # DIdTextToAvatar:
+    #   $ref: "./schemas/create/didtexttoavatar.yaml#/DIdTextToAvatar"
 
     # Edit response schemas
     QueuedResponse:
@@ -349,7 +352,7 @@ components:
 
     CreateAssetResponseData:
       $ref: "./schemas/create/responses/createassetresponsedata.yaml#/CreateAssetResponseData"
-    
+
     CreateAssetErrorResponse:
       $ref: "./schemas/create/responses/createasseterrorresponse.yaml#/CreateAssetErrorResponse"
 
