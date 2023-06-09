@@ -1,4 +1,4 @@
-CreateAssetErrorResponseData:
+GeneratedAssetErrorResponseData:
   type: object
   description: >-
     Individual errors returned by the Create API.

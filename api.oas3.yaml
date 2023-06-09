@@ -126,11 +126,11 @@ paths:
   # can't have duplicate keys - we use a temporary path name here /path_alias_createassets and rename it at built time
   # to assets using sed. Better ideas welcomed!
   /path_alias_createassets:
-    $ref: "./paths/createassets.yaml"
+    $ref: "./paths/generateasset.yaml"
 
   # Using path alias and sed for replacement. See above comment.
   /path_alias_createassets/{id}:
-    $ref: "./paths/createassetsid.yaml"
+    $ref: "./paths/generateassetid.yaml"
 
 components:
   schemas:
@@ -365,17 +365,17 @@ components:
       $ref: "./schemas/ingest/responses/ingesterrorresponsedata.yaml#/IngestErrorResponseData"
 
     # Create response schemas
-    CreateAssetResponse:
-      $ref: "./schemas/create/responses/createassetresponse.yaml#/CreateAssetResponse"
+    GeneratedAssetResponse:
+      $ref: "./schemas/create/responses/generatedassetresponse.yaml#/GeneratedAssetResponse"
 
-    CreateAssetResponseData:
-      $ref: "./schemas/create/responses/createassetresponsedata.yaml#/CreateAssetResponseData"
+    GeneratedAssetResponseData:
+      $ref: "./schemas/create/responses/generatedassetresponsedata.yaml#/GeneratedAssetResponseData"
 
-    CreateAssetErrorResponse:
-      $ref: "./schemas/create/responses/createasseterrorresponse.yaml#/CreateAssetErrorResponse"
+    GeneratedAssetErrorResponse:
+      $ref: "./schemas/create/responses/generatedasseterrorresponse.yaml#/GeneratedAssetErrorResponse"
 
-    CreateAssetErrorResponseData:
-      $ref: "./schemas/create/responses/createasseterrorresponsedata.yaml#/CreateAssetErrorResponseData"
+    GeneratedAssetErrorResponseData:
+      $ref: "./schemas/create/responses/generatedasseterrorresponsedata.yaml#/GeneratedAssetErrorResponseData"
 
   responses: {}
   parameters: {}

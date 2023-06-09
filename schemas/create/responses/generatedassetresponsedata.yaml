@@ -1,4 +1,4 @@
-CreateAssetResponseData:
+GeneratedAssetResponseData:
   description: The response data returned with the CreateAssetResponse
   properties:
     owner: 

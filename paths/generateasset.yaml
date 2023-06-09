@@ -21,13 +21,13 @@ post:
       content:
         application/json:
           schema:
-            $ref: "../schemas/create/responses/createassetresponse.yaml#/CreateAssetResponse"
+            $ref: "../schemas/create/responses/generatedassetresponse.yaml#/GeneratedAssetResponse"
     "400":
       description: A list of validation and other errors
       content:
         application/json:
           schema:
-            $ref: "../schemas/create/responses/createasseterrorresponse.yaml#/CreateAssetErrorResponse"
+            $ref: "../schemas/create/responses/generatedasseterrorresponse.yaml#/GeneratedAssetErrorResponse"
   security:
     - DeveloperKey: []
   tags:

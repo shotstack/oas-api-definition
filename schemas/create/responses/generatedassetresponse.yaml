@@ -1,4 +1,4 @@
-CreateAssetResponse:
+GeneratedAssetResponse:
   description: The created asset
   properties:
     id:
@@ -11,5 +11,5 @@ CreateAssetResponse:
       example: "asset"
     attributes:
       description: The asset attributes including the URL.
-      $ref: "./createassetresponsedata.yaml#/CreateAssetResponseData"
+      $ref: "./generatedassetresponsedata.yaml#/GeneratedAssetResponseData"
   required: ["id", "type", "attributes"]
