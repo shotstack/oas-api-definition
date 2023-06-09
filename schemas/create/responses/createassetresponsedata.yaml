@@ -8,7 +8,7 @@ CreateAssetResponseData:
     provider:
       description: The provider of the asset.
       type: string
-      enum: ["shotstack", "eleven-labs", "heygen"]
+      enum: ["shotstack", "elevenlabs", "heygen"]
     type:
       description: The type of the asset.
       type: string

@@ -83,8 +83,10 @@ tags:
 
   - name: Create
     description: >-
-      The Create API is used to create assets like text-to-speech and text-to-avatar from multiple providers to be
-      used with the Edit API. The generated assets are available directly from an S3 bucket URL
+      The Create API generates assets and media files using services like text-to-speech and text-to-avatar.
+      A native text-to-speech service is included as well as integrations with third party providers. Third party
+      services include HeyGen text-to-avatar, ElevenLabs text-to-speech and D-ID text-to-avatar. Assets can be used with
+      the Edit API or downloaded and used independently.
 
 paths:
   /render:
@@ -120,11 +122,15 @@ paths:
   /upload:
     $ref: "./paths/upload.yaml"
 
-  /createassets:
-    $ref: "./paths/createasset.yaml"
+  # Because of the way we have our servers set up and Create and Serve share the same endpoint name and how yaml/swagger
+  # can't have duplicate keys - we use a temporary path name here /path_alias_createassets and rename it at built time
+  # to assets using sed. Better ideas welcomed!
+  /path_alias_createassets:
+    $ref: "./paths/createassets.yaml"
 
-  /createassets/{id}:
-    $ref: "./paths/createassetid.yaml"
+  # Using path alias and sed for replacement. See above comment.
+  /path_alias_createassets/{id}:
+    $ref: "./paths/createassetsid.yaml"
 
 components:
   schemas:
@@ -242,20 +248,32 @@ components:
       $ref: "./schemas/ingest/rendition.yaml#/Rendition"
 
     # Create schemas
-    CreateAsset:
-      $ref: "./schemas/create/createasset.yaml#/CreateAsset"
+    GeneratedAsset:
+      $ref: "./schemas/create/generatedasset.yaml#/GeneratedAsset"
 
-    ShotstackTextToSpeech:
-      $ref: "./schemas/create/shotstacktexttospeech.yaml#/ShotstackTextToSpeech"
+    ShotstackGeneratedAsset:
+      $ref: "./schemas/create/shotstackgeneratedasset.yaml#/ShotstackGeneratedAsset"
 
-    # ElevenLabsTextToSpeech:
-    #   $ref: "./schemas/create/elevenlabstexttospeech.yaml#/ElevenLabsTextToSpeech"
+    ShotstackTextToSpeechOptions:
+      $ref: "./schemas/create/shotstacktexttospeechoptions.yaml#/ShotstackTextToSpeechOptions"
 
-    # HeygenTextToAvatar:
-    #   $ref: "./schemas/create/heygentexttoavatar.yaml#/HeygenTextToAvatar"
+    ElevenLabsGeneratedAsset:
+      $ref: "./schemas/create/elevenlabsgeneratedasset.yaml#/ElevenLabsGeneratedAsset"
 
-    # DIdTextToAvatar:
-    #   $ref: "./schemas/create/didtexttoavatar.yaml#/DIdTextToAvatar"
+    ElevenLabsTextToSpeechOptions:
+      $ref: "./schemas/create/elevenlabstexttospeechoptions.yaml#/ElevenLabsTextToSpeechOptions"
+
+    HeyGenGeneratedAsset:
+      $ref: "./schemas/create/heygengeneratedasset.yaml#/HeyGenGeneratedAsset"
+
+    HeyGenTextToAvatarOptions:
+      $ref: "./schemas/create/heygentexttoavataroptions.yaml#/HeyGenTextToAvatarOptions"
+
+    DIDGeneratedAsset:
+      $ref: "./schemas/create/didgeneratedasset.yaml#/DIDGeneratedAsset"
+
+    DIDTextToAvatarOptions:
+      $ref: "./schemas/create/didtexttoavataroptions.yaml#/DIDTextToAvatarOptions"
 
     # Edit response schemas
     QueuedResponse:
