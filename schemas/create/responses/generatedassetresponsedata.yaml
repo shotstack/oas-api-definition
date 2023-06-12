@@ -1,31 +1,19 @@
 GeneratedAssetResponseData:
-  description: The response data returned with the CreateAssetResponse
+  description: The type of resource (an asset), it's id and attributes of the generated file.
   properties:
-    owner: 
-      description: The owner id of the asset.
-      type: string
-      example: nvknodbfq0
-    provider:
-      description: The provider of the asset.
-      type: string
-      enum: ["shotstack", "elevenlabs", "heygen"]
     type:
-      description: The type of the asset.
+      description: The type of resource, in this case it is an asset.
       type: string
-      enum: ["text-to-speech", "text-to-avatar"]
-    url:
-      description: The url of the asset. This value is only included if the create operation was a success.
+      example: asset
+    id:
+      description: The generated asset id.
       type: string
-    status:
-      description: The status of the asset. If the status is "done", a url is included in the response.
-      type: string
-      enum: ["queued", "processing", "saving", "done", "failed"]
-    created:
-      description: The time the ingestion task was initially queued.
-      type: string
-      example: "2023-01-02T01:47:18.973Z"
-    updated:
-      description: The time the ingestion status was last updated.
-      type: string
-      example: "2023-01-02T01:47:37.260Z"
-  required: ["owner", "provider", "type", "status", "created", "updated"]
+      example: 01gz0-tj679-xj30t-hr8zk-3hasvk
+    attributes:
+      description: The generated asset attributes including its url, status, provider, type, etc...
+      $ref: "./generatedassetresponseattributes.yaml#/GeneratedAssetResponseAttributes"
+  required:
+    - type
+    - id
+    - attributes
+  type: object

@@ -372,6 +372,9 @@ components:
     GeneratedAssetResponseData:
       $ref: "./schemas/create/responses/generatedassetresponsedata.yaml#/GeneratedAssetResponseData"
 
+    GeneratedAssetResponseAttributes:
+      $ref: "./schemas/create/responses/generatedassetresponseattributes.yaml#/GeneratedAssetResponseAttributes"
+
     GeneratedAssetErrorResponse:
       $ref: "./schemas/create/responses/generatedasseterrorresponse.yaml#/GeneratedAssetErrorResponse"
 

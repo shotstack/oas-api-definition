@@ -14,5 +14,5 @@ GeneratedAssetErrorResponseData:
     detail:
       description: A detailed description of the error.
       type: string
-      example: Invalid discriminator value. Expected 'shotstack' | 'elevenlabs' | 'heygen' at \"body/provider\".
+      example: "\"body/options/text\" is required."
   required: ["status", "title", "detail"]
