@@ -83,10 +83,11 @@ tags:
 
   - name: Create
     description: >-
-      The Create API generates assets and media files using services like text-to-speech and text-to-avatar.
-      A native text-to-speech service is included as well as integrations with third party providers. Third party
-      services include HeyGen text-to-avatar, ElevenLabs text-to-speech and D-ID text-to-avatar. Assets can be used with
-      the Edit API or downloaded and used independently.
+      The Create API generates assets and media files using Generative AI services like text-to-speech and
+      text-to-avatar. A native text-to-speech service is included as well as integrations with third party providers.
+      Third party services include [HeyGen](https://www.heygen.com/) text-to-avatar, [ElevenLabs](https://elevenlabs.io/)
+      text-to-speech and [D-ID](https://www.d-id.com/) text-to-avatar. Assets can be used with the Edit API or
+      downloaded and used independently.
 
 paths:
   /render:
