@@ -1,0 +1,12 @@
+GeneratedAssetResponse:
+  description: >-
+    The response returned by the Create API [generate asset](#generate-asset) and
+    [get generated asset](#get-generated-asset) requests. Includes status and details of the generated asset. The
+    response follows the [json:api](https://jsonapi.org/) specification.
+  properties:
+    data:
+      description: A generated asset resource.
+      $ref: "./generatedassetresponsedata.yaml#/GeneratedAssetResponseData"
+  required:
+    - data
+  type: object

@@ -51,6 +51,15 @@ servers:
           - v1
           - stage
         default: v1
+  - url: https://api.shotstack.io/create/{version}
+    variables:
+      version:
+        description: >-
+          Set the stage to **v1** for production usage. Set to **stage** to use the development sandbox.
+        enum:
+          - v1
+          - stage
+        default: v1
 
 tags:
   - name: Edit
@@ -71,6 +80,14 @@ tags:
       Edit API. Instead of hosting your own assets or building your own uploader you can use the Ingest API. The Ingest
       API provides endpoints to fetch and upload files and check their status and URLs. All ingested files are available
       directly from an S3 bucket URL or via CDN (Serve API).
+
+  - name: Create
+    description: >-
+      The Create API generates assets and media files using Generative AI services like text-to-speech and
+      text-to-avatar. A native text-to-speech service is included as well as integrations with third party providers.
+      Third party services include [HeyGen](https://www.heygen.com/) text-to-avatar, [ElevenLabs](https://elevenlabs.io/)
+      text-to-speech and [D-ID](https://www.d-id.com/) text-to-avatar. Assets can be used with the Edit API or
+      downloaded and used independently.
 
 paths:
   /render:
@@ -105,6 +122,16 @@ paths:
 
   /upload:
     $ref: "./paths/upload.yaml"
+
+  # Because of the way we have our servers set up and Create and Serve share the same endpoint name and how yaml/swagger
+  # can't have duplicate keys - we use a temporary path name here /path_alias_createassets and rename it at built time
+  # to assets using sed. Better ideas welcomed!
+  /path_alias_createassets:
+    $ref: "./paths/generateasset.yaml"
+
+  # Using path alias and sed for replacement. See above comment.
+  /path_alias_createassets/{id}:
+    $ref: "./paths/generateassetid.yaml"
 
 components:
   schemas:
@@ -221,7 +248,35 @@ components:
     Rendition:
       $ref: "./schemas/ingest/rendition.yaml#/Rendition"
 
-    # Response schemas
+    # Create schemas
+    GeneratedAsset:
+      $ref: "./schemas/create/generatedasset.yaml#/GeneratedAsset"
+
+    ShotstackGeneratedAsset:
+      $ref: "./schemas/create/shotstackgeneratedasset.yaml#/ShotstackGeneratedAsset"
+
+    ShotstackTextToSpeechOptions:
+      $ref: "./schemas/create/shotstacktexttospeechoptions.yaml#/ShotstackTextToSpeechOptions"
+
+    ElevenLabsGeneratedAsset:
+      $ref: "./schemas/create/elevenlabsgeneratedasset.yaml#/ElevenLabsGeneratedAsset"
+
+    ElevenLabsTextToSpeechOptions:
+      $ref: "./schemas/create/elevenlabstexttospeechoptions.yaml#/ElevenLabsTextToSpeechOptions"
+
+    HeyGenGeneratedAsset:
+      $ref: "./schemas/create/heygengeneratedasset.yaml#/HeyGenGeneratedAsset"
+
+    HeyGenTextToAvatarOptions:
+      $ref: "./schemas/create/heygentexttoavataroptions.yaml#/HeyGenTextToAvatarOptions"
+
+    DIDGeneratedAsset:
+      $ref: "./schemas/create/didgeneratedasset.yaml#/DIDGeneratedAsset"
+
+    DIDTextToAvatarOptions:
+      $ref: "./schemas/create/didtexttoavataroptions.yaml#/DIDTextToAvatarOptions"
+
+    # Edit response schemas
     QueuedResponse:
       $ref: "./schemas/responses/queuedresponse.yaml#/QueuedResponse"
 
@@ -270,7 +325,7 @@ components:
     AssetResponseAttributes:
       $ref: "./schemas/responses/assetresponseattributes.yaml#/AssetResponseAttributes"
 
-    # Ingest schema responses
+    # Ingest response schemas
     QueuedSourceResponse:
       $ref: "./schemas/ingest/responses/queuedsourceresponse.yaml#/QueuedSourceResponse"
 
@@ -309,6 +364,22 @@ components:
 
     IngestErrorResponseData:
       $ref: "./schemas/ingest/responses/ingesterrorresponsedata.yaml#/IngestErrorResponseData"
+
+    # Create response schemas
+    GeneratedAssetResponse:
+      $ref: "./schemas/create/responses/generatedassetresponse.yaml#/GeneratedAssetResponse"
+
+    GeneratedAssetResponseData:
+      $ref: "./schemas/create/responses/generatedassetresponsedata.yaml#/GeneratedAssetResponseData"
+
+    GeneratedAssetResponseAttributes:
+      $ref: "./schemas/create/responses/generatedassetresponseattributes.yaml#/GeneratedAssetResponseAttributes"
+
+    GeneratedAssetErrorResponse:
+      $ref: "./schemas/create/responses/generatedasseterrorresponse.yaml#/GeneratedAssetErrorResponse"
+
+    GeneratedAssetErrorResponseData:
+      $ref: "./schemas/create/responses/generatedasseterrorresponsedata.yaml#/GeneratedAssetErrorResponseData"
 
   responses: {}
   parameters: {}

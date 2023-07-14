@@ -1,0 +1,19 @@
+GeneratedAssetResponseData:
+  description: The type of resource (an asset), it's id and attributes of the generated file.
+  properties:
+    type:
+      description: The type of resource, in this case it is an asset.
+      type: string
+      example: asset
+    id:
+      description: The generated asset id.
+      type: string
+      example: 01gz0-tj679-xj30t-hr8zk-3hasvk
+    attributes:
+      description: The generated asset attributes including its url, status, provider, type, etc...
+      $ref: "./generatedassetresponseattributes.yaml#/GeneratedAssetResponseAttributes"
+  required:
+    - type
+    - id
+    - attributes
+  type: object

@@ -17,9 +17,13 @@ mkdir -p $DOCS_DIR
 
 cp $DOCS_DIR/index.html.md .shins/source/index.html.md
 
-# Replace Serve and Ingest API URL's as overrides do not work
+# Replace Create, Serve, Ingest API URL's as overrides do not work
 sed -i -e 's/https:\/\/api.shotstack.io\/edit\/{version}\/assets/https:\/\/api.shotstack.io\/serve\/{version}\/assets/g' .shins/source/index.html.md
 sed -i -e 's/https:\/\/api.shotstack.io\/edit\/{version}\/sources/https:\/\/api.shotstack.io\/ingest\/{version}\/sources/g' .shins/source/index.html.md
+sed -i -e 's/https:\/\/api.shotstack.io\/edit\/{version}\/createassets/https:\/\/api.shotstack.io\/create\/{version}\/assets/g' .shins/source/index.html.md
+
+# Openapi doesn't support duplicate path mapping
+sed -i -e 's/\/path_alias_createassets/\/assets/g' .shins/source/index.html.md
 
 # Build the Shins docs HTML
 cd .shins

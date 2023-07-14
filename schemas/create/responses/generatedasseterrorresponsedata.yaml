@@ -1,0 +1,18 @@
+GeneratedAssetErrorResponseData:
+  type: object
+  description: >-
+    Individual errors returned by the Create API.
+  properties:
+    status:
+      description: The http status code.
+      type: string
+      example: 400
+    title:
+      description: A short summary of the error.
+      type: string
+      example: 'Bad Request'
+    detail:
+      description: A detailed description of the error.
+      type: string
+      example: "\"body/options/text\" is required."
+  required: ["status", "title", "detail"]

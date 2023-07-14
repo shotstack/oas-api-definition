@@ -1,0 +1,28 @@
+get:
+  description: |
+    Get the generated assets status, url and details by ID.
+
+    **Base URL:** https://api.shotstack.io/create/{version}
+  summary: Get Generated Asset
+  operationId: getGeneratedAsset
+  responses:
+    "200":
+      description: The generated asset details
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/create/responses/generatedassetresponse.yaml#/GeneratedAssetResponse"
+  security:
+    - DeveloperKey: []
+  tags:
+    - Create
+
+parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      pattern: >-
+        ^[0-9a-zA-Z]{8}-[0-9a-zA-Z]{4}-[0-9a-zA-Z]{4}-[0-9a-zA-Z]{4}-[0-9a-zA-Z]{12}$
+      type: string
+    description: The id of the source file in [KSUID](https://github.com/segmentio/ksuid#what-is-a-ksuid) format.
