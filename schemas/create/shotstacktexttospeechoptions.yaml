@@ -22,10 +22,6 @@ ShotstackTextToSpeechOptions:
         
         Select a voice from the list of available voices, the language code is in brackets:
         <ul>
-          <li>Arabic (arb)</li>
-          <ul>
-            <li>`Zeina`</li>
-          </ul>
           <li>Arabic - Gulf (ar-AE)</li>
           <ul>
             <li>`Hala`</li>
@@ -48,19 +44,14 @@ ShotstackTextToSpeechOptions:
           </ul>
           <li>Danish (da-DK)</li>
           <ul>
-            <li>`Naja`</li>
-            <li>`Mads`</li>
             <li>`Sofie`</li>
           </ul>
           <li>Dutch (nl-NL)</li>
           <ul>
             <li>`Laura`</li>
-            <li>`Lotte`</li>
-            <li>`Ruben`</li>
           </ul>
           <li>English - Australian (en-AU)</li>
           <ul>
-            <li>`Nicole`</li>
             <li>`Olivia`</li>
             <li>`Russell`</li>
           </ul>
@@ -73,8 +64,6 @@ ShotstackTextToSpeechOptions:
           </ul>
           <li>English - Indian (en-IN)</li>
           <ul>
-            <li>`Aditi`</li>
-            <li>`Raveena`</li>
             <li>`Kajal`</li>
           </ul>
           <li>English - Ireland (en-IE)</li>
@@ -103,31 +92,22 @@ ShotstackTextToSpeechOptions:
             <li>`Ruth`</li>
             <li>`Stephen`</li>
           </ul>
-          <li>English - Welsh (en-GB-WLS)</li>
-          <ul>
-            <li>`Geraint`</li>
-          </ul>
           <li>Finnish (fi-FI)</li>
           <ul>
             <li>`Suvi`</li>
           </ul>
           <li>French (fr-FR)</li>
           <ul>
-            <li>`Celine` or `Céline`</li>
             <li>`Léa`</li>
-            <li>`Mathieu`</li>
             <li>`Rémi`</li>
           </ul>
           <li>French - Canadian (fr-CA)</li>
           <ul>
-            <li>`Chantal`</li>
             <li>`Gabrielle`</li>
             <li>`Liam`</li>
           </ul>
           <li>German (de-DE)</li>
           <ul>
-            <li>`Hans`</li>
-            <li>`Marlene`</li>
             <li>`Vicki`</li>
             <li>`Daniel`</li>
           </ul>
@@ -137,24 +117,15 @@ ShotstackTextToSpeechOptions:
           </ul>
           <li>Hindi (hi-IN)</li>
           <ul>
-            <li>`Aditi`</li>
             <li>`Kajal`</li>
-          </ul>
-          <li>Icelandic (is-IS)</li>
-          <ul>
-            <li>`Dóra` or `Dora`</li>
-            <li>`Karl`</li>
           </ul>
           <li>Italian (it-IT)</li>
           <ul>
-            <li>`Carla`</li>
             <li>`Bianca`</li>
-            <li>`Giorgio`</li>
             <li>`Adriano`</li>
           </ul>
           <li>Japanese (ja-JP)</li>
           <ul>
-            <li>`Mizuki`</li>
             <li>`Takumi`</li>
             <li>`Kazuha`</li>
             <li>`Tomoko`</li>
@@ -165,43 +136,25 @@ ShotstackTextToSpeechOptions:
           </ul>
           <li>Norwegian (nb-NO)</li>
           <ul>
-            <li>`Liv`</li>
             <li>`Ida`</li>
           </ul>
           <li>Polish (pl-PL)</li>
           <ul>
-            <li>`Ewa`</li>
-            <li>`Maja`</li>
-            <li>`Jacek`</li>
-            <li>`Jan`</li>
             <li>`Ola`</li>
           </ul>
           <li>Portuguese - Brazilian (pt-BR)</li>
           <ul>
             <li>`Camila`</li>
             <li>`Vitória` or `Vitoria`</li>
-            <li>`Ricardo`</li>
             <li>`Thiago`</li>
           </ul>
           <li>Portuguese - European (pt-PT)</li>
           <ul>
             <li>`Inês` or `Ines`</li>
-            <li>`Cristiano`</li>
-          </ul>
-          <li>Romanian (ro-RO)</li>
-          <ul>
-            <li>`Carmen`</li>
-          </ul>
-          <li>Russian (ru-RU)</li>
-          <ul>
-            <li>`Tatyana`</li>
-            <li>`Maxim`</li>
           </ul>
           <li>Spanish (es-ES)</li>
           <ul>
-            <li>`Conchita`</li>
             <li>`Lucia`</li>
-            <li>`Enrique`</li>
             <li>`Sergio`</li>
           </ul>
           <li>Spanish - Mexican (es-MX)</li>
@@ -212,48 +165,28 @@ ShotstackTextToSpeechOptions:
           <li>Spanish - US (es-US)</li>
           <ul>
             <li>`Lupe`</li>
-            <li>`Penélope` or `Penelope`</li>
-            <li>`Miguel`</li>
             <li>`Pedro`</li>
           </ul>
           <li>Swedish (sv-SE)</li>
           <ul>
-            <li>`Astrid`</li>
             <li>`Elin`</li>
-          </ul>
-          <li>Turkish (tr-TR)</li>
-          <ul>
-            <li>`Filiz`</li>
-          </ul>
-          <li>Welsh (cy-GB)</li>
-          <ul>
-            <li>`Gwyneth`</li>
           </ul>
         </ul>
       example: Matthew
       enum:
         [
-          "Zeina",
           "Hala",
           "Lisa",
           "Arlet",
           "Hiujin",
           "Zhiyu",
-          "Naja",
-          "Mads",
           "Sofie",
           "Laura",
-          "Lotte",
-          "Ruben",
-          "Nicole",
           "Olivia",
-          "Russell",
           "Amy",
           "Emma",
           "Brian",
           "Arthur",
-          "Aditi",
-          "Raveena",
           "Kajal",
           "Niamh",
           "Aria",
@@ -269,68 +202,36 @@ ShotstackTextToSpeechOptions:
           "Matthew",
           "Ruth",
           "Stephen",
-          "Geraint",
           "Suvi",
-          "Celine",
-          "Céline",
           "Léa",
-          "Mathieu",
           "Rémi",
-          "Chantal",
           "Gabrielle",
           "Liam",
-          "Hans",
-          "Marlene",
           "Vicki",
           "Daniel",
           "Hannah",
-          "Aditi",
           "Kajal",
-          "Dóra",
-          "Dora",
-          "Karl",
-          "Carla",
           "Bianca",
-          "Giorgio",
           "Adriano",
-          "Mizuki",
           "Takumi",
           "Kazuha",
           "Tomoko",
           "Seoyeon",
-          "Liv",
           "Ida",
-          "Ewa",
-          "Maja",
-          "Jacek",
-          "Jan",
           "Ola",
           "Camila",
           "Vitória",
           "Vitoria",
-          "Ricardo",
           "Thiago",
           "Inês",
           "Ines",
-          "Cristiano",
-          "Carmen",
-          "Tatyana",
-          "Maxim",
-          "Conchita",
           "Lucia",
-          "Enrique",
           "Sergio",
           "Mia",
           "Andrés",
           "Lupe",
-          "Penélope",
-          "Penelope",
-          "Miguel",
           "Pedro",
-          "Astrid",
           "Elin",
-          "Filiz",
-          "Gwyneth",
         ]
     language:
       type: string
@@ -340,14 +241,11 @@ ShotstackTextToSpeechOptions:
 
         Select a language from the list of available languages:
         <ul>
-          <li>`arb`</li>
           <li>`cmn-CN`</li>
-          <li>`cy-GB`</li>
           <li>`da-DK`</li>
           <li>`de-DE`</li>
           <li>`en-AU`</li>
           <li>`en-GB`</li>
-          <li>`en-GB-WLS`</li>
           <li>`en-IN`</li>
           <li>`en-US`</li>
           <li>`es-ES`</li>
@@ -355,7 +253,6 @@ ShotstackTextToSpeechOptions:
           <li>`es-US`</li>
           <li>`fr-CA`</li>
           <li>`fr-FR`</li>
-          <li>`is-IS`</li>
           <li>`it-IT`</li>
           <li>`ja-JP`</li>
           <li>`hi-IN`</li>
@@ -365,10 +262,7 @@ ShotstackTextToSpeechOptions:
           <li>`pl-PL`</li>
           <li>`pt-BR`</li>
           <li>`pt-PT`</li>
-          <li>`ro-RO`</li>
-          <li>`ru-RU`</li>
           <li>`sv-SE`</li>
-          <li>`tr-TR`</li>
           <li>`en-NZ`</li>
           <li>`en-ZA`</li>
           <li>`ca-ES`</li>
@@ -379,14 +273,11 @@ ShotstackTextToSpeechOptions:
         </ul>
       enum:
         [
-          "arb",
           "cmn-CN",
-          "cy-GB",
           "da-DK",
           "de-DE",
           "en-AU",
           "en-GB",
-          "en-GB-WLS",
           "en-IN",
           "en-US",
           "es-ES",
@@ -394,7 +285,6 @@ ShotstackTextToSpeechOptions:
           "es-US",
           "fr-CA",
           "fr-FR",
-          "is-IS",
           "it-IT",
           "ja-JP",
           "hi-IN",
@@ -404,10 +294,7 @@ ShotstackTextToSpeechOptions:
           "pl-PL",
           "pt-BR",
           "pt-PT",
-          "ro-RO",
-          "ru-RU",
           "sv-SE",
-          "tr-TR",
           "en-NZ",
           "en-ZA",
           "ca-ES",
