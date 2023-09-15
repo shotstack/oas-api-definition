@@ -14,7 +14,7 @@ ElevenLabsTextToSpeechOptions:
     voice:
       type: string
       description: >-
-        Select a voice from the list of available voices:
+        The voice to use for the text-to-speech conversion. Select a voice from the list of available voices:
         <ul>
           <li>`Adam`</li>
           <li>`Antoni`</li>
