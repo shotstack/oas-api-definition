@@ -16,12 +16,13 @@ DIDTextToAvatarOptions:
       description: >-
         The avatar character to generate. Select from the list of available avatars:
         <ul>
-          <li>`amy`</li>
-          <li>`daniel`</li>
+          <li>`jack`</li>
+          <li>`lana`</li>
+          <li>`lily`</li>
           <li>`matt`</li>
-          <li>`trevor`</li>
+          <li>`rian`</li>
         </ul>
-      enum: ["amy", "daniel", "matt", "trevor"]
+      enum: ["jack", "lana", "lily", "matt", "rian"]
     background:
       type: string
       description: The background color of the video.
