@@ -23,6 +23,9 @@ info:
     **[Ingest API](#shotstack-ingest)** - [https://api.shotstack.io/ingest/{version}](#)<br>
     Ingest (upload, store and transform) source footage, images, audio and fonts to be used by the Edit API.
 
+    **[Create API](#shotstack-create)** - [https://api.shotstack.io/create/{version}](#)<br>
+    Generate images, videos, voice overs and text using built in and third party generative AI providers.
+
 servers:
   - url: https://api.shotstack.io/edit/{version}
     variables:
