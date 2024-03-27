@@ -17,7 +17,7 @@
           description: The [Edit](#tocs_edit) template.
           $ref: "../edit.yaml#/Edit"
           example:
-            $ref: ".../../definitions/edit.yaml"
+            $ref: "../../definitions/edit.yaml"
       required:
         - id
         - name
