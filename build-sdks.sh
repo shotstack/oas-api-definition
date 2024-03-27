@@ -20,6 +20,9 @@ OPENAPI_GENERATOR_VERSION=5.4.0
 rm -rf $BUILD_DIR
 mkdir -p $BUILD_DIR
 
+# Validate OpenAPI 3.0 YAML
+./node_modules/.bin/swagger-cli validate $SPEC_FILE
+
 # Resolve YAML files in to one master JSON file
 ./node_modules/.bin/swagger-cli bundle -o $SPEC_FILE_JSON $SPEC_FILE
 

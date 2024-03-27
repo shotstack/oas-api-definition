@@ -5,6 +5,9 @@ OAS3_YAML=api.oas3.yaml
 OAS3_JSON=api.oas3.json
 mkdir -p $DOCS_DIR
 
+# Validate OpenAPI 3.0 YAML
+./node_modules/.bin/swagger-cli validate $OAS3_YAML
+
 # Resolve YAML files in to one master JSON file
 ./node_modules/.bin/swagger-cli bundle -o $OAS3_JSON $OAS3_YAML
 
