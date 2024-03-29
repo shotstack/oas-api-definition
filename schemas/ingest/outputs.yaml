@@ -8,4 +8,8 @@
           type: array
           items:
             $ref: "./rendition.yaml#/Rendition"
+        transcription:
+          description: >-
+            The transcription settings for the output file.
+          $ref: "./transcription.yaml#/Transcription"
       type: object

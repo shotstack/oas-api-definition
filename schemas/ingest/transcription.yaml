@@ -1,0 +1,17 @@
+    Transcription:
+      description: >-
+        Generate a transcription of the audio in the video. The transcription can be output as a file in SRT or VTT format.
+      properties:
+        format:
+          description: >-
+            The output format of the transcription file. The following formats are available:
+            <ul>
+              <li>`srt` - SRT captions format</li>
+              <li>`vtt` - VTT captions format</li>
+            </ul>
+          enum:
+            - srt
+            - vtt
+          type: string
+          example: vtt
+      type: object
