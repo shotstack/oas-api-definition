@@ -24,3 +24,4 @@
         - $ref: "./shotstackdestination.yaml#/ShotstackDestination"
         - $ref: "./muxdestination.yaml#/MuxDestination"
         - $ref: "./s3destination.yaml#/S3Destination"
+      additionalProperties: false

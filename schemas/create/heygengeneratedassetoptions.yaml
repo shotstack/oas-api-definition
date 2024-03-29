@@ -1,0 +1,17 @@
+HeyGenGeneratedAssetOptions:
+  type: object
+  description: >-
+    Generate assets using the third party HeyGen provider AI services.
+
+
+    The following AI generation services are available:
+    <ul>
+      <li><a href="#tocs_heygentexttoavataroptions">HeyGenTextToAvatarOptions</a></li>
+    </ul>
+  oneOf:
+    - $ref: "./heygentexttoavataroptions.yaml#/HeyGenTextToAvatarOptions"
+  discriminator:
+    propertyName: type
+    mapping:
+      text-to-avatar: "#/components/schemas/HeyGenTextToAvatarOptions"
+  additionalProperties: false

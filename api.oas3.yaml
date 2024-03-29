@@ -251,6 +251,9 @@ components:
     Rendition:
       $ref: "./schemas/ingest/rendition.yaml#/Rendition"
 
+    Transcription:
+      $ref: "./schemas/ingest/transcription.yaml#/Transcription"
+
     # Create schemas
     GeneratedAsset:
       $ref: "./schemas/create/generatedasset.yaml#/GeneratedAsset"
@@ -258,11 +261,29 @@ components:
     ShotstackGeneratedAsset:
       $ref: "./schemas/create/shotstackgeneratedasset.yaml#/ShotstackGeneratedAsset"
 
+    ShotstackGeneratedAssetOptions:
+      $ref: "./schemas/create/shotstackgeneratedassetoptions.yaml#/ShotstackGeneratedAssetOptions"
+
     ShotstackTextToSpeechOptions:
       $ref: "./schemas/create/shotstacktexttospeechoptions.yaml#/ShotstackTextToSpeechOptions"
 
+    ShotstackTextToImageOptions:
+      $ref: "./schemas/create/shotstacktexttoimageoptions.yaml#/ShotstackTextToImageOptions"
+
+    DIDGeneratedAsset:
+      $ref: "./schemas/create/didgeneratedasset.yaml#/DIDGeneratedAsset"
+
+    DIDGeneratedAssetOptions:
+      $ref: "./schemas/create/didgeneratedassetoptions.yaml#/DIDGeneratedAssetOptions"
+
+    DIDTextToAvatarOptions:
+      $ref: "./schemas/create/didtexttoavataroptions.yaml#/DIDTextToAvatarOptions"
+
     ElevenLabsGeneratedAsset:
       $ref: "./schemas/create/elevenlabsgeneratedasset.yaml#/ElevenLabsGeneratedAsset"
+
+    ElevenLabsGeneratedAssetOptions:
+      $ref: "./schemas/create/elevenlabsgeneratedassetoptions.yaml#/ElevenLabsGeneratedAssetOptions"
 
     ElevenLabsTextToSpeechOptions:
       $ref: "./schemas/create/elevenlabstexttospeechoptions.yaml#/ElevenLabsTextToSpeechOptions"
@@ -270,14 +291,11 @@ components:
     HeyGenGeneratedAsset:
       $ref: "./schemas/create/heygengeneratedasset.yaml#/HeyGenGeneratedAsset"
 
+    HeyGenGeneratedAssetOptions:
+      $ref: "./schemas/create/heygengeneratedassetoptions.yaml#/HeyGenGeneratedAssetOptions"
+
     HeyGenTextToAvatarOptions:
       $ref: "./schemas/create/heygentexttoavataroptions.yaml#/HeyGenTextToAvatarOptions"
-
-    DIDGeneratedAsset:
-      $ref: "./schemas/create/didgeneratedasset.yaml#/DIDGeneratedAsset"
-
-    DIDTextToAvatarOptions:
-      $ref: "./schemas/create/didtexttoavataroptions.yaml#/DIDTextToAvatarOptions"
 
     # Edit response schemas
     QueuedResponse:

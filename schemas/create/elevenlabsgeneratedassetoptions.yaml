@@ -1,0 +1,17 @@
+ElevenLabsGeneratedAssetOptions:
+  type: object
+  description: >-
+    Generate assets using the third party ElevenLabs provider AI services.
+
+
+    The following AI generation services are available:
+    <ul>
+      <li><a href="#tocs_elevenlabstexttospeechoptions">ElevenLabsTextToSpeechOptions</a></li>
+    </ul>
+  oneOf:
+    - $ref: "./elevenlabstexttospeechoptions.yaml#/ElevenLabsTextToSpeechOptions"
+  discriminator:
+    propertyName: type
+    mapping:
+      text-to-speech: "#/components/schemas/ElevenLabsTextToSpeechOptions"
+  additionalProperties: false

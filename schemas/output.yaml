@@ -152,7 +152,6 @@
           type: array
           items:
             $ref: "./destinations.yaml#/Destinations"
-          additionalProperties: false
       required:
         - format
       type: object

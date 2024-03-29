@@ -1,6 +1,6 @@
 ShotstackGeneratedAsset:
   description: >-
-    Generate assets using the native Shotstack provider. Shotstack provides a text-to-speech service.
+    Generate assets using the native Shotstack provider. Shotstack provides a text-to-speech and a text-to-image service.
   type: object
   properties:
     provider:
@@ -9,5 +9,8 @@ ShotstackGeneratedAsset:
       enum: ["shotstack"]
       default: shotstack
     options:
-      description: Options and configuration for the native Shotstack text-to-speech service.
-      $ref: "./shotstacktexttospeechoptions.yaml#/ShotstackTextToSpeechOptions"
+      description: Options and configuration for the native Shotstack services.
+      $ref: "./shotstackgeneratedassetoptions.yaml#/ShotstackGeneratedAssetOptions"
+  required:
+    - provider
+    - options

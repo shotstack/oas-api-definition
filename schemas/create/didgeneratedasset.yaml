@@ -10,4 +10,7 @@ DIDGeneratedAsset:
       default: d-id
     options:
       description: Options and configuration for the D-ID text-to-avatar service.
-      $ref: "./didtexttoavataroptions.yaml#/DIDTextToAvatarOptions"
+      $ref: "./didgeneratedassetoptions.yaml#/DIDGeneratedAssetOptions"
+  required:
+    - provider
+    - options
