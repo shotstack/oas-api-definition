@@ -1,0 +1,11 @@
+TransferResponse:
+  description: >-
+    The response returned by the Serve API [transfer asset](#transfer-asset) request. The response includes the ID and
+    transfer status. The response follows the [json:api](https://jsonapi.org/) specification.
+  properties:
+    data:
+      description: An asset transfer resource.
+      $ref: "./transferresponsedata.yaml#/TransferResponseData"
+  required:
+    - data
+  type: object

@@ -6,7 +6,7 @@
           type: string
           example: a4482cbf-e321-42a2-ac8b-947d26886840
         owner:
-          description: The owner id of the render task.
+          description: The owner id of the asset.
           type: string
           example: 5ca6hu7s9k
         region:

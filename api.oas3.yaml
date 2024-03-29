@@ -117,6 +117,9 @@ paths:
   /assets/render/{id}:
     $ref: "./paths/assetsrenderid.yaml"
 
+  /assets:
+    $ref: "./paths/assets.yaml"
+
   /sources:
     $ref: "./paths/sources.yaml"
 
@@ -254,6 +257,10 @@ components:
     Transcription:
       $ref: "./schemas/ingest/transcription.yaml#/Transcription"
 
+    # Serve schemas
+    Transfer:
+      $ref: "./schemas/serve/transfer.yaml#/Transfer"
+
     # Create schemas
     GeneratedAsset:
       $ref: "./schemas/create/generatedasset.yaml#/GeneratedAsset"
@@ -345,6 +352,16 @@ components:
 
     AssetResponseAttributes:
       $ref: "./schemas/responses/assetresponseattributes.yaml#/AssetResponseAttributes"
+
+    # Serve response schemas
+    TransferResponse:
+      $ref: "./schemas/serve/responses/transferresponse.yaml#/TransferResponse"
+
+    TransferResponseData:
+      $ref: "./schemas/serve/responses/transferresponsedata.yaml#/TransferResponseData"
+
+    TransferResponseAttributes:
+      $ref: "./schemas/serve/responses/transferresponseattributes.yaml#/TransferResponseAttributes"
 
     # Ingest response schemas
     QueuedSourceResponse:
