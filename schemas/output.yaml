@@ -23,13 +23,14 @@
           example: mp4
         resolution:
           description: >-
-            The output resolution of the video or image.
+            The preset output resolution of the video or image. For custom sizes use the `size` property.
             <ul>
               <li>`preview` - 512px x 288px @ 15fps</li>
               <li>`mobile` - 640px x 360px @ 25fps</li>
               <li>`sd` - 1024px x 576px @ 25fps</li>
               <li>`hd` - 1280px x 720px @ 25fps</li>
               <li>`1080` - 1920px x 1080px @ 25fps</li>
+              <li>`4k` - 3840px x 2160px @ 25fps</li>
             </ul>
           enum:
             - preview
@@ -37,8 +38,9 @@
             - sd
             - hd
             - "1080"
+            - "4k"
           type: string
-          example: sd
+          example: hd
         aspectRatio:
           description: >-
             The aspect ratio (shape) of the video or image. Useful for social media output formats. Options are:
@@ -118,14 +120,18 @@
             The default `medium` provides the most optimized choice for all three 
             factors.
             <ul>
+              <li>`verylow` - reduced quality, smallest file size</li>
               <li>`low` - slightly reduced quality, smaller file size</li>
               <li>`medium` (default) - optimized quality, render speeds and file size</li>
               <li>`high` - slightly increased quality, larger file size</li>
+              <li>`veryhigh` - highest quality, largest file size</li>
             </ul>
           enum:
+            - verylow
             - low
             - medium
             - high
+            - veryhigh
           type: string
           example: medium
         repeat:
