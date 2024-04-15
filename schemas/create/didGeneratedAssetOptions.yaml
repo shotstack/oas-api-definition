@@ -9,7 +9,7 @@ DIDGeneratedAssetOptions:
       <li><a href="#tocs_didtexttoavataroptions">DidTextToAvatarOptions</a></li>
     </ul>
   oneOf:
-    - $ref: "./didtexttoavataroptions.yaml#/DIDTextToAvatarOptions"
+    - $ref: "./didTextToAvatarOptions.yaml#/DIDTextToAvatarOptions"
   discriminator:
     propertyName: type
     mapping:

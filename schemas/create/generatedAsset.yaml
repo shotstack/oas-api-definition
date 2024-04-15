@@ -15,8 +15,8 @@ GeneratedAsset:
   discriminator:
     propertyName: provider
   oneOf:
-    - $ref: "./shotstackgeneratedasset.yaml#/ShotstackGeneratedAsset"
-    - $ref: "./didgeneratedasset.yaml#/DIDGeneratedAsset"
-    - $ref: "./elevenlabsgeneratedasset.yaml#/ElevenLabsGeneratedAsset"
-    - $ref: "./heygengeneratedasset.yaml#/HeyGenGeneratedAsset"
+    - $ref: "./shotstackGeneratedAsset.yaml#/ShotstackGeneratedAsset"
+    - $ref: "./didGeneratedAsset.yaml#/DIDGeneratedAsset"
+    - $ref: "./elevenlabsGeneratedAsset.yaml#/ElevenLabsGeneratedAsset"
+    - $ref: "./heygenGeneratedAsset.yaml#/HeyGenGeneratedAsset"
   additionalProperties: false

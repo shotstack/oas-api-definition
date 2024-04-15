@@ -13,7 +13,7 @@ post:
     content:
       application/json:
         schema:
-          $ref: "../schemas/create/generatedasset.yaml#/GeneratedAsset"
+          $ref: "../schemas/create/generatedAsset.yaml#/GeneratedAsset"
     required: true
   responses:
     "201":
@@ -21,13 +21,13 @@ post:
       content:
         application/json:
           schema:
-            $ref: "../schemas/create/responses/generatedassetresponse.yaml#/GeneratedAssetResponse"
+            $ref: "../schemas/create/responses/generatedAssetResponse.yaml#/GeneratedAssetResponse"
     "400":
       description: A list of validation and other errors
       content:
         application/json:
           schema:
-            $ref: "../schemas/create/responses/generatedasseterrorresponse.yaml#/GeneratedAssetErrorResponse"
+            $ref: "../schemas/create/responses/generatedAssetErrorResponse.yaml#/GeneratedAssetErrorResponse"
   security:
     - DeveloperKey: []
   tags:

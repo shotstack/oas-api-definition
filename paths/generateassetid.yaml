@@ -11,7 +11,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: "../schemas/create/responses/generatedassetresponse.yaml#/GeneratedAssetResponse"
+            $ref: "../schemas/create/responses/generatedAssetResponse.yaml#/GeneratedAssetResponse"
   security:
     - DeveloperKey: []
   tags:

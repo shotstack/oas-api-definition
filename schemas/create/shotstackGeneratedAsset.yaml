@@ -10,7 +10,7 @@ ShotstackGeneratedAsset:
       default: shotstack
     options:
       description: Options and configuration for the native Shotstack services.
-      $ref: "./shotstackgeneratedassetoptions.yaml#/ShotstackGeneratedAssetOptions"
+      $ref: "./shotstackGeneratedAssetOptions.yaml#/ShotstackGeneratedAssetOptions"
   required:
     - provider
     - options

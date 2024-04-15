@@ -284,46 +284,46 @@ components:
 
     # Create schemas
     GeneratedAsset:
-      $ref: "./schemas/create/generatedasset.yaml#/GeneratedAsset"
+      $ref: "./schemas/create/generatedAsset.yaml#/GeneratedAsset"
 
     ShotstackGeneratedAsset:
-      $ref: "./schemas/create/shotstackgeneratedasset.yaml#/ShotstackGeneratedAsset"
+      $ref: "./schemas/create/shotstackGeneratedAsset.yaml#/ShotstackGeneratedAsset"
 
     ShotstackGeneratedAssetOptions:
-      $ref: "./schemas/create/shotstackgeneratedassetoptions.yaml#/ShotstackGeneratedAssetOptions"
+      $ref: "./schemas/create/shotstackGeneratedAssetOptions.yaml#/ShotstackGeneratedAssetOptions"
 
     ShotstackTextToSpeechOptions:
-      $ref: "./schemas/create/shotstacktexttospeechoptions.yaml#/ShotstackTextToSpeechOptions"
+      $ref: "./schemas/create/shotstackTextToSpeechOptions.yaml#/ShotstackTextToSpeechOptions"
 
     ShotstackTextToImageOptions:
-      $ref: "./schemas/create/shotstacktexttoimageoptions.yaml#/ShotstackTextToImageOptions"
+      $ref: "./schemas/create/shotstackTextToImageOptions.yaml#/ShotstackTextToImageOptions"
 
     DIDGeneratedAsset:
-      $ref: "./schemas/create/didgeneratedasset.yaml#/DIDGeneratedAsset"
+      $ref: "./schemas/create/didGeneratedAsset.yaml#/DIDGeneratedAsset"
 
     DIDGeneratedAssetOptions:
-      $ref: "./schemas/create/didgeneratedassetoptions.yaml#/DIDGeneratedAssetOptions"
+      $ref: "./schemas/create/didGeneratedAssetOptions.yaml#/DIDGeneratedAssetOptions"
 
     DIDTextToAvatarOptions:
-      $ref: "./schemas/create/didtexttoavataroptions.yaml#/DIDTextToAvatarOptions"
+      $ref: "./schemas/create/didTextToAvatarOptions.yaml#/DIDTextToAvatarOptions"
 
     ElevenLabsGeneratedAsset:
-      $ref: "./schemas/create/elevenlabsgeneratedasset.yaml#/ElevenLabsGeneratedAsset"
+      $ref: "./schemas/create/elevenlabsGeneratedAsset.yaml#/ElevenLabsGeneratedAsset"
 
     ElevenLabsGeneratedAssetOptions:
-      $ref: "./schemas/create/elevenlabsgeneratedassetoptions.yaml#/ElevenLabsGeneratedAssetOptions"
+      $ref: "./schemas/create/elevenlabsGeneratedAssetOptions.yaml#/ElevenLabsGeneratedAssetOptions"
 
     ElevenLabsTextToSpeechOptions:
-      $ref: "./schemas/create/elevenlabstexttospeechoptions.yaml#/ElevenLabsTextToSpeechOptions"
+      $ref: "./schemas/create/elevenlabsTextToSpeechOptions.yaml#/ElevenLabsTextToSpeechOptions"
 
     HeyGenGeneratedAsset:
-      $ref: "./schemas/create/heygengeneratedasset.yaml#/HeyGenGeneratedAsset"
+      $ref: "./schemas/create/heygenGeneratedAsset.yaml#/HeyGenGeneratedAsset"
 
     HeyGenGeneratedAssetOptions:
-      $ref: "./schemas/create/heygengeneratedassetoptions.yaml#/HeyGenGeneratedAssetOptions"
+      $ref: "./schemas/create/heygenGeneratedAssetOptions.yaml#/HeyGenGeneratedAssetOptions"
 
     HeyGenTextToAvatarOptions:
-      $ref: "./schemas/create/heygentexttoavataroptions.yaml#/HeyGenTextToAvatarOptions"
+      $ref: "./schemas/create/heygenTextToAvatarOptions.yaml#/HeyGenTextToAvatarOptions"
 
     # Edit response schemas
     QueuedResponse:
@@ -426,19 +426,19 @@ components:
 
     # Create response schemas
     GeneratedAssetResponse:
-      $ref: "./schemas/create/responses/generatedassetresponse.yaml#/GeneratedAssetResponse"
+      $ref: "./schemas/create/responses/generatedAssetResponse.yaml#/GeneratedAssetResponse"
 
     GeneratedAssetResponseData:
-      $ref: "./schemas/create/responses/generatedassetresponsedata.yaml#/GeneratedAssetResponseData"
+      $ref: "./schemas/create/responses/generatedAssetResponseData.yaml#/GeneratedAssetResponseData"
 
     GeneratedAssetResponseAttributes:
-      $ref: "./schemas/create/responses/generatedassetresponseattributes.yaml#/GeneratedAssetResponseAttributes"
+      $ref: "./schemas/create/responses/generatedAssetResponseAttributes.yaml#/GeneratedAssetResponseAttributes"
 
     GeneratedAssetErrorResponse:
-      $ref: "./schemas/create/responses/generatedasseterrorresponse.yaml#/GeneratedAssetErrorResponse"
+      $ref: "./schemas/create/responses/generatedAssetErrorResponse.yaml#/GeneratedAssetErrorResponse"
 
     GeneratedAssetErrorResponseData:
-      $ref: "./schemas/create/responses/generatedasseterrorresponsedata.yaml#/GeneratedAssetErrorResponseData"
+      $ref: "./schemas/create/responses/generatedAssetErrorResponseData.yaml#/GeneratedAssetErrorResponseData"
 
   responses: {}
   parameters: {}

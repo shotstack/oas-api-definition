@@ -10,4 +10,4 @@ ElevenLabsGeneratedAsset:
       default: elevenlabs
     options:
       description: Options and configuration for the ElevenLabs text-to-speech service.
-      $ref: "./elevenlabsgeneratedassetoptions.yaml#/ElevenLabsGeneratedAssetOptions"
+      $ref: "./elevenlabsGeneratedAssetOptions.yaml#/ElevenLabsGeneratedAssetOptions"

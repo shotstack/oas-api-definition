@@ -10,4 +10,4 @@ HeyGenGeneratedAsset:
       default: heygen
     options:
       description: Options and configuration for the HeyGen text-to-avatar service.
-      $ref: "./heygengeneratedassetoptions.yaml#/HeyGenGeneratedAssetOptions"
+      $ref: "./heygenGeneratedAssetOptions.yaml#/HeyGenGeneratedAssetOptions"

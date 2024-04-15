@@ -10,8 +10,8 @@ ShotstackGeneratedAssetOptions:
       <li><a href="#tocs_shotstacktexttoimageoptions">ShotstackTextToImageOptions</a></li>
     </ul>
   oneOf:
-    - $ref: "./shotstacktexttospeechoptions.yaml#/ShotstackTextToSpeechOptions"
-    - $ref: "./shotstacktexttoimageoptions.yaml#/ShotstackTextToImageOptions"
+    - $ref: "./shotstackTextToSpeechOptions.yaml#/ShotstackTextToSpeechOptions"
+    - $ref: "./shotstackTextToImageOptions.yaml#/ShotstackTextToImageOptions"
   discriminator:
     propertyName: type
     mapping:

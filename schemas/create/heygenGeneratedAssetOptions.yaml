@@ -9,7 +9,7 @@ HeyGenGeneratedAssetOptions:
       <li><a href="#tocs_heygentexttoavataroptions">HeyGenTextToAvatarOptions</a></li>
     </ul>
   oneOf:
-    - $ref: "./heygentexttoavataroptions.yaml#/HeyGenTextToAvatarOptions"
+    - $ref: "./heygenTextToAvatarOptions.yaml#/HeyGenTextToAvatarOptions"
   discriminator:
     propertyName: type
     mapping:
