@@ -224,19 +224,25 @@ components:
       $ref: "./schemas/destinations.yaml#/Destinations"
 
     ShotstackDestination:
-      $ref: "./schemas/shotstackdestination.yaml#/ShotstackDestination"
+      $ref: "./schemas/destinations/shotstackDestination.yaml#/ShotstackDestination"
 
     MuxDestination:
-      $ref: "./schemas/muxdestination.yaml#/MuxDestination"
+      $ref: "./schemas/destinations/muxDestination.yaml#/MuxDestination"
 
     MuxDestinationOptions:
-      $ref: "./schemas/muxdestinationoptions.yaml#/MuxDestinationOptions"
+      $ref: "./schemas/destinations/muxDestinationOptions.yaml#/MuxDestinationOptions"
 
     S3Destination:
-      $ref: "./schemas/s3destination.yaml#/S3Destination"
+      $ref: "./schemas/destinations/s3Destination.yaml#/S3Destination"
 
     S3DestinationOptions:
-      $ref: "./schemas/s3destinationoptions.yaml#/S3DestinationOptions"
+      $ref: "./schemas/destinations/s3DestinationOptions.yaml#/S3DestinationOptions"
+
+    GoogleCloudStorageDestination:
+      $ref: "./schemas/destinations/googleCloudStorageDestination.yaml#/GoogleCloudStorageDestination"
+
+    GoogleCloudStorageDestinationOptions:
+      $ref: "./schemas/destinations/googleCloudStorageDestinationOptions.yaml#/GoogleCloudStorageDestinationOptions"
 
     Template:
       $ref: "./schemas/template.yaml#/Template"

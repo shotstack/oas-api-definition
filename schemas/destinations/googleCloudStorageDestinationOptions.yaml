@@ -1,0 +1,24 @@
+GoogleCloudStorageDestinationOptions:
+  description: >-
+    Pass additional options to control how files are stored in Google Cloud Storage.
+  properties:
+    bucket:
+      description: >-
+        The bucket name to send files to. The bucket must exist in the Google Cloud Storage account before files can be
+        sent.
+      type: string
+      example: my-bucket
+    prefix:
+      description: >-
+        A prefix for the file being sent. This is typically a folder name, i.e. `videos` or `customerId/videos`.
+      type: string
+      example: my-renders
+    filename:
+      description: >-
+        Use your own filename instead of the default render ID filename. Note: omit the file extension as this will
+        be appended depending on the output format. Also `-poster.jpg` and `-thumb.jpg` will be appended for poster
+        and thumbnail images.
+      type: string
+      example: my-file
+  required:
+    - bucket

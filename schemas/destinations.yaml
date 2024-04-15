@@ -19,11 +19,13 @@
           <li><a href="#tocs_shotstackdestination">ShotstackDestination</a></li>
           <li><a href="#tocs_muxdestination">MuxDestination</a></li>
           <li><a href="#tocs_s3destination">S3Destination</a></li>
+          <li><a href="#tocs_googlecloudstoragedestination">GoogleCloudStorageDestination</a></li>
         </ul>
       discriminator:
         propertyName: destinations
       anyOf:
-        - $ref: "./shotstackdestination.yaml#/ShotstackDestination"
-        - $ref: "./muxdestination.yaml#/MuxDestination"
-        - $ref: "./s3destination.yaml#/S3Destination"
+        - $ref: "./destinations/shotstackDestination.yaml#/ShotstackDestination"
+        - $ref: "./destinations/muxDestination.yaml#/MuxDestination"
+        - $ref: "./destinations/s3Destination.yaml#/S3Destination"
+        - $ref: "./destinations/googleCloudStorageDestination.yaml#/GoogleCloudStorageDestination"
       additionalProperties: false

@@ -1,6 +1,6 @@
     S3Destination:
       description: >-
-        Send rendered videos to an [Amazon S3](https://shotstack.io/docs/guide/serving-assets/destinations/s3) bucket.
+        Send rendered videos and assets to an [Amazon S3](https://shotstack.io/docs/guide/serving-assets/destinations/s3) bucket.
         Send files to any region with your own prefix and filename. AWS credentials are required and added via the
         [dashboard](https://dashboard.shotstack.io/integrations/s3), not in the request.
       properties:
@@ -11,7 +11,7 @@
           example: s3
         options:
           description: Additional S3 configuration options.
-          $ref: "./s3destinationoptions.yaml#/S3DestinationOptions"
+          $ref: "./s3DestinationOptions.yaml#/S3DestinationOptions"
       type: object
       required:
         - provider

@@ -11,7 +11,7 @@
           example: mux
         options:
           description: Additional Mux configuration and features.
-          $ref: "./muxdestinationoptions.yaml#/MuxDestinationOptions"
+          $ref: "./muxDestinationOptions.yaml#/MuxDestinationOptions"
       type: object
       required:
         - provider
