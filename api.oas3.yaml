@@ -257,6 +257,21 @@ components:
     Transcription:
       $ref: "./schemas/ingest/transcription.yaml#/Transcription"
 
+    Speed:
+      $ref: "./schemas/ingest/speed.yaml#/Speed"
+
+    Enhancements:
+      $ref: "./schemas/ingest/enhancements.yaml#/Enhancements"
+
+    AudioEnhancement:
+      $ref: "./schemas/ingest/enhancements/audioEnhancement.yaml#/AudioEnhancement"
+
+    DolbyEnhancement:
+      $ref: "./schemas/ingest/enhancements/audio/dolbyEnhancement.yaml#/DolbyEnhancement"
+
+    DolbyEnhancementOptions:
+      $ref: "./schemas/ingest/enhancements/audio/dolbyEnhancementOptions.yaml#/DolbyEnhancementOptions"
+
     # Serve schemas
     Transfer:
       $ref: "./schemas/serve/transfer.yaml#/Transfer"

@@ -9,15 +9,37 @@
             video or an image to an image. You can't encode a video as an image. The following formats are available:
             <ul>
               <li>`mp4` - mp4 video file (video only)</li>
+              <li>`webm` - webm video file (video only)</li>
+              <li>`mov` - mov video file (video only)</li>
+              <li>`avi` - avi video file (video only)</li>
+              <li>`mkv` - mkv video file (video only)</li>
+              <li>`ogv` - ogv video file (video only)</li>
+              <li>`wmv` - wmv video file (video only)</li>
+              <li>`avif` - avif video file (video only)</li>
+              <li>`gif` - animated gif file (video only)</li>
               <li>`jpg` - jpg image file (image only)</li>
               <li>`png` - png image file (image only)</li>
+              <li>`webp` - webp image file (image only)</li>
+              <li>`tif` - tif image file (image only)</li>
               <li>`mp3` - mp3 audio file (audio only)</li>
+              <li>`wav` - wav audio file (audio only)</li>
             </ul>
           enum:
             - mp4
+            - webm
+            - mov
+            - avi
+            - mkv
+            - ogv
+            - wmv
+            - avif
+            - gif
             - mp3
+            - wav
             - jpg
             - png
+            - webp
+            - tif
           type: string
           example: mp4
         size:
@@ -39,7 +61,7 @@
           example: crop
         resolution:
           description: >-
-            The output resolution of the video or image. This is a convenience property that sets the width and height
+            The preset output resolution of the video or image. This is a convenience property that sets the width and height
             based on industry standard resolutions. The following resolutions are available:
             <ul>
               <li>`preview` - 512px x 288px</li>
@@ -54,7 +76,7 @@
             - sd
             - hd
             - fhd
-          example: sd
+          example: hd
         quality:
           description: >-
             Adjust the visual quality of the video or image. The higher the value, the sharper the image quality but
@@ -98,6 +120,23 @@
             - 60
           type: number
           example: 25
+        speed:
+          $ref: "./speed.yaml#/Speed"
+        keyframeInterval:
+          description: >-
+            The keyframe interval is useful to optimize playback, seeking and smoother scrubbing in browsers. The value
+            sets the number of frames between a keyframe. The lower the number, the larger the file. Try a value between
+            10 and 25 for smooth scrubbing.
+          type: integer
+          minimum: 1
+          maximum: 300
+          example: 10
+        enhance:
+          description: >-
+            Apply media processing enhancements to the rendition using a third party provider. Currently only Dolby.io
+            audio enhancement is available.
+          type: object
+          $ref: "./enhancements.yaml#/Enhancements"
         filename:
           description: >-
             A custom name for the generated rendition file. The file extension will be automatically added based

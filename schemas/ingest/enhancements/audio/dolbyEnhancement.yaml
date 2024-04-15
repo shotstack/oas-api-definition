@@ -1,0 +1,17 @@
+DolbyEnhancement:
+  description: >-
+    Dolby.io audio enhancement provider. Credentials are required and must be added via the 
+    [dashboard](https://dashboard.shotstack.io/integrations/dolby), not in the request.
+  properties:
+    provider:
+      description: The enhancement provider to use - set to `dolby` for Dolby.
+      type: string
+      default: dolby
+      example: dolby
+    options:
+      description: Additional Dolby configuration and features.
+      $ref: "./dolbyEnhancementOptions.yaml#/DolbyEnhancementOptions"
+  type: object
+  required:
+    - provider
+    - options

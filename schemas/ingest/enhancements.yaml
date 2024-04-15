@@ -1,0 +1,9 @@
+Enhancements:
+  type: object
+  description: >-
+    Enhancements that can be applied to a rendition. Currently only supports the Dolby audio enhancement.
+  properties:
+    audio:
+      description: >-
+        An audio enhancement that can be applied to the audio content of the rendition.
+      $ref: "./enhancements/audioEnhancement.yaml#/AudioEnhancement"
