@@ -1,0 +1,97 @@
+StabilityAiTextToImageOptions:
+  description: >-
+    Options for the Stability AI text-to-image service. Set a text prompt to generate an image from plus other engine
+    and configuration options. The output will be generated as a JPG file available at the URL returned in the response.
+  properties:
+    type:
+      type: string
+      description: The type of asset to generate - set to `text-to-image` for text-to-image.
+      enum: ["text-to-image"]
+      default: text-to-image
+    prompt:
+      type: string
+      description: The text prompt to generate an image from.
+      example: A detailed photograph of Mars, showcasing its orange-red surface
+    engine:
+      type: string
+      description: >-
+        The engine (model) to use for generating the image. Select from the list of available engines:
+        <ul>
+          <li>`stable-diffusion-xl-1024-v0-9`</li>
+          <li>`stable-diffusion-xl-1024-v1-0`</li>
+          <li>`stable-diffusion-v1`</li>
+          <li>`stable-diffusion-v1-5`</li>
+          <li>`stable-diffusion-512-v2-0`</li>
+          <li>`stable-diffusion-768-v2-0`</li>
+          <li>`stable-diffusion-512-v2-1`</li>
+          <li>`stable-diffusion-768-v2-1`</li>
+        </ul>
+      enum: [
+        'stable-diffusion-xl-1024-v0-9',
+        'stable-diffusion-xl-1024-v1-0',
+        'stable-diffusion-v1',
+        'stable-diffusion-v1-5',
+        'stable-diffusion-512-v2-0',
+        'stable-diffusion-768-v2-0',
+        'stable-diffusion-512-v2-1',
+        'stable-diffusion-768-v2-1'
+      ]
+      default: stable-diffusion-xl-1024-v1-0
+      example: stable-diffusion-xl-1024-v1-0
+    width:
+      type: integer
+      description: The width of the image in pixels. Must be divisible by 64.
+      example: 512
+    height:
+      type: integer
+      description: The height of the image in pixels. Must be divisible by 64.
+      example: 512
+    steps:
+      type: integer
+      description: The number of iterative diffusion steps to run.
+      example: 30
+      default: 50
+    stylePreset:
+      type: string
+      description: >-
+        Apply a preset to generate an image in a particular style. Select from the list of available presets:
+        <ul>
+          <li>`3d-model`</li>
+          <li>`analog-film`</li>
+          <li>`anime`</li>
+          <li>`cinematic`</li>
+          <li>`comic-book`</li>
+          <li>`digital-art`</li>
+          <li>`enhance`</li>
+          <li>`fantasy-art`</li>
+          <li>`isometric`</li>
+          <li>`line-art`</li>
+          <li>`low-poly`</li>
+          <li>`modeling-compound`</li>
+          <li>`neon-punk`</li>
+          <li>`origami`</li>
+          <li>`photographic`</li>
+          <li>`pixel-art`</li>
+          <li>`tile-texture`</li>
+        </ul>
+      enum: [
+        '3d-model',
+        'analog-film',
+        'anime',
+        'cinematic',
+        'comic-book',
+        'digital-art',
+        'enhance',
+        'fantasy-art',
+        'isometric',
+        'line-art',
+        'low-poly',
+        'modeling-compound',
+        'neon-punk',
+        'origami',
+        'photographic',
+        'pixel-art',
+        'tile-texture'
+      ]
+      example: photographic
+  required: ["type", "prompt", "width", "height"]

@@ -8,13 +8,16 @@ ShotstackGeneratedAssetOptions:
     <ul>
       <li><a href="#tocs_shotstacktexttospeechoptions">ShotstackTextToSpeechOptions</a></li>
       <li><a href="#tocs_shotstacktexttoimageoptions">ShotstackTextToImageOptions</a></li>
+      <li><a href="#tocs_shotstacktextgeneratoroptions">ShotstackTextGeneratorOptions</a></li>
     </ul>
   oneOf:
     - $ref: "./shotstackTextToSpeechOptions.yaml#/ShotstackTextToSpeechOptions"
     - $ref: "./shotstackTextToImageOptions.yaml#/ShotstackTextToImageOptions"
+    - $ref: "./shotstackTextGeneratorOptions.yaml#/ShotstackTextGeneratorOptions"
   discriminator:
     propertyName: type
     mapping:
       text-to-speech: "#/components/schemas/ShotstackTextToSpeechOptions"
       text-to-image: "#/components/schemas/ShotstackTextToImageOptions"
+      text-generation: "#/components/schemas/ShotstackTextToImageOptions"
   additionalProperties: false

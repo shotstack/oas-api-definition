@@ -298,6 +298,9 @@ components:
     ShotstackTextToImageOptions:
       $ref: "./schemas/create/shotstackTextToImageOptions.yaml#/ShotstackTextToImageOptions"
 
+    ShotstackTextGeneratorOptions:
+      $ref: "./schemas/create/shotstackTextGeneratorOptions.yaml#/ShotstackTextGeneratorOptions"
+
     DIDGeneratedAsset:
       $ref: "./schemas/create/didGeneratedAsset.yaml#/DIDGeneratedAsset"
 
@@ -324,6 +327,15 @@ components:
 
     HeyGenTextToAvatarOptions:
       $ref: "./schemas/create/heygenTextToAvatarOptions.yaml#/HeyGenTextToAvatarOptions"
+
+    StabilityAiGeneratedAsset:
+      $ref: "./schemas/create/stabilityAiGeneratedAsset.yaml#/StabilityAiGeneratedAsset"
+
+    StabilityAiGeneratedAssetOptions:
+      $ref: "./schemas/create/stabilityAiGeneratedAssetOptions.yaml#/StabilityAiGeneratedAssetOptions"
+
+    StabilityAiTextToImageOptions:
+      $ref: "./schemas/create/stabilityAiTextToImageOptions.yaml#/StabilityAiTextToImageOptions"
 
     # Edit response schemas
     QueuedResponse:

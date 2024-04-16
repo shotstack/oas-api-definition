@@ -1,0 +1,17 @@
+StabilityAiGeneratedAssetOptions:
+  type: object
+  description: >-
+    Generate assets using Stability AI provider AI services.
+
+
+    The following AI generation services are available:
+    <ul>
+      <li><a href="#tocs_stabilityaitexttoimageoptions">StabilityAiTextToImageOptions</a></li>
+    </ul>
+  oneOf:
+    - $ref: "./stabilityAiTextToImageOptions.yaml#/StabilityAiTextToImageOptions"
+  discriminator:
+    propertyName: type
+    mapping:
+      text-to-image: "#/components/schemas/StabilityAiTextToImageOptions"
+  additionalProperties: false

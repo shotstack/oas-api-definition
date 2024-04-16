@@ -1,0 +1,18 @@
+StabilityAiGeneratedAsset:
+  description: >-
+    Generate assets using Stability AI. Stability AI provide a text-to-image service using Stable Diffusion. The
+    Stability AI provider works on a bring-your-own-key basis, credentials are required and must be added via the 
+    [dashboard](https://dashboard.shotstack.io/integrations/stability-ai), not in the request.
+  type: object
+  properties:
+    provider:
+      type: string
+      description: The name of the provider - set to `stability-ai` for Stability AI.
+      enum: ["stability-ai"]
+      default: stability-ai
+    options:
+      description: Options and configuration for the Stability AI text-to-image service.
+      $ref: "./stabilityAiGeneratedAssetOptions.yaml#/StabilityAiGeneratedAssetOptions"
+  required:
+    - provider
+    - options

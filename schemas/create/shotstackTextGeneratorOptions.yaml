@@ -1,0 +1,15 @@
+ShotstackTextGeneratorOptions:
+  description: >-
+    Options for the Shotstack text-generator service. Set a text prompt that will be used to generate a new body of
+    text. The output will be generated as a text (txt) file available at the URL returned in the response.
+  properties:
+    type:
+      type: string
+      description: The type of asset to generate - set to `text-generator` for text generation.
+      enum: ["text-generator"]
+      default: text-generator
+    prompt:
+      type: string
+      description: The text prompt to generate text from.
+      example: Generate a short script for a 15 second video describing the benefits of the Shotstack API
+  required: ["type", "prompt"]

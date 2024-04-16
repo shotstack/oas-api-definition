@@ -1,7 +1,7 @@
 ElevenLabsTextToSpeechOptions:
   description: >-
     Options for the ElevenLabs text-to-speech service. Set the text to be converted to speech and choose a voice to set
-    the speaking style. The output will be generated as an MP3 audio file.
+    the speaking style. The output will be generated as an MP3 audio file available at the URL returned in the response.
   properties:
     type:
       type: string

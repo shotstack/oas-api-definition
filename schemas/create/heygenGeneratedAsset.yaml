@@ -1,6 +1,8 @@
 HeyGenGeneratedAsset:
   description: >-
-    Generate assets using HeyGen. HeyGen provide a text-to-avatar service.
+    Generate assets using HeyGen. HeyGen provide a text-to-avatar service.  The HeyGen provider works on a
+    bring-your-own-key basis, credentials are required and must be added via the 
+    [dashboard](https://dashboard.shotstack.io/integrations/heygen), not in the request.
   type: object
   properties:
     provider:
@@ -11,3 +13,6 @@ HeyGenGeneratedAsset:
     options:
       description: Options and configuration for the HeyGen text-to-avatar service.
       $ref: "./heygenGeneratedAssetOptions.yaml#/HeyGenGeneratedAssetOptions"
+  required:
+    - provider
+    - options

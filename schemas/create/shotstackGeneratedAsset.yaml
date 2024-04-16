@@ -1,6 +1,7 @@
 ShotstackGeneratedAsset:
   description: >-
     Generate assets using the native Shotstack provider. Shotstack provides a text-to-speech and a text-to-image service.
+    The Shotstack provider works natively with your existing API key, no additional credentials are required.
   type: object
   properties:
     provider:
