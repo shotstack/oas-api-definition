@@ -1,0 +1,17 @@
+OpenAiGeneratedAssetOptions:
+  type: object
+  description: >-
+    Generate assets using OpenAI provider AI services.
+
+
+    The following AI generation services are available:
+    <ul>
+      <li><a href="#tocs_openaitextgeneratoroptions">OpenAiTextGeneratorOptions</a></li>
+    </ul>
+  oneOf:
+    - $ref: "./openaiTextGeneratorOptions.yaml#/OpenAiTextGeneratorOptions"
+  discriminator:
+    propertyName: type
+    mapping:
+      text-generator: "#/components/schemas/OpenAiTextGeneratorOptions"
+  additionalProperties: false

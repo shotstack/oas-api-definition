@@ -19,5 +19,5 @@ ShotstackGeneratedAssetOptions:
     mapping:
       text-to-speech: "#/components/schemas/ShotstackTextToSpeechOptions"
       text-to-image: "#/components/schemas/ShotstackTextToImageOptions"
-      text-generation: "#/components/schemas/ShotstackTextToImageOptions"
+      text-generator: "#/components/schemas/ShotstackTextToImageOptions"
   additionalProperties: false

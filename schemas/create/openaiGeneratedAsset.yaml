@@ -1,0 +1,18 @@
+OpenAiGeneratedAsset:
+  description: >-
+    Generate assets using OpenAI. OpenAI provide a text generation service using ChatGPT 3.5 and 4. The OpenAI provider
+    works on a bring-your-own-key basis, credentials are required and must be added via the
+    [dashboard](https://dashboard.shotstack.io/integrations/openai), not in the request.
+  type: object
+  properties:
+    provider:
+      type: string
+      description: The name of the provider - set to `openai` for OpenAI.
+      enum: ["openai"]
+      default: openai
+    options:
+      description: Options and configuration for the OpenAI text-generator service.
+      $ref: "./openaiGeneratedAssetOptions.yaml#/OpenAiGeneratedAssetOptions"
+  required:
+    - provider
+    - options

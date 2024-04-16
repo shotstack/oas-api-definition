@@ -328,6 +328,15 @@ components:
     HeyGenTextToAvatarOptions:
       $ref: "./schemas/create/heygenTextToAvatarOptions.yaml#/HeyGenTextToAvatarOptions"
 
+    OpenAiGeneratedAsset:
+      $ref: "./schemas/create/openaiGeneratedAsset.yaml#/OpenAiGeneratedAsset"
+
+    OpenAiGeneratedAssetOptions:
+      $ref: "./schemas/create/openaiGeneratedAssetOptions.yaml#/OpenAiGeneratedAssetOptions"
+
+    OpenAiTextGeneratorOptions:
+      $ref: "./schemas/create/openaiTextGeneratorOptions.yaml#/OpenAiTextGeneratorOptions"
+
     StabilityAiGeneratedAsset:
       $ref: "./schemas/create/stabilityAiGeneratedAsset.yaml#/StabilityAiGeneratedAsset"
 

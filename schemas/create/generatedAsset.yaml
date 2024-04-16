@@ -11,6 +11,8 @@ GeneratedAsset:
       <li><a href="#tocs_didgeneratedasset">DIDGeneratedAsset</a></li>
       <li><a href="#tocs_elevenlabsgeneratedasset">ElevenLabsGeneratedAsset</a></li>
       <li><a href="#tocs_heygengeneratedasset">HeyGenGeneratedAsset</a></li>
+      <li><a href="#tocs_openaigeneratedasset">OpenAiGeneratedAsset</a></li>
+      <li><a href="#tocs_stabilityaigeneratedasset">StabilityAiGeneratedAsset</a></li>
     </ul>
   discriminator:
     propertyName: provider
@@ -19,4 +21,6 @@ GeneratedAsset:
     - $ref: "./didGeneratedAsset.yaml#/DIDGeneratedAsset"
     - $ref: "./elevenlabsGeneratedAsset.yaml#/ElevenLabsGeneratedAsset"
     - $ref: "./heygenGeneratedAsset.yaml#/HeyGenGeneratedAsset"
+    - $ref: "./openaiGeneratedAsset.yaml#/OpenAiGeneratedAsset"
+    - $ref: "./stabilityAiGeneratedAsset.yaml#/StabilityAiGeneratedAsset"
   additionalProperties: false
