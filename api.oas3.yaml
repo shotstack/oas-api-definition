@@ -244,6 +244,12 @@ components:
     GoogleCloudStorageDestinationOptions:
       $ref: "./schemas/destinations/googleCloudStorageDestinationOptions.yaml#/GoogleCloudStorageDestinationOptions"
 
+    GoogleDriveDestination:
+      $ref: "./schemas/destinations/googleDriveDestination.yaml#/GoogleDriveDestination"
+
+    GoogleDriveDestinationOptions:
+      $ref: "./schemas/destinations/googleDriveDestinationOptions.yaml#/GoogleDriveDestinationOptions"
+
     Template:
       $ref: "./schemas/template.yaml#/Template"
 

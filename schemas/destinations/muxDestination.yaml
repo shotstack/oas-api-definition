@@ -1,11 +1,11 @@
     MuxDestination:
       description: >-
-        Send rendered videos to the [Mux](https://shotstack.io/docs/guide/serving-assets/destinations/mux) video hosting
+        Send videos to the [Mux](https://shotstack.io/docs/guide/serving-assets/destinations/mux) video hosting
         and streaming service. Mux credentials are required and added via the
         [dashboard](https://dashboard.shotstack.io/integrations/mux), not in the request.
       properties:
         provider:
-          description: The destination to send rendered assets to - set to `mux` for Mux.
+          description: The destination to send video to - set to `mux` for Mux.
           type: string
           default: mux
           example: mux
