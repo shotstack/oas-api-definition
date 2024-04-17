@@ -7,5 +7,5 @@ GeneratedAssetErrorResponse:
       description: An array of errors.
       type: array
       items:
-        $ref: "./generatedasseterrorresponsedata.yaml#/GeneratedAssetErrorResponseData"
+        $ref: "./generatedAssetErrorResponseData.yaml#/GeneratedAssetErrorResponseData"
   required: ["errors"]

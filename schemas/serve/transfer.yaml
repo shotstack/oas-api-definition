@@ -1,0 +1,23 @@
+    Transfer:
+      description: The asset URL to fetch and transfer to a destination.
+      properties:
+        url:
+          description: The file URL to fetch and transfer.
+          type: string
+          example: https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4
+        id:
+          description: >-
+            An identifier for the asset which must be provided by the client. The identifier does not need to be unique.
+          type: string
+          example: 018e8937-5015-75ee-aab6-03f214981133
+        destinations:
+          description: >-
+            Specify the storage locations and hosting services to send the file to.
+          type: array
+          items:
+            $ref: "../destinations.yaml#/Destinations"
+      required:
+        - url
+        - id
+        - destinations
+      type: object

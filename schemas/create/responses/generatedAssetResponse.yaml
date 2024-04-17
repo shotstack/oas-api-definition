@@ -6,7 +6,7 @@ GeneratedAssetResponse:
   properties:
     data:
       description: A generated asset resource.
-      $ref: "./generatedassetresponsedata.yaml#/GeneratedAssetResponseData"
+      $ref: "./generatedAssetResponseData.yaml#/GeneratedAssetResponseData"
   required:
     - data
   type: object

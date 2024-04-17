@@ -1,0 +1,32 @@
+DolbyEnhancementOptions:
+  description: >-
+    Options for the Dolby.io audio enhancement provider.
+  properties:
+    preset:
+      description: >-
+        The preset to use for the audio enhancement. The following presets are available:
+        <ul>
+          <li>`conference` - Conference</li>
+          <li>`interview` - Interview</li>
+          <li>`lecture` - Lecture</li>
+          <li>`meeting` - Meeting</li>
+          <li>`mobile_phone` - Mobile Phone</li>
+          <li>`music` - Music</li>
+          <li>`podcast` - Podcast</li>
+          <li>`studio` - Studio</li>
+          <li>`voice_over` - Voice Over</li>
+        </ul>
+      enum:
+        - conference
+        - interview
+        - lecture
+        - meeting
+        - mobile_phone
+        - music
+        - podcast
+        - studio
+        - voice_over
+      type: string
+      example: studio
+  required:
+    - preset

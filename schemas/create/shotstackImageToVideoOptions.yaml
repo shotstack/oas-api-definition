@@ -1,0 +1,30 @@
+ShotstackImageToVideoOptions:
+  description: >-
+    Options for the Shotstack image-to-video service. Set the URL of an image to convert in to a video. The output will
+    be generated as an MP4 file available at the URL returned in the response.
+  properties:
+    type:
+      type: string
+      description: The type of asset to generate - set to `image-to-video` for image-to-video.
+      enum: ["image-to-video"]
+      default: image-to-video
+    imageUrl:
+      type: string
+      description: >-
+        The URL of the image to convert to video. The URL must be publicly accessible or include credentials. The image
+        dimensions must exactly match one of the following: 1024px x 576px, 576px x 1024px or 768px x 768px.
+      example: https://s3-ap-northeast-1.amazonaws.com/my-bucket/image.jpg
+    guidanceScale:
+      type: number
+      description: >-
+        The guidance scale determines how closely the generated video will match the image. Lower numbers allow for more
+        creative freedom. A number between 0 and 10.
+      example: 1.8
+      default: 1.8
+    motion:
+      type: integer
+      description: >-
+        The amount of motion in the video. A number between 1 and 255.
+      example: 127
+      default: 127
+  required: ["type", "imageUrl"]

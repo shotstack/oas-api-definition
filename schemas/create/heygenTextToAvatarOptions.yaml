@@ -1,7 +1,8 @@
 HeyGenTextToAvatarOptions:
   description: >-
     Options for the HeyGen text-to-avatar service. Set the text to be converted to an avatar and configure the avatars
-    voice, speaking style, appearance and background. The output will be generated as an MP4 video file.
+    voice, speaking style, appearance and background. The output will be generated as an MP4 video file available at the
+    URL returned in the response.
   properties:
     type:
       type: string

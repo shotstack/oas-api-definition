@@ -1,0 +1,31 @@
+OpenAiTextGeneratorOptions:
+  description: >-
+    Options for the OpenAI text-generator service. Set a text prompt that will be used to generate a new body of
+    text. The output will be generated as a text (txt) file available at the URL returned in the response.
+  properties:
+    type:
+      type: string
+      description: The type of asset to generate - set to `text-generator` for text generation.
+      enum: ["text-generator"]
+      default: text-generator
+    prompt:
+      type: string
+      description: The text prompt to generate text from.
+      example: Generate a short script for a 15 second video describing the benefits of the Shotstack API
+    model:
+      type: string
+      description: >-
+        The model to use for generating the text. Select from the list of available models:
+        <ul>
+          <li>`gpt-3.5-turbo`</li>
+          <li>`gpt-4`</li>
+        </ul>
+      enum: ['gpt-3.5-turbo', 'gpt-4']
+      example: gpt-4
+    systemPrompt:
+      type: string
+      description: >-
+        The system prompt to use for generating the text. This is an optional prompt that can be used to provide context
+        or additional information to the model.
+      example: You are a professional script writer and film maker
+  required: ["type", "prompt", "model"]

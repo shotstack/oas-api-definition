@@ -1,0 +1,17 @@
+DIDGeneratedAssetOptions:
+  type: object
+  description: >-
+    Generate assets using the third party D-ID provider AI services.
+
+
+    The following AI generation services are available:
+    <ul>
+      <li><a href="#tocs_didtexttoavataroptions">DidTextToAvatarOptions</a></li>
+    </ul>
+  oneOf:
+    - $ref: "./didTextToAvatarOptions.yaml#/DIDTextToAvatarOptions"
+  discriminator:
+    propertyName: type
+    mapping:
+      text-to-avatar: "#/components/schemas/DIDTextToAvatarOptions"
+  additionalProperties: false

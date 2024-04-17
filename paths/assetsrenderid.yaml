@@ -11,7 +11,7 @@
         created the only known id is the render id returned by the original [render request](#render-video), status 
         request or webhook. This endpoint lets you look up one or more assets by the render id.
 
-        **Base URL:** https://api.shotstack.io/serve/{version}
+        **Base URL:** <a href="#">https://api.shotstack.io/serve/{version}</a>
       operationId: getAssetByRenderId
       summary: Get Asset by Render ID
       security:

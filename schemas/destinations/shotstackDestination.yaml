@@ -1,17 +1,17 @@
     ShotstackDestination:
       description: >-
-        Send rendered assets to the 
-        [Shotstack hosting and CDN](https://shotstack.io/docs/guide/serving-assets/destinations/shotstack) service. 
+        Send videos and assets to the 
+        [Shotstack hosting and CDN](https://shotstack.io/docs/guide/serving-assets/destinations/shotstack/) service. 
         This destination is enabled by default.
       properties:
         provider:
-          description: The destination to send rendered assets to - set to `shotstack` for Shotstack hosting and CDN.
+          description: The destination to send assets to - set to `shotstack` for Shotstack hosting and CDN.
           type: string
           default: shotstack
           example: shotstack
         exclude:
           description: >-
-            Set to `true` to [opt-out](https://shotstack.io/docs/guide/serving-assets/self-host) from the Shotstack
+            Set to `true` to [opt-out](https://shotstack.io/docs/guide/serving-assets/self-host/) from the Shotstack
             hosting and CDN service. All files must be downloaded within 24 hours of rendering.
           type: boolean
           example: false

@@ -1,0 +1,15 @@
+TransferResponseData:
+  description: >-
+    The type of resource (an asset) and the transfer attributes. Returned with
+    [TransferResponse](#tocs_transferresponse).
+  properties:
+    type:
+      description: The type of resource, in this case it is an asset.
+      type: string
+      example: asset
+    attributes:
+      description: The attributes of the asset transfer including the status.
+      $ref: "./transferresponseattributes.yaml#/TransferResponseAttributes"
+  required:
+    - data
+  type: object

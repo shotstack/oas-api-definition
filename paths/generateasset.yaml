@@ -4,7 +4,7 @@ post:
     inputs and options to generate the asset. Once generated the asset can be used with the [Edit](#tocs_edit) API or
     downloaded.
     
-    **Base URL:** https://api.shotstack.io/create/{version}
+    **Base URL:** <a href="#">https://api.shotstack.io/create/{version}</a>
   summary: Generate Asset
   operationId: postGenerateAsset
   requestBody:
@@ -13,7 +13,7 @@ post:
     content:
       application/json:
         schema:
-          $ref: "../schemas/create/generatedasset.yaml#/GeneratedAsset"
+          $ref: "../schemas/create/generatedAsset.yaml#/GeneratedAsset"
     required: true
   responses:
     "201":
@@ -21,13 +21,13 @@ post:
       content:
         application/json:
           schema:
-            $ref: "../schemas/create/responses/generatedassetresponse.yaml#/GeneratedAssetResponse"
+            $ref: "../schemas/create/responses/generatedAssetResponse.yaml#/GeneratedAssetResponse"
     "400":
       description: A list of validation and other errors
       content:
         application/json:
           schema:
-            $ref: "../schemas/create/responses/generatedasseterrorresponse.yaml#/GeneratedAssetErrorResponse"
+            $ref: "../schemas/create/responses/generatedAssetErrorResponse.yaml#/GeneratedAssetErrorResponse"
   security:
     - DeveloperKey: []
   tags:

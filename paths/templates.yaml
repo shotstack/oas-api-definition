@@ -4,7 +4,7 @@
         before being rendered. [Merge fields](#tocs_mergefield) can be also used to merge data in to a template and
         [render](#render-template) it in a single request.
 
-        **Base URL:** https://api.shotstack.io/{version}
+        **Base URL:** <a href="#">https://api.shotstack.io/edit/{version}</a>
       summary: Create Template
       operationId: postTemplate
       requestBody:
@@ -31,7 +31,7 @@
       description: |
         Retrieve a list of templates stored against a users account and stage.
 
-        **Base URL:** https://api.shotstack.io/{version}
+        **Base URL:** <a href="#">https://api.shotstack.io/edit/{version}</a>
       summary: List Templates
       operationId: getTemplates
       responses:

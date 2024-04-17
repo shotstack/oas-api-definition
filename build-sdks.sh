@@ -14,7 +14,8 @@
 SPEC_FILE=./api.oas3.yaml
 SPEC_FILE_JSON=./api.oas3.json
 BUILD_DIR=./build/sdks
-OPENAPI_GENERATOR_VERSION=5.4.0
+OPENAPI_GENERATOR_VERSION=7.4.0
+SDK_VERSION=0.2.6
 
 # Prepare build dir
 rm -rf $BUILD_DIR
@@ -48,7 +49,7 @@ $OPENAPI_GENERATOR version-manager set $OPENAPI_GENERATOR_VERSION
 
 # PHP SDK
 $OPENAPI_GENERATOR generate -i $SPEC_FILE_JSON -g php -o $BUILD_DIR/php \
-                  --invoker-package Shotstack\\\\Client
+    --additional-properties=invokerPackage=Shotstack\\\\Client,composerPackageName=shotstack-sdk,artifactVersion=$SDK_VERSION
 
 printf "\n========================================= \n"
 printf "\nPHP SDK Generated\n\n"
@@ -62,10 +63,17 @@ printf "\nRuby SDK Generated\n\n"
 
 # Node SDK
 $OPENAPI_GENERATOR generate -i $SPEC_FILE_JSON -g javascript -o $BUILD_DIR/node \
-    --additional-properties=emitModelMethods=true,licenseName="MIT",projectName="shotstack-sdk",useES6=false,usePromises=true
+    --additional-properties=emitModelMethods=true,licenseName="MIT",projectName="shotstack-sdk",useES6=false,usePromises=true,projectVersion=$SDK_VERSION
 
 printf "\n========================================= \n"
 printf "\nNode SDK Generated\n\n"
+
+# Node (Typescript) SDK
+$OPENAPI_GENERATOR generate -i $SPEC_FILE_JSON -g typescript-node -o $BUILD_DIR/typescript \
+    --additional-properties=npmName="shotstack-sdk-typescript",supportsES6=true,npmVersion=$SDK_VERSION.beta,enumPropertyNaming=UPPERCASE
+
+printf "\n========================================= \n"
+printf "\nTypescript SDK Generated\n\n"
 
 # Python SDK
 $OPENAPI_GENERATOR generate -i $SPEC_FILE_JSON -g python -o $BUILD_DIR/python \
@@ -76,6 +84,7 @@ printf "\nPython SDK Generated\n\n"
 
 # Openapi doesn't support duplicate path mapping
 sed -i -e 's/\/path_alias_createassets/\/assets/g' $BUILD_DIR/node/src/api/CreateApi.js
+sed -i -e 's/\/path_alias_createassets/\/assets/g' $BUILD_DIR/typescript/api/createApi.ts
 sed -i -e 's/\/path_alias_createassets/\/assets/g' $BUILD_DIR/php/lib/Api/CreateApi.php
 sed -i -e 's/\/path_alias_createassets/\/assets/g' $BUILD_DIR/python/shotstack_sdk/api/create_api.py
 sed -i -e 's/\/path_alias_createassets/\/assets/g' $BUILD_DIR/ruby/lib/shotstack/api/create_api.rb

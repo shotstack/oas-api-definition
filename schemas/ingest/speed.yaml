@@ -1,0 +1,24 @@
+Speed:
+  description: >-
+    Set the playback speed of a video or audio file. Allows you to preserve the pitch of the audio so that it is sped
+    up without sounding too high pitched or too low.
+  properties:
+    speed:
+      description: >-
+        Adjust the playback speed of the video clip between 0 (paused) and 10 (10x normal speed) where 1 is normal
+        speed (defaults to 1). Set values less than 1 to slow down the playback speed, i.e. set speed to 0.5 to play
+        back at half speed. Set values greater than 1 to speed up the playback speed, i.e. set speed to 2 to play back
+        at double speed.
+      type: number
+      format: float
+      minimum: 0
+      maximum: 10
+      example: 1.5
+    preservePitch:
+      description: >-
+        Set whether to adjust the audio pitch or not. Set to false to make the audio sound higher or lower pitched. By
+        default the pitch is preserved.
+      type: boolean
+      example: false
+  type: object
+

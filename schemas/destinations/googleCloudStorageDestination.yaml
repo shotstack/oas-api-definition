@@ -1,0 +1,17 @@
+GoogleCloudStorageDestination:
+  description: >-
+    Send videos and assets to a [Google Cloud Storage](https://cloud.google.com/storage) bucket.
+    Send files with your own prefix and filename. Google Cloud credentials are required and added via the
+    [dashboard](https://dashboard.shotstack.io/integrations/google-cloud-storage), not in the request.
+  properties:
+    provider:
+      description: The destination to send assets to - set to `google-cloud-storage` for Google Cloud Storage.
+      type: string
+      default: google-cloud-storage
+      example: google-cloud-storage
+    options:
+      description: Additional Google Cloud Storage configuration options.
+      $ref: "./googleCloudStorageDestinationOptions.yaml#/GoogleCloudStorageDestinationOptions"
+  type: object
+  required:
+    - provider

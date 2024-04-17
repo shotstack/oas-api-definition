@@ -2,7 +2,7 @@
       description: |
         Retrieve a template by template id.
 
-        **Base URL:** https://api.shotstack.io/{version}
+        **Base URL:** <a href="#">https://api.shotstack.io/edit/{version}</a>
       summary: Retrieve Template
       operationId: getTemplate
       responses:
@@ -21,7 +21,7 @@
       description: |
         Update an existing template by template id.
 
-        **Base URL:** https://api.shotstack.io/{version}
+        **Base URL:** <a href="#">https://api.shotstack.io/edit/{version}</a>
       summary: Update Template
       operationId: putTemplate
       requestBody:
@@ -58,7 +58,7 @@
       description: |
         Delete a template by its template id.
 
-        **Base URL:** https://api.shotstack.io/{version}
+        **Base URL:** <a href="#">https://api.shotstack.io/edit/{version}</a>
       operationId: deleteTemplate
       summary: Delete Template
       security:

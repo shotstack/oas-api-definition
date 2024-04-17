@@ -1,0 +1,46 @@
+TransferResponseAttributes:
+  description: >-
+    The transfer request attributes inlcudling the user specified ID and status. Returned with
+    [TransferResponseData](#tocs_transferresponsedata).
+  properties:
+    id:
+      description: The user provided ID for the asset
+      type: string
+      example: 018e8937-5015-75ee-aab6-03f214981133
+    owner:
+      description: The attributes of the asset transfer including the status.
+      type: string
+      example: 5ca6hu7s9k
+    status:
+      description: >-
+        The status of the asset transfer.
+        <ul>
+          <li>`queued` - the transfer request has been queued</li>
+          <li>`failed` - the transfer request failed</li>
+        </ul>
+      enum:
+        - queued
+        - failed
+      type: string
+      example: queued
+    created:
+      description: The time the asset transfer was created.
+      type: string
+      example: "2023-09-28T11:17:32.226Z"
+  type: object
+
+
+
+
+
+# {
+#     "data": {
+#         "type": "asset",
+#         "attributes": {
+#             "id": "s3-1234",
+#             "owner": "lu8ta6o0i8",
+#             "status": "queued",
+#             "created": "2024-03-29T08:30:07.436Z"
+#         }
+#     }
+# }

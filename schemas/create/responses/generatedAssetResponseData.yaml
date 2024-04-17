@@ -11,7 +11,7 @@ GeneratedAssetResponseData:
       example: 01gz0-tj679-xj30t-hr8zk-3hasvk
     attributes:
       description: The generated asset attributes including its url, status, provider, type, etc...
-      $ref: "./generatedassetresponseattributes.yaml#/GeneratedAssetResponseAttributes"
+      $ref: "./generatedAssetResponseAttributes.yaml#/GeneratedAssetResponseAttributes"
   required:
     - type
     - id

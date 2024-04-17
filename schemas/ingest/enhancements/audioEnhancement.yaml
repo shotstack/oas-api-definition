@@ -1,0 +1,14 @@
+AudioEnhancement:
+  type: object
+  description: >-
+    An audio enhancement that can be applied to the audio content of a rendition.
+
+    The following providers are available:
+    <ul>
+      <li><a href="#tocs_dolbyenhancement">DolbyEnhancement</a></li>
+    </ul>
+  discriminator:
+    propertyName: enhancement
+  oneOf:
+    - $ref: "./audio/dolbyEnhancement.yaml#/DolbyEnhancement"
+  additionalProperties: false

@@ -11,7 +11,7 @@
         thumbnails and poster images. Use this endpoint to fetch an asset by asset id. Note that an asset id is unique
         for each asset and different from the render id.
 
-        **Base URL:** https://api.shotstack.io/serve/{version}
+        **Base URL:** <a href="#">https://api.shotstack.io/serve/{version}</a>
       operationId: getAsset
       summary: Get Asset
       security:
@@ -27,7 +27,7 @@
         Delete an asset by its asset id. If a render creates multiple assets, such as thumbnail and poster images,
         each asset must be deleted individually by the asset id.
 
-        **Base URL:** https://api.shotstack.io/serve/{version}
+        **Base URL:** <a href="#">https://api.shotstack.io/serve/{version}</a>
       operationId: deleteAsset
       summary: Delete Asset
       security:

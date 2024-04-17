@@ -9,7 +9,7 @@
       description: |
         Queue and render the contents of an [Edit](#tocs_edit) as a video, image or audio file.
 
-        **Base URL:** https://api.shotstack.io/{version}
+        **Base URL:** <a href="#">https://api.shotstack.io/edit/{version}</a>
       summary: Render Asset
       operationId: postRender
       requestBody:

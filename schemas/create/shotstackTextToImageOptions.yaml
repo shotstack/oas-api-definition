@@ -1,0 +1,23 @@
+ShotstackTextToImageOptions:
+  description: >-
+    Options for the Shotstack text-to-image service. Set a text prompt to generate an image from. The output will be 
+    generated as a PNG file available at the URL returned in the response.
+  properties:
+    type:
+      type: string
+      description: The type of asset to generate - set to `text-to-image` for text-to-image.
+      enum: ["text-to-image"]
+      default: text-to-image
+    prompt:
+      type: string
+      description: The text prompt to generate an image from.
+      example: A detailed photograph of Mars, showcasing its orange-red surface
+    width:
+      type: integer
+      description: The width of the image in pixels.
+      example: 512
+    height:
+      type: integer
+      description: The height of the image in pixels.
+      example: 512
+  required: ["type", "prompt", "width", "height"]

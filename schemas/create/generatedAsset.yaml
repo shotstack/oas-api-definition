@@ -5,17 +5,22 @@ GeneratedAsset:
     to generate video, audio and image files using Generative AI services like text-to-speech and text-to-avatar.
 
     The following providers are currently available:
+
     <ul>
       <li><a href="#tocs_shotstackgeneratedasset">ShotstackGeneratedAsset</a></li>
+      <li><a href="#tocs_didgeneratedasset">DIDGeneratedAsset</a></li>
       <li><a href="#tocs_elevenlabsgeneratedasset">ElevenLabsGeneratedAsset</a></li>
       <li><a href="#tocs_heygengeneratedasset">HeyGenGeneratedAsset</a></li>
-      <li><a href="#tocs_didgeneratedasset">DIDGeneratedAsset</a></li>
+      <li><a href="#tocs_openaigeneratedasset">OpenAiGeneratedAsset</a></li>
+      <li><a href="#tocs_stabilityaigeneratedasset">StabilityAiGeneratedAsset</a></li>
     </ul>
   discriminator:
     propertyName: provider
   oneOf:
-    - $ref: "./shotstackgeneratedasset.yaml#/ShotstackGeneratedAsset"
-    - $ref: "./elevenlabsgeneratedasset.yaml#/ElevenLabsGeneratedAsset"
-    - $ref: "./heygengeneratedasset.yaml#/HeyGenGeneratedAsset"
-    - $ref: "./didgeneratedasset.yaml#/DIDGeneratedAsset"
+    - $ref: "./shotstackGeneratedAsset.yaml#/ShotstackGeneratedAsset"
+    - $ref: "./didGeneratedAsset.yaml#/DIDGeneratedAsset"
+    - $ref: "./elevenlabsGeneratedAsset.yaml#/ElevenLabsGeneratedAsset"
+    - $ref: "./heygenGeneratedAsset.yaml#/HeyGenGeneratedAsset"
+    - $ref: "./openaiGeneratedAsset.yaml#/OpenAiGeneratedAsset"
+    - $ref: "./stabilityAiGeneratedAsset.yaml#/StabilityAiGeneratedAsset"
   additionalProperties: false

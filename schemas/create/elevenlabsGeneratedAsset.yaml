@@ -1,0 +1,18 @@
+ElevenLabsGeneratedAsset:
+  description: >-
+    Generate assets using ElevenLabs. ElevenLabs provide a text-to-speech service. The ElevenLabs provider works on a
+    bring-your-own-key basis, credentials are required and must be added via the 
+    [dashboard](https://dashboard.shotstack.io/integrations/elevenlabs), not in the request.
+  type: object
+  properties:
+    provider:
+      type: string
+      description: The name of the provider - set to `elevenlabs` for ElevenLabs.
+      enum: ["elevenlabs"]
+      default: elevenlabs
+    options:
+      description: Options and configuration for the ElevenLabs text-to-speech service.
+      $ref: "./elevenlabsGeneratedAssetOptions.yaml#/ElevenLabsGeneratedAssetOptions"
+  required:
+    - provider
+    - options

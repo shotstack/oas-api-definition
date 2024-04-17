@@ -117,6 +117,9 @@ paths:
   /assets/render/{id}:
     $ref: "./paths/assetsrenderid.yaml"
 
+  /assets:
+    $ref: "./paths/assets.yaml"
+
   /sources:
     $ref: "./paths/sources.yaml"
 
@@ -221,19 +224,31 @@ components:
       $ref: "./schemas/destinations.yaml#/Destinations"
 
     ShotstackDestination:
-      $ref: "./schemas/shotstackdestination.yaml#/ShotstackDestination"
+      $ref: "./schemas/destinations/shotstackDestination.yaml#/ShotstackDestination"
 
     MuxDestination:
-      $ref: "./schemas/muxdestination.yaml#/MuxDestination"
+      $ref: "./schemas/destinations/muxDestination.yaml#/MuxDestination"
 
     MuxDestinationOptions:
-      $ref: "./schemas/muxdestinationoptions.yaml#/MuxDestinationOptions"
+      $ref: "./schemas/destinations/muxDestinationOptions.yaml#/MuxDestinationOptions"
 
     S3Destination:
-      $ref: "./schemas/s3destination.yaml#/S3Destination"
+      $ref: "./schemas/destinations/s3Destination.yaml#/S3Destination"
 
     S3DestinationOptions:
-      $ref: "./schemas/s3destinationoptions.yaml#/S3DestinationOptions"
+      $ref: "./schemas/destinations/s3DestinationOptions.yaml#/S3DestinationOptions"
+
+    GoogleCloudStorageDestination:
+      $ref: "./schemas/destinations/googleCloudStorageDestination.yaml#/GoogleCloudStorageDestination"
+
+    GoogleCloudStorageDestinationOptions:
+      $ref: "./schemas/destinations/googleCloudStorageDestinationOptions.yaml#/GoogleCloudStorageDestinationOptions"
+
+    GoogleDriveDestination:
+      $ref: "./schemas/destinations/googleDriveDestination.yaml#/GoogleDriveDestination"
+
+    GoogleDriveDestinationOptions:
+      $ref: "./schemas/destinations/googleDriveDestinationOptions.yaml#/GoogleDriveDestinationOptions"
 
     Template:
       $ref: "./schemas/template.yaml#/Template"
@@ -251,33 +266,94 @@ components:
     Rendition:
       $ref: "./schemas/ingest/rendition.yaml#/Rendition"
 
+    Transcription:
+      $ref: "./schemas/ingest/transcription.yaml#/Transcription"
+
+    Speed:
+      $ref: "./schemas/ingest/speed.yaml#/Speed"
+
+    Enhancements:
+      $ref: "./schemas/ingest/enhancements.yaml#/Enhancements"
+
+    AudioEnhancement:
+      $ref: "./schemas/ingest/enhancements/audioEnhancement.yaml#/AudioEnhancement"
+
+    DolbyEnhancement:
+      $ref: "./schemas/ingest/enhancements/audio/dolbyEnhancement.yaml#/DolbyEnhancement"
+
+    DolbyEnhancementOptions:
+      $ref: "./schemas/ingest/enhancements/audio/dolbyEnhancementOptions.yaml#/DolbyEnhancementOptions"
+
+    # Serve schemas
+    Transfer:
+      $ref: "./schemas/serve/transfer.yaml#/Transfer"
+
     # Create schemas
     GeneratedAsset:
-      $ref: "./schemas/create/generatedasset.yaml#/GeneratedAsset"
+      $ref: "./schemas/create/generatedAsset.yaml#/GeneratedAsset"
 
     ShotstackGeneratedAsset:
-      $ref: "./schemas/create/shotstackgeneratedasset.yaml#/ShotstackGeneratedAsset"
+      $ref: "./schemas/create/shotstackGeneratedAsset.yaml#/ShotstackGeneratedAsset"
+
+    ShotstackGeneratedAssetOptions:
+      $ref: "./schemas/create/shotstackGeneratedAssetOptions.yaml#/ShotstackGeneratedAssetOptions"
 
     ShotstackTextToSpeechOptions:
-      $ref: "./schemas/create/shotstacktexttospeechoptions.yaml#/ShotstackTextToSpeechOptions"
+      $ref: "./schemas/create/shotstackTextToSpeechOptions.yaml#/ShotstackTextToSpeechOptions"
 
-    ElevenLabsGeneratedAsset:
-      $ref: "./schemas/create/elevenlabsgeneratedasset.yaml#/ElevenLabsGeneratedAsset"
+    ShotstackTextToImageOptions:
+      $ref: "./schemas/create/shotstackTextToImageOptions.yaml#/ShotstackTextToImageOptions"
 
-    ElevenLabsTextToSpeechOptions:
-      $ref: "./schemas/create/elevenlabstexttospeechoptions.yaml#/ElevenLabsTextToSpeechOptions"
+    ShotstackImageToVideoOptions:
+      $ref: "./schemas/create/shotstackImageToVideoOptions.yaml#/ShotstackImageToVideoOptions"
 
-    HeyGenGeneratedAsset:
-      $ref: "./schemas/create/heygengeneratedasset.yaml#/HeyGenGeneratedAsset"
-
-    HeyGenTextToAvatarOptions:
-      $ref: "./schemas/create/heygentexttoavataroptions.yaml#/HeyGenTextToAvatarOptions"
+    ShotstackTextGeneratorOptions:
+      $ref: "./schemas/create/shotstackTextGeneratorOptions.yaml#/ShotstackTextGeneratorOptions"
 
     DIDGeneratedAsset:
-      $ref: "./schemas/create/didgeneratedasset.yaml#/DIDGeneratedAsset"
+      $ref: "./schemas/create/didGeneratedAsset.yaml#/DIDGeneratedAsset"
+
+    DIDGeneratedAssetOptions:
+      $ref: "./schemas/create/didGeneratedAssetOptions.yaml#/DIDGeneratedAssetOptions"
 
     DIDTextToAvatarOptions:
-      $ref: "./schemas/create/didtexttoavataroptions.yaml#/DIDTextToAvatarOptions"
+      $ref: "./schemas/create/didTextToAvatarOptions.yaml#/DIDTextToAvatarOptions"
+
+    ElevenLabsGeneratedAsset:
+      $ref: "./schemas/create/elevenlabsGeneratedAsset.yaml#/ElevenLabsGeneratedAsset"
+
+    ElevenLabsGeneratedAssetOptions:
+      $ref: "./schemas/create/elevenlabsGeneratedAssetOptions.yaml#/ElevenLabsGeneratedAssetOptions"
+
+    ElevenLabsTextToSpeechOptions:
+      $ref: "./schemas/create/elevenlabsTextToSpeechOptions.yaml#/ElevenLabsTextToSpeechOptions"
+
+    HeyGenGeneratedAsset:
+      $ref: "./schemas/create/heygenGeneratedAsset.yaml#/HeyGenGeneratedAsset"
+
+    HeyGenGeneratedAssetOptions:
+      $ref: "./schemas/create/heygenGeneratedAssetOptions.yaml#/HeyGenGeneratedAssetOptions"
+
+    HeyGenTextToAvatarOptions:
+      $ref: "./schemas/create/heygenTextToAvatarOptions.yaml#/HeyGenTextToAvatarOptions"
+
+    OpenAiGeneratedAsset:
+      $ref: "./schemas/create/openaiGeneratedAsset.yaml#/OpenAiGeneratedAsset"
+
+    OpenAiGeneratedAssetOptions:
+      $ref: "./schemas/create/openaiGeneratedAssetOptions.yaml#/OpenAiGeneratedAssetOptions"
+
+    OpenAiTextGeneratorOptions:
+      $ref: "./schemas/create/openaiTextGeneratorOptions.yaml#/OpenAiTextGeneratorOptions"
+
+    StabilityAiGeneratedAsset:
+      $ref: "./schemas/create/stabilityAiGeneratedAsset.yaml#/StabilityAiGeneratedAsset"
+
+    StabilityAiGeneratedAssetOptions:
+      $ref: "./schemas/create/stabilityAiGeneratedAssetOptions.yaml#/StabilityAiGeneratedAssetOptions"
+
+    StabilityAiTextToImageOptions:
+      $ref: "./schemas/create/stabilityAiTextToImageOptions.yaml#/StabilityAiTextToImageOptions"
 
     # Edit response schemas
     QueuedResponse:
@@ -328,6 +404,16 @@ components:
     AssetResponseAttributes:
       $ref: "./schemas/responses/assetresponseattributes.yaml#/AssetResponseAttributes"
 
+    # Serve response schemas
+    TransferResponse:
+      $ref: "./schemas/serve/responses/transferresponse.yaml#/TransferResponse"
+
+    TransferResponseData:
+      $ref: "./schemas/serve/responses/transferresponsedata.yaml#/TransferResponseData"
+
+    TransferResponseAttributes:
+      $ref: "./schemas/serve/responses/transferresponseattributes.yaml#/TransferResponseAttributes"
+
     # Ingest response schemas
     QueuedSourceResponse:
       $ref: "./schemas/ingest/responses/queuedsourceresponse.yaml#/QueuedSourceResponse"
@@ -370,19 +456,19 @@ components:
 
     # Create response schemas
     GeneratedAssetResponse:
-      $ref: "./schemas/create/responses/generatedassetresponse.yaml#/GeneratedAssetResponse"
+      $ref: "./schemas/create/responses/generatedAssetResponse.yaml#/GeneratedAssetResponse"
 
     GeneratedAssetResponseData:
-      $ref: "./schemas/create/responses/generatedassetresponsedata.yaml#/GeneratedAssetResponseData"
+      $ref: "./schemas/create/responses/generatedAssetResponseData.yaml#/GeneratedAssetResponseData"
 
     GeneratedAssetResponseAttributes:
-      $ref: "./schemas/create/responses/generatedassetresponseattributes.yaml#/GeneratedAssetResponseAttributes"
+      $ref: "./schemas/create/responses/generatedAssetResponseAttributes.yaml#/GeneratedAssetResponseAttributes"
 
     GeneratedAssetErrorResponse:
-      $ref: "./schemas/create/responses/generatedasseterrorresponse.yaml#/GeneratedAssetErrorResponse"
+      $ref: "./schemas/create/responses/generatedAssetErrorResponse.yaml#/GeneratedAssetErrorResponse"
 
     GeneratedAssetErrorResponseData:
-      $ref: "./schemas/create/responses/generatedasseterrorresponsedata.yaml#/GeneratedAssetErrorResponseData"
+      $ref: "./schemas/create/responses/generatedAssetErrorResponseData.yaml#/GeneratedAssetErrorResponseData"
 
   responses: {}
   parameters: {}

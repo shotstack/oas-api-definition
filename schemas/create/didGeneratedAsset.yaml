@@ -1,0 +1,18 @@
+DIDGeneratedAsset:
+  description: >-
+    Generate assets using D-ID. D-ID provide a text-to-avatar service. The D-ID provider works on a bring-your-own-key
+    basis, credentials are required and must be added via the 
+    [dashboard](https://dashboard.shotstack.io/integrations/d-id), not in the request.
+  type: object
+  properties:
+    provider:
+      type: string
+      description: The name of the provider - set to `d-id` for D-ID.
+      enum: ["d-id"]
+      default: d-id
+    options:
+      description: Options and configuration for the D-ID text-to-avatar service.
+      $ref: "./didGeneratedAssetOptions.yaml#/DIDGeneratedAssetOptions"
+  required:
+    - provider
+    - options

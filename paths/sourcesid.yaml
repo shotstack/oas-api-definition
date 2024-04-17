@@ -9,7 +9,7 @@
       description: |
         Fetch a source file details and status by its id.
 
-        **Base URL:** https://api.shotstack.io/ingest/{version}
+        **Base URL:** <a href="#">https://api.shotstack.io/ingest/{version}</a>
       operationId: getSource
       summary: Get Source
       security:
@@ -24,7 +24,7 @@
       description: |
         Delete an ingested source file by its id.
 
-        **Base URL:** https://api.shotstack.io/ingest/{version}
+        **Base URL:** <a href="#">https://api.shotstack.io/ingest/{version}</a>
       operationId: deleteSource
       summary: Delete Source
       security:
