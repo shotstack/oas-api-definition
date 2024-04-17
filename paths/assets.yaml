@@ -3,7 +3,7 @@ post:
     Transfer a file from any publicly available URL to one or more Serve API
     [destinations](#tocs_destinations).
     
-    **Base URL:** https://api.shotstack.io/serve/{version}
+    **Base URL:** <a href="#">https://api.shotstack.io/serve/{version}</a>
   summary: Transfer Asset
   operationId: postServeAsset
   requestBody:

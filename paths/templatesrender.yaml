@@ -3,7 +3,7 @@
         Render an asset from a template id and optional merge fields. Merge fields can be used to replace placeholder
         variables within the [Edit](#tocs_edit).
 
-        **Base URL:** https://api.shotstack.io/{version}
+        **Base URL:** <a href="#">https://api.shotstack.io/edit/{version}</a>
       summary: Render Template
       operationId: postTemplateRender
       requestBody:

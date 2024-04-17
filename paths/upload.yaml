@@ -23,7 +23,7 @@
         The SDK does not currently support the PUT request. You can use the SDK to make the request for the signed URL
         and then use cURL to make the PUT request.
 
-        **Base URL:** https://api.shotstack.io/ingest/{version}
+        **Base URL:** <a href="#">https://api.shotstack.io/ingest/{version}</a>
       summary: Direct Upload
       operationId: getUploadSignedUrl
       security:

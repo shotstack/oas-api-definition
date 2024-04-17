@@ -2,7 +2,7 @@ get:
   description: |
     Get the generated assets status, url and details by ID.
 
-    **Base URL:** https://api.shotstack.io/create/{version}
+    **Base URL:** <a href="#">https://api.shotstack.io/create/{version}</a>
   summary: Get Generated Asset
   operationId: getGeneratedAsset
   responses:

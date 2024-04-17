@@ -4,7 +4,7 @@ post:
     inputs and options to generate the asset. Once generated the asset can be used with the [Edit](#tocs_edit) API or
     downloaded.
     
-    **Base URL:** https://api.shotstack.io/create/{version}
+    **Base URL:** <a href="#">https://api.shotstack.io/create/{version}</a>
   summary: Generate Asset
   operationId: postGenerateAsset
   requestBody:

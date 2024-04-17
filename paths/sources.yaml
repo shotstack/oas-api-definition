@@ -16,7 +16,7 @@
         Queue a source file to be fetched from a URL and stored by Shotstack. Source files can be videos, images, audio
         files and fonts. Once ingested, new [output renditions](#tocs_outputs) can be created from the source file.
 
-        **Base URL:** https://api.shotstack.io/ingest/{version}
+        **Base URL:** <a href="#">https://api.shotstack.io/ingest/{version}</a>
       summary: Fetch Source
       operationId: postSource
       requestBody:
@@ -39,7 +39,7 @@
       description: |
         Retrieve a list of ingested source files stored against a users account and stage.
 
-        **Base URL:** https://api.shotstack.io/ingest/{version}
+        **Base URL:** <a href="#">https://api.shotstack.io/ingest/{version}</a>
       summary: List Sources
       operationId: getSources
       responses:

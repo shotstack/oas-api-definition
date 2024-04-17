@@ -11,7 +11,7 @@
         of [FFprobe](https://ffmpeg.org/ffprobe.html). The probe endpoint returns useful information
         about an asset such as width, height, duration, rotation, framerate, etc...
 
-        **Base URL:** https://api.shotstack.io/{version}
+        **Base URL:** <a href="#">https://api.shotstack.io/edit/{version}</a>
       operationId: probe
       summary: Inspect Media
       security:
