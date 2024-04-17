@@ -298,6 +298,9 @@ components:
     ShotstackTextToImageOptions:
       $ref: "./schemas/create/shotstackTextToImageOptions.yaml#/ShotstackTextToImageOptions"
 
+    ShotstackImageToVideoOptions:
+      $ref: "./schemas/create/shotstackImageToVideoOptions.yaml#/ShotstackImageToVideoOptions"
+
     ShotstackTextGeneratorOptions:
       $ref: "./schemas/create/shotstackTextGeneratorOptions.yaml#/ShotstackTextGeneratorOptions"
 
