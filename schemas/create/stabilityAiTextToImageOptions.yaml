@@ -19,22 +19,16 @@ StabilityAiTextToImageOptions:
         <ul>
           <li>`stable-diffusion-xl-1024-v0-9`</li>
           <li>`stable-diffusion-xl-1024-v1-0`</li>
-          <li>`stable-diffusion-v1`</li>
-          <li>`stable-diffusion-v1-5`</li>
-          <li>`stable-diffusion-512-v2-0`</li>
-          <li>`stable-diffusion-768-v2-0`</li>
+          <li>`stable-diffusion-v1-6`</li>
           <li>`stable-diffusion-512-v2-1`</li>
-          <li>`stable-diffusion-768-v2-1`</li>
+          <li>`stable-diffusion-xl-beta-v2-2-2`</li>
         </ul>
       enum: [
         'stable-diffusion-xl-1024-v0-9',
         'stable-diffusion-xl-1024-v1-0',
-        'stable-diffusion-v1',
-        'stable-diffusion-v1-5',
-        'stable-diffusion-512-v2-0',
-        'stable-diffusion-768-v2-0',
+        'stable-diffusion-v1-6',
         'stable-diffusion-512-v2-1',
-        'stable-diffusion-768-v2-1'
+        'stable-diffusion-xl-beta-v2-2-2'
       ]
       default: stable-diffusion-xl-1024-v1-0
       example: stable-diffusion-xl-1024-v1-0
@@ -48,9 +42,19 @@ StabilityAiTextToImageOptions:
       example: 512
     steps:
       type: integer
-      description: The number of iterative diffusion steps to run.
+      description: The number of iterative diffusion steps to run. A number between 10 and 50.
       example: 30
-      default: 50
+      default: 30
+    seed:
+      type: integer
+      description: Using the same seed can help you create images that look similar. Set to 0 for a random seed. A number between 0 and 4294967295.
+      example: 0
+      default: 0
+    cfgScale:
+      type: number
+      description: Determines how closely the generated image will match the prompt. Lower numbers allow for more creative freedom. A number between 0 and 35.
+      example: 7
+      default: 7
     stylePreset:
       type: string
       description: >-
