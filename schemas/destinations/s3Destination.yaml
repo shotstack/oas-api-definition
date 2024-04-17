@@ -1,6 +1,6 @@
     S3Destination:
       description: >-
-        Send videos and assets to an [Amazon S3](https://shotstack.io/docs/guide/serving-assets/destinations/s3) bucket.
+        Send videos and assets to an [Amazon S3](https://shotstack.io/docs/guide/serving-assets/destinations/s3/) bucket.
         Send files to any region with your own prefix and filename. AWS credentials are required and added via the
         [dashboard](https://dashboard.shotstack.io/integrations/s3), not in the request.
       properties:

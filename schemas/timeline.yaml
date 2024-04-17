@@ -32,7 +32,7 @@
         cache:
           description: >-
             Disable the caching of ingested source footage and assets. See 
-            [caching](https://shotstack.io/docs/guide/architecting-an-application/caching) for more details.
+            [caching](https://shotstack.io/docs/guide/architecting-an-application/caching/) for more details.
           type: boolean
       required:
         - tracks
