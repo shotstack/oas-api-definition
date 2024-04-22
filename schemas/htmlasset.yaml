@@ -12,13 +12,13 @@
         html:
           description: >-
             The HTML text string. See list of
-            [supported HTML tags](https://shotstack.io/docs/guide/architecting-an-application/html-support#supported-html-tags).
+            [supported HTML tags](https://shotstack.io/docs/guide/architecting-an-application/html-support/#supported-html-tags).
           type: string
           example: "<p>Hello <b>World</b></p>"
         css:
           description: >-
             The CSS text string to apply styling to the HTML. See list of 
-            [support CSS properties](https://shotstack.io/docs/guide/architecting-an-application/html-support#supported-css-properties).
+            [support CSS properties](https://shotstack.io/docs/guide/architecting-an-application/html-support/#supported-css-properties).
           type: string
           example: "p { color: #ffffff; } b { color: #ffff00; }"
         width:
