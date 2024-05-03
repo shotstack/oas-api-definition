@@ -14,6 +14,7 @@
 SPEC_FILE=./api.oas3.yaml
 SPEC_FILE_JSON=./api.oas3.json
 BUILD_DIR=./build/sdks
+TEMPLATES_DIR=./templates
 OPENAPI_GENERATOR_VERSION=7.4.0
 SDK_VERSION=0.2.6
 
@@ -62,7 +63,7 @@ printf "\n========================================= \n"
 printf "\nRuby SDK Generated\n\n"
 
 # Node SDK
-$OPENAPI_GENERATOR generate -i $SPEC_FILE_JSON -g javascript -o $BUILD_DIR/node \
+$OPENAPI_GENERATOR generate -i $SPEC_FILE_JSON -g javascript -t $TEMPLATES_DIR/javascript -o $BUILD_DIR/node \
     --additional-properties=emitModelMethods=true,licenseName="MIT",projectName="shotstack-sdk",useES6=false,usePromises=true,projectVersion=$SDK_VERSION
 
 printf "\n========================================= \n"
