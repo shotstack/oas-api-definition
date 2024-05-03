@@ -144,6 +144,7 @@ class {{classname}} {{#parent}}{{^parentModel}}{{#vendorExtensions.x-is-array}}e
      */{{/emitJSDoc}}
     {{setter}}({{name}}) {
         this['{{baseName}}'] = {{name}};
+        return this;
     }
 {{/vars}}{{/emitModelMethods}}{{/model}}
 }
