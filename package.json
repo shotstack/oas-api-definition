@@ -17,7 +17,7 @@
     "type": "git",
     "url": "git+ssh://git@bitbucket.org/shotstack/oas-api-definition.git"
   },
-  "author": "Jeff Shillitto",
+  "author": "Shotstack",
   "license": "ISC",
   "homepage": "https://github.com/shotstack/oas-api-definition",
   "dependencies": {

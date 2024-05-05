@@ -14,6 +14,8 @@
 SPEC_FILE=./api.oas3.yaml
 SPEC_FILE_JSON=./api.oas3.json
 BUILD_DIR=./build/sdks
+TEMPLATES_DIR=./templates
+CONFIGS_DIR=./configs
 OPENAPI_GENERATOR_VERSION=7.4.0
 SDK_VERSION=0.2.6
 
@@ -62,8 +64,12 @@ printf "\n========================================= \n"
 printf "\nRuby SDK Generated\n\n"
 
 # Node SDK
-$OPENAPI_GENERATOR generate -i $SPEC_FILE_JSON -g javascript -o $BUILD_DIR/node \
+$OPENAPI_GENERATOR generate -i $SPEC_FILE_JSON -g javascript -c $CONFIGS_DIR/node.yaml -o $BUILD_DIR/node \
     --additional-properties=emitModelMethods=true,licenseName="MIT",projectName="shotstack-sdk",useES6=false,usePromises=true,projectVersion=$SDK_VERSION
+cd $BUILD_DIR/node
+npm install
+npm run build
+cd -
 
 printf "\n========================================= \n"
 printf "\nNode SDK Generated\n\n"
@@ -83,7 +89,7 @@ printf "\n========================================= \n"
 printf "\nPython SDK Generated\n\n"
 
 # Openapi doesn't support duplicate path mapping
-sed -i -e 's/\/path_alias_createassets/\/assets/g' $BUILD_DIR/node/src/api/CreateApi.js
+sed -i -e 's/\/path_alias_createassets/\/assets/g' $BUILD_DIR/node/dist/api/CreateApi.js
 sed -i -e 's/\/path_alias_createassets/\/assets/g' $BUILD_DIR/typescript/api/createApi.ts
 sed -i -e 's/\/path_alias_createassets/\/assets/g' $BUILD_DIR/php/lib/Api/CreateApi.php
 sed -i -e 's/\/path_alias_createassets/\/assets/g' $BUILD_DIR/python/shotstack_sdk/api/create_api.py
