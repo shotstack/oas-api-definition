@@ -50,8 +50,8 @@ echo "- using OpenAPI generator $OPENAPI_GENERATOR"
 $OPENAPI_GENERATOR version-manager set $OPENAPI_GENERATOR_VERSION
 
 # PHP SDK
-$OPENAPI_GENERATOR generate -i $SPEC_FILE_JSON -g php -o $BUILD_DIR/php \
-    --additional-properties=invokerPackage=Shotstack\\\\Client,composerPackageName=shotstack-sdk,artifactVersion=$SDK_VERSION
+$OPENAPI_GENERATOR generate -i $SPEC_FILE_JSON -g php -c $CONFIGS_DIR/php.yaml -o $BUILD_DIR/php \
+    --additional-properties=invokerPackage=Shotstack\\\\Client,licenseName="MIT",composerPackageName="shotstack/shotstack-sdk-php",srcBasePath="src",artifactVersion=$SDK_VERSION,artifactUrl="https://shotstack.io",developerOrganization="Shotstack",developerOrganizationUrl="https://shotstack.io"
 
 printf "\n========================================= \n"
 printf "\nPHP SDK Generated\n\n"
@@ -91,7 +91,7 @@ printf "\nPython SDK Generated\n\n"
 # Openapi doesn't support duplicate path mapping
 sed -i -e 's/\/path_alias_createassets/\/assets/g' $BUILD_DIR/node/dist/api/CreateApi.js
 sed -i -e 's/\/path_alias_createassets/\/assets/g' $BUILD_DIR/typescript/api/createApi.ts
-sed -i -e 's/\/path_alias_createassets/\/assets/g' $BUILD_DIR/php/lib/Api/CreateApi.php
+sed -i -e 's/\/path_alias_createassets/\/assets/g' $BUILD_DIR/php/src/Api/CreateApi.php
 sed -i -e 's/\/path_alias_createassets/\/assets/g' $BUILD_DIR/python/shotstack_sdk/api/create_api.py
 sed -i -e 's/\/path_alias_createassets/\/assets/g' $BUILD_DIR/ruby/lib/shotstack/api/create_api.rb
 
