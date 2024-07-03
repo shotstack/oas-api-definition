@@ -75,8 +75,8 @@ printf "\n========================================= \n"
 printf "\nNode SDK Generated\n\n"
 
 # Node (Typescript) SDK
-$OPENAPI_GENERATOR generate -i $SPEC_FILE_JSON -g typescript-node -o $BUILD_DIR/typescript \
-    --additional-properties=npmName="shotstack-sdk-typescript",supportsES6=true,npmVersion=$SDK_VERSION.beta,enumPropertyNaming=UPPERCASE
+$OPENAPI_GENERATOR generate -i $SPEC_FILE_JSON -g typescript-node -c $CONFIGS_DIR/typescript.yaml  -o $BUILD_DIR/typescript \
+    --additional-properties=npmName="shotstack-sdk-typescript",supportsES6=true,npmVersion=$SDK_VERSION,enumPropertyNaming=UPPERCASE,licenseName="MIT"
 
 printf "\n========================================= \n"
 printf "\nTypescript SDK Generated\n\n"
