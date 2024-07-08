@@ -75,15 +75,15 @@ printf "\n========================================= \n"
 printf "\nNode SDK Generated\n\n"
 
 # Node (Typescript) SDK
-$OPENAPI_GENERATOR generate -i $SPEC_FILE_JSON -g typescript-node -c $CONFIGS_DIR/typescript.yaml  -o $BUILD_DIR/typescript \
+$OPENAPI_GENERATOR generate -i $SPEC_FILE_JSON -g typescript-node -c $CONFIGS_DIR/typescript.yaml -o $BUILD_DIR/typescript \
     --additional-properties=npmName="shotstack-sdk-typescript",supportsES6=true,npmVersion=$SDK_VERSION,enumPropertyNaming=UPPERCASE,licenseName="MIT"
 
 printf "\n========================================= \n"
 printf "\nTypescript SDK Generated\n\n"
 
 # Python SDK
-$OPENAPI_GENERATOR generate -i $SPEC_FILE_JSON -g python -o $BUILD_DIR/python \
-    --additional-properties=packageName="shotstack_sdk",projectName="shotstack-sdk",pythonAttrNoneIfUnset=true
+$OPENAPI_GENERATOR generate -i $SPEC_FILE_JSON -g python -c $CONFIGS_DIR/python.yaml -o $BUILD_DIR/python \
+    --additional-properties=packageName="shotstack_sdk",projectName="shotstack-sdk",pythonAttrNoneIfUnset=true,packageVersion=$SDK_VERSION,packageUrl="https://shotstack.io/product/sdk/python/",infoName="Shotstack",infoEmail="pypi@shotstack.io"
 
 printf "\n========================================= \n"
 printf "\nPython SDK Generated\n\n"
