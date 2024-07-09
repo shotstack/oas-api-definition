@@ -57,8 +57,8 @@ printf "\n========================================= \n"
 printf "\nPHP SDK Generated\n\n"
 
 # Ruby SDK
-$OPENAPI_GENERATOR generate -i $SPEC_FILE_JSON -g ruby -o $BUILD_DIR/ruby \
-    --additional-properties=moduleName="Shotstack"
+$OPENAPI_GENERATOR generate -i $SPEC_FILE_JSON -g ruby -c $CONFIGS_DIR/ruby.yaml -o $BUILD_DIR/ruby \
+    --additional-properties=moduleName="Shotstack",gemAuthor="Shotstack",gemAuthorEmail="ruby@shotstack.io",gemHomepage="https://shotstack.io/product/sdk/ruby/",gemLicense="MIT",gemVersion=$SDK_VERSION,
 
 printf "\n========================================= \n"
 printf "\nRuby SDK Generated\n\n"
