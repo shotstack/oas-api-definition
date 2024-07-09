@@ -2,6 +2,5 @@ node_modules
 build
 
 .tags
-copy-*-files.sh
 .shins/index.html
 .shins/source/index.html.md
