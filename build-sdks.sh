@@ -16,8 +16,9 @@ SPEC_FILE_JSON=./api.oas3.json
 BUILD_DIR=./build/sdks
 TEMPLATES_DIR=./templates
 CONFIGS_DIR=./configs
-OPENAPI_GENERATOR_VERSION=7.4.0
-SDK_VERSION=0.2.6
+OPENAPI_GENERATOR_VERSION_STABLE=7.4.0
+OPENAPI_GENERATOR_VERSION_LEGACY=5.4.0
+SDK_VERSION=0.2.7
 
 # Prepare build dir
 rm -rf $BUILD_DIR
@@ -47,7 +48,7 @@ echo "- using OpenAPI generator $OPENAPI_GENERATOR"
 ./node_modules/.bin/swagger-cli bundle -o $SPEC_FILE_JSON $SPEC_FILE
 
 # Set Open API generator version
-$OPENAPI_GENERATOR version-manager set $OPENAPI_GENERATOR_VERSION
+$OPENAPI_GENERATOR version-manager set $OPENAPI_GENERATOR_VERSION_STABLE
 
 # PHP SDK
 $OPENAPI_GENERATOR generate -i $SPEC_FILE_JSON -g php -c $CONFIGS_DIR/php.yaml -o $BUILD_DIR/php \
@@ -82,8 +83,10 @@ printf "\n========================================= \n"
 printf "\nTypescript SDK Generated\n\n"
 
 # Python SDK
-$OPENAPI_GENERATOR generate -i $SPEC_FILE_JSON -g python -o $BUILD_DIR/python \
-    --additional-properties=packageName="shotstack_sdk",projectName="shotstack-sdk",pythonAttrNoneIfUnset=true
+# v7.4.0 seems to have a bunch of bugs around oneOf and anyOf. Revert to v5.4.0
+$OPENAPI_GENERATOR version-manager set $OPENAPI_GENERATOR_VERSION_LEGACY
+$OPENAPI_GENERATOR generate -i $SPEC_FILE_JSON -g python -c $CONFIGS_DIR/python.yaml -o $BUILD_DIR/python \
+    --additional-properties=packageName="shotstack_sdk",projectName="shotstack-sdk",pythonAttrNoneIfUnset=true,packageVersion=$SDK_VERSION,packageUrl="https://shotstack.io/product/sdk/python/",infoName="Shotstack",infoEmail="pypi@shotstack.io",licenseInfo="MIT"
 
 printf "\n========================================= \n"
 printf "\nPython SDK Generated\n\n"
