@@ -169,17 +169,20 @@ components:
     ImageAsset:
       $ref: "./schemas/imageasset.yaml#/ImageAsset"
 
-    TitleAsset:
-      $ref: "./schemas/titleasset.yaml#/TitleAsset"
-
-    HtmlAsset:
-      $ref: "./schemas/htmlasset.yaml#/HtmlAsset"
-
     AudioAsset:
       $ref: "./schemas/audioasset.yaml#/AudioAsset"
 
     LumaAsset:
       $ref: "./schemas/lumaasset.yaml#/LumaAsset"
+
+    CaptionAsset:
+      $ref: "./schemas/captionasset.yaml#/CaptionAsset"
+
+    HtmlAsset:
+      $ref: "./schemas/htmlasset.yaml#/HtmlAsset"
+
+    TitleAsset:
+      $ref: "./schemas/titleasset.yaml#/TitleAsset"
 
     Transition:
       $ref: "./schemas/transition.yaml#/Transition"
@@ -201,6 +204,15 @@ components:
 
     FlipTransformation:
       $ref: "./schemas/fliptransformation.yaml#/FlipTransformation"
+
+    CaptionFont:
+      $ref: "./schemas/captionproperties.yaml#/CaptionFont"
+  
+    CaptionBackground:
+      $ref: "./schemas/captionproperties.yaml#/CaptionBackground"
+
+    CaptionMargin:
+      $ref: "./schemas/captionproperties.yaml#/CaptionMargin"
 
     MergeField:
       $ref: "./schemas/mergefield.yaml#/MergeField"

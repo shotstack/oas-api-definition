@@ -6,18 +6,20 @@
         <ul>
           <li><a href="#tocs_videoasset">VideoAsset</a></li>
           <li><a href="#tocs_imageasset">ImageAsset</a></li>
-          <li><a href="#tocs_titleasset">TitleAsset</a></li>
-          <li><a href="#tocs_htmlasset">HtmlAsset</a></li>
           <li><a href="#tocs_audioasset">AudioAsset</a></li>
           <li><a href="#tocs_lumaasset">LumaAsset</a></li>
+          <li><a href="#tocs_captionasset">CaptionAsset</a></li>
+          <li><a href="#tocs_htmlasset">HtmlAsset</a></li>
+          <li><a href="#tocs_titleasset">TitleAsset</a></li>
         </ul>
       discriminator:
         propertyName: asset
       oneOf:
         - $ref: "./videoasset.yaml#/VideoAsset"
         - $ref: "./imageasset.yaml#/ImageAsset"
-        - $ref: "./titleasset.yaml#/TitleAsset"
-        - $ref: "./htmlasset.yaml#/HtmlAsset"
         - $ref: "./audioasset.yaml#/AudioAsset"
         - $ref: "./lumaasset.yaml#/LumaAsset"
+        - $ref: "./captionasset.yaml#/CaptionAsset"
+        - $ref: "./htmlasset.yaml#/HtmlAsset"
+        - $ref: "./titleasset.yaml#/TitleAsset"
       additionalProperties: false
