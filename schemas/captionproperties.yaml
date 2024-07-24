@@ -16,7 +16,7 @@
           example: 0.8
         size:
           description: The size of the font in pixels (px).
-          type: number
+          type: integer
           example: 24
         lineHeight:
           description: The line height of the font as a ratio of the font size.
@@ -63,11 +63,11 @@
           type: number
           example: 0.4
         padding:
-          description: The padding inside the background box.
-          type: number
+          description: The padding inside the background box in pixels.
+          type: integer
           example: 30
         borderRadius:
-          description: The border radius of the background box.
-          type: number
+          description: The border radius of the background box in pixels.
+          type: integer
           example: 18
       type: object

@@ -169,6 +169,9 @@ components:
     ImageAsset:
       $ref: "./schemas/imageasset.yaml#/ImageAsset"
 
+    TextAsset:
+      $ref: "./schemas/textasset.yaml#/TextAsset"
+
     AudioAsset:
       $ref: "./schemas/audioasset.yaml#/AudioAsset"
 
@@ -204,6 +207,15 @@ components:
 
     FlipTransformation:
       $ref: "./schemas/fliptransformation.yaml#/FlipTransformation"
+
+    TextFont:
+      $ref: "./schemas/textproperties.yaml#/TextFont"
+
+    TextBackground:
+      $ref: "./schemas/textproperties.yaml#/TextBackground"
+
+    TextAlignment:
+      $ref: "./schemas/textproperties.yaml#/TextAlignment"
 
     CaptionFont:
       $ref: "./schemas/captionproperties.yaml#/CaptionFont"

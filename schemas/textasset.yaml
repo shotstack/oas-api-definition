@@ -1,0 +1,40 @@
+    TextAsset:
+      description: |
+        The TextAsset is used to add text and titles to a video. The text can be styled with built in and custom
+        [Fonts](#tocs_font). You can also add a background bounding box used to control wrapping and overflow.
+      type: object
+      properties:
+        type:
+          default: text
+          description: The type of asset - set to `text` for text.
+          type: string
+        text:
+          description: The text string to display.
+          type: string
+          example: Hello World
+        width:
+          description: >-
+            Set the width of the HTML asset bounding box in pixels. Text will wrap to fill the bounding box.
+          type: integer
+          example: 400
+        height:
+          description: >-
+            Set the width of the HTML asset bounding box in pixels. Text and elements will be masked if they exceed the 
+            height of the bounding box.
+          type: integer
+          example: 200
+        font:
+          description: >-
+            Font styling properties.
+          $ref: "./textproperties.yaml#/TextFont"
+        background:
+          description: >-
+            Background styling properties.
+          $ref: "./textproperties.yaml#/TextBackground"
+        alignment:
+          description: >-
+            Alignment properties.
+          $ref: "./textproperties.yaml#/TextAlignment"
+      required:
+        - type
+        - text
