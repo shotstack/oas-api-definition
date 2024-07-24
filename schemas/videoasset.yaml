@@ -55,6 +55,8 @@
           example: 1
         crop:
           $ref: "./crop.yaml#/Crop"
+        chromaKey:
+          $ref: "./chromakey.yaml#/ChromaKey"
       required:
         - type
         - src

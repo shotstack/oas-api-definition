@@ -1,0 +1,26 @@
+    ChromaKey:
+      description: >-
+        Chroma key, commonly known as green screen, is a technique that replaces a specific color in a video with a
+        different background image or video, enabling seamless integration of diverse environments.
+      properties:
+        color:
+          description: >-
+            The chroma key color as a hex value. For a green screen, use a green hex value.
+          type: string
+          example: "#00b140"
+        threshold:
+          description: >-
+            Pixels within this distance from the key color are eliminated by setting their alpha values to zero.
+          type: integer
+          minimum: 0
+          maximum: 250
+          example: 150
+        halo:
+          description: >-
+            Pixels within the halo distance from the threshold boundary are given an increasing alpha value based on
+            their distance from the threshold.
+          type: integer
+          minimum: 0
+          maximum: 250
+          example: 100
+      type: object

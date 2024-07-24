@@ -226,6 +226,9 @@ components:
     CaptionMargin:
       $ref: "./schemas/captionproperties.yaml#/CaptionMargin"
 
+    ChromaKey:
+      $ref: "./schemas/chromakey.yaml#/ChromaKey"
+
     MergeField:
       $ref: "./schemas/mergefield.yaml#/MergeField"
 
