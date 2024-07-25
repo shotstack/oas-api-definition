@@ -6,8 +6,21 @@
       properties:
         angle:
           description: >-
-            The angle to rotate the clip. Can be 0 to 360, or 0 to -360. Using a
-            positive number rotates the clip clockwise, negative numbers
-            counter-clockwise.
-          type: integer
-          example: 45
+            Rotate a clip by the specified angle in degrees. Use a number or an array of
+            [Tween](./#tocs_tween) objects to create a custom animation.
+          oneOf:
+            - type: integer
+              description: >-
+                The angle to rotate the clip. Can be 0 to 360, or 0 to -360. Using a
+                positive number rotates the clip clockwise, negative numbers
+                counter-clockwise.
+              format: float
+              minimum: -360
+              maximum: 360
+              example: 45
+            - type: array
+              description: >-
+                An array of [Tween](./#tocs_tween) objects used to create a custom animation.
+                Animate the rotation of an asset over time.
+              items:
+                $ref: "./tween.yaml#/Tween"

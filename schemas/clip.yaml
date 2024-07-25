@@ -130,8 +130,20 @@
           type: string
           example: greyscale
         opacity:
-          description: Sets the opacity of the Clip where 1 is opaque and 0 is transparent.
-          type: number
+          description: >-
+            Offset an asset on the horizontal axis (left or right). Use a number or an array of
+            [Tween](./#tocs_tween) objects to create a custom animation.
+          oneOf:
+            - type: number
+              description: >-
+                Sets the opacity of the Clip where 1 is opaque and 0 is transparent.
+              example: 0.5
+            - type: array
+              description: >-
+                An array of [Tween](./#tocs_tween) objects used to create a custom animation. Animate the opacity
+                of an asset over time.
+              items:
+                $ref: "./tween.yaml#/Tween"
         transform:
           description: >-
             A transformation lets you modify the visual properties of a clip. Available

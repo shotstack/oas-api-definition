@@ -229,6 +229,9 @@ components:
     ChromaKey:
       $ref: "./schemas/chromakey.yaml#/ChromaKey"
 
+    Tween:
+      $ref: "./schemas/tween.yaml#/Tween"
+
     MergeField:
       $ref: "./schemas/mergefield.yaml#/MergeField"
 
