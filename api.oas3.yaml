@@ -280,6 +280,15 @@ components:
     GoogleDriveDestinationOptions:
       $ref: "./schemas/destinations/googleDriveDestinationOptions.yaml#/GoogleDriveDestinationOptions"
 
+    VimeoDestination:
+      $ref: "./schemas/destinations/vimeoDestination.yaml#/VimeoDestination"
+
+    VimeoDestinationOptions:
+      $ref: "./schemas/destinations/vimeoDestinationOptions.yaml#/VimeoDestinationOptions"
+
+    VimeoDestinationPrivacyOptions:
+      $ref: "./schemas/destinations/vimeoDestinationPrivacyOptions.yaml#/VimeoDestinationPrivacyOptions"
+
     Template:
       $ref: "./schemas/template.yaml#/Template"
 
