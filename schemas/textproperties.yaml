@@ -1,0 +1,73 @@
+    TextFont:
+      description: >-
+        Font properties for text.
+      properties:
+        family:
+          description: The font family name. This must be Family name embedded in the font, i.e. "Open Sans".
+          type: string
+          example: Open Sans
+        color:
+          description: The text color using hexadecimal color notation.
+          type: string
+          example: "#ffffff"
+        opacity:
+          description: The opacity of the text where 1 is opaque and 0 is transparent.
+          type: number
+          example: 0.8
+        size:
+          description: The size of the font in pixels (px).
+          type: integer
+          example: 24
+        weight:
+          description: The weight of the font. 100 is lightest, 900 is heaviest (boldest).
+          type: integer
+          example: 400
+        lineHeight:
+          description: The line height of the font as a ratio of the font size.
+          type: number
+          example: 0.85
+      type: object
+
+    TextBackground:
+      description: >-
+        Displays a background box behind the text.
+      properties:
+        color:
+          description: The background color using hexadecimal color notation.
+          type: string
+          example: "#000000"
+      type: object
+
+    TextAlignment:
+      description: >-
+        Horizontal and vertical alignment properties for text.
+      properties:
+        horizontal:
+          description: >-
+            The horizontal alignment of the text. Value must be one of:
+            <ul>
+              <li>`left`</li>
+              <li>`center`</li>
+              <li>`right`</li>
+            </ul>
+          type: string
+          example: center
+          enum:
+            - left
+            - center
+            - right
+        vertical:
+          description: >-
+            The vertical alignment of the text. Value must be one of:
+            <ul>
+              <li>`top`</li>
+              <li>`center`</li>
+              <li>`bottom`</li>
+            </ul>
+          type: string
+          example: center
+          enum:
+            - top
+            - center
+            - bottom
+      type: object

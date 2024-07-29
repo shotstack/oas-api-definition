@@ -33,6 +33,25 @@
           description: >-
             Margin properties.
           $ref: "./captionproperties.yaml#/CaptionMargin"
+        trim:
+          description: >-
+            The start trim point of the captions, in seconds (defaults to 0). Remove the trim length from teh start of
+            the captions and allow it to be synced with video or audio. The captions will play until the file ends or
+            the Clip length is reached.
+          type: number
+          example: 2
+        speed:
+          description: >-
+            Adjust the playback speed of the captions between 0 (paused) and 10 (10x normal speed) where 1 is normal
+            speed (defaults to 1). Adjusting the speed will also adjust the duration of the clip and may require you to 
+            adjust the Clip length. For example, if you set speed to 0.5, the clip will need to be 2x as long to play
+            the entire captions (i.e. original length / 0.5). If you set speed to 2, the clip will need to be half as long
+            to play the entire captions (i.e. original length / 2).
+          type: number
+          format: float
+          minimum: 0
+          maximum: 10
+          example: 1
       required:
         - type
         - src

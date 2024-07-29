@@ -1,0 +1,17 @@
+    VimeoDestination:
+      description: >-
+        Send videos to [Vimeo](https://shotstack.io/docs/guide/serving-assets/destinations/vimeo/) video hosting
+        and streaming service. Vimeo credentials are required and added via the
+        [dashboard](https://dashboard.shotstack.io/integrations/vimeo), not in the request.
+      properties:
+        provider:
+          description: The destination to send video to - set to `vimeo` for Vimeo.
+          type: string
+          default: vimeo
+          example: vimeo
+        options:
+          description: Additional Vimeo configuration and features.
+          $ref: "./vimeoDestinationOptions.yaml#/VimeoDestinationOptions"
+      type: object
+      required:
+        - provider
