@@ -18,6 +18,19 @@ Install dependencies:
 npm install
 ```
 
+Add google analytics: Create the file `$workspace/.tags`:
+```
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-12345"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-12345');
+</script>
+```
+
 ## Generating Docs
 
 Generate the docs using:
