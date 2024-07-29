@@ -1,0 +1,48 @@
+    VimeoDestinationPrivacyOptions:
+      description: >-
+        Options to control the visibility of videos and privacy features.
+      properties:
+        view:
+          description: >-
+            Set who can view the videos. Available options are:
+            <ul>
+              <li>`anybody` - Anyone can view the video.</li>
+              <li>`nobody` - Only the video owner can view the video.</li>
+              <li>`contacts` - Only contacts can view the video.</li>
+              <li>`password` - A password is required to view the video.</li>
+              <li>`unlisted` - The video is not listed on Vimeo.</li>
+            </ul>
+          type: string
+          enum:
+            - anybody
+            - nobody
+            - contacts
+            - password
+            - unlisted
+        embed:
+          description: >-
+            Set who can embed the video. Available options are:
+            <ul>
+              <li>`public` - Anyone can embed the video.</li>
+              <li>`private` - Only the video owner can embed the video.</li>
+              <li>`whitelist` - Only whitelisted domains can embed the video.</li>
+            </ul>
+          type: string
+          enum:
+            - public
+            - private
+            - whitelist
+        comments:
+          description: >-
+            Set who can comment on the video. Available options are:
+            <ul>
+              <li>`anybody` - Anyone can comment on the video.</li>
+              <li>`nobody` - Only the video owner can comment on the video.</li>
+              <li>`contacts` - Only contacts can comment on the video.</li>
+            </ul>
+          type: string
+          enum:
+            - anybody
+            - nobody
+            - contacts
+      type: object

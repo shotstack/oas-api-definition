@@ -1,18 +1,8 @@
     Asset:
       type: object
       description: >-
-        The type of asset to display for the duration of the Clip. Value
-        must be one of:
-        <ul>
-          <li><a href="#tocs_videoasset">VideoAsset</a></li>
-          <li><a href="#tocs_imageasset">ImageAsset</a></li>
-          <li><a href="#tocs_textasset">TextAsset</a></li>
-          <li><a href="#tocs_audioasset">AudioAsset</a></li>
-          <li><a href="#tocs_lumaasset">LumaAsset</a></li>
-          <li><a href="#tocs_captionasset">CaptionAsset</a></li>
-          <li><a href="#tocs_htmlasset">HtmlAsset</a></li>
-          <li><a href="#tocs_titleasset">TitleAsset</a></li>
-        </ul>
+        The type of asset to display for the duration of the Clip, i.e. a video clip or an image. Choose from one of
+        the available asset types below.
       discriminator:
         propertyName: asset
       oneOf:
