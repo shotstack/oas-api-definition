@@ -8,13 +8,36 @@
         asset:
           $ref: "./asset.yaml#/Asset"
         start:
-          description: The start position of the Clip on the timeline, in seconds.
-          type: number
-          example: 2
+          description: The start position of the Clip on the timeline.
+          oneOf:
+            - type: number
+              description: >-
+                The start position of the Clip on the timeline, in seconds.
+                For example, to start the Clip at 2 seconds, set the start value to 2.
+              example: 2
+            - type: string
+              description: >-
+                The start position using a [smart clip property](/docs/guide/architecting-an-application/smart-clips/).
+                Set to `auto` to automatically play the clip after the previous clip finishes.
+              enum:
+                - auto
         length:
-          description: The length, in seconds, the Clip should play for.
-          type: number
-          example: 5
+          description: The duration the Clip should play for.
+          oneOf:
+            - type: number
+              description: >-
+                The duration the Clip should play for, in seconds.
+                For example, to play the Clip for 5 seconds, set the length value to 5.
+              example: 5
+            - type: string
+              description: >-
+                The duration the Clip should play for using a
+                [smart clip property](/docs/guide/architecting-an-application/smart-clips/).
+                Set to `auto` to play the Clip for the duration of the asset. Set to `end` to display or play the clip to
+                the end of the timeline.
+              enum:
+                - auto
+                - end
         fit:
           description: >-
             Set how the asset should be scaled to fit the viewport using one of the following options: 

@@ -19,4 +19,6 @@
         - $ref: "./destinations/muxDestination.yaml#/MuxDestination"
         - $ref: "./destinations/s3Destination.yaml#/S3Destination"
         - $ref: "./destinations/googleCloudStorageDestination.yaml#/GoogleCloudStorageDestination"
+        - $ref: "./destinations/googleDriveDestination.yaml#/GoogleDriveDestination"
+        - $ref: "./destinations/vimeoDestination.yaml#/VimeoDestination"
       additionalProperties: false
