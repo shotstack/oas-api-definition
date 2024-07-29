@@ -6,11 +6,33 @@
       properties:
         x:
           description: Skew the clip along it's x axis.
-          type: number
-          format: float
-          example: 0.5
+          oneOf:
+            - type: number
+              description: >-
+                Range varies from 0 to 3. Positive numbers skew the asset right, negative left.
+                The distance moved is relative to the width of the viewport - i.e. an X skew of 0.5 will skew the
+                asset half the screen width to the right.
+              format: float
+              example: 0.5
+            - type: array
+              description: >-
+                An array of [Tween](./#tocs_tween) objects used to create a custom animation. Animate the X skew
+                of an asset over time.
+              items:
+                $ref: "./tween.yaml#/Tween"
         y:
           description: Skew the clip along it's y axis.
-          type: number
-          format: float
-          example: 0.5
+          oneOf:
+            - type: number
+              description: >-
+                Range varies from 0 to 3. Positive numbers skew the asset up, negative down.
+                The distance moved is relative to the height of the viewport - i.e. an Y skew of 0.5 will skew the
+                asset half the screen height up.
+              format: float
+              example: 0.5
+            - type: array
+              description: >-
+                An array of [Tween](./#tocs_tween) objects used to create a custom animation. Animate the Y skew
+                of an asset over time.
+              items:
+                $ref: "./tween.yaml#/Tween"

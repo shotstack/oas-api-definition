@@ -23,10 +23,23 @@
           type: number
         volume:
           description: >-
-            Set the volume for the audio clip between 0 and 1 where 0 is muted and 1
-            is full volume (defaults to 1).
-          type: number
-          example: 1
+            Set the volume of the audio clip. Use a number or an array of [Tween](./#tocs_tween) objects to create
+            custom volume transitions.
+          oneOf:
+            - type: number
+              description: >-
+                The volume level for the audio clip. Range varies from 0 to 1 where 0 is muted and 1 is full volume
+                (defaults to 1).
+              format: float
+              minimum: 0
+              maximum: 1
+              example: 0.5
+            - type: array
+              description: >-
+                An array of [Tween](./#tocs_tween) objects used to create a custom volume effect. Modify the volume
+                of an asset over time.
+              items:
+                $ref: "./tween.yaml#/Tween"
         speed:
           description: >-
             Adjust the playback speed of the audio clip between 0 (paused) and 10 (10x normal speed), where 1 is normal

@@ -2,15 +2,6 @@ ShotstackGeneratedAssetOptions:
   type: object
   description: >-
     Generate assets using the native Shotstack provider AI services.
-
-
-    The following AI generation services are available:
-    <ul>
-      <li><a href="#tocs_shotstacktexttospeechoptions">ShotstackTextToSpeechOptions</a></li>
-      <li><a href="#tocs_shotstacktexttoimageoptions">ShotstackTextToImageOptions</a></li>
-      <li><a href="#tocs_shotstackimagetovideooptions">ShotstackImageToVideoOptions</a></li>
-      <li><a href="#tocs_shotstacktextgeneratoroptions">ShotstackTextGeneratorOptions</a></li>
-    </ul>
   oneOf:
     - $ref: "./shotstackTextToSpeechOptions.yaml#/ShotstackTextToSpeechOptions"
     - $ref: "./shotstackTextToImageOptions.yaml#/ShotstackTextToImageOptions"
