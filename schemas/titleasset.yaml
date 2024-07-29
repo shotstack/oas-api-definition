@@ -1,7 +1,7 @@
     TitleAsset:
       deprecated: true
       description: |
-        **Notice: The title asset is deprecated, use the [HTML asset](#tocs_htmlasset) instead.**
+        **Notice: The TitleAsset is deprecated, use the [TextAsset](#tocs_textasset) instead.**
 
         The TitleAsset clip type lets you create video titles from a text string and apply styling and positioning.
       type: object

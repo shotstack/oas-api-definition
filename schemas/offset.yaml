@@ -1,31 +1,46 @@
 
     Offset:
       description: >-
-        Offsets the position of an asset horizontally or vertically by a
-        relative distance.
+        Offsets the position of an asset horizontally or vertically by a relative distance.
       properties:
         x:
           description: >-
-            Offset an asset on the horizontal axis (left or right), range varies
-            from -10 to 10. Positive numbers move the asset right, negative left.
-            For all assets except titles the distance moved is relative to the width 
-            of the viewport - i.e. an X offset of 0.5 will move the asset half the 
-            screen width to the right.
-          type: number
-          format: float
-          minimum: -10
-          maximum: 10
-          example: 0.1
+            Offset an asset on the horizontal axis (left or right). Use a number or an array of
+            [Tween](./#tocs_tween) objects to create a custom animation.
+          oneOf:
+            - type: number
+              description: >-
+                Range varies from -10 to 10. Positive numbers move the asset right, negative left.
+                The distance moved is relative to the width  of the viewport - i.e. an X offset of 0.5 will move the
+                asset half the screen width to the right.
+              format: float
+              minimum: -10
+              maximum: 10
+              example: 0.1
+            - type: array
+              description: >-
+                An array of [Tween](./#tocs_tween) objects used to create a custom animation. Animate the X offset
+                of an asset over time.
+              items:
+                $ref: "./tween.yaml#/Tween"
         y:
           description: >-
-            Offset an asset on the vertical axis (up or down), range varies from
-            -10 to 10. Positive numbers move the asset up, negative down.
-            For all assets except titles the distance moved is relative to the height 
-            of the viewport - i.e. an Y offset of 0.5 will move the asset up half the 
-            screen height.
-          type: number
-          format: float
-          minimum: -10
-          maximum: 10
-          example: -0.2
+            Offset an asset on the vertical axis (up or down). Use a number or an array of
+            [Tween](./#tocs_tween) objects to create a custom animation.
+          oneOf:
+            - type: number
+              description: >-
+                Range varies from -10 to 10. Positive numbers move the asset up, negative down.
+                The distance moved is relative to the height of the viewport - i.e. an Y offset of 0.5 will move the
+                asset half the screen height up.
+              format: float
+              minimum: -10
+              maximum: 10
+              example: -0.2
+            - type: array
+              description: >-
+                An array of [Tween](./#tocs_tween) objects used to create a custom animation. Animate the Y offset
+                of an asset over time.
+              items:
+                $ref: "./tween.yaml#/Tween"
       type: object

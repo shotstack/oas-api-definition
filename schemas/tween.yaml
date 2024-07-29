@@ -1,0 +1,43 @@
+    Tween:
+      description: >-
+        Use a Tween to [animate properties over time](/docs/guide/architecting-an-application/animations/). The
+        following properties are currently supported and can be animated:
+          <ul>
+            <li>Opacity - animate the transparency of a clip.</li>
+            <li>Offset - animate the x and y position of a clip.</li>
+            <li>Rotation - animate the rotation of a clip.</li>
+            <li>Skew - animate the horizontal and vertical shearing effect.</li>
+            <li>Volume - animate the audio volume of a clip.</li>
+          </ul>
+      properties:
+        from:
+          description: >-
+            The initial property value at the start of the animation.
+          example: 0
+        to:
+          description: >-
+            The final property value at the end of the animation.
+          example: 1
+        start:
+          description: >-
+            The time in seconds when the animation starts, relative to the clip, not the timeline.
+          type: number
+          example: 0
+        length:
+          description: >-
+            The duration of the animation in seconds.
+          type: number
+          example: 3
+        interpolation:
+          description: >-
+            The interpolation method to use for the animation. Available options are:
+            <ul>
+              <li>`linear` - a linear interpolation between the start and end values.</li>
+              <li>`bezier` - a bezier curve interpolation between the start and end values.</li>
+            </ul>
+          type: string
+          example: bezier
+          enum:
+            - linear
+            - bezier
+      type: object

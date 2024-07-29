@@ -1,0 +1,14 @@
+    VimeoDestinationOptions:
+      description: >-
+        Pass additional options to control how Vimeo publishes video, including name, description and privacy settings.
+      properties:
+        name:
+          description: A name or title for the video that will be displayed on the Vimeo website.
+          type: string
+        description:
+          description: A description of the video that will be displayed on the Vimeo website.
+          type: string
+        privacy:
+          description: >-
+            Options to control the visibility of videos and privacy features.
+          $ref: "./vimeoDestinationPrivacyOptions.yaml#/VimeoDestinationPrivacyOptions"

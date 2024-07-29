@@ -1,0 +1,73 @@
+    CaptionFont:
+      description: >-
+        Font properties for captions text.
+      properties:
+        family:
+          description: The font family name. This must be Family name embedded in the font, i.e. "Open Sans".
+          type: string
+          example: Open Sans
+        color:
+          description: The text color using hexadecimal color notation.
+          type: string
+          example: "#ffffff"
+        opacity:
+          description: The opacity of the text where 1 is opaque and 0 is transparent.
+          type: number
+          example: 0.8
+        size:
+          description: The size of the font in pixels (px).
+          type: integer
+          example: 24
+        lineHeight:
+          description: The line height of the font as a ratio of the font size.
+          type: number
+          example: 0.85
+        stroke:
+          description: The stroke color of the font using hexadecimal color notation.
+          type: string
+          example: "#ff6600"
+        strokeWidth:
+          description: The width of the stroke in pixels.
+          type: number
+          example: 0.8
+      type: object
+
+    CaptionMargin:
+      description: >-
+        The margin properties for captions. Margins are used to position the caption text and background on the screen.
+      properties:
+        top:
+          description: The margin above the text. Pushes captions down the screen.
+          type: number
+          example: 0.25
+        left:
+          description: The margin to the left of the text. Pushes captions to the right.
+          type: number
+          example: 0.05
+        right:
+          description: The margin to the right of the text. Pushes captions to the left.
+          type: number
+          example: 0.45
+      type: object
+
+    CaptionBackground:
+      description: >-
+        Displays a background box behind the caption text.
+      properties:
+        color:
+          description: The background color using hexadecimal color notation.
+          type: string
+          example: "#000000"
+        opacity:
+          description: The opacity of the background color.
+          type: number
+          example: 0.4
+        padding:
+          description: The padding inside the background box in pixels.
+          type: integer
+          example: 30
+        borderRadius:
+          description: The border radius of the background box in pixels.
+          type: integer
+          example: 18
+      type: object
