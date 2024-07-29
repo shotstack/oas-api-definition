@@ -4,8 +4,16 @@ Defines the Shotstack API and provides tooling for documentation and SDK generat
 
 ## Installation
 
-The project is built using Node.js. To install the dependencies run the command:
+The project is built using Node.js.
 
+Install shins dependencies:
+```
+cd .shins
+nvm use
+npm i
+```
+
+Install dependencies:
 ```
 npm install
 ```
@@ -79,12 +87,3 @@ git subtree pull --prefix=.shins/ shins master --squash
 ```
 
 For more details on Git subtrees see: https://www.atlassian.com/git/tutorials/git-subtree
-
-### Installing Shins
-
-Follow the process above to link and update Shins as a subtree, then:
-
-```
-cd .shins
-npm install
-```
