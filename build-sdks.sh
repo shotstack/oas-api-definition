@@ -18,7 +18,17 @@ TEMPLATES_DIR=./templates
 CONFIGS_DIR=./configs
 OPENAPI_GENERATOR_VERSION_STABLE=7.4.0
 OPENAPI_GENERATOR_VERSION_LEGACY=5.4.0
-SDK_VERSION=0.2.8
+SDK_VERSION=0.2.9
+
+echo "Current SDK_VERSION is set to: $SDK_VERSION"
+read -p "Is this version correct? (y/n): " confirm
+
+if [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]]; then
+    echo "Building SDKs with version: $SDK_VERSION."
+else
+    echo "Please update the SDK_VERSION in the build-sdks.sh file to the correct version."
+    exit 1
+fi
 
 # Prepare build dir
 rm -rf $BUILD_DIR
@@ -97,6 +107,9 @@ sed -i -e 's/\/path_alias_createassets/\/assets/g' $BUILD_DIR/typescript/api/cre
 sed -i -e 's/\/path_alias_createassets/\/assets/g' $BUILD_DIR/php/src/Api/CreateApi.php
 sed -i -e 's/\/path_alias_createassets/\/assets/g' $BUILD_DIR/python/shotstack_sdk/api/create_api.py
 sed -i -e 's/\/path_alias_createassets/\/assets/g' $BUILD_DIR/ruby/lib/shotstack/api/create_api.rb
+
+# Revert back to stable version
+$OPENAPI_GENERATOR version-manager set $OPENAPI_GENERATOR_VERSION_STABLE
 
 # Cleanup
 rm -f $SPEC_FILE_JSON
