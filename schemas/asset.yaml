@@ -14,4 +14,7 @@
         - $ref: "./captionasset.yaml#/CaptionAsset"
         - $ref: "./htmlasset.yaml#/HtmlAsset"
         - $ref: "./titleasset.yaml#/TitleAsset"
+        - $ref: "./shapeasset.yaml#/ShapeAsset"
+        - $ref: "./texttoimage.yaml#/TextToImageAsset"
+        - $ref: "./imagetovideo.yaml#/ImageToVideoAsset"
       additionalProperties: false

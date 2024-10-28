@@ -1,0 +1,42 @@
+ImageToVideoOptions:
+  description: >-
+    Options for the Shotstack image-to-video service. Set an image source to generate a video from. The output will be 
+    generated as a MP4 file available at the URL returned in the response.
+  properties:
+    type:
+      type: string
+      description: The type of asset to generate - set to `image-to-video` for image-to-video.
+      enum: ['image-to-video']
+      default: image-to-video
+    src:
+      description: >-
+        The image source URL. The URL must be publicly accessible or include
+        credentials.
+      type: string
+      example: https://s3-ap-northeast-1.amazonaws.com/my-bucket/image.jpg
+    prompt:
+      type: string
+      description: The instructions for modifying the image into a video sequence.
+      example: Slowly zoom out and orbit left around the object.
+    aspectRatio:
+      description: >-
+        The aspect ratio (shape) of the video output.
+      enum:
+        - '1:1'
+        - '4:3'
+        - '16:9'
+        - '9:16'
+        - '3:4'
+        - '21:9'
+        - '9:21'
+      type: string
+      example: '16:9'
+    speed:
+      description: >-
+        Adjust the playback speed of the video clip between 0 (paused) and 10 (10x normal speed) where 1 is normal
+        speed (defaults to 1). Adjusting the speed will also adjust the duration of the clip and may require you to 
+        adjust the Clip length. For example, if you set speed to 0.5, the clip will need to be 2x as long to play
+        the entire video (i.e. original length / 0.5). If you set speed to 2, the clip will need to be half as long
+        to play the entire video (i.e. original length / 2).
+    crop:
+      $ref: './crop.yaml#/Crop'
