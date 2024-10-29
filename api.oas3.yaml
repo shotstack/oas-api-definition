@@ -175,11 +175,20 @@ components:
     AudioAsset:
       $ref: "./schemas/audioasset.yaml#/AudioAsset"
 
+    ShapeAsset:
+      $ref: "./schemas/shapeasset.yaml#/ShapeAsset"
+
     LumaAsset:
       $ref: "./schemas/lumaasset.yaml#/LumaAsset"
 
     CaptionAsset:
       $ref: "./schemas/captionasset.yaml#/CaptionAsset"
+
+    TextToImageAsset:
+      $ref: "./schemas/texttoimageasset.yaml#/TextToImageAsset"
+
+    ImageToVideoAsset:
+      $ref: "./schemas/imagetovideoasset.yaml#/ImageToVideoAsset"
 
     HtmlAsset:
       $ref: "./schemas/htmlasset.yaml#/HtmlAsset"

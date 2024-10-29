@@ -1,0 +1,109 @@
+ShapeAsset:
+  description: |
+    The ShapeAsset is used to add shapes to a video. The shape can be styled with a fill and a stroke.
+    You can manipulate properties such as rotation to create dynamic effects like a diamond shape or stripes.
+  type: object
+  properties:
+    type:
+      default: shape
+      description: The type of asset - set to `shape` for shape.
+      type: string
+    shape:
+      description: The shape to display.
+      type: string
+      enum:
+        - rectangle
+        - circle
+        - line
+    width:
+      description: >-
+        Sets the width of the bounding box in pixels. This value should be larger than the shape's width. If omitted, the entire viewport width and height will be used.
+      type: integer
+      example: 800
+    height:
+      description: >-
+        Sets the height of the bounding box in pixels. This value should be larger than the shape's height. If omitted, the entire viewport width and height will be used.
+      type: integer
+      example: 800
+    fill:
+      description: >-
+        Specifies the fill style of the shape.
+      type: object
+      properties:
+        color:
+          description: The color of the fill using hexadecimal color notation.
+          type: string
+          example: '#ffffff'
+        opacity:
+          description: The opacity of the fill where 1 is opaque and 0 is transparent.
+          type: number
+          example: 1
+    stroke:
+      description: >-
+        Specifies the stroke style of the shape.
+      type: object
+      properties:
+        color:
+          description: The stroke color of the font using hexadecimal color notation.
+          type: string
+          example: '#000000'
+        width:
+          description: The width of the stroke in pixels.
+          type: number
+          example: 0.8
+    rectangle:
+      description: >-
+        Configuration settings for the rectangle shape. Required when `shape` is set to `rectangle`.
+      type: object
+      properties:
+        width:
+          description: >-
+            Set the width of the rectangle shape in pixels.
+          type: integer
+          example: 800
+        height:
+          description: >-
+            Set the height of the rectangle shape in pixels.
+          type: integer
+          example: 800
+        cornerRadius:
+          description: >-
+            Set the corner radius of the rectangle shape.
+          type: integer
+          example: 20
+      required:
+        - width
+        - height
+    circle:
+      description: >-
+        Configuration settings for the circle shape. Required when `shape` is set to `circle`.
+      type: object
+      properties:
+        radius:
+          description: >-
+            Set the radius of the circle shape in pixels.
+          type: integer
+          example: 800
+      required:
+        - radius
+    line:
+      description: >-
+        Configuration settings for the line shape. Required when `shape` is set to `line`.
+      type: object
+      properties:
+        length:
+          description: >-
+            Set the length of the line shape in pixels.
+          type: integer
+          example: 100
+        thickness:
+          description: >-
+            Set the thickness of the line in pixels.
+          type: integer
+          example: 4
+      required:
+        - length
+        - thickness
+  required:
+    - type
+    - shape
