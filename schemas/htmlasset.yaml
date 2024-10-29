@@ -1,5 +1,6 @@
     HtmlAsset:
-      description: >-
+      deprecated: true
+      description: |
         **Notice: The HtmlAsset is deprecated, use the [TextAsset](#tocs_textasset) instead.**
 
         The HtmlAsset clip type lets you create text based layout and formatting using
