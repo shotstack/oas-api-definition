@@ -1,7 +1,6 @@
 ImageToVideoAsset:
   description: >-
-    Options for the Shotstack image-to-video service. Set an image source to generate a video from. The output will be 
-    generated as a MP4 file available at the URL returned in the response.
+    The image-to-image asset lets you create a video from an image and a text prompt.
   properties:
     type:
       type: string

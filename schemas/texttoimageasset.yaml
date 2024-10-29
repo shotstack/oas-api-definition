@@ -1,7 +1,6 @@
 TextToImageAsset:
   description: >-
-    Options for the Shotstack text-to-image service. Set a text prompt to generate an image from. The output will be 
-    generated as a PNG file available at the URL returned in the response.
+    The text-to-image asset lets you create a dynamic image from a text prompt.
   properties:
     type:
       type: string
@@ -11,7 +10,7 @@ TextToImageAsset:
     prompt:
       type: string
       description: The text prompt to generate an image from.
-      example: A detailed photograph of Mars, showcasing its orange-red surface
+      example: A serene landscape featuring a crystal-clear mountain lake at sunrise. The water reflects the pink and orange sky like a mirror. In the foreground, a majestic pine tree stands tall, its branches framing the view. Snow-capped peaks rise in the distance, their edges softened by a light morning mist. A pair of deer drink from the lake's edge, creating gentle ripples on the otherwise still surface.
     width:
       type: integer
       description: The width of the image in pixels.
