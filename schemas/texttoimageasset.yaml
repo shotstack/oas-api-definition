@@ -1,6 +1,6 @@
 TextToImageAsset:
   description: >-
-    The text-to-image asset lets you create a dynamic image from a text prompt.
+    The TextToImageAsset lets you create a dynamic image from a text prompt.
   properties:
     type:
       type: string

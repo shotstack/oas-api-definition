@@ -1,6 +1,6 @@
 ImageToVideoAsset:
   description: >-
-    The image-to-image asset lets you create a video from an image and a text prompt.
+    The ImageToVideoAsset lets you create a video from an image and a text prompt.
   properties:
     type:
       type: string
