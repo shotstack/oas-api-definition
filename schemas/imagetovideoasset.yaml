@@ -1,4 +1,4 @@
-ImageToVideoOptions:
+ImageToVideoAsset:
   description: >-
     Options for the Shotstack image-to-video service. Set an image source to generate a video from. The output will be 
     generated as a MP4 file available at the URL returned in the response.
@@ -38,5 +38,10 @@ ImageToVideoOptions:
         adjust the Clip length. For example, if you set speed to 0.5, the clip will need to be 2x as long to play
         the entire video (i.e. original length / 0.5). If you set speed to 2, the clip will need to be half as long
         to play the entire video (i.e. original length / 2).
+      type: number
+      format: float
+      minimum: 0
+      maximum: 10
+      example: 1
     crop:
       $ref: './crop.yaml#/Crop'

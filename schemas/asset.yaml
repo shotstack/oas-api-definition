@@ -1,20 +1,20 @@
-    Asset:
-      type: object
-      description: >-
-        The type of asset to display for the duration of the Clip, i.e. a video clip or an image. Choose from one of
-        the available asset types below.
-      discriminator:
-        propertyName: asset
-      oneOf:
-        - $ref: "./videoasset.yaml#/VideoAsset"
-        - $ref: "./imageasset.yaml#/ImageAsset"
-        - $ref: "./textasset.yaml#/TextAsset"
-        - $ref: "./audioasset.yaml#/AudioAsset"
-        - $ref: "./lumaasset.yaml#/LumaAsset"
-        - $ref: "./captionasset.yaml#/CaptionAsset"
-        - $ref: "./htmlasset.yaml#/HtmlAsset"
-        - $ref: "./titleasset.yaml#/TitleAsset"
-        - $ref: "./shapeasset.yaml#/ShapeAsset"
-        - $ref: "./texttoimage.yaml#/TextToImageAsset"
-        - $ref: "./imagetovideo.yaml#/ImageToVideoAsset"
-      additionalProperties: false
+Asset:
+  type: object
+  description: >-
+    The type of asset to display for the duration of the Clip, i.e. a video clip or an image. Choose from one of
+    the available asset types below.
+  discriminator:
+    propertyName: asset
+  oneOf:
+    - $ref: './videoasset.yaml#/VideoAsset'
+    - $ref: './imageasset.yaml#/ImageAsset'
+    - $ref: './textasset.yaml#/TextAsset'
+    - $ref: './audioasset.yaml#/AudioAsset'
+    - $ref: './lumaasset.yaml#/LumaAsset'
+    - $ref: './captionasset.yaml#/CaptionAsset'
+    - $ref: './htmlasset.yaml#/HtmlAsset'
+    - $ref: './titleasset.yaml#/TitleAsset'
+    - $ref: './shapeasset.yaml#/ShapeAsset'
+    - $ref: './texttoimageasset.yaml#/TextToImageAsset'
+    - $ref: './imagetovideoasset.yaml#/ImageToVideoAsset'
+  additionalProperties: false

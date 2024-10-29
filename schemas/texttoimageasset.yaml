@@ -1,4 +1,4 @@
-TextToImageOptions:
+TextToImageAsset:
   description: >-
     Options for the Shotstack text-to-image service. Set a text prompt to generate an image from. The output will be 
     generated as a PNG file available at the URL returned in the response.
