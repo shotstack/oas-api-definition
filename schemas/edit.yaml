@@ -1,7 +1,8 @@
     Edit:
       description: >-
         An edit defines the arrangement of a video on a timeline, an audio edit or an image design and the output
-        format.
+        format. Video assets are automatically preprocessed to fix common compatibility issues before rendering.
+        You can control preprocessing behavior using the `transcode` flag on video assets.
       properties:
         timeline:
           $ref: "./timeline.yaml#/Timeline"

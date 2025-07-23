@@ -29,6 +29,7 @@ timeline:
             src: >-
               https://s3-ap-northeast-1.amazonaws.com/my-bucket/my-clip-1.mp4
             trim: 10.5
+            transcode: true
           start: 7
           length: 4.5
         - asset:

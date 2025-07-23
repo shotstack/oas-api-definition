@@ -15,6 +15,15 @@
             credentials.
           type: string
           example: https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4
+        transcode:
+          type: boolean
+          description: >-
+            Set to `true` to force re-encoding of the video during preprocessing. 
+            This can help resolve compatibility issues, fix rotation problems, 
+            synchronize audio, or convert formats. The video will be processed 
+            to ensure optimal compatibility with the rendering engine.
+          example: false
+          default: false 
         trim:
           description: >-
             The start trim point of the video clip, in seconds (defaults to 0). Videos
