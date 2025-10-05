@@ -1,0 +1,299 @@
+RichTextFont:
+  description: Font properties for rich text.
+  properties:
+    family:
+      description: >-
+        The font family name. This must be the Family name embedded in the font, i.e. "Open Sans".
+        For custom fonts, use the family name specified in the customFonts array.
+      type: string
+      example: "Open Sans"
+      default: "Open Sans"
+    size:
+      description: The size of the font in pixels (px). Must be between 1 and 500.
+      type: integer
+      minimum: 1
+      maximum: 500
+      default: 24
+      example: 48
+    weight:
+      description: >-
+        The weight of the font. Can be a number (100-900) or a string ('normal', 'bold', etc.).
+        100 is lightest, 900 is heaviest (boldest).
+      default: "400"
+    style:
+      description: The font style.
+      type: string
+      enum:
+        - normal
+        - italic
+        - oblique
+      default: "normal"
+      example: "italic"
+    color:
+      description: The text color using hexadecimal color notation.
+      type: string
+      pattern: "^#[A-Fa-f0-9]{6}$"
+      default: "#ffffff"
+      example: "#ff0000"
+    opacity:
+      description: The opacity of the text where 1 is opaque and 0 is transparent.
+      type: number
+      minimum: 0
+      maximum: 1
+      default: 1
+      example: 0.9
+  type: object
+
+RichTextStyle:
+  description: Text style properties including spacing, line height, and transformations.
+  properties:
+    letterSpacing:
+      description: Additional spacing between letters in pixels. Can be negative for tighter spacing.
+      type: number
+      default: 0
+      example: 2
+    lineHeight:
+      description: The line height as a multiplier of the font size. Must be between 0 and 10.
+      type: number
+      minimum: 0
+      maximum: 10
+      default: 1.2
+      example: 1.5
+    textTransform:
+      description: Text transformation to apply.
+      type: string
+      enum:
+        - none
+        - uppercase
+        - lowercase
+        - capitalize
+      default: "none"
+      example: "uppercase"
+    textDecoration:
+      description: Text decoration to apply.
+      type: string
+      enum:
+        - none
+        - underline
+        - line-through
+      default: "none"
+      example: "underline"
+    gradient:
+      description: Gradient fill for text instead of solid color.
+      $ref: "#/RichTextGradient"
+  type: object
+
+RichTextGradient:
+  description: Gradient properties for text fill.
+  properties:
+    type:
+      description: The type of gradient.
+      type: string
+      enum:
+        - linear
+        - radial
+      default: "linear"
+      example: "linear"
+    angle:
+      description: The angle of the gradient in degrees (for linear gradients). Must be between 0 and 360.
+      type: number
+      minimum: 0
+      maximum: 360
+      default: 0
+      example: 45
+    stops:
+      description: Gradient color stops. Must have at least 2 stops.
+      type: array
+      minItems: 2
+      items:
+        type: object
+        properties:
+          offset:
+            description: Position of the color stop between 0 (start) and 1 (end).
+            type: number
+            minimum: 0
+            maximum: 1
+            example: 0.5
+          color:
+            description: Color at this stop using hexadecimal color notation.
+            type: string
+            pattern: "^#[A-Fa-f0-9]{6}$"
+            example: "#ff0000"
+        required:
+          - offset
+          - color
+  required:
+    - stops
+  type: object
+
+RichTextStroke:
+  description: Text stroke (outline) properties.
+  properties:
+    width:
+      description: The width of the stroke in pixels. Must be 0 or greater.
+      type: number
+      minimum: 0
+      default: 0
+      example: 2
+    color:
+      description: The stroke color using hexadecimal color notation.
+      type: string
+      pattern: "^#[A-Fa-f0-9]{6}$"
+      default: "#000000"
+      example: "#000000"
+    opacity:
+      description: The opacity of the stroke where 1 is opaque and 0 is transparent.
+      type: number
+      minimum: 0
+      maximum: 1
+      default: 1
+      example: 0.8
+  type: object
+
+RichTextShadow:
+  description: Text shadow properties.
+  properties:
+    offsetX:
+      description: Horizontal offset of the shadow in pixels. Positive values move right, negative left.
+      type: number
+      default: 0
+      example: 4
+    offsetY:
+      description: Vertical offset of the shadow in pixels. Positive values move down, negative up.
+      type: number
+      default: 0
+      example: 4
+    blur:
+      description: The blur radius of the shadow in pixels. Must be 0 or greater.
+      type: number
+      minimum: 0
+      default: 0
+      example: 8
+    color:
+      description: The shadow color using hexadecimal color notation.
+      type: string
+      pattern: "^#[A-Fa-f0-9]{6}$"
+      default: "#000000"
+      example: "#000000"
+    opacity:
+      description: The opacity of the shadow where 1 is opaque and 0 is transparent.
+      type: number
+      minimum: 0
+      maximum: 1
+      default: 0.5
+      example: 0.7
+  type: object
+
+RichTextBackground:
+  description: Background styling properties for the text bounding box.
+  properties:
+    color:
+      description: The background color using hexadecimal color notation.
+      type: string
+      pattern: "^#[A-Fa-f0-9]{6}$"
+      example: "#000000"
+    opacity:
+      description: The opacity of the background where 1 is opaque and 0 is transparent.
+      type: number
+      minimum: 0
+      maximum: 1
+      default: 1
+      example: 0.5
+    borderRadius:
+      description: The border radius of the background box in pixels. Must be 0 or greater.
+      type: number
+      minimum: 0
+      default: 0
+      example: 10
+  type: object
+
+RichTextAlignment:
+  description: Text alignment properties (horizontal and vertical).
+  properties:
+    horizontal:
+      description: The horizontal alignment of the text.
+      type: string
+      enum:
+        - left
+        - center
+        - right
+      default: "center"
+      example: "center"
+    vertical:
+      description: The vertical alignment of the text within the bounding box.
+      type: string
+      enum:
+        - top
+        - middle
+        - bottom
+      default: "middle"
+      example: "middle"
+  type: object
+
+RichTextAnimation:
+  description: Animation properties for text entrance effects.
+  properties:
+    preset:
+      description: >-
+        The animation preset to apply. Available presets:
+        <ul>
+          <li>`fade` - fade in animation</li>
+          <li>`scale` - scale in animation</li>
+          <li>`slideIn` - slide in from a direction</li>
+          <li>`typewriter` - typewriter effect</li>
+          <li>`ascend` - ascend from a direction</li>
+          <li>`shift` - shift in from a direction</li>
+          <li>`movingLetters` - letters move in from a direction</li>
+        </ul>
+      type: string
+      enum:
+        - fade
+        - scale
+        - slideIn
+        - typewriter
+        - ascend
+        - shift
+        - movingLetters
+      example: "fade"
+    speed:
+      description: Animation speed multiplier. Must be between 0.1 and 10. Higher is faster.
+      type: number
+      minimum: 0.1
+      maximum: 10
+      default: 1
+      example: 1.5
+    duration:
+      description: >-
+        Override animation duration in seconds. If not specified, calculated based on text length and speed.
+        Must be between 0.1 and 30 seconds.
+      type: number
+      minimum: 0.1
+      maximum: 30
+      example: 2
+    style:
+      description: >-
+        Animation style - animate by character or by word. Only applicable for typewriter and shift animations.
+      type: string
+      enum:
+        - character
+        - word
+      example: "character"
+    direction:
+      description: >-
+        Direction for directional animations. Required for slideIn, ascend, shift, and movingLetters presets.
+        <ul>
+          <li>`ascend` - supports: up, down</li>
+          <li>`shift` - supports: left, right, up, down</li>
+          <li>`slideIn` - supports: left, right, up, down</li>
+          <li>`movingLetters` - supports: left, right, up, down</li>
+        </ul>
+      type: string
+      enum:
+        - left
+        - right
+        - up
+        - down
+      example: "up"
+  required:
+    - preset
+  type: object

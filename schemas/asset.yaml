@@ -9,6 +9,7 @@ Asset:
     - $ref: './videoasset.yaml#/VideoAsset'
     - $ref: './imageasset.yaml#/ImageAsset'
     - $ref: './textasset.yaml#/TextAsset'
+    - $ref: './richtextasset.yaml#/RichTextAsset'
     - $ref: './audioasset.yaml#/AudioAsset'
     - $ref: './lumaasset.yaml#/LumaAsset'
     - $ref: './captionasset.yaml#/CaptionAsset'

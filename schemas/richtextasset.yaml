@@ -1,0 +1,69 @@
+RichTextAsset:
+  description: |
+    The RichTextAsset provides advanced text rendering with support for custom fonts, gradients, shadows, strokes,
+    animations, and styling options. It offers more flexibility and visual effects than the basic TextAsset.
+  type: object
+  properties:
+    type:
+      default: rich-text
+      description: The type of asset - set to `rich-text` for rich text.
+      type: string
+    text:
+      description: The text string to display. Maximum 5000 characters.
+      type: string
+      example: "Hello World"
+      maxLength: 5000
+    width:
+      description: >-
+        Set the width of the rich text asset bounding box in pixels. Text will wrap to fill the bounding box.
+        Minimum 1px, maximum 4096px.
+      type: integer
+      minimum: 1
+      maximum: 4096
+      example: 800
+    height:
+      description: >-
+        Set the height of the rich text asset bounding box in pixels. Text and elements will be masked if they 
+        exceed the height of the bounding box. Minimum 1px, maximum 4096px.
+      type: integer
+      minimum: 1
+      maximum: 4096
+      example: 600
+    font:
+      description: Font styling properties.
+      $ref: "./richtextproperties.yaml#/RichTextFont"
+    style:
+      description: Text style properties including spacing, line height, and transformations.
+      $ref: "./richtextproperties.yaml#/RichTextStyle"
+    stroke:
+      description: Text stroke (outline) properties.
+      $ref: "./richtextproperties.yaml#/RichTextStroke"
+    shadow:
+      description: Text shadow properties.
+      $ref: "./richtextproperties.yaml#/RichTextShadow"
+    background:
+      description: Background styling properties for the text bounding box.
+      $ref: "./richtextproperties.yaml#/RichTextBackground"
+    align:
+      description: Text alignment properties (horizontal and vertical).
+      $ref: "./richtextproperties.yaml#/RichTextAlignment"
+    animation:
+      description: Animation properties for text entrance effects.
+      $ref: "./richtextproperties.yaml#/RichTextAnimation"
+    cacheEnabled:
+      description: Enable or disable caching for rendered text. Defaults to true for better performance.
+      type: boolean
+      default: true
+      example: true
+    pixelRatio:
+      description: >-
+        The pixel ratio for rendering. Higher values produce sharper text but increase processing time.
+        Value must be between 1 and 3. Defaults to 2.
+      type: number
+      minimum: 1
+      maximum: 3
+      default: 2
+      example: 2
+  required:
+    - type
+    - text
