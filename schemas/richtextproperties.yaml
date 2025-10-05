@@ -237,7 +237,7 @@ RichTextAnimation:
       description: >-
         The animation preset to apply. Available presets:
         <ul>
-          <li>`fade` - fade in animation</li>
+          <li>`fadeIn` - fadeIn in animation</li>
           <li>`scale` - scale in animation</li>
           <li>`slideIn` - slide in from a direction</li>
           <li>`typewriter` - typewriter effect</li>
@@ -247,14 +247,14 @@ RichTextAnimation:
         </ul>
       type: string
       enum:
-        - fade
+        - fadeIn
         - scale
         - slideIn
         - typewriter
         - ascend
         - shift
         - movingLetters
-      example: "fade"
+      example: "fadeIn"
     speed:
       description: Animation speed multiplier. Must be between 0.1 and 10. Higher is faster.
       type: number
