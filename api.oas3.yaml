@@ -172,6 +172,9 @@ components:
     TextAsset:
       $ref: "./schemas/textasset.yaml#/TextAsset"
 
+    RichTextAsset:
+      $ref: "./schemas/richtextasset.yaml#/RichTextAsset"  
+
     AudioAsset:
       $ref: "./schemas/audioasset.yaml#/AudioAsset"
 
@@ -225,6 +228,30 @@ components:
 
     TextAlignment:
       $ref: "./schemas/textproperties.yaml#/TextAlignment"
+
+    RichTextFont:
+      $ref: "./schemas/richtextproperties.yaml#/RichTextFont"
+
+    RichTextStyle:
+      $ref: "./schemas/richtextproperties.yaml#/RichTextStyle"
+
+    RichTextGradient:
+      $ref: "./schemas/richtextproperties.yaml#/RichTextGradient"
+
+    RichTextStroke:
+      $ref: "./schemas/richtextproperties.yaml#/RichTextStroke"
+
+    RichTextShadow:
+      $ref: "./schemas/richtextproperties.yaml#/RichTextShadow"
+
+    RichTextBackground:
+      $ref: "./schemas/richtextproperties.yaml#/RichTextBackground"
+
+    RichTextAlignment:
+      $ref: "./schemas/richtextproperties.yaml#/RichTextAlignment"
+
+    RichTextAnimation:
+      $ref: "./schemas/richtextproperties.yaml#/RichTextAnimation"
 
     CaptionFont:
       $ref: "./schemas/captionproperties.yaml#/CaptionFont"
