@@ -84,10 +84,19 @@ RichTextStyle:
   type: object
 
 RichTextGradient:
-  description: Gradient properties for text fill.
+  description: |
+    Gradient properties for text fill. Gradients are applied across the entire text string, 
+    creating smooth color transitions from the first character to the last.
+    
+    Supports two gradient types:
+    - **linear**: Creates a straight-line gradient at a specified angle
+    - **radial**: Creates a circular gradient emanating from the center
   properties:
     type:
-      description: The type of gradient.
+      description: |
+        The type of gradient to apply:
+        - `linear` - Gradient follows a straight line at the specified angle
+        - `radial` - Gradient radiates from the center outward in a circular pattern
       type: string
       enum:
         - linear
@@ -95,27 +104,47 @@ RichTextGradient:
       default: "linear"
       example: "linear"
     angle:
-      description: The angle of the gradient in degrees (for linear gradients). Must be between 0 and 360.
+      description: |
+        The angle of the gradient in degrees (applies to linear gradients only).
+        
+        Common angles:
+        - `0` - Left to right (horizontal)
+        - `90` - Top to bottom (vertical)
+        - `45` - Diagonal (bottom-left to top-right)
+        - `135` - Diagonal (top-left to bottom-right)
+        - `180` - Right to left
+        - `270` - Bottom to top
       type: number
       minimum: 0
       maximum: 360
       default: 0
-      example: 45
+      example: 90
     stops:
-      description: Gradient color stops. Must have at least 2 stops.
+      description: |
+        Gradient color stops defining the color transition points. At least 2 stops are required.
+        
+        Each stop defines:
+        - `offset` - Position along the gradient (0 = start, 1 = end)
+        - `color` - Color at that position in hexadecimal format
+        
+        The gradient smoothly interpolates colors between stops.
       type: array
       minItems: 2
       items:
         type: object
         properties:
           offset:
-            description: Position of the color stop between 0 (start) and 1 (end).
+            description: |
+              Position of the color stop between 0 (start) and 1 (end).
+              - `0.0` - Beginning of the gradient
+              - `0.5` - Middle of the gradient
+              - `1.0` - End of the gradient
             type: number
             minimum: 0
             maximum: 1
             example: 0.5
           color:
-            description: Color at this stop using hexadecimal color notation.
+            description: Color at this stop using hexadecimal color notation (e.g., #ff0000 for red).
             type: string
             pattern: "^#[A-Fa-f0-9]{6}$"
             example: "#ff0000"
