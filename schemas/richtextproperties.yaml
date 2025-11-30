@@ -42,6 +42,11 @@ RichTextFont:
       maximum: 1
       default: 1
       example: 0.9
+    background:
+      description: The background color for individual characters using hexadecimal color notation.
+      type: string
+      pattern: "^#[A-Fa-f0-9]{6}$"
+      example: "#000000"
   type: object
 
 RichTextStyle:
@@ -228,13 +233,71 @@ RichTextBackground:
       maximum: 1
       default: 1
       example: 0.5
-    borderRadius:
-      description: The border radius of the background box in pixels. Must be 0 or greater.
+  type: object
+
+RichTextBorder:
+  description: Border styling properties for the text bounding box.
+  properties:
+    width:
+      description: The width of the border in pixels. Must be 0 or greater.
+      type: number
+      minimum: 0
+      default: 0
+      example: 2
+    color:
+      description: The border color using hexadecimal color notation.
+      type: string
+      pattern: "^#[A-Fa-f0-9]{6}$"
+      default: "#000000"
+      example: "#ff0000"
+    opacity:
+      description: The opacity of the border where 1 is opaque and 0 is transparent.
+      type: number
+      minimum: 0
+      maximum: 1
+      default: 1
+      example: 0.8
+    radius:
+      description: The border radius in pixels. Must be 0 or greater.
       type: number
       minimum: 0
       default: 0
       example: 10
   type: object
+
+RichTextPadding:
+  description: |
+    Padding around the text bounding box. Can be specified in two ways:
+
+    **Single number** - Apply uniform padding to all sides (e.g., `10` applies 10px padding to all sides)
+
+    **Object** - Specify individual padding for each side using the properties below
+  type: object
+  properties:
+    top:
+      description: Padding for the top side in pixels. Must be 0 or greater.
+      type: number
+      minimum: 0
+      default: 0
+      example: 10
+    right:
+      description: Padding for the right side in pixels. Must be 0 or greater.
+      type: number
+      minimum: 0
+      default: 0
+      example: 20
+    bottom:
+      description: Padding for the bottom side in pixels. Must be 0 or greater.
+      type: number
+      minimum: 0
+      default: 0
+      example: 10
+    left:
+      description: Padding for the left side in pixels. Must be 0 or greater.
+      type: number
+      minimum: 0
+      default: 0
+      example: 20
 
 RichTextAlignment:
   description: Text alignment properties (horizontal and vertical).
@@ -282,16 +345,9 @@ RichTextAnimation:
         - shift
         - movingLetters
       example: "shift"
-    speed:
-      description: Animation speed multiplier. Must be between 0.1 and 10. Higher is faster.
-      type: number
-      minimum: 0.1
-      maximum: 10
-      default: 1
-      example: 1.5
     duration:
       description: >-
-        Override animation duration in seconds. If not specified, calculated based on text length and speed.
+        Override animation duration in seconds. If not specified, calculated based on text length.
         Must be between 0.1 and 30 seconds.
       type: number
       minimum: 0.1
@@ -299,7 +355,7 @@ RichTextAnimation:
       example: 2
     style:
       description: >-
-        Animation style - animate by character or by word. Only applicable for typewriter and shift animations.
+        Animation style - animate by character or by word. Only applicable for typewriter, shift, fadeIn, and slideIn animations.
       type: string
       enum:
         - character

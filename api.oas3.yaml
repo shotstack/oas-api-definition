@@ -247,6 +247,12 @@ components:
     RichTextBackground:
       $ref: "./schemas/richtextproperties.yaml#/RichTextBackground"
 
+    RichTextBorder:
+      $ref: "./schemas/richtextproperties.yaml#/RichTextBorder"
+
+    RichTextPadding:
+      $ref: "./schemas/richtextproperties.yaml#/RichTextPadding"
+
     RichTextAlignment:
       $ref: "./schemas/richtextproperties.yaml#/RichTextAlignment"
 

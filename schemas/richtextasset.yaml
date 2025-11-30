@@ -44,6 +44,12 @@ RichTextAsset:
     background:
       description: Background styling properties for the text bounding box.
       $ref: "./richtextproperties.yaml#/RichTextBackground"
+    border:
+      description: Border styling properties for the text bounding box.
+      $ref: "./richtextproperties.yaml#/RichTextBorder"
+    padding:
+      description: Padding around the text. Can be a single number for uniform padding or an object for individual sides.
+      $ref: "./richtextproperties.yaml#/RichTextPadding"
     align:
       description: Text alignment properties (horizontal and vertical).
       $ref: "./richtextproperties.yaml#/RichTextAlignment"
