@@ -17,18 +17,38 @@ RichTextFont:
       example: 48
     weight:
       description: >-
-        The weight of the font. Can be a number (100-900) or a string ('normal', 'bold', etc.).
-        100 is lightest, 900 is heaviest (boldest).
+        The weight of the font. Can be a number (100-900) or a string. Available string values:
+        <ul>
+          <li>`"100"` - Thin</li>
+          <li>`"200"` - Extra Light</li>
+          <li>`"300"` - Light</li>
+          <li>`"400"` or `normal` - Normal (default)</li>
+          <li>`"500"` - Medium</li>
+          <li>`"600"` - Semi Bold</li>
+          <li>`"700"` or `bold` - Bold</li>
+          <li>`"800"` - Extra Bold</li>
+          <li>`"900"` - Black</li>
+        </ul>
+        You can also use numeric values from 100 to 900.
+      oneOf:
+        - type: string
+          enum:
+            - "100"
+            - "200"
+            - "300"
+            - "400"
+            - "500"
+            - "600"
+            - "700"
+            - "800"
+            - "900"
+            - normal
+            - bold
+        - type: number
+          minimum: 100
+          maximum: 900
       default: "400"
-    style:
-      description: The font style.
-      type: string
-      enum:
-        - normal
-        - italic
-        - oblique
-      default: "normal"
-      example: "italic"
+      example: "700"
     color:
       description: The text color using hexadecimal color notation.
       type: string
@@ -65,7 +85,14 @@ RichTextStyle:
       default: 1.2
       example: 1.5
     textTransform:
-      description: Text transformation to apply.
+      description: >-
+        Text transformation to apply. Available options:
+        <ul>
+          <li>`none` - No transformation</li>
+          <li>`uppercase` - Convert all characters to uppercase</li>
+          <li>`lowercase` - Convert all characters to lowercase</li>
+          <li>`capitalize` - Capitalize the first letter of each word</li>
+        </ul>
       type: string
       enum:
         - none
@@ -75,7 +102,13 @@ RichTextStyle:
       default: "none"
       example: "uppercase"
     textDecoration:
-      description: Text decoration to apply.
+      description: >-
+        Text decoration to apply. Available options:
+        <ul>
+          <li>`none` - No decoration</li>
+          <li>`underline` - Underline the text</li>
+          <li>`line-through` - Strike through the text</li>
+        </ul>
       type: string
       enum:
         - none
@@ -303,7 +336,13 @@ RichTextAlignment:
   description: Text alignment properties (horizontal and vertical).
   properties:
     horizontal:
-      description: The horizontal alignment of the text.
+      description: >-
+        The horizontal alignment of the text. Available options:
+        <ul>
+          <li>`left` - Align text to the left</li>
+          <li>`center` - Center align text</li>
+          <li>`right` - Align text to the right</li>
+        </ul>
       type: string
       enum:
         - left
@@ -312,7 +351,13 @@ RichTextAlignment:
       default: "center"
       example: "center"
     vertical:
-      description: The vertical alignment of the text within the bounding box.
+      description: >-
+        The vertical alignment of the text within the bounding box. Available options:
+        <ul>
+          <li>`top` - Align text to the top</li>
+          <li>`middle` - Center align text vertically</li>
+          <li>`bottom` - Align text to the bottom</li>
+        </ul>
       type: string
       enum:
         - top
@@ -355,7 +400,11 @@ RichTextAnimation:
       example: 2
     style:
       description: >-
-        Animation style - animate by character or by word. Only applicable for typewriter, shift, fadeIn, and slideIn animations.
+        Animation style - animate by character or by word. Only applicable for typewriter, shift, fadeIn, and slideIn animations. Available options:
+        <ul>
+          <li>`character` - Animate each character individually</li>
+          <li>`word` - Animate each word individually</li>
+        </ul>
       type: string
       enum:
         - character

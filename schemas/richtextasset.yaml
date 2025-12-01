@@ -56,20 +56,6 @@ RichTextAsset:
     animation:
       description: Animation properties for text entrance effects.
       $ref: "./richtextproperties.yaml#/RichTextAnimation"
-    cacheEnabled:
-      description: Enable or disable caching for rendered text. Defaults to true for better performance.
-      type: boolean
-      default: true
-      example: true
-    pixelRatio:
-      description: >-
-        The pixel ratio for rendering. Higher values produce sharper text but increase processing time.
-        Value must be between 1 and 3. Defaults to 2.
-      type: number
-      minimum: 1
-      maximum: 3
-      default: 2
-      example: 2
   required:
     - type
     - text
