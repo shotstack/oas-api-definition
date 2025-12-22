@@ -1,6 +1,11 @@
 node_modules
 build
+dist
 
 .tags
 .shins/index.html
 .shins/source/index.html.md
+.claude
+.DS_Store
+*.log
+
