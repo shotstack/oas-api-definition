@@ -1,6 +1,6 @@
 {
   "name": "@shotstack/schemas",
-  "version": "1.1.0",
+  "version": "1.1.2",
   "description": "Centralized OpenAPI schemas and TypeScript types for Shotstack API",
   "type": "module",
   "main": "dist/index.js",
@@ -12,7 +12,8 @@
     },
     "./zod": {
       "types": "./dist/zod/zod.gen.d.ts",
-      "default": "./dist/zod/zod.gen.js"
+      "import": "./dist/zod/zod.gen.js",
+      "require": "./dist/zod/zod.gen.cjs"
     }
   },
   "files": [
@@ -24,8 +25,11 @@
     "bundle": "swagger-cli bundle api.oas3.yaml -o dist/api.bundled.json -t json",
     "generate:types": "openapi-typescript dist/api.bundled.json -o dist/schema.d.ts",
     "generate:zod": "openapi-ts",
-    "copy:index": "node -e \"require('fs').copyFileSync('src/index.ts','dist/index.d.ts')\"",
-    "build": "npm run clean && node -e \"require('fs').mkdirSync('dist',{recursive:true})\" && npm run bundle && npm run generate:types && npm run generate:zod && npm run copy:index",
+    "compile:zod:cjs": "tsc --declaration false --module commonjs --moduleResolution node --target ES2022 --outDir dist/zod --skipLibCheck dist/zod/zod.gen.ts && node -e \"require('fs').renameSync('dist/zod/zod.gen.js','dist/zod/zod.gen.cjs')\"",
+    "compile:zod:esm": "tsc --declaration --module nodenext --moduleResolution nodenext --target ES2022 --outDir dist/zod --skipLibCheck dist/zod/zod.gen.ts",
+    "compile:zod": "npm run compile:zod:cjs && npm run compile:zod:esm",
+    "copy:index": "node -e \"require('fs').writeFileSync('dist/index.d.ts','export type * from \\\"./schema\\\";');require('fs').writeFileSync('dist/index.js','// Type-only package\\nexport {};');\"",
+    "build": "npm run clean && node -e \"require('fs').mkdirSync('dist',{recursive:true})\" && npm run bundle && npm run generate:types && npm run generate:zod && npm run compile:zod && npm run copy:index",
     "build:docs": "cross-env ./build-docs.sh",
     "build:sdks": "cross-env ./build-sdks.sh",
     "start": "cross-env ./build-docs.sh && http-server build/docs/ -o -c-1",
