@@ -1,31 +1,50 @@
 {
-  "name": "oas3-api-shotstack-definition",
-  "version": "1.0.0",
-  "description": "Open API Specification 3 (OAS3) definition for the Shotstack API",
-  "main": "index.js",
+  "name": "@shotstack/schemas",
+  "version": "1.0.1",
+  "description": "Centralized OpenAPI schemas and TypeScript types for Shotstack API",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "clean": "rm -R build",
-    "build": "./build-docs.sh && ./build-sdks.sh",
-    "build:docs": "./build-docs.sh",
-    "build:sdks": "./build-sdks.sh",
-    "start": "./build-docs.sh && http-server build/docs/ -o -c-1",
-    "deploy:docs": "aws s3 sync build/docs/ s3://shotstack.io/docs/api"
+    "test": "tsc --noEmit",
+    "clean": "node -e \"fs=require('fs');if(fs.existsSync('dist'))fs.rmSync('dist',{recursive:true})\"",
+    "bundle": "swagger-cli bundle api.oas3.yaml -o dist/api.bundled.json -t json",
+    "generate:types": "openapi-typescript dist/api.bundled.json -o dist/schema.d.ts",
+    "copy:index": "node -e \"require('fs').copyFileSync('src/index.ts','dist/index.d.ts')\"",
+    "build": "npm run clean && node -e \"require('fs').mkdirSync('dist',{recursive:true})\" && npm run bundle && npm run generate:types && npm run copy:index",
+    "build:docs": "cross-env ./build-docs.sh",
+    "build:sdks": "cross-env ./build-sdks.sh",
+    "start": "cross-env ./build-docs.sh && http-server build/docs/ -o -c-1",
+    "deploy:docs": "aws s3 sync build/docs/ s3://shotstack.io/docs/api",
+    "prepublishOnly": "npm run build && npm run test"
   },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@bitbucket.org/shotstack/oas-api-definition.git"
   },
   "author": "Shotstack",
-  "license": "ISC",
+  "license": "MIT",
   "homepage": "https://github.com/shotstack/oas-api-definition",
+  "keywords": [
+    "shotstack",
+    "video",
+    "api",
+    "openapi",
+    "schema",
+    "typescript"
+  ],
   "dependencies": {
     "js-yaml": "^3.14.1"
   },
   "devDependencies": {
     "@apidevtools/swagger-cli": "^4.0.4",
     "ajv": "^8.11.2",
+    "cross-env": "^7.0.3",
     "http-server": "^14.1.0",
+    "openapi-typescript": "^7.4.4",
+    "typescript": "^5.7.2",
     "widdershins": "^4.0.1"
   }
 }
