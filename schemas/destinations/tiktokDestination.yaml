@@ -1,0 +1,16 @@
+    TiktokDestination:
+      description: >-
+        Send videos to TikTok. TikTok credentials are required and added via the
+        [dashboard](https://dashboard.shotstack.io/integrations/tiktok), not in the request.
+      properties:
+        provider:
+          description: The destination to send video to - set to `tiktok` for TikTok.
+          type: string
+          default: tiktok
+          example: tiktok
+        options:
+          description: Additional TikTok configuration options.
+          $ref: "./tiktokDestinationOptions.yaml#/TiktokDestinationOptions"
+      type: object
+      required:
+        - provider

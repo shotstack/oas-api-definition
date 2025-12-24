@@ -112,6 +112,7 @@
             - sd
             - hd
             - "1080"
+            - "4k"
           type: string
         quality:
           description: >-

@@ -35,7 +35,25 @@
         color:
           description: The background color using hexadecimal color notation.
           type: string
+          pattern: "^#[A-Fa-f0-9]{6}$"
           example: "#000000"
+        opacity:
+          description: The opacity of the background where 1 is opaque and 0 is transparent.
+          type: number
+          minimum: 0
+          maximum: 1
+          example: 0.8
+        padding:
+          description: Padding inside the background box in pixels.
+          type: number
+          minimum: 0
+          maximum: 100
+          example: 10
+        borderRadius:
+          description: The border radius of the background box in pixels for rounded corners.
+          type: number
+          minimum: 0
+          example: 5
       type: object
 
     TextAlignment:
@@ -70,4 +88,46 @@
             - top
             - center
             - bottom
+      type: object
+
+    TextStroke:
+      description: >-
+        Text stroke (outline) properties.
+      properties:
+        width:
+          description: The width of the stroke in pixels.
+          type: number
+          minimum: 0
+          maximum: 10
+          example: 2
+        color:
+          description: The stroke color using hexadecimal color notation.
+          type: string
+          pattern: "^#[A-Fa-f0-9]{6}$"
+          example: "#000000"
+      type: object
+
+    TextAnimation:
+      description: >-
+        Animation properties for text entrance effects.
+      properties:
+        preset:
+          description: >-
+            The animation preset to apply.
+            <ul>
+              <li>`typewriter` - typewriter effect where characters appear one at a time</li>
+            </ul>
+          type: string
+          enum:
+            - typewriter
+          example: "typewriter"
+        duration:
+          description: >-
+            The duration of the animation in seconds.
+          type: number
+          minimum: 0.1
+          maximum: 30
+          example: 2
+      required:
+        - preset
       type: object

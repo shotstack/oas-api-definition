@@ -1,0 +1,35 @@
+    TiktokDestinationOptions:
+      description: >-
+        Pass additional options to control how TikTok publishes video.
+      properties:
+        title:
+          description: A title for the video that will be displayed on TikTok.
+          type: string
+          maxLength: 150
+        privacyLevel:
+          description: >-
+            The privacy level for the video. Options are:
+            <ul>
+              <li>`public` - video is visible to everyone</li>
+              <li>`friends` - video is visible to friends only</li>
+              <li>`private` - video is only visible to you</li>
+            </ul>
+          type: string
+          enum:
+            - public
+            - friends
+            - private
+          default: private
+        disableDuet:
+          description: Disable the Duet feature for this video.
+          type: boolean
+          default: false
+        disableStitch:
+          description: Disable the Stitch feature for this video.
+          type: boolean
+          default: false
+        disableComment:
+          description: Disable comments on this video.
+          type: boolean
+          default: false
+      type: object

@@ -4,7 +4,6 @@ RichTextFont:
     family:
       description: >-
         The font family name. This must be the Family name embedded in the font, i.e. "Open Sans".
-        For custom fonts, use the family name specified in the customFonts array.
       type: string
       example: "Open Sans"
       default: "Open Sans"
@@ -295,3 +294,63 @@ RichTextAnimation:
   required:
     - preset
   type: object
+
+RichTextBorder:
+  description: Border styling properties for the text bounding box.
+  properties:
+    width:
+      description: The width of the border in pixels. Must be 0 or greater.
+      type: number
+      minimum: 0
+      default: 0
+      example: 2
+    color:
+      description: The border color using hexadecimal color notation.
+      type: string
+      pattern: "^#[A-Fa-f0-9]{6}$"
+      default: "#000000"
+      example: "#ff0000"
+    opacity:
+      description: The opacity of the border where 1 is opaque and 0 is transparent.
+      type: number
+      minimum: 0
+      maximum: 1
+      default: 1
+      example: 0.8
+    radius:
+      description: The border radius in pixels for rounded corners. Must be 0 or greater.
+      type: number
+      minimum: 0
+      default: 0
+      example: 10
+  type: object
+
+RichTextPadding:
+  description: Padding properties for individual sides of the text bounding box.
+  properties:
+    top:
+      description: Top padding in pixels.
+      type: number
+      minimum: 0
+      default: 0
+      example: 10
+    right:
+      description: Right padding in pixels.
+      type: number
+      minimum: 0
+      default: 0
+      example: 10
+    bottom:
+      description: Bottom padding in pixels.
+      type: number
+      minimum: 0
+      default: 0
+      example: 10
+    left:
+      description: Left padding in pixels.
+      type: number
+      minimum: 0
+      default: 0
+      example: 10
+  type: object
+

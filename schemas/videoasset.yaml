@@ -59,6 +59,7 @@
               <li>`fadeInFadeOut` - fade volume in and out</li>
             </ul>
           enum:
+            - none
             - fadeIn
             - fadeOut
             - fadeInFadeOut

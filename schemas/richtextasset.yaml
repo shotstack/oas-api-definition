@@ -23,7 +23,7 @@ RichTextAsset:
       example: 800
     height:
       description: >-
-        Set the height of the rich text asset bounding box in pixels. Text and elements will be masked if they 
+        Set the height of the rich text asset bounding box in pixels. Text and elements will be masked if they
         exceed the height of the bounding box. Minimum 1px, maximum 4096px.
       type: integer
       minimum: 1
@@ -44,6 +44,19 @@ RichTextAsset:
     background:
       description: Background styling properties for the text bounding box.
       $ref: "./richtextproperties.yaml#/RichTextBackground"
+    border:
+      description: Border styling properties for the text bounding box.
+      $ref: "./richtextproperties.yaml#/RichTextBorder"
+    padding:
+      description: >-
+        Padding inside the text bounding box. Can be a single number (applied to all sides)
+        or an object with individual sides.
+      oneOf:
+        - type: number
+          minimum: 0
+          description: Padding in pixels applied to all sides.
+          example: 10
+        - $ref: "./richtextproperties.yaml#/RichTextPadding"
     align:
       description: Text alignment properties (horizontal and vertical).
       $ref: "./richtextproperties.yaml#/RichTextAlignment"

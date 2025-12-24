@@ -1,7 +1,7 @@
     SkewTransformation:
       description: >-
-        Skew a clip so its edges are sheared at an angle. Use values between 0 and 3.
-        Over 3 the clip will be skewed almost flat.
+        Skew a clip so its edges are sheared at an angle. Use values between -100 and 100.
+        Values over 3 or under -3 will skew the clip almost flat.
       type: object
       properties:
         x:
@@ -9,10 +9,12 @@
           oneOf:
             - type: number
               description: >-
-                Range varies from 0 to 3. Positive numbers skew the asset right, negative left.
+                Range varies from -100 to 100. Positive numbers skew the asset right, negative left.
                 The distance moved is relative to the width of the viewport - i.e. an X skew of 0.5 will skew the
                 asset half the screen width to the right.
               format: float
+              minimum: -100
+              maximum: 100
               example: 0.5
             - type: array
               description: >-
@@ -25,10 +27,12 @@
           oneOf:
             - type: number
               description: >-
-                Range varies from 0 to 3. Positive numbers skew the asset up, negative down.
+                Range varies from -100 to 100. Positive numbers skew the asset up, negative down.
                 The distance moved is relative to the height of the viewport - i.e. an Y skew of 0.5 will skew the
                 asset half the screen height up.
               format: float
+              minimum: -100
+              maximum: 100
               example: 0.5
             - type: array
               description: >-
