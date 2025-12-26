@@ -41,6 +41,9 @@ RichTextFont:
       maximum: 1
       default: 1
       example: 0.9
+    stroke:
+      description: Text stroke (outline) properties.
+      $ref: "#/RichTextStroke"
   type: object
 
 RichTextStyle:
