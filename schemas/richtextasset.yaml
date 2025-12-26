@@ -13,22 +13,6 @@ RichTextAsset:
       type: string
       example: "Hello World"
       maxLength: 5000
-    width:
-      description: >-
-        Set the width of the rich text asset bounding box in pixels. Text will wrap to fill the bounding box.
-        Minimum 1px, maximum 4096px.
-      type: integer
-      minimum: 1
-      maximum: 4096
-      example: 800
-    height:
-      description: >-
-        Set the height of the rich text asset bounding box in pixels. Text and elements will be masked if they
-        exceed the height of the bounding box. Minimum 1px, maximum 4096px.
-      type: integer
-      minimum: 1
-      maximum: 4096
-      example: 600
     font:
       description: Font styling properties.
       $ref: "./richtextproperties.yaml#/RichTextFont"
