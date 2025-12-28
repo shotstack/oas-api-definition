@@ -9,6 +9,7 @@
       type: object
       properties:
         type:
+          enum: ['html']
           default: html
           description: The type of asset - set to `html` for HTML.
           type: string

@@ -7,6 +7,7 @@
       type: object
       properties:
         type:
+          enum: ['luma']
           default: luma
           description: The type of asset - set to `luma` for luma mattes.
           type: string

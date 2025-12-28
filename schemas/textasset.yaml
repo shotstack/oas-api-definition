@@ -5,6 +5,7 @@
       type: object
       properties:
         type:
+          enum: ['text']
           default: text
           description: The type of asset - set to `text` for text.
           type: string

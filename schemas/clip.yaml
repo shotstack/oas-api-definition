@@ -148,6 +148,7 @@
           description: >-
             A filter effect to apply to the Clip.
             <ul>
+              <li>`none` - no filter applied</li>
               <li>`blur` - blur the scene</li>
               <li>`boost` - boost contrast and saturation</li>
               <li>`contrast` - increase contrast</li>
@@ -158,6 +159,7 @@
               <li>`negative` - negative colors</li>
             </ul>
           enum:
+            - none
             - blur
             - boost
             - contrast

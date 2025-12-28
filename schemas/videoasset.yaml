@@ -6,6 +6,7 @@
       type: object
       properties:
         type:
+          enum: ['video']
           default: video
           description: The type of asset - set to `video` for videos.
           type: string

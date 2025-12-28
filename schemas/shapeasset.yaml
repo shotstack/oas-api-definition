@@ -5,6 +5,7 @@ ShapeAsset:
   type: object
   properties:
     type:
+      enum: ['shape']
       default: shape
       description: The type of asset - set to `shape` for shape.
       type: string

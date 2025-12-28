@@ -4,7 +4,20 @@ Asset:
     The type of asset to display for the duration of the Clip, i.e. a video clip or an image. Choose from one of
     the available asset types below.
   discriminator:
-    propertyName: asset
+    propertyName: type
+    mapping:
+      video: '#/components/schemas/VideoAsset'
+      image: '#/components/schemas/ImageAsset'
+      text: '#/components/schemas/TextAsset'
+      rich-text: '#/components/schemas/RichTextAsset'
+      audio: '#/components/schemas/AudioAsset'
+      luma: '#/components/schemas/LumaAsset'
+      caption: '#/components/schemas/CaptionAsset'
+      html: '#/components/schemas/HtmlAsset'
+      title: '#/components/schemas/TitleAsset'
+      shape: '#/components/schemas/ShapeAsset'
+      text-to-image: '#/components/schemas/TextToImageAsset'
+      image-to-video: '#/components/schemas/ImageToVideoAsset'
   oneOf:
     - $ref: './videoasset.yaml#/VideoAsset'
     - $ref: './imageasset.yaml#/ImageAsset'

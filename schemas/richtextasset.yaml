@@ -5,6 +5,7 @@ RichTextAsset:
   type: object
   properties:
     type:
+      enum: ['rich-text']
       default: rich-text
       description: The type of asset - set to `rich-text` for rich text.
       type: string

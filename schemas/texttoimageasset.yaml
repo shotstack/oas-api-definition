@@ -21,4 +21,4 @@ TextToImageAsset:
       example: 512
     crop:
       $ref: './crop.yaml#/Crop'
-  required: ['type', 'prompt', 'width', 'height']
+  required: ['type', 'prompt']
