@@ -19,15 +19,6 @@ RichTextFont:
         The weight of the font. Can be a number (100-900) or a string ('normal', 'bold', etc.).
         100 is lightest, 900 is heaviest (boldest).
       default: "400"
-    style:
-      description: The font style.
-      type: string
-      enum:
-        - normal
-        - italic
-        - oblique
-      default: "normal"
-      example: "italic"
     color:
       description: The text color using hexadecimal color notation.
       type: string
@@ -41,6 +32,11 @@ RichTextFont:
       maximum: 1
       default: 1
       example: 0.9
+    background:
+      description: The background color behind the text using hexadecimal color notation.
+      type: string
+      pattern: "^#[A-Fa-f0-9]{6}$"
+      example: "#000000"
     stroke:
       description: Text stroke (outline) properties.
       $ref: "#/RichTextStroke"
