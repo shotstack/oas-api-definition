@@ -5,6 +5,7 @@
       type: object
       properties:
         type:
+          enum: ['text']
           default: text
           description: The type of asset - set to `text` for text.
           type: string
@@ -35,6 +36,20 @@
           description: >-
             Alignment properties.
           $ref: "./textproperties.yaml#/TextAlignment"
+        stroke:
+          description: >-
+            Text stroke (outline) properties.
+          $ref: "./textproperties.yaml#/TextStroke"
+        animation:
+          description: >-
+            Animation properties for text entrance effects.
+          $ref: "./textproperties.yaml#/TextAnimation"
+        ellipsis:
+          description: >-
+            The string to display when text overflows its bounding box.
+            Set to an ellipsis character or custom string to indicate truncated text.
+          type: string
+          example: "..."
       required:
         - type
         - text

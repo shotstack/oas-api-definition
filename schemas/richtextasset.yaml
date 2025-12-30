@@ -5,6 +5,7 @@ RichTextAsset:
   type: object
   properties:
     type:
+      enum: ['rich-text']
       default: rich-text
       description: The type of asset - set to `rich-text` for rich text.
       type: string
@@ -13,37 +14,31 @@ RichTextAsset:
       type: string
       example: "Hello World"
       maxLength: 5000
-    width:
-      description: >-
-        Set the width of the rich text asset bounding box in pixels. Text will wrap to fill the bounding box.
-        Minimum 1px, maximum 4096px.
-      type: integer
-      minimum: 1
-      maximum: 4096
-      example: 800
-    height:
-      description: >-
-        Set the height of the rich text asset bounding box in pixels. Text and elements will be masked if they 
-        exceed the height of the bounding box. Minimum 1px, maximum 4096px.
-      type: integer
-      minimum: 1
-      maximum: 4096
-      example: 600
     font:
       description: Font styling properties.
       $ref: "./richtextproperties.yaml#/RichTextFont"
     style:
       description: Text style properties including spacing, line height, and transformations.
       $ref: "./richtextproperties.yaml#/RichTextStyle"
-    stroke:
-      description: Text stroke (outline) properties.
-      $ref: "./richtextproperties.yaml#/RichTextStroke"
     shadow:
       description: Text shadow properties.
       $ref: "./richtextproperties.yaml#/RichTextShadow"
     background:
       description: Background styling properties for the text bounding box.
       $ref: "./richtextproperties.yaml#/RichTextBackground"
+    border:
+      description: Border styling properties for the text bounding box.
+      $ref: "./richtextproperties.yaml#/RichTextBorder"
+    padding:
+      description: >-
+        Padding inside the text bounding box. Can be a single number (applied to all sides)
+        or an object with individual sides.
+      oneOf:
+        - type: number
+          minimum: 0
+          description: Padding in pixels applied to all sides.
+          example: 10
+        - $ref: "./richtextproperties.yaml#/RichTextPadding"
     align:
       description: Text alignment properties (horizontal and vertical).
       $ref: "./richtextproperties.yaml#/RichTextAlignment"

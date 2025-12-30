@@ -21,4 +21,5 @@
         - $ref: "./destinations/googleCloudStorageDestination.yaml#/GoogleCloudStorageDestination"
         - $ref: "./destinations/googleDriveDestination.yaml#/GoogleDriveDestination"
         - $ref: "./destinations/vimeoDestination.yaml#/VimeoDestination"
+        - $ref: "./destinations/tiktokDestination.yaml#/TiktokDestination"
       additionalProperties: false

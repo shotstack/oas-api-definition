@@ -30,6 +30,7 @@
             The transition speed can also be controlled by appending `Fast` or `Slow`
             to the transition, e.g. `fadeFast` or `CarouselLeftSlow`.
           enum:
+            - none
             - fade
             - fadeSlow
             - fadeFast
@@ -121,6 +122,7 @@
             The transition speed can also be controlled by appending `Fast` or `Slow`
             to the transition, e.g. `fadeFast` or `CarouselLeftSlow`.
           enum:
+            - none
             - fade
             - fadeSlow
             - fadeFast

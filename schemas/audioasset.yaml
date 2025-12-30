@@ -6,6 +6,7 @@
       type: object
       properties:
         type:
+          enum: ['audio']
           default: audio
           description: The type of asset - set to `audio` for audio assets.
           type: string
@@ -61,6 +62,7 @@
               <li>`fadeInFadeOut` - fade volume in and out</li>
             </ul>
           enum:
+            - none
             - fadeIn
             - fadeOut
             - fadeInFadeOut

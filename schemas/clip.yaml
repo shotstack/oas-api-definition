@@ -56,10 +56,26 @@
         scale:
           description: >-
             Scale the asset to a fraction of the viewport size - i.e. setting the scale to 0.5 will scale
-            asset to half the size of the viewport. This is useful for picture-in-picture video and 
+            asset to half the size of the viewport. This is useful for picture-in-picture video and
             scaling images such as logos and watermarks.
           type: number
           example: 0
+        width:
+          description: >-
+            Set the width of the clip bounding box in pixels. This constrains the width of the clip,
+            overriding the default behavior where clips fill the viewport width.
+          type: integer
+          minimum: 1
+          maximum: 3840
+          example: 800
+        height:
+          description: >-
+            Set the height of the clip bounding box in pixels. This constrains the height of the clip,
+            overriding the default behavior where clips fill the viewport height.
+          type: integer
+          minimum: 1
+          maximum: 2160
+          example: 600
         position:
           description: >-
             Place the asset in one of nine predefined positions of the viewport. This is most effective
@@ -132,6 +148,7 @@
           description: >-
             A filter effect to apply to the Clip.
             <ul>
+              <li>`none` - no filter applied</li>
               <li>`blur` - blur the scene</li>
               <li>`boost` - boost contrast and saturation</li>
               <li>`contrast` - increase contrast</li>
@@ -142,6 +159,7 @@
               <li>`negative` - negative colors</li>
             </ul>
           enum:
+            - none
             - blur
             - boost
             - contrast
@@ -173,6 +191,14 @@
             transformations are <b>rotate</b>, <b>skew</b> and <b>flip</b>. Transformations
             can be combined to create interesting new shapes and effects.
           $ref: "./transformation.yaml#/Transformation"
+        alias:
+          description: >-
+            A unique identifier for this clip that can be used to reference it from other clips
+            using the `alias://` protocol in asset sources. This is useful for features like
+            auto-captioning where a caption asset needs to reference the audio from another clip.
+          type: string
+          pattern: "^[A-Za-z0-9_-]+$"
+          example: "MY_VIDEO_CLIP"
       required:
         - asset
         - start

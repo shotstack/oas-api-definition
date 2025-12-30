@@ -12,3 +12,8 @@
           description: >-
             Options to control the visibility of videos and privacy features.
           $ref: "./vimeoDestinationPrivacyOptions.yaml#/VimeoDestinationPrivacyOptions"
+        folderUri:
+          description: >-
+            The Vimeo folder URI to upload the video to. The folder must already exist in your Vimeo account.
+          type: string
+          example: "/users/12345678/projects/87654321"

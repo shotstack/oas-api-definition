@@ -12,6 +12,7 @@
       type: object
       properties:
         type:
+          enum: ['caption']
           default: caption
           description: The type of asset - set to `caption` for captions.
           type: string

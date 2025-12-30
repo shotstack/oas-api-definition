@@ -5,6 +5,7 @@
       type: object
       properties:
         type:
+          enum: ['image']
           default: image
           description: The type of asset - set to `image` for images.
           type: string

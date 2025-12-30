@@ -7,6 +7,7 @@
       type: object
       properties:
         type:
+          enum: ['title']
           default: title
           description: The type of asset - set to `title` for titles.
           type: string
