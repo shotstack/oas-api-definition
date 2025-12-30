@@ -16,6 +16,7 @@ Asset:
       html: '#/components/schemas/HtmlAsset'
       title: '#/components/schemas/TitleAsset'
       shape: '#/components/schemas/ShapeAsset'
+      svg: '#/components/schemas/SvgAsset'
       text-to-image: '#/components/schemas/TextToImageAsset'
       image-to-video: '#/components/schemas/ImageToVideoAsset'
   oneOf:
@@ -29,6 +30,7 @@ Asset:
     - $ref: './htmlasset.yaml#/HtmlAsset'
     - $ref: './titleasset.yaml#/TitleAsset'
     - $ref: './shapeasset.yaml#/ShapeAsset'
+    - $ref: './svgasset.yaml#/SvgAsset'
     - $ref: './texttoimageasset.yaml#/TextToImageAsset'
     - $ref: './imagetovideoasset.yaml#/ImageToVideoAsset'
   additionalProperties: false
