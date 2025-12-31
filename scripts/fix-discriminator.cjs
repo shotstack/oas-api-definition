@@ -3,9 +3,7 @@ const path = require("path");
 
 const zodGenPath = path.join(__dirname, "..", "dist", "zod", "zod.gen.ts");
 
-console.log(
-  "Fixing discriminator and adding coercion in generated Zod schemas..."
-);
+console.log("Fixing discriminator and adding z.coerce for number fields...");
 
 let content = fs.readFileSync(zodGenPath, "utf8");
 
@@ -75,112 +73,54 @@ if (svgFillUnionPattern.test(content)) {
   console.log("⚠ Could not find svgpropertiesSvgFillSchema to replace");
 }
 
-const clipStartPattern =
-  /start: z\.union\(\[z\.number\(\), z\.enum\(\["auto"\]\)\]\)/g;
-const clipStartReplacement = `start: z.union([z.preprocess((val) => typeof val === 'string' && val !== '' && !isNaN(Number(val)) ? Number(val) : val, z.number()), z.enum(["auto"])])`;
+const rejectInvalid = `((v: unknown) => v === '' || Array.isArray(v) ? NaN : v)`;
 
-if (clipStartPattern.test(content)) {
-  content = content.replace(clipStartPattern, clipStartReplacement);
-  console.log("✓ Added coercion for clip start");
-} else {
-  console.log("⚠ Could not find clip start pattern to add coercion");
-}
-
-const clipLengthPattern =
-  /length: z\.union\(\[z\.number\(\), z\.literal\("auto"\), z\.literal\("end"\)\]\)/g;
-const clipLengthReplacement = `length: z.union([z.preprocess((val) => typeof val === 'string' && val !== '' && !isNaN(Number(val)) ? Number(val) : val, z.number()), z.literal("auto"), z.literal("end")])`;
-
-if (clipLengthPattern.test(content)) {
-  content = content.replace(clipLengthPattern, clipLengthReplacement);
-  console.log("✓ Added coercion for clip length");
-} else {
-  console.log("⚠ Could not find clip length pattern to add coercion");
-}
-
-const trimPattern = /trim: z\.optional\(z\.number\(\)\)/g;
-const trimReplacement = `trim: z.optional(z.preprocess((val) => typeof val === 'string' && val !== '' && !isNaN(Number(val)) ? Number(val) : val, z.number()))`;
-
-const trimCount = (content.match(trimPattern) || []).length;
-if (trimCount > 0) {
-  content = content.replace(trimPattern, trimReplacement);
-  console.log(`✓ Added coercion for trim (${trimCount} occurrences)`);
-}
-
-const volumePattern =
-  /volume: z\.optional\(z\.number\(\)\.gte\(0\)\.lte\(1\)\)/g;
-const volumeReplacement = `volume: z.optional(z.preprocess((val) => typeof val === 'string' && val !== '' && !isNaN(Number(val)) ? Number(val) : val, z.number().gte(0).lte(1)))`;
-
-const volumeCount = (content.match(volumePattern) || []).length;
-if (volumeCount > 0) {
-  content = content.replace(volumePattern, volumeReplacement);
-  console.log(`✓ Added coercion for volume (${volumeCount} occurrences)`);
-}
-
-const speedPattern =
-  /speed: z\.optional\(z\.number\(\)\.gte\(0\)\.lte\(10\)\)/g;
-const speedReplacement = `speed: z.optional(z.preprocess((val) => typeof val === 'string' && val !== '' && !isNaN(Number(val)) ? Number(val) : val, z.number().gte(0).lte(10)))`;
-
-const speedCount = (content.match(speedPattern) || []).length;
-if (speedCount > 0) {
-  content = content.replace(speedPattern, speedReplacement);
-  console.log(`✓ Added coercion for speed (${speedCount} occurrences)`);
-}
-
-const scalePattern = /scale: z\.optional\(z\.number\(\)\)/g;
-const scaleReplacement = `scale: z.optional(z.preprocess((val) => typeof val === 'string' && val !== '' && !isNaN(Number(val)) ? Number(val) : val, z.number()))`;
-
-const scaleCount = (content.match(scalePattern) || []).length;
-if (scaleCount > 0) {
-  content = content.replace(scalePattern, scaleReplacement);
-  console.log(`✓ Added coercion for scale (${scaleCount} occurrences)`);
-}
-
-// Global coercion for ALL remaining z.number() patterns not already handled
-// This catches font.size, opacity, width, height, etc.
-const coerceHelper = `(val) => typeof val === 'string' && val !== '' && !isNaN(Number(val)) ? Number(val) : val`;
-
-// Pattern: z.number() without any chained methods (standalone)
 const plainNumberPattern = /z\.number\(\)(?!\.)/g;
-const plainNumberReplacement = `z.preprocess(${coerceHelper}, z.number())`;
 const plainNumberCount = (content.match(plainNumberPattern) || []).length;
 if (plainNumberCount > 0) {
-  content = content.replace(plainNumberPattern, plainNumberReplacement);
-  console.log(`✓ Added coercion for plain z.number() (${plainNumberCount} occurrences)`);
+  content = content.replace(
+    plainNumberPattern,
+    `z.preprocess(${rejectInvalid}, z.coerce.number())`
+  );
+  console.log(
+    `✓ Added z.coerce.number() for plain z.number() (${plainNumberCount} occurrences)`
+  );
 }
 
-// Pattern: z.number() with chained methods (e.g., .gte(), .lte(), .min(), .max(), .int())
-// Match z.number() followed by method chains
 const chainedNumberPattern = /z\.number\(\)((?:\.[a-zA-Z]+\([^)]*\))+)/g;
 let chainedCount = 0;
 content = content.replace(chainedNumberPattern, (match, chain) => {
-  // Skip if already preprocessed (from specific patterns above)
-  if (match.includes('preprocess')) return match;
   chainedCount++;
-  return `z.preprocess(${coerceHelper}, z.number()${chain})`;
+  return `z.preprocess(${rejectInvalid}, z.coerce.number()${chain})`;
 });
 if (chainedCount > 0) {
-  console.log(`✓ Added coercion for chained z.number() (${chainedCount} occurrences)`);
+  console.log(
+    `✓ Added z.coerce.number() for chained z.number() (${chainedCount} occurrences)`
+  );
 }
 
-// Pattern: z.int() - integers also need coercion from strings
 const plainIntPattern = /z\.int\(\)(?!\.)/g;
-const plainIntReplacement = `z.preprocess(${coerceHelper}, z.int())`;
 const plainIntCount = (content.match(plainIntPattern) || []).length;
 if (plainIntCount > 0) {
-  content = content.replace(plainIntPattern, plainIntReplacement);
-  console.log(`✓ Added coercion for plain z.int() (${plainIntCount} occurrences)`);
+  content = content.replace(
+    plainIntPattern,
+    `z.preprocess(${rejectInvalid}, z.coerce.number().int())`
+  );
+  console.log(
+    `✓ Added z.coerce.number().int() for plain z.int() (${plainIntCount} occurrences)`
+  );
 }
 
-// Pattern: z.int() with chained methods (e.g., .gte(), .lte())
 const chainedIntPattern = /z\.int\(\)((?:\.[a-zA-Z]+\([^)]*\))+)/g;
 let chainedIntCount = 0;
 content = content.replace(chainedIntPattern, (match, chain) => {
-  if (match.includes('preprocess')) return match;
   chainedIntCount++;
-  return `z.preprocess(${coerceHelper}, z.int()${chain})`;
+  return `z.preprocess(${rejectInvalid}, z.coerce.number().int()${chain})`;
 });
 if (chainedIntCount > 0) {
-  console.log(`✓ Added coercion for chained z.int() (${chainedIntCount} occurrences)`);
+  console.log(
+    `✓ Added z.coerce.number().int() for chained z.int() (${chainedIntCount} occurrences)`
+  );
 }
 
 fs.writeFileSync(zodGenPath, content);
@@ -231,7 +171,10 @@ if (fs.existsSync(zodGenCjsPath)) {
 ]);`;
 
   if (cjsSvgShapeUnionPattern.test(cjsContent)) {
-    cjsContent = cjsContent.replace(cjsSvgShapeUnionPattern, newCjsSvgShapeSchema);
+    cjsContent = cjsContent.replace(
+      cjsSvgShapeUnionPattern,
+      newCjsSvgShapeSchema
+    );
     console.log("✓ Fixed svgshapesSvgShapeSchema discriminator in CJS");
   }
 
@@ -245,75 +188,39 @@ if (fs.existsSync(zodGenCjsPath)) {
 ]);`;
 
   if (cjsSvgFillUnionPattern.test(cjsContent)) {
-    cjsContent = cjsContent.replace(cjsSvgFillUnionPattern, newCjsSvgFillSchema);
+    cjsContent = cjsContent.replace(
+      cjsSvgFillUnionPattern,
+      newCjsSvgFillSchema
+    );
     console.log("✓ Fixed svgpropertiesSvgFillSchema discriminator in CJS");
   }
 
-  const cjsCoercionPatterns = [
-    {
-      pattern:
-        /start: zod_1\.z\.union\(\[zod_1\.z\.number\(\), zod_1\.z\.enum\(\["auto"\]\)\]\)/g,
-      replacement: `start: zod_1.z.union([zod_1.z.preprocess((val) => typeof val === 'string' && val !== '' && !isNaN(Number(val)) ? Number(val) : val, zod_1.z.number()), zod_1.z.enum(["auto"])])`,
-      name: "clip start",
-    },
-    {
-      pattern:
-        /length: zod_1\.z\.union\(\[zod_1\.z\.number\(\), zod_1\.z\.literal\("auto"\), zod_1\.z\.literal\("end"\)\]\)/g,
-      replacement: `length: zod_1.z.union([zod_1.z.preprocess((val) => typeof val === 'string' && val !== '' && !isNaN(Number(val)) ? Number(val) : val, zod_1.z.number()), zod_1.z.literal("auto"), zod_1.z.literal("end")])`,
-      name: "clip length",
-    },
-    {
-      pattern: /trim: zod_1\.z\.optional\(zod_1\.z\.number\(\)\)/g,
-      replacement: `trim: zod_1.z.optional(zod_1.z.preprocess((val) => typeof val === 'string' && val !== '' && !isNaN(Number(val)) ? Number(val) : val, zod_1.z.number()))`,
-      name: "trim",
-    },
-    {
-      pattern:
-        /volume: zod_1\.z\.optional\(zod_1\.z\.number\(\)\.gte\(0\)\.lte\(1\)\)/g,
-      replacement: `volume: zod_1.z.optional(zod_1.z.preprocess((val) => typeof val === 'string' && val !== '' && !isNaN(Number(val)) ? Number(val) : val, zod_1.z.number().gte(0).lte(1)))`,
-      name: "volume",
-    },
-    {
-      pattern:
-        /speed: zod_1\.z\.optional\(zod_1\.z\.number\(\)\.gte\(0\)\.lte\(10\)\)/g,
-      replacement: `speed: zod_1.z.optional(zod_1.z.preprocess((val) => typeof val === 'string' && val !== '' && !isNaN(Number(val)) ? Number(val) : val, zod_1.z.number().gte(0).lte(10)))`,
-      name: "speed",
-    },
-    {
-      pattern: /scale: zod_1\.z\.optional\(zod_1\.z\.number\(\)\)/g,
-      replacement: `scale: zod_1.z.optional(zod_1.z.preprocess((val) => typeof val === 'string' && val !== '' && !isNaN(Number(val)) ? Number(val) : val, zod_1.z.number()))`,
-      name: "scale",
-    },
-  ];
-
-  for (const { pattern, replacement, name } of cjsCoercionPatterns) {
-    const count = (cjsContent.match(pattern) || []).length;
-    if (count > 0) {
-      cjsContent = cjsContent.replace(pattern, replacement);
-      console.log(`✓ Added coercion for ${name} in CJS (${count} occurrences)`);
-    }
-  }
-
-  // Global coercion for ALL remaining zod_1.z.number() patterns in CJS
-  const cjsCoerceHelper = `(val) => typeof val === 'string' && val !== '' && !isNaN(Number(val)) ? Number(val) : val`;
+  const cjsRejectInvalid = `((v) => v === '' || Array.isArray(v) ? NaN : v)`;
 
   const cjsPlainNumberPattern = /zod_1\.z\.number\(\)(?!\.)/g;
-  const cjsPlainNumberReplacement = `zod_1.z.preprocess(${cjsCoerceHelper}, zod_1.z.number())`;
-  const cjsPlainNumberCount = (cjsContent.match(cjsPlainNumberPattern) || []).length;
+  const cjsPlainNumberCount = (cjsContent.match(cjsPlainNumberPattern) || [])
+    .length;
   if (cjsPlainNumberCount > 0) {
-    cjsContent = cjsContent.replace(cjsPlainNumberPattern, cjsPlainNumberReplacement);
-    console.log(`✓ Added coercion for plain z.number() in CJS (${cjsPlainNumberCount} occurrences)`);
+    cjsContent = cjsContent.replace(
+      cjsPlainNumberPattern,
+      `zod_1.z.preprocess(${cjsRejectInvalid}, zod_1.z.coerce.number())`
+    );
+    console.log(
+      `✓ Added z.coerce.number() in CJS (${cjsPlainNumberCount} occurrences)`
+    );
   }
 
-  const cjsChainedNumberPattern = /zod_1\.z\.number\(\)((?:\.[a-zA-Z]+\([^)]*\))+)/g;
+  const cjsChainedNumberPattern =
+    /zod_1\.z\.number\(\)((?:\.[a-zA-Z]+\([^)]*\))+)/g;
   let cjsChainedCount = 0;
   cjsContent = cjsContent.replace(cjsChainedNumberPattern, (match, chain) => {
-    if (match.includes('preprocess')) return match;
     cjsChainedCount++;
-    return `zod_1.z.preprocess(${cjsCoerceHelper}, zod_1.z.number()${chain})`;
+    return `zod_1.z.preprocess(${cjsRejectInvalid}, zod_1.z.coerce.number()${chain})`;
   });
   if (cjsChainedCount > 0) {
-    console.log(`✓ Added coercion for chained z.number() in CJS (${cjsChainedCount} occurrences)`);
+    console.log(
+      `✓ Added z.coerce.number() chains in CJS (${cjsChainedCount} occurrences)`
+    );
   }
 
   fs.writeFileSync(zodGenCjsPath, cjsContent);
@@ -341,48 +248,31 @@ if (fs.existsSync(zodGenJsPath)) {
     console.log("✓ Fixed svgpropertiesSvgFillSchema discriminator in ESM JS");
   }
 
-  const esmCoercionPatterns = [
-    {
-      pattern: clipStartPattern,
-      replacement: clipStartReplacement,
-      name: "clip start",
-    },
-    {
-      pattern: clipLengthPattern,
-      replacement: clipLengthReplacement,
-      name: "clip length",
-    },
-    { pattern: trimPattern, replacement: trimReplacement, name: "trim" },
-    { pattern: volumePattern, replacement: volumeReplacement, name: "volume" },
-    { pattern: speedPattern, replacement: speedReplacement, name: "speed" },
-    { pattern: scalePattern, replacement: scaleReplacement, name: "scale" },
-  ];
+  const esmRejectInvalid = `((v) => v === '' || Array.isArray(v) ? NaN : v)`;
 
-  for (const { pattern, replacement, name } of esmCoercionPatterns) {
-    const count = (jsContent.match(pattern) || []).length;
-    if (count > 0) {
-      jsContent = jsContent.replace(pattern, replacement);
-      console.log(
-        `✓ Added coercion for ${name} in ESM JS (${count} occurrences)`
-      );
-    }
-  }
-
-  // Global coercion for ALL remaining z.number() patterns in ESM JS
-  const esmPlainNumberCount = (jsContent.match(plainNumberPattern) || []).length;
+  const esmPlainNumberPattern = /z\.number\(\)(?!\.)/g;
+  const esmPlainNumberCount = (jsContent.match(esmPlainNumberPattern) || [])
+    .length;
   if (esmPlainNumberCount > 0) {
-    jsContent = jsContent.replace(plainNumberPattern, plainNumberReplacement);
-    console.log(`✓ Added coercion for plain z.number() in ESM JS (${esmPlainNumberCount} occurrences)`);
+    jsContent = jsContent.replace(
+      esmPlainNumberPattern,
+      `z.preprocess(${esmRejectInvalid}, z.coerce.number())`
+    );
+    console.log(
+      `✓ Added z.coerce.number() in ESM JS (${esmPlainNumberCount} occurrences)`
+    );
   }
 
+  const esmChainedNumberPattern = /z\.number\(\)((?:\.[a-zA-Z]+\([^)]*\))+)/g;
   let esmChainedCount = 0;
-  jsContent = jsContent.replace(chainedNumberPattern, (match, chain) => {
-    if (match.includes('preprocess')) return match;
+  jsContent = jsContent.replace(esmChainedNumberPattern, (match, chain) => {
     esmChainedCount++;
-    return `z.preprocess(${coerceHelper}, z.number()${chain})`;
+    return `z.preprocess(${esmRejectInvalid}, z.coerce.number()${chain})`;
   });
   if (esmChainedCount > 0) {
-    console.log(`✓ Added coercion for chained z.number() in ESM JS (${esmChainedCount} occurrences)`);
+    console.log(
+      `✓ Added z.coerce.number() chains in ESM JS (${esmChainedCount} occurrences)`
+    );
   }
 
   fs.writeFileSync(zodGenJsPath, jsContent);
