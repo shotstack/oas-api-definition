@@ -94,6 +94,54 @@ if (scaleCount > 0) {
   console.log(`✓ Added coercion for scale (${scaleCount} occurrences)`);
 }
 
+// Global coercion for ALL remaining z.number() patterns not already handled
+// This catches font.size, opacity, width, height, etc.
+const coerceHelper = `(val) => typeof val === 'string' && val !== '' && !isNaN(Number(val)) ? Number(val) : val`;
+
+// Pattern: z.number() without any chained methods (standalone)
+const plainNumberPattern = /z\.number\(\)(?!\.)/g;
+const plainNumberReplacement = `z.preprocess(${coerceHelper}, z.number())`;
+const plainNumberCount = (content.match(plainNumberPattern) || []).length;
+if (plainNumberCount > 0) {
+  content = content.replace(plainNumberPattern, plainNumberReplacement);
+  console.log(`✓ Added coercion for plain z.number() (${plainNumberCount} occurrences)`);
+}
+
+// Pattern: z.number() with chained methods (e.g., .gte(), .lte(), .min(), .max(), .int())
+// Match z.number() followed by method chains
+const chainedNumberPattern = /z\.number\(\)((?:\.[a-zA-Z]+\([^)]*\))+)/g;
+let chainedCount = 0;
+content = content.replace(chainedNumberPattern, (match, chain) => {
+  // Skip if already preprocessed (from specific patterns above)
+  if (match.includes('preprocess')) return match;
+  chainedCount++;
+  return `z.preprocess(${coerceHelper}, z.number()${chain})`;
+});
+if (chainedCount > 0) {
+  console.log(`✓ Added coercion for chained z.number() (${chainedCount} occurrences)`);
+}
+
+// Pattern: z.int() - integers also need coercion from strings
+const plainIntPattern = /z\.int\(\)(?!\.)/g;
+const plainIntReplacement = `z.preprocess(${coerceHelper}, z.int())`;
+const plainIntCount = (content.match(plainIntPattern) || []).length;
+if (plainIntCount > 0) {
+  content = content.replace(plainIntPattern, plainIntReplacement);
+  console.log(`✓ Added coercion for plain z.int() (${plainIntCount} occurrences)`);
+}
+
+// Pattern: z.int() with chained methods (e.g., .gte(), .lte())
+const chainedIntPattern = /z\.int\(\)((?:\.[a-zA-Z]+\([^)]*\))+)/g;
+let chainedIntCount = 0;
+content = content.replace(chainedIntPattern, (match, chain) => {
+  if (match.includes('preprocess')) return match;
+  chainedIntCount++;
+  return `z.preprocess(${coerceHelper}, z.int()${chain})`;
+});
+if (chainedIntCount > 0) {
+  console.log(`✓ Added coercion for chained z.int() (${chainedIntCount} occurrences)`);
+}
+
 fs.writeFileSync(zodGenPath, content);
 
 const zodGenCjsPath = path.join(__dirname, "..", "dist", "zod", "zod.gen.cjs");
@@ -168,6 +216,28 @@ if (fs.existsSync(zodGenCjsPath)) {
     }
   }
 
+  // Global coercion for ALL remaining zod_1.z.number() patterns in CJS
+  const cjsCoerceHelper = `(val) => typeof val === 'string' && val !== '' && !isNaN(Number(val)) ? Number(val) : val`;
+
+  const cjsPlainNumberPattern = /zod_1\.z\.number\(\)(?!\.)/g;
+  const cjsPlainNumberReplacement = `zod_1.z.preprocess(${cjsCoerceHelper}, zod_1.z.number())`;
+  const cjsPlainNumberCount = (cjsContent.match(cjsPlainNumberPattern) || []).length;
+  if (cjsPlainNumberCount > 0) {
+    cjsContent = cjsContent.replace(cjsPlainNumberPattern, cjsPlainNumberReplacement);
+    console.log(`✓ Added coercion for plain z.number() in CJS (${cjsPlainNumberCount} occurrences)`);
+  }
+
+  const cjsChainedNumberPattern = /zod_1\.z\.number\(\)((?:\.[a-zA-Z]+\([^)]*\))+)/g;
+  let cjsChainedCount = 0;
+  cjsContent = cjsContent.replace(cjsChainedNumberPattern, (match, chain) => {
+    if (match.includes('preprocess')) return match;
+    cjsChainedCount++;
+    return `zod_1.z.preprocess(${cjsCoerceHelper}, zod_1.z.number()${chain})`;
+  });
+  if (cjsChainedCount > 0) {
+    console.log(`✓ Added coercion for chained z.number() in CJS (${cjsChainedCount} occurrences)`);
+  }
+
   fs.writeFileSync(zodGenCjsPath, cjsContent);
 }
 
@@ -208,6 +278,23 @@ if (fs.existsSync(zodGenJsPath)) {
         `✓ Added coercion for ${name} in ESM JS (${count} occurrences)`
       );
     }
+  }
+
+  // Global coercion for ALL remaining z.number() patterns in ESM JS
+  const esmPlainNumberCount = (jsContent.match(plainNumberPattern) || []).length;
+  if (esmPlainNumberCount > 0) {
+    jsContent = jsContent.replace(plainNumberPattern, plainNumberReplacement);
+    console.log(`✓ Added coercion for plain z.number() in ESM JS (${esmPlainNumberCount} occurrences)`);
+  }
+
+  let esmChainedCount = 0;
+  jsContent = jsContent.replace(chainedNumberPattern, (match, chain) => {
+    if (match.includes('preprocess')) return match;
+    esmChainedCount++;
+    return `z.preprocess(${coerceHelper}, z.number()${chain})`;
+  });
+  if (esmChainedCount > 0) {
+    console.log(`✓ Added coercion for chained z.number() in ESM JS (${esmChainedCount} occurrences)`);
   }
 
   fs.writeFileSync(zodGenJsPath, jsContent);
