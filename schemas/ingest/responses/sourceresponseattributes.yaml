@@ -51,7 +51,7 @@
           example: 1920
         height:
           description: The height in pixels of the ingested source file, if a video or image.
-          type: string
+          type: integer
           example: 1080
         duration:
           description: The duration in seconds of the ingested source file, if a video or audio file.
