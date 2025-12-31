@@ -1,0 +1,120 @@
+SvgAsset:
+  description: |
+    The SvgAsset is used to add scalable vector graphics (SVG) shapes to a video.
+    It provides a comprehensive set of primitive shapes and custom paths with full
+    styling support including fills, strokes, gradients, and shadows.
+
+    **Available Shapes:**
+    - `rectangle` - Rectangles with optional rounded corners
+    - `circle` - Perfect circles
+    - `ellipse` - Ellipses/ovals with separate x and y radii
+    - `line` - Straight lines with configurable thickness
+    - `polygon` - Regular polygons (triangle, pentagon, hexagon, etc.)
+    - `star` - Multi-pointed stars
+    - `arrow` - Directional arrows
+    - `heart` - Heart shapes
+    - `cross` - Plus/cross shapes
+    - `ring` - Donut/ring shapes
+    - `path` - Custom shapes using SVG path data
+
+    **Styling Options:**
+    - Fill with solid colors or linear/radial gradients
+    - Stroke with configurable width, color, dash patterns, and line caps/joins
+    - Drop shadows with blur, offset, and opacity
+    - Transform properties for positioning, rotation, and scaling
+
+    See [W3C SVG 2 Specification](https://www.w3.org/TR/SVG2/) for path data syntax.
+  type: object
+  properties:
+    type:
+      description: The asset type - set to `svg` for SVG shapes.
+      type: string
+      enum:
+        - svg
+      default: svg
+      example: svg
+    shape:
+      description: |
+        The shape definition. The `type` property within determines the shape kind
+        and its specific properties. See individual shape documentation for details.
+      $ref: "./svgshapes.yaml#/SvgShape"
+    fill:
+      description: |
+        Fill properties for the shape interior.
+        Can be a solid color or a gradient (linear/radial).
+        If omitted, the shape will have no fill (transparent interior).
+      $ref: "./svgproperties.yaml#/SvgFill"
+    stroke:
+      description: |
+        Stroke (outline) properties for the shape.
+        If omitted, the shape will have no stroke (no outline).
+      $ref: "./svgproperties.yaml#/SvgStroke"
+    shadow:
+      description: |
+        Drop shadow properties for the shape.
+        Creates a shadow effect behind the shape.
+      $ref: "./svgproperties.yaml#/SvgShadow"
+    transform:
+      description: |
+        Transform properties for positioning, rotating, and scaling the shape.
+        The transform is applied relative to the transformation origin.
+      $ref: "./svgproperties.yaml#/SvgTransform"
+    opacity:
+      description: |
+        The overall opacity of the entire shape (including fill, stroke, and shadow).
+        `1` is fully opaque, `0` is fully transparent.
+        This is applied on top of individual fill/stroke/shadow opacity values.
+      type: number
+      minimum: 0
+      maximum: 1
+      default: 1
+      example: 1
+    width:
+      description: |
+        The width of the bounding box in pixels.
+        If specified, the shape may be scaled to fit within this width.
+        If omitted, the shape uses its natural dimensions.
+      type: integer
+      minimum: 1
+      maximum: 4096
+      example: 400
+    height:
+      description: |
+        The height of the bounding box in pixels.
+        If specified, the shape may be scaled to fit within this height.
+        If omitted, the shape uses its natural dimensions.
+      type: integer
+      minimum: 1
+      maximum: 4096
+      example: 300
+  required:
+    - type
+    - shape
+  example:
+    type: svg
+    shape:
+      type: star
+      points: 5
+      outerRadius: 100
+      innerRadius: 50
+    fill:
+      type: linear
+      angle: 45
+      stops:
+        - offset: 0
+          color: "#FFD700"
+        - offset: 1
+          color: "#FF6B6B"
+      opacity: 1
+    stroke:
+      color: "#2C3E50"
+      width: 3
+      opacity: 1
+      lineCap: round
+      lineJoin: round
+    transform:
+      x: 200
+      y: 150
+      rotation: 0
+      scale: 1
+    opacity: 1

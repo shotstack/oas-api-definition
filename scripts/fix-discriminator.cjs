@@ -23,6 +23,7 @@ const newAssetSchema = `export const assetAssetSchema = z.discriminatedUnion("ty
   htmlassetHtmlAssetSchema,
   titleassetTitleAssetSchema,
   shapeassetShapeAssetSchema,
+  svgassetSvgAssetSchema,
   texttoimageassetTextToImageAssetSchema,
   imagetovideoassetImageToVideoAssetSchema,
 ]);`;
@@ -32,6 +33,46 @@ if (assetUnionPattern.test(content)) {
   console.log("✓ Fixed assetAssetSchema discriminator");
 } else {
   console.log("⚠ Could not find assetAssetSchema to replace");
+}
+
+const svgShapeUnionPattern =
+  /export const svgshapesSvgShapeSchema = z\.union\(\[[\s\S]*?\]\);/;
+
+const newSvgShapeSchema = `export const svgshapesSvgShapeSchema = z.discriminatedUnion("type", [
+  svgshapesSvgRectangleShapeSchema,
+  svgshapesSvgCircleShapeSchema,
+  svgshapesSvgEllipseShapeSchema,
+  svgshapesSvgLineShapeSchema,
+  svgshapesSvgPolygonShapeSchema,
+  svgshapesSvgStarShapeSchema,
+  svgshapesSvgArrowShapeSchema,
+  svgshapesSvgHeartShapeSchema,
+  svgshapesSvgCrossShapeSchema,
+  svgshapesSvgRingShapeSchema,
+  svgshapesSvgPathShapeSchema,
+]);`;
+
+if (svgShapeUnionPattern.test(content)) {
+  content = content.replace(svgShapeUnionPattern, newSvgShapeSchema);
+  console.log("✓ Fixed svgshapesSvgShapeSchema discriminator");
+} else {
+  console.log("⚠ Could not find svgshapesSvgShapeSchema to replace");
+}
+
+const svgFillUnionPattern =
+  /export const svgpropertiesSvgFillSchema = z\.union\(\[[\s\S]*?\]\);/;
+
+const newSvgFillSchema = `export const svgpropertiesSvgFillSchema = z.discriminatedUnion("type", [
+  svgpropertiesSvgSolidFillSchema,
+  svgpropertiesSvgLinearGradientFillSchema,
+  svgpropertiesSvgRadialGradientFillSchema,
+]);`;
+
+if (svgFillUnionPattern.test(content)) {
+  content = content.replace(svgFillUnionPattern, newSvgFillSchema);
+  console.log("✓ Fixed svgpropertiesSvgFillSchema discriminator");
+} else {
+  console.log("⚠ Could not find svgpropertiesSvgFillSchema to replace");
 }
 
 const clipStartPattern =
@@ -162,6 +203,7 @@ if (fs.existsSync(zodGenCjsPath)) {
   exports.htmlassetHtmlAssetSchema,
   exports.titleassetTitleAssetSchema,
   exports.shapeassetShapeAssetSchema,
+  exports.svgassetSvgAssetSchema,
   exports.texttoimageassetTextToImageAssetSchema,
   exports.imagetovideoassetImageToVideoAssetSchema,
 ]);`;
@@ -169,6 +211,42 @@ if (fs.existsSync(zodGenCjsPath)) {
   if (cjsAssetUnionPattern.test(cjsContent)) {
     cjsContent = cjsContent.replace(cjsAssetUnionPattern, newCjsAssetSchema);
     console.log("✓ Fixed assetAssetSchema discriminator in CJS");
+  }
+
+  const cjsSvgShapeUnionPattern =
+    /exports\.svgshapesSvgShapeSchema = zod_1\.z\.union\(\[[\s\S]*?\]\);/;
+
+  const newCjsSvgShapeSchema = `exports.svgshapesSvgShapeSchema = zod_1.z.discriminatedUnion("type", [
+  exports.svgshapesSvgRectangleShapeSchema,
+  exports.svgshapesSvgCircleShapeSchema,
+  exports.svgshapesSvgEllipseShapeSchema,
+  exports.svgshapesSvgLineShapeSchema,
+  exports.svgshapesSvgPolygonShapeSchema,
+  exports.svgshapesSvgStarShapeSchema,
+  exports.svgshapesSvgArrowShapeSchema,
+  exports.svgshapesSvgHeartShapeSchema,
+  exports.svgshapesSvgCrossShapeSchema,
+  exports.svgshapesSvgRingShapeSchema,
+  exports.svgshapesSvgPathShapeSchema,
+]);`;
+
+  if (cjsSvgShapeUnionPattern.test(cjsContent)) {
+    cjsContent = cjsContent.replace(cjsSvgShapeUnionPattern, newCjsSvgShapeSchema);
+    console.log("✓ Fixed svgshapesSvgShapeSchema discriminator in CJS");
+  }
+
+  const cjsSvgFillUnionPattern =
+    /exports\.svgpropertiesSvgFillSchema = zod_1\.z\.union\(\[[\s\S]*?\]\);/;
+
+  const newCjsSvgFillSchema = `exports.svgpropertiesSvgFillSchema = zod_1.z.discriminatedUnion("type", [
+  exports.svgpropertiesSvgSolidFillSchema,
+  exports.svgpropertiesSvgLinearGradientFillSchema,
+  exports.svgpropertiesSvgRadialGradientFillSchema,
+]);`;
+
+  if (cjsSvgFillUnionPattern.test(cjsContent)) {
+    cjsContent = cjsContent.replace(cjsSvgFillUnionPattern, newCjsSvgFillSchema);
+    console.log("✓ Fixed svgpropertiesSvgFillSchema discriminator in CJS");
   }
 
   const cjsCoercionPatterns = [
@@ -251,6 +329,16 @@ if (fs.existsSync(zodGenJsPath)) {
   if (jsAssetUnionPattern.test(jsContent)) {
     jsContent = jsContent.replace(jsAssetUnionPattern, newAssetSchema);
     console.log("✓ Fixed assetAssetSchema discriminator in ESM JS");
+  }
+
+  if (svgShapeUnionPattern.test(jsContent)) {
+    jsContent = jsContent.replace(svgShapeUnionPattern, newSvgShapeSchema);
+    console.log("✓ Fixed svgshapesSvgShapeSchema discriminator in ESM JS");
+  }
+
+  if (svgFillUnionPattern.test(jsContent)) {
+    jsContent = jsContent.replace(svgFillUnionPattern, newSvgFillSchema);
+    console.log("✓ Fixed svgpropertiesSvgFillSchema discriminator in ESM JS");
   }
 
   const esmCoercionPatterns = [
