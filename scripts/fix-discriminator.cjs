@@ -73,6 +73,61 @@ if (svgFillUnionPattern.test(content)) {
   console.log("⚠ Could not find svgpropertiesSvgFillSchema to replace");
 }
 
+const svgAssetPattern =
+  /export const svgassetSvgAssetSchema = z\.object\(\{[\s\S]*?\}\);/;
+
+const svgAssetSuperRefine = `export const svgassetSvgAssetSchema = z.object({
+  type: z.enum(["svg"]),
+  src: z.optional(z.string().min(1).max(500000)),
+  shape: z.optional(svgshapesSvgShapeSchema),
+  fill: z.optional(svgpropertiesSvgFillSchema),
+  stroke: z.optional(svgpropertiesSvgStrokeSchema),
+  shadow: z.optional(svgpropertiesSvgShadowSchema),
+  transform: z.optional(svgpropertiesSvgTransformSchema),
+  opacity: z.optional(z.preprocess(((v: unknown) => v === '' || Array.isArray(v) ? NaN : v), z.coerce.number().gte(0).lte(1))).default(1),
+  width: z.optional(z.preprocess(((v: unknown) => v === '' || Array.isArray(v) ? NaN : v), z.coerce.number().int().gte(1).lte(4096))),
+  height: z.optional(z.preprocess(((v: unknown) => v === '' || Array.isArray(v) ? NaN : v), z.coerce.number().int().gte(1).lte(4096))),
+}).superRefine((data, ctx) => {
+  const hasShape = data.shape !== undefined;
+  const hasSrc = data.src !== undefined && data.src.trim() !== "";
+
+  if (!hasShape && !hasSrc) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      message: "Either 'src' or 'shape' must be provided",
+      path: [],
+    });
+  }
+
+  if (hasShape && hasSrc) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      message: "Provide either 'src' or 'shape', not both",
+      path: ["src"],
+    });
+  }
+
+  if (hasSrc) {
+    const disallowedProps = ["shape", "fill", "stroke", "shadow", "transform", "width", "height"];
+    for (const prop of disallowedProps) {
+      if (data[prop] !== undefined) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: \`'\${prop}' is not allowed when using 'src'. Only 'type' and 'src' are allowed in import mode\`,
+          path: [prop],
+        });
+      }
+    }
+  }
+});`;
+
+if (svgAssetPattern.test(content)) {
+  content = content.replace(svgAssetPattern, svgAssetSuperRefine);
+  console.log("✓ Added superRefine validation to svgassetSvgAssetSchema for mutual exclusivity");
+} else {
+  console.log("⚠ Could not find svgassetSvgAssetSchema to add superRefine validation");
+}
+
 const rejectInvalid = `((v: unknown) => v === '' || Array.isArray(v) ? NaN : v)`;
 
 const plainNumberPattern = /z\.number\(\)(?!\.)/g;
@@ -195,6 +250,59 @@ if (fs.existsSync(zodGenCjsPath)) {
     console.log("✓ Fixed svgpropertiesSvgFillSchema discriminator in CJS");
   }
 
+  const cjsSvgAssetPattern =
+    /exports\.svgassetSvgAssetSchema = zod_1\.z\.object\(\{[\s\S]*?\}\);/;
+
+  const cjsSvgAssetSuperRefine = `exports.svgassetSvgAssetSchema = zod_1.z.object({
+  type: zod_1.z.enum(["svg"]),
+  src: zod_1.z.optional(zod_1.z.string().min(1).max(500000)),
+  shape: zod_1.z.optional(exports.svgshapesSvgShapeSchema),
+  fill: zod_1.z.optional(exports.svgpropertiesSvgFillSchema),
+  stroke: zod_1.z.optional(exports.svgpropertiesSvgStrokeSchema),
+  shadow: zod_1.z.optional(exports.svgpropertiesSvgShadowSchema),
+  transform: zod_1.z.optional(exports.svgpropertiesSvgTransformSchema),
+  opacity: zod_1.z.optional(zod_1.z.preprocess(((v) => v === '' || Array.isArray(v) ? NaN : v), zod_1.z.coerce.number().gte(0).lte(1))).default(1),
+  width: zod_1.z.optional(zod_1.z.preprocess(((v) => v === '' || Array.isArray(v) ? NaN : v), zod_1.z.coerce.number().int().gte(1).lte(4096))),
+  height: zod_1.z.optional(zod_1.z.preprocess(((v) => v === '' || Array.isArray(v) ? NaN : v), zod_1.z.coerce.number().int().gte(1).lte(4096))),
+}).superRefine((data, ctx) => {
+  const hasShape = data.shape !== undefined;
+  const hasSrc = data.src !== undefined && data.src.trim() !== "";
+
+  if (!hasShape && !hasSrc) {
+    ctx.addIssue({
+      code: zod_1.z.ZodIssueCode.custom,
+      message: "Either 'src' or 'shape' must be provided",
+      path: [],
+    });
+  }
+
+  if (hasShape && hasSrc) {
+    ctx.addIssue({
+      code: zod_1.z.ZodIssueCode.custom,
+      message: "Provide either 'src' or 'shape', not both",
+      path: ["src"],
+    });
+  }
+
+  if (hasSrc) {
+    const disallowedProps = ["shape", "fill", "stroke", "shadow", "transform", "width", "height"];
+    for (const prop of disallowedProps) {
+      if (data[prop] !== undefined) {
+        ctx.addIssue({
+          code: zod_1.z.ZodIssueCode.custom,
+          message: "'" + prop + "' is not allowed when using 'src'. Only 'type' and 'src' are allowed in import mode",
+          path: [prop],
+        });
+      }
+    }
+  }
+});`;
+
+  if (cjsSvgAssetPattern.test(cjsContent)) {
+    cjsContent = cjsContent.replace(cjsSvgAssetPattern, cjsSvgAssetSuperRefine);
+    console.log("✓ Added superRefine validation to svgassetSvgAssetSchema in CJS");
+  }
+
   const cjsRejectInvalid = `((v) => v === '' || Array.isArray(v) ? NaN : v)`;
 
   const cjsPlainNumberPattern = /zod_1\.z\.number\(\)(?!\.)/g;
@@ -246,6 +354,11 @@ if (fs.existsSync(zodGenJsPath)) {
   if (svgFillUnionPattern.test(jsContent)) {
     jsContent = jsContent.replace(svgFillUnionPattern, newSvgFillSchema);
     console.log("✓ Fixed svgpropertiesSvgFillSchema discriminator in ESM JS");
+  }
+
+  if (svgAssetPattern.test(jsContent)) {
+    jsContent = jsContent.replace(svgAssetPattern, svgAssetSuperRefine);
+    console.log("✓ Added superRefine validation to svgassetSvgAssetSchema in ESM JS");
   }
 
   const esmRejectInvalid = `((v) => v === '' || Array.isArray(v) ? NaN : v)`;
