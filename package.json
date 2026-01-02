@@ -1,6 +1,6 @@
 {
   "name": "@shotstack/schemas",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Centralized OpenAPI schemas and TypeScript types for Shotstack API",
   "type": "module",
   "main": "dist/index.js",
