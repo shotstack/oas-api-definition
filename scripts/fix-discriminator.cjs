@@ -84,9 +84,9 @@ const svgAssetSuperRefine = `export const svgassetSvgAssetSchema = z.object({
   stroke: z.optional(svgpropertiesSvgStrokeSchema),
   shadow: z.optional(svgpropertiesSvgShadowSchema),
   transform: z.optional(svgpropertiesSvgTransformSchema),
-  opacity: z.optional(z.preprocess(((v: unknown) => v === '' || Array.isArray(v) ? NaN : v), z.coerce.number().gte(0).lte(1))).default(1),
-  width: z.optional(z.preprocess(((v: unknown) => v === '' || Array.isArray(v) ? NaN : v), z.coerce.number().int().gte(1).lte(4096))),
-  height: z.optional(z.preprocess(((v: unknown) => v === '' || Array.isArray(v) ? NaN : v), z.coerce.number().int().gte(1).lte(4096))),
+  opacity: z.optional(z.preprocess(((v: unknown) => { if (v === '' || v === null || v === undefined || Array.isArray(v)) return undefined; if (typeof v === 'string') return Number(v); return v; }), z.number().gte(0).lte(1))).default(1),
+  width: z.optional(z.preprocess(((v: unknown) => { if (v === '' || v === null || v === undefined || Array.isArray(v)) return undefined; if (typeof v === 'string') return Number(v); return v; }), z.number().int().gte(1).lte(4096))),
+  height: z.optional(z.preprocess(((v: unknown) => { if (v === '' || v === null || v === undefined || Array.isArray(v)) return undefined; if (typeof v === 'string') return Number(v); return v; }), z.number().int().gte(1).lte(4096))),
 }).superRefine((data, ctx) => {
   const hasShape = data.shape !== undefined;
   const hasSrc = data.src !== undefined && data.src.trim() !== "";
@@ -128,17 +128,18 @@ if (svgAssetPattern.test(content)) {
   console.log("⚠ Could not find svgassetSvgAssetSchema to add superRefine validation");
 }
 
-const rejectInvalid = `((v: unknown) => v === '' || Array.isArray(v) ? NaN : v)`;
+// Coercion function that converts strings to numbers inside preprocess (doesn't rely on z.coerce)
+const coerceNumber = `((v: unknown) => { if (v === '' || v === null || v === undefined || Array.isArray(v)) return undefined; if (typeof v === 'string') return Number(v); return v; })`;
 
 const plainNumberPattern = /z\.number\(\)(?!\.)/g;
 const plainNumberCount = (content.match(plainNumberPattern) || []).length;
 if (plainNumberCount > 0) {
   content = content.replace(
     plainNumberPattern,
-    `z.preprocess(${rejectInvalid}, z.coerce.number())`
+    `z.preprocess(${coerceNumber}, z.number())`
   );
   console.log(
-    `✓ Added z.coerce.number() for plain z.number() (${plainNumberCount} occurrences)`
+    `✓ Added number coercion for plain z.number() (${plainNumberCount} occurrences)`
   );
 }
 
@@ -146,11 +147,11 @@ const chainedNumberPattern = /z\.number\(\)((?:\.[a-zA-Z]+\([^)]*\))+)/g;
 let chainedCount = 0;
 content = content.replace(chainedNumberPattern, (match, chain) => {
   chainedCount++;
-  return `z.preprocess(${rejectInvalid}, z.coerce.number()${chain})`;
+  return `z.preprocess(${coerceNumber}, z.number()${chain})`;
 });
 if (chainedCount > 0) {
   console.log(
-    `✓ Added z.coerce.number() for chained z.number() (${chainedCount} occurrences)`
+    `✓ Added number coercion for chained z.number() (${chainedCount} occurrences)`
   );
 }
 
@@ -159,10 +160,10 @@ const plainIntCount = (content.match(plainIntPattern) || []).length;
 if (plainIntCount > 0) {
   content = content.replace(
     plainIntPattern,
-    `z.preprocess(${rejectInvalid}, z.coerce.number().int())`
+    `z.preprocess(${coerceNumber}, z.number().int())`
   );
   console.log(
-    `✓ Added z.coerce.number().int() for plain z.int() (${plainIntCount} occurrences)`
+    `✓ Added number coercion for plain z.int() (${plainIntCount} occurrences)`
   );
 }
 
@@ -170,11 +171,11 @@ const chainedIntPattern = /z\.int\(\)((?:\.[a-zA-Z]+\([^)]*\))+)/g;
 let chainedIntCount = 0;
 content = content.replace(chainedIntPattern, (match, chain) => {
   chainedIntCount++;
-  return `z.preprocess(${rejectInvalid}, z.coerce.number().int()${chain})`;
+  return `z.preprocess(${coerceNumber}, z.number().int()${chain})`;
 });
 if (chainedIntCount > 0) {
   console.log(
-    `✓ Added z.coerce.number().int() for chained z.int() (${chainedIntCount} occurrences)`
+    `✓ Added number coercion for chained z.int() (${chainedIntCount} occurrences)`
   );
 }
 
@@ -261,9 +262,9 @@ if (fs.existsSync(zodGenCjsPath)) {
   stroke: zod_1.z.optional(exports.svgpropertiesSvgStrokeSchema),
   shadow: zod_1.z.optional(exports.svgpropertiesSvgShadowSchema),
   transform: zod_1.z.optional(exports.svgpropertiesSvgTransformSchema),
-  opacity: zod_1.z.optional(zod_1.z.preprocess(((v) => v === '' || Array.isArray(v) ? NaN : v), zod_1.z.coerce.number().gte(0).lte(1))).default(1),
-  width: zod_1.z.optional(zod_1.z.preprocess(((v) => v === '' || Array.isArray(v) ? NaN : v), zod_1.z.coerce.number().int().gte(1).lte(4096))),
-  height: zod_1.z.optional(zod_1.z.preprocess(((v) => v === '' || Array.isArray(v) ? NaN : v), zod_1.z.coerce.number().int().gte(1).lte(4096))),
+  opacity: zod_1.z.optional(zod_1.z.preprocess(((v) => { if (v === '' || v === null || v === undefined || Array.isArray(v)) return undefined; if (typeof v === 'string') return Number(v); return v; }), zod_1.z.number().gte(0).lte(1))).default(1),
+  width: zod_1.z.optional(zod_1.z.preprocess(((v) => { if (v === '' || v === null || v === undefined || Array.isArray(v)) return undefined; if (typeof v === 'string') return Number(v); return v; }), zod_1.z.number().int().gte(1).lte(4096))),
+  height: zod_1.z.optional(zod_1.z.preprocess(((v) => { if (v === '' || v === null || v === undefined || Array.isArray(v)) return undefined; if (typeof v === 'string') return Number(v); return v; }), zod_1.z.number().int().gte(1).lte(4096))),
 }).superRefine((data, ctx) => {
   const hasShape = data.shape !== undefined;
   const hasSrc = data.src !== undefined && data.src.trim() !== "";
@@ -303,7 +304,8 @@ if (fs.existsSync(zodGenCjsPath)) {
     console.log("✓ Added superRefine validation to svgassetSvgAssetSchema in CJS");
   }
 
-  const cjsRejectInvalid = `((v) => v === '' || Array.isArray(v) ? NaN : v)`;
+  // Coercion function for CJS (without TypeScript type annotation)
+  const cjsCoerceNumber = `((v) => { if (v === '' || v === null || v === undefined || Array.isArray(v)) return undefined; if (typeof v === 'string') return Number(v); return v; })`;
 
   const cjsPlainNumberPattern = /zod_1\.z\.number\(\)(?!\.)/g;
   const cjsPlainNumberCount = (cjsContent.match(cjsPlainNumberPattern) || [])
@@ -311,10 +313,10 @@ if (fs.existsSync(zodGenCjsPath)) {
   if (cjsPlainNumberCount > 0) {
     cjsContent = cjsContent.replace(
       cjsPlainNumberPattern,
-      `zod_1.z.preprocess(${cjsRejectInvalid}, zod_1.z.coerce.number())`
+      `zod_1.z.preprocess(${cjsCoerceNumber}, zod_1.z.number())`
     );
     console.log(
-      `✓ Added z.coerce.number() in CJS (${cjsPlainNumberCount} occurrences)`
+      `✓ Added number coercion in CJS (${cjsPlainNumberCount} occurrences)`
     );
   }
 
@@ -323,11 +325,11 @@ if (fs.existsSync(zodGenCjsPath)) {
   let cjsChainedCount = 0;
   cjsContent = cjsContent.replace(cjsChainedNumberPattern, (match, chain) => {
     cjsChainedCount++;
-    return `zod_1.z.preprocess(${cjsRejectInvalid}, zod_1.z.coerce.number()${chain})`;
+    return `zod_1.z.preprocess(${cjsCoerceNumber}, zod_1.z.number()${chain})`;
   });
   if (cjsChainedCount > 0) {
     console.log(
-      `✓ Added z.coerce.number() chains in CJS (${cjsChainedCount} occurrences)`
+      `✓ Added number coercion chains in CJS (${cjsChainedCount} occurrences)`
     );
   }
 
@@ -361,7 +363,8 @@ if (fs.existsSync(zodGenJsPath)) {
     console.log("✓ Added superRefine validation to svgassetSvgAssetSchema in ESM JS");
   }
 
-  const esmRejectInvalid = `((v) => v === '' || Array.isArray(v) ? NaN : v)`;
+  // Coercion function for ESM JS (without TypeScript type annotation)
+  const esmCoerceNumber = `((v) => { if (v === '' || v === null || v === undefined || Array.isArray(v)) return undefined; if (typeof v === 'string') return Number(v); return v; })`;
 
   const esmPlainNumberPattern = /z\.number\(\)(?!\.)/g;
   const esmPlainNumberCount = (jsContent.match(esmPlainNumberPattern) || [])
@@ -369,10 +372,10 @@ if (fs.existsSync(zodGenJsPath)) {
   if (esmPlainNumberCount > 0) {
     jsContent = jsContent.replace(
       esmPlainNumberPattern,
-      `z.preprocess(${esmRejectInvalid}, z.coerce.number())`
+      `z.preprocess(${esmCoerceNumber}, z.number())`
     );
     console.log(
-      `✓ Added z.coerce.number() in ESM JS (${esmPlainNumberCount} occurrences)`
+      `✓ Added number coercion in ESM JS (${esmPlainNumberCount} occurrences)`
     );
   }
 
@@ -380,11 +383,11 @@ if (fs.existsSync(zodGenJsPath)) {
   let esmChainedCount = 0;
   jsContent = jsContent.replace(esmChainedNumberPattern, (match, chain) => {
     esmChainedCount++;
-    return `z.preprocess(${esmRejectInvalid}, z.coerce.number()${chain})`;
+    return `z.preprocess(${esmCoerceNumber}, z.number()${chain})`;
   });
   if (esmChainedCount > 0) {
     console.log(
-      `✓ Added z.coerce.number() chains in ESM JS (${esmChainedCount} occurrences)`
+      `✓ Added number coercion chains in ESM JS (${esmChainedCount} occurrences)`
     );
   }
 
