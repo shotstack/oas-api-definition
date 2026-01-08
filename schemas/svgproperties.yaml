@@ -1,0 +1,311 @@
+SvgFill:
+  description: |
+    Fill properties for SVG shapes. Supports solid colors and gradients.
+    The fill defines how the interior of a shape is painted.
+  oneOf:
+    - $ref: "#/SvgSolidFill"
+    - $ref: "#/SvgLinearGradientFill"
+    - $ref: "#/SvgRadialGradientFill"
+  discriminator:
+    propertyName: type
+    mapping:
+      solid: "#/components/schemas/SvgSolidFill"
+      linear: "#/components/schemas/SvgLinearGradientFill"
+      radial: "#/components/schemas/SvgRadialGradientFill"
+
+SvgSolidFill:
+  description: A solid color fill for SVG shapes.
+  type: object
+  properties:
+    type:
+      description: The fill type - set to `solid` for a single color fill.
+      type: string
+      enum:
+        - solid
+      default: solid
+    color:
+      description: |
+        The fill color using hexadecimal color notation (e.g., `#FF0000` for red).
+        Must be a 6-digit hex color code prefixed with `#`.
+      type: string
+      pattern: "^#[A-Fa-f0-9]{6}$"
+      default: "#000000"
+      example: "#3498db"
+    opacity:
+      description: |
+        The opacity of the fill where `1` is fully opaque and `0` is fully transparent.
+        Values between 0 and 1 create semi-transparent fills.
+      type: number
+      minimum: 0
+      maximum: 1
+      default: 1
+      example: 0.8
+  required:
+    - type
+    - color
+
+SvgGradientStop:
+  description: |
+    A color stop in a gradient. Each stop defines a color at a specific position
+    along the gradient vector. Gradients require at least 2 stops.
+  type: object
+  properties:
+    offset:
+      description: |
+        Position of the color stop along the gradient vector.
+        `0` represents the start and `1` represents the end of the gradient.
+      type: number
+      minimum: 0
+      maximum: 1
+      example: 0.5
+    color:
+      description: The color at this stop using hexadecimal color notation.
+      type: string
+      pattern: "^#[A-Fa-f0-9]{6}$"
+      example: "#e74c3c"
+  required:
+    - offset
+    - color
+
+SvgLinearGradientFill:
+  description: |
+    A linear gradient fill that transitions colors along a straight line.
+    The gradient direction is controlled by the `angle` property.
+  type: object
+  properties:
+    type:
+      description: The fill type - set to `linear` for a linear gradient fill.
+      type: string
+      enum:
+        - linear
+    angle:
+      description: |
+        The angle of the gradient in degrees. `0` is horizontal (left to right),
+        `90` is vertical (bottom to top), `180` is right to left, etc.
+      type: number
+      minimum: 0
+      maximum: 360
+      default: 0
+      example: 45
+    stops:
+      description: |
+        Array of color stops that define the gradient colors and their positions.
+        Must have at least 2 stops. Offsets should increase from 0 to 1.
+      type: array
+      minItems: 2
+      items:
+        $ref: "#/SvgGradientStop"
+    opacity:
+      description: |
+        The overall opacity of the gradient where `1` is fully opaque and `0` is fully transparent.
+      type: number
+      minimum: 0
+      maximum: 1
+      default: 1
+      example: 1
+  required:
+    - type
+    - stops
+
+SvgRadialGradientFill:
+  description: |
+    A radial gradient fill that transitions colors radiating outward from a center point.
+    The gradient creates a circular or elliptical color transition.
+  type: object
+  properties:
+    type:
+      description: The fill type - set to `radial` for a radial gradient fill.
+      type: string
+      enum:
+        - radial
+    stops:
+      description: |
+        Array of color stops that define the gradient colors and their positions.
+        Must have at least 2 stops. Offset `0` is the center, `1` is the outer edge.
+      type: array
+      minItems: 2
+      items:
+        $ref: "#/SvgGradientStop"
+    opacity:
+      description: |
+        The overall opacity of the gradient where `1` is fully opaque and `0` is fully transparent.
+      type: number
+      minimum: 0
+      maximum: 1
+      default: 1
+      example: 1
+  required:
+    - type
+    - stops
+
+SvgStroke:
+  description: |
+    Stroke (outline) properties for SVG shapes. The stroke defines how the outline
+    of a shape is painted, including its color, width, and line style.
+  type: object
+  properties:
+    color:
+      description: The stroke color using hexadecimal color notation.
+      type: string
+      pattern: "^#[A-Fa-f0-9]{6}$"
+      default: "#000000"
+      example: "#2c3e50"
+    width:
+      description: |
+        The width of the stroke in pixels. Must be greater than 0.
+        Larger values create thicker outlines.
+      type: number
+      minimum: 0
+      maximum: 100
+      default: 1
+      example: 2
+    opacity:
+      description: The opacity of the stroke where `1` is opaque and `0` is transparent.
+      type: number
+      minimum: 0
+      maximum: 1
+      default: 1
+      example: 1
+    lineCap:
+      description: |
+        The shape at the end of open paths (lines, polylines, unclosed paths).
+        <ul>
+          <li>`butt` - flat edge perpendicular to the line (default)</li>
+          <li>`round` - semicircular cap extending beyond the endpoint</li>
+          <li>`square` - rectangular cap extending beyond the endpoint</li>
+        </ul>
+      type: string
+      enum:
+        - butt
+        - round
+        - square
+      default: butt
+      example: round
+    lineJoin:
+      description: |
+        The shape at the corners where two lines meet.
+        <ul>
+          <li>`miter` - sharp corner (default)</li>
+          <li>`round` - rounded corner</li>
+          <li>`bevel` - flattened corner</li>
+        </ul>
+      type: string
+      enum:
+        - miter
+        - round
+        - bevel
+      default: miter
+      example: round
+    dashArray:
+      description: |
+        Pattern of dashes and gaps for the stroke. An array of numbers where
+        odd indices are dash lengths and even indices are gap lengths.
+        For example, `[10, 5]` creates 10px dashes with 5px gaps.
+        `[10, 5, 2, 5]` creates alternating 10px and 2px dashes with 5px gaps.
+      type: array
+      items:
+        type: number
+        minimum: 0
+      example: [10, 5]
+    dashOffset:
+      description: |
+        Offset for the dash pattern. Positive values shift the pattern
+        forward along the path, negative values shift it backward.
+      type: number
+      default: 0
+      example: 5
+
+SvgShadow:
+  description: |
+    Drop shadow properties for SVG shapes. Creates a shadow effect behind the shape.
+  type: object
+  properties:
+    offsetX:
+      description: |
+        Horizontal offset of the shadow in pixels.
+        Positive values move the shadow to the right, negative to the left.
+      type: number
+      default: 0
+      example: 4
+    offsetY:
+      description: |
+        Vertical offset of the shadow in pixels.
+        Positive values move the shadow down, negative values move it up.
+      type: number
+      default: 0
+      example: 4
+    blur:
+      description: The blur radius of the shadow in pixels. Must be 0 or greater.
+      type: number
+      minimum: 0
+      default: 0
+      example: 8
+    color:
+      description: The shadow color using hexadecimal color notation.
+      type: string
+      pattern: "^#[A-Fa-f0-9]{6}$"
+      default: "#000000"
+      example: "#000000"
+    opacity:
+      description: The opacity of the shadow where `1` is opaque and `0` is transparent.
+      type: number
+      minimum: 0
+      maximum: 1
+      default: 0.5
+      example: 0.3
+
+SvgTransform:
+  description: |
+    Transformation properties for positioning, rotating, and scaling SVG shapes.
+  type: object
+  properties:
+    x:
+      description: |
+        The x-coordinate position of the shape in pixels.
+        Relative to the top-left corner of the viewport.
+      type: number
+      default: 0
+      example: 100
+    y:
+      description: |
+        The y-coordinate position of the shape in pixels.
+        Relative to the top-left corner of the viewport.
+      type: number
+      default: 0
+      example: 100
+    rotation:
+      description: |
+        Rotation angle in degrees. Positive values rotate clockwise,
+        negative values rotate counter-clockwise. Range: -360 to 360.
+      type: number
+      minimum: -360
+      maximum: 360
+      default: 0
+      example: 45
+    scale:
+      description: |
+        Scale factor for the shape. `1` is original size, `2` is double size,
+        `0.5` is half size. Must be greater than 0.
+      type: number
+      minimum: 0.01
+      maximum: 100
+      default: 1
+      example: 1.5
+    originX:
+      description: |
+        The x-coordinate of the transformation origin as a value from 0 to 1.
+        `0` is the left edge, `0.5` is the center, `1` is the right edge.
+      type: number
+      minimum: 0
+      maximum: 1
+      default: 0.5
+      example: 0.5
+    originY:
+      description: |
+        The y-coordinate of the transformation origin as a value from 0 to 1.
+        `0` is the top edge, `0.5` is the center, `1` is the bottom edge.
+      type: number
+      minimum: 0
+      maximum: 1
+      default: 0.5
+      example: 0.5

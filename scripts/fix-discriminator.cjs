@@ -3,9 +3,7 @@ const path = require("path");
 
 const zodGenPath = path.join(__dirname, "..", "dist", "zod", "zod.gen.ts");
 
-console.log(
-  "Fixing discriminator and adding coercion in generated Zod schemas..."
-);
+console.log("Fixing discriminator and adding z.coerce for number fields...");
 
 let content = fs.readFileSync(zodGenPath, "utf8");
 
@@ -23,6 +21,7 @@ const newAssetSchema = `export const assetAssetSchema = z.discriminatedUnion("ty
   htmlassetHtmlAssetSchema,
   titleassetTitleAssetSchema,
   shapeassetShapeAssetSchema,
+  svgassetSvgAssetSchema,
   texttoimageassetTextToImageAssetSchema,
   imagetovideoassetImageToVideoAssetSchema,
 ]);`;
@@ -34,64 +33,151 @@ if (assetUnionPattern.test(content)) {
   console.log("⚠ Could not find assetAssetSchema to replace");
 }
 
-const clipStartPattern =
-  /start: z\.union\(\[z\.number\(\), z\.enum\(\["auto"\]\)\]\)/g;
-const clipStartReplacement = `start: z.union([z.preprocess((val) => typeof val === 'string' && val !== '' && !isNaN(Number(val)) ? Number(val) : val, z.number()), z.enum(["auto"])])`;
+const svgShapeUnionPattern =
+  /export const svgshapesSvgShapeSchema = z\.union\(\[[\s\S]*?\]\);/;
 
-if (clipStartPattern.test(content)) {
-  content = content.replace(clipStartPattern, clipStartReplacement);
-  console.log("✓ Added coercion for clip start");
+const newSvgShapeSchema = `export const svgshapesSvgShapeSchema = z.discriminatedUnion("type", [
+  svgshapesSvgRectangleShapeSchema,
+  svgshapesSvgCircleShapeSchema,
+  svgshapesSvgEllipseShapeSchema,
+  svgshapesSvgLineShapeSchema,
+  svgshapesSvgPolygonShapeSchema,
+  svgshapesSvgStarShapeSchema,
+  svgshapesSvgArrowShapeSchema,
+  svgshapesSvgHeartShapeSchema,
+  svgshapesSvgCrossShapeSchema,
+  svgshapesSvgRingShapeSchema,
+  svgshapesSvgPathShapeSchema,
+]);`;
+
+if (svgShapeUnionPattern.test(content)) {
+  content = content.replace(svgShapeUnionPattern, newSvgShapeSchema);
+  console.log("✓ Fixed svgshapesSvgShapeSchema discriminator");
 } else {
-  console.log("⚠ Could not find clip start pattern to add coercion");
+  console.log("⚠ Could not find svgshapesSvgShapeSchema to replace");
 }
 
-const clipLengthPattern =
-  /length: z\.union\(\[z\.number\(\), z\.literal\("auto"\), z\.literal\("end"\)\]\)/g;
-const clipLengthReplacement = `length: z.union([z.preprocess((val) => typeof val === 'string' && val !== '' && !isNaN(Number(val)) ? Number(val) : val, z.number()), z.literal("auto"), z.literal("end")])`;
+const svgFillUnionPattern =
+  /export const svgpropertiesSvgFillSchema = z\.union\(\[[\s\S]*?\]\);/;
 
-if (clipLengthPattern.test(content)) {
-  content = content.replace(clipLengthPattern, clipLengthReplacement);
-  console.log("✓ Added coercion for clip length");
+const newSvgFillSchema = `export const svgpropertiesSvgFillSchema = z.discriminatedUnion("type", [
+  svgpropertiesSvgSolidFillSchema,
+  svgpropertiesSvgLinearGradientFillSchema,
+  svgpropertiesSvgRadialGradientFillSchema,
+]);`;
+
+if (svgFillUnionPattern.test(content)) {
+  content = content.replace(svgFillUnionPattern, newSvgFillSchema);
+  console.log("✓ Fixed svgpropertiesSvgFillSchema discriminator");
 } else {
-  console.log("⚠ Could not find clip length pattern to add coercion");
+  console.log("⚠ Could not find svgpropertiesSvgFillSchema to replace");
 }
 
-const trimPattern = /trim: z\.optional\(z\.number\(\)\)/g;
-const trimReplacement = `trim: z.optional(z.preprocess((val) => typeof val === 'string' && val !== '' && !isNaN(Number(val)) ? Number(val) : val, z.number()))`;
+const svgAssetPattern =
+  /export const svgassetSvgAssetSchema = z\.object\(\{[\s\S]*?\}\);/;
 
-const trimCount = (content.match(trimPattern) || []).length;
-if (trimCount > 0) {
-  content = content.replace(trimPattern, trimReplacement);
-  console.log(`✓ Added coercion for trim (${trimCount} occurrences)`);
+const svgAssetSuperRefine = `export const svgassetSvgAssetSchema = z.object({
+  type: z.enum(["svg"]),
+  src: z.optional(z.string().min(1).max(500000)),
+  shape: z.optional(svgshapesSvgShapeSchema),
+  fill: z.optional(svgpropertiesSvgFillSchema),
+  stroke: z.optional(svgpropertiesSvgStrokeSchema),
+  shadow: z.optional(svgpropertiesSvgShadowSchema),
+  transform: z.optional(svgpropertiesSvgTransformSchema),
+  opacity: z.optional(z.preprocess(((v: unknown) => { if (v === '' || v === null || v === undefined) return undefined; if (Array.isArray(v)) return v; if (typeof v === 'string') return Number(v); return v; }), z.number().gte(0).lte(1))).default(1),
+  width: z.optional(z.preprocess(((v: unknown) => { if (v === '' || v === null || v === undefined) return undefined; if (Array.isArray(v)) return v; if (typeof v === 'string') return Number(v); return v; }), z.number().int().gte(1).lte(4096))),
+  height: z.optional(z.preprocess(((v: unknown) => { if (v === '' || v === null || v === undefined) return undefined; if (Array.isArray(v)) return v; if (typeof v === 'string') return Number(v); return v; }), z.number().int().gte(1).lte(4096))),
+}).superRefine((data, ctx) => {
+  const hasShape = data.shape !== undefined;
+  const hasSrc = data.src !== undefined && data.src.trim() !== "";
+
+  if (!hasShape && !hasSrc) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      message: "Either 'src' or 'shape' must be provided",
+      path: [],
+    });
+  }
+
+  if (hasShape && hasSrc) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      message: "Provide either 'src' or 'shape', not both",
+      path: ["src"],
+    });
+  }
+
+  if (hasSrc) {
+    const disallowedProps = ["shape", "fill", "stroke", "shadow", "transform", "width", "height"];
+    for (const prop of disallowedProps) {
+      if (data[prop] !== undefined) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: \`'\${prop}' is not allowed when using 'src'. Only 'type' and 'src' are allowed in import mode\`,
+          path: [prop],
+        });
+      }
+    }
+  }
+});`;
+
+if (svgAssetPattern.test(content)) {
+  content = content.replace(svgAssetPattern, svgAssetSuperRefine);
+  console.log("✓ Added superRefine validation to svgassetSvgAssetSchema for mutual exclusivity");
+} else {
+  console.log("⚠ Could not find svgassetSvgAssetSchema to add superRefine validation");
 }
 
-const volumePattern =
-  /volume: z\.optional\(z\.number\(\)\.gte\(0\)\.lte\(1\)\)/g;
-const volumeReplacement = `volume: z.optional(z.preprocess((val) => typeof val === 'string' && val !== '' && !isNaN(Number(val)) ? Number(val) : val, z.number().gte(0).lte(1)))`;
+// Coercion function that converts strings to numbers inside preprocess (doesn't rely on z.coerce)
+// Note: Arrays are passed through unchanged to allow unions with array types (e.g., scale: number | Tween[])
+const coerceNumber = `((v: unknown) => { if (v === '' || v === null || v === undefined) return undefined; if (Array.isArray(v)) return v; if (typeof v === 'string') return Number(v); return v; })`;
 
-const volumeCount = (content.match(volumePattern) || []).length;
-if (volumeCount > 0) {
-  content = content.replace(volumePattern, volumeReplacement);
-  console.log(`✓ Added coercion for volume (${volumeCount} occurrences)`);
+const plainNumberPattern = /z\.number\(\)(?!\.)/g;
+const plainNumberCount = (content.match(plainNumberPattern) || []).length;
+if (plainNumberCount > 0) {
+  content = content.replace(
+    plainNumberPattern,
+    `z.preprocess(${coerceNumber}, z.number())`
+  );
+  console.log(
+    `✓ Added number coercion for plain z.number() (${plainNumberCount} occurrences)`
+  );
 }
 
-const speedPattern =
-  /speed: z\.optional\(z\.number\(\)\.gte\(0\)\.lte\(10\)\)/g;
-const speedReplacement = `speed: z.optional(z.preprocess((val) => typeof val === 'string' && val !== '' && !isNaN(Number(val)) ? Number(val) : val, z.number().gte(0).lte(10)))`;
-
-const speedCount = (content.match(speedPattern) || []).length;
-if (speedCount > 0) {
-  content = content.replace(speedPattern, speedReplacement);
-  console.log(`✓ Added coercion for speed (${speedCount} occurrences)`);
+const chainedNumberPattern = /z\.number\(\)((?:\.[a-zA-Z]+\([^)]*\))+)/g;
+let chainedCount = 0;
+content = content.replace(chainedNumberPattern, (match, chain) => {
+  chainedCount++;
+  return `z.preprocess(${coerceNumber}, z.number()${chain})`;
+});
+if (chainedCount > 0) {
+  console.log(
+    `✓ Added number coercion for chained z.number() (${chainedCount} occurrences)`
+  );
 }
 
-const scalePattern = /scale: z\.optional\(z\.number\(\)\)/g;
-const scaleReplacement = `scale: z.optional(z.preprocess((val) => typeof val === 'string' && val !== '' && !isNaN(Number(val)) ? Number(val) : val, z.number()))`;
+const plainIntPattern = /z\.int\(\)(?!\.)/g;
+const plainIntCount = (content.match(plainIntPattern) || []).length;
+if (plainIntCount > 0) {
+  content = content.replace(
+    plainIntPattern,
+    `z.preprocess(${coerceNumber}, z.number().int())`
+  );
+  console.log(
+    `✓ Added number coercion for plain z.int() (${plainIntCount} occurrences)`
+  );
+}
 
-const scaleCount = (content.match(scalePattern) || []).length;
-if (scaleCount > 0) {
-  content = content.replace(scalePattern, scaleReplacement);
-  console.log(`✓ Added coercion for scale (${scaleCount} occurrences)`);
+const chainedIntPattern = /z\.int\(\)((?:\.[a-zA-Z]+\([^)]*\))+)/g;
+let chainedIntCount = 0;
+content = content.replace(chainedIntPattern, (match, chain) => {
+  chainedIntCount++;
+  return `z.preprocess(${coerceNumber}, z.number().int()${chain})`;
+});
+if (chainedIntCount > 0) {
+  console.log(
+    `✓ Added number coercion for chained z.int() (${chainedIntCount} occurrences)`
+  );
 }
 
 fs.writeFileSync(zodGenPath, content);
@@ -114,6 +200,7 @@ if (fs.existsSync(zodGenCjsPath)) {
   exports.htmlassetHtmlAssetSchema,
   exports.titleassetTitleAssetSchema,
   exports.shapeassetShapeAssetSchema,
+  exports.svgassetSvgAssetSchema,
   exports.texttoimageassetTextToImageAssetSchema,
   exports.imagetovideoassetImageToVideoAssetSchema,
 ]);`;
@@ -123,49 +210,129 @@ if (fs.existsSync(zodGenCjsPath)) {
     console.log("✓ Fixed assetAssetSchema discriminator in CJS");
   }
 
-  const cjsCoercionPatterns = [
-    {
-      pattern:
-        /start: zod_1\.z\.union\(\[zod_1\.z\.number\(\), zod_1\.z\.enum\(\["auto"\]\)\]\)/g,
-      replacement: `start: zod_1.z.union([zod_1.z.preprocess((val) => typeof val === 'string' && val !== '' && !isNaN(Number(val)) ? Number(val) : val, zod_1.z.number()), zod_1.z.enum(["auto"])])`,
-      name: "clip start",
-    },
-    {
-      pattern:
-        /length: zod_1\.z\.union\(\[zod_1\.z\.number\(\), zod_1\.z\.literal\("auto"\), zod_1\.z\.literal\("end"\)\]\)/g,
-      replacement: `length: zod_1.z.union([zod_1.z.preprocess((val) => typeof val === 'string' && val !== '' && !isNaN(Number(val)) ? Number(val) : val, zod_1.z.number()), zod_1.z.literal("auto"), zod_1.z.literal("end")])`,
-      name: "clip length",
-    },
-    {
-      pattern: /trim: zod_1\.z\.optional\(zod_1\.z\.number\(\)\)/g,
-      replacement: `trim: zod_1.z.optional(zod_1.z.preprocess((val) => typeof val === 'string' && val !== '' && !isNaN(Number(val)) ? Number(val) : val, zod_1.z.number()))`,
-      name: "trim",
-    },
-    {
-      pattern:
-        /volume: zod_1\.z\.optional\(zod_1\.z\.number\(\)\.gte\(0\)\.lte\(1\)\)/g,
-      replacement: `volume: zod_1.z.optional(zod_1.z.preprocess((val) => typeof val === 'string' && val !== '' && !isNaN(Number(val)) ? Number(val) : val, zod_1.z.number().gte(0).lte(1)))`,
-      name: "volume",
-    },
-    {
-      pattern:
-        /speed: zod_1\.z\.optional\(zod_1\.z\.number\(\)\.gte\(0\)\.lte\(10\)\)/g,
-      replacement: `speed: zod_1.z.optional(zod_1.z.preprocess((val) => typeof val === 'string' && val !== '' && !isNaN(Number(val)) ? Number(val) : val, zod_1.z.number().gte(0).lte(10)))`,
-      name: "speed",
-    },
-    {
-      pattern: /scale: zod_1\.z\.optional\(zod_1\.z\.number\(\)\)/g,
-      replacement: `scale: zod_1.z.optional(zod_1.z.preprocess((val) => typeof val === 'string' && val !== '' && !isNaN(Number(val)) ? Number(val) : val, zod_1.z.number()))`,
-      name: "scale",
-    },
-  ];
+  const cjsSvgShapeUnionPattern =
+    /exports\.svgshapesSvgShapeSchema = zod_1\.z\.union\(\[[\s\S]*?\]\);/;
 
-  for (const { pattern, replacement, name } of cjsCoercionPatterns) {
-    const count = (cjsContent.match(pattern) || []).length;
-    if (count > 0) {
-      cjsContent = cjsContent.replace(pattern, replacement);
-      console.log(`✓ Added coercion for ${name} in CJS (${count} occurrences)`);
+  const newCjsSvgShapeSchema = `exports.svgshapesSvgShapeSchema = zod_1.z.discriminatedUnion("type", [
+  exports.svgshapesSvgRectangleShapeSchema,
+  exports.svgshapesSvgCircleShapeSchema,
+  exports.svgshapesSvgEllipseShapeSchema,
+  exports.svgshapesSvgLineShapeSchema,
+  exports.svgshapesSvgPolygonShapeSchema,
+  exports.svgshapesSvgStarShapeSchema,
+  exports.svgshapesSvgArrowShapeSchema,
+  exports.svgshapesSvgHeartShapeSchema,
+  exports.svgshapesSvgCrossShapeSchema,
+  exports.svgshapesSvgRingShapeSchema,
+  exports.svgshapesSvgPathShapeSchema,
+]);`;
+
+  if (cjsSvgShapeUnionPattern.test(cjsContent)) {
+    cjsContent = cjsContent.replace(
+      cjsSvgShapeUnionPattern,
+      newCjsSvgShapeSchema
+    );
+    console.log("✓ Fixed svgshapesSvgShapeSchema discriminator in CJS");
+  }
+
+  const cjsSvgFillUnionPattern =
+    /exports\.svgpropertiesSvgFillSchema = zod_1\.z\.union\(\[[\s\S]*?\]\);/;
+
+  const newCjsSvgFillSchema = `exports.svgpropertiesSvgFillSchema = zod_1.z.discriminatedUnion("type", [
+  exports.svgpropertiesSvgSolidFillSchema,
+  exports.svgpropertiesSvgLinearGradientFillSchema,
+  exports.svgpropertiesSvgRadialGradientFillSchema,
+]);`;
+
+  if (cjsSvgFillUnionPattern.test(cjsContent)) {
+    cjsContent = cjsContent.replace(
+      cjsSvgFillUnionPattern,
+      newCjsSvgFillSchema
+    );
+    console.log("✓ Fixed svgpropertiesSvgFillSchema discriminator in CJS");
+  }
+
+  const cjsSvgAssetPattern =
+    /exports\.svgassetSvgAssetSchema = zod_1\.z\.object\(\{[\s\S]*?\}\);/;
+
+  const cjsSvgAssetSuperRefine = `exports.svgassetSvgAssetSchema = zod_1.z.object({
+  type: zod_1.z.enum(["svg"]),
+  src: zod_1.z.optional(zod_1.z.string().min(1).max(500000)),
+  shape: zod_1.z.optional(exports.svgshapesSvgShapeSchema),
+  fill: zod_1.z.optional(exports.svgpropertiesSvgFillSchema),
+  stroke: zod_1.z.optional(exports.svgpropertiesSvgStrokeSchema),
+  shadow: zod_1.z.optional(exports.svgpropertiesSvgShadowSchema),
+  transform: zod_1.z.optional(exports.svgpropertiesSvgTransformSchema),
+  opacity: zod_1.z.optional(zod_1.z.preprocess(((v) => { if (v === '' || v === null || v === undefined) return undefined; if (Array.isArray(v)) return v; if (typeof v === 'string') return Number(v); return v; }), zod_1.z.number().gte(0).lte(1))).default(1),
+  width: zod_1.z.optional(zod_1.z.preprocess(((v) => { if (v === '' || v === null || v === undefined) return undefined; if (Array.isArray(v)) return v; if (typeof v === 'string') return Number(v); return v; }), zod_1.z.number().int().gte(1).lte(4096))),
+  height: zod_1.z.optional(zod_1.z.preprocess(((v) => { if (v === '' || v === null || v === undefined) return undefined; if (Array.isArray(v)) return v; if (typeof v === 'string') return Number(v); return v; }), zod_1.z.number().int().gte(1).lte(4096))),
+}).superRefine((data, ctx) => {
+  const hasShape = data.shape !== undefined;
+  const hasSrc = data.src !== undefined && data.src.trim() !== "";
+
+  if (!hasShape && !hasSrc) {
+    ctx.addIssue({
+      code: zod_1.z.ZodIssueCode.custom,
+      message: "Either 'src' or 'shape' must be provided",
+      path: [],
+    });
+  }
+
+  if (hasShape && hasSrc) {
+    ctx.addIssue({
+      code: zod_1.z.ZodIssueCode.custom,
+      message: "Provide either 'src' or 'shape', not both",
+      path: ["src"],
+    });
+  }
+
+  if (hasSrc) {
+    const disallowedProps = ["shape", "fill", "stroke", "shadow", "transform", "width", "height"];
+    for (const prop of disallowedProps) {
+      if (data[prop] !== undefined) {
+        ctx.addIssue({
+          code: zod_1.z.ZodIssueCode.custom,
+          message: "'" + prop + "' is not allowed when using 'src'. Only 'type' and 'src' are allowed in import mode",
+          path: [prop],
+        });
+      }
     }
+  }
+});`;
+
+  if (cjsSvgAssetPattern.test(cjsContent)) {
+    cjsContent = cjsContent.replace(cjsSvgAssetPattern, cjsSvgAssetSuperRefine);
+    console.log("✓ Added superRefine validation to svgassetSvgAssetSchema in CJS");
+  }
+
+  // Coercion function for CJS (without TypeScript type annotation)
+  // Note: Arrays are passed through unchanged to allow unions with array types (e.g., scale: number | Tween[])
+  const cjsCoerceNumber = `((v) => { if (v === '' || v === null || v === undefined) return undefined; if (Array.isArray(v)) return v; if (typeof v === 'string') return Number(v); return v; })`;
+
+  const cjsPlainNumberPattern = /zod_1\.z\.number\(\)(?!\.)/g;
+  const cjsPlainNumberCount = (cjsContent.match(cjsPlainNumberPattern) || [])
+    .length;
+  if (cjsPlainNumberCount > 0) {
+    cjsContent = cjsContent.replace(
+      cjsPlainNumberPattern,
+      `zod_1.z.preprocess(${cjsCoerceNumber}, zod_1.z.number())`
+    );
+    console.log(
+      `✓ Added number coercion in CJS (${cjsPlainNumberCount} occurrences)`
+    );
+  }
+
+  const cjsChainedNumberPattern =
+    /zod_1\.z\.number\(\)((?:\.[a-zA-Z]+\([^)]*\))+)/g;
+  let cjsChainedCount = 0;
+  cjsContent = cjsContent.replace(cjsChainedNumberPattern, (match, chain) => {
+    cjsChainedCount++;
+    return `zod_1.z.preprocess(${cjsCoerceNumber}, zod_1.z.number()${chain})`;
+  });
+  if (cjsChainedCount > 0) {
+    console.log(
+      `✓ Added number coercion chains in CJS (${cjsChainedCount} occurrences)`
+    );
   }
 
   fs.writeFileSync(zodGenCjsPath, cjsContent);
@@ -183,31 +350,48 @@ if (fs.existsSync(zodGenJsPath)) {
     console.log("✓ Fixed assetAssetSchema discriminator in ESM JS");
   }
 
-  const esmCoercionPatterns = [
-    {
-      pattern: clipStartPattern,
-      replacement: clipStartReplacement,
-      name: "clip start",
-    },
-    {
-      pattern: clipLengthPattern,
-      replacement: clipLengthReplacement,
-      name: "clip length",
-    },
-    { pattern: trimPattern, replacement: trimReplacement, name: "trim" },
-    { pattern: volumePattern, replacement: volumeReplacement, name: "volume" },
-    { pattern: speedPattern, replacement: speedReplacement, name: "speed" },
-    { pattern: scalePattern, replacement: scaleReplacement, name: "scale" },
-  ];
+  if (svgShapeUnionPattern.test(jsContent)) {
+    jsContent = jsContent.replace(svgShapeUnionPattern, newSvgShapeSchema);
+    console.log("✓ Fixed svgshapesSvgShapeSchema discriminator in ESM JS");
+  }
 
-  for (const { pattern, replacement, name } of esmCoercionPatterns) {
-    const count = (jsContent.match(pattern) || []).length;
-    if (count > 0) {
-      jsContent = jsContent.replace(pattern, replacement);
-      console.log(
-        `✓ Added coercion for ${name} in ESM JS (${count} occurrences)`
-      );
-    }
+  if (svgFillUnionPattern.test(jsContent)) {
+    jsContent = jsContent.replace(svgFillUnionPattern, newSvgFillSchema);
+    console.log("✓ Fixed svgpropertiesSvgFillSchema discriminator in ESM JS");
+  }
+
+  if (svgAssetPattern.test(jsContent)) {
+    jsContent = jsContent.replace(svgAssetPattern, svgAssetSuperRefine);
+    console.log("✓ Added superRefine validation to svgassetSvgAssetSchema in ESM JS");
+  }
+
+  // Coercion function for ESM JS (without TypeScript type annotation)
+  // Note: Arrays are passed through unchanged to allow unions with array types (e.g., scale: number | Tween[])
+  const esmCoerceNumber = `((v) => { if (v === '' || v === null || v === undefined) return undefined; if (Array.isArray(v)) return v; if (typeof v === 'string') return Number(v); return v; })`;
+
+  const esmPlainNumberPattern = /z\.number\(\)(?!\.)/g;
+  const esmPlainNumberCount = (jsContent.match(esmPlainNumberPattern) || [])
+    .length;
+  if (esmPlainNumberCount > 0) {
+    jsContent = jsContent.replace(
+      esmPlainNumberPattern,
+      `z.preprocess(${esmCoerceNumber}, z.number())`
+    );
+    console.log(
+      `✓ Added number coercion in ESM JS (${esmPlainNumberCount} occurrences)`
+    );
+  }
+
+  const esmChainedNumberPattern = /z\.number\(\)((?:\.[a-zA-Z]+\([^)]*\))+)/g;
+  let esmChainedCount = 0;
+  jsContent = jsContent.replace(esmChainedNumberPattern, (match, chain) => {
+    esmChainedCount++;
+    return `z.preprocess(${esmCoerceNumber}, z.number()${chain})`;
+  });
+  if (esmChainedCount > 0) {
+    console.log(
+      `✓ Added number coercion chains in ESM JS (${esmChainedCount} occurrences)`
+    );
   }
 
   fs.writeFileSync(zodGenJsPath, jsContent);
