@@ -84,9 +84,9 @@ const svgAssetSuperRefine = `export const svgassetSvgAssetSchema = z.object({
   stroke: z.optional(svgpropertiesSvgStrokeSchema),
   shadow: z.optional(svgpropertiesSvgShadowSchema),
   transform: z.optional(svgpropertiesSvgTransformSchema),
-  opacity: z.optional(z.preprocess(((v: unknown) => { if (v === '' || v === null || v === undefined || Array.isArray(v)) return undefined; if (typeof v === 'string') return Number(v); return v; }), z.number().gte(0).lte(1))).default(1),
-  width: z.optional(z.preprocess(((v: unknown) => { if (v === '' || v === null || v === undefined || Array.isArray(v)) return undefined; if (typeof v === 'string') return Number(v); return v; }), z.number().int().gte(1).lte(4096))),
-  height: z.optional(z.preprocess(((v: unknown) => { if (v === '' || v === null || v === undefined || Array.isArray(v)) return undefined; if (typeof v === 'string') return Number(v); return v; }), z.number().int().gte(1).lte(4096))),
+  opacity: z.optional(z.preprocess(((v: unknown) => { if (v === '' || v === null || v === undefined) return undefined; if (Array.isArray(v)) return v; if (typeof v === 'string') return Number(v); return v; }), z.number().gte(0).lte(1))).default(1),
+  width: z.optional(z.preprocess(((v: unknown) => { if (v === '' || v === null || v === undefined) return undefined; if (Array.isArray(v)) return v; if (typeof v === 'string') return Number(v); return v; }), z.number().int().gte(1).lte(4096))),
+  height: z.optional(z.preprocess(((v: unknown) => { if (v === '' || v === null || v === undefined) return undefined; if (Array.isArray(v)) return v; if (typeof v === 'string') return Number(v); return v; }), z.number().int().gte(1).lte(4096))),
 }).superRefine((data, ctx) => {
   const hasShape = data.shape !== undefined;
   const hasSrc = data.src !== undefined && data.src.trim() !== "";
@@ -129,7 +129,8 @@ if (svgAssetPattern.test(content)) {
 }
 
 // Coercion function that converts strings to numbers inside preprocess (doesn't rely on z.coerce)
-const coerceNumber = `((v: unknown) => { if (v === '' || v === null || v === undefined || Array.isArray(v)) return undefined; if (typeof v === 'string') return Number(v); return v; })`;
+// Note: Arrays are passed through unchanged to allow unions with array types (e.g., scale: number | Tween[])
+const coerceNumber = `((v: unknown) => { if (v === '' || v === null || v === undefined) return undefined; if (Array.isArray(v)) return v; if (typeof v === 'string') return Number(v); return v; })`;
 
 const plainNumberPattern = /z\.number\(\)(?!\.)/g;
 const plainNumberCount = (content.match(plainNumberPattern) || []).length;
@@ -262,9 +263,9 @@ if (fs.existsSync(zodGenCjsPath)) {
   stroke: zod_1.z.optional(exports.svgpropertiesSvgStrokeSchema),
   shadow: zod_1.z.optional(exports.svgpropertiesSvgShadowSchema),
   transform: zod_1.z.optional(exports.svgpropertiesSvgTransformSchema),
-  opacity: zod_1.z.optional(zod_1.z.preprocess(((v) => { if (v === '' || v === null || v === undefined || Array.isArray(v)) return undefined; if (typeof v === 'string') return Number(v); return v; }), zod_1.z.number().gte(0).lte(1))).default(1),
-  width: zod_1.z.optional(zod_1.z.preprocess(((v) => { if (v === '' || v === null || v === undefined || Array.isArray(v)) return undefined; if (typeof v === 'string') return Number(v); return v; }), zod_1.z.number().int().gte(1).lte(4096))),
-  height: zod_1.z.optional(zod_1.z.preprocess(((v) => { if (v === '' || v === null || v === undefined || Array.isArray(v)) return undefined; if (typeof v === 'string') return Number(v); return v; }), zod_1.z.number().int().gte(1).lte(4096))),
+  opacity: zod_1.z.optional(zod_1.z.preprocess(((v) => { if (v === '' || v === null || v === undefined) return undefined; if (Array.isArray(v)) return v; if (typeof v === 'string') return Number(v); return v; }), zod_1.z.number().gte(0).lte(1))).default(1),
+  width: zod_1.z.optional(zod_1.z.preprocess(((v) => { if (v === '' || v === null || v === undefined) return undefined; if (Array.isArray(v)) return v; if (typeof v === 'string') return Number(v); return v; }), zod_1.z.number().int().gte(1).lte(4096))),
+  height: zod_1.z.optional(zod_1.z.preprocess(((v) => { if (v === '' || v === null || v === undefined) return undefined; if (Array.isArray(v)) return v; if (typeof v === 'string') return Number(v); return v; }), zod_1.z.number().int().gte(1).lte(4096))),
 }).superRefine((data, ctx) => {
   const hasShape = data.shape !== undefined;
   const hasSrc = data.src !== undefined && data.src.trim() !== "";
@@ -305,7 +306,8 @@ if (fs.existsSync(zodGenCjsPath)) {
   }
 
   // Coercion function for CJS (without TypeScript type annotation)
-  const cjsCoerceNumber = `((v) => { if (v === '' || v === null || v === undefined || Array.isArray(v)) return undefined; if (typeof v === 'string') return Number(v); return v; })`;
+  // Note: Arrays are passed through unchanged to allow unions with array types (e.g., scale: number | Tween[])
+  const cjsCoerceNumber = `((v) => { if (v === '' || v === null || v === undefined) return undefined; if (Array.isArray(v)) return v; if (typeof v === 'string') return Number(v); return v; })`;
 
   const cjsPlainNumberPattern = /zod_1\.z\.number\(\)(?!\.)/g;
   const cjsPlainNumberCount = (cjsContent.match(cjsPlainNumberPattern) || [])
@@ -364,7 +366,8 @@ if (fs.existsSync(zodGenJsPath)) {
   }
 
   // Coercion function for ESM JS (without TypeScript type annotation)
-  const esmCoerceNumber = `((v) => { if (v === '' || v === null || v === undefined || Array.isArray(v)) return undefined; if (typeof v === 'string') return Number(v); return v; })`;
+  // Note: Arrays are passed through unchanged to allow unions with array types (e.g., scale: number | Tween[])
+  const esmCoerceNumber = `((v) => { if (v === '' || v === null || v === undefined) return undefined; if (Array.isArray(v)) return v; if (typeof v === 'string') return Number(v); return v; })`;
 
   const esmPlainNumberPattern = /z\.number\(\)(?!\.)/g;
   const esmPlainNumberCount = (jsContent.match(esmPlainNumberPattern) || [])

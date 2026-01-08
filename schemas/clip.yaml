@@ -57,9 +57,21 @@
           description: >-
             Scale the asset to a fraction of the viewport size - i.e. setting the scale to 0.5 will scale
             asset to half the size of the viewport. This is useful for picture-in-picture video and
-            scaling images such as logos and watermarks.
-          type: number
-          example: 0
+            scaling images such as logos and watermarks. Use a number or an array of
+            [Tween](./#tocs_tween) objects to create a custom animation.
+          oneOf:
+            - type: number
+              description: >-
+                Scale the asset to a fraction of the viewport size. For example, 0.5 will scale the asset
+                to half the size of the viewport.
+              format: float
+              example: 0.5
+            - type: array
+              description: >-
+                An array of [Tween](./#tocs_tween) objects used to create a custom animation. Animate the scale
+                of an asset over time.
+              items:
+                $ref: "./tween.yaml#/Tween"
         width:
           description: >-
             Set the width of the clip bounding box in pixels. This constrains the width of the clip,
