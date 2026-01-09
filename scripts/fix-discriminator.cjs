@@ -7,6 +7,45 @@ console.log("Fixing discriminator and adding z.coerce for number fields...");
 
 let content = fs.readFileSync(zodGenPath, "utf8");
 
+// Fix destination provider fields to use z.literal() for proper discriminated union
+const destinationProviderFixes = [
+  { pattern: /provider: z\.string\(\)\.default\('shotstack'\)/, replacement: "provider: z.literal('shotstack')" },
+  { pattern: /provider: z\.string\(\)\.default\('s3'\)/, replacement: "provider: z.literal('s3')" },
+  { pattern: /provider: z\.string\(\)\.default\('mux'\)/, replacement: "provider: z.literal('mux')" },
+  { pattern: /provider: z\.string\(\)\.default\('google-cloud-storage'\)/, replacement: "provider: z.literal('google-cloud-storage')" },
+  { pattern: /provider: z\.string\(\)\.default\('google-drive'\)/, replacement: "provider: z.literal('google-drive')" },
+  { pattern: /provider: z\.string\(\)\.default\('vimeo'\)/, replacement: "provider: z.literal('vimeo')" },
+  { pattern: /provider: z\.string\(\)\.default\('tiktok'\)/, replacement: "provider: z.literal('tiktok')" },
+];
+
+destinationProviderFixes.forEach(({ pattern, replacement }) => {
+  if (pattern.test(content)) {
+    content = content.replace(pattern, replacement);
+    console.log(`✓ Fixed destination provider: ${replacement}`);
+  }
+});
+
+// Fix the malformed destinations union schema
+const destinationsUnionPattern =
+  /export const destinationsDestinationsSchema = z\.union\(\[[\s\S]*?\]\);/;
+
+const newDestinationsSchema = `export const destinationsDestinationsSchema = z.discriminatedUnion("provider", [
+  shotstackDestinationShotstackDestinationSchema,
+  muxDestinationMuxDestinationSchema,
+  s3DestinationS3DestinationSchema,
+  googleCloudStorageDestinationGoogleCloudStorageDestinationSchema,
+  googleDriveDestinationGoogleDriveDestinationSchema,
+  vimeoDestinationVimeoDestinationSchema,
+  tiktokDestinationTiktokDestinationSchema
+]);`;
+
+if (destinationsUnionPattern.test(content)) {
+  content = content.replace(destinationsUnionPattern, newDestinationsSchema);
+  console.log("✓ Fixed destinationsDestinationsSchema discriminator");
+} else {
+  console.log("⚠ Could not find destinationsDestinationsSchema to replace");
+}
+
 const assetUnionPattern =
   /export const assetAssetSchema = z\.union\(\[[\s\S]*?\]\);/;
 
@@ -186,6 +225,43 @@ const zodGenCjsPath = path.join(__dirname, "..", "dist", "zod", "zod.gen.cjs");
 if (fs.existsSync(zodGenCjsPath)) {
   let cjsContent = fs.readFileSync(zodGenCjsPath, "utf8");
 
+  // Fix destination provider fields in CJS
+  const cjsDestinationProviderFixes = [
+    { pattern: /provider: zod_1\.z\.string\(\)\.default\('shotstack'\)/, replacement: "provider: zod_1.z.literal('shotstack')" },
+    { pattern: /provider: zod_1\.z\.string\(\)\.default\('s3'\)/, replacement: "provider: zod_1.z.literal('s3')" },
+    { pattern: /provider: zod_1\.z\.string\(\)\.default\('mux'\)/, replacement: "provider: zod_1.z.literal('mux')" },
+    { pattern: /provider: zod_1\.z\.string\(\)\.default\('google-cloud-storage'\)/, replacement: "provider: zod_1.z.literal('google-cloud-storage')" },
+    { pattern: /provider: zod_1\.z\.string\(\)\.default\('google-drive'\)/, replacement: "provider: zod_1.z.literal('google-drive')" },
+    { pattern: /provider: zod_1\.z\.string\(\)\.default\('vimeo'\)/, replacement: "provider: zod_1.z.literal('vimeo')" },
+    { pattern: /provider: zod_1\.z\.string\(\)\.default\('tiktok'\)/, replacement: "provider: zod_1.z.literal('tiktok')" },
+  ];
+
+  cjsDestinationProviderFixes.forEach(({ pattern, replacement }) => {
+    if (pattern.test(cjsContent)) {
+      cjsContent = cjsContent.replace(pattern, replacement);
+      console.log(`✓ Fixed destination provider in CJS: ${replacement}`);
+    }
+  });
+
+  // Fix destinations union schema in CJS
+  const cjsDestinationsUnionPattern =
+    /exports\.destinationsDestinationsSchema = zod_1\.z\.union\(\[[\s\S]*?\]\);/;
+
+  const newCjsDestinationsSchema = `exports.destinationsDestinationsSchema = zod_1.z.discriminatedUnion("provider", [
+  exports.shotstackDestinationShotstackDestinationSchema,
+  exports.muxDestinationMuxDestinationSchema,
+  exports.s3DestinationS3DestinationSchema,
+  exports.googleCloudStorageDestinationGoogleCloudStorageDestinationSchema,
+  exports.googleDriveDestinationGoogleDriveDestinationSchema,
+  exports.vimeoDestinationVimeoDestinationSchema,
+  exports.tiktokDestinationTiktokDestinationSchema
+]);`;
+
+  if (cjsDestinationsUnionPattern.test(cjsContent)) {
+    cjsContent = cjsContent.replace(cjsDestinationsUnionPattern, newCjsDestinationsSchema);
+    console.log("✓ Fixed destinationsDestinationsSchema discriminator in CJS");
+  }
+
   const cjsAssetUnionPattern =
     /exports\.assetAssetSchema = zod_1\.z\.union\(\[[\s\S]*?\]\);/;
 
@@ -341,6 +417,20 @@ if (fs.existsSync(zodGenCjsPath)) {
 const zodGenJsPath = path.join(__dirname, "..", "dist", "zod", "zod.gen.js");
 if (fs.existsSync(zodGenJsPath)) {
   let jsContent = fs.readFileSync(zodGenJsPath, "utf8");
+
+  // Fix destination provider fields in ESM JS
+  destinationProviderFixes.forEach(({ pattern, replacement }) => {
+    if (pattern.test(jsContent)) {
+      jsContent = jsContent.replace(pattern, replacement);
+      console.log(`✓ Fixed destination provider in ESM JS: ${replacement}`);
+    }
+  });
+
+  // Fix destinations union schema in ESM JS
+  if (destinationsUnionPattern.test(jsContent)) {
+    jsContent = jsContent.replace(destinationsUnionPattern, newDestinationsSchema);
+    console.log("✓ Fixed destinationsDestinationsSchema discriminator in ESM JS");
+  }
 
   const jsAssetUnionPattern =
     /export const assetAssetSchema = z\.union\(\[[\s\S]*?\]\);/;
