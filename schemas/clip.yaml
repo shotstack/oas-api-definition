@@ -19,8 +19,9 @@
               description: >-
                 The start position using a [smart clip property](/docs/guide/architecting-an-application/smart-clips/).
                 Set to `auto` to automatically play the clip after the previous clip finishes.
-              enum:
-                - auto
+                Use `alias://clip-name` to inherit the start time from the referenced clip.
+              pattern: "^(auto|alias://[A-Za-z0-9_-]+)$"
+              example: "auto"
         length:
           description: The duration the Clip should play for.
           oneOf:
@@ -34,10 +35,9 @@
                 The duration the Clip should play for using a
                 [smart clip property](/docs/guide/architecting-an-application/smart-clips/).
                 Set to `auto` to play the Clip for the duration of the asset. Set to `end` to display or play the clip to
-                the end of the timeline.
-              enum:
-                - auto
-                - end
+                the end of the timeline. Use `alias://clip-name` to inherit the length from the referenced clip.
+              pattern: "^(auto|end|alias://[A-Za-z0-9_-]+)$"
+              example: "auto"
         fit:
           description: >-
             Set how the asset should be scaled to fit the viewport using one of the following options: 
