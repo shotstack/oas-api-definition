@@ -76,7 +76,8 @@
           description: >-
             Set the width of the clip bounding box in pixels. This constrains the width of the clip,
             overriding the default behavior where clips fill the viewport width.
-          type: integer
+          type: number
+          format: float
           minimum: 1
           maximum: 3840
           example: 800
@@ -84,7 +85,8 @@
           description: >-
             Set the height of the clip bounding box in pixels. This constrains the height of the clip,
             overriding the default behavior where clips fill the viewport height.
-          type: integer
+          type: number
+          format: float
           minimum: 1
           maximum: 2160
           example: 600

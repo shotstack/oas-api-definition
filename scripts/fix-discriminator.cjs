@@ -8,14 +8,15 @@ console.log("Fixing discriminator and adding z.coerce for number fields...");
 let content = fs.readFileSync(zodGenPath, "utf8");
 
 // Fix destination provider fields to use z.literal() for proper discriminated union
+// Note: The generated code uses double quotes, so we match both single and double quotes
 const destinationProviderFixes = [
-  { pattern: /provider: z\.string\(\)\.default\('shotstack'\)/, replacement: "provider: z.literal('shotstack')" },
-  { pattern: /provider: z\.string\(\)\.default\('s3'\)/, replacement: "provider: z.literal('s3')" },
-  { pattern: /provider: z\.string\(\)\.default\('mux'\)/, replacement: "provider: z.literal('mux')" },
-  { pattern: /provider: z\.string\(\)\.default\('google-cloud-storage'\)/, replacement: "provider: z.literal('google-cloud-storage')" },
-  { pattern: /provider: z\.string\(\)\.default\('google-drive'\)/, replacement: "provider: z.literal('google-drive')" },
-  { pattern: /provider: z\.string\(\)\.default\('vimeo'\)/, replacement: "provider: z.literal('vimeo')" },
-  { pattern: /provider: z\.string\(\)\.default\('tiktok'\)/, replacement: "provider: z.literal('tiktok')" },
+  { pattern: /provider: z\.string\(\)\.default\(["']shotstack["']\)/, replacement: 'provider: z.literal("shotstack")' },
+  { pattern: /provider: z\.string\(\)\.default\(["']s3["']\)/, replacement: 'provider: z.literal("s3")' },
+  { pattern: /provider: z\.string\(\)\.default\(["']mux["']\)/, replacement: 'provider: z.literal("mux")' },
+  { pattern: /provider: z\.string\(\)\.default\(["']google-cloud-storage["']\)/, replacement: 'provider: z.literal("google-cloud-storage")' },
+  { pattern: /provider: z\.string\(\)\.default\(["']google-drive["']\)/, replacement: 'provider: z.literal("google-drive")' },
+  { pattern: /provider: z\.string\(\)\.default\(["']vimeo["']\)/, replacement: 'provider: z.literal("vimeo")' },
+  { pattern: /provider: z\.string\(\)\.default\(["']tiktok["']\)/, replacement: 'provider: z.literal("tiktok")' },
 ];
 
 destinationProviderFixes.forEach(({ pattern, replacement }) => {
@@ -226,14 +227,15 @@ if (fs.existsSync(zodGenCjsPath)) {
   let cjsContent = fs.readFileSync(zodGenCjsPath, "utf8");
 
   // Fix destination provider fields in CJS
+  // Note: The generated code uses double quotes, so we match both single and double quotes
   const cjsDestinationProviderFixes = [
-    { pattern: /provider: zod_1\.z\.string\(\)\.default\('shotstack'\)/, replacement: "provider: zod_1.z.literal('shotstack')" },
-    { pattern: /provider: zod_1\.z\.string\(\)\.default\('s3'\)/, replacement: "provider: zod_1.z.literal('s3')" },
-    { pattern: /provider: zod_1\.z\.string\(\)\.default\('mux'\)/, replacement: "provider: zod_1.z.literal('mux')" },
-    { pattern: /provider: zod_1\.z\.string\(\)\.default\('google-cloud-storage'\)/, replacement: "provider: zod_1.z.literal('google-cloud-storage')" },
-    { pattern: /provider: zod_1\.z\.string\(\)\.default\('google-drive'\)/, replacement: "provider: zod_1.z.literal('google-drive')" },
-    { pattern: /provider: zod_1\.z\.string\(\)\.default\('vimeo'\)/, replacement: "provider: zod_1.z.literal('vimeo')" },
-    { pattern: /provider: zod_1\.z\.string\(\)\.default\('tiktok'\)/, replacement: "provider: zod_1.z.literal('tiktok')" },
+    { pattern: /provider: zod_1\.z\.string\(\)\.default\(["']shotstack["']\)/, replacement: 'provider: zod_1.z.literal("shotstack")' },
+    { pattern: /provider: zod_1\.z\.string\(\)\.default\(["']s3["']\)/, replacement: 'provider: zod_1.z.literal("s3")' },
+    { pattern: /provider: zod_1\.z\.string\(\)\.default\(["']mux["']\)/, replacement: 'provider: zod_1.z.literal("mux")' },
+    { pattern: /provider: zod_1\.z\.string\(\)\.default\(["']google-cloud-storage["']\)/, replacement: 'provider: zod_1.z.literal("google-cloud-storage")' },
+    { pattern: /provider: zod_1\.z\.string\(\)\.default\(["']google-drive["']\)/, replacement: 'provider: zod_1.z.literal("google-drive")' },
+    { pattern: /provider: zod_1\.z\.string\(\)\.default\(["']vimeo["']\)/, replacement: 'provider: zod_1.z.literal("vimeo")' },
+    { pattern: /provider: zod_1\.z\.string\(\)\.default\(["']tiktok["']\)/, replacement: 'provider: zod_1.z.literal("tiktok")' },
   ];
 
   cjsDestinationProviderFixes.forEach(({ pattern, replacement }) => {
