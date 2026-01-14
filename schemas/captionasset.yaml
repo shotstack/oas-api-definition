@@ -24,6 +24,8 @@
             alias of an audio, video, or text-to-speech clip. The system will automatically transcribe
             the audio and detect the language.
           type: string
+          minLength: 1
+          pattern: '\S'
           example: https://s3-ap-northeast-1.amazonaws.com/my-bucket/captions.srt
         font:
           description: >-

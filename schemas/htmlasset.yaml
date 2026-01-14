@@ -18,6 +18,8 @@
             The HTML text string. See list of
             [supported HTML tags](https://shotstack.io/docs/guide/architecting-an-application/html-support/#supported-html-tags).
           type: string
+          minLength: 1
+          pattern: '\S'
           example: "<p>Hello <b>World</b></p>"
         css:
           description: >-

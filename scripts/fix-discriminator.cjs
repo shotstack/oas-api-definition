@@ -220,6 +220,21 @@ if (chainedIntCount > 0) {
   );
 }
 
+const mergeFieldPattern = /export const mergefieldMergeFieldSchema = z\.object\(\{[\s\S]*?find: z\.string\(\),[\s\S]*?replace: z\.unknown\(\),[\s\S]*?\}\);/;
+
+const newMergeFieldSchema = `export const mergefieldMergeFieldSchema = z.object({
+  find: z.string(),
+  replace: z.union([z.string(), z.number(), z.boolean(), z.null(), z.record(z.string(), z.unknown()), z.array(z.unknown())]),
+});`;
+
+if (mergeFieldPattern.test(content)) {
+  content = content.replace(mergeFieldPattern, newMergeFieldSchema);
+  console.log("✓ Fixed MergeField replace to require a value");
+} else {
+  console.log("⚠ Could not find mergefieldMergeFieldSchema to fix");
+}
+
+
 fs.writeFileSync(zodGenPath, content);
 
 const zodGenCjsPath = path.join(__dirname, "..", "dist", "zod", "zod.gen.cjs");

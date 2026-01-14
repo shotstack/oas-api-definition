@@ -14,6 +14,7 @@
               description: >-
                 The start position of the Clip on the timeline, in seconds.
                 For example, to start the Clip at 2 seconds, set the start value to 2.
+              minimum: 0
               example: 2
             - type: string
               description: >-
@@ -29,6 +30,7 @@
               description: >-
                 The duration the Clip should play for, in seconds.
                 For example, to play the Clip for 5 seconds, set the length value to 5.
+              minimum: 0
               example: 5
             - type: string
               description: >-

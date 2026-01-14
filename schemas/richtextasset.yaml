@@ -12,8 +12,10 @@ RichTextAsset:
     text:
       description: The text string to display. Maximum 5000 characters.
       type: string
-      example: "Hello World"
+      minLength: 1
       maxLength: 5000
+      pattern: '\S'
+      example: "Hello World"
     font:
       description: Font styling properties.
       $ref: "./richtextproperties.yaml#/RichTextFont"
