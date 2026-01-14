@@ -14,13 +14,15 @@
               description: >-
                 The start position of the Clip on the timeline, in seconds.
                 For example, to start the Clip at 2 seconds, set the start value to 2.
+              minimum: 0
               example: 2
             - type: string
               description: >-
                 The start position using a [smart clip property](/docs/guide/architecting-an-application/smart-clips/).
                 Set to `auto` to automatically play the clip after the previous clip finishes.
-              enum:
-                - auto
+                Use `alias://clip-name` to inherit the start time from the referenced clip.
+              pattern: "^(auto|alias://[A-Za-z0-9_-]+)$"
+              example: "auto"
         length:
           description: The duration the Clip should play for.
           oneOf:
@@ -28,16 +30,16 @@
               description: >-
                 The duration the Clip should play for, in seconds.
                 For example, to play the Clip for 5 seconds, set the length value to 5.
+              minimum: 0
               example: 5
             - type: string
               description: >-
                 The duration the Clip should play for using a
                 [smart clip property](/docs/guide/architecting-an-application/smart-clips/).
                 Set to `auto` to play the Clip for the duration of the asset. Set to `end` to display or play the clip to
-                the end of the timeline.
-              enum:
-                - auto
-                - end
+                the end of the timeline. Use `alias://clip-name` to inherit the length from the referenced clip.
+              pattern: "^(auto|end|alias://[A-Za-z0-9_-]+)$"
+              example: "auto"
         fit:
           description: >-
             Set how the asset should be scaled to fit the viewport using one of the following options: 
@@ -76,7 +78,8 @@
           description: >-
             Set the width of the clip bounding box in pixels. This constrains the width of the clip,
             overriding the default behavior where clips fill the viewport width.
-          type: integer
+          type: number
+          format: float
           minimum: 1
           maximum: 3840
           example: 800
@@ -84,7 +87,8 @@
           description: >-
             Set the height of the clip bounding box in pixels. This constrains the height of the clip,
             overriding the default behavior where clips fill the viewport height.
-          type: integer
+          type: number
+          format: float
           minimum: 1
           maximum: 2160
           example: 600

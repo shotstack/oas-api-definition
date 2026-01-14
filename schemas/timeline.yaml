@@ -27,6 +27,7 @@
             top of those below it. Ensure that a track containing titles is the
             top most track so that it is displayed above videos and images.
           type: array
+          minItems: 1
           items:
             $ref: "./track.yaml#/Track"
         cache:

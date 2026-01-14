@@ -8,6 +8,8 @@
             The URL of the mp3 audio file. The URL must be publicly accessible
             or include credentials.
           type: string
+          minLength: 1
+          pattern: '\S'
           example: https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3
         effect:
           description: >-

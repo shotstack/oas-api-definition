@@ -45,4 +45,12 @@
             - anybody
             - nobody
             - contacts
+        download:
+          description: >-
+            Set whether the video can be downloaded.
+          type: boolean
+        add:
+          description: >-
+            Set whether other users can add the video to their collections.
+          type: boolean
       type: object

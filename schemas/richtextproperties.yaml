@@ -251,16 +251,9 @@ RichTextAnimation:
         - shift
         - movingLetters
       example: "shift"
-    speed:
-      description: Animation speed multiplier. Must be between 0.1 and 10. Higher is faster.
-      type: number
-      minimum: 0.1
-      maximum: 10
-      default: 1
-      example: 1.5
     duration:
       description: >-
-        Override animation duration in seconds. If not specified, calculated based on text length and speed.
+        Override animation duration in seconds.
         Must be between 0.1 and 30 seconds.
       type: number
       minimum: 0.1
