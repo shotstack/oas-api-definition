@@ -12,9 +12,7 @@ RichTextAsset:
     text:
       description: The text string to display. Maximum 5000 characters.
       type: string
-      minLength: 1
       maxLength: 5000
-      pattern: '\S'
       example: "Hello World"
     font:
       description: Font styling properties.

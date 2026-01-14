@@ -12,8 +12,6 @@
         text:
           description: The text string to display.
           type: string
-          minLength: 1
-          pattern: '\S'
           example: Hello World
         width:
           description: >-
