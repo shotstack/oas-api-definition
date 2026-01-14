@@ -234,6 +234,40 @@ if (mergeFieldPattern.test(content)) {
   console.log("⚠ Could not find mergefieldMergeFieldSchema to fix");
 }
 
+// Fix clip start/length to use smart coercion that preserves alias strings
+// The preprocessor should only convert to number if it looks like a number, not alias strings
+const smartCoerceForUnion = `((v: unknown) => { if (v === '' || v === null || v === undefined) return undefined; if (typeof v === 'string' && /^-?\\d+(\\.\\d+)?$/.test(v)) return Number(v); return v; })`;
+
+// Fix start field in clipClipSchema - must match the exact pattern with preprocess
+const clipStartPattern = /start: z\.union\(\[\s*z\.preprocess\(\(\(v: unknown\) => \{ if \(v === '' \|\| v === null \|\| v === undefined\) return undefined; if \(Array\.isArray\(v\)\) return v; if \(typeof v === 'string'\) return Number\(v\); return v; \}\), z\.number\(\)\.gte\(0\)\),\s*z\.string\(\)\.regex\(\/\^\(auto\|alias:\\\/\\\/\[A-Za-z0-9_-\]\+\)\$\/\),\s*\]\)/;
+
+const newClipStartSchema = `start: z.union([
+    z.preprocess(${smartCoerceForUnion}, z.number().gte(0)),
+    z.string().regex(/^(auto|alias:\\/\\/[A-Za-z0-9_-]+)$/),
+  ])`;
+
+if (clipStartPattern.test(content)) {
+  content = content.replace(clipStartPattern, newClipStartSchema);
+  console.log("✓ Fixed clip start to use smart coercion (preserves alias strings)");
+} else {
+  console.log("⚠ Could not find clip start pattern to fix");
+}
+
+// Fix length field in clipClipSchema
+const clipLengthPattern = /length: z\.union\(\[\s*z\.preprocess\(\(\(v: unknown\) => \{ if \(v === '' \|\| v === null \|\| v === undefined\) return undefined; if \(Array\.isArray\(v\)\) return v; if \(typeof v === 'string'\) return Number\(v\); return v; \}\), z\.number\(\)\.gte\(0\)\),\s*z\.string\(\)\.regex\(\/\^\(auto\|end\|alias:\\\/\\\/\[A-Za-z0-9_-\]\+\)\$\/\),\s*\]\)/;
+
+const newClipLengthSchema = `length: z.union([
+    z.preprocess(${smartCoerceForUnion}, z.number().gte(0)),
+    z.string().regex(/^(auto|end|alias:\\/\\/[A-Za-z0-9_-]+)$/),
+  ])`;
+
+if (clipLengthPattern.test(content)) {
+  content = content.replace(clipLengthPattern, newClipLengthSchema);
+  console.log("✓ Fixed clip length to use smart coercion (preserves alias strings)");
+} else {
+  console.log("⚠ Could not find clip length pattern to fix");
+}
+
 
 fs.writeFileSync(zodGenPath, content);
 
@@ -398,6 +432,39 @@ if (fs.existsSync(zodGenCjsPath)) {
     console.log("✓ Added superRefine validation to svgassetSvgAssetSchema in CJS");
   }
 
+  // Fix clip start/length to use smart coercion that preserves alias strings in CJS
+  const cjsSmartCoerceForUnion = `((v) => { if (v === '' || v === null || v === undefined) return undefined; if (typeof v === 'string' && /^-?\\d+(\\.\\d+)?$/.test(v)) return Number(v); return v; })`;
+
+  // Fix start field in clipClipSchema in CJS
+  const cjsClipStartPattern = /start: zod_1\.z\.union\(\[\s*zod_1\.z\.preprocess\(\(\(v\) => \{ if \(v === '' \|\| v === null \|\| v === undefined\)\s*return undefined; if \(Array\.isArray\(v\)\)\s*return v; if \(typeof v === 'string'\)\s*return Number\(v\); return v; \}\), zod_1\.z\.number\(\)\.gte\(0\)\),\s*zod_1\.z\.string\(\)\.regex\(\/\^\(auto\|alias:\\\/\\\/\[A-Za-z0-9_-\]\+\)\$\/\),\s*\]\)/;
+
+  const newCjsClipStartSchema = `start: zod_1.z.union([
+        zod_1.z.preprocess(${cjsSmartCoerceForUnion}, zod_1.z.number().gte(0)),
+        zod_1.z.string().regex(/^(auto|alias:\\/\\/[A-Za-z0-9_-]+)$/),
+    ])`;
+
+  if (cjsClipStartPattern.test(cjsContent)) {
+    cjsContent = cjsContent.replace(cjsClipStartPattern, newCjsClipStartSchema);
+    console.log("✓ Fixed clip start in CJS to use smart coercion (preserves alias strings)");
+  } else {
+    console.log("⚠ Could not find clip start pattern in CJS to fix");
+  }
+
+  // Fix length field in clipClipSchema in CJS
+  const cjsClipLengthPattern = /length: zod_1\.z\.union\(\[\s*zod_1\.z\.preprocess\(\(\(v\) => \{ if \(v === '' \|\| v === null \|\| v === undefined\)\s*return undefined; if \(Array\.isArray\(v\)\)\s*return v; if \(typeof v === 'string'\)\s*return Number\(v\); return v; \}\), zod_1\.z\.number\(\)\.gte\(0\)\),\s*zod_1\.z\.string\(\)\.regex\(\/\^\(auto\|end\|alias:\\\/\\\/\[A-Za-z0-9_-\]\+\)\$\/\),\s*\]\)/;
+
+  const newCjsClipLengthSchema = `length: zod_1.z.union([
+        zod_1.z.preprocess(${cjsSmartCoerceForUnion}, zod_1.z.number().gte(0)),
+        zod_1.z.string().regex(/^(auto|end|alias:\\/\\/[A-Za-z0-9_-]+)$/),
+    ])`;
+
+  if (cjsClipLengthPattern.test(cjsContent)) {
+    cjsContent = cjsContent.replace(cjsClipLengthPattern, newCjsClipLengthSchema);
+    console.log("✓ Fixed clip length in CJS to use smart coercion (preserves alias strings)");
+  } else {
+    console.log("⚠ Could not find clip length pattern in CJS to fix");
+  }
+
   // Coercion function for CJS (without TypeScript type annotation)
   // Note: Arrays are passed through unchanged to allow unions with array types (e.g., scale: number | Tween[])
   const cjsCoerceNumber = `((v) => { if (v === '' || v === null || v === undefined) return undefined; if (Array.isArray(v)) return v; if (typeof v === 'string') return Number(v); return v; })`;
@@ -470,6 +537,39 @@ if (fs.existsSync(zodGenJsPath)) {
   if (svgAssetPattern.test(jsContent)) {
     jsContent = jsContent.replace(svgAssetPattern, svgAssetSuperRefine);
     console.log("✓ Added superRefine validation to svgassetSvgAssetSchema in ESM JS");
+  }
+
+  // Fix clip start/length to use smart coercion that preserves alias strings in ESM JS
+  const esmSmartCoerceForUnion = `((v) => { if (v === '' || v === null || v === undefined) return undefined; if (typeof v === 'string' && /^-?\\d+(\\.\\d+)?$/.test(v)) return Number(v); return v; })`;
+
+  // Fix start field in clipClipSchema in ESM JS
+  const esmClipStartPattern = /start: z\.union\(\[\s*z\.preprocess\(\(\(v\) => \{ if \(v === '' \|\| v === null \|\| v === undefined\)\s*return undefined; if \(Array\.isArray\(v\)\)\s*return v; if \(typeof v === 'string'\)\s*return Number\(v\); return v; \}\), z\.number\(\)\.gte\(0\)\),\s*z\.string\(\)\.regex\(\/\^\(auto\|alias:\\\/\\\/\[A-Za-z0-9_-\]\+\)\$\/\),\s*\]\)/;
+
+  const newEsmClipStartSchema = `start: z.union([
+        z.preprocess(${esmSmartCoerceForUnion}, z.number().gte(0)),
+        z.string().regex(/^(auto|alias:\\/\\/[A-Za-z0-9_-]+)$/),
+    ])`;
+
+  if (esmClipStartPattern.test(jsContent)) {
+    jsContent = jsContent.replace(esmClipStartPattern, newEsmClipStartSchema);
+    console.log("✓ Fixed clip start in ESM JS to use smart coercion (preserves alias strings)");
+  } else {
+    console.log("⚠ Could not find clip start pattern in ESM JS to fix");
+  }
+
+  // Fix length field in clipClipSchema in ESM JS
+  const esmClipLengthPattern = /length: z\.union\(\[\s*z\.preprocess\(\(\(v\) => \{ if \(v === '' \|\| v === null \|\| v === undefined\)\s*return undefined; if \(Array\.isArray\(v\)\)\s*return v; if \(typeof v === 'string'\)\s*return Number\(v\); return v; \}\), z\.number\(\)\.gte\(0\)\),\s*z\.string\(\)\.regex\(\/\^\(auto\|end\|alias:\\\/\\\/\[A-Za-z0-9_-\]\+\)\$\/\),\s*\]\)/;
+
+  const newEsmClipLengthSchema = `length: z.union([
+        z.preprocess(${esmSmartCoerceForUnion}, z.number().gte(0)),
+        z.string().regex(/^(auto|end|alias:\\/\\/[A-Za-z0-9_-]+)$/),
+    ])`;
+
+  if (esmClipLengthPattern.test(jsContent)) {
+    jsContent = jsContent.replace(esmClipLengthPattern, newEsmClipLengthSchema);
+    console.log("✓ Fixed clip length in ESM JS to use smart coercion (preserves alias strings)");
+  } else {
+    console.log("⚠ Could not find clip length pattern in ESM JS to fix");
   }
 
   // Coercion function for ESM JS (without TypeScript type annotation)
