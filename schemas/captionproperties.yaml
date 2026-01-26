@@ -40,6 +40,10 @@
           description: The margin above the text. Pushes captions down the screen.
           type: number
           example: 0.25
+        bottom:
+          description: The margin below the text. Pushes captions up the screen.
+          type: number
+          example: 0.25
         left:
           description: The margin to the left of the text. Pushes captions to the right.
           type: number

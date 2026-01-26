@@ -39,6 +39,20 @@
             - local
             - mount
           deprecated: true
+        instance:
+          description: >-
+            The instance type to use for rendering. Different instance types have different capabilities
+            and performance characteristics. Use `a1` for high-resolution 4K renders.
+          type: string
+          example: a1
+        poster:
+          description: >-
+            Generate a poster image from a specific point on the timeline.
+          $ref: "./poster.yaml#/Poster"
+        thumbnail:
+          description: >-
+            Generate a thumbnail image from a specific point on the timeline.
+          $ref: "./thumbnail.yaml#/Thumbnail"
       required:
         - timeline
         - output
