@@ -193,6 +193,9 @@ components:
     ImageToVideoAsset:
       $ref: "./schemas/imagetovideoasset.yaml#/ImageToVideoAsset"
 
+    TextToSpeechAsset:
+      $ref: "./schemas/texttospeechasset.yaml#/TextToSpeechAsset"
+
     HtmlAsset:
       $ref: "./schemas/htmlasset.yaml#/HtmlAsset"
 
