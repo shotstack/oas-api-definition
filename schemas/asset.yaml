@@ -19,6 +19,7 @@ Asset:
       svg: '#/components/schemas/SvgAsset'
       text-to-image: '#/components/schemas/TextToImageAsset'
       image-to-video: '#/components/schemas/ImageToVideoAsset'
+      text-to-speech: '#/components/schemas/TextToSpeechAsset'
   oneOf:
     - $ref: './videoasset.yaml#/VideoAsset'
     - $ref: './imageasset.yaml#/ImageAsset'
@@ -33,4 +34,5 @@ Asset:
     - $ref: './svgasset.yaml#/SvgAsset'
     - $ref: './texttoimageasset.yaml#/TextToImageAsset'
     - $ref: './imagetovideoasset.yaml#/ImageToVideoAsset'
+    - $ref: './texttospeechasset.yaml#/TextToSpeechAsset'
   additionalProperties: false
