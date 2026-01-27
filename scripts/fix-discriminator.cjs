@@ -64,6 +64,7 @@ const newAssetSchema = `export const assetAssetSchema = z.discriminatedUnion("ty
   svgassetSvgAssetSchema,
   texttoimageassetTextToImageAssetSchema,
   imagetovideoassetImageToVideoAssetSchema,
+  texttospeechassetTextToSpeechAssetSchema,
 ]);`;
 
 if (assetUnionPattern.test(content)) {
@@ -333,6 +334,7 @@ if (fs.existsSync(zodGenCjsPath)) {
   exports.svgassetSvgAssetSchema,
   exports.texttoimageassetTextToImageAssetSchema,
   exports.imagetovideoassetImageToVideoAssetSchema,
+  exports.texttospeechassetTextToSpeechAssetSchema,
 ]);`;
 
   if (cjsAssetUnionPattern.test(cjsContent)) {
