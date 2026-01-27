@@ -116,6 +116,7 @@ if (svgFillUnionPattern.test(content)) {
 const svgAssetPattern =
   /export const svgassetSvgAssetSchema = z\.object\(\{[\s\S]*?\}\);/;
 
+// Note: Do NOT include z.preprocess here - the number coercion pass will add it
 const svgAssetSuperRefine = `export const svgassetSvgAssetSchema = z.object({
   type: z.enum(["svg"]),
   src: z.optional(z.string().min(1).max(500000)),
@@ -124,9 +125,9 @@ const svgAssetSuperRefine = `export const svgassetSvgAssetSchema = z.object({
   stroke: z.optional(svgpropertiesSvgStrokeSchema),
   shadow: z.optional(svgpropertiesSvgShadowSchema),
   transform: z.optional(svgpropertiesSvgTransformSchema),
-  opacity: z.optional(z.preprocess(((v: unknown) => { if (v === '' || v === null || v === undefined) return undefined; if (Array.isArray(v)) return v; if (typeof v === 'string') return Number(v); return v; }), z.number().gte(0).lte(1))).default(1),
-  width: z.optional(z.preprocess(((v: unknown) => { if (v === '' || v === null || v === undefined) return undefined; if (Array.isArray(v)) return v; if (typeof v === 'string') return Number(v); return v; }), z.number().int().gte(1).lte(4096))),
-  height: z.optional(z.preprocess(((v: unknown) => { if (v === '' || v === null || v === undefined) return undefined; if (Array.isArray(v)) return v; if (typeof v === 'string') return Number(v); return v; }), z.number().int().gte(1).lte(4096))),
+  opacity: z.optional(z.number().gte(0).lte(1)).default(1),
+  width: z.optional(z.number().int().gte(1).lte(4096)),
+  height: z.optional(z.number().int().gte(1).lte(4096)),
 }).superRefine((data, ctx) => {
   const hasShape = data.shape !== undefined;
   const hasSrc = data.src !== undefined && data.src.trim() !== "";
@@ -170,7 +171,8 @@ if (svgAssetPattern.test(content)) {
 
 // Coercion function that converts strings to numbers inside preprocess (doesn't rely on z.coerce)
 // Note: Arrays are passed through unchanged to allow unions with array types (e.g., scale: number | Tween[])
-const coerceNumber = `((v: unknown) => { if (v === '' || v === null || v === undefined) return undefined; if (Array.isArray(v)) return v; if (typeof v === 'string') return Number(v); return v; })`;
+// Note: Merge field templates ({{ FIELD }}) are preserved to allow the union's string alternative to match
+const coerceNumber = `((v: unknown) => { if (v === '' || v === null || v === undefined) return undefined; if (Array.isArray(v)) return v; if (typeof v === 'string') { if (/^\\{\\{\\s*[A-Za-z0-9_]+\\s*\\}\\}$/.test(v)) return v; return Number(v); } return v; })`;
 
 const plainNumberPattern = /z\.number\(\)(?!\.)/g;
 const plainNumberCount = (content.match(plainNumberPattern) || []).length;
@@ -234,6 +236,41 @@ if (mergeFieldPattern.test(content)) {
   console.log("⚠ Could not find mergefieldMergeFieldSchema to fix");
 }
 
+
+// ─── MERGE FIELD SUPPORT ──────────────────────────────────────────────────────
+// Allow merge field templates ({{ FIELD_NAME }}) in string fields with regex validation
+// and number fields. This enables the Studio SDK to preserve merge field bindings.
+console.log("Adding merge field support...");
+
+// Regex literal for merge fields: /^\{\{\s*[A-Za-z0-9_]+\s*\}\}$/
+const MERGE_FIELD_REGEX_LITERAL = `/^\\{\\{\\s*[A-Za-z0-9_]+\\s*\\}\\}$/`;
+
+// 1. z.string().regex(/pattern/) → union with merge field alternative
+// For fields with existing regex patterns (like hex colors, clip aliases), add merge field as alternative
+// Match regex literal: /.../ (handles escaped slashes inside)
+let regexFieldCount = 0;
+content = content.replace(
+  /z\.string\(\)\.regex\((\/(?:[^\/\\]|\\.)*\/)\)(?![\.\(])/g,
+  (match, existingRegex) => {
+    regexFieldCount++;
+    return `z.union([z.string().regex(${existingRegex}), z.string().regex(${MERGE_FIELD_REGEX_LITERAL})])`;
+  }
+);
+console.log(`✓ Added merge field support to ${regexFieldCount} regex-validated string fields`);
+
+// 2. Number fields with coercion → add merge field string alternative
+// The existing z.preprocess wraps numbers. We need to add union with merge field.
+// The coercion function contains many ) chars, so we use the "return v; })" anchor pattern
+// Pattern: z.preprocess(((...) => {...return v; }), z.number()...) → z.union([...], z.string().regex(MERGE_FIELD)])
+let numberFieldCount = 0;
+content = content.replace(
+  /(z\.preprocess\(\(\(v: unknown\).*?return v; }\), z\.number\(\)(?:\.[a-zA-Z]+\([^)]*\))*\))/g,
+  (match) => {
+    numberFieldCount++;
+    return `z.union([${match}, z.string().regex(${MERGE_FIELD_REGEX_LITERAL})])`;
+  }
+);
+console.log(`✓ Added merge field support to ${numberFieldCount} number fields`);
 
 fs.writeFileSync(zodGenPath, content);
 
@@ -348,6 +385,7 @@ if (fs.existsSync(zodGenCjsPath)) {
   const cjsSvgAssetPattern =
     /exports\.svgassetSvgAssetSchema = zod_1\.z\.object\(\{[\s\S]*?\}\);/;
 
+  // Note: Do NOT include z.preprocess here - the number coercion pass will add it
   const cjsSvgAssetSuperRefine = `exports.svgassetSvgAssetSchema = zod_1.z.object({
   type: zod_1.z.enum(["svg"]),
   src: zod_1.z.optional(zod_1.z.string().min(1).max(500000)),
@@ -356,9 +394,9 @@ if (fs.existsSync(zodGenCjsPath)) {
   stroke: zod_1.z.optional(exports.svgpropertiesSvgStrokeSchema),
   shadow: zod_1.z.optional(exports.svgpropertiesSvgShadowSchema),
   transform: zod_1.z.optional(exports.svgpropertiesSvgTransformSchema),
-  opacity: zod_1.z.optional(zod_1.z.preprocess(((v) => { if (v === '' || v === null || v === undefined) return undefined; if (Array.isArray(v)) return v; if (typeof v === 'string') return Number(v); return v; }), zod_1.z.number().gte(0).lte(1))).default(1),
-  width: zod_1.z.optional(zod_1.z.preprocess(((v) => { if (v === '' || v === null || v === undefined) return undefined; if (Array.isArray(v)) return v; if (typeof v === 'string') return Number(v); return v; }), zod_1.z.number().int().gte(1).lte(4096))),
-  height: zod_1.z.optional(zod_1.z.preprocess(((v) => { if (v === '' || v === null || v === undefined) return undefined; if (Array.isArray(v)) return v; if (typeof v === 'string') return Number(v); return v; }), zod_1.z.number().int().gte(1).lte(4096))),
+  opacity: zod_1.z.optional(zod_1.z.number().gte(0).lte(1)).default(1),
+  width: zod_1.z.optional(zod_1.z.number().int().gte(1).lte(4096)),
+  height: zod_1.z.optional(zod_1.z.number().int().gte(1).lte(4096)),
 }).superRefine((data, ctx) => {
   const hasShape = data.shape !== undefined;
   const hasSrc = data.src !== undefined && data.src.trim() !== "";
@@ -400,7 +438,8 @@ if (fs.existsSync(zodGenCjsPath)) {
 
   // Coercion function for CJS (without TypeScript type annotation)
   // Note: Arrays are passed through unchanged to allow unions with array types (e.g., scale: number | Tween[])
-  const cjsCoerceNumber = `((v) => { if (v === '' || v === null || v === undefined) return undefined; if (Array.isArray(v)) return v; if (typeof v === 'string') return Number(v); return v; })`;
+  // Note: Merge field templates ({{ FIELD }}) are preserved to allow the union's string alternative to match
+  const cjsCoerceNumber = `((v) => { if (v === '' || v === null || v === undefined) return undefined; if (Array.isArray(v)) return v; if (typeof v === 'string') { if (/^\\{\\{\\s*[A-Za-z0-9_]+\\s*\\}\\}$/.test(v)) return v; return Number(v); } return v; })`;
 
   const cjsPlainNumberPattern = /zod_1\.z\.number\(\)(?!\.)/g;
   const cjsPlainNumberCount = (cjsContent.match(cjsPlainNumberPattern) || [])
@@ -427,6 +466,31 @@ if (fs.existsSync(zodGenCjsPath)) {
       `✓ Added number coercion chains in CJS (${cjsChainedCount} occurrences)`
     );
   }
+
+  // ─── MERGE FIELD SUPPORT FOR CJS ─────────────────────────────────────────────
+  const CJS_MERGE_FIELD_REGEX_LITERAL = `/^\\{\\{\\s*[A-Za-z0-9_]+\\s*\\}\\}$/`;
+
+  // 1. String fields with regex validation
+  let cjsRegexFieldCount = 0;
+  cjsContent = cjsContent.replace(
+    /zod_1\.z\.string\(\)\.regex\((\/(?:[^\/\\]|\\.)*\/)\)(?![\.\(])/g,
+    (match, existingRegex) => {
+      cjsRegexFieldCount++;
+      return `zod_1.z.union([zod_1.z.string().regex(${existingRegex}), zod_1.z.string().regex(${CJS_MERGE_FIELD_REGEX_LITERAL})])`;
+    }
+  );
+  console.log(`✓ Added merge field support to ${cjsRegexFieldCount} regex-validated string fields in CJS`);
+
+  // 2. Number fields with coercion
+  let cjsNumberFieldCount = 0;
+  cjsContent = cjsContent.replace(
+    /(zod_1\.z\.preprocess\(\(\(v\).*?return v; }\), zod_1\.z\.number\(\)(?:\.[a-zA-Z]+\([^)]*\))*\))/g,
+    (match) => {
+      cjsNumberFieldCount++;
+      return `zod_1.z.union([${match}, zod_1.z.string().regex(${CJS_MERGE_FIELD_REGEX_LITERAL})])`;
+    }
+  );
+  console.log(`✓ Added merge field support to ${cjsNumberFieldCount} number fields in CJS`);
 
   fs.writeFileSync(zodGenCjsPath, cjsContent);
 }
@@ -474,7 +538,8 @@ if (fs.existsSync(zodGenJsPath)) {
 
   // Coercion function for ESM JS (without TypeScript type annotation)
   // Note: Arrays are passed through unchanged to allow unions with array types (e.g., scale: number | Tween[])
-  const esmCoerceNumber = `((v) => { if (v === '' || v === null || v === undefined) return undefined; if (Array.isArray(v)) return v; if (typeof v === 'string') return Number(v); return v; })`;
+  // Note: Merge field templates ({{ FIELD }}) are preserved to allow the union's string alternative to match
+  const esmCoerceNumber = `((v) => { if (v === '' || v === null || v === undefined) return undefined; if (Array.isArray(v)) return v; if (typeof v === 'string') { if (/^\\{\\{\\s*[A-Za-z0-9_]+\\s*\\}\\}$/.test(v)) return v; return Number(v); } return v; })`;
 
   const esmPlainNumberPattern = /z\.number\(\)(?!\.)/g;
   const esmPlainNumberCount = (jsContent.match(esmPlainNumberPattern) || [])
@@ -500,6 +565,31 @@ if (fs.existsSync(zodGenJsPath)) {
       `✓ Added number coercion chains in ESM JS (${esmChainedCount} occurrences)`
     );
   }
+
+  // ─── MERGE FIELD SUPPORT FOR ESM JS ──────────────────────────────────────────
+  const ESM_MERGE_FIELD_REGEX_LITERAL = `/^\\{\\{\\s*[A-Za-z0-9_]+\\s*\\}\\}$/`;
+
+  // 1. String fields with regex validation
+  let esmRegexFieldCount = 0;
+  jsContent = jsContent.replace(
+    /z\.string\(\)\.regex\((\/(?:[^\/\\]|\\.)*\/)\)(?![\.\(])/g,
+    (match, existingRegex) => {
+      esmRegexFieldCount++;
+      return `z.union([z.string().regex(${existingRegex}), z.string().regex(${ESM_MERGE_FIELD_REGEX_LITERAL})])`;
+    }
+  );
+  console.log(`✓ Added merge field support to ${esmRegexFieldCount} regex-validated string fields in ESM JS`);
+
+  // 2. Number fields with coercion
+  let esmNumberFieldCount = 0;
+  jsContent = jsContent.replace(
+    /(z\.preprocess\(\(\(v\).*?return v; }\), z\.number\(\)(?:\.[a-zA-Z]+\([^)]*\))*\))/g,
+    (match) => {
+      esmNumberFieldCount++;
+      return `z.union([${match}, z.string().regex(${ESM_MERGE_FIELD_REGEX_LITERAL})])`;
+    }
+  );
+  console.log(`✓ Added merge field support to ${esmNumberFieldCount} number fields in ESM JS`);
 
   fs.writeFileSync(zodGenJsPath, jsContent);
 }
