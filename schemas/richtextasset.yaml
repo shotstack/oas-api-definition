@@ -20,6 +20,9 @@ RichTextAsset:
     style:
       description: Text style properties including spacing, line height, and transformations.
       $ref: "./richtextproperties.yaml#/RichTextStyle"
+    stroke:
+      description: Text stroke (outline) properties.
+      $ref: "./richtextproperties.yaml#/RichTextStroke"
     shadow:
       description: Text shadow properties.
       $ref: "./richtextproperties.yaml#/RichTextShadow"
