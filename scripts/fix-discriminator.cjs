@@ -58,6 +58,7 @@ const newAssetSchema = `export const assetAssetSchema = z.discriminatedUnion("ty
   audioassetAudioAssetSchema,
   lumaassetLumaAssetSchema,
   captionassetCaptionAssetSchema,
+  richcaptionassetRichCaptionAssetSchema,
   htmlassetHtmlAssetSchema,
   titleassetTitleAssetSchema,
   shapeassetShapeAssetSchema,
@@ -328,6 +329,8 @@ if (fs.existsSync(zodGenCjsPath)) {
   exports.audioassetAudioAssetSchema,
   exports.lumaassetLumaAssetSchema,
   exports.captionassetCaptionAssetSchema,
+  exports.richcaptionassetRichCaptionAssetSchema,
+
   exports.htmlassetHtmlAssetSchema,
   exports.titleassetTitleAssetSchema,
   exports.shapeassetShapeAssetSchema,

@@ -1,0 +1,119 @@
+WordTiming:
+  description: Word-level timing information for caption animation.
+  type: object
+  properties:
+    text:
+      description: The word text to display.
+      type: string
+      minLength: 1
+      example: "Hello"
+    start:
+      description: Start time of the word in milliseconds.
+      type: number
+      minimum: 0
+      example: 0
+    end:
+      description: End time of the word in milliseconds.
+      type: number
+      minimum: 0
+      example: 400
+    confidence:
+      description: Speech-to-text confidence score between 0 and 1.
+      type: number
+      minimum: 0
+      maximum: 1
+      example: 0.98
+  required:
+    - text
+    - start
+    - end
+
+RichCaptionActiveFont:
+  description: Font properties for the active/highlighted word.
+  type: object
+  properties:
+    color:
+      description: The active word color using hexadecimal color notation.
+      type: string
+      pattern: "^#[A-Fa-f0-9]{6}$"
+      default: "#ffff00"
+      example: "#ffff00"
+    background:
+      description: The background color behind the active word using hexadecimal color notation.
+      type: string
+      pattern: "^#[A-Fa-f0-9]{6}$"
+      example: "#000000"
+    opacity:
+      description: The opacity of the active word where 1 is opaque and 0 is transparent.
+      type: number
+      minimum: 0
+      maximum: 1
+      default: 1
+      example: 1
+
+RichCaptionActive:
+  description: Styling properties for the active/highlighted word.
+  type: object
+  properties:
+    font:
+      description: Font properties for the active word.
+      $ref: "#/RichCaptionActiveFont"
+    stroke:
+      description: Stroke properties for the active word.
+      $ref: "./richtextproperties.yaml#/RichTextStroke"
+    scale:
+      description: Scale multiplier for the active word. 1.0 is normal size, 1.2 is 20% larger.
+      type: number
+      minimum: 0.5
+      maximum: 2.0
+      default: 1.0
+      example: 1.2
+
+RichCaptionWordAnimation:
+  description: Word-level animation properties for caption effects.
+  type: object
+  properties:
+    style:
+      description: >-
+        The animation style to apply to words:
+        <ul>
+          <li>`karaoke` - Word-by-word color fill as spoken (shows all words, highlights active)</li>
+          <li>`highlight` - Word changes to active color when spoken (shows all words)</li>
+          <li>`pop` - Each word scales up when active</li>
+          <li>`fade` - Gradual opacity transition per word</li>
+          <li>`slide` - Words slide in from a direction</li>
+          <li>`bounce` - Spring animation on word appearance</li>
+          <li>`typewriter` - Words appear one by one and stay visible</li>
+          <li>`none` - No animation, all words visible immediately</li>
+        </ul>
+      type: string
+      enum:
+        - karaoke
+        - highlight
+        - pop
+        - fade
+        - slide
+        - bounce
+        - typewriter
+        - none
+      default: "karaoke"
+      example: "karaoke"
+    speed:
+      description: Animation speed multiplier. 1.0 is normal speed, 0.5 is half speed, 2.0 is double speed.
+      type: number
+      minimum: 0.5
+      maximum: 2.0
+      default: 1.0
+      example: 1.0
+    direction:
+      description: Direction for directional animations (slide). Only applicable when style is `slide`.
+      type: string
+      enum:
+        - left
+        - right
+        - up
+        - down
+      default: "up"
+      example: "up"
+  required:
+    - style
