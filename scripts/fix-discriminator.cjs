@@ -273,16 +273,8 @@ content = content.replace(
 );
 console.log(`✓ Added merge field support to ${numberFieldCount} number fields`);
 
-// ─── CLIP SCHEMA FIT PROPERTY FILTER ──────────────────────────────────────────
-// Remove the 'fit' property from clips when the asset type is 'rich-text'
-// These asset types don't support the fit property
-//
-// IMPORTANT: We keep clipClipSchema as a plain z.object() so it can be extended with .extend()
-// We create a separate clipClipSchemaWithFitFilter that applies the transform
-// Then we update trackTrackSchema to use the filtered version
 console.log("Adding fit property filter for rich-text assets...");
 
-// Add the filtered clip schema after clipSchema export
 const clipSchemaExportPattern = /export const clipSchema = clipClipSchema;/;
 
 if (clipSchemaExportPattern.test(content)) {
@@ -536,8 +528,7 @@ if (fs.existsSync(zodGenCjsPath)) {
   );
   console.log(`✓ Added merge field support to ${cjsNumberFieldCount} number fields in CJS`);
 
-  // ─── CLIP SCHEMA FIT PROPERTY FILTER FOR CJS ────────────────────────────────
-  // Add the filtered clip schema after clipSchema export
+
   const cjsClipSchemaExportPattern = /exports\.clipSchema = exports\.clipClipSchema;/;
 
   if (cjsClipSchemaExportPattern.test(cjsContent)) {
@@ -668,8 +659,6 @@ if (fs.existsSync(zodGenJsPath)) {
   );
   console.log(`✓ Added merge field support to ${esmNumberFieldCount} number fields in ESM JS`);
 
-  // ─── CLIP SCHEMA FIT PROPERTY FILTER FOR ESM JS ─────────────────────────────
-  // Add the filtered clip schema after clipSchema export
   const esmClipSchemaExportPattern = /export const clipSchema = clipClipSchema;/;
 
   if (esmClipSchemaExportPattern.test(jsContent)) {
