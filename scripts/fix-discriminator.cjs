@@ -273,6 +273,33 @@ content = content.replace(
 );
 console.log(`✓ Added merge field support to ${numberFieldCount} number fields`);
 
+// ─── CLIP SCHEMA FIT PROPERTY FILTER ──────────────────────────────────────────
+// Remove the 'fit' property from clips when the asset type is 'rich-text' or 'rich-caption'
+// These asset types don't support the fit property
+console.log("Adding fit property filter for rich-text and rich-caption assets...");
+
+const clipSchemaPattern = /export const clipClipSchema = (z\.object\(\{[\s\S]*?\}\));/;
+
+const clipSchemaMatch = content.match(clipSchemaPattern);
+if (clipSchemaMatch) {
+  const originalSchema = clipSchemaMatch[1];
+  const newClipSchema = `export const clipClipSchema = ${originalSchema}.transform((clip) => {
+  // Remove 'fit' property for asset types that don't support it
+  if (clip.asset && typeof clip.asset === 'object' && 'type' in clip.asset) {
+    const assetType = clip.asset.type;
+    if (assetType === 'rich-text') {
+      const { fit, ...rest } = clip;
+      return rest;
+    }
+  }
+  return clip;
+});`;
+  content = content.replace(clipSchemaPattern, newClipSchema);
+  console.log("✓ Added fit property filter to clipClipSchema");
+} else {
+  console.log("⚠ Could not find clipClipSchema to add fit property filter");
+}
+
 fs.writeFileSync(zodGenPath, content);
 
 const zodGenCjsPath = path.join(__dirname, "..", "dist", "zod", "zod.gen.cjs");
@@ -494,6 +521,29 @@ if (fs.existsSync(zodGenCjsPath)) {
   );
   console.log(`✓ Added merge field support to ${cjsNumberFieldCount} number fields in CJS`);
 
+  // ─── CLIP SCHEMA FIT PROPERTY FILTER FOR CJS ────────────────────────────────
+  const cjsClipSchemaPattern = /exports\.clipClipSchema = (zod_1\.z\.object\(\{[\s\S]*?\}\));/;
+
+  const cjsClipSchemaMatch = cjsContent.match(cjsClipSchemaPattern);
+  if (cjsClipSchemaMatch) {
+    const originalSchema = cjsClipSchemaMatch[1];
+    const newCjsClipSchema = `exports.clipClipSchema = ${originalSchema}.transform((clip) => {
+  // Remove 'fit' property for asset types that don't support it
+  if (clip.asset && typeof clip.asset === 'object' && 'type' in clip.asset) {
+    const assetType = clip.asset.type;
+    if (assetType === 'rich-text') {
+      const { fit, ...rest } = clip;
+      return rest;
+    }
+  }
+  return clip;
+});`;
+    cjsContent = cjsContent.replace(cjsClipSchemaPattern, newCjsClipSchema);
+    console.log("✓ Added fit property filter to clipClipSchema in CJS");
+  } else {
+    console.log("⚠ Could not find clipClipSchema in CJS to add fit property filter");
+  }
+
   fs.writeFileSync(zodGenCjsPath, cjsContent);
 }
 
@@ -592,6 +642,29 @@ if (fs.existsSync(zodGenJsPath)) {
     }
   );
   console.log(`✓ Added merge field support to ${esmNumberFieldCount} number fields in ESM JS`);
+
+  // ─── CLIP SCHEMA FIT PROPERTY FILTER FOR ESM JS ─────────────────────────────
+  const esmClipSchemaPattern = /export const clipClipSchema = (z\.object\(\{[\s\S]*?\}\));/;
+
+  const esmClipSchemaMatch = jsContent.match(esmClipSchemaPattern);
+  if (esmClipSchemaMatch) {
+    const originalSchema = esmClipSchemaMatch[1];
+    const newEsmClipSchema = `export const clipClipSchema = ${originalSchema}.transform((clip) => {
+  // Remove 'fit' property for asset types that don't support it
+  if (clip.asset && typeof clip.asset === 'object' && 'type' in clip.asset) {
+    const assetType = clip.asset.type;
+    if (assetType === 'rich-text') {
+      const { fit, ...rest } = clip;
+      return rest;
+    }
+  }
+  return clip;
+});`;
+    jsContent = jsContent.replace(esmClipSchemaPattern, newEsmClipSchema);
+    console.log("✓ Added fit property filter to clipClipSchema in ESM JS");
+  } else {
+    console.log("⚠ Could not find clipClipSchema in ESM JS to add fit property filter");
+  }
 
   fs.writeFileSync(zodGenJsPath, jsContent);
 }
