@@ -274,6 +274,40 @@ content = content.replace(
 );
 console.log(`✓ Added merge field support to ${numberFieldCount} number fields`);
 
+console.log("Adding fit property filter for rich-text assets...");
+
+const clipSchemaExportPattern = /export const clipSchema = clipClipSchema;/;
+
+if (clipSchemaExportPattern.test(content)) {
+  const clipSchemaWithFitFilter = `export const clipSchema = clipClipSchema;
+
+// Clip schema with fit property filter for rich-text assets
+// This removes the 'fit' property when asset type is 'rich-text'
+const clipClipSchemaWithFitFilter = clipClipSchema.transform((clip) => {
+  if (clip.asset && typeof clip.asset === 'object' && 'type' in clip.asset) {
+    const assetType = clip.asset.type;
+    if (assetType === 'rich-text') {
+      const { fit, ...rest } = clip;
+      return rest;
+    }
+  }
+  return clip;
+});`;
+  content = content.replace(clipSchemaExportPattern, clipSchemaWithFitFilter);
+  console.log("✓ Added clipClipSchemaWithFitFilter");
+
+  // Update trackTrackSchema to use the filtered clip schema
+  const trackSchemaPattern = /clips: z\.array\(clipClipSchema\)/;
+  if (trackSchemaPattern.test(content)) {
+    content = content.replace(trackSchemaPattern, 'clips: z.array(clipClipSchemaWithFitFilter)');
+    console.log("✓ Updated trackTrackSchema to use clipClipSchemaWithFitFilter");
+  } else {
+    console.log("⚠ Could not find trackTrackSchema to update");
+  }
+} else {
+  console.log("⚠ Could not find clipSchema export to add fit property filter");
+}
+
 fs.writeFileSync(zodGenPath, content);
 
 const zodGenCjsPath = path.join(__dirname, "..", "dist", "zod", "zod.gen.cjs");
@@ -497,6 +531,38 @@ if (fs.existsSync(zodGenCjsPath)) {
   );
   console.log(`✓ Added merge field support to ${cjsNumberFieldCount} number fields in CJS`);
 
+
+  const cjsClipSchemaExportPattern = /exports\.clipSchema = exports\.clipClipSchema;/;
+
+  if (cjsClipSchemaExportPattern.test(cjsContent)) {
+    const cjsClipSchemaWithFitFilter = `exports.clipSchema = exports.clipClipSchema;
+
+// Clip schema with fit property filter for rich-text assets
+const clipClipSchemaWithFitFilter = exports.clipClipSchema.transform((clip) => {
+  if (clip.asset && typeof clip.asset === 'object' && 'type' in clip.asset) {
+    const assetType = clip.asset.type;
+    if (assetType === 'rich-text') {
+      const { fit, ...rest } = clip;
+      return rest;
+    }
+  }
+  return clip;
+});`;
+    cjsContent = cjsContent.replace(cjsClipSchemaExportPattern, cjsClipSchemaWithFitFilter);
+    console.log("✓ Added clipClipSchemaWithFitFilter in CJS");
+
+    // Update trackTrackSchema to use the filtered clip schema
+    const cjsTrackSchemaPattern = /clips: zod_1\.z\.array\(exports\.clipClipSchema\)/;
+    if (cjsTrackSchemaPattern.test(cjsContent)) {
+      cjsContent = cjsContent.replace(cjsTrackSchemaPattern, 'clips: zod_1.z.array(clipClipSchemaWithFitFilter)');
+      console.log("✓ Updated trackTrackSchema to use clipClipSchemaWithFitFilter in CJS");
+    } else {
+      console.log("⚠ Could not find trackTrackSchema in CJS to update");
+    }
+  } else {
+    console.log("⚠ Could not find clipSchema export in CJS to add fit property filter");
+  }
+
   fs.writeFileSync(zodGenCjsPath, cjsContent);
 }
 
@@ -595,6 +661,37 @@ if (fs.existsSync(zodGenJsPath)) {
     }
   );
   console.log(`✓ Added merge field support to ${esmNumberFieldCount} number fields in ESM JS`);
+
+  const esmClipSchemaExportPattern = /export const clipSchema = clipClipSchema;/;
+
+  if (esmClipSchemaExportPattern.test(jsContent)) {
+    const esmClipSchemaWithFitFilter = `export const clipSchema = clipClipSchema;
+
+// Clip schema with fit property filter for rich-text assets
+const clipClipSchemaWithFitFilter = clipClipSchema.transform((clip) => {
+  if (clip.asset && typeof clip.asset === 'object' && 'type' in clip.asset) {
+    const assetType = clip.asset.type;
+    if (assetType === 'rich-text') {
+      const { fit, ...rest } = clip;
+      return rest;
+    }
+  }
+  return clip;
+});`;
+    jsContent = jsContent.replace(esmClipSchemaExportPattern, esmClipSchemaWithFitFilter);
+    console.log("✓ Added clipClipSchemaWithFitFilter in ESM JS");
+
+    // Update trackTrackSchema to use the filtered clip schema
+    const esmTrackSchemaPattern = /clips: z\.array\(clipClipSchema\)/;
+    if (esmTrackSchemaPattern.test(jsContent)) {
+      jsContent = jsContent.replace(esmTrackSchemaPattern, 'clips: z.array(clipClipSchemaWithFitFilter)');
+      console.log("✓ Updated trackTrackSchema to use clipClipSchemaWithFitFilter in ESM JS");
+    } else {
+      console.log("⚠ Could not find trackTrackSchema in ESM JS to update");
+    }
+  } else {
+    console.log("⚠ Could not find clipSchema export in ESM JS to add fit property filter");
+  }
 
   fs.writeFileSync(zodGenJsPath, jsContent);
 }
