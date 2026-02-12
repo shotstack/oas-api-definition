@@ -76,4 +76,5 @@
             - easeInOutExpo
             - easeInOutCirc
             - easeInOutBack
+      additionalProperties: false
       type: object

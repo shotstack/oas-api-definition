@@ -13,6 +13,7 @@
           minimum: 0
           maximum: 1
           example: 0.3
+      additionalProperties: false
       required:
         - capture
         - scale

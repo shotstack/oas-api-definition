@@ -3,6 +3,7 @@
         Apply one or more transformations to a clip. Transformations alter the visual
         properties of a clip and can be combined to create new shapes and effects.
       type: object
+      additionalProperties: false
       properties:
         rotate: 
           $ref: "./rotatetransformation.yaml#/RotateTransformation"

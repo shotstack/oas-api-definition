@@ -40,6 +40,7 @@ RichTextFont:
     stroke:
       description: Text stroke (outline) properties.
       $ref: "#/RichTextStroke"
+  additionalProperties: false
   type: object
 
 RichTextStyle:
@@ -85,6 +86,7 @@ RichTextStyle:
     gradient:
       description: Gradient fill for text instead of solid color.
       $ref: "#/RichTextGradient"
+  additionalProperties: false
   type: object
 
 RichTextGradient:
@@ -126,8 +128,10 @@ RichTextGradient:
         required:
           - offset
           - color
+        additionalProperties: false
   required:
     - stops
+  additionalProperties: false
   type: object
 
 RichTextStroke:
@@ -152,6 +156,7 @@ RichTextStroke:
       maximum: 1
       default: 1
       example: 0.8
+  additionalProperties: false
   type: object
 
 RichTextShadow:
@@ -186,6 +191,7 @@ RichTextShadow:
       maximum: 1
       default: 0.5
       example: 0.7
+  additionalProperties: false
   type: object
 
 RichTextBackground:
@@ -209,6 +215,7 @@ RichTextBackground:
       minimum: 0
       default: 0
       example: 10
+  additionalProperties: false
   type: object
 
 RichTextAlignment:
@@ -232,6 +239,7 @@ RichTextAlignment:
         - bottom
       default: "middle"
       example: "middle"
+  additionalProperties: false
   type: object
 
 RichTextAnimation:
@@ -291,6 +299,7 @@ RichTextAnimation:
       example: "up"
   required:
     - preset
+  additionalProperties: false
   type: object
 
 RichTextBorder:
@@ -321,6 +330,7 @@ RichTextBorder:
       minimum: 0
       default: 0
       example: 10
+  additionalProperties: false
   type: object
 
 RichTextPadding:
@@ -350,5 +360,6 @@ RichTextPadding:
       minimum: 0
       default: 0
       example: 10
+  additionalProperties: false
   type: object
 

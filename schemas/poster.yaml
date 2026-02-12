@@ -7,6 +7,7 @@
           description: The point on the timeline in seconds to capture a single frame to use as the poster image.
           type: number
           example: 1
+      additionalProperties: false
       required:
         - capture
       type: object

@@ -25,6 +25,7 @@
             will start from the in trim point. A luma matte video will play until the
             file ends or the Clip length is reached.
           type: number
+      additionalProperties: false
       required:
         - type
         - src

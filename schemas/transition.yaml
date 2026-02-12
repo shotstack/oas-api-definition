@@ -185,4 +185,5 @@
             - shuffleTopLeftFast
             - zoom
           type: string
+      additionalProperties: false
       type: object

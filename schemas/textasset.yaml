@@ -50,6 +50,7 @@
             Set to an ellipsis character or custom string to indicate truncated text.
           type: string
           example: "..."
+      additionalProperties: false
       required:
         - type
         - text

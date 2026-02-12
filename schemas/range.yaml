@@ -18,4 +18,5 @@
           format: float
           minimum: 0
           example: 6
+      additionalProperties: false
       type: object

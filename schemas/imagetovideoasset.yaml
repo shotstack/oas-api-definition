@@ -45,6 +45,7 @@ ImageToVideoAsset:
       example: 1
     crop:
       $ref: './crop.yaml#/Crop'
+  additionalProperties: false
   type: object
   required:
     - type

@@ -23,6 +23,7 @@ WordTiming:
       minimum: 0
       maximum: 1
       example: 0.98
+  additionalProperties: false
   required:
     - text
     - start
@@ -50,6 +51,7 @@ RichCaptionActiveFont:
       maximum: 1
       default: 1
       example: 1
+  additionalProperties: false
 
 RichCaptionActive:
   description: Styling properties for the active/highlighted word.
@@ -68,6 +70,7 @@ RichCaptionActive:
       maximum: 2.0
       default: 1.0
       example: 1.2
+  additionalProperties: false
 
 RichCaptionWordAnimation:
   description: Word-level animation properties for caption effects.
@@ -115,5 +118,6 @@ RichCaptionWordAnimation:
         - down
       default: "up"
       example: "up"
+  additionalProperties: false
   required:
     - style

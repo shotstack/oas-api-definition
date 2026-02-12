@@ -39,6 +39,7 @@
             - local
             - mount
           deprecated: true
+      additionalProperties: false
       required:
         - timeline
         - output

@@ -58,6 +58,7 @@
           minimum: 0
           maximum: 10
           example: 1
+      additionalProperties: false
       required:
         - type
         - src

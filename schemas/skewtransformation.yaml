@@ -3,6 +3,7 @@
         Skew a clip so its edges are sheared at an angle. Use values between -100 and 100.
         Values over 3 or under -3 will skew the clip almost flat.
       type: object
+      additionalProperties: false
       properties:
         x:
           description: Skew the clip along it's x axis.

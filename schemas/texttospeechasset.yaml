@@ -78,4 +78,5 @@ TextToSpeechAsset:
         - fadeOut
         - fadeInFadeOut
       type: string
+  additionalProperties: false
   required: ['type', 'text', 'voice']

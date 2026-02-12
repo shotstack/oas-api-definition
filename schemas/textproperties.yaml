@@ -26,6 +26,7 @@
           description: The line height of the font as a ratio of the font size.
           type: number
           example: 0.85
+      additionalProperties: false
       type: object
 
     TextBackground:
@@ -54,6 +55,7 @@
           type: number
           minimum: 0
           example: 5
+      additionalProperties: false
       type: object
 
     TextAlignment:
@@ -88,6 +90,7 @@
             - top
             - center
             - bottom
+      additionalProperties: false
       type: object
 
     TextStroke:
@@ -105,6 +108,7 @@
           type: string
           pattern: "^#[A-Fa-f0-9]{6}$"
           example: "#000000"
+      additionalProperties: false
       type: object
 
     TextAnimation:
@@ -128,6 +132,7 @@
           minimum: 0.1
           maximum: 30
           example: 2
+      additionalProperties: false
       required:
         - preset
       type: object
