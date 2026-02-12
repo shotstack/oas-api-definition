@@ -1,6 +1,6 @@
 {
   "name": "@shotstack/schemas",
-  "version": "1.5.9",
+  "version": "1.6.0",
   "description": "Centralized OpenAPI schemas and TypeScript types for Shotstack API",
   "type": "module",
   "main": "dist/index.js",
@@ -23,7 +23,7 @@
     "test": "tsc --noEmit --skipLibCheck",
     "clean": "node -e \"fs=require('fs');if(fs.existsSync('dist'))fs.rmSync('dist',{recursive:true})\"",
     "bundle": "swagger-cli bundle api.oas3.yaml -o dist/api.bundled.json -t json",
-    "generate:types": "openapi-typescript dist/api.bundled.json -o dist/schema.d.ts",
+    "generate:types": "openapi-typescript dist/api.bundled.json -o dist/schema.d.ts --default-non-nullable=false",
     "generate:zod": "openapi-ts",
     "compile:zod:cjs": "tsc --declaration false --module commonjs --moduleResolution node --target ES2022 --outDir dist/zod --skipLibCheck dist/zod/zod.gen.ts && node -e \"require('fs').renameSync('dist/zod/zod.gen.js','dist/zod/zod.gen.cjs')\"",
     "compile:zod:esm": "tsc --declaration --module nodenext --moduleResolution nodenext --target ES2022 --outDir dist/zod --skipLibCheck dist/zod/zod.gen.ts",
