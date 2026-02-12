@@ -187,6 +187,21 @@ components:
     CaptionAsset:
       $ref: "./schemas/captionasset.yaml#/CaptionAsset"
 
+    RichCaptionAsset:
+      $ref: "./schemas/richcaptionasset.yaml#/RichCaptionAsset"
+
+    WordTiming:
+      $ref: "./schemas/richcaptionproperties.yaml#/WordTiming"
+
+    RichCaptionActiveFont:
+      $ref: "./schemas/richcaptionproperties.yaml#/RichCaptionActiveFont"
+
+    RichCaptionActive:
+      $ref: "./schemas/richcaptionproperties.yaml#/RichCaptionActive"
+
+    RichCaptionWordAnimation:
+      $ref: "./schemas/richcaptionproperties.yaml#/RichCaptionWordAnimation"
+
     TextToImageAsset:
       $ref: "./schemas/texttoimageasset.yaml#/TextToImageAsset"
 

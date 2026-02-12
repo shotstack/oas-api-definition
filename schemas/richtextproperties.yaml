@@ -50,6 +50,12 @@ RichTextStyle:
       type: number
       default: 0
       example: 2
+    wordSpacing:
+      description: Additional spacing between words in pixels. A value of 0 uses the font's natural space width.
+      type: number
+      minimum: 0
+      default: 0
+      example: 10
     lineHeight:
       description: The line height as a multiplier of the font size. Must be between 0 and 10.
       type: number
