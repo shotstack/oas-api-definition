@@ -215,6 +215,7 @@
           type: string
           pattern: "^[A-Za-z0-9_-]+$"
           example: "MY_VIDEO_CLIP"
+      additionalProperties: false
       required:
         - asset
         - start

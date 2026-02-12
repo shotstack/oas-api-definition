@@ -48,6 +48,7 @@ RichTextAsset:
     animation:
       description: Animation properties for text entrance effects.
       $ref: "./richtextproperties.yaml#/RichTextAnimation"
+  additionalProperties: false
   required:
     - type
     - text

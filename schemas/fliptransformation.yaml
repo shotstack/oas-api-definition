@@ -3,6 +3,7 @@
         Flip a clip vertically or horizontally. Acts as a mirror effect of the clip along
         the selected plane.
       type: object
+      additionalProperties: false
       properties:
         horizontal:
           description: Flip a clip horizontally.

@@ -308,6 +308,65 @@ const clipClipSchemaWithFitFilter = clipClipSchema.transform((clip) => {
   console.log("⚠ Could not find clipSchema export to add fit property filter");
 }
 
+// ─── STRICT MODE ENFORCEMENT ──────────────────────────────────────────────────
+// Convert all z.object({...}) to z.object({...}).strict() to reject unknown properties
+// with meaningful error messages like: "Unrecognized key(s) in object: 'container'"
+console.log("Adding strict mode to all object schemas...");
+
+function addStrictToObjects(src, prefix) {
+  // prefix is "z" for ESM TS/JS or "zod_1.z" for CJS
+  const escapedPrefix = prefix.replace(/\./g, "\\.");
+  const marker = prefix + ".object({";
+  let result = "";
+  let i = 0;
+  let strictCount = 0;
+
+  while (i < src.length) {
+    // Check if we're at a z.object({ or zod_1.z.object({ boundary
+    const remaining = src.slice(i);
+    if (remaining.startsWith(marker)) {
+      // Find the matching closing brace by counting depth
+      let depth = 0;
+      let j = i + marker.length - 1; // position of the opening {
+      depth = 1;
+      j++;
+      while (j < src.length && depth > 0) {
+        if (src[j] === "{") depth++;
+        else if (src[j] === "}") depth--;
+        j++;
+      }
+      // j is now right after the closing }
+      // Check if followed by ) to close z.object(...)
+      if (j < src.length && src[j] === ")") {
+        j++; // skip the )
+        // Check what follows - skip if already has .strict() or is followed by .superRefine(
+        const after = src.slice(j);
+        if (after.startsWith(".strict()")) {
+          // Already strict, skip
+          result += src.slice(i, j);
+          i = j;
+        } else {
+          // Insert .strict() after z.object({...})
+          result += src.slice(i, j) + ".strict()";
+          strictCount++;
+          i = j;
+        }
+      } else {
+        result += src[i];
+        i++;
+      }
+    } else {
+      result += src[i];
+      i++;
+    }
+  }
+
+  console.log(`✓ Added .strict() to ${strictCount} object schemas (${prefix})`);
+  return result;
+}
+
+content = addStrictToObjects(content, "z");
+
 fs.writeFileSync(zodGenPath, content);
 
 const zodGenCjsPath = path.join(__dirname, "..", "dist", "zod", "zod.gen.cjs");
@@ -563,6 +622,8 @@ const clipClipSchemaWithFitFilter = exports.clipClipSchema.transform((clip) => {
     console.log("⚠ Could not find clipSchema export in CJS to add fit property filter");
   }
 
+  cjsContent = addStrictToObjects(cjsContent, "zod_1.z");
+
   fs.writeFileSync(zodGenCjsPath, cjsContent);
 }
 
@@ -692,6 +753,8 @@ const clipClipSchemaWithFitFilter = clipClipSchema.transform((clip) => {
   } else {
     console.log("⚠ Could not find clipSchema export in ESM JS to add fit property filter");
   }
+
+  jsContent = addStrictToObjects(jsContent, "z");
 
   fs.writeFileSync(zodGenJsPath, jsContent);
 }

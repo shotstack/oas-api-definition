@@ -30,4 +30,5 @@
           format: float
           minimum: 0
           maximum: 1
+      additionalProperties: false
       type: object

@@ -39,6 +39,21 @@
             - local
             - mount
           deprecated: true
+        instance:
+          description: >-
+            The render instance type to use for processing the edit.
+            <ul>
+              <li>`s1` - standard instance (default)</li>
+              <li>`s2` - standard instance with more resources</li>
+              <li>`a1` - accelerated instance for faster rendering</li>
+            </ul>
+          type: string
+          enum:
+            - s1
+            - s2
+            - a1
+          default: s1
+      additionalProperties: false
       required:
         - timeline
         - output

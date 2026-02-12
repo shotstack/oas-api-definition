@@ -20,4 +20,5 @@
           minimum: 1
           maximum: 4096
           example: 800
+      additionalProperties: false
       type: object

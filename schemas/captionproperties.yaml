@@ -30,6 +30,7 @@
           description: The width of the stroke in pixels.
           type: number
           example: 0.8
+      additionalProperties: false
       type: object
 
     CaptionMargin:
@@ -48,6 +49,7 @@
           description: The margin to the right of the text. Pushes captions to the left.
           type: number
           example: 0.45
+      additionalProperties: false
       type: object
 
     CaptionBackground:
@@ -70,4 +72,5 @@
           description: The border radius of the background box in pixels.
           type: integer
           example: 18
+      additionalProperties: false
       type: object

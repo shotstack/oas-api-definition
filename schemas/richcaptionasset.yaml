@@ -84,5 +84,6 @@ RichCaptionAsset:
       maximum: 10
       default: 2
       example: 2
+  additionalProperties: false
   required:
     - type

@@ -26,6 +26,7 @@
           minimum: 0
           maximum: 250
           example: 100
+      additionalProperties: false
       required:
         - color
       type: object

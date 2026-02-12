@@ -107,6 +107,7 @@
             Offset the location of the title relative to its position on the
             screen.
           $ref: "./offset.yaml#/Offset"
+      additionalProperties: false
       required:
         - type
         - text

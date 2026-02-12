@@ -43,4 +43,5 @@
                 of an asset over time.
               items:
                 $ref: "./tween.yaml#/Tween"
+      additionalProperties: false
       type: object

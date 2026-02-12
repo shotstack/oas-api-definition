@@ -34,6 +34,7 @@ SvgRectangleShape:
     A rectangle shape with optional rounded corners.
     The rectangle is defined by its width and height dimensions.
   type: object
+  additionalProperties: false
   properties:
     type:
       description: The shape type - set to `rectangle`.
@@ -72,6 +73,7 @@ SvgCircleShape:
     A perfect circle shape defined by its radius.
     The circle is centered at the shape's position.
   type: object
+  additionalProperties: false
   properties:
     type:
       description: The shape type - set to `circle`.
@@ -93,6 +95,7 @@ SvgEllipseShape:
     An ellipse (oval) shape with separate horizontal and vertical radii.
     The ellipse is centered at the shape's position.
   type: object
+  additionalProperties: false
   properties:
     type:
       description: The shape type - set to `ellipse`.
@@ -121,6 +124,7 @@ SvgLineShape:
     A straight line shape with a specified length and thickness.
     The line is drawn horizontally by default and can be rotated using transform.
   type: object
+  additionalProperties: false
   properties:
     type:
       description: The shape type - set to `line`.
@@ -150,6 +154,7 @@ SvgPolygonShape:
     Examples: triangle (3), square (4), pentagon (5), hexagon (6), etc.
     The polygon is inscribed in a circle of the given radius.
   type: object
+  additionalProperties: false
   properties:
     type:
       description: The shape type - set to `polygon`.
@@ -183,6 +188,7 @@ SvgStarShape:
     The star is defined by outer and inner radii, creating the characteristic
     pointed appearance.
   type: object
+  additionalProperties: false
   properties:
     type:
       description: The shape type - set to `star`.
@@ -223,6 +229,7 @@ SvgArrowShape:
     An arrow shape pointing to the right by default.
     Use transform rotation to change direction.
   type: object
+  additionalProperties: false
   properties:
     type:
       description: The shape type - set to `arrow`.
@@ -265,6 +272,7 @@ SvgHeartShape:
     A heart shape commonly used for love/like icons.
     The heart is defined by a single size parameter.
   type: object
+  additionalProperties: false
   properties:
     type:
       description: The shape type - set to `heart`.
@@ -288,6 +296,7 @@ SvgCrossShape:
     A cross or plus shape with equal or different arm lengths.
     Can be styled as a plus sign (+) or a cross (x with rotation).
   type: object
+  additionalProperties: false
   properties:
     type:
       description: The shape type - set to `cross`.
@@ -323,6 +332,7 @@ SvgRingShape:
     A ring (donut/annulus) shape - a circle with a circular hole in the center.
     The ring is defined by outer and inner radii.
   type: object
+  additionalProperties: false
   properties:
     type:
       description: The shape type - set to `ring`.
@@ -365,6 +375,7 @@ SvgPathShape:
     - `A rx ry angle large-arc sweep x y` / `a` - Elliptical arc
     - `Z` / `z` - Close path
   type: object
+  additionalProperties: false
   properties:
     type:
       description: The shape type - set to `path`.

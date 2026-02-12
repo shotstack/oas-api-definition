@@ -16,6 +16,7 @@ SvgFill:
 SvgSolidFill:
   description: A solid color fill for SVG shapes.
   type: object
+  additionalProperties: false
   properties:
     type:
       description: The fill type - set to `solid` for a single color fill.
@@ -49,6 +50,7 @@ SvgGradientStop:
     A color stop in a gradient. Each stop defines a color at a specific position
     along the gradient vector. Gradients require at least 2 stops.
   type: object
+  additionalProperties: false
   properties:
     offset:
       description: |
@@ -72,6 +74,7 @@ SvgLinearGradientFill:
     A linear gradient fill that transitions colors along a straight line.
     The gradient direction is controlled by the `angle` property.
   type: object
+  additionalProperties: false
   properties:
     type:
       description: The fill type - set to `linear` for a linear gradient fill.
@@ -112,6 +115,7 @@ SvgRadialGradientFill:
     A radial gradient fill that transitions colors radiating outward from a center point.
     The gradient creates a circular or elliptical color transition.
   type: object
+  additionalProperties: false
   properties:
     type:
       description: The fill type - set to `radial` for a radial gradient fill.
@@ -143,6 +147,7 @@ SvgStroke:
     Stroke (outline) properties for SVG shapes. The stroke defines how the outline
     of a shape is painted, including its color, width, and line style.
   type: object
+  additionalProperties: false
   properties:
     color:
       description: The stroke color using hexadecimal color notation.
@@ -219,6 +224,7 @@ SvgShadow:
   description: |
     Drop shadow properties for SVG shapes. Creates a shadow effect behind the shape.
   type: object
+  additionalProperties: false
   properties:
     offsetX:
       description: |
@@ -258,6 +264,7 @@ SvgTransform:
   description: |
     Transformation properties for positioning, rotating, and scaling SVG shapes.
   type: object
+  additionalProperties: false
   properties:
     x:
       description: |

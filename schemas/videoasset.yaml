@@ -82,6 +82,7 @@
           $ref: "./crop.yaml#/Crop"
         chromaKey:
           $ref: "./chromakey.yaml#/ChromaKey"
+      additionalProperties: false
       required:
         - type
         - src

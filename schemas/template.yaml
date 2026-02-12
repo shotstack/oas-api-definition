@@ -8,6 +8,7 @@
           example: My template
         template:
           $ref: "./edit.yaml#/Edit"
+      additionalProperties: false
       required:
         - name
       type: object

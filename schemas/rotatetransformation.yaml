@@ -3,6 +3,7 @@
         Rotate a clip by the specified angle in degrees. Rotation origin
         is set based on the clips `position`.
       type: object
+      additionalProperties: false
       properties:
         angle:
           description: >-

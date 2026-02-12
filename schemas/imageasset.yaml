@@ -19,6 +19,7 @@
           example: https://s3-ap-northeast-1.amazonaws.com/my-bucket/image.jpg
         crop:
           $ref: "./crop.yaml#/Crop"
+      additionalProperties: false
       required:
         - type
         - src
