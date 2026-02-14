@@ -1,6 +1,6 @@
 {
   "name": "@shotstack/schemas",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "Centralized OpenAPI schemas and TypeScript types for Shotstack API",
   "type": "module",
   "main": "dist/index.js",
@@ -14,6 +14,11 @@
       "types": "./dist/zod/zod.gen.d.ts",
       "import": "./dist/zod/zod.gen.js",
       "require": "./dist/zod/zod.gen.cjs"
+    },
+    "./json": {
+      "types": "./dist/json-schema/index.d.ts",
+      "import": "./dist/json-schema/index.js",
+      "require": "./dist/json-schema/index.cjs"
     }
   },
   "files": [
@@ -28,9 +33,10 @@
     "compile:zod:cjs": "tsc --declaration false --module commonjs --moduleResolution node --target ES2022 --outDir dist/zod --skipLibCheck dist/zod/zod.gen.ts && node -e \"require('fs').renameSync('dist/zod/zod.gen.js','dist/zod/zod.gen.cjs')\"",
     "compile:zod:esm": "tsc --declaration --module nodenext --moduleResolution nodenext --target ES2022 --outDir dist/zod --skipLibCheck dist/zod/zod.gen.ts",
     "compile:zod": "npm run compile:zod:cjs && npm run compile:zod:esm",
+    "generate:json-schema": "node scripts/generate-json-schema.cjs",
     "fix:discriminator": "node scripts/fix-discriminator.cjs",
     "copy:index": "node -e \"require('fs').writeFileSync('dist/index.d.ts','export type * from \\\"./schema\\\";');require('fs').writeFileSync('dist/index.js','// Type-only package\\nexport {};');\"",
-    "build": "npm run clean && node -e \"require('fs').mkdirSync('dist',{recursive:true})\" && npm run bundle && npm run generate:types && npm run generate:zod && npm run fix:discriminator && npm run compile:zod && npm run copy:index",
+    "build": "npm run clean && node -e \"require('fs').mkdirSync('dist',{recursive:true})\" && npm run bundle && npm run generate:types && npm run generate:zod && npm run fix:discriminator && npm run compile:zod && npm run generate:json-schema && npm run copy:index",
     "build:docs": "cross-env ./build-docs.sh",
     "build:sdks": "cross-env ./build-sdks.sh",
     "start": "cross-env ./build-docs.sh && http-server build/docs/ -o -c-1",
