@@ -220,66 +220,6 @@ components:
     SvgAsset:
       $ref: "./schemas/svgasset.yaml#/SvgAsset"
 
-    SvgShape:
-      $ref: "./schemas/svgshapes.yaml#/SvgShape"
-
-    SvgRectangleShape:
-      $ref: "./schemas/svgshapes.yaml#/SvgRectangleShape"
-
-    SvgCircleShape:
-      $ref: "./schemas/svgshapes.yaml#/SvgCircleShape"
-
-    SvgEllipseShape:
-      $ref: "./schemas/svgshapes.yaml#/SvgEllipseShape"
-
-    SvgLineShape:
-      $ref: "./schemas/svgshapes.yaml#/SvgLineShape"
-
-    SvgPolygonShape:
-      $ref: "./schemas/svgshapes.yaml#/SvgPolygonShape"
-
-    SvgStarShape:
-      $ref: "./schemas/svgshapes.yaml#/SvgStarShape"
-
-    SvgArrowShape:
-      $ref: "./schemas/svgshapes.yaml#/SvgArrowShape"
-
-    SvgHeartShape:
-      $ref: "./schemas/svgshapes.yaml#/SvgHeartShape"
-
-    SvgCrossShape:
-      $ref: "./schemas/svgshapes.yaml#/SvgCrossShape"
-
-    SvgRingShape:
-      $ref: "./schemas/svgshapes.yaml#/SvgRingShape"
-
-    SvgPathShape:
-      $ref: "./schemas/svgshapes.yaml#/SvgPathShape"
-
-    SvgFill:
-      $ref: "./schemas/svgproperties.yaml#/SvgFill"
-
-    SvgSolidFill:
-      $ref: "./schemas/svgproperties.yaml#/SvgSolidFill"
-
-    SvgLinearGradientFill:
-      $ref: "./schemas/svgproperties.yaml#/SvgLinearGradientFill"
-
-    SvgRadialGradientFill:
-      $ref: "./schemas/svgproperties.yaml#/SvgRadialGradientFill"
-
-    SvgGradientStop:
-      $ref: "./schemas/svgproperties.yaml#/SvgGradientStop"
-
-    SvgStroke:
-      $ref: "./schemas/svgproperties.yaml#/SvgStroke"
-
-    SvgShadow:
-      $ref: "./schemas/svgproperties.yaml#/SvgShadow"
-
-    SvgTransform:
-      $ref: "./schemas/svgproperties.yaml#/SvgTransform"
-
     Transition:
       $ref: "./schemas/transition.yaml#/Transition"
 
