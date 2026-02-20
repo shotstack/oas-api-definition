@@ -1,50 +1,20 @@
 SvgAsset:
   description: |
-    The SvgAsset is used to add scalable vector graphics (SVG) shapes to a video.
-    It provides two mutually exclusive ways to define shapes:
+    The SvgAsset is used to create scalable vector graphic (SVG) assets using
+    raw SVG markup.
 
-    **Option 1: Import SVG markup using `src`**
     ```json
     {
       "type": "svg",
       "src": "<svg width=\"100\" height=\"100\"><circle cx=\"50\" cy=\"50\" r=\"40\" fill=\"#FF0000\"/></svg>"
     }
     ```
-    When using `src`, no other properties are allowed. The fill, stroke, and dimensions
-    are automatically extracted from the SVG markup.
 
-    **Option 2: Define shapes programmatically using `shape`**
-    ```json
-    {
-      "type": "svg",
-      "shape": { "type": "circle", "radius": 50 },
-      "fill": { "type": "solid", "color": "#FF0000" }
-    }
-    ```
-    When using `shape`, you can customize fill, stroke, shadow, transform, and other properties.
-    The `src` property is not allowed in this mode.
-
-    **Important:** You must provide either `src` OR `shape`, but not both.
-    These two modes are mutually exclusive.
-
-    **Available Shapes (Option 2 only):**
-    - `rectangle` - Rectangles with optional rounded corners
-    - `circle` - Perfect circles
-    - `ellipse` - Ellipses/ovals with separate x and y radii
-    - `line` - Straight lines with configurable thickness
-    - `polygon` - Regular polygons (triangle, pentagon, hexagon, etc.)
-    - `star` - Multi-pointed stars
-    - `arrow` - Directional arrows
-    - `heart` - Heart shapes
-    - `cross` - Plus/cross shapes
-    - `ring` - Donut/ring shapes
-    - `path` - Custom shapes using SVG path data
-
-    See [W3C SVG 2 Specification](https://www.w3.org/TR/SVG2/) for path data syntax.
+    See [W3C SVG 2 Specification](https://www.w3.org/TR/SVG2/) for SVG markup syntax.
   type: object
   properties:
     type:
-      description: The asset type - set to `svg` for SVG shapes.
+      description: The asset type - set to `svg` for SVG assets.
       type: string
       enum:
         - svg
@@ -52,123 +22,18 @@ SvgAsset:
       example: svg
     src:
       description: |
-        Raw SVG markup string to import. When provided, the shape is extracted
-        automatically from the SVG content.
+        Raw SVG markup string to import.
 
         **Supported elements:** `<path>`, `<rect>`, `<circle>`, `<ellipse>`,
         `<line>`, `<polygon>`, `<polyline>`
-
-        **Automatically extracted:**
-        - Path data (converted to a single combined path)
-        - Fill color (from `fill` attribute or `style`)
-        - Stroke color and width (from attributes or `style`)
-        - Dimensions (from `width`/`height` or `viewBox`)
-        - Opacity (from `opacity` attribute)
-
-        **Important:** When using `src`, no other properties (shape, fill, stroke, etc.)
-        are allowed. All styling must be defined within the SVG markup itself.
       type: string
       minLength: 1
       maxLength: 500000
       example: '<svg width="100" height="100"><circle cx="50" cy="50" r="40" fill="#3498db"/></svg>'
-    shape:
-      description: |
-        The shape definition using primitives. The `type` property within determines
-        the shape kind and its specific properties.
-
-        **Important:** When using `shape`, the `src` property is not allowed.
-      $ref: "./svgshapes.yaml#/SvgShape"
-    fill:
-      description: |
-        Fill properties for the shape interior.
-        Can be a solid color or a gradient (linear/radial).
-        If omitted, the shape will have no fill (transparent interior).
-
-        **Note:** Only allowed when using `shape`, not with `src`.
-      $ref: "./svgproperties.yaml#/SvgFill"
-    stroke:
-      description: |
-        Stroke (outline) properties for the shape.
-        If omitted, the shape will have no stroke (no outline).
-
-        **Note:** Only allowed when using `shape`, not with `src`.
-      $ref: "./svgproperties.yaml#/SvgStroke"
-    shadow:
-      description: |
-        Drop shadow properties for the shape.
-        Creates a shadow effect behind the shape.
-
-        **Note:** Only allowed when using `shape`, not with `src`.
-      $ref: "./svgproperties.yaml#/SvgShadow"
-    transform:
-      description: |
-        Transform properties for positioning, rotating, and scaling the shape.
-        The transform is applied relative to the transformation origin.
-
-        **Note:** Only allowed when using `shape`, not with `src`.
-      $ref: "./svgproperties.yaml#/SvgTransform"
-    opacity:
-      description: |
-        The overall opacity of the entire shape (including fill, stroke, and shadow).
-        `1` is fully opaque, `0` is fully transparent.
-        This is applied on top of individual fill/stroke/shadow opacity values.
-
-        **Note:** Only allowed when using `shape`, not with `src`.
-      type: number
-      minimum: 0
-      maximum: 1
-      default: 1
-      example: 1
-    width:
-      description: |
-        The width of the bounding box in pixels.
-        If specified, the shape may be scaled to fit within this width.
-        If omitted, the shape uses its natural dimensions.
-
-        **Note:** Only allowed when using `shape`, not with `src`.
-      type: integer
-      minimum: 1
-      maximum: 4096
-      example: 400
-    height:
-      description: |
-        The height of the bounding box in pixels.
-        If specified, the shape may be scaled to fit within this height.
-        If omitted, the shape uses its natural dimensions.
-
-        **Note:** Only allowed when using `shape`, not with `src`.
-      type: integer
-      minimum: 1
-      maximum: 4096
-      example: 300
   additionalProperties: false
   required:
     - type
+    - src
   example:
     type: svg
-    shape:
-      type: star
-      points: 5
-      outerRadius: 100
-      innerRadius: 50
-    fill:
-      type: linear
-      angle: 45
-      stops:
-        - offset: 0
-          color: "#FFD700"
-        - offset: 1
-          color: "#FF6B6B"
-      opacity: 1
-    stroke:
-      color: "#2C3E50"
-      width: 3
-      opacity: 1
-      lineCap: round
-      lineJoin: round
-    transform:
-      x: 200
-      y: 150
-      rotation: 0
-      scale: 1
-    opacity: 1
+    src: '<svg width="100" height="100"><circle cx="50" cy="50" r="40" fill="#3498db"/></svg>'
