@@ -29,7 +29,7 @@ RichCaptionAsset:
       maxItems: 100000
     font:
       description: Font styling properties for inactive words.
-      $ref: "./richtextproperties.yaml#/RichTextFont"
+      $ref: "./richcaptionproperties.yaml#/RichCaptionFont"
     style:
       description: Text style properties including spacing, line height, and transformations.
       $ref: "./richtextproperties.yaml#/RichTextStyle"
