@@ -17,6 +17,8 @@ const destinationProviderFixes = [
   { pattern: /provider: z\.string\(\)\.default\(["']google-drive["']\)/, replacement: 'provider: z.literal("google-drive")' },
   { pattern: /provider: z\.string\(\)\.default\(["']vimeo["']\)/, replacement: 'provider: z.literal("vimeo")' },
   { pattern: /provider: z\.string\(\)\.default\(["']tiktok["']\)/, replacement: 'provider: z.literal("tiktok")' },
+  { pattern: /provider: z\.string\(\)\.default\(["']akamai-netstorage["']\)/, replacement: 'provider: z.literal("akamai-netstorage")' },
+  { pattern: /provider: z\.string\(\)\.default\(["']azure-blob-storage["']\)/, replacement: 'provider: z.literal("azure-blob-storage")' },
 ];
 
 destinationProviderFixes.forEach(({ pattern, replacement }) => {
@@ -37,7 +39,9 @@ const newDestinationsSchema = `export const destinationsDestinationsSchema = z.d
   googleCloudStorageDestinationGoogleCloudStorageDestinationSchema,
   googleDriveDestinationGoogleDriveDestinationSchema,
   vimeoDestinationVimeoDestinationSchema,
-  tiktokDestinationTiktokDestinationSchema
+  tiktokDestinationTiktokDestinationSchema,
+  akamaiNetStorageDestinationAkamaiNetStorageDestinationSchema,
+  azureBlobStorageDestinationAzureBlobStorageDestinationSchema
 ]);`;
 
 if (destinationsUnionPattern.test(content)) {
@@ -403,7 +407,9 @@ if (fs.existsSync(zodGenCjsPath)) {
   exports.googleCloudStorageDestinationGoogleCloudStorageDestinationSchema,
   exports.googleDriveDestinationGoogleDriveDestinationSchema,
   exports.vimeoDestinationVimeoDestinationSchema,
-  exports.tiktokDestinationTiktokDestinationSchema
+  exports.tiktokDestinationTiktokDestinationSchema,
+  exports.akamaiNetStorageDestinationAkamaiNetStorageDestinationSchema,
+  exports.azureBlobStorageDestinationAzureBlobStorageDestinationSchema
 ]);`;
 
   if (cjsDestinationsUnionPattern.test(cjsContent)) {
