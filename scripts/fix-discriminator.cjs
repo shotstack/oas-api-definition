@@ -75,6 +75,102 @@ if (assetUnionPattern.test(content)) {
   console.log("⚠ Could not find assetAssetSchema to replace");
 }
 
+const svgShapeUnionPattern =
+  /export const svgshapesSvgShapeSchema = z\.union\(\[[\s\S]*?\]\);/;
+
+const newSvgShapeSchema = `export const svgshapesSvgShapeSchema = z.discriminatedUnion("type", [
+  svgshapesSvgRectangleShapeSchema,
+  svgshapesSvgCircleShapeSchema,
+  svgshapesSvgEllipseShapeSchema,
+  svgshapesSvgLineShapeSchema,
+  svgshapesSvgPolygonShapeSchema,
+  svgshapesSvgStarShapeSchema,
+  svgshapesSvgArrowShapeSchema,
+  svgshapesSvgHeartShapeSchema,
+  svgshapesSvgCrossShapeSchema,
+  svgshapesSvgRingShapeSchema,
+  svgshapesSvgPathShapeSchema,
+]);`;
+
+if (svgShapeUnionPattern.test(content)) {
+  content = content.replace(svgShapeUnionPattern, newSvgShapeSchema);
+  console.log("✓ Fixed svgshapesSvgShapeSchema discriminator");
+} else {
+  console.log("⚠ Could not find svgshapesSvgShapeSchema to replace");
+}
+
+const svgFillUnionPattern =
+  /export const svgpropertiesSvgFillSchema = z\.union\(\[[\s\S]*?\]\);/;
+
+const newSvgFillSchema = `export const svgpropertiesSvgFillSchema = z.discriminatedUnion("type", [
+  svgpropertiesSvgSolidFillSchema,
+  svgpropertiesSvgLinearGradientFillSchema,
+  svgpropertiesSvgRadialGradientFillSchema,
+]);`;
+
+if (svgFillUnionPattern.test(content)) {
+  content = content.replace(svgFillUnionPattern, newSvgFillSchema);
+  console.log("✓ Fixed svgpropertiesSvgFillSchema discriminator");
+} else {
+  console.log("⚠ Could not find svgpropertiesSvgFillSchema to replace");
+}
+
+const svgAssetPattern =
+  /export const svgassetSvgAssetSchema = z\.object\(\{[\s\S]*?\}\);/;
+
+// Note: Do NOT include z.preprocess here - the number coercion pass will add it
+const svgAssetSuperRefine = `export const svgassetSvgAssetSchema = z.object({
+  type: z.enum(["svg"]),
+  src: z.optional(z.string().min(1).max(500000)),
+  shape: z.optional(svgshapesSvgShapeSchema),
+  fill: z.optional(svgpropertiesSvgFillSchema),
+  stroke: z.optional(svgpropertiesSvgStrokeSchema),
+  shadow: z.optional(svgpropertiesSvgShadowSchema),
+  transform: z.optional(svgpropertiesSvgTransformSchema),
+  opacity: z.optional(z.number().gte(0).lte(1)).default(1),
+  width: z.optional(z.number().int().gte(1).lte(4096)),
+  height: z.optional(z.number().int().gte(1).lte(4096)),
+}).superRefine((data, ctx) => {
+  const hasShape = data.shape !== undefined;
+  const hasSrc = data.src !== undefined && data.src.trim() !== "";
+
+  if (!hasShape && !hasSrc) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      message: "Either 'src' or 'shape' must be provided",
+      path: [],
+    });
+  }
+
+  if (hasShape && hasSrc) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      message: "Provide either 'src' or 'shape', not both",
+      path: ["src"],
+    });
+  }
+
+  if (hasSrc) {
+    const disallowedProps = ["shape", "fill", "stroke", "shadow", "transform", "width", "height"];
+    for (const prop of disallowedProps) {
+      if (data[prop] !== undefined) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: \`'\${prop}' is not allowed when using 'src'. Only 'type' and 'src' are allowed in import mode\`,
+          path: [prop],
+        });
+      }
+    }
+  }
+});`;
+
+if (svgAssetPattern.test(content)) {
+  content = content.replace(svgAssetPattern, svgAssetSuperRefine);
+  console.log("✓ Added superRefine validation to svgassetSvgAssetSchema for mutual exclusivity");
+} else {
+  console.log("⚠ Could not find svgassetSvgAssetSchema to add superRefine validation");
+}
+
 // Coercion function that converts strings to numbers inside preprocess (doesn't rely on z.coerce)
 // Note: Arrays are passed through unchanged to allow unions with array types (e.g., scale: number | Tween[])
 // Note: Merge field templates ({{ FIELD }}) are preserved to allow the union's string alternative to match
@@ -342,6 +438,102 @@ if (fs.existsSync(zodGenCjsPath)) {
     console.log("✓ Fixed assetAssetSchema discriminator in CJS");
   }
 
+  const cjsSvgShapeUnionPattern =
+    /exports\.svgshapesSvgShapeSchema = zod_1\.z\.union\(\[[\s\S]*?\]\);/;
+
+  const newCjsSvgShapeSchema = `exports.svgshapesSvgShapeSchema = zod_1.z.discriminatedUnion("type", [
+  exports.svgshapesSvgRectangleShapeSchema,
+  exports.svgshapesSvgCircleShapeSchema,
+  exports.svgshapesSvgEllipseShapeSchema,
+  exports.svgshapesSvgLineShapeSchema,
+  exports.svgshapesSvgPolygonShapeSchema,
+  exports.svgshapesSvgStarShapeSchema,
+  exports.svgshapesSvgArrowShapeSchema,
+  exports.svgshapesSvgHeartShapeSchema,
+  exports.svgshapesSvgCrossShapeSchema,
+  exports.svgshapesSvgRingShapeSchema,
+  exports.svgshapesSvgPathShapeSchema,
+]);`;
+
+  if (cjsSvgShapeUnionPattern.test(cjsContent)) {
+    cjsContent = cjsContent.replace(
+      cjsSvgShapeUnionPattern,
+      newCjsSvgShapeSchema
+    );
+    console.log("✓ Fixed svgshapesSvgShapeSchema discriminator in CJS");
+  }
+
+  const cjsSvgFillUnionPattern =
+    /exports\.svgpropertiesSvgFillSchema = zod_1\.z\.union\(\[[\s\S]*?\]\);/;
+
+  const newCjsSvgFillSchema = `exports.svgpropertiesSvgFillSchema = zod_1.z.discriminatedUnion("type", [
+  exports.svgpropertiesSvgSolidFillSchema,
+  exports.svgpropertiesSvgLinearGradientFillSchema,
+  exports.svgpropertiesSvgRadialGradientFillSchema,
+]);`;
+
+  if (cjsSvgFillUnionPattern.test(cjsContent)) {
+    cjsContent = cjsContent.replace(
+      cjsSvgFillUnionPattern,
+      newCjsSvgFillSchema
+    );
+    console.log("✓ Fixed svgpropertiesSvgFillSchema discriminator in CJS");
+  }
+
+  const cjsSvgAssetPattern =
+    /exports\.svgassetSvgAssetSchema = zod_1\.z\.object\(\{[\s\S]*?\}\);/;
+
+  // Note: Do NOT include z.preprocess here - the number coercion pass will add it
+  const cjsSvgAssetSuperRefine = `exports.svgassetSvgAssetSchema = zod_1.z.object({
+  type: zod_1.z.enum(["svg"]),
+  src: zod_1.z.optional(zod_1.z.string().min(1).max(500000)),
+  shape: zod_1.z.optional(exports.svgshapesSvgShapeSchema),
+  fill: zod_1.z.optional(exports.svgpropertiesSvgFillSchema),
+  stroke: zod_1.z.optional(exports.svgpropertiesSvgStrokeSchema),
+  shadow: zod_1.z.optional(exports.svgpropertiesSvgShadowSchema),
+  transform: zod_1.z.optional(exports.svgpropertiesSvgTransformSchema),
+  opacity: zod_1.z.optional(zod_1.z.number().gte(0).lte(1)).default(1),
+  width: zod_1.z.optional(zod_1.z.number().int().gte(1).lte(4096)),
+  height: zod_1.z.optional(zod_1.z.number().int().gte(1).lte(4096)),
+}).superRefine((data, ctx) => {
+  const hasShape = data.shape !== undefined;
+  const hasSrc = data.src !== undefined && data.src.trim() !== "";
+
+  if (!hasShape && !hasSrc) {
+    ctx.addIssue({
+      code: zod_1.z.ZodIssueCode.custom,
+      message: "Either 'src' or 'shape' must be provided",
+      path: [],
+    });
+  }
+
+  if (hasShape && hasSrc) {
+    ctx.addIssue({
+      code: zod_1.z.ZodIssueCode.custom,
+      message: "Provide either 'src' or 'shape', not both",
+      path: ["src"],
+    });
+  }
+
+  if (hasSrc) {
+    const disallowedProps = ["shape", "fill", "stroke", "shadow", "transform", "width", "height"];
+    for (const prop of disallowedProps) {
+      if (data[prop] !== undefined) {
+        ctx.addIssue({
+          code: zod_1.z.ZodIssueCode.custom,
+          message: "'" + prop + "' is not allowed when using 'src'. Only 'type' and 'src' are allowed in import mode",
+          path: [prop],
+        });
+      }
+    }
+  }
+});`;
+
+  if (cjsSvgAssetPattern.test(cjsContent)) {
+    cjsContent = cjsContent.replace(cjsSvgAssetPattern, cjsSvgAssetSuperRefine);
+    console.log("✓ Added superRefine validation to svgassetSvgAssetSchema in CJS");
+  }
+
   // Coercion function for CJS (without TypeScript type annotation)
   // Note: Arrays are passed through unchanged to allow unions with array types (e.g., scale: number | Tween[])
   // Note: Merge field templates ({{ FIELD }}) are preserved to allow the union's string alternative to match
@@ -459,6 +651,21 @@ if (fs.existsSync(zodGenJsPath)) {
   if (jsAssetUnionPattern.test(jsContent)) {
     jsContent = jsContent.replace(jsAssetUnionPattern, newAssetSchema);
     console.log("✓ Fixed assetAssetSchema discriminator in ESM JS");
+  }
+
+  if (svgShapeUnionPattern.test(jsContent)) {
+    jsContent = jsContent.replace(svgShapeUnionPattern, newSvgShapeSchema);
+    console.log("✓ Fixed svgshapesSvgShapeSchema discriminator in ESM JS");
+  }
+
+  if (svgFillUnionPattern.test(jsContent)) {
+    jsContent = jsContent.replace(svgFillUnionPattern, newSvgFillSchema);
+    console.log("✓ Fixed svgpropertiesSvgFillSchema discriminator in ESM JS");
+  }
+
+  if (svgAssetPattern.test(jsContent)) {
+    jsContent = jsContent.replace(svgAssetPattern, svgAssetSuperRefine);
+    console.log("✓ Added superRefine validation to svgassetSvgAssetSchema in ESM JS");
   }
 
   // Coercion function for ESM JS (without TypeScript type annotation)
