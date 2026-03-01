@@ -1,0 +1,17 @@
+    AzureBlobStorageDestination:
+      description: >-
+        Send videos and assets to [Azure Blob Storage](https://learn.microsoft.com/en-us/azure/storage/blobs/). Send files to
+        any container with a custom prefix and filename. Azure credentials are required and added via the
+        [dashboard](https://dashboard.shotstack.io/integrations/azure-blob-storage), not in the request.
+      properties:
+        provider:
+          description: The destination to send assets to - set to `azure-blob-storage` for Azure Blob Storage.
+          type: string
+          default: azure-blob-storage
+          example: azure-blob-storage
+        options:
+          description: Additional Azure Blob Storage configuration options.
+          $ref: "./azureBlobStorageDestinationOptions.yaml#/AzureBlobStorageDestinationOptions"
+      type: object
+      required:
+        - provider
