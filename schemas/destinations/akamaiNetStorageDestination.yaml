@@ -1,0 +1,17 @@
+    AkamaiNetStorageDestination:
+      description: >-
+        Send videos and assets to [Akamai NetStorage](https://techdocs.akamai.com/netstorage-usage/docs). Send files to
+        your NetStorage upload directory with a custom path and filename. Akamai credentials are required and added via the
+        [dashboard](https://dashboard.shotstack.io/integrations/akamai-netstorage), not in the request.
+      properties:
+        provider:
+          description: The destination to send assets to - set to `akamai-netstorage` for Akamai NetStorage.
+          type: string
+          default: akamai-netstorage
+          example: akamai-netstorage
+        options:
+          description: Additional Akamai NetStorage configuration options.
+          $ref: "./akamaiNetStorageDestinationOptions.yaml#/AkamaiNetStorageDestinationOptions"
+      type: object
+      required:
+        - provider
