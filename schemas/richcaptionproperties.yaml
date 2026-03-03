@@ -121,3 +121,45 @@ RichCaptionWordAnimation:
   additionalProperties: false
   required:
     - style
+
+RichCaptionFont:
+  description: Font properties for rich captions. Defaults to Roboto.
+  properties:
+    family:
+      description: >-
+        The font family name. This must be the Family name embedded in the font, i.e. "Roboto".
+      type: string
+      example: "Roboto"
+      default: "Roboto"
+    size:
+      description: The size of the font in pixels (px). Must be between 1 and 500.
+      type: integer
+      minimum: 1
+      maximum: 500
+      default: 24
+      example: 48
+    weight:
+      description: >-
+        The weight of the font. Can be a number (100-900) or a string ('normal', 'bold', etc.).
+        100 is lightest, 900 is heaviest (boldest).
+      default: "400"
+    color:
+      description: The text color using hexadecimal color notation.
+      type: string
+      pattern: "^#[A-Fa-f0-9]{6}$"
+      default: "#ffffff"
+      example: "#ffffff"
+    opacity:
+      description: The opacity of the text where 1 is opaque and 0 is transparent.
+      type: number
+      minimum: 0
+      maximum: 1
+      default: 1
+      example: 0.9
+    background:
+      description: The background color behind the text using hexadecimal color notation.
+      type: string
+      pattern: "^#[A-Fa-f0-9]{6}$"
+      example: "#000000"
+  additionalProperties: false
+  type: object
