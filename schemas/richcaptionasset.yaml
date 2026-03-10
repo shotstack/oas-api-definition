@@ -15,18 +15,10 @@ RichCaptionAsset:
         The URL to an SRT or VTT subtitles file, or an alias reference to auto-generate captions
         from an audio or video clip. For file URLs, the URL must be publicly accessible or include
         credentials. For auto-captioning, use the format `alias://clip-name` where clip-name is
-        the alias of an audio, video, or text-to-speech clip. Mutually exclusive with `words`.
+        the alias of an audio, video, or text-to-speech clip.
       type: string
       minLength: 1
       example: "alias://audio"
-    words:
-      description: >-
-        Pre-provided word-level timing data. Use this instead of `src` when you have word timestamps
-        from an external source. Mutually exclusive with `src`.
-      type: array
-      items:
-        $ref: "./richcaptionproperties.yaml#/WordTiming"
-      maxItems: 100000
     font:
       description: Font styling properties for inactive words.
       $ref: "./richcaptionproperties.yaml#/RichCaptionFont"
@@ -42,6 +34,9 @@ RichCaptionAsset:
     background:
       description: Background styling properties for the caption bounding box.
       $ref: "./richtextproperties.yaml#/RichTextBackground"
+    border:
+      description: Border styling properties for the caption bounding box.
+      $ref: "./richtextproperties.yaml#/RichTextBorder"
     padding:
       description: >-
         Padding inside the caption bounding box. Can be a single number (applied to all sides)
@@ -61,29 +56,7 @@ RichCaptionAsset:
     wordAnimation:
       description: Word-level animation properties controlling how words are highlighted or revealed.
       $ref: "./richcaptionproperties.yaml#/RichCaptionWordAnimation"
-    position:
-      description: Vertical position of the caption on screen.
-      type: string
-      enum:
-        - top
-        - center
-        - bottom
-      default: "bottom"
-      example: "bottom"
-    maxWidth:
-      description: Maximum width of the caption as a ratio of the frame width. Must be between 0.1 and 1.
-      type: number
-      minimum: 0.1
-      maximum: 1
-      default: 0.9
-      example: 0.85
-    maxLines:
-      description: Maximum number of lines to display at once. Must be between 1 and 10.
-      type: integer
-      minimum: 1
-      maximum: 10
-      default: 2
-      example: 2
   additionalProperties: false
   required:
     - type
+    - src

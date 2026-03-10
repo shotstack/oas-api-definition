@@ -1,34 +1,3 @@
-WordTiming:
-  description: Word-level timing information for caption animation.
-  type: object
-  properties:
-    text:
-      description: The word text to display.
-      type: string
-      minLength: 1
-      example: "Hello"
-    start:
-      description: Start time of the word in milliseconds.
-      type: number
-      minimum: 0
-      example: 0
-    end:
-      description: End time of the word in milliseconds.
-      type: number
-      minimum: 0
-      example: 400
-    confidence:
-      description: Speech-to-text confidence score between 0 and 1.
-      type: number
-      minimum: 0
-      maximum: 1
-      example: 0.98
-  additionalProperties: false
-  required:
-    - text
-    - start
-    - end
-
 RichCaptionActiveFont:
   description: Font properties for the active/highlighted word.
   type: object

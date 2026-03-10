@@ -190,9 +190,6 @@ components:
     RichCaptionAsset:
       $ref: "./schemas/richcaptionasset.yaml#/RichCaptionAsset"
 
-    WordTiming:
-      $ref: "./schemas/richcaptionproperties.yaml#/WordTiming"
-
     RichCaptionActiveFont:
       $ref: "./schemas/richcaptionproperties.yaml#/RichCaptionActiveFont"
 
