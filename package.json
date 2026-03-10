@@ -32,20 +32,21 @@
     "generate:zod": "openapi-ts",
     "compile:zod:cjs": "tsc --declaration false --module commonjs --moduleResolution node --target ES2022 --outDir dist/zod --skipLibCheck dist/zod/zod.gen.ts && node -e \"require('fs').renameSync('dist/zod/zod.gen.js','dist/zod/zod.gen.cjs')\"",
     "compile:zod:esm": "tsc --declaration --module nodenext --moduleResolution nodenext --target ES2022 --outDir dist/zod --skipLibCheck dist/zod/zod.gen.ts",
-    "compile:zod": "npm run compile:zod:cjs && npm run compile:zod:esm",
+    "compile:zod": "pnpm compile:zod:cjs && pnpm compile:zod:esm",
     "generate:json-schema": "node scripts/generate-json-schema.cjs",
     "fix:discriminator": "node scripts/fix-discriminator.cjs",
     "copy:index": "node -e \"require('fs').writeFileSync('dist/index.d.ts','export type * from \\\"./schema\\\";');require('fs').writeFileSync('dist/index.js','// Type-only package\\nexport {};');\"",
-    "build": "npm run clean && node -e \"require('fs').mkdirSync('dist',{recursive:true})\" && npm run bundle && npm run generate:types && npm run generate:zod && npm run fix:discriminator && npm run compile:zod && npm run generate:json-schema && npm run copy:index",
+    "build": "pnpm clean && node -e \"require('fs').mkdirSync('dist',{recursive:true})\" && pnpm bundle && pnpm generate:types && pnpm generate:zod && pnpm fix:discriminator && pnpm compile:zod && pnpm generate:json-schema && pnpm copy:index",
     "build:docs": "cross-env ./build-docs.sh",
     "build:sdks": "cross-env ./build-sdks.sh",
     "start": "cross-env ./build-docs.sh && http-server build/docs/ -o -c-1",
     "deploy:docs": "aws s3 sync build/docs/ s3://shotstack.io/docs/api",
-    "prepublishOnly": "npm run build && npm run test"
+    "prepublishOnly": "node scripts/publish-guard.cjs && pnpm build && pnpm test",
+    "test:smoke": "node tests/smoke.cjs"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@bitbucket.org/shotstack/oas-api-definition.git"
+    "url": "https://github.com/shotstack/oas-api-definition.git"
   },
   "author": "Shotstack",
   "license": "MIT",
@@ -68,12 +69,26 @@
   "devDependencies": {
     "@apidevtools/swagger-cli": "^4.0.4",
     "@hey-api/openapi-ts": "^0.89.2",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/commit-analyzer": "^13.0.1",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^12.0.6",
+    "@semantic-release/npm": "^13.1.5",
+    "@semantic-release/release-notes-generator": "^14.1.0",
     "ajv": "^8.11.2",
     "cross-env": "^7.0.3",
     "http-server": "^14.1.0",
     "openapi-typescript": "^7.4.4",
+    "semantic-release": "^25.0.3",
     "tsx": "^4.21.0",
     "typescript": "^5.7.2",
     "widdershins": "^4.0.1"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }
