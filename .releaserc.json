@@ -1,7 +1,15 @@
 {
   "branches": ["main"],
   "plugins": [
-    "@semantic-release/commit-analyzer",
+    ["@semantic-release/commit-analyzer", {
+      "preset": "angular",
+      "releaseRules": [
+        { "message": "*fix/*", "release": "patch" },
+        { "message": "*hotfix/*", "release": "patch" },
+        { "message": "*feat/*", "release": "minor" },
+        { "message": "*release/*", "release": "major" }
+      ]
+    }],
     "@semantic-release/release-notes-generator",
     "@semantic-release/changelog",
     ["@semantic-release/npm", {
