@@ -20,6 +20,15 @@ RichCaptionActiveFont:
       maximum: 1
       default: 1
       example: 1
+    textDecoration:
+      description: Text decoration to apply to the active word.
+      type: string
+      enum:
+        - none
+        - underline
+        - line-through
+      default: "none"
+      example: "underline"
   additionalProperties: false
 
 RichCaptionActive:
@@ -32,6 +41,9 @@ RichCaptionActive:
     stroke:
       description: Stroke properties for the active word.
       $ref: "./richtextproperties.yaml#/RichTextStroke"
+    shadow:
+      description: Shadow properties for the active word. Overrides the base shadow when a word is active.
+      $ref: "./richtextproperties.yaml#/RichTextShadow"
     scale:
       description: Scale multiplier for the active word. 1.0 is normal size, 1.2 is 20% larger.
       type: number
@@ -130,5 +142,14 @@ RichCaptionFont:
       type: string
       pattern: "^#[A-Fa-f0-9]{6}$"
       example: "#000000"
+    textDecoration:
+      description: Text decoration to apply to all words.
+      type: string
+      enum:
+        - none
+        - underline
+        - line-through
+      default: "none"
+      example: "underline"
   additionalProperties: false
   type: object
