@@ -1,3 +1,10 @@
+# [1.10.0](https://github.com/shotstack/oas-api-definition/compare/v1.9.0...v1.10.0) (2026-03-12)
+
+
+### Bug Fixes
+
+* Add type-based fallback release rules for conventional commits ([a4e8128](https://github.com/shotstack/oas-api-definition/commit/a4e812809f6622aa04d88a257e5a87737702fee0))
+
 # [1.9.0](https://github.com/shotstack/oas-api-definition/compare/v1.8.7...v1.9.0) (2026-03-11)
 
 
