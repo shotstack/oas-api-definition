@@ -1,3 +1,10 @@
+## [1.10.1](https://github.com/shotstack/oas-api-definition/compare/v1.10.0...v1.10.1) (2026-03-12)
+
+
+### Bug Fixes
+
+* added shadow and textdecorations ([ee84599](https://github.com/shotstack/oas-api-definition/commit/ee84599ce0d51c51eb31b0a27c0f1d6578a6cbb3))
+
 # [1.10.0](https://github.com/shotstack/oas-api-definition/compare/v1.9.0...v1.10.0) (2026-03-12)
 
 
