@@ -1,6 +1,6 @@
 # @shotstack/schemas
 
-Centralized OpenAPI schemas and TypeScript types for the Shotstack API.
+Centralized OpenAPI schemas and TypeScript types for the Shotstack API
 
 ## Installation
 
