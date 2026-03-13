@@ -39,11 +39,19 @@ RichCaptionActive:
       description: Font properties for the active word.
       $ref: "#/RichCaptionActiveFont"
     stroke:
-      description: Stroke properties for the active word.
-      $ref: "./richtextproperties.yaml#/RichTextStroke"
+      description: Stroke properties for the active word. Set to "none" to explicitly remove the base stroke on the active word.
+      oneOf:
+        - $ref: "./richtextproperties.yaml#/RichTextStroke"
+        - type: string
+          enum:
+            - none
     shadow:
-      description: Shadow properties for the active word. Overrides the base shadow when a word is active.
-      $ref: "./richtextproperties.yaml#/RichTextShadow"
+      description: Shadow properties for the active word. Set to "none" to explicitly remove the base shadow on the active word.
+      oneOf:
+        - $ref: "./richtextproperties.yaml#/RichTextShadow"
+        - type: string
+          enum:
+            - none
     scale:
       description: Scale multiplier for the active word. 1.0 is normal size, 1.2 is 20% larger.
       type: number
@@ -82,13 +90,6 @@ RichCaptionWordAnimation:
         - none
       default: "karaoke"
       example: "karaoke"
-    speed:
-      description: Animation speed multiplier. 1.0 is normal speed, 0.5 is half speed, 2.0 is double speed.
-      type: number
-      minimum: 0.5
-      maximum: 2.0
-      default: 1.0
-      example: 1.0
     direction:
       description: Direction for directional animations (slide). Only applicable when style is `slide`.
       type: string
