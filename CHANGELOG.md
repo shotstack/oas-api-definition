@@ -1,3 +1,10 @@
+## [1.9.1](https://github.com/shotstack/oas-api-definition/compare/v1.9.0...v1.9.1) (2026-03-13)
+
+
+### Bug Fixes
+
+*  added none for shadow and stroke and removed speed ([3370824](https://github.com/shotstack/oas-api-definition/commit/3370824033f594785cfd3a8a0491d6a46130f66c))
+
 # [1.9.0](https://github.com/shotstack/oas-api-definition/compare/v1.8.7...v1.9.0) (2026-03-12)
 
 
