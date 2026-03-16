@@ -1,3 +1,10 @@
+## [1.9.3](https://github.com/shotstack/oas-api-definition/compare/v1.9.2...v1.9.3) (2026-03-16)
+
+
+### Bug Fixes
+
+* remove wordspacing from rich-caption ([4955e14](https://github.com/shotstack/oas-api-definition/commit/4955e14e34ce815f06d9415b6e42398c5972997d))
+
 ## [1.9.2](https://github.com/shotstack/oas-api-definition/compare/v1.9.1...v1.9.2) (2026-03-16)
 
 
