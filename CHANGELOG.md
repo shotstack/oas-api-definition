@@ -1,3 +1,10 @@
+## [1.9.2](https://github.com/shotstack/oas-api-definition/compare/v1.9.1...v1.9.2) (2026-03-16)
+
+
+### Bug Fixes
+
+* Removed textDecoration from RichCaptionFont and Changed wordAnimation.style default from "karaoke" to "highlight" ([e8601cf](https://github.com/shotstack/oas-api-definition/commit/e8601cf4dd2d1202f15d2bc33a04e0c6632d3ef5))
+
 ## [1.9.1](https://github.com/shotstack/oas-api-definition/compare/v1.9.0...v1.9.1) (2026-03-13)
 
 
