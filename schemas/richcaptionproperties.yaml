@@ -145,3 +145,43 @@ RichCaptionFont:
       example: "#000000"
   additionalProperties: false
   type: object
+
+RichCaptionStyle:
+  description: Text style properties for rich captions. Same as RichTextStyle but without wordSpacing.
+  properties:
+    letterSpacing:
+      description: Additional spacing between letters in pixels. Can be negative for tighter spacing.
+      type: number
+      default: 0
+      example: 2
+    lineHeight:
+      description: The line height as a multiplier of the font size. Must be between 0 and 10.
+      type: number
+      minimum: 0
+      maximum: 10
+      default: 1.2
+      example: 1.5
+    textTransform:
+      description: Text transformation to apply.
+      type: string
+      enum:
+        - none
+        - uppercase
+        - lowercase
+        - capitalize
+      default: "none"
+      example: "uppercase"
+    textDecoration:
+      description: Text decoration to apply.
+      type: string
+      enum:
+        - none
+        - underline
+        - line-through
+      default: "none"
+      example: "underline"
+    gradient:
+      description: Gradient fill for text instead of solid color.
+      $ref: "./richtextproperties.yaml#/RichTextGradient"
+  additionalProperties: false
+  type: object
