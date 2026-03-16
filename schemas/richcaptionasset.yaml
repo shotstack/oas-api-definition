@@ -24,7 +24,7 @@ RichCaptionAsset:
       $ref: "./richcaptionproperties.yaml#/RichCaptionFont"
     style:
       description: Text style properties including spacing, line height, and transformations.
-      $ref: "./richtextproperties.yaml#/RichTextStyle"
+      $ref: "./richcaptionproperties.yaml#/RichCaptionStyle"
     stroke:
       description: Text stroke (outline) properties for inactive words.
       $ref: "./richtextproperties.yaml#/RichTextStroke"
