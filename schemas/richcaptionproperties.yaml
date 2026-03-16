@@ -88,8 +88,8 @@ RichCaptionWordAnimation:
         - bounce
         - typewriter
         - none
-      default: "karaoke"
-      example: "karaoke"
+      default: "highlight"
+      example: "highlight"
     direction:
       description: Direction for directional animations (slide). Only applicable when style is `slide`.
       type: string
@@ -143,14 +143,5 @@ RichCaptionFont:
       type: string
       pattern: "^#[A-Fa-f0-9]{6}$"
       example: "#000000"
-    textDecoration:
-      description: Text decoration to apply to all words.
-      type: string
-      enum:
-        - none
-        - underline
-        - line-through
-      default: "none"
-      example: "underline"
   additionalProperties: false
   type: object
