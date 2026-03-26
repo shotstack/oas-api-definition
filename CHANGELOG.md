@@ -1,3 +1,11 @@
+## [1.9.4](https://github.com/shotstack/oas-api-definition/compare/v1.9.3...v1.9.4) (2026-03-26)
+
+
+### Bug Fixes
+
+*  fixed the build issue ([d52f7cb](https://github.com/shotstack/oas-api-definition/commit/d52f7cba332afc25da72fa2c4a070134d4fac74d))
+* update wordanimation to animation ([f7e6d80](https://github.com/shotstack/oas-api-definition/commit/f7e6d80514f37f05138fd4d6451fb34581f16991))
+
 ## [1.9.3](https://github.com/shotstack/oas-api-definition/compare/v1.9.2...v1.9.3) (2026-03-16)
 
 
