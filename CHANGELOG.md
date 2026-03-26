@@ -1,3 +1,10 @@
+## [1.9.5](https://github.com/shotstack/oas-api-definition/compare/v1.9.4...v1.9.5) (2026-03-26)
+
+
+### Bug Fixes
+
+*  OAS schema updated. RichCaptionActiveFont now has size ([85f051f](https://github.com/shotstack/oas-api-definition/commit/85f051f3afcb098c770a7ff20c153a4143f16e5b))
+
 ## [1.9.4](https://github.com/shotstack/oas-api-definition/compare/v1.9.3...v1.9.4) (2026-03-26)
 
 
