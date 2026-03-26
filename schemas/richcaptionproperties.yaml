@@ -20,6 +20,12 @@ RichCaptionActiveFont:
       maximum: 1
       default: 1
       example: 1
+    size:
+      description: The font size of the active word in pixels. Overrides the scale property when set.
+      type: number
+      minimum: 1
+      maximum: 500
+      example: 120
     textDecoration:
       description: Text decoration to apply to the active word.
       type: string
@@ -171,6 +177,12 @@ RichCaptionStyle:
         - capitalize
       default: "none"
       example: "uppercase"
+    size:
+      description: The font size of the active word in pixels. Overrides the scale property when set.
+      type: number
+      minimum: 1
+      maximum: 500
+      example: 120
     textDecoration:
       description: Text decoration to apply.
       type: string
