@@ -196,8 +196,8 @@ components:
     RichCaptionActive:
       $ref: "./schemas/richcaptionproperties.yaml#/RichCaptionActive"
 
-    RichCaptionWordAnimation:
-      $ref: "./schemas/richcaptionproperties.yaml#/RichCaptionWordAnimation"
+    RichCaptionAnimation:
+      $ref: "./schemas/richcaptionproperties.yaml#/RichCaptionAnimation"
 
     TextToImageAsset:
       $ref: "./schemas/texttoimageasset.yaml#/TextToImageAsset"
