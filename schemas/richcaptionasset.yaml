@@ -53,9 +53,9 @@ RichCaptionAsset:
     active:
       description: Styling properties for the active/highlighted word. These override the base styling when a word is being spoken.
       $ref: "./richcaptionproperties.yaml#/RichCaptionActive"
-    wordAnimation:
+    animation:
       description: Word-level animation properties controlling how words are highlighted or revealed.
-      $ref: "./richcaptionproperties.yaml#/RichCaptionWordAnimation"
+      $ref: "./richcaptionproperties.yaml#/RichCaptionAnimation"
   additionalProperties: false
   required:
     - type

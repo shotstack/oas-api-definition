@@ -61,7 +61,7 @@ RichCaptionActive:
       example: 1.2
   additionalProperties: false
 
-RichCaptionWordAnimation:
+RichCaptionAnimation:
   description: Word-level animation properties for caption effects.
   type: object
   properties:
