@@ -1,3 +1,10 @@
+## [1.9.6](https://github.com/shotstack/oas-api-definition/compare/v1.9.5...v1.9.6) (2026-03-30)
+
+
+### Bug Fixes
+
+* The edit-api validates with @shotstack/schemas/zod which has the default: "#ffff00". After validation, active.font.color becomes "#ffff00" even though the user didn't set it. Then this passes to the  canvas which sees an explicit yellow and uses it. ([1c26a99](https://github.com/shotstack/oas-api-definition/commit/1c26a994c29425dc6238e5994d367e261d3cf3ac))
+
 ## [1.9.5](https://github.com/shotstack/oas-api-definition/compare/v1.9.4...v1.9.5) (2026-03-26)
 
 
