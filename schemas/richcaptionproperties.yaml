@@ -6,8 +6,7 @@ RichCaptionActiveFont:
       description: The active word color using hexadecimal color notation.
       type: string
       pattern: "^#[A-Fa-f0-9]{6}$"
-      default: "#ffff00"
-      example: "#ffff00"
+      example: "#C96741"
     background:
       description: The background color behind the active word using hexadecimal color notation.
       type: string
