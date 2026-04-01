@@ -1,3 +1,11 @@
+## [1.9.7](https://github.com/shotstack/oas-api-definition/compare/v1.9.6...v1.9.7) (2026-04-01)
+
+
+### Bug Fixes
+
+* Removed  Create API intro description, server URL, tag definition, path aliases, all Create schema references, all Create response schema references. ([3ffc4b0](https://github.com/shotstack/oas-api-definition/commit/3ffc4b0009d1fee4a12427015cd750aa6c052962))
+* streamline SvgAsset schema by removing shape-related properties and enforcing strict validation ([6b6d08a](https://github.com/shotstack/oas-api-definition/commit/6b6d08a1099f45ca98145a36a519740eba1b40dd))
+
 ## [1.9.6](https://github.com/shotstack/oas-api-definition/compare/v1.9.5...v1.9.6) (2026-03-30)
 
 
