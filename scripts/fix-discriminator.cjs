@@ -125,48 +125,8 @@ const svgAssetPattern =
 // Note: Do NOT include z.preprocess here - the number coercion pass will add it
 const svgAssetSuperRefine = `export const svgassetSvgAssetSchema = z.object({
   type: z.enum(["svg"]),
-  src: z.optional(z.string().min(1).max(500000)),
-  shape: z.optional(svgshapesSvgShapeSchema),
-  fill: z.optional(svgpropertiesSvgFillSchema),
-  stroke: z.optional(svgpropertiesSvgStrokeSchema),
-  shadow: z.optional(svgpropertiesSvgShadowSchema),
-  transform: z.optional(svgpropertiesSvgTransformSchema),
-  opacity: z.optional(z.number().gte(0).lte(1)).default(1),
-  width: z.optional(z.number().int().gte(1).lte(4096)),
-  height: z.optional(z.number().int().gte(1).lte(4096)),
-}).superRefine((data, ctx) => {
-  const hasShape = data.shape !== undefined;
-  const hasSrc = data.src !== undefined && data.src.trim() !== "";
-
-  if (!hasShape && !hasSrc) {
-    ctx.addIssue({
-      code: z.ZodIssueCode.custom,
-      message: "Either 'src' or 'shape' must be provided",
-      path: [],
-    });
-  }
-
-  if (hasShape && hasSrc) {
-    ctx.addIssue({
-      code: z.ZodIssueCode.custom,
-      message: "Provide either 'src' or 'shape', not both",
-      path: ["src"],
-    });
-  }
-
-  if (hasSrc) {
-    const disallowedProps = ["shape", "fill", "stroke", "shadow", "transform", "width", "height"];
-    for (const prop of disallowedProps) {
-      if (data[prop] !== undefined) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: \`'\${prop}' is not allowed when using 'src'. Only 'type' and 'src' are allowed in import mode\`,
-          path: [prop],
-        });
-      }
-    }
-  }
-});`;
+  src: z.string().min(1).max(500000),
+}).strict();`;
 
 if (svgAssetPattern.test(content)) {
   content = content.replace(svgAssetPattern, svgAssetSuperRefine);
@@ -492,48 +452,8 @@ if (fs.existsSync(zodGenCjsPath)) {
   // Note: Do NOT include z.preprocess here - the number coercion pass will add it
   const cjsSvgAssetSuperRefine = `exports.svgassetSvgAssetSchema = zod_1.z.object({
   type: zod_1.z.enum(["svg"]),
-  src: zod_1.z.optional(zod_1.z.string().min(1).max(500000)),
-  shape: zod_1.z.optional(exports.svgshapesSvgShapeSchema),
-  fill: zod_1.z.optional(exports.svgpropertiesSvgFillSchema),
-  stroke: zod_1.z.optional(exports.svgpropertiesSvgStrokeSchema),
-  shadow: zod_1.z.optional(exports.svgpropertiesSvgShadowSchema),
-  transform: zod_1.z.optional(exports.svgpropertiesSvgTransformSchema),
-  opacity: zod_1.z.optional(zod_1.z.number().gte(0).lte(1)).default(1),
-  width: zod_1.z.optional(zod_1.z.number().int().gte(1).lte(4096)),
-  height: zod_1.z.optional(zod_1.z.number().int().gte(1).lte(4096)),
-}).superRefine((data, ctx) => {
-  const hasShape = data.shape !== undefined;
-  const hasSrc = data.src !== undefined && data.src.trim() !== "";
-
-  if (!hasShape && !hasSrc) {
-    ctx.addIssue({
-      code: zod_1.z.ZodIssueCode.custom,
-      message: "Either 'src' or 'shape' must be provided",
-      path: [],
-    });
-  }
-
-  if (hasShape && hasSrc) {
-    ctx.addIssue({
-      code: zod_1.z.ZodIssueCode.custom,
-      message: "Provide either 'src' or 'shape', not both",
-      path: ["src"],
-    });
-  }
-
-  if (hasSrc) {
-    const disallowedProps = ["shape", "fill", "stroke", "shadow", "transform", "width", "height"];
-    for (const prop of disallowedProps) {
-      if (data[prop] !== undefined) {
-        ctx.addIssue({
-          code: zod_1.z.ZodIssueCode.custom,
-          message: "'" + prop + "' is not allowed when using 'src'. Only 'type' and 'src' are allowed in import mode",
-          path: [prop],
-        });
-      }
-    }
-  }
-});`;
+  src: zod_1.z.string().min(1).max(500000),
+}).strict();`;
 
   if (cjsSvgAssetPattern.test(cjsContent)) {
     cjsContent = cjsContent.replace(cjsSvgAssetPattern, cjsSvgAssetSuperRefine);
