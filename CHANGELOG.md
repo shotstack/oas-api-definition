@@ -1,3 +1,10 @@
+## [1.9.8](https://github.com/shotstack/oas-api-definition/compare/v1.9.7...v1.9.8) (2026-04-02)
+
+
+### Bug Fixes
+
+* remove unused SVG shape properties and update nullable types in destination options ([b5dd7e8](https://github.com/shotstack/oas-api-definition/commit/b5dd7e8cea9dc3e0cdb470cc012bc4a6ce5ebeb8))
+
 ## [1.9.7](https://github.com/shotstack/oas-api-definition/compare/v1.9.6...v1.9.7) (2026-04-01)
 
 
