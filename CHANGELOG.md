@@ -1,3 +1,10 @@
+## [1.9.9](https://github.com/shotstack/oas-api-definition/compare/v1.9.8...v1.9.9) (2026-04-02)
+
+
+### Bug Fixes
+
+* enhance RichCaptionActiveFont schema by adding font family and weight properties, and removing scale property ([05d0a61](https://github.com/shotstack/oas-api-definition/commit/05d0a6121c8ec386cbb29dcd6f8a2cc810abade9))
+
 ## [1.9.8](https://github.com/shotstack/oas-api-definition/compare/v1.9.7...v1.9.8) (2026-04-02)
 
 
