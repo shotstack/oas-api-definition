@@ -2,6 +2,15 @@ RichCaptionActiveFont:
   description: Font properties for the active/highlighted word.
   type: object
   properties:
+    family:
+      description: The font family for the active word. Inherits from the base font.family when not set.
+      type: string
+      example: "Roboto"
+    weight:
+      description: >
+        The weight of the font for the active word. Can be a number (100-900) or a string. Inherits from
+        the base font.weight when not set.
+      default: "400"
     color:
       description: The active word color using hexadecimal color notation.
       type: string
@@ -20,7 +29,7 @@ RichCaptionActiveFont:
       default: 1
       example: 1
     size:
-      description: The font size of the active word in pixels. Overrides the scale property when set.
+      description: The font size of the active word in pixels.
       type: number
       minimum: 1
       maximum: 500
@@ -57,13 +66,6 @@ RichCaptionActive:
         - type: string
           enum:
             - none
-    scale:
-      description: Scale multiplier for the active word. 1.0 is normal size, 1.2 is 20% larger.
-      type: number
-      minimum: 0.5
-      maximum: 2.0
-      default: 1.0
-      example: 1.2
   additionalProperties: false
 
 RichCaptionAnimation:
@@ -177,7 +179,7 @@ RichCaptionStyle:
       default: "none"
       example: "uppercase"
     size:
-      description: The font size of the active word in pixels. Overrides the scale property when set.
+      description: The font size in pixels. Can be used as an alternative to font.size.
       type: number
       minimum: 1
       maximum: 500
