@@ -2,13 +2,6 @@ SvgAsset:
   description: |
     The SvgAsset is used to add scalable vector graphics (SVG) to a video using raw SVG markup.
 
-    ```json
-    {
-      "type": "svg",
-      "src": "<svg width=\"100\" height=\"100\"><circle cx=\"50\" cy=\"50\" r=\"40\" fill=\"#FF0000\"/></svg>"
-    }
-    ```
-
     **Supported elements:** `<path>`, `<rect>`, `<circle>`, `<ellipse>`,
     `<line>`, `<polygon>`, `<polyline>`
 
@@ -31,16 +24,17 @@ SvgAsset:
       example: svg
     src:
       description: |
-        Raw SVG markup string. The shape, fill, stroke, dimensions and opacity
-        are automatically extracted from the SVG content.
+        Raw SVG markup string. The SVG must contain valid SVG elements. The shape,
+        fill, stroke, dimensions and opacity are automatically extracted from the
+        SVG content.
       type: string
       minLength: 1
       maxLength: 500000
-      example: '<svg width="100" height="100"><circle cx="50" cy="50" r="40" fill="#3498db"/></svg>'
+      example: "<svg width=\"100\" height=\"100\"><circle cx=\"50\" cy=\"50\" r=\"40\" fill=\"#3498db\"/></svg>"
   additionalProperties: false
   required:
     - type
     - src
   example:
     type: svg
-    src: '<svg width="200" height="200"><rect x="10" y="10" width="180" height="180" rx="20" fill="#3498db" stroke="#2C3E50" stroke-width="3"/></svg>'
+    src: "<svg width=\"100\" height=\"100\"><circle cx=\"50\" cy=\"50\" r=\"40\" fill=\"#3498db\"/></svg>"
