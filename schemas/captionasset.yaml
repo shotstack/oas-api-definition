@@ -7,7 +7,7 @@
         flexibility with styling and layout. For example you can scale, position or crop a video without modifying the
         captions.
         
-        To sync captions with a video or audio file use a [Video](#tocs_videoasset") or [Audio](#tocs_audioasset") with
+        To sync captions with a video or audio file use a [Video](#tocs_videoasset) or [Audio](#tocs_audioasset) with
         matching start and end time.
       type: object
       properties:
