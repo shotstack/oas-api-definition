@@ -1,3 +1,10 @@
+## [1.9.10](https://github.com/shotstack/oas-api-definition/compare/v1.9.9...v1.9.10) (2026-04-03)
+
+
+### Bug Fixes
+
+* correct markdown links in captionasset schema ([6a3bc4e](https://github.com/shotstack/oas-api-definition/commit/6a3bc4e8366f48ac75a0c8aab246b3679e4a5c17))
+
 ## [1.9.9](https://github.com/shotstack/oas-api-definition/compare/v1.9.8...v1.9.9) (2026-04-02)
 
 
