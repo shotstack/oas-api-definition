@@ -329,7 +329,51 @@ function addStrictToObjects(src, prefix) {
   return result;
 }
 
+
+// --- Rich-caption src media file validation ---
+const MEDIA_FILE_EXTENSIONS = [
+  ".m4a", ".mp3", ".wav", ".aac", ".ogg", ".flac", ".wma",
+  ".mp4", ".mov", ".avi", ".mkv", ".webm", ".wmv", ".flv", ".3gp",
+];
+
+function addRichCaptionSrcValidation(code, zPrefix) {
+  const schemaName = 'richcaptionassetRichCaptionAssetSchema';
+  const idx = code.indexOf(schemaName);
+  if (idx === -1) {
+    console.log("⚠ Could not find " + schemaName);
+    return code;
+  }
+
+  const strictMarker = '.strict()';
+  const strictIdx = code.indexOf(strictMarker, idx);
+  if (strictIdx === -1 || strictIdx - idx > 3000) {
+    console.log("⚠ Could not find .strict() for " + schemaName);
+    return code;
+  }
+
+  const superRefine = strictMarker + '.superRefine((data, ctx) => {\n' +
+    '  if (data.src) {\n' +
+    '    try {\n' +
+    '      const pathname = new URL(data.src).pathname.toLowerCase();\n' +
+    '      const mediaExts = ' + JSON.stringify(MEDIA_FILE_EXTENSIONS) + ';\n' +
+    '      if (mediaExts.some((ext) => pathname.endsWith(ext))) {\n' +
+    '        ctx.addIssue({\n' +
+    '          code: ' + zPrefix + '.ZodIssueCode.custom,\n' +
+    '          message: "src must point to a subtitle file (SRT or VTT). Audio and video files are not supported as src. Use the words array to provide word timings directly.",\n' +
+    '          path: ["src"],\n' +
+    '        });\n' +
+    '      }\n' +
+    '    } catch {}\n' +
+    '  }\n' +
+    '})';
+
+  code = code.substring(0, strictIdx) + superRefine + code.substring(strictIdx + strictMarker.length);
+  console.log("✓ Added rich-caption src media validation (" + zPrefix + ")");
+  return code;
+}
+
 content = addStrictToObjects(content, "z");
+content = addRichCaptionSrcValidation(content, "z");
 
 fs.writeFileSync(zodGenPath, content);
 
@@ -549,6 +593,7 @@ const clipClipSchemaWithFitFilter = exports.clipClipSchema.transform((clip) => {
   }
 
   cjsContent = addStrictToObjects(cjsContent, "zod_1.z");
+  cjsContent = addRichCaptionSrcValidation(cjsContent, "zod_1.z");
 
   fs.writeFileSync(zodGenCjsPath, cjsContent);
 }
@@ -681,6 +726,7 @@ const clipClipSchemaWithFitFilter = clipClipSchema.transform((clip) => {
   }
 
   jsContent = addStrictToObjects(jsContent, "z");
+  jsContent = addRichCaptionSrcValidation(jsContent, "z");
 
   fs.writeFileSync(zodGenJsPath, jsContent);
 }
