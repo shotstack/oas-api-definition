@@ -1,3 +1,10 @@
+## [1.10.5](https://github.com/shotstack/oas-api-definition/compare/v1.10.4...v1.10.5) (2026-04-08)
+
+
+### Bug Fixes
+
+* typescript sdk fixed ([5c216cf](https://github.com/shotstack/oas-api-definition/commit/5c216cfc0a24461ac6e6aa0a0a27c048a0752877))
+
 ## [1.10.4](https://github.com/shotstack/oas-api-definition/compare/v1.10.3...v1.10.4) (2026-04-08)
 
 
