@@ -1,0 +1,206 @@
+name: Regenerate SDK
+
+# Reusable workflow called by each SDK repo when a new OAS version is released.
+# Each SDK repo has a thin receiver workflow that calls this with its language.
+
+on:
+  workflow_call:
+    inputs:
+      oas-version:
+        description: 'The @shotstack/schemas version to generate from'
+        required: true
+        type: string
+      language:
+        description: 'Target language: node, php, python, ruby'
+        required: true
+        type: string
+      sdk-version:
+        description: 'SDK version to set (defaults to oas-version)'
+        required: false
+        type: string
+        default: ''
+    secrets:
+      PR_TOKEN:
+        description: 'Token for creating PRs (must be PAT or App token to trigger CI)'
+        required: true
+
+jobs:
+  regenerate:
+    name: Generate ${{ inputs.language }} SDK
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout SDK repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Checkout OAS repo
+        uses: actions/checkout@v4
+        with:
+          repository: shotstack/oas-api-definition
+          path: _oas
+          ref: main
+
+      # ---------- Setup tools ----------
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Setup pnpm (for OAS repo)
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+          run_install: false
+
+      - name: Install OAS dependencies & bundle spec
+        run: |
+          cd _oas
+          pnpm install --frozen-lockfile
+          bash scripts/sdk/bundle-spec.sh "${{ github.workspace }}/_spec.json"
+
+      - name: Setup Java (for openapi-generator)
+        if: inputs.language != 'node'
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Cache openapi-generator
+        if: inputs.language != 'node'
+        uses: actions/cache@v4
+        with:
+          path: ~/.openapi-generator
+          key: openapi-generator-${{ inputs.language == 'python' && '5.4.0' || '7.4.0' }}
+
+      - name: Install openapi-generator-cli
+        if: inputs.language != 'node'
+        run: |
+          npm install -g @openapitools/openapi-generator-cli
+          # Set generator version based on language
+          # Python uses v5.4.0 due to oneOf/anyOf discriminator bugs in v7.x
+          if [ "${{ inputs.language }}" = "python" ]; then
+            npx @openapitools/openapi-generator-cli version-manager set 5.4.0
+          else
+            npx @openapitools/openapi-generator-cli version-manager set 7.4.0
+          fi
+
+      - name: Setup PHP
+        if: inputs.language == 'php'
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+
+      - name: Setup Python
+        if: inputs.language == 'python'
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Setup Ruby
+        if: inputs.language == 'ruby'
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+
+      # ---------- Generate ----------
+
+      - name: Determine SDK version
+        id: version
+        run: |
+          VERSION="${{ inputs.sdk-version }}"
+          if [ -z "$VERSION" ]; then
+            VERSION="${{ inputs.oas-version }}"
+          fi
+          echo "sdk_version=${VERSION}" >> $GITHUB_OUTPUT
+
+      - name: Generate SDK
+        run: |
+          bash _oas/scripts/sdk/generate-${{ inputs.language }}.sh \
+            "${{ github.workspace }}/_spec.json" \
+            "${{ github.workspace }}/_generated" \
+            "${{ steps.version.outputs.sdk_version }}"
+
+      - name: Copy generated files to SDK repo
+        run: |
+          # Remove previously generated files (but not .git, README, .github, etc.)
+          if [ "${{ inputs.language }}" = "node" ]; then
+            rm -rf src/generated/ dist/
+            mkdir -p src/generated/
+            cp -r _generated/src/generated/* src/generated/
+            # Update package.json version only (preserve custom fields)
+            if [ -f _generated/package.json ]; then
+              node -e "
+                const pkg = JSON.parse(require('fs').readFileSync('package.json', 'utf-8'));
+                const gen = JSON.parse(require('fs').readFileSync('_generated/package.json', 'utf-8'));
+                pkg.version = gen.version;
+                require('fs').writeFileSync('package.json', JSON.stringify(pkg, null, 2) + '\n');
+              "
+            fi
+          elif [ "${{ inputs.language }}" = "php" ]; then
+            rm -rf src/Api/ src/Model/ src/ApiException.php src/Configuration.php src/HeaderSelector.php src/ObjectSerializer.php
+            cp -r _generated/src/* src/ 2>/dev/null || true
+            cp -r _generated/lib/* src/ 2>/dev/null || true
+          elif [ "${{ inputs.language }}" = "python" ]; then
+            rm -rf shotstack_sdk/api/ shotstack_sdk/model/ shotstack_sdk/models/
+            cp -r _generated/shotstack_sdk/* shotstack_sdk/ 2>/dev/null || true
+          elif [ "${{ inputs.language }}" = "ruby" ]; then
+            rm -rf lib/shotstack/api/ lib/shotstack/models/
+            cp -r _generated/lib/shotstack/* lib/shotstack/ 2>/dev/null || true
+          fi
+
+      - name: Run post-generate script
+        if: hashFiles('scripts/post-generate.sh') != ''
+        run: bash scripts/post-generate.sh
+
+      # ---------- Test ----------
+
+      - name: Smoke test
+        run: bash _oas/scripts/sdk/smoke-test.sh "${{ inputs.language }}" "${{ github.workspace }}"
+
+      - name: Conformance check
+        run: |
+          node _oas/scripts/sdk/conformance-check.mjs \
+            "${{ github.workspace }}/_spec.json" \
+            "${{ inputs.language }}" \
+            "${{ github.workspace }}"
+
+      # ---------- Version tracking ----------
+
+      - name: Write .oas-version
+        run: echo "${{ inputs.oas-version }}" > .oas-version
+
+      # ---------- Create PR ----------
+
+      - name: Clean up temporary files
+        run: rm -rf _oas _generated _spec.json
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v8
+        with:
+          token: ${{ secrets.PR_TOKEN }}
+          branch: auto/oas-v${{ inputs.oas-version }}
+          title: "chore: regenerate SDK from @shotstack/schemas v${{ inputs.oas-version }}"
+          body: |
+            ## Automated SDK Regeneration
+
+            Regenerated **${{ inputs.language }}** SDK from `@shotstack/schemas` v${{ inputs.oas-version }}.
+
+            ### What changed
+            - Updated generated models and API clients to match OAS spec v${{ inputs.oas-version }}
+            - SDK version: ${{ steps.version.outputs.sdk_version }}
+
+            ### Checks
+            - [x] Smoke tests (compile/import) passed
+            - [x] Spec conformance check passed
+
+            ---
+            *Automated by [regenerate-sdk workflow](https://github.com/shotstack/oas-api-definition/blob/main/.github/workflows/regenerate-sdk.yml)*
+          labels: automated,sdk-regeneration
+          commit-message: "chore: regenerate SDK from @shotstack/schemas v${{ inputs.oas-version }}"
+          delete-branch: true
