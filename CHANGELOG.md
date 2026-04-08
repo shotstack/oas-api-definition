@@ -1,3 +1,10 @@
+## [1.10.1](https://github.com/shotstack/oas-api-definition/compare/v1.10.0...v1.10.1) (2026-04-08)
+
+
+### Bug Fixes
+
+* add TypeScript SDK to regeneration pipeline ([cd66165](https://github.com/shotstack/oas-api-definition/commit/cd6616577f20f9020b5cc99e8a1a726b0ea2d775))
+
 # [1.10.0](https://github.com/shotstack/oas-api-definition/compare/v1.9.12...v1.10.0) (2026-04-08)
 
 
