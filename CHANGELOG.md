@@ -1,3 +1,10 @@
+## [1.10.6](https://github.com/shotstack/oas-api-definition/compare/v1.10.5...v1.10.6) (2026-04-08)
+
+
+### Bug Fixes
+
+* node file cleanup ([3b9bc8e](https://github.com/shotstack/oas-api-definition/commit/3b9bc8ee735c0676d0140b03adc6a5498cba13bd))
+
 ## [1.10.5](https://github.com/shotstack/oas-api-definition/compare/v1.10.4...v1.10.5) (2026-04-08)
 
 
