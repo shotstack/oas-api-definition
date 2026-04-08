@@ -146,6 +146,7 @@ jobs:
           if [ "${{ inputs.language }}" = "node" ] || [ "${{ inputs.language }}" = "typescript" ]; then
             # Remove old generated code (both new hey-api and old openapi-generator output)
             rm -rf src/generated/ src/api/ src/model/ dist/
+            rm -f src/*.js src/ApiClient.js
             mkdir -p src/generated/
             cp -r _generated/src/generated/* src/generated/
             [ -f _generated/src/index.ts ] && cp _generated/src/index.ts src/index.ts
