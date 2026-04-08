@@ -65,21 +65,21 @@ jobs:
           bash scripts/sdk/bundle-spec.sh "${{ github.workspace }}/_spec.json"
 
       - name: Setup Java (for openapi-generator)
-        if: inputs.language != 'node'
+        if: inputs.language != 'node' && inputs.language != 'typescript'
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
 
       - name: Cache openapi-generator
-        if: inputs.language != 'node'
+        if: inputs.language != 'node' && inputs.language != 'typescript'
         uses: actions/cache@v4
         with:
           path: ~/.openapi-generator
           key: openapi-generator-${{ inputs.language == 'python' && '5.4.0' || '7.4.0' }}
 
       - name: Install openapi-generator-cli
-        if: inputs.language != 'node'
+        if: inputs.language != 'node' && inputs.language != 'typescript'
         run: |
           npm install -g @openapitools/openapi-generator-cli
           # Set generator version based on language
@@ -129,10 +129,12 @@ jobs:
       - name: Copy generated files to SDK repo
         run: |
           # Remove previously generated files (but not .git, README, .github, etc.)
-          if [ "${{ inputs.language }}" = "node" ]; then
+          if [ "${{ inputs.language }}" = "node" ] || [ "${{ inputs.language }}" = "typescript" ]; then
             rm -rf src/generated/ dist/
             mkdir -p src/generated/
             cp -r _generated/src/generated/* src/generated/
+            # Copy src/index.ts if generated
+            [ -f _generated/src/index.ts ] && cp _generated/src/index.ts src/index.ts
             # Update package.json version only (preserve custom fields)
             if [ -f _generated/package.json ]; then
               node -e "
@@ -142,6 +144,8 @@ jobs:
                 require('fs').writeFileSync('package.json', JSON.stringify(pkg, null, 2) + '\n');
               "
             fi
+            # Copy tsconfig if generated and none exists
+            [ -f _generated/tsconfig.json ] && [ ! -f tsconfig.json ] && cp _generated/tsconfig.json tsconfig.json
           elif [ "${{ inputs.language }}" = "php" ]; then
             rm -rf src/Api/ src/Model/ src/ApiException.php src/Configuration.php src/HeaderSelector.php src/ObjectSerializer.php
             cp -r _generated/src/* src/ 2>/dev/null || true

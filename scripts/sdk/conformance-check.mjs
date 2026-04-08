@@ -32,7 +32,8 @@ function getSdkModels(language, sdkDir) {
   const models = new Set();
 
   switch (language) {
-    case 'node': {
+    case 'node':
+    case 'typescript': {
       // For hey-api generated SDK, check types.gen.ts for exported types
       const typesFile = join(sdkDir, 'src', 'generated', 'types.gen.ts');
       if (existsSync(typesFile)) {

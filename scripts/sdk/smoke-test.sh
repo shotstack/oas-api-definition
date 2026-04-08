@@ -11,7 +11,7 @@ SDK_DIR="${2:?Usage: smoke-test.sh <language> <sdk-dir>}"
 echo "Running smoke tests for ${LANGUAGE} SDK at ${SDK_DIR}..."
 
 case "${LANGUAGE}" in
-  node)
+  node|typescript)
     echo "→ TypeScript type-check..."
     cd "${SDK_DIR}"
     npm install --ignore-scripts 2>/dev/null || true
