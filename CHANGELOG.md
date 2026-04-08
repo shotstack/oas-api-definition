@@ -1,3 +1,10 @@
+## [1.10.4](https://github.com/shotstack/oas-api-definition/compare/v1.10.3...v1.10.4) (2026-04-08)
+
+
+### Bug Fixes
+
+* --template-dir added back to PHP/Python/Ruby scripts (config templateDir resolves relative to config file, not CWD) ([f5dda2d](https://github.com/shotstack/oas-api-definition/commit/f5dda2d45483312b38de5aa2a8e7a9d2b53aa90f))
+
 ## [1.10.3](https://github.com/shotstack/oas-api-definition/compare/v1.10.2...v1.10.3) (2026-04-08)
 
 
