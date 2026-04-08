@@ -64,7 +64,7 @@ jobs:
           DISPATCH_TOKEN: ${{ secrets.SDK_DISPATCH_TOKEN }}
         run: |
           VERSION="${{ steps.release.outputs.version }}"
-          REPOS=("shotstack-sdk-node" "shotstack-sdk-php" "shotstack-sdk-python" "shotstack-sdk-ruby")
+          REPOS=("shotstack-sdk-node" "shotstack-sdk-php" "shotstack-sdk-python" "shotstack-sdk-ruby" "shotstack-sdk-typescript")
 
           for repo in "${REPOS[@]}"; do
             success=false

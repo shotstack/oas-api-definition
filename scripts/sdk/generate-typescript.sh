@@ -1,0 +1,82 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Generate TypeScript SDK using @hey-api/openapi-ts
+# Usage: generate-typescript.sh <spec-file> <output-dir> <version>
+#
+# Uses hey-api to produce modern TypeScript with typed SDK functions,
+# fetch-based HTTP client, and tree-shakeable exports.
+
+SPEC_FILE="${1:?Usage: generate-typescript.sh <spec-file> <output-dir> <version>}"
+OUTPUT_DIR="${2:?Usage: generate-typescript.sh <spec-file> <output-dir> <version>}"
+VERSION="${3:?Usage: generate-typescript.sh <spec-file> <output-dir> <version>}"
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+OAS_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
+
+echo "Generating TypeScript SDK v${VERSION}..."
+
+mkdir -p "${OUTPUT_DIR}/src/generated"
+
+# hey-api resolves $ref from the spec's directory, so we must run from OAS root
+cd "${OAS_ROOT}"
+npx @hey-api/openapi-ts \
+  --input "./api.oas3.yaml" \
+  --output "${OUTPUT_DIR}/src/generated" \
+  --plugins @hey-api/typescript @hey-api/sdk
+
+# Write package.json
+cat > "${OUTPUT_DIR}/package.json" << EOF
+{
+  "name": "shotstack-sdk-typescript",
+  "version": "${VERSION}",
+  "description": "Official TypeScript SDK for the Shotstack Cloud Video Editing API",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": ["dist"],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shotstack/shotstack-sdk-typescript.git"
+  },
+  "keywords": ["shotstack", "video", "video-editing", "video-api", "typescript"],
+  "engines": {
+    "node": ">=18"
+  }
+}
+EOF
+
+# Write tsconfig.json
+cat > "${OUTPUT_DIR}/tsconfig.json" << EOF
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "declaration": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true
+  },
+  "include": ["src/**/*"]
+}
+EOF
+
+# Write index.ts that re-exports everything
+cat > "${OUTPUT_DIR}/src/index.ts" << 'EOF'
+export * from './generated/types.gen';
+export * from './generated/sdk.gen';
+EOF
+
+echo "TypeScript SDK generated at ${OUTPUT_DIR}"
