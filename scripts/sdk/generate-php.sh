@@ -15,12 +15,13 @@ TEMPLATES_DIR="${OAS_ROOT}/templates/php"
 
 echo "Generating PHP SDK v${VERSION} from ${SPEC_FILE}..."
 
+# cd to OAS root so config-relative paths (templateDir: templates/php) resolve
+cd "${OAS_ROOT}"
 npx @openapitools/openapi-generator-cli generate \
   -i "${SPEC_FILE}" \
   -g php \
   -c "${CONFIGS_DIR}/php.yaml" \
   -o "${OUTPUT_DIR}" \
-  --template-dir "${TEMPLATES_DIR}" \
   --additional-properties=invokerPackage=Shotstack\\\\Client,licenseName="MIT",composerPackageName="shotstack/shotstack-sdk-php",srcBasePath="src",artifactVersion="${VERSION}",artifactUrl="https://shotstack.io",developerOrganization="Shotstack",developerOrganizationUrl="https://shotstack.io"
 
 echo "PHP SDK generated at ${OUTPUT_DIR}"

@@ -15,10 +15,10 @@ case "${LANGUAGE}" in
     echo "→ TypeScript type-check..."
     cd "${SDK_DIR}"
     npm install --ignore-scripts 2>/dev/null || true
-    npx tsc --noEmit --skipLibCheck
+    # Use npx -p typescript to ensure we get the real TypeScript compiler, not the 'tsc' npm package
+    npx -p typescript tsc --noEmit --skipLibCheck
     echo "→ Import check..."
-    node -e "import('./src/index.ts')" 2>/dev/null || \
-      npx tsx -e "import * as sdk from './src/index'; console.log('Exports:', Object.keys(sdk).length)"
+    npx -p tsx tsx -e "import * as sdk from './src/index'; console.log('Exports:', Object.keys(sdk).length)"
     echo "✓ Node/TypeScript smoke tests passed"
     ;;
 
