@@ -144,19 +144,28 @@ jobs:
         run: |
           set -e
           if [ "${{ inputs.language }}" = "node" ] || [ "${{ inputs.language }}" = "typescript" ]; then
-            rm -rf src/generated/ dist/
+            # Remove old generated code (both new hey-api and old openapi-generator output)
+            rm -rf src/generated/ src/api/ src/model/ dist/
             mkdir -p src/generated/
             cp -r _generated/src/generated/* src/generated/
             [ -f _generated/src/index.ts ] && cp _generated/src/index.ts src/index.ts
+            # Always overwrite tsconfig with the generated one (hey-api needs specific settings)
+            [ -f _generated/tsconfig.json ] && cp _generated/tsconfig.json tsconfig.json
             if [ -f _generated/package.json ]; then
               node -e "
                 const pkg = JSON.parse(require('fs').readFileSync('package.json', 'utf-8'));
                 const gen = JSON.parse(require('fs').readFileSync('_generated/package.json', 'utf-8'));
                 pkg.version = gen.version;
+                // Ensure modern TypeScript for hey-api generated code
+                if (!pkg.devDependencies) pkg.devDependencies = {};
+                pkg.devDependencies.typescript = '^5.7.0';
+                // Remove outdated deps from old openapi-generator SDK
+                delete pkg.dependencies?.['es6-promise'];
+                delete pkg.dependencies?.['url-parse'];
+                delete pkg.devDependencies?.['@types/url-parse'];
                 require('fs').writeFileSync('package.json', JSON.stringify(pkg, null, 2) + '\n');
               "
             fi
-            [ -f _generated/tsconfig.json ] && [ ! -f tsconfig.json ] && cp _generated/tsconfig.json tsconfig.json
           elif [ "${{ inputs.language }}" = "php" ]; then
             rm -rf src/Api/ src/Model/ src/ApiException.php src/Configuration.php src/HeaderSelector.php src/ObjectSerializer.php
             cp -r _generated/src/* src/
