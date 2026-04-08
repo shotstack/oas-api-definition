@@ -18,12 +18,14 @@ echo "Generating TypeScript SDK v${VERSION}..."
 
 mkdir -p "${OUTPUT_DIR}/src/generated"
 
-# hey-api resolves $ref from the spec's directory, so we must run from OAS root
+# hey-api resolves $ref from the spec's directory, so we pass the absolute path
+# to the YAML source. Run npx from OAS root so it finds the locally-installed package.
 cd "${OAS_ROOT}"
 npx @hey-api/openapi-ts \
-  --input "./api.oas3.yaml" \
+  --input "${OAS_ROOT}/api.oas3.yaml" \
   --output "${OUTPUT_DIR}/src/generated" \
   --plugins @hey-api/typescript @hey-api/sdk
+cd -
 
 # Write package.json
 cat > "${OUTPUT_DIR}/package.json" << EOF

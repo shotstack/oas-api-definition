@@ -126,16 +126,28 @@ jobs:
             "${{ github.workspace }}/_generated" \
             "${{ steps.version.outputs.sdk_version }}"
 
+      - name: Debug generated output
+        run: |
+          echo "Generated output structure:"
+          ls -la _generated/ 2>/dev/null || echo "ERROR: _generated/ does not exist!"
+          if [ "${{ inputs.language }}" = "node" ] || [ "${{ inputs.language }}" = "typescript" ]; then
+            ls -la _generated/src/generated/ 2>/dev/null || echo "ERROR: _generated/src/generated/ missing!"
+          elif [ "${{ inputs.language }}" = "php" ]; then
+            ls -la _generated/src/ 2>/dev/null || echo "ERROR: _generated/src/ missing!"
+          elif [ "${{ inputs.language }}" = "python" ]; then
+            ls -la _generated/shotstack_sdk/ 2>/dev/null || echo "ERROR: _generated/shotstack_sdk/ missing!"
+          elif [ "${{ inputs.language }}" = "ruby" ]; then
+            ls -la _generated/lib/shotstack/ 2>/dev/null || echo "ERROR: _generated/lib/shotstack/ missing!"
+          fi
+
       - name: Copy generated files to SDK repo
         run: |
-          # Remove previously generated files (but not .git, README, .github, etc.)
+          set -e
           if [ "${{ inputs.language }}" = "node" ] || [ "${{ inputs.language }}" = "typescript" ]; then
             rm -rf src/generated/ dist/
             mkdir -p src/generated/
             cp -r _generated/src/generated/* src/generated/
-            # Copy src/index.ts if generated
             [ -f _generated/src/index.ts ] && cp _generated/src/index.ts src/index.ts
-            # Update package.json version only (preserve custom fields)
             if [ -f _generated/package.json ]; then
               node -e "
                 const pkg = JSON.parse(require('fs').readFileSync('package.json', 'utf-8'));
@@ -144,19 +156,24 @@ jobs:
                 require('fs').writeFileSync('package.json', JSON.stringify(pkg, null, 2) + '\n');
               "
             fi
-            # Copy tsconfig if generated and none exists
             [ -f _generated/tsconfig.json ] && [ ! -f tsconfig.json ] && cp _generated/tsconfig.json tsconfig.json
           elif [ "${{ inputs.language }}" = "php" ]; then
             rm -rf src/Api/ src/Model/ src/ApiException.php src/Configuration.php src/HeaderSelector.php src/ObjectSerializer.php
-            cp -r _generated/src/* src/ 2>/dev/null || true
-            cp -r _generated/lib/* src/ 2>/dev/null || true
+            cp -r _generated/src/* src/
           elif [ "${{ inputs.language }}" = "python" ]; then
             rm -rf shotstack_sdk/api/ shotstack_sdk/model/ shotstack_sdk/models/
-            cp -r _generated/shotstack_sdk/* shotstack_sdk/ 2>/dev/null || true
+            cp -r _generated/shotstack_sdk/* shotstack_sdk/
+            # Generator v5.4.0 outputs to models/ but SDK expects model/
+            if [ -d shotstack_sdk/models ] && [ ! -d shotstack_sdk/model ]; then
+              mv shotstack_sdk/models shotstack_sdk/model
+              mkdir -p shotstack_sdk/models
+              echo "from shotstack_sdk.model import *" > shotstack_sdk/models/__init__.py
+            fi
           elif [ "${{ inputs.language }}" = "ruby" ]; then
             rm -rf lib/shotstack/api/ lib/shotstack/models/
-            cp -r _generated/lib/shotstack/* lib/shotstack/ 2>/dev/null || true
+            cp -r _generated/lib/shotstack/* lib/shotstack/
           fi
+          echo "Copy complete for ${{ inputs.language }}"
 
       - name: Run post-generate script
         if: hashFiles('scripts/post-generate.sh') != ''
