@@ -1,0 +1,96 @@
+name: SDK Conformance Check
+
+# Weekly check that all SDK repos are generated from the latest OAS version.
+# Alerts via GitHub issue if any SDK repo has a stale .oas-version.
+
+on:
+  schedule:
+    - cron: '0 9 * * 1'  # Every Monday at 9:00 UTC
+  workflow_dispatch: {}
+
+jobs:
+  check:
+    name: Check SDK versions
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get latest OAS version
+        id: oas
+        run: |
+          VERSION=$(npm view @shotstack/schemas version 2>/dev/null || echo "unknown")
+          echo "version=${VERSION}" >> $GITHUB_OUTPUT
+          echo "Latest @shotstack/schemas: ${VERSION}"
+
+      - name: Check SDK repos
+        id: check
+        env:
+          GH_TOKEN: ${{ secrets.SDK_DISPATCH_TOKEN }}
+        run: |
+          OAS_VERSION="${{ steps.oas.outputs.version }}"
+          REPOS=("shotstack-sdk-node" "shotstack-sdk-php" "shotstack-sdk-python" "shotstack-sdk-ruby")
+          stale=""
+
+          for repo in "${REPOS[@]}"; do
+            sdk_version=$(curl -s \
+              -H "Authorization: Bearer ${GH_TOKEN}" \
+              -H "Accept: application/vnd.github.raw" \
+              "https://api.github.com/repos/shotstack/${repo}/contents/.oas-version" 2>/dev/null | tr -d '[:space:]')
+
+            if [ -z "$sdk_version" ] || [ "$sdk_version" = "404: Not Found" ]; then
+              sdk_version="not found"
+            fi
+
+            if [ "$sdk_version" != "$OAS_VERSION" ]; then
+              echo "✗ ${repo}: ${sdk_version} (expected ${OAS_VERSION})"
+              stale="${stale}| ${repo} | ${sdk_version} | ${OAS_VERSION} |\n"
+            else
+              echo "✓ ${repo}: ${sdk_version}"
+            fi
+          done
+
+          if [ -n "$stale" ]; then
+            echo "has_stale=true" >> $GITHUB_OUTPUT
+            # Write the table for the issue body
+            {
+              echo "stale_table<<EOF"
+              echo -e "$stale"
+              echo "EOF"
+            } >> $GITHUB_OUTPUT
+          else
+            echo "has_stale=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create issue if SDKs are stale
+        if: steps.check.outputs.has_stale == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Check if an issue already exists
+          existing=$(gh issue list --repo shotstack/oas-api-definition \
+            --label "sdk-drift" --state open --json number --jq '.[0].number' 2>/dev/null || echo "")
+
+          BODY="## SDK Version Drift Detected
+
+          The following SDK repos are not on the latest \`@shotstack/schemas\` version:
+
+          | SDK Repo | Current Version | Expected Version |
+          |----------|----------------|-----------------|
+          ${{ steps.check.outputs.stale_table }}
+
+          ### Resolution
+          Either trigger regeneration manually via \`workflow_dispatch\` on the affected repo, or investigate why the automated \`repository_dispatch\` didn't fire.
+
+          *This issue is auto-created by the [SDK Conformance Check](https://github.com/shotstack/oas-api-definition/actions/workflows/sdk-conformance-check.yml) workflow.*"
+
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" \
+              --repo shotstack/oas-api-definition \
+              --body "$BODY"
+            echo "Updated existing issue #${existing}"
+          else
+            gh issue create \
+              --repo shotstack/oas-api-definition \
+              --title "SDK drift: some repos are behind @shotstack/schemas v${{ steps.oas.outputs.version }}" \
+              --body "$BODY" \
+              --label "sdk-drift"
+            echo "Created new drift issue"
+          fi
