@@ -1,3 +1,10 @@
+## [1.10.2](https://github.com/shotstack/oas-api-definition/compare/v1.10.1...v1.10.2) (2026-04-08)
+
+
+### Bug Fixes
+
+* workflow pipeline issue resolved ([aa32a3f](https://github.com/shotstack/oas-api-definition/commit/aa32a3fb16801b06b5667637c31b09af7efe8245))
+
 ## [1.10.1](https://github.com/shotstack/oas-api-definition/compare/v1.10.0...v1.10.1) (2026-04-08)
 
 
