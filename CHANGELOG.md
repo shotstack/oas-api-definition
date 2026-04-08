@@ -1,3 +1,10 @@
+## [1.9.12](https://github.com/shotstack/oas-api-definition/compare/v1.9.11...v1.9.12) (2026-04-08)
+
+
+### Bug Fixes
+
+* replaced validation text for rich-caption ([2cf9199](https://github.com/shotstack/oas-api-definition/commit/2cf9199a15ba4dab20bc8d85deab2b23f5a689e7))
+
 ## [1.9.11](https://github.com/shotstack/oas-api-definition/compare/v1.9.10...v1.9.11) (2026-04-07)
 
 
