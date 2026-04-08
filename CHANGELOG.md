@@ -1,3 +1,10 @@
+# [1.10.0](https://github.com/shotstack/oas-api-definition/compare/v1.9.12...v1.10.0) (2026-04-08)
+
+
+### Features
+
+* add automated SDK regeneration pipeline ([54bca25](https://github.com/shotstack/oas-api-definition/commit/54bca25e036bb856456bbec80b167c47d81f4751))
+
 ## [1.9.12](https://github.com/shotstack/oas-api-definition/compare/v1.9.11...v1.9.12) (2026-04-08)
 
 
