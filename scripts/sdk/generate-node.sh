@@ -18,14 +18,16 @@ echo "Generating Node/TypeScript SDK v${VERSION}..."
 
 mkdir -p "${OUTPUT_DIR}/src/generated"
 
-# hey-api resolves $ref from the spec's directory, so we must run from OAS root
-# and point at the YAML source (not the bundled JSON) to resolve all refs.
-# The bundled JSON has unresolved example $refs that hey-api tries to follow.
+# hey-api resolves $ref from the spec's directory, so we pass the absolute path
+# to the YAML source. The bundled JSON has unresolved example $refs that hey-api
+# tries to follow, so we use the original YAML instead.
+# Run npx from the OAS root so it finds the locally-installed hey-api package.
 cd "${OAS_ROOT}"
 npx @hey-api/openapi-ts \
-  --input "./api.oas3.yaml" \
+  --input "${OAS_ROOT}/api.oas3.yaml" \
   --output "${OUTPUT_DIR}/src/generated" \
   --plugins @hey-api/typescript @hey-api/sdk
+cd -
 
 # Write package.json for the generated SDK
 cat > "${OUTPUT_DIR}/package.json" << EOF

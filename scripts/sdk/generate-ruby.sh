@@ -22,6 +22,7 @@ npx @openapitools/openapi-generator-cli generate \
   -g ruby \
   -c "${CONFIGS_DIR}/ruby.yaml" \
   -o "${OUTPUT_DIR}" \
+  --template-dir "${OAS_ROOT}/templates/ruby" \
   --additional-properties=moduleName="Shotstack",gemAuthor="Shotstack",gemAuthorEmail="ruby@shotstack.io",gemHomepage="https://shotstack.io/product/sdk/ruby/",gemLicense="MIT",gemVersion="${VERSION}"
 
 echo "Ruby SDK generated at ${OUTPUT_DIR}"
