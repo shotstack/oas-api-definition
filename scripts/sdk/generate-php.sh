@@ -22,6 +22,6 @@ npx @openapitools/openapi-generator-cli generate \
   -g php \
   -c "${CONFIGS_DIR}/php.yaml" \
   -o "${OUTPUT_DIR}" \
-  --additional-properties=invokerPackage=Shotstack\\\\Client,licenseName="MIT",composerPackageName="shotstack/shotstack-sdk-php",srcBasePath="src",artifactVersion="${VERSION}",artifactUrl="https://shotstack.io",developerOrganization="Shotstack",developerOrganizationUrl="https://shotstack.io"
+  --additional-properties=invokerPackage=Shotstack\\Client,licenseName="MIT",composerPackageName="shotstack/shotstack-sdk-php",srcBasePath="src",artifactVersion="${VERSION}",artifactUrl="https://shotstack.io",developerOrganization="Shotstack",developerOrganizationUrl="https://shotstack.io"
 
 echo "PHP SDK generated at ${OUTPUT_DIR}"
