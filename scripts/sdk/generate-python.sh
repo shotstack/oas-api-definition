@@ -24,12 +24,13 @@ echo "Using openapi-generator v${PYTHON_GENERATOR_VERSION} (Python requires lega
 
 npx @openapitools/openapi-generator-cli version-manager set "${PYTHON_GENERATOR_VERSION}"
 
+# cd to OAS root so config-relative paths (templateDir: templates/python) resolve
+cd "${OAS_ROOT}"
 npx @openapitools/openapi-generator-cli generate \
   -i "${SPEC_FILE}" \
   -g python \
   -c "${CONFIGS_DIR}/python.yaml" \
   -o "${OUTPUT_DIR}" \
-  --template-dir "${TEMPLATES_DIR}" \
   --additional-properties=packageName="shotstack_sdk",projectName="shotstack-sdk",pythonAttrNoneIfUnset=true,packageVersion="${VERSION}",packageUrl="https://shotstack.io/product/sdk/python/",infoName="Shotstack",infoEmail="pypi@shotstack.io",licenseInfo="MIT"
 
 echo "Python SDK generated at ${OUTPUT_DIR}"
