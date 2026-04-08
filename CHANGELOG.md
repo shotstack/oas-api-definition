@@ -1,3 +1,10 @@
+## [1.10.3](https://github.com/shotstack/oas-api-definition/compare/v1.10.2...v1.10.3) (2026-04-08)
+
+
+### Bug Fixes
+
+* test and verified all test cases for all sdks ([aeb9625](https://github.com/shotstack/oas-api-definition/commit/aeb9625fc3be3c236cfa317bcdf3442f71eda3e2))
+
 ## [1.10.2](https://github.com/shotstack/oas-api-definition/compare/v1.10.1...v1.10.2) (2026-04-08)
 
 
