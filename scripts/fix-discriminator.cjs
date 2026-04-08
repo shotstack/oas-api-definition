@@ -359,7 +359,7 @@ function addRichCaptionSrcValidation(code, zPrefix) {
     '      if (mediaExts.some((ext) => pathname.endsWith(ext))) {\n' +
     '        ctx.addIssue({\n' +
     '          code: ' + zPrefix + '.ZodIssueCode.custom,\n' +
-    '          message: "src must point to a subtitle file (SRT or VTT). Audio and video files are not supported as src. Use the words array to provide word timings directly.",\n' +
+    '          message: "Caption src must be an SRT or VTT subtitle file. To generate captions from a media asset, use an alias reference (e.g. \\"alias://my-clip\\") instead of a direct URL. See: https://shotstack.io/docs/guide/architecting-an-application/rich-captions/",\n' +
     '          path: ["src"],\n' +
     '        });\n' +
     '      }\n' +
