@@ -215,6 +215,15 @@ RichTextBackground:
       minimum: 0
       default: 0
       example: 10
+    wrap:
+      description: |
+        When true, the background pill shrinks to fit the rendered text bounding box plus the
+        asset's padding (and stroke width, if present), producing a pill or badge effect. When
+        false (default), the background fills the full asset content area. Available on
+        rich-text and rich-caption assets only; not supported on legacy `type: text`.
+      type: boolean
+      default: false
+      example: true
   additionalProperties: false
   type: object
 
