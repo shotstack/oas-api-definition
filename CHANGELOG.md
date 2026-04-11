@@ -1,3 +1,10 @@
+## [1.10.7](https://github.com/shotstack/oas-api-definition/compare/v1.10.6...v1.10.7) (2026-04-11)
+
+
+### Bug Fixes
+
+* add  wrap  to rich-text  and rich-caption ([f570b2e](https://github.com/shotstack/oas-api-definition/commit/f570b2e9569f134cbf872f46659e09dc2338fa03))
+
 ## [1.10.6](https://github.com/shotstack/oas-api-definition/compare/v1.10.5...v1.10.6) (2026-04-08)
 
 
