@@ -1,3 +1,10 @@
+## [1.10.9](https://github.com/shotstack/oas-api-definition/compare/v1.10.8...v1.10.9) (2026-04-15)
+
+
+### Bug Fixes
+
+* Added wrap as an accepted optional boolean on TextBackground with a description explaining it exists purely so validators can emit a clear migration error. ([a049cb2](https://github.com/shotstack/oas-api-definition/commit/a049cb2f04defb1c77ab29e2797d508a4a8d536a))
+
 ## [1.10.8](https://github.com/shotstack/oas-api-definition/compare/v1.10.7...v1.10.8) (2026-04-15)
 
 
