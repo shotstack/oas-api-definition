@@ -1,3 +1,10 @@
+## [1.10.8](https://github.com/shotstack/oas-api-definition/compare/v1.10.7...v1.10.8) (2026-04-15)
+
+
+### Bug Fixes
+
+* remove src validation for rich-caption ([55bb8a2](https://github.com/shotstack/oas-api-definition/commit/55bb8a21106beb2f3bb3c5e1bce0780413c99959))
+
 ## [1.10.7](https://github.com/shotstack/oas-api-definition/compare/v1.10.6...v1.10.7) (2026-04-11)
 
 
