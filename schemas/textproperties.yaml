@@ -55,6 +55,13 @@
           type: number
           minimum: 0
           example: 5
+        wrap:
+          description: >-
+            Not supported on legacy `text` assets. Accepted here only so validators
+            can emit a clear migration error pointing users to `rich-text` or
+            `rich-caption`, which support background wrapping natively.
+          type: boolean
+          example: false
       additionalProperties: false
       type: object
 

@@ -330,7 +330,38 @@ function addStrictToObjects(src, prefix) {
 }
 
 
+function addLegacyTextWrapMigrationError(code, zPrefix) {
+  const schemaName = 'textassetTextAssetSchema';
+  const idx = code.indexOf(schemaName);
+  if (idx === -1) {
+    console.log("⚠ Could not find " + schemaName);
+    return code;
+  }
+
+  const strictMarker = '.strict()';
+  const strictIdx = code.indexOf(strictMarker, idx);
+  if (strictIdx === -1 || strictIdx - idx > 3000) {
+    console.log("⚠ Could not find .strict() for " + schemaName);
+    return code;
+  }
+
+  const superRefine = strictMarker + '.superRefine((data, ctx) => {\n' +
+    '  if (data.background && data.background.wrap === true) {\n' +
+    '    ctx.addIssue({\n' +
+    '      code: ' + zPrefix + '.ZodIssueCode.custom,\n' +
+    '      message: "background.wrap is only supported on rich-text and rich-caption assets. For type \\"text\\", migrate to type \\"rich-text\\" to use this feature.",\n' +
+    '      path: ["background", "wrap"],\n' +
+    '    });\n' +
+    '  }\n' +
+    '})';
+
+  code = code.substring(0, strictIdx) + superRefine + code.substring(strictIdx + strictMarker.length);
+  console.log("✓ Added legacy-text wrap migration error (" + zPrefix + ")");
+  return code;
+}
+
 content = addStrictToObjects(content, "z");
+content = addLegacyTextWrapMigrationError(content, "z");
 
 fs.writeFileSync(zodGenPath, content);
 
@@ -550,6 +581,7 @@ const clipClipSchemaWithFitFilter = exports.clipClipSchema.transform((clip) => {
   }
 
   cjsContent = addStrictToObjects(cjsContent, "zod_1.z");
+  cjsContent = addLegacyTextWrapMigrationError(cjsContent, "zod_1.z");
 
   fs.writeFileSync(zodGenCjsPath, cjsContent);
 }
@@ -682,6 +714,7 @@ const clipClipSchemaWithFitFilter = clipClipSchema.transform((clip) => {
   }
 
   jsContent = addStrictToObjects(jsContent, "z");
+  jsContent = addLegacyTextWrapMigrationError(jsContent, "z");
 
   fs.writeFileSync(zodGenJsPath, jsContent);
 }
