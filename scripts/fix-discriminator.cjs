@@ -1,38 +1,592 @@
 const fs = require("fs");
 const path = require("path");
 
+const START_TIME = Date.now();
+
 const zodGenPath = path.join(__dirname, "..", "dist", "zod", "zod.gen.ts");
+const zodGenCjsPath = path.join(__dirname, "..", "dist", "zod", "zod.gen.cjs");
+const zodGenJsPath = path.join(__dirname, "..", "dist", "zod", "zod.gen.js");
 
-console.log("Fixing discriminator and adding z.coerce for number fields...");
+const ALIAS_TABLE = [
+  {
+    kind: "enum",
+    zSchema: "clipClipSchema",
+    field: "fit",
+    canonical: "crop",
+    alias: "cover",
+  },
+  {
+    kind: "enum",
+    zSchema: "clipClipSchema",
+    field: "fit",
+    canonical: "cover",
+    alias: "fill",
+  },
+  {
+    kind: "enum",
+    zSchema: "renditionRenditionSchema",
+    field: "fit",
+    canonical: "crop",
+    alias: "cover",
+  },
+  {
+    kind: "enum",
+    zSchema: "renditionRenditionSchema",
+    field: "fit",
+    canonical: "cover",
+    alias: "fill",
+  },
 
-let content = fs.readFileSync(zodGenPath, "utf8");
+  {
+    kind: "enum",
+    zSchema: "clipClipSchema",
+    field: "position",
+    canonical: "topRight",
+    alias: "top-right",
+  },
+  {
+    kind: "enum",
+    zSchema: "clipClipSchema",
+    field: "position",
+    canonical: "topLeft",
+    alias: "top-left",
+  },
+  {
+    kind: "enum",
+    zSchema: "clipClipSchema",
+    field: "position",
+    canonical: "bottomRight",
+    alias: "bottom-right",
+  },
+  {
+    kind: "enum",
+    zSchema: "clipClipSchema",
+    field: "position",
+    canonical: "bottomLeft",
+    alias: "bottom-left",
+  },
+  {
+    kind: "enum",
+    zSchema: "htmlassetHtmlAssetSchema",
+    field: "position",
+    canonical: "topRight",
+    alias: "top-right",
+  },
+  {
+    kind: "enum",
+    zSchema: "htmlassetHtmlAssetSchema",
+    field: "position",
+    canonical: "topLeft",
+    alias: "top-left",
+  },
+  {
+    kind: "enum",
+    zSchema: "htmlassetHtmlAssetSchema",
+    field: "position",
+    canonical: "bottomRight",
+    alias: "bottom-right",
+  },
+  {
+    kind: "enum",
+    zSchema: "htmlassetHtmlAssetSchema",
+    field: "position",
+    canonical: "bottomLeft",
+    alias: "bottom-left",
+  },
+  {
+    kind: "enum",
+    zSchema: "titleassetTitleAssetSchema",
+    field: "position",
+    canonical: "topRight",
+    alias: "top-right",
+  },
+  {
+    kind: "enum",
+    zSchema: "titleassetTitleAssetSchema",
+    field: "position",
+    canonical: "topLeft",
+    alias: "top-left",
+  },
+  {
+    kind: "enum",
+    zSchema: "titleassetTitleAssetSchema",
+    field: "position",
+    canonical: "bottomRight",
+    alias: "bottom-right",
+  },
+  {
+    kind: "enum",
+    zSchema: "titleassetTitleAssetSchema",
+    field: "position",
+    canonical: "bottomLeft",
+    alias: "bottom-left",
+  },
+  {
+    kind: "enum",
+    zSchema: "richtextpropertiesRichTextAlignmentSchema",
+    field: "vertical",
+    canonical: "middle",
+    alias: "center",
+  },
 
-// Fix destination provider fields to use z.literal() for proper discriminated union
-// Note: The generated code uses double quotes, so we match both single and double quotes
-const destinationProviderFixes = [
-  { pattern: /provider: z\.string\(\)\.default\(["']shotstack["']\)/, replacement: 'provider: z.literal("shotstack")' },
-  { pattern: /provider: z\.string\(\)\.default\(["']s3["']\)/, replacement: 'provider: z.literal("s3")' },
-  { pattern: /provider: z\.string\(\)\.default\(["']mux["']\)/, replacement: 'provider: z.literal("mux")' },
-  { pattern: /provider: z\.string\(\)\.default\(["']google-cloud-storage["']\)/, replacement: 'provider: z.literal("google-cloud-storage")' },
-  { pattern: /provider: z\.string\(\)\.default\(["']google-drive["']\)/, replacement: 'provider: z.literal("google-drive")' },
-  { pattern: /provider: z\.string\(\)\.default\(["']vimeo["']\)/, replacement: 'provider: z.literal("vimeo")' },
-  { pattern: /provider: z\.string\(\)\.default\(["']tiktok["']\)/, replacement: 'provider: z.literal("tiktok")' },
-  { pattern: /provider: z\.string\(\)\.default\(["']akamai-netstorage["']\)/, replacement: 'provider: z.literal("akamai-netstorage")' },
-  { pattern: /provider: z\.string\(\)\.default\(["']azure-blob-storage["']\)/, replacement: 'provider: z.literal("azure-blob-storage")' },
+  {
+    kind: "property",
+    zSchema: "richtextassetRichTextAssetSchema",
+    field: "align",
+    alias: "alignment",
+    required: false,
+  },
+  {
+    kind: "property",
+    zSchema: "richcaptionassetRichCaptionAssetSchema",
+    field: "align",
+    alias: "alignment",
+    required: false,
+  },
+
+  {
+    kind: "property",
+    zSchema: "clipClipSchema",
+    field: "length",
+    alias: "duration",
+    required: true,
+  },
+  {
+    kind: "property",
+    zSchema: "rangeRangeSchema",
+    field: "length",
+    alias: "duration",
+    required: false,
+  },
+  {
+    kind: "property",
+    zSchema: "tweenTweenSchema",
+    field: "length",
+    alias: "duration",
+    required: false,
+  },
+
+  {
+    kind: "nested",
+    zSchema: "textpropertiesTextFontSchema",
+    field: "family",
+    aliases: ["name", "fontFamily"],
+  },
+  {
+    kind: "nested",
+    zSchema: "richtextpropertiesRichTextFontSchema",
+    field: "family",
+    aliases: ["name", "fontFamily"],
+  },
+  {
+    kind: "nested",
+    zSchema: "captionpropertiesCaptionFontSchema",
+    field: "family",
+    aliases: ["name", "fontFamily"],
+  },
+  {
+    kind: "nested",
+    zSchema: "richcaptionpropertiesRichCaptionFontSchema",
+    field: "family",
+    aliases: ["name", "fontFamily"],
+  },
+
+  {
+    kind: "nested",
+    zSchema: "textpropertiesTextFontSchema",
+    field: "size",
+    aliases: ["fontSize"],
+  },
+  {
+    kind: "nested",
+    zSchema: "richtextpropertiesRichTextFontSchema",
+    field: "size",
+    aliases: ["fontSize"],
+  },
+  {
+    kind: "nested",
+    zSchema: "captionpropertiesCaptionFontSchema",
+    field: "size",
+    aliases: ["fontSize"],
+  },
+  {
+    kind: "nested",
+    zSchema: "richcaptionpropertiesRichCaptionFontSchema",
+    field: "size",
+    aliases: ["fontSize"],
+  },
+
+  {
+    kind: "nested",
+    zSchema: "textpropertiesTextFontSchema",
+    field: "weight",
+    aliases: ["fontWeight"],
+  },
+  {
+    kind: "nested",
+    zSchema: "richtextpropertiesRichTextFontSchema",
+    field: "weight",
+    aliases: ["fontWeight"],
+  },
+  {
+    kind: "nested",
+    zSchema: "richcaptionpropertiesRichCaptionFontSchema",
+    field: "weight",
+    aliases: ["fontWeight"],
+  },
+
+  {
+    kind: "nested",
+    zSchema: "richtextpropertiesRichTextShadowSchema",
+    field: "offsetX",
+    aliases: ["x"],
+  },
+  {
+    kind: "nested",
+    zSchema: "richtextpropertiesRichTextShadowSchema",
+    field: "offsetY",
+    aliases: ["y"],
+  },
+
+  {
+    kind: "nested",
+    zSchema: "richtextpropertiesRichTextBorderSchema",
+    field: "radius",
+    aliases: ["borderRadius"],
+  },
+
+  {
+    kind: "nested",
+    zSchema: "richtextpropertiesRichTextGradientStopSchema",
+    field: "offset",
+    aliases: ["position"],
+  },
 ];
 
-destinationProviderFixes.forEach(({ pattern, replacement }) => {
-  if (pattern.test(content)) {
-    content = content.replace(pattern, replacement);
-    console.log(`✓ Fixed destination provider: ${replacement}`);
+function buildPropertyTransform(field, alias, zPrefix) {
+  const z = zPrefix;
+  return (
+    `.transform((data) => {\n` +
+    `  if (data.${alias} !== undefined && data.${field} === undefined) {\n` +
+    `    data.${field} = data.${alias};\n` +
+    `  }\n` +
+    `  const { ${alias}: _dropped, ...rest } = data;\n` +
+    `  return rest;\n` +
+    `})`
+  );
+}
+
+function buildPropertySuperRefine(field, alias, zPrefix) {
+  const z = zPrefix;
+  return (
+    `.superRefine((data, ctx) => {\n` +
+    `  if (data.${field} === undefined && data.${alias} === undefined) {\n` +
+    `    ctx.addIssue({ code: ${z}.ZodIssueCode.custom, message: "'${field}' is required (you may also use '${alias}' as an alias)", path: ["${field}"] });\n` +
+    `  }\n` +
+    `})`
+  );
+}
+
+function buildMultiAliasTransform(field, aliases) {
+  const checks = aliases
+    .map(
+      (a) =>
+        `  if (data.${a} !== undefined && data.${field} === undefined) { data.${field} = data.${a}; }`,
+    )
+    .join("\n");
+  const drops = aliases.map((a) => `${a}: _${a}`).join(", ");
+  const rests = aliases.map((a) => `_${a}`).join(", ");
+  return (
+    `.transform((data) => {\n` +
+    `${checks}\n` +
+    `  const { ${drops}, ...rest } = data;\n` +
+    `  return rest;\n` +
+    `})`
+  );
+}
+
+function buildEnumTransform(field, canonical, alias) {
+  return (
+    `.transform((data) => {\n` +
+    `  if (data.${field} === "${alias}") data.${field} = "${canonical}";\n` +
+    `  return data;\n` +
+    `})`
+  );
+}
+
+function findSchemaEnd(src, exportName, isCjs) {
+  const prefix = isCjs
+    ? `exports.${exportName} = `
+    : `export const ${exportName} = `;
+  const startIdx = src.indexOf(prefix);
+  if (startIdx === -1) return null;
+
+  const exprStart = startIdx + prefix.length;
+  let depth = 0;
+  let i = exprStart;
+  let inStr = false;
+  let strChar = "";
+
+  while (i < src.length) {
+    const c = src[i];
+    if (inStr) {
+      if (c === "\\") {
+        i += 2;
+        continue;
+      }
+      if (c === strChar) inStr = false;
+    } else if (c === '"' || c === "'" || c === "`") {
+      inStr = true;
+      strChar = c;
+    } else if (c === "(" || c === "{" || c === "[") {
+      depth++;
+    } else if (c === ")" || c === "}" || c === "]") {
+      depth--;
+    } else if (c === ";" && depth === 0) {
+      return { startIdx, exprStart, semiIdx: i };
+    }
+    i++;
   }
-});
+  return null;
+}
 
-// Fix the malformed destinations union schema
-const destinationsUnionPattern =
-  /export const destinationsDestinationsSchema = z\.union\(\[[\s\S]*?\]\);/;
+function makeFieldOptional(src, schemaName, fieldName, isCjs) {
+  const found = findSchemaEnd(src, schemaName, isCjs || false);
+  if (!found) {
+    console.log(
+      `- makeFieldOptional: schema "${schemaName}" not found, skipping`,
+    );
+    return src;
+  }
 
-const newDestinationsSchema = `export const destinationsDestinationsSchema = z.discriminatedUnion("provider", [
+  const before = src.slice(0, found.startIdx);
+  const body = src.slice(found.startIdx, found.semiIdx);
+  const after = src.slice(found.semiIdx);
+
+  const fieldMarker = `\n  ${fieldName}: `;
+  const markerIdx = body.indexOf(fieldMarker);
+  if (markerIdx === -1) {
+    console.log(
+      `- makeFieldOptional: field "${fieldName}" not found in "${schemaName}", skipping`,
+    );
+    return src;
+  }
+
+  const valueStart = markerIdx + fieldMarker.length;
+  let depth = 0;
+  let i = valueStart;
+  let inStr = false;
+  let strChar = "";
+  let started = false;
+
+  while (i < body.length) {
+    const c = body[i];
+    if (inStr) {
+      if (c === "\\") {
+        i += 2;
+        continue;
+      }
+      if (c === strChar) inStr = false;
+    } else if (c === '"' || c === "'" || c === "`") {
+      inStr = true;
+      strChar = c;
+    } else if (c === "(" || c === "{" || c === "[") {
+      depth++;
+      started = true;
+    } else if (c === ")" || c === "}" || c === "]") {
+      depth--;
+      if (depth === 0 && started) {
+        i++; // move past the closing bracket
+        break;
+      }
+    }
+    i++;
+  }
+
+  const peek = body.slice(i, i + 11);
+  if (peek === ".optional()") return src;
+
+  const newBody = body.slice(0, i) + ".optional()" + body.slice(i);
+  console.log(`✓ Made ${schemaName}.${fieldName} optional`);
+  return before + newBody + after;
+}
+
+function applyAliases(src, zPrefix, isCjs) {
+  let result = src;
+  let count = 0;
+  const cjs = isCjs || false;
+  const z = cjs ? "zod_1.z" : "z";
+  const dParam = cjs ? "d" : "d: any";
+
+  for (const entry of ALIAS_TABLE) {
+    if (entry.kind === "nested") continue;
+
+    const found = findSchemaEnd(result, entry.zSchema, cjs);
+    if (!found) {
+      console.error(
+        `✗ ALIAS TABLE: could not find schema "${entry.zSchema}" (${entry.kind}: ${entry.field})`,
+      );
+      process.exit(1);
+    }
+
+    let injection = "";
+    if (entry.kind === "enum") {
+      injection = buildEnumTransform(entry.field, entry.canonical, entry.alias);
+    } else if (entry.kind === "property") {
+      injection =
+        (entry.required
+          ? buildPropertySuperRefine(entry.field, entry.alias, zPrefix)
+          : "") + buildPropertyTransform(entry.field, entry.alias, zPrefix);
+    }
+
+    result =
+      result.slice(0, found.semiIdx) + injection + result.slice(found.semiIdx);
+    count++;
+  }
+
+  const nestedBySchema = new Map();
+  for (const entry of ALIAS_TABLE) {
+    if (entry.kind !== "nested") continue;
+    if (!nestedBySchema.has(entry.zSchema))
+      nestedBySchema.set(entry.zSchema, []);
+    nestedBySchema.get(entry.zSchema).push(entry);
+  }
+
+  for (const [schemaName, entries] of nestedBySchema) {
+    const found = findSchemaEnd(result, schemaName, cjs);
+    if (!found) {
+      console.error(
+        `✗ ALIAS TABLE: could not find schema "${schemaName}" for nested aliases`,
+      );
+      process.exit(1);
+    }
+
+    const checks = entries
+      .flatMap((e) =>
+        e.aliases.map(
+          (a) =>
+            `    if ('${a}' in d && !('${e.field}' in d)) { d.${e.field} = d.${a}; }\n    delete d.${a};`,
+        ),
+      )
+      .join("\n");
+
+    const preFn =
+      `((${dParam}) => {\n` +
+      `  if (typeof d === 'object' && d !== null) {\n` +
+      `    d = Object.assign({}, d);\n` +
+      `${checks}\n` +
+      `  }\n` +
+      `  return d;\n` +
+      `})`;
+
+    result =
+      result.slice(0, found.exprStart) +
+      `${z}.preprocess(${preFn}, ` +
+      result.slice(found.exprStart, found.semiIdx) +
+      `)` +
+      result.slice(found.semiIdx);
+
+    count += entries.length;
+  }
+
+  console.log(`✓ Applied ${count} alias transforms`);
+  return result;
+}
+
+function fixDestinationProviders(src, isTs) {
+  const fixes = [
+    {
+      pattern: /provider: z\.string\(\)\.default\(["']shotstack["']\)/,
+      replacement: 'provider: z.literal("shotstack")',
+    },
+    {
+      pattern: /provider: z\.string\(\)\.default\(["']s3["']\)/,
+      replacement: 'provider: z.literal("s3")',
+    },
+    {
+      pattern: /provider: z\.string\(\)\.default\(["']mux["']\)/,
+      replacement: 'provider: z.literal("mux")',
+    },
+    {
+      pattern:
+        /provider: z\.string\(\)\.default\(["']google-cloud-storage["']\)/,
+      replacement: 'provider: z.literal("google-cloud-storage")',
+    },
+    {
+      pattern: /provider: z\.string\(\)\.default\(["']google-drive["']\)/,
+      replacement: 'provider: z.literal("google-drive")',
+    },
+    {
+      pattern: /provider: z\.string\(\)\.default\(["']vimeo["']\)/,
+      replacement: 'provider: z.literal("vimeo")',
+    },
+    {
+      pattern: /provider: z\.string\(\)\.default\(["']tiktok["']\)/,
+      replacement: 'provider: z.literal("tiktok")',
+    },
+    {
+      pattern: /provider: z\.string\(\)\.default\(["']akamai-netstorage["']\)/,
+      replacement: 'provider: z.literal("akamai-netstorage")',
+    },
+    {
+      pattern: /provider: z\.string\(\)\.default\(["']azure-blob-storage["']\)/,
+      replacement: 'provider: z.literal("azure-blob-storage")',
+    },
+  ];
+  let result = src;
+  for (const { pattern, replacement } of fixes) {
+    if (pattern.test(result)) {
+      result = result.replace(pattern, replacement);
+      console.log(`✓ Fixed provider literal: ${replacement}`);
+    }
+  }
+  return result;
+}
+
+function fixCjsDestinationProviders(src) {
+  const fixes = [
+    {
+      pattern: /provider: zod_1\.z\.string\(\)\.default\(["']shotstack["']\)/,
+      replacement: 'provider: zod_1.z.literal("shotstack")',
+    },
+    {
+      pattern: /provider: zod_1\.z\.string\(\)\.default\(["']s3["']\)/,
+      replacement: 'provider: zod_1.z.literal("s3")',
+    },
+    {
+      pattern: /provider: zod_1\.z\.string\(\)\.default\(["']mux["']\)/,
+      replacement: 'provider: zod_1.z.literal("mux")',
+    },
+    {
+      pattern:
+        /provider: zod_1\.z\.string\(\)\.default\(["']google-cloud-storage["']\)/,
+      replacement: 'provider: zod_1.z.literal("google-cloud-storage")',
+    },
+    {
+      pattern:
+        /provider: zod_1\.z\.string\(\)\.default\(["']google-drive["']\)/,
+      replacement: 'provider: zod_1.z.literal("google-drive")',
+    },
+    {
+      pattern: /provider: zod_1\.z\.string\(\)\.default\(["']vimeo["']\)/,
+      replacement: 'provider: zod_1.z.literal("vimeo")',
+    },
+    {
+      pattern: /provider: zod_1\.z\.string\(\)\.default\(["']tiktok["']\)/,
+      replacement: 'provider: zod_1.z.literal("tiktok")',
+    },
+  ];
+  let result = src;
+  for (const { pattern, replacement } of fixes) {
+    if (pattern.test(result)) {
+      result = result.replace(pattern, replacement);
+      console.log(`✓ Fixed CJS provider literal: ${replacement}`);
+    }
+  }
+  return result;
+}
+
+const NEW_DESTINATIONS_SCHEMA = `export const destinationsDestinationsSchema = z.discriminatedUnion("provider", [
   shotstackDestinationShotstackDestinationSchema,
   muxDestinationMuxDestinationSchema,
   s3DestinationS3DestinationSchema,
@@ -44,17 +598,7 @@ const newDestinationsSchema = `export const destinationsDestinationsSchema = z.d
   azureBlobStorageDestinationAzureBlobStorageDestinationSchema
 ]);`;
 
-if (destinationsUnionPattern.test(content)) {
-  content = content.replace(destinationsUnionPattern, newDestinationsSchema);
-  console.log("✓ Fixed destinationsDestinationsSchema discriminator");
-} else {
-  console.log("⚠ Could not find destinationsDestinationsSchema to replace");
-}
-
-const assetUnionPattern =
-  /export const assetAssetSchema = z\.union\(\[[\s\S]*?\]\);/;
-
-const newAssetSchema = `export const assetAssetSchema = z.discriminatedUnion("type", [
+const NEW_ASSET_SCHEMA = `export const assetAssetSchema = z.discriminatedUnion("type", [
   videoassetVideoAssetSchema,
   imageassetImageAssetSchema,
   textassetTextAssetSchema,
@@ -72,17 +616,7 @@ const newAssetSchema = `export const assetAssetSchema = z.discriminatedUnion("ty
   texttospeechassetTextToSpeechAssetSchema,
 ]);`;
 
-if (assetUnionPattern.test(content)) {
-  content = content.replace(assetUnionPattern, newAssetSchema);
-  console.log("✓ Fixed assetAssetSchema discriminator");
-} else {
-  console.log("⚠ Could not find assetAssetSchema to replace");
-}
-
-const svgShapeUnionPattern =
-  /export const svgshapesSvgShapeSchema = z\.union\(\[[\s\S]*?\]\);/;
-
-const newSvgShapeSchema = `export const svgshapesSvgShapeSchema = z.discriminatedUnion("type", [
+const NEW_SVG_SHAPE_SCHEMA = `export const svgshapesSvgShapeSchema = z.discriminatedUnion("type", [
   svgshapesSvgRectangleShapeSchema,
   svgshapesSvgCircleShapeSchema,
   svgshapesSvgEllipseShapeSchema,
@@ -96,202 +630,249 @@ const newSvgShapeSchema = `export const svgshapesSvgShapeSchema = z.discriminate
   svgshapesSvgPathShapeSchema,
 ]);`;
 
-if (svgShapeUnionPattern.test(content)) {
-  content = content.replace(svgShapeUnionPattern, newSvgShapeSchema);
-  console.log("✓ Fixed svgshapesSvgShapeSchema discriminator");
-} else {
-  console.log("⚠ Could not find svgshapesSvgShapeSchema to replace");
-}
-
-const svgFillUnionPattern =
-  /export const svgpropertiesSvgFillSchema = z\.union\(\[[\s\S]*?\]\);/;
-
-const newSvgFillSchema = `export const svgpropertiesSvgFillSchema = z.discriminatedUnion("type", [
+const NEW_SVG_FILL_SCHEMA = `export const svgpropertiesSvgFillSchema = z.discriminatedUnion("type", [
   svgpropertiesSvgSolidFillSchema,
   svgpropertiesSvgLinearGradientFillSchema,
   svgpropertiesSvgRadialGradientFillSchema,
 ]);`;
 
-if (svgFillUnionPattern.test(content)) {
-  content = content.replace(svgFillUnionPattern, newSvgFillSchema);
-  console.log("✓ Fixed svgpropertiesSvgFillSchema discriminator");
-} else {
-  console.log("⚠ Could not find svgpropertiesSvgFillSchema to replace");
+function fixDiscriminatedUnions(src) {
+  let result = src;
+
+  const destPattern =
+    /export const destinationsDestinationsSchema = z\.union\(\[[\s\S]*?\]\);/;
+  if (!destPattern.test(result)) {
+    console.error("✗ Could not find destinationsDestinationsSchema to replace");
+    process.exit(1);
+  }
+  result = result.replace(destPattern, NEW_DESTINATIONS_SCHEMA);
+  console.log("✓ Fixed destinationsDestinationsSchema discriminator");
+
+  const assetPattern =
+    /export const assetAssetSchema = z\.union\(\[[\s\S]*?\]\);/;
+  if (!assetPattern.test(result)) {
+    console.error("✗ Could not find assetAssetSchema to replace");
+    process.exit(1);
+  }
+  result = result.replace(assetPattern, NEW_ASSET_SCHEMA);
+  console.log("✓ Fixed assetAssetSchema discriminator");
+
+  const svgShapePattern =
+    /export const svgshapesSvgShapeSchema = z\.union\(\[[\s\S]*?\]\);/;
+  if (svgShapePattern.test(result)) {
+    result = result.replace(svgShapePattern, NEW_SVG_SHAPE_SCHEMA);
+    console.log("✓ Fixed svgshapesSvgShapeSchema discriminator");
+  } else {
+    console.log(
+      "- svgshapesSvgShapeSchema not present in generated output, skipping",
+    );
+  }
+
+  const svgFillPattern =
+    /export const svgpropertiesSvgFillSchema = z\.union\(\[[\s\S]*?\]\);/;
+  if (svgFillPattern.test(result)) {
+    result = result.replace(svgFillPattern, NEW_SVG_FILL_SCHEMA);
+    console.log("✓ Fixed svgpropertiesSvgFillSchema discriminator");
+  } else {
+    console.log(
+      "- svgpropertiesSvgFillSchema not present in generated output, skipping",
+    );
+  }
+
+  return result;
 }
 
-const svgAssetPattern =
-  /export const svgassetSvgAssetSchema = z\.object\(\{[\s\S]*?\}\);/;
-
-// Note: Do NOT include z.preprocess here - the number coercion pass will add it
-const svgAssetSuperRefine = `export const svgassetSvgAssetSchema = z.object({
+const SVG_ASSET_REPLACEMENT = `export const svgassetSvgAssetSchema = z.object({
   type: z.enum(["svg"]),
   src: z.string().min(1).max(500000),
 }).strict();`;
 
-if (svgAssetPattern.test(content)) {
-  content = content.replace(svgAssetPattern, svgAssetSuperRefine);
-  console.log("✓ Added superRefine validation to svgassetSvgAssetSchema for mutual exclusivity");
-} else {
-  console.log("⚠ Could not find svgassetSvgAssetSchema to add superRefine validation");
+function fixSvgAsset(src) {
+  const pattern =
+    /export const svgassetSvgAssetSchema = z\.object\(\{[\s\S]*?\}\);/;
+  if (!pattern.test(src)) {
+    console.error("✗ Could not find svgassetSvgAssetSchema to replace");
+    process.exit(1);
+  }
+  console.log("✓ Fixed svgassetSvgAssetSchema");
+  return src.replace(pattern, SVG_ASSET_REPLACEMENT);
 }
 
-// Coercion function that converts strings to numbers inside preprocess (doesn't rely on z.coerce)
-// Note: Arrays are passed through unchanged to allow unions with array types (e.g., scale: number | Tween[])
-// Note: Merge field templates ({{ FIELD }}) are preserved to allow the union's string alternative to match
-const coerceNumber = `((v: unknown) => { if (v === '' || v === null || v === undefined) return undefined; if (Array.isArray(v)) return v; if (typeof v === 'string') { if (/^\\{\\{\\s*[A-Za-z0-9_]+\\s*\\}\\}$/.test(v)) return v; return Number(v); } return v; })`;
+const COERCE_FN_TS = `((v: unknown) => { if (v === '' || v === null || v === undefined) return undefined; if (Array.isArray(v)) return v; if (typeof v === 'string') { if (/^\\{\\{\\s*[A-Za-z0-9_]+\\s*\\}\\}$/.test(v)) return v; return Number(v); } return v; })`;
+const COERCE_FN_JS = `((v) => { if (v === '' || v === null || v === undefined) return undefined; if (Array.isArray(v)) return v; if (typeof v === 'string') { if (/^\\{\\{\\s*[A-Za-z0-9_]+\\s*\\}\\}$/.test(v)) return v; return Number(v); } return v; })`;
 
-const plainNumberPattern = /z\.number\(\)(?!\.)/g;
-const plainNumberCount = (content.match(plainNumberPattern) || []).length;
-if (plainNumberCount > 0) {
-  content = content.replace(
-    plainNumberPattern,
-    `z.preprocess(${coerceNumber}, z.number())`
+function addNumberCoercion(src, coerceFn, zPrefix) {
+  let result = src;
+  const p = zPrefix === "z" ? "z" : "zod_1\\.z";
+
+  const plainPattern = new RegExp(`${p}\\.number\\(\\)(?!\\.)`, "g");
+  const plainCount = (result.match(plainPattern) || []).length;
+  if (plainCount > 0) {
+    result = result.replace(
+      plainPattern,
+      `${zPrefix}.preprocess(${coerceFn}, ${zPrefix}.number())`,
+    );
+    console.log(`✓ Number coercion: plain z.number() (${plainCount})`);
+  }
+
+  const chainedPattern = new RegExp(
+    `${p}\\.number\\(\\)((?:\\.[a-zA-Z]+\\([^)]*\\))+)`,
+    "g",
   );
-  console.log(
-    `✓ Added number coercion for plain z.number() (${plainNumberCount} occurrences)`
-  );
+  let chainedCount = 0;
+  result = result.replace(chainedPattern, (match, chain) => {
+    chainedCount++;
+    return `${zPrefix}.preprocess(${coerceFn}, ${zPrefix}.number()${chain})`;
+  });
+  if (chainedCount > 0)
+    console.log(`✓ Number coercion: chained z.number() (${chainedCount})`);
+
+  return result;
 }
 
-const chainedNumberPattern = /z\.number\(\)((?:\.[a-zA-Z]+\([^)]*\))+)/g;
-let chainedCount = 0;
-content = content.replace(chainedNumberPattern, (match, chain) => {
-  chainedCount++;
-  return `z.preprocess(${coerceNumber}, z.number()${chain})`;
-});
-if (chainedCount > 0) {
-  console.log(
-    `✓ Added number coercion for chained z.number() (${chainedCount} occurrences)`
+// ─── EXISTING PASS: merge field support ──────────────────────────────────────
+
+const MERGE_RE = `/^\\{\\{\\s*[A-Za-z0-9_]+\\s*\\}\\}$/`;
+
+function addMergeFieldSupport(src, zPrefix) {
+  let result = src;
+  const p = zPrefix === "z" ? "z" : "zod_1\\.z";
+
+  let regexCount = 0;
+  result = result.replace(
+    new RegExp(
+      `${p}\\.string\\(\\)\\.regex\\((\\/(?:[^\\/\\\\]|\\\\.)*\\/)\\)(?![.(])`,
+      "g",
+    ),
+    (match, existingRegex) => {
+      regexCount++;
+      return `${zPrefix}.union([${zPrefix}.string().regex(${existingRegex}), ${zPrefix}.string().regex(${MERGE_RE})])`;
+    },
   );
+  console.log(`✓ Merge field support: regex fields (${regexCount})`);
+
+  let numberCount = 0;
+  const preStr =
+    zPrefix === "z"
+      ? "z\\.preprocess\\(\\(\\(v: unknown\\)"
+      : "zod_1\\.z\\.preprocess\\(\\(\\(v\\)";
+  result = result.replace(
+    new RegExp(
+      `(${preStr}.*?return v; }\\), ${p}\\.number\\(\\)(?:\\.[a-zA-Z]+\\([^)]*\\))*)\\)`,
+      "g",
+    ),
+    (match) => {
+      numberCount++;
+      return `${zPrefix}.union([${match}, ${zPrefix}.string().regex(${MERGE_RE})])`;
+    },
+  );
+  console.log(`✓ Merge field support: number fields (${numberCount})`);
+
+  return result;
 }
 
-const plainIntPattern = /z\.int\(\)(?!\.)/g;
-const plainIntCount = (content.match(plainIntPattern) || []).length;
-if (plainIntCount > 0) {
-  content = content.replace(
-    plainIntPattern,
-    `z.preprocess(${coerceNumber}, z.number().int())`
+function fixMergeField(src, zPrefix) {
+  const p = zPrefix === "z" ? "z" : "zod_1\\.z";
+  const pattern = new RegExp(
+    `(export const mergefieldMergeFieldSchema = ${p}\\.object\\(\\{[\\s\\S]*?find: ${p}\\.string\\(\\),[\\s\\S]*?replace: ${p}\\.unknown\\(\\),[\\s\\S]*?\\}\\))`,
+    "m",
   );
-  console.log(
-    `✓ Added number coercion for plain z.int() (${plainIntCount} occurrences)`
-  );
-}
-
-const chainedIntPattern = /z\.int\(\)((?:\.[a-zA-Z]+\([^)]*\))+)/g;
-let chainedIntCount = 0;
-content = content.replace(chainedIntPattern, (match, chain) => {
-  chainedIntCount++;
-  return `z.preprocess(${coerceNumber}, z.number().int()${chain})`;
-});
-if (chainedIntCount > 0) {
-  console.log(
-    `✓ Added number coercion for chained z.int() (${chainedIntCount} occurrences)`
-  );
-}
-
-const mergeFieldPattern = /export const mergefieldMergeFieldSchema = z\.object\(\{[\s\S]*?find: z\.string\(\),[\s\S]*?replace: z\.unknown\(\),[\s\S]*?\}\);/;
-
-const newMergeFieldSchema = `export const mergefieldMergeFieldSchema = z.object({
+  if (!pattern.test(src)) {
+    return src;
+  }
+  const replacement = `export const mergefieldMergeFieldSchema = z.object({
   find: z.string(),
   replace: z.union([z.string(), z.number(), z.boolean(), z.null(), z.record(z.string(), z.unknown()), z.array(z.unknown())]),
-});`;
-
-if (mergeFieldPattern.test(content)) {
-  content = content.replace(mergeFieldPattern, newMergeFieldSchema);
-  console.log("✓ Fixed MergeField replace to require a value");
-} else {
-  console.log("⚠ Could not find mergefieldMergeFieldSchema to fix");
+})`;
+  const result = src.replace(pattern, replacement);
+  console.log("✓ Fixed MergeField replace type");
+  return result;
 }
 
+// ─── EXISTING PASS: clip fit-filter for rich-text ────────────────────────────
 
-// ─── MERGE FIELD SUPPORT ──────────────────────────────────────────────────────
-// Allow merge field templates ({{ FIELD_NAME }}) in string fields with regex validation
-// and number fields. This enables the Studio SDK to preserve merge field bindings.
-console.log("Adding merge field support...");
+const CLIP_FIT_FILTER_ESM = `export const clipSchema = clipClipSchema;
 
-// Regex literal for merge fields: /^\{\{\s*[A-Za-z0-9_]+\s*\}\}$/
-const MERGE_FIELD_REGEX_LITERAL = `/^\\{\\{\\s*[A-Za-z0-9_]+\\s*\\}\\}$/`;
-
-// 1. z.string().regex(/pattern/) → union with merge field alternative
-// For fields with existing regex patterns (like hex colors, clip aliases), add merge field as alternative
-// Match regex literal: /.../ (handles escaped slashes inside)
-let regexFieldCount = 0;
-content = content.replace(
-  /z\.string\(\)\.regex\((\/(?:[^\/\\]|\\.)*\/)\)(?![\.\(])/g,
-  (match, existingRegex) => {
-    regexFieldCount++;
-    return `z.union([z.string().regex(${existingRegex}), z.string().regex(${MERGE_FIELD_REGEX_LITERAL})])`;
-  }
-);
-console.log(`✓ Added merge field support to ${regexFieldCount} regex-validated string fields`);
-
-// 2. Number fields with coercion → add merge field string alternative
-// The existing z.preprocess wraps numbers. We need to add union with merge field.
-// The coercion function contains many ) chars, so we use the "return v; })" anchor pattern
-// Pattern: z.preprocess(((...) => {...return v; }), z.number()...) → z.union([...], z.string().regex(MERGE_FIELD)])
-let numberFieldCount = 0;
-content = content.replace(
-  /(z\.preprocess\(\(\(v: unknown\).*?return v; }\), z\.number\(\)(?:\.[a-zA-Z]+\([^)]*\))*\))/g,
-  (match) => {
-    numberFieldCount++;
-    return `z.union([${match}, z.string().regex(${MERGE_FIELD_REGEX_LITERAL})])`;
-  }
-);
-console.log(`✓ Added merge field support to ${numberFieldCount} number fields`);
-
-console.log("Adding fit property filter for rich-text assets...");
-
-const clipSchemaExportPattern = /export const clipSchema = clipClipSchema;/;
-
-if (clipSchemaExportPattern.test(content)) {
-  const clipSchemaWithFitFilter = `export const clipSchema = clipClipSchema;
-
-// Clip schema with fit property filter for rich-text assets
-// This removes the 'fit' property when asset type is 'rich-text'
+// Strips 'fit' from clips whose asset type is 'rich-text' (fit is unsupported there)
 const clipClipSchemaWithFitFilter = clipClipSchema.transform((clip) => {
   if (clip.asset && typeof clip.asset === 'object' && 'type' in clip.asset) {
-    const assetType = clip.asset.type;
-    if (assetType === 'rich-text') {
+    if (clip.asset.type === 'rich-text') {
       const { fit, ...rest } = clip;
       return rest;
     }
   }
   return clip;
 });`;
-  content = content.replace(clipSchemaExportPattern, clipSchemaWithFitFilter);
-  console.log("✓ Added clipClipSchemaWithFitFilter");
 
-  // Update trackTrackSchema to use the filtered clip schema
-  const trackSchemaPattern = /clips: z\.array\(clipClipSchema\)/;
-  if (trackSchemaPattern.test(content)) {
-    content = content.replace(trackSchemaPattern, 'clips: z.array(clipClipSchemaWithFitFilter)');
-    console.log("✓ Updated trackTrackSchema to use clipClipSchemaWithFitFilter");
-  } else {
-    console.log("⚠ Could not find trackTrackSchema to update");
+const CLIP_FIT_FILTER_CJS = `exports.clipSchema = exports.clipClipSchema;
+
+// Strips 'fit' from clips whose asset type is 'rich-text' (fit is unsupported there)
+const clipClipSchemaWithFitFilter = exports.clipClipSchema.transform((clip) => {
+  if (clip.asset && typeof clip.asset === 'object' && 'type' in clip.asset) {
+    if (clip.asset.type === 'rich-text') {
+      const { fit, ...rest } = clip;
+      return rest;
+    }
   }
-} else {
-  console.log("⚠ Could not find clipSchema export to add fit property filter");
+  return clip;
+});`;
+
+function addClipFitFilter(src, isCjs) {
+  if (isCjs) {
+    const exportPattern = /exports\.clipSchema = exports\.clipClipSchema;/;
+    const trackPattern = /clips: zod_1\.z\.array\(exports\.clipClipSchema\)/;
+    if (!exportPattern.test(src)) {
+      console.error("✗ Could not find CJS clipSchema export for fit filter");
+      process.exit(1);
+    }
+    let result = src.replace(exportPattern, CLIP_FIT_FILTER_CJS);
+    if (!trackPattern.test(result)) {
+      console.error(
+        "✗ Could not find CJS trackTrackSchema to update with fit filter",
+      );
+      process.exit(1);
+    }
+    result = result.replace(
+      trackPattern,
+      "clips: zod_1.z.array(clipClipSchemaWithFitFilter)",
+    );
+    console.log("✓ Added clip fit filter (CJS)");
+    return result;
+  } else {
+    const exportPattern = /export const clipSchema = clipClipSchema;/;
+    const trackPattern = /clips: z\.array\(clipClipSchema\)/;
+    if (!exportPattern.test(src)) {
+      console.error("✗ Could not find ESM clipSchema export for fit filter");
+      process.exit(1);
+    }
+    let result = src.replace(exportPattern, CLIP_FIT_FILTER_ESM);
+    if (!trackPattern.test(result)) {
+      console.error(
+        "✗ Could not find ESM trackTrackSchema to update with fit filter",
+      );
+      process.exit(1);
+    }
+    result = result.replace(
+      trackPattern,
+      "clips: z.array(clipClipSchemaWithFitFilter)",
+    );
+    console.log("✓ Added clip fit filter (ESM)");
+    return result;
+  }
 }
 
-// ─── STRICT MODE ENFORCEMENT ──────────────────────────────────────────────────
-// Convert all z.object({...}) to z.object({...}).strict() to reject unknown properties
-// with meaningful error messages like: "Unrecognized key(s) in object: 'container'"
-console.log("Adding strict mode to all object schemas...");
+// ─── EXISTING PASS: strict mode ───────────────────────────────────────────────
 
 function addStrictToObjects(src, prefix) {
-  // prefix is "z" for ESM TS/JS or "zod_1.z" for CJS
-  const escapedPrefix = prefix.replace(/\./g, "\\.");
   const marker = prefix + ".object({";
   let result = "";
   let i = 0;
   let strictCount = 0;
 
   while (i < src.length) {
-    // Check if we're at a z.object({ or zod_1.z.object({ boundary
-    const remaining = src.slice(i);
-    if (remaining.startsWith(marker)) {
-      // Find the matching closing brace by counting depth
+    if (src.slice(i).startsWith(marker)) {
       let depth = 0;
-      let j = i + marker.length - 1; // position of the opening {
+      let j = i + marker.length - 1;
       depth = 1;
       j++;
       while (j < src.length && depth > 0) {
@@ -299,18 +880,13 @@ function addStrictToObjects(src, prefix) {
         else if (src[j] === "}") depth--;
         j++;
       }
-      // j is now right after the closing }
-      // Check if followed by ) to close z.object(...)
       if (j < src.length && src[j] === ")") {
-        j++; // skip the )
-        // Check what follows - skip if already has .strict() or is followed by .superRefine(
+        j++;
         const after = src.slice(j);
         if (after.startsWith(".strict()")) {
-          // Already strict, skip
           result += src.slice(i, j);
           i = j;
         } else {
-          // Insert .strict() after z.object({...})
           result += src.slice(i, j) + ".strict()";
           strictCount++;
           i = j;
@@ -324,75 +900,54 @@ function addStrictToObjects(src, prefix) {
       i++;
     }
   }
-
   console.log(`✓ Added .strict() to ${strictCount} object schemas (${prefix})`);
   return result;
 }
 
-
 function addLegacyTextWrapMigrationError(code, zPrefix) {
-  const schemaName = 'textassetTextAssetSchema';
+  const schemaName = "textassetTextAssetSchema";
   const idx = code.indexOf(schemaName);
   if (idx === -1) {
-    console.log("⚠ Could not find " + schemaName);
-    return code;
+    console.error(`✗ Could not find ${schemaName} for wrap migration error`);
+    process.exit(1);
   }
-
-  const strictMarker = '.strict()';
+  const strictMarker = ".strict()";
   const strictIdx = code.indexOf(strictMarker, idx);
   if (strictIdx === -1 || strictIdx - idx > 3000) {
-    console.log("⚠ Could not find .strict() for " + schemaName);
-    return code;
+    console.error(`✗ Could not find .strict() for ${schemaName}`);
+    process.exit(1);
   }
-
-  const superRefine = strictMarker + '.superRefine((data, ctx) => {\n' +
-    '  if (data.background && data.background.wrap === true) {\n' +
-    '    ctx.addIssue({\n' +
-    '      code: ' + zPrefix + '.ZodIssueCode.custom,\n' +
-    '      message: "background.wrap is only supported on rich-text and rich-caption assets. For type \\"text\\", migrate to type \\"rich-text\\" to use this feature.",\n' +
-    '      path: ["background", "wrap"],\n' +
-    '    });\n' +
-    '  }\n' +
-    '})';
-
-  code = code.substring(0, strictIdx) + superRefine + code.substring(strictIdx + strictMarker.length);
-  console.log("✓ Added legacy-text wrap migration error (" + zPrefix + ")");
-  return code;
+  const superRefine =
+    strictMarker +
+    `.superRefine((data, ctx) => {\n` +
+    `  if (data.background && data.background.wrap === true) {\n` +
+    `    ctx.addIssue({\n` +
+    `      code: ${zPrefix}.ZodIssueCode.custom,\n` +
+    `      message: "background.wrap is only supported on rich-text and rich-caption assets. For type \\"text\\", migrate to type \\"rich-text\\" to use this feature.",\n` +
+    `      path: ["background", "wrap"],\n` +
+    `    });\n` +
+    `  }\n` +
+    `})`;
+  const result =
+    code.substring(0, strictIdx) +
+    superRefine +
+    code.substring(strictIdx + strictMarker.length);
+  console.log(`✓ Added legacy text wrap migration error (${zPrefix})`);
+  return result;
 }
 
-content = addStrictToObjects(content, "z");
-content = addLegacyTextWrapMigrationError(content, "z");
+function fixCjsDiscriminatedUnions(src) {
+  let result = src;
 
-fs.writeFileSync(zodGenPath, content);
-
-const zodGenCjsPath = path.join(__dirname, "..", "dist", "zod", "zod.gen.cjs");
-if (fs.existsSync(zodGenCjsPath)) {
-  let cjsContent = fs.readFileSync(zodGenCjsPath, "utf8");
-
-  // Fix destination provider fields in CJS
-  // Note: The generated code uses double quotes, so we match both single and double quotes
-  const cjsDestinationProviderFixes = [
-    { pattern: /provider: zod_1\.z\.string\(\)\.default\(["']shotstack["']\)/, replacement: 'provider: zod_1.z.literal("shotstack")' },
-    { pattern: /provider: zod_1\.z\.string\(\)\.default\(["']s3["']\)/, replacement: 'provider: zod_1.z.literal("s3")' },
-    { pattern: /provider: zod_1\.z\.string\(\)\.default\(["']mux["']\)/, replacement: 'provider: zod_1.z.literal("mux")' },
-    { pattern: /provider: zod_1\.z\.string\(\)\.default\(["']google-cloud-storage["']\)/, replacement: 'provider: zod_1.z.literal("google-cloud-storage")' },
-    { pattern: /provider: zod_1\.z\.string\(\)\.default\(["']google-drive["']\)/, replacement: 'provider: zod_1.z.literal("google-drive")' },
-    { pattern: /provider: zod_1\.z\.string\(\)\.default\(["']vimeo["']\)/, replacement: 'provider: zod_1.z.literal("vimeo")' },
-    { pattern: /provider: zod_1\.z\.string\(\)\.default\(["']tiktok["']\)/, replacement: 'provider: zod_1.z.literal("tiktok")' },
-  ];
-
-  cjsDestinationProviderFixes.forEach(({ pattern, replacement }) => {
-    if (pattern.test(cjsContent)) {
-      cjsContent = cjsContent.replace(pattern, replacement);
-      console.log(`✓ Fixed destination provider in CJS: ${replacement}`);
-    }
-  });
-
-  // Fix destinations union schema in CJS
-  const cjsDestinationsUnionPattern =
+  const destPattern =
     /exports\.destinationsDestinationsSchema = zod_1\.z\.union\(\[[\s\S]*?\]\);/;
-
-  const newCjsDestinationsSchema = `exports.destinationsDestinationsSchema = zod_1.z.discriminatedUnion("provider", [
+  if (!destPattern.test(result)) {
+    console.error("✗ CJS: could not find destinationsDestinationsSchema");
+    process.exit(1);
+  }
+  result = result.replace(
+    destPattern,
+    `exports.destinationsDestinationsSchema = zod_1.z.discriminatedUnion("provider", [
   exports.shotstackDestinationShotstackDestinationSchema,
   exports.muxDestinationMuxDestinationSchema,
   exports.s3DestinationS3DestinationSchema,
@@ -402,17 +957,19 @@ if (fs.existsSync(zodGenCjsPath)) {
   exports.tiktokDestinationTiktokDestinationSchema,
   exports.akamaiNetStorageDestinationAkamaiNetStorageDestinationSchema,
   exports.azureBlobStorageDestinationAzureBlobStorageDestinationSchema
-]);`;
+]);`,
+  );
+  console.log("✓ CJS: fixed destinationsDestinationsSchema discriminator");
 
-  if (cjsDestinationsUnionPattern.test(cjsContent)) {
-    cjsContent = cjsContent.replace(cjsDestinationsUnionPattern, newCjsDestinationsSchema);
-    console.log("✓ Fixed destinationsDestinationsSchema discriminator in CJS");
-  }
-
-  const cjsAssetUnionPattern =
+  const assetPattern =
     /exports\.assetAssetSchema = zod_1\.z\.union\(\[[\s\S]*?\]\);/;
-
-  const newCjsAssetSchema = `exports.assetAssetSchema = zod_1.z.discriminatedUnion("type", [
+  if (!assetPattern.test(result)) {
+    console.error("✗ CJS: could not find assetAssetSchema");
+    process.exit(1);
+  }
+  result = result.replace(
+    assetPattern,
+    `exports.assetAssetSchema = zod_1.z.discriminatedUnion("type", [
   exports.videoassetVideoAssetSchema,
   exports.imageassetImageAssetSchema,
   exports.textassetTextAssetSchema,
@@ -421,7 +978,6 @@ if (fs.existsSync(zodGenCjsPath)) {
   exports.lumaassetLumaAssetSchema,
   exports.captionassetCaptionAssetSchema,
   exports.richcaptionassetRichCaptionAssetSchema,
-
   exports.htmlassetHtmlAssetSchema,
   exports.titleassetTitleAssetSchema,
   exports.shapeassetShapeAssetSchema,
@@ -429,17 +985,16 @@ if (fs.existsSync(zodGenCjsPath)) {
   exports.texttoimageassetTextToImageAssetSchema,
   exports.imagetovideoassetImageToVideoAssetSchema,
   exports.texttospeechassetTextToSpeechAssetSchema,
-]);`;
+]);`,
+  );
+  console.log("✓ CJS: fixed assetAssetSchema discriminator");
 
-  if (cjsAssetUnionPattern.test(cjsContent)) {
-    cjsContent = cjsContent.replace(cjsAssetUnionPattern, newCjsAssetSchema);
-    console.log("✓ Fixed assetAssetSchema discriminator in CJS");
-  }
-
-  const cjsSvgShapeUnionPattern =
+  const svgShapePattern =
     /exports\.svgshapesSvgShapeSchema = zod_1\.z\.union\(\[[\s\S]*?\]\);/;
-
-  const newCjsSvgShapeSchema = `exports.svgshapesSvgShapeSchema = zod_1.z.discriminatedUnion("type", [
+  if (svgShapePattern.test(result)) {
+    result = result.replace(
+      svgShapePattern,
+      `exports.svgshapesSvgShapeSchema = zod_1.z.discriminatedUnion("type", [
   exports.svgshapesSvgRectangleShapeSchema,
   exports.svgshapesSvgCircleShapeSchema,
   exports.svgshapesSvgEllipseShapeSchema,
@@ -451,272 +1006,110 @@ if (fs.existsSync(zodGenCjsPath)) {
   exports.svgshapesSvgCrossShapeSchema,
   exports.svgshapesSvgRingShapeSchema,
   exports.svgshapesSvgPathShapeSchema,
-]);`;
-
-  if (cjsSvgShapeUnionPattern.test(cjsContent)) {
-    cjsContent = cjsContent.replace(
-      cjsSvgShapeUnionPattern,
-      newCjsSvgShapeSchema
+]);`,
     );
-    console.log("✓ Fixed svgshapesSvgShapeSchema discriminator in CJS");
+    console.log("✓ CJS: fixed svgshapesSvgShapeSchema discriminator");
+  } else {
+    console.log("- CJS: svgshapesSvgShapeSchema not present, skipping");
   }
 
-  const cjsSvgFillUnionPattern =
+  const svgFillPattern =
     /exports\.svgpropertiesSvgFillSchema = zod_1\.z\.union\(\[[\s\S]*?\]\);/;
-
-  const newCjsSvgFillSchema = `exports.svgpropertiesSvgFillSchema = zod_1.z.discriminatedUnion("type", [
+  if (svgFillPattern.test(result)) {
+    result = result.replace(
+      svgFillPattern,
+      `exports.svgpropertiesSvgFillSchema = zod_1.z.discriminatedUnion("type", [
   exports.svgpropertiesSvgSolidFillSchema,
   exports.svgpropertiesSvgLinearGradientFillSchema,
   exports.svgpropertiesSvgRadialGradientFillSchema,
-]);`;
-
-  if (cjsSvgFillUnionPattern.test(cjsContent)) {
-    cjsContent = cjsContent.replace(
-      cjsSvgFillUnionPattern,
-      newCjsSvgFillSchema
+]);`,
     );
-    console.log("✓ Fixed svgpropertiesSvgFillSchema discriminator in CJS");
+    console.log("✓ CJS: fixed svgpropertiesSvgFillSchema discriminator");
+  } else {
+    console.log("- CJS: svgpropertiesSvgFillSchema not present, skipping");
   }
 
-  const cjsSvgAssetPattern =
-    /exports\.svgassetSvgAssetSchema = zod_1\.z\.object\(\{[\s\S]*?\}\);/;
+  return result;
+}
 
-  // Note: Do NOT include z.preprocess here - the number coercion pass will add it
-  const cjsSvgAssetSuperRefine = `exports.svgassetSvgAssetSchema = zod_1.z.object({
+function fixCjsSvgAsset(src) {
+  const pattern =
+    /exports\.svgassetSvgAssetSchema = zod_1\.z\.object\(\{[\s\S]*?\}\);/;
+  if (!pattern.test(src)) {
+    console.error("✗ CJS: could not find svgassetSvgAssetSchema");
+    process.exit(1);
+  }
+  console.log("✓ CJS: fixed svgassetSvgAssetSchema");
+  return src.replace(
+    pattern,
+    `exports.svgassetSvgAssetSchema = zod_1.z.object({
   type: zod_1.z.enum(["svg"]),
   src: zod_1.z.string().min(1).max(500000),
-}).strict();`;
-
-  if (cjsSvgAssetPattern.test(cjsContent)) {
-    cjsContent = cjsContent.replace(cjsSvgAssetPattern, cjsSvgAssetSuperRefine);
-    console.log("✓ Added superRefine validation to svgassetSvgAssetSchema in CJS");
-  }
-
-  // Coercion function for CJS (without TypeScript type annotation)
-  // Note: Arrays are passed through unchanged to allow unions with array types (e.g., scale: number | Tween[])
-  // Note: Merge field templates ({{ FIELD }}) are preserved to allow the union's string alternative to match
-  const cjsCoerceNumber = `((v) => { if (v === '' || v === null || v === undefined) return undefined; if (Array.isArray(v)) return v; if (typeof v === 'string') { if (/^\\{\\{\\s*[A-Za-z0-9_]+\\s*\\}\\}$/.test(v)) return v; return Number(v); } return v; })`;
-
-  const cjsPlainNumberPattern = /zod_1\.z\.number\(\)(?!\.)/g;
-  const cjsPlainNumberCount = (cjsContent.match(cjsPlainNumberPattern) || [])
-    .length;
-  if (cjsPlainNumberCount > 0) {
-    cjsContent = cjsContent.replace(
-      cjsPlainNumberPattern,
-      `zod_1.z.preprocess(${cjsCoerceNumber}, zod_1.z.number())`
-    );
-    console.log(
-      `✓ Added number coercion in CJS (${cjsPlainNumberCount} occurrences)`
-    );
-  }
-
-  const cjsChainedNumberPattern =
-    /zod_1\.z\.number\(\)((?:\.[a-zA-Z]+\([^)]*\))+)/g;
-  let cjsChainedCount = 0;
-  cjsContent = cjsContent.replace(cjsChainedNumberPattern, (match, chain) => {
-    cjsChainedCount++;
-    return `zod_1.z.preprocess(${cjsCoerceNumber}, zod_1.z.number()${chain})`;
-  });
-  if (cjsChainedCount > 0) {
-    console.log(
-      `✓ Added number coercion chains in CJS (${cjsChainedCount} occurrences)`
-    );
-  }
-
-  // ─── MERGE FIELD SUPPORT FOR CJS ─────────────────────────────────────────────
-  const CJS_MERGE_FIELD_REGEX_LITERAL = `/^\\{\\{\\s*[A-Za-z0-9_]+\\s*\\}\\}$/`;
-
-  // 1. String fields with regex validation
-  let cjsRegexFieldCount = 0;
-  cjsContent = cjsContent.replace(
-    /zod_1\.z\.string\(\)\.regex\((\/(?:[^\/\\]|\\.)*\/)\)(?![\.\(])/g,
-    (match, existingRegex) => {
-      cjsRegexFieldCount++;
-      return `zod_1.z.union([zod_1.z.string().regex(${existingRegex}), zod_1.z.string().regex(${CJS_MERGE_FIELD_REGEX_LITERAL})])`;
-    }
+}).strict();`,
   );
-  console.log(`✓ Added merge field support to ${cjsRegexFieldCount} regex-validated string fields in CJS`);
-
-  // 2. Number fields with coercion
-  let cjsNumberFieldCount = 0;
-  cjsContent = cjsContent.replace(
-    /(zod_1\.z\.preprocess\(\(\(v\).*?return v; }\), zod_1\.z\.number\(\)(?:\.[a-zA-Z]+\([^)]*\))*\))/g,
-    (match) => {
-      cjsNumberFieldCount++;
-      return `zod_1.z.union([${match}, zod_1.z.string().regex(${CJS_MERGE_FIELD_REGEX_LITERAL})])`;
-    }
-  );
-  console.log(`✓ Added merge field support to ${cjsNumberFieldCount} number fields in CJS`);
-
-
-  const cjsClipSchemaExportPattern = /exports\.clipSchema = exports\.clipClipSchema;/;
-
-  if (cjsClipSchemaExportPattern.test(cjsContent)) {
-    const cjsClipSchemaWithFitFilter = `exports.clipSchema = exports.clipClipSchema;
-
-// Clip schema with fit property filter for rich-text assets
-const clipClipSchemaWithFitFilter = exports.clipClipSchema.transform((clip) => {
-  if (clip.asset && typeof clip.asset === 'object' && 'type' in clip.asset) {
-    const assetType = clip.asset.type;
-    if (assetType === 'rich-text') {
-      const { fit, ...rest } = clip;
-      return rest;
-    }
-  }
-  return clip;
-});`;
-    cjsContent = cjsContent.replace(cjsClipSchemaExportPattern, cjsClipSchemaWithFitFilter);
-    console.log("✓ Added clipClipSchemaWithFitFilter in CJS");
-
-    // Update trackTrackSchema to use the filtered clip schema
-    const cjsTrackSchemaPattern = /clips: zod_1\.z\.array\(exports\.clipClipSchema\)/;
-    if (cjsTrackSchemaPattern.test(cjsContent)) {
-      cjsContent = cjsContent.replace(cjsTrackSchemaPattern, 'clips: zod_1.z.array(clipClipSchemaWithFitFilter)');
-      console.log("✓ Updated trackTrackSchema to use clipClipSchemaWithFitFilter in CJS");
-    } else {
-      console.log("⚠ Could not find trackTrackSchema in CJS to update");
-    }
-  } else {
-    console.log("⚠ Could not find clipSchema export in CJS to add fit property filter");
-  }
-
-  cjsContent = addStrictToObjects(cjsContent, "zod_1.z");
-  cjsContent = addLegacyTextWrapMigrationError(cjsContent, "zod_1.z");
-
-  fs.writeFileSync(zodGenCjsPath, cjsContent);
 }
 
-const zodGenJsPath = path.join(__dirname, "..", "dist", "zod", "zod.gen.js");
+console.log("=== fix-discriminator start ===");
+
+let ts = fs.readFileSync(zodGenPath, "utf8");
+
+ts = fixDestinationProviders(ts, true);
+ts = fixDiscriminatedUnions(ts);
+ts = fixSvgAsset(ts);
+ts = fixMergeField(ts, "z");
+ts = addStrictToObjects(ts, "z");
+ts = addLegacyTextWrapMigrationError(ts, "z");
+ts = addClipFitFilter(ts, false);
+ts = addNumberCoercion(ts, COERCE_FN_TS, "z");
+ts = addMergeFieldSupport(ts, "z");
+ts = makeFieldOptional(ts, "clipClipSchema", "length", false);
+ts = makeFieldOptional(ts, "rangeRangeSchema", "length", false);
+ts = makeFieldOptional(ts, "tweenTweenSchema", "length", false);
+ts = applyAliases(ts, "z", false);
+
+fs.writeFileSync(zodGenPath, ts);
+console.log("✓ Wrote zod.gen.ts");
+
+if (fs.existsSync(zodGenCjsPath)) {
+  let cjs = fs.readFileSync(zodGenCjsPath, "utf8");
+
+  cjs = fixCjsDestinationProviders(cjs);
+  cjs = fixCjsDiscriminatedUnions(cjs);
+  cjs = fixCjsSvgAsset(cjs);
+  cjs = addStrictToObjects(cjs, "zod_1.z");
+  cjs = addLegacyTextWrapMigrationError(cjs, "zod_1.z");
+  cjs = addClipFitFilter(cjs, true);
+  cjs = addNumberCoercion(cjs, COERCE_FN_JS, "zod_1.z");
+  cjs = addMergeFieldSupport(cjs, "zod_1.z");
+  cjs = makeFieldOptional(cjs, "clipClipSchema", "length", true);
+  cjs = makeFieldOptional(cjs, "rangeRangeSchema", "length", true);
+  cjs = makeFieldOptional(cjs, "tweenTweenSchema", "length", true);
+  cjs = applyAliases(cjs, "zod_1.z", true);
+
+  fs.writeFileSync(zodGenCjsPath, cjs);
+  console.log("✓ Wrote zod.gen.cjs");
+}
+
 if (fs.existsSync(zodGenJsPath)) {
-  let jsContent = fs.readFileSync(zodGenJsPath, "utf8");
+  let js = fs.readFileSync(zodGenJsPath, "utf8");
 
-  // Fix destination provider fields in ESM JS
-  destinationProviderFixes.forEach(({ pattern, replacement }) => {
-    if (pattern.test(jsContent)) {
-      jsContent = jsContent.replace(pattern, replacement);
-      console.log(`✓ Fixed destination provider in ESM JS: ${replacement}`);
-    }
-  });
+  js = fixDestinationProviders(js, false);
+  js = fixDiscriminatedUnions(js);
+  js = fixSvgAsset(js);
+  js = fixMergeField(js, "z");
+  js = addStrictToObjects(js, "z");
+  js = addLegacyTextWrapMigrationError(js, "z");
+  js = addClipFitFilter(js, false);
+  js = addNumberCoercion(js, COERCE_FN_JS, "z");
+  js = addMergeFieldSupport(js, "z");
+  js = makeFieldOptional(js, "clipClipSchema", "length", false);
+  js = makeFieldOptional(js, "rangeRangeSchema", "length", false);
+  js = makeFieldOptional(js, "tweenTweenSchema", "length", false);
+  js = applyAliases(js, "z", false);
 
-  // Fix destinations union schema in ESM JS
-  if (destinationsUnionPattern.test(jsContent)) {
-    jsContent = jsContent.replace(destinationsUnionPattern, newDestinationsSchema);
-    console.log("✓ Fixed destinationsDestinationsSchema discriminator in ESM JS");
-  }
-
-  const jsAssetUnionPattern =
-    /export const assetAssetSchema = z\.union\(\[[\s\S]*?\]\);/;
-
-  if (jsAssetUnionPattern.test(jsContent)) {
-    jsContent = jsContent.replace(jsAssetUnionPattern, newAssetSchema);
-    console.log("✓ Fixed assetAssetSchema discriminator in ESM JS");
-  }
-
-  if (svgShapeUnionPattern.test(jsContent)) {
-    jsContent = jsContent.replace(svgShapeUnionPattern, newSvgShapeSchema);
-    console.log("✓ Fixed svgshapesSvgShapeSchema discriminator in ESM JS");
-  }
-
-  if (svgFillUnionPattern.test(jsContent)) {
-    jsContent = jsContent.replace(svgFillUnionPattern, newSvgFillSchema);
-    console.log("✓ Fixed svgpropertiesSvgFillSchema discriminator in ESM JS");
-  }
-
-  if (svgAssetPattern.test(jsContent)) {
-    jsContent = jsContent.replace(svgAssetPattern, svgAssetSuperRefine);
-    console.log("✓ Added superRefine validation to svgassetSvgAssetSchema in ESM JS");
-  }
-
-  // Coercion function for ESM JS (without TypeScript type annotation)
-  // Note: Arrays are passed through unchanged to allow unions with array types (e.g., scale: number | Tween[])
-  // Note: Merge field templates ({{ FIELD }}) are preserved to allow the union's string alternative to match
-  const esmCoerceNumber = `((v) => { if (v === '' || v === null || v === undefined) return undefined; if (Array.isArray(v)) return v; if (typeof v === 'string') { if (/^\\{\\{\\s*[A-Za-z0-9_]+\\s*\\}\\}$/.test(v)) return v; return Number(v); } return v; })`;
-
-  const esmPlainNumberPattern = /z\.number\(\)(?!\.)/g;
-  const esmPlainNumberCount = (jsContent.match(esmPlainNumberPattern) || [])
-    .length;
-  if (esmPlainNumberCount > 0) {
-    jsContent = jsContent.replace(
-      esmPlainNumberPattern,
-      `z.preprocess(${esmCoerceNumber}, z.number())`
-    );
-    console.log(
-      `✓ Added number coercion in ESM JS (${esmPlainNumberCount} occurrences)`
-    );
-  }
-
-  const esmChainedNumberPattern = /z\.number\(\)((?:\.[a-zA-Z]+\([^)]*\))+)/g;
-  let esmChainedCount = 0;
-  jsContent = jsContent.replace(esmChainedNumberPattern, (match, chain) => {
-    esmChainedCount++;
-    return `z.preprocess(${esmCoerceNumber}, z.number()${chain})`;
-  });
-  if (esmChainedCount > 0) {
-    console.log(
-      `✓ Added number coercion chains in ESM JS (${esmChainedCount} occurrences)`
-    );
-  }
-
-  // ─── MERGE FIELD SUPPORT FOR ESM JS ──────────────────────────────────────────
-  const ESM_MERGE_FIELD_REGEX_LITERAL = `/^\\{\\{\\s*[A-Za-z0-9_]+\\s*\\}\\}$/`;
-
-  // 1. String fields with regex validation
-  let esmRegexFieldCount = 0;
-  jsContent = jsContent.replace(
-    /z\.string\(\)\.regex\((\/(?:[^\/\\]|\\.)*\/)\)(?![\.\(])/g,
-    (match, existingRegex) => {
-      esmRegexFieldCount++;
-      return `z.union([z.string().regex(${existingRegex}), z.string().regex(${ESM_MERGE_FIELD_REGEX_LITERAL})])`;
-    }
-  );
-  console.log(`✓ Added merge field support to ${esmRegexFieldCount} regex-validated string fields in ESM JS`);
-
-  // 2. Number fields with coercion
-  let esmNumberFieldCount = 0;
-  jsContent = jsContent.replace(
-    /(z\.preprocess\(\(\(v\).*?return v; }\), z\.number\(\)(?:\.[a-zA-Z]+\([^)]*\))*\))/g,
-    (match) => {
-      esmNumberFieldCount++;
-      return `z.union([${match}, z.string().regex(${ESM_MERGE_FIELD_REGEX_LITERAL})])`;
-    }
-  );
-  console.log(`✓ Added merge field support to ${esmNumberFieldCount} number fields in ESM JS`);
-
-  const esmClipSchemaExportPattern = /export const clipSchema = clipClipSchema;/;
-
-  if (esmClipSchemaExportPattern.test(jsContent)) {
-    const esmClipSchemaWithFitFilter = `export const clipSchema = clipClipSchema;
-
-// Clip schema with fit property filter for rich-text assets
-const clipClipSchemaWithFitFilter = clipClipSchema.transform((clip) => {
-  if (clip.asset && typeof clip.asset === 'object' && 'type' in clip.asset) {
-    const assetType = clip.asset.type;
-    if (assetType === 'rich-text') {
-      const { fit, ...rest } = clip;
-      return rest;
-    }
-  }
-  return clip;
-});`;
-    jsContent = jsContent.replace(esmClipSchemaExportPattern, esmClipSchemaWithFitFilter);
-    console.log("✓ Added clipClipSchemaWithFitFilter in ESM JS");
-
-    // Update trackTrackSchema to use the filtered clip schema
-    const esmTrackSchemaPattern = /clips: z\.array\(clipClipSchema\)/;
-    if (esmTrackSchemaPattern.test(jsContent)) {
-      jsContent = jsContent.replace(esmTrackSchemaPattern, 'clips: z.array(clipClipSchemaWithFitFilter)');
-      console.log("✓ Updated trackTrackSchema to use clipClipSchemaWithFitFilter in ESM JS");
-    } else {
-      console.log("⚠ Could not find trackTrackSchema in ESM JS to update");
-    }
-  } else {
-    console.log("⚠ Could not find clipSchema export in ESM JS to add fit property filter");
-  }
-
-  jsContent = addStrictToObjects(jsContent, "z");
-  jsContent = addLegacyTextWrapMigrationError(jsContent, "z");
-
-  fs.writeFileSync(zodGenJsPath, jsContent);
+  fs.writeFileSync(zodGenJsPath, js);
+  console.log("✓ Wrote zod.gen.js");
 }
 
-console.log("Done!");
+const elapsed = Date.now() - START_TIME;
+console.log(`=== fix-discriminator done in ${elapsed}ms ===`);

@@ -28,6 +28,10 @@
             The duration of the animation in seconds.
           type: number
           example: 3
+        duration:
+          description: Alias for `length`. If both are provided, `length` takes precedence.
+          type: number
+          example: 3
         interpolation:
           description: >-
             The interpolation method to use for the animation. Available options are:

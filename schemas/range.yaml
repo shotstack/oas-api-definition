@@ -18,5 +18,11 @@
           format: float
           minimum: 0
           example: 6
+        duration:
+          description: Alias for `length`. If both are provided, `length` takes precedence.
+          type: number
+          format: float
+          minimum: 0
+          example: 6
       additionalProperties: false
       type: object

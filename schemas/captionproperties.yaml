@@ -6,6 +6,14 @@
           description: The font family name. This must be Family name embedded in the font, i.e. "Open Sans".
           type: string
           example: Open Sans
+        name:
+          description: Alias for `family`. If both are provided, `family` takes precedence.
+          type: string
+          example: Open Sans
+        fontFamily:
+          description: Alias for `family`. If both are provided, `family` takes precedence.
+          type: string
+          example: Open Sans
         color:
           description: The text color using hexadecimal color notation.
           type: string
@@ -16,6 +24,10 @@
           example: 0.8
         size:
           description: The size of the font in pixels (px).
+          type: integer
+          example: 24
+        fontSize:
+          description: Alias for `size`. If both are provided, `size` takes precedence.
           type: integer
           example: 24
         lineHeight:

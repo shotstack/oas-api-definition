@@ -42,7 +42,8 @@
     "start": "cross-env ./build-docs.sh && http-server build/docs/ -o -c-1",
     "deploy:docs": "aws s3 sync build/docs/ s3://shotstack.io/docs/api",
     "prepublishOnly": "node scripts/publish-guard.cjs && pnpm build && pnpm test",
-    "test:smoke": "node tests/smoke.cjs"
+    "test:smoke": "node tests/smoke.cjs",
+    "test:aliases": "node tests/aliases.cjs"
   },
   "repository": {
     "type": "git",

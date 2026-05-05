@@ -58,6 +58,9 @@ RichCaptionAsset:
     align:
       description: Text alignment properties (horizontal and vertical).
       $ref: "./richtextproperties.yaml#/RichTextAlignment"
+    alignment:
+      description: Alias for `align`. If both are provided, `align` takes precedence.
+      $ref: "./richtextproperties.yaml#/RichTextAlignment"
     active:
       description: Styling properties for the active/highlighted word. These override the base styling when a word is being spoken.
       $ref: "./richcaptionproperties.yaml#/RichCaptionActive"

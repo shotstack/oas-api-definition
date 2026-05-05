@@ -57,6 +57,7 @@
             - cover
             - contain
             - crop
+            - fill
           type: string
           example: crop
         resolution:

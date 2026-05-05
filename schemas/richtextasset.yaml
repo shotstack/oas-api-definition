@@ -45,6 +45,9 @@ RichTextAsset:
     align:
       description: Text alignment properties (horizontal and vertical).
       $ref: "./richtextproperties.yaml#/RichTextAlignment"
+    alignment:
+      description: Alias for `align`. If both are provided, `align` takes precedence.
+      $ref: "./richtextproperties.yaml#/RichTextAlignment"
     animation:
       description: Animation properties for text entrance effects.
       $ref: "./richtextproperties.yaml#/RichTextAnimation"
