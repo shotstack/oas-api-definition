@@ -1,3 +1,5 @@
+## [1.10.10](https://github.com/shotstack/oas-api-definition/compare/v1.10.9...v1.10.10) (2026-05-06)
+
 ## [1.10.9](https://github.com/shotstack/oas-api-definition/compare/v1.10.8...v1.10.9) (2026-04-15)
 
 
