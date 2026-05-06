@@ -101,13 +101,6 @@ $OPENAPI_GENERATOR generate -i $SPEC_FILE_JSON -g python -c $CONFIGS_DIR/python.
 printf "\n========================================= \n"
 printf "\nPython SDK Generated\n\n"
 
-# Openapi doesn't support duplicate path mapping
-sed -i -e 's/\/path_alias_createassets/\/assets/g' $BUILD_DIR/node/dist/api/CreateApi.js
-sed -i -e 's/\/path_alias_createassets/\/assets/g' $BUILD_DIR/typescript/api/createApi.ts
-sed -i -e 's/\/path_alias_createassets/\/assets/g' $BUILD_DIR/php/src/Api/CreateApi.php
-sed -i -e 's/\/path_alias_createassets/\/assets/g' $BUILD_DIR/python/shotstack_sdk/api/create_api.py
-sed -i -e 's/\/path_alias_createassets/\/assets/g' $BUILD_DIR/ruby/lib/shotstack/api/create_api.rb
-
 # Revert back to stable version
 $OPENAPI_GENERATOR version-manager set $OPENAPI_GENERATOR_VERSION_STABLE
 
