@@ -7,14 +7,6 @@ RichTextFont:
       type: string
       example: "Open Sans"
       default: "Open Sans"
-    name:
-      description: Alias for `family`. If both are provided, `family` takes precedence.
-      type: string
-      example: "Open Sans"
-    fontFamily:
-      description: Alias for `family`. If both are provided, `family` takes precedence.
-      type: string
-      example: "Open Sans"
     size:
       description: The size of the font in pixels (px). Must be between 1 and 500.
       type: integer
@@ -22,19 +14,11 @@ RichTextFont:
       maximum: 500
       default: 24
       example: 48
-    fontSize:
-      description: Alias for `size`. If both are provided, `size` takes precedence.
-      type: integer
-      minimum: 1
-      maximum: 500
-      example: 48
     weight:
       description: >-
         The weight of the font. Can be a number (100-900) or a string ('normal', 'bold', etc.).
         100 is lightest, 900 is heaviest (boldest).
       default: "400"
-    fontWeight:
-      description: Alias for `weight`. If both are provided, `weight` takes precedence.
     color:
       description: The text color using hexadecimal color notation.
       type: string
@@ -144,18 +128,13 @@ RichTextGradientStop:
       minimum: 0
       maximum: 1
       example: 0.5
-    position:
-      description: Alias for `offset`. If both are provided, `offset` takes precedence.
-      type: number
-      minimum: 0
-      maximum: 1
-      example: 0.5
     color:
       description: Color at this stop using hexadecimal color notation.
       type: string
       pattern: "^#[A-Fa-f0-9]{6}$"
       example: "#ff0000"
   required:
+    - offset
     - color
   additionalProperties: false
 
@@ -192,18 +171,10 @@ RichTextShadow:
       type: number
       default: 0
       example: 4
-    x:
-      description: Alias for `offsetX`. If both are provided, `offsetX` takes precedence.
-      type: number
-      example: 4
     offsetY:
       description: Vertical offset of the shadow in pixels. Positive values move down, negative up.
       type: number
       default: 0
-      example: 4
-    y:
-      description: Alias for `offsetY`. If both are provided, `offsetY` takes precedence.
-      type: number
       example: 4
     blur:
       description: The blur radius of the shadow in pixels. Must be 0 or greater.
@@ -278,7 +249,6 @@ RichTextAlignment:
       enum:
         - top
         - middle
-        - center
         - bottom
       default: "middle"
       example: "middle"
@@ -372,11 +342,6 @@ RichTextBorder:
       type: number
       minimum: 0
       default: 0
-      example: 10
-    borderRadius:
-      description: Alias for `radius`. If both are provided, `radius` takes precedence.
-      type: number
-      minimum: 0
       example: 10
   additionalProperties: false
   type: object

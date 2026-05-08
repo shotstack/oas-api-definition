@@ -59,16 +59,12 @@
           enum:
             - top
             - topRight
-            - top-right
             - right
             - bottomRight
-            - bottom-right
             - bottom
             - bottomLeft
-            - bottom-left
             - left
             - topLeft
-            - top-left
             - center
           type: string
       additionalProperties: false

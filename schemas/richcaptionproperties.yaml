@@ -120,14 +120,6 @@ RichCaptionFont:
       type: string
       example: "Roboto"
       default: "Roboto"
-    name:
-      description: Alias for `family`. If both are provided, `family` takes precedence.
-      type: string
-      example: "Roboto"
-    fontFamily:
-      description: Alias for `family`. If both are provided, `family` takes precedence.
-      type: string
-      example: "Roboto"
     size:
       description: The size of the font in pixels (px). Must be between 1 and 500.
       type: integer
@@ -135,19 +127,11 @@ RichCaptionFont:
       maximum: 500
       default: 24
       example: 48
-    fontSize:
-      description: Alias for `size`. If both are provided, `size` takes precedence.
-      type: integer
-      minimum: 1
-      maximum: 500
-      example: 48
     weight:
       description: >-
         The weight of the font. Can be a number (100-900) or a string ('normal', 'bold', etc.).
         100 is lightest, 900 is heaviest (boldest).
       default: "400"
-    fontWeight:
-      description: Alias for `weight`. If both are provided, `weight` takes precedence.
     color:
       description: The text color using hexadecimal color notation.
       type: string

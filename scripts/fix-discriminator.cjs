@@ -12,22 +12,8 @@ const ALIAS_TABLE = [
     kind: "enum",
     zSchema: "clipClipSchema",
     field: "fit",
-    canonical: "crop",
-    alias: "cover",
-  },
-  {
-    kind: "enum",
-    zSchema: "clipClipSchema",
-    field: "fit",
     canonical: "cover",
     alias: "fill",
-  },
-  {
-    kind: "enum",
-    zSchema: "renditionRenditionSchema",
-    field: "fit",
-    canonical: "crop",
-    alias: "cover",
   },
   {
     kind: "enum",
@@ -263,57 +249,6 @@ const ALIAS_TABLE = [
   },
 ];
 
-function buildPropertyTransform(field, alias, zPrefix) {
-  const z = zPrefix;
-  return (
-    `.transform((data) => {\n` +
-    `  if (data.${alias} !== undefined && data.${field} === undefined) {\n` +
-    `    data.${field} = data.${alias};\n` +
-    `  }\n` +
-    `  const { ${alias}: _dropped, ...rest } = data;\n` +
-    `  return rest;\n` +
-    `})`
-  );
-}
-
-function buildPropertySuperRefine(field, alias, zPrefix) {
-  const z = zPrefix;
-  return (
-    `.superRefine((data, ctx) => {\n` +
-    `  if (data.${field} === undefined && data.${alias} === undefined) {\n` +
-    `    ctx.addIssue({ code: ${z}.ZodIssueCode.custom, message: "'${field}' is required (you may also use '${alias}' as an alias)", path: ["${field}"] });\n` +
-    `  }\n` +
-    `})`
-  );
-}
-
-function buildMultiAliasTransform(field, aliases) {
-  const checks = aliases
-    .map(
-      (a) =>
-        `  if (data.${a} !== undefined && data.${field} === undefined) { data.${field} = data.${a}; }`,
-    )
-    .join("\n");
-  const drops = aliases.map((a) => `${a}: _${a}`).join(", ");
-  const rests = aliases.map((a) => `_${a}`).join(", ");
-  return (
-    `.transform((data) => {\n` +
-    `${checks}\n` +
-    `  const { ${drops}, ...rest } = data;\n` +
-    `  return rest;\n` +
-    `})`
-  );
-}
-
-function buildEnumTransform(field, canonical, alias) {
-  return (
-    `.transform((data) => {\n` +
-    `  if (data.${field} === "${alias}") data.${field} = "${canonical}";\n` +
-    `  return data;\n` +
-    `})`
-  );
-}
-
 function findSchemaEnd(src, exportName, isCjs) {
   const prefix = isCjs
     ? `exports.${exportName} = `
@@ -350,132 +285,68 @@ function findSchemaEnd(src, exportName, isCjs) {
   return null;
 }
 
-function makeFieldOptional(src, schemaName, fieldName, isCjs) {
-  const found = findSchemaEnd(src, schemaName, isCjs || false);
-  if (!found) {
-    console.log(
-      `- makeFieldOptional: schema "${schemaName}" not found, skipping`,
-    );
-    return src;
-  }
+const ASSET_UNION_MEMBERS = {
+  htmlassetHtmlAssetSchema: "html",
+  titleassetTitleAssetSchema: "title",
+  richtextassetRichTextAssetSchema: "rich-text",
+  richcaptionassetRichCaptionAssetSchema: "rich-caption",
+};
 
-  const before = src.slice(0, found.startIdx);
-  const body = src.slice(found.startIdx, found.semiIdx);
-  const after = src.slice(found.semiIdx);
-
-  const fieldMarker = `\n  ${fieldName}: `;
-  const markerIdx = body.indexOf(fieldMarker);
-  if (markerIdx === -1) {
-    console.log(
-      `- makeFieldOptional: field "${fieldName}" not found in "${schemaName}", skipping`,
-    );
-    return src;
-  }
-
-  const valueStart = markerIdx + fieldMarker.length;
-  let depth = 0;
-  let i = valueStart;
-  let inStr = false;
-  let strChar = "";
-  let started = false;
-
-  while (i < body.length) {
-    const c = body[i];
-    if (inStr) {
-      if (c === "\\") {
-        i += 2;
-        continue;
-      }
-      if (c === strChar) inStr = false;
-    } else if (c === '"' || c === "'" || c === "`") {
-      inStr = true;
-      strChar = c;
-    } else if (c === "(" || c === "{" || c === "[") {
-      depth++;
-      started = true;
-    } else if (c === ")" || c === "}" || c === "]") {
-      depth--;
-      if (depth === 0 && started) {
-        i++; // move past the closing bracket
-        break;
-      }
-    }
-    i++;
-  }
-
-  const peek = body.slice(i, i + 11);
-  if (peek === ".optional()") return src;
-
-  const newBody = body.slice(0, i) + ".optional()" + body.slice(i);
-  console.log(`✓ Made ${schemaName}.${fieldName} optional`);
-  return before + newBody + after;
-}
-
+// Aliases are agent-ergonomic crutches that live ONLY in the runtime layer.
+// The OpenAPI spec stays canonical.
 function applyAliases(src, zPrefix, isCjs) {
   let result = src;
-  let count = 0;
   const cjs = isCjs || false;
   const z = cjs ? "zod_1.z" : "z";
   const dParam = cjs ? "d" : "d: any";
 
+  const bySchema = new Map();
   for (const entry of ALIAS_TABLE) {
-    if (entry.kind === "nested") continue;
-
-    const found = findSchemaEnd(result, entry.zSchema, cjs);
-    if (!found) {
-      console.error(
-        `✗ ALIAS TABLE: could not find schema "${entry.zSchema}" (${entry.kind}: ${entry.field})`,
-      );
-      process.exit(1);
-    }
-
-    let injection = "";
-    if (entry.kind === "enum") {
-      injection = buildEnumTransform(entry.field, entry.canonical, entry.alias);
-    } else if (entry.kind === "property") {
-      injection =
-        (entry.required
-          ? buildPropertySuperRefine(entry.field, entry.alias, zPrefix)
-          : "") + buildPropertyTransform(entry.field, entry.alias, zPrefix);
-    }
-
-    result =
-      result.slice(0, found.semiIdx) + injection + result.slice(found.semiIdx);
-    count++;
+    if (entry.zSchema in ASSET_UNION_MEMBERS) continue;
+    if (!bySchema.has(entry.zSchema)) bySchema.set(entry.zSchema, []);
+    bySchema.get(entry.zSchema).push(entry);
   }
 
-  const nestedBySchema = new Map();
-  for (const entry of ALIAS_TABLE) {
-    if (entry.kind !== "nested") continue;
-    if (!nestedBySchema.has(entry.zSchema))
-      nestedBySchema.set(entry.zSchema, []);
-    nestedBySchema.get(entry.zSchema).push(entry);
-  }
-
-  for (const [schemaName, entries] of nestedBySchema) {
+  let total = 0;
+  for (const [schemaName, entries] of bySchema) {
     const found = findSchemaEnd(result, schemaName, cjs);
     if (!found) {
       console.error(
-        `✗ ALIAS TABLE: could not find schema "${schemaName}" for nested aliases`,
+        `✗ ALIAS TABLE: could not find schema "${schemaName}"`,
       );
       process.exit(1);
     }
 
-    const checks = entries
-      .flatMap((e) =>
-        e.aliases.map(
-          (a) =>
-            `    if ('${a}' in d && !('${e.field}' in d)) { d.${e.field} = d.${a}; }\n    delete d.${a};`,
-        ),
-      )
-      .join("\n");
+    const lines = [];
+    for (const e of entries) {
+      if (e.kind === "enum") {
+        lines.push(
+          `    if (d.${e.field} === "${e.alias}") d.${e.field} = "${e.canonical}";`,
+        );
+        total++;
+      } else if (e.kind === "property") {
+        lines.push(
+          `    if ('${e.alias}' in d && !('${e.field}' in d)) { d.${e.field} = d.${e.alias}; }`,
+        );
+        lines.push(`    delete d.${e.alias};`);
+        total++;
+      } else if (e.kind === "nested") {
+        for (const a of e.aliases) {
+          lines.push(
+            `    if ('${a}' in d && !('${e.field}' in d)) { d.${e.field} = d.${a}; }`,
+          );
+          lines.push(`    delete d.${a};`);
+          total++;
+        }
+      }
+    }
 
     const preFn =
       `((${dParam}) => {\n` +
       `  if (typeof d === 'object' && d !== null) {\n` +
       `    d = Object.assign({}, d);\n` +
-      `${checks}\n` +
-      `  }\n` +
+      lines.join("\n") +
+      `\n  }\n` +
       `  return d;\n` +
       `})`;
 
@@ -485,11 +356,76 @@ function applyAliases(src, zPrefix, isCjs) {
       result.slice(found.exprStart, found.semiIdx) +
       `)` +
       result.slice(found.semiIdx);
-
-    count += entries.length;
   }
 
-  console.log(`✓ Applied ${count} alias transforms`);
+  console.log(
+    `✓ Applied ${total} alias rewrites via preprocess across ${bySchema.size} schemas`,
+  );
+  return result;
+}
+
+function applyAssetUnionAliases(src, zPrefix, isCjs) {
+  const cjs = isCjs || false;
+  const z = cjs ? "zod_1.z" : "z";
+  const dParam = cjs ? "d" : "d: any";
+
+  const byType = new Map();
+  for (const entry of ALIAS_TABLE) {
+    const typeVal = ASSET_UNION_MEMBERS[entry.zSchema];
+    if (!typeVal) continue;
+    if (!byType.has(typeVal)) byType.set(typeVal, []);
+    byType.get(typeVal).push(entry);
+  }
+  if (byType.size === 0) return src;
+
+  const branches = [];
+  let total = 0;
+  for (const [typeVal, entries] of byType) {
+    const lines = [];
+    for (const e of entries) {
+      if (e.kind === "enum") {
+        lines.push(
+          `      if (d.${e.field} === "${e.alias}") d.${e.field} = "${e.canonical}";`,
+        );
+        total++;
+      } else if (e.kind === "property") {
+        lines.push(
+          `      if ('${e.alias}' in d && !('${e.field}' in d)) { d.${e.field} = d.${e.alias}; }`,
+        );
+        lines.push(`      delete d.${e.alias};`);
+        total++;
+      }
+    }
+    branches.push(
+      `    if (d.type === "${typeVal}") {\n${lines.join("\n")}\n    }`,
+    );
+  }
+
+  const preFn =
+    `((${dParam}) => {\n` +
+    `  if (typeof d === 'object' && d !== null) {\n` +
+    `    d = Object.assign({}, d);\n` +
+    branches.join("\n") +
+    `\n  }\n` +
+    `  return d;\n` +
+    `})`;
+
+  const found = findSchemaEnd(src, "assetAssetSchema", cjs);
+  if (!found) {
+    console.error("✗ assetAssetSchema not found for asset-union alias preprocess");
+    process.exit(1);
+  }
+
+  const result =
+    src.slice(0, found.exprStart) +
+    `${z}.preprocess(${preFn}, ` +
+    src.slice(found.exprStart, found.semiIdx) +
+    `)` +
+    src.slice(found.semiIdx);
+
+  console.log(
+    `✓ Applied ${total} asset-union alias rewrites via preprocess (${byType.size} types)`,
+  );
   return result;
 }
 
@@ -1062,10 +998,8 @@ ts = addLegacyTextWrapMigrationError(ts, "z");
 ts = addClipFitFilter(ts, false);
 ts = addNumberCoercion(ts, COERCE_FN_TS, "z");
 ts = addMergeFieldSupport(ts, "z");
-ts = makeFieldOptional(ts, "clipClipSchema", "length", false);
-ts = makeFieldOptional(ts, "rangeRangeSchema", "length", false);
-ts = makeFieldOptional(ts, "tweenTweenSchema", "length", false);
 ts = applyAliases(ts, "z", false);
+ts = applyAssetUnionAliases(ts, "z", false);
 
 fs.writeFileSync(zodGenPath, ts);
 console.log("✓ Wrote zod.gen.ts");
@@ -1081,10 +1015,8 @@ if (fs.existsSync(zodGenCjsPath)) {
   cjs = addClipFitFilter(cjs, true);
   cjs = addNumberCoercion(cjs, COERCE_FN_JS, "zod_1.z");
   cjs = addMergeFieldSupport(cjs, "zod_1.z");
-  cjs = makeFieldOptional(cjs, "clipClipSchema", "length", true);
-  cjs = makeFieldOptional(cjs, "rangeRangeSchema", "length", true);
-  cjs = makeFieldOptional(cjs, "tweenTweenSchema", "length", true);
   cjs = applyAliases(cjs, "zod_1.z", true);
+  cjs = applyAssetUnionAliases(cjs, "zod_1.z", true);
 
   fs.writeFileSync(zodGenCjsPath, cjs);
   console.log("✓ Wrote zod.gen.cjs");
@@ -1102,10 +1034,8 @@ if (fs.existsSync(zodGenJsPath)) {
   js = addClipFitFilter(js, false);
   js = addNumberCoercion(js, COERCE_FN_JS, "z");
   js = addMergeFieldSupport(js, "z");
-  js = makeFieldOptional(js, "clipClipSchema", "length", false);
-  js = makeFieldOptional(js, "rangeRangeSchema", "length", false);
-  js = makeFieldOptional(js, "tweenTweenSchema", "length", false);
   js = applyAliases(js, "z", false);
+  js = applyAssetUnionAliases(js, "z", false);
 
   fs.writeFileSync(zodGenJsPath, js);
   console.log("✓ Wrote zod.gen.js");

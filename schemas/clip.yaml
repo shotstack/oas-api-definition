@@ -40,17 +40,6 @@
                 the end of the timeline. Use `alias://clip-name` to inherit the length from the referenced clip.
               pattern: "^(auto|end|alias://[A-Za-z0-9_-]+)$"
               example: "auto"
-        duration:
-          description: >-
-            Alias for `length`. The duration the Clip should play for. If both `length` and `duration`
-            are provided, `length` takes precedence.
-          oneOf:
-            - type: number
-              minimum: 0
-              example: 5
-            - type: string
-              pattern: "^(auto|end|alias://[A-Za-z0-9_-]+)$"
-              example: "auto"
         fit:
           description: >-
             Set how the asset should be scaled to fit the viewport using one of the following options: 
@@ -65,7 +54,6 @@
             - contain
             - crop
             - none
-            - fill
           type: string
         scale:
           description: >-
@@ -122,16 +110,12 @@
           enum:
             - top
             - topRight
-            - top-right
             - right
             - bottomRight
-            - bottom-right
             - bottom
             - bottomLeft
-            - bottom-left
             - left
             - topLeft
-            - top-left
             - center
           type: string
         offset:

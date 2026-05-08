@@ -5,10 +5,7 @@ const {
   rangeRangeSchema,
   tweenTweenSchema,
   renditionRenditionSchema,
-  htmlassetHtmlAssetSchema,
-  titleassetTitleAssetSchema,
-  richtextassetRichTextAssetSchema,
-  richcaptionassetRichCaptionAssetSchema,
+  assetAssetSchema,
   textpropertiesTextFontSchema,
   richtextpropertiesRichTextFontSchema,
   captionpropertiesCaptionFontSchema,
@@ -71,11 +68,11 @@ const BASE_CLIP = {
 console.log("\n── Clip.fit aliases ──");
 {
   const d = passes(
-    "cover  (CSS) accepted → normalises to crop",
+    "cover  (canonical) unchanged — backward compat",
     clipClipSchema,
     { ...BASE_CLIP, fit: "cover" },
   );
-  if (d) ok("fit === 'crop'", d.fit, "crop");
+  if (d) ok("fit === 'cover'", d.fit, "cover");
 }
 {
   const d = passes(
@@ -106,11 +103,11 @@ rejects("invalid fit rejected", clipClipSchema, {
 
 console.log("\n── Rendition.fit aliases ──");
 {
-  const d = passes("cover → crop", renditionRenditionSchema, {
+  const d = passes("cover canonical unchanged — backward compat", renditionRenditionSchema, {
     format: "mp4",
     fit: "cover",
   });
-  if (d) ok("fit === 'crop'", d.fit, "crop");
+  if (d) ok("fit === 'cover'", d.fit, "cover");
 }
 {
   const d = passes("fill → cover", renditionRenditionSchema, {
@@ -171,13 +168,13 @@ for (const [alias, canonical] of [
   ["bottom-right", "bottomRight"],
   ["bottom-left", "bottomLeft"],
 ]) {
-  const d = passes(`${alias} → ${canonical}`, htmlassetHtmlAssetSchema, {
+  const d = passes(`${alias} → ${canonical}`, assetAssetSchema, {
     ...BASE_HTML,
     position: alias,
   });
   if (d) ok(`position === '${canonical}'`, d.position, canonical);
 }
-rejects("invalid position rejected on HtmlAsset", htmlassetHtmlAssetSchema, {
+rejects("invalid position rejected on HtmlAsset", assetAssetSchema, {
   ...BASE_HTML,
   position: "middle",
 });
@@ -190,13 +187,13 @@ for (const [alias, canonical] of [
   ["bottom-right", "bottomRight"],
   ["bottom-left", "bottomLeft"],
 ]) {
-  const d = passes(`${alias} → ${canonical}`, titleassetTitleAssetSchema, {
+  const d = passes(`${alias} → ${canonical}`, assetAssetSchema, {
     ...BASE_TITLE,
     position: alias,
   });
   if (d) ok(`position === '${canonical}'`, d.position, canonical);
 }
-rejects("invalid position rejected on TitleAsset", titleassetTitleAssetSchema, {
+rejects("invalid position rejected on TitleAsset", assetAssetSchema, {
   ...BASE_TITLE,
   position: "middle",
 });
@@ -229,7 +226,7 @@ const BASE_RT = { type: "rich-text", text: "Hello" };
 {
   const d = passes(
     "alignment alias accepted",
-    richtextassetRichTextAssetSchema,
+    assetAssetSchema,
     { ...BASE_RT, alignment: { horizontal: "center", vertical: "top" } },
   );
   if (d) {
@@ -244,7 +241,7 @@ const BASE_RT = { type: "rich-text", text: "Hello" };
 {
   const d = passes(
     "align canonical still works",
-    richtextassetRichTextAssetSchema,
+    assetAssetSchema,
     { ...BASE_RT, align: { horizontal: "right", vertical: "bottom" } },
   );
   if (d)
@@ -253,7 +250,7 @@ const BASE_RT = { type: "rich-text", text: "Hello" };
 {
   const d = passes(
     "align wins when both sent",
-    richtextassetRichTextAssetSchema,
+    assetAssetSchema,
     {
       ...BASE_RT,
       align: { horizontal: "left", vertical: "top" },
@@ -272,7 +269,7 @@ console.log("\n── RichCaptionAsset.alignment alias ──");
 {
   const d = passes(
     "alignment alias on RichCaptionAsset",
-    richcaptionassetRichCaptionAssetSchema,
+    assetAssetSchema,
     {
       type: "rich-caption",
       src: "https://example.com/v.mp4",
