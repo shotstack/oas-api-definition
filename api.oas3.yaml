@@ -183,6 +183,9 @@ components:
     HtmlAsset:
       $ref: "./schemas/htmlasset.yaml#/HtmlAsset"
 
+    Html5Asset:
+      $ref: "./schemas/html5asset.yaml#/Html5Asset"
+
     TitleAsset:
       $ref: "./schemas/titleasset.yaml#/TitleAsset"
 

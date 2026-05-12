@@ -33,6 +33,7 @@ const EXCLUDE_EXACT = new Set([
   "DolbyEnhancement",
   "DolbyEnhancementOptions",
   "HtmlAsset",
+  "Html5Asset",
   "TitleAsset",
   "TextAsset",
 ]);
