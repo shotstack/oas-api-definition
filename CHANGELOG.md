@@ -1,3 +1,10 @@
+# [1.11.0](https://github.com/shotstack/oas-api-definition/compare/v1.10.10...v1.11.0) (2026-05-12)
+
+
+### Features
+
+* add Html5Asset for HTML5/CSS3/JS rendering ([79854a5](https://github.com/shotstack/oas-api-definition/commit/79854a5a2a1e5a0718a3246066eb05fa17a82bac))
+
 ## [1.10.10](https://github.com/shotstack/oas-api-definition/compare/v1.10.9...v1.10.10) (2026-05-06)
 
 ## [1.10.9](https://github.com/shotstack/oas-api-definition/compare/v1.10.8...v1.10.9) (2026-04-15)
