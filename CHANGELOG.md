@@ -1,3 +1,10 @@
+# [1.12.0](https://github.com/shotstack/oas-api-definition/compare/v1.11.0...v1.12.0) (2026-05-18)
+
+
+### Features
+
+* add optional client-generated identifier to Clip schema ([d1b8ef1](https://github.com/shotstack/oas-api-definition/commit/d1b8ef119dbe7030f8f2674cfebca00f74937a58))
+
 # [1.11.0](https://github.com/shotstack/oas-api-definition/compare/v1.10.10...v1.11.0) (2026-05-12)
 
 
