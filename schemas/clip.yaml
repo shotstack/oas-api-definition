@@ -5,6 +5,14 @@
         timeline, how long it will play for and transitions, filters and effects to apply
         to it.
       properties:
+        id:
+          description: >-
+            Optional client-generated identifier. Used by client SDKs
+            (e.g. the Shotstack Studio SDK) to reference a clip across edits
+            without relying on its position in the timeline. The render API
+            does not use this field and it does not appear in render output.
+          type: string
+          example: "f47ac10b-58cc-4372-a567-0e02b2c3d479"
         asset:
           $ref: "./asset.yaml#/Asset"
         start:
