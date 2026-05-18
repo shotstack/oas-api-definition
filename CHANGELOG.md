@@ -1,3 +1,10 @@
+## [1.12.1](https://github.com/shotstack/oas-api-definition/compare/v1.12.0...v1.12.1) (2026-05-18)
+
+
+### Bug Fixes
+
+* update descriptions and add maxLength constraints for Html5Asset properties ([2cfdc24](https://github.com/shotstack/oas-api-definition/commit/2cfdc24850c1d26d583d9f975dbed9e7fb9a6fdc))
+
 # [1.12.0](https://github.com/shotstack/oas-api-definition/compare/v1.11.0...v1.12.0) (2026-05-18)
 
 
