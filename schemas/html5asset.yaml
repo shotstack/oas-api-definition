@@ -10,18 +10,21 @@ Html5Asset:
       type: string
     html:
       description: >-
-        The HTML markup for the asset.
+        The HTML markup for the asset. Max 1,000,000 characters.
       type: string
+      maxLength: 1000000
       example: "<div class='card'><h1>{{title}}</h1></div>"
     css:
       description: >-
-        The CSS string applied to the HTML.
+        The CSS string applied to the HTML. Max 500,000 characters.
       type: string
+      maxLength: 500000
       example: ".card { font-family: 'Inter'; padding: 32px; }"
     js:
       description: |
-        Optional JavaScript. Use for chart libraries, animations, or DOM manipulation. `gsap`, `d3`, `anime` and `lottie` are always available. CSS animations, transitions, and `Element.animate()` are also captured automatically.
+        Optional JavaScript. Use for chart libraries, animations, or DOM manipulation. `gsap`, `d3`, `anime` and `lottie` are always available. CSS animations, transitions, and `Element.animate()` are also captured automatically. Max 500,000 characters.
       type: string
+      maxLength: 500000
       example: "gsap.to('.card', { x: 200, duration: 1 });"
   additionalProperties: false
   required:
