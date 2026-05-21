@@ -224,6 +224,17 @@ RichTextBackground:
       type: boolean
       default: false
       example: true
+    padding:
+      description: |
+        Inner padding in pixels between the wrap pill edge and the rendered text. Only takes
+        effect when `wrap: true`. When omitted, the renderer applies a sensible default
+        proportional to the font size (approximately 12% of the active page font size on
+        rich-caption assets). Set to 0 for a pill that hugs the text exactly. Available on
+        rich-text and rich-caption assets only.
+      type: integer
+      minimum: 0
+      maximum: 200
+      example: 12
   additionalProperties: false
   type: object
 
