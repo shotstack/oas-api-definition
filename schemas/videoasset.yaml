@@ -1,8 +1,14 @@
     VideoAsset:
-      description: >-
-        The VideoAsset is used to create video sequences from video files. The
-        src must be a publicly accessible URL to a video resource such as an mp4
-        file.
+      description: |
+        The VideoAsset adds a video to a Clip. The video can be sourced from a URL
+        (`src`) or generated from a text prompt (`prompt`), optionally seeded from a
+        starting image (`seed`). Exactly one of `src` or `prompt` must be provided.
+
+        - **Source URL:** set `src` to the URL of an mp4 (or compatible) video file.
+        - **Generated:** set `prompt` to describe the motion. Optionally set `seed` to
+          a starting image URL (image-to-video). Use `model` to choose the generator
+          (e.g. `luma-ray-3`, `runpod-itv-mini`). The generated `src` is filled in
+          automatically.
       type: object
       properties:
         type:
@@ -13,11 +19,34 @@
         src:
           description: >-
             The video source URL. The URL must be publicly accessible or include
-            credentials.
+            credentials. Provide either `src` or `prompt`, not both.
           type: string
           minLength: 1
           pattern: '\S'
           example: https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4
+        prompt:
+          description: >-
+            A text prompt to generate the video from. When set without `src`, the
+            engine generates a video and fills `src` automatically. Optionally pair
+            with `seed` for image-to-video. Use `model` to choose the generator.
+          type: string
+          maxLength: 4000
+          example: Slowly zoom out and orbit left around the object.
+        seed:
+          description: >-
+            Seed image URL for image-to-video generation. The image is used as the
+            starting frame; `prompt` describes the motion. Has no effect unless
+            `prompt` is set.
+          type: string
+          minLength: 1
+          example: https://s3-ap-northeast-1.amazonaws.com/my-bucket/seed-image.jpg
+        model:
+          description: >-
+            The generation model to use when `prompt` is set (e.g. `luma-ray-3`,
+            `runpod-itv-mini`). Defaults to the platform's preferred generator if
+            omitted.
+          type: string
+          example: luma-ray-3
         transcode:
           type: boolean
           description: >-
@@ -69,7 +98,7 @@
         speed:
           description: >-
             Adjust the playback speed of the video clip between 0 (paused) and 10 (10x normal speed) where 1 is normal
-            speed (defaults to 1). Adjusting the speed will also adjust the duration of the clip and may require you to 
+            speed (defaults to 1). Adjusting the speed will also adjust the duration of the clip and may require you to
             adjust the Clip length. For example, if you set speed to 0.5, the clip will need to be 2x as long to play
             the entire video (i.e. original length / 0.5). If you set speed to 2, the clip will need to be half as long
             to play the entire video (i.e. original length / 2).
@@ -85,4 +114,3 @@
       additionalProperties: false
       required:
         - type
-        - src

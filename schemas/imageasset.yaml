@@ -1,7 +1,12 @@
     ImageAsset:
-      description: >-
-        The ImageAsset is used to create video from images to compose an image. The src must be a
-        publicly accessible URL to an image resource such as a jpg or png file.
+      description: |
+        The ImageAsset adds an image to a Clip. The image can be sourced from a URL
+        (`src`) or generated from a text prompt (`prompt`). Exactly one of `src` or
+        `prompt` must be provided.
+
+        - **Source URL:** set `src` to the publicly accessible URL of a jpg or png file.
+        - **Generated:** set `prompt` to describe the image; the engine generates it
+          using the provider chosen by `model` and fills `src` in automatically.
       type: object
       properties:
         type:
@@ -12,14 +17,27 @@
         src:
           description: >-
             The image source URL. The URL must be publicly accessible or include
-            credentials.
+            credentials. Provide either `src` or `prompt`, not both.
           type: string
           minLength: 1
           pattern: '\S'
           example: https://s3-ap-northeast-1.amazonaws.com/my-bucket/image.jpg
+        prompt:
+          description: >-
+            A text prompt to generate the image from. When set without `src`, the
+            engine generates an image and fills `src` automatically. Use `model` to
+            choose the generator.
+          type: string
+          maxLength: 4000
+          example: A serene landscape with a crystal-clear mountain lake at sunrise.
+        model:
+          description: >-
+            The generation model to use when `prompt` is set (e.g. `flux-schnell`).
+            Defaults to the platform's preferred generator if omitted.
+          type: string
+          example: flux-schnell
         crop:
           $ref: "./crop.yaml#/Crop"
       additionalProperties: false
       required:
         - type
-        - src
