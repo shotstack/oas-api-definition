@@ -361,8 +361,45 @@ function addLegacyTextWrapMigrationError(code, zPrefix) {
   return code;
 }
 
+function addSrcOrPromptRefine(code, zPrefix) {
+  const schemaNames = [
+    'imageassetImageAssetSchema',
+    'videoassetVideoAssetSchema',
+    'audioassetAudioAssetSchema',
+  ];
+  const strictMarker = '.strict()';
+  const superRefine = strictMarker + '.superRefine((data, ctx) => {\n' +
+    '  var hasSrc = typeof data.src === "string" && data.src.trim().length > 0;\n' +
+    '  var hasPrompt = typeof data.prompt === "string" && data.prompt.trim().length > 0;\n' +
+    '  if (!hasSrc && !hasPrompt) {\n' +
+    '    ctx.addIssue({\n' +
+    '      code: ' + zPrefix + '.ZodIssueCode.custom,\n' +
+    '      message: "A media asset requires either \\"src\\" (a source URL) or \\"prompt\\" (to generate the asset). Provide one.",\n' +
+    '      path: ["src"],\n' +
+    '    });\n' +
+    '  }\n' +
+    '})';
+
+  for (const schemaName of schemaNames) {
+    const idx = code.indexOf(schemaName + ' = ');
+    if (idx === -1) {
+      console.log("⚠ src/prompt refine: could not find " + schemaName + " (" + zPrefix + ")");
+      continue;
+    }
+    const strictIdx = code.indexOf(strictMarker, idx);
+    if (strictIdx === -1 || strictIdx - idx > 6000) {
+      console.log("⚠ src/prompt refine: no .strict() for " + schemaName + " (" + zPrefix + ")");
+      continue;
+    }
+    code = code.substring(0, strictIdx) + superRefine + code.substring(strictIdx + strictMarker.length);
+    console.log("✓ Added src/prompt refine to " + schemaName + " (" + zPrefix + ")");
+  }
+  return code;
+}
+
 content = addStrictToObjects(content, "z");
 content = addLegacyTextWrapMigrationError(content, "z");
+content = addSrcOrPromptRefine(content, "z");
 
 fs.writeFileSync(zodGenPath, content);
 
@@ -584,6 +621,7 @@ const clipClipSchemaWithFitFilter = exports.clipClipSchema.transform((clip) => {
 
   cjsContent = addStrictToObjects(cjsContent, "zod_1.z");
   cjsContent = addLegacyTextWrapMigrationError(cjsContent, "zod_1.z");
+  cjsContent = addSrcOrPromptRefine(cjsContent, "zod_1.z");
 
   fs.writeFileSync(zodGenCjsPath, cjsContent);
 }
@@ -717,6 +755,7 @@ const clipClipSchemaWithFitFilter = clipClipSchema.transform((clip) => {
 
   jsContent = addStrictToObjects(jsContent, "z");
   jsContent = addLegacyTextWrapMigrationError(jsContent, "z");
+  jsContent = addSrcOrPromptRefine(jsContent, "z");
 
   fs.writeFileSync(zodGenJsPath, jsContent);
 }
