@@ -277,6 +277,49 @@ async function run() {
     assert.strictEqual(result.type, "text-to-speech");
   });
 
+  console.log("\n--- Unified asset: src-or-prompt rule (ADR 0001) ---\n");
+
+  // At-least-one: src OR prompt required on image/video/audio. Both allowed.
+  // Neither → rejected. seed/voice are modifiers and never satisfy the rule.
+
+  check("image with src only is valid", () => {
+    zodCjs.imageAssetSchema.parse({ type: "image", src: "https://example.com/a.jpg" });
+  });
+
+  check("image with both src and prompt is valid (src wins downstream)", () => {
+    zodCjs.imageAssetSchema.parse({
+      type: "image",
+      src: "https://example.com/a.jpg",
+      prompt: "a serene lake",
+    });
+  });
+
+  check("REJECT image with neither src nor prompt", () => {
+    assert.throws(() => zodCjs.imageAssetSchema.parse({ type: "image" }));
+  });
+
+  check("REJECT image with empty-string prompt and no src", () => {
+    assert.throws(() => zodCjs.imageAssetSchema.parse({ type: "image", prompt: "" }));
+  });
+
+  check("REJECT video with neither src nor prompt", () => {
+    assert.throws(() => zodCjs.videoAssetSchema.parse({ type: "video" }));
+  });
+
+  check("REJECT video with seed but no src and no prompt (seed is a modifier)", () => {
+    assert.throws(() =>
+      zodCjs.videoAssetSchema.parse({ type: "video", seed: "https://example.com/seed.jpg" })
+    );
+  });
+
+  check("REJECT audio with voice but no src and no prompt (voice is a modifier)", () => {
+    assert.throws(() => zodCjs.audioAssetSchema.parse({ type: "audio", voice: "Matthew" }));
+  });
+
+  check("audio with prompt + voice is valid (text-to-speech shape)", () => {
+    zodCjs.audioAssetSchema.parse({ type: "audio", prompt: "hello", voice: "Matthew" });
+  });
+
   console.log("\n--- Deprecation markers in bundled spec ---\n");
 
   const bundledSpec = JSON.parse(
