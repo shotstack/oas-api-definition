@@ -1,3 +1,11 @@
+# [1.13.0](https://github.com/shotstack/oas-api-definition/compare/v1.12.2...v1.13.0) (2026-06-01)
+
+
+### Features
+
+* enhance asset schemas with prompt support and deprecate legacy types ([8385beb](https://github.com/shotstack/oas-api-definition/commit/8385beb42bdf0015dede545b10f4e370cbbd4c61))
+* implement src-or-prompt validation for media asset schemas ([6a2f3a7](https://github.com/shotstack/oas-api-definition/commit/6a2f3a76a57f6f1c98195a9e7012df125115750a))
+
 ## [1.12.2](https://github.com/shotstack/oas-api-definition/compare/v1.12.1...v1.12.2) (2026-05-21)
 
 ## [1.12.1](https://github.com/shotstack/oas-api-definition/compare/v1.12.0...v1.12.1) (2026-05-18)
