@@ -397,9 +397,40 @@ function addSrcOrPromptRefine(code, zPrefix) {
   return code;
 }
 
+function addOutputDimensionsRefine(code, zPrefix) {
+  const schemaName = 'outputOutputSchema';
+  const idx = code.indexOf(schemaName + ' = ');
+  if (idx === -1) {
+    console.log("⚠ output dimensions refine: could not find " + schemaName + " (" + zPrefix + ")");
+    return code;
+  }
+  const strictMarker = '.strict()';
+  const strictIdx = code.indexOf(strictMarker, idx);
+  if (strictIdx === -1 || strictIdx - idx > 3000) {
+    console.log("⚠ output dimensions refine: no .strict() for " + schemaName + " (" + zPrefix + ")");
+    return code;
+  }
+  const superRefine = strictMarker + '.superRefine((val, ctx) => {\n' +
+    '  var isMp3 = val.format === "mp3";\n' +
+    '  if (!isMp3 && val.size != null && (val.size.width == null || val.size.height == null)) {\n' +
+    '    ctx.addIssue({ code: ' + zPrefix + '.ZodIssueCode.custom, path: ["size"], message: "size requires both width and height" });\n' +
+    '    return;\n' +
+    '  }\n' +
+    '  var hasResolution = typeof val.resolution === "string";\n' +
+    '  var hasSize = val.size != null && val.size.width != null && val.size.height != null;\n' +
+    '  if (!isMp3 && !hasResolution && !hasSize) {\n' +
+    '    ctx.addIssue({ code: ' + zPrefix + '.ZodIssueCode.custom, message: \'output requires either "resolution" or "size" (with width and height)\' });\n' +
+    '  }\n' +
+    '})';
+  code = code.substring(0, strictIdx) + superRefine + code.substring(strictIdx + strictMarker.length);
+  console.log("✓ Added output dimensions refine to " + schemaName + " (" + zPrefix + ")");
+  return code;
+}
+
 content = addStrictToObjects(content, "z");
 content = addLegacyTextWrapMigrationError(content, "z");
 content = addSrcOrPromptRefine(content, "z");
+content = addOutputDimensionsRefine(content, "z");
 
 fs.writeFileSync(zodGenPath, content);
 
@@ -622,6 +653,7 @@ const clipClipSchemaWithFitFilter = exports.clipClipSchema.transform((clip) => {
   cjsContent = addStrictToObjects(cjsContent, "zod_1.z");
   cjsContent = addLegacyTextWrapMigrationError(cjsContent, "zod_1.z");
   cjsContent = addSrcOrPromptRefine(cjsContent, "zod_1.z");
+  cjsContent = addOutputDimensionsRefine(cjsContent, "zod_1.z");
 
   fs.writeFileSync(zodGenCjsPath, cjsContent);
 }
@@ -756,6 +788,7 @@ const clipClipSchemaWithFitFilter = clipClipSchema.transform((clip) => {
   jsContent = addStrictToObjects(jsContent, "z");
   jsContent = addLegacyTextWrapMigrationError(jsContent, "z");
   jsContent = addSrcOrPromptRefine(jsContent, "z");
+  jsContent = addOutputDimensionsRefine(jsContent, "z");
 
   fs.writeFileSync(zodGenJsPath, jsContent);
 }
