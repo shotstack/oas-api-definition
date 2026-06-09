@@ -1,3 +1,10 @@
+## [1.13.1](https://github.com/shotstack/oas-api-definition/compare/v1.13.0...v1.13.1) (2026-06-09)
+
+
+### Bug Fixes
+
+* enforce resolution/size constraint on output schema for non-mp3 formats ([b2890c3](https://github.com/shotstack/oas-api-definition/commit/b2890c377d9e9f68c689a07ff600063863e15373))
+
 # [1.13.0](https://github.com/shotstack/oas-api-definition/compare/v1.12.2...v1.13.0) (2026-06-01)
 
 
