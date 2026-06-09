@@ -1,5 +1,7 @@
     Output:
-      description: The output format, render range and type of media to generate.
+      description: >-
+        The output format, render range and type of media to generate.
+        For all formats except `mp3`, either `resolution` or `size` (with both `width` and `height`) must be specified.
       properties:
         format:
           description: >-
@@ -24,6 +26,7 @@
         resolution:
           description: >-
             The preset output resolution of the video or image. For custom sizes use the `size` property.
+            Either `resolution` or `size` (with both `width` and `height`) must be specified for all formats except `mp3`.
             <ul>
               <li>`preview` - 512px x 288px @ 15fps</li>
               <li>`mobile` - 640px x 360px @ 25fps</li>
