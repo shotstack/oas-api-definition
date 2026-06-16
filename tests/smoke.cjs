@@ -198,24 +198,33 @@ async function run() {
     assert.strictEqual(result.model, "flux-schnell");
   });
 
-  check("Parse videoAsset with prompt + seed", () => {
+  check("Parse videoAsset with prompt + inputSrc", () => {
     const result = zodCjs.videoAssetSchema.parse({
       type: "video",
       prompt: "Slowly zoom out and orbit left around the object",
-      seed: "https://example.com/seed-image.jpg",
+      inputSrc: "https://example.com/input-image.jpg",
     });
     assert.strictEqual(result.prompt, "Slowly zoom out and orbit left around the object");
-    assert.strictEqual(result.seed, "https://example.com/seed-image.jpg");
+    assert.strictEqual(result.inputSrc, "https://example.com/input-image.jpg");
   });
 
-  check("Parse videoAsset with prompt + seed + model", () => {
+  check("Parse videoAsset with prompt + inputSrc + model", () => {
+    const result = zodCjs.videoAssetSchema.parse({
+      type: "video",
+      prompt: "Camera pans right",
+      inputSrc: "https://example.com/input.jpg",
+      model: "luma-ray-3",
+    });
+    assert.strictEqual(result.model, "luma-ray-3");
+  });
+
+  check("Parse videoAsset with deprecated seed alias (still accepted for back-compat)", () => {
     const result = zodCjs.videoAssetSchema.parse({
       type: "video",
       prompt: "Camera pans right",
       seed: "https://example.com/seed.jpg",
-      model: "luma-ray-3",
     });
-    assert.strictEqual(result.model, "luma-ray-3");
+    assert.strictEqual(result.seed, "https://example.com/seed.jpg");
   });
 
   check("Parse audioAsset with prompt + voice", () => {
@@ -280,7 +289,7 @@ async function run() {
   console.log("\n--- Unified asset: src-or-prompt rule (ADR 0001) ---\n");
 
   // At-least-one: src OR prompt required on image/video/audio. Both allowed.
-  // Neither → rejected. seed/voice are modifiers and never satisfy the rule.
+  // Neither → rejected. inputSrc/voice are modifiers and never satisfy the rule.
 
   check("image with src only is valid", () => {
     zodCjs.imageAssetSchema.parse({ type: "image", src: "https://example.com/a.jpg" });
@@ -306,7 +315,13 @@ async function run() {
     assert.throws(() => zodCjs.videoAssetSchema.parse({ type: "video" }));
   });
 
-  check("REJECT video with seed but no src and no prompt (seed is a modifier)", () => {
+  check("REJECT video with inputSrc but no src and no prompt (inputSrc is a modifier)", () => {
+    assert.throws(() =>
+      zodCjs.videoAssetSchema.parse({ type: "video", inputSrc: "https://example.com/input.jpg" })
+    );
+  });
+
+  check("REJECT video with deprecated seed but no src and no prompt (alias is a modifier)", () => {
     assert.throws(() =>
       zodCjs.videoAssetSchema.parse({ type: "video", seed: "https://example.com/seed.jpg" })
     );

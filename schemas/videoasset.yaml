@@ -1,12 +1,12 @@
     VideoAsset:
       description: |
         The VideoAsset adds a video to a Clip. The video can be sourced from a URL
-        (`src`) or generated from a text prompt (`prompt`), optionally seeded from a
-        starting image (`seed`). Exactly one of `src` or `prompt` must be provided.
+        (`src`) or generated from a text prompt (`prompt`), optionally from a
+        starting image (`inputSrc`). Exactly one of `src` or `prompt` must be provided.
 
         - **Source URL:** set `src` to the URL of an mp4 (or compatible) video file.
-        - **Generated:** set `prompt` to describe the motion. Optionally set `seed` to
-          a starting image URL (image-to-video). Use `model` to choose the generator
+        - **Generated:** set `prompt` to describe the motion. Optionally set `inputSrc`
+          to a starting image URL (image-to-video). Use `model` to choose the generator
           (e.g. `luma-ray-3`, `runpod-itv-mini`). The generated `src` is filled in
           automatically.
       type: object
@@ -28,15 +28,25 @@
           description: >-
             A text prompt to generate the video from. When set without `src`, the
             engine generates a video and fills `src` automatically. Optionally pair
-            with `seed` for image-to-video. Use `model` to choose the generator.
+            with `inputSrc` for image-to-video. Use `model` to choose the generator.
           type: string
           maxLength: 4000
           example: Slowly zoom out and orbit left around the object.
-        seed:
+        inputSrc:
           description: >-
-            Seed image URL for image-to-video generation. The image is used as the
+            Input image URL for image-to-video generation. The image is used as the
             starting frame; `prompt` describes the motion. Has no effect unless
             `prompt` is set.
+          type: string
+          minLength: 1
+          example: https://s3-ap-northeast-1.amazonaws.com/my-bucket/input-image.jpg
+        seed:
+          deprecated: true
+          description: >-
+            **Deprecated — use `inputSrc`.** Legacy alias for the image-to-video
+            input image URL, accepted and normalised to `inputSrc` on ingest. The
+            name is misleading — industry-wide `seed` means an integer RNG sampling
+            seed — and will be removed in a future major version.
           type: string
           minLength: 1
           example: https://s3-ap-northeast-1.amazonaws.com/my-bucket/seed-image.jpg
