@@ -1,3 +1,10 @@
+## [1.13.2](https://github.com/shotstack/oas-api-definition/compare/v1.13.1...v1.13.2) (2026-06-16)
+
+
+### Bug Fixes
+
+* update references from 'seed' to 'inputSrc' in video asset schemas and tests ([db8e75a](https://github.com/shotstack/oas-api-definition/commit/db8e75ad60243744c626d05459134c1c2b809403))
+
 ## [1.13.1](https://github.com/shotstack/oas-api-definition/compare/v1.13.0...v1.13.1) (2026-06-09)
 
 
