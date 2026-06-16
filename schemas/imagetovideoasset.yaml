@@ -2,7 +2,7 @@ ImageToVideoAsset:
   deprecated: true
   description: |
     **Notice: ImageToVideoAsset is deprecated. Use [VideoAsset](#tocs_videoasset)
-    with `prompt` and `seed` instead.** This type continues to function and is
+    with `prompt` and `inputSrc` instead.** This type continues to function and is
     internally rewritten to VideoAsset; no behaviour change for existing
     integrations.
 
