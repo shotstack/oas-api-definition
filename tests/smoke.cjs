@@ -218,13 +218,14 @@ async function run() {
     assert.strictEqual(result.model, "luma-ray-3");
   });
 
-  check("Parse videoAsset with deprecated seed alias (still accepted for back-compat)", () => {
-    const result = zodCjs.videoAssetSchema.parse({
-      type: "video",
-      prompt: "Camera pans right",
-      seed: "https://example.com/seed.jpg",
-    });
-    assert.strictEqual(result.seed, "https://example.com/seed.jpg");
+  check("REJECT videoAsset with removed `seed` field (use inputSrc instead)", () => {
+    assert.throws(() =>
+      zodCjs.videoAssetSchema.parse({
+        type: "video",
+        prompt: "Camera pans right",
+        seed: "https://example.com/seed.jpg",
+      })
+    );
   });
 
   check("Parse audioAsset with prompt + voice", () => {
@@ -321,7 +322,7 @@ async function run() {
     );
   });
 
-  check("REJECT video with deprecated seed but no src and no prompt (alias is a modifier)", () => {
+  check("REJECT video with removed `seed` field and no src/prompt (seed no longer recognized)", () => {
     assert.throws(() =>
       zodCjs.videoAssetSchema.parse({ type: "video", seed: "https://example.com/seed.jpg" })
     );
