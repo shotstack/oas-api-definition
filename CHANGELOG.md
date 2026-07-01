@@ -1,3 +1,10 @@
+## [1.13.3](https://github.com/shotstack/oas-api-definition/compare/v1.13.2...v1.13.3) (2026-07-01)
+
+
+### Bug Fixes
+
+* remove deprecated 'seed' field from video asset schema and update tests ([ff7a689](https://github.com/shotstack/oas-api-definition/commit/ff7a6897f37fa650460fae50eabb3d02f4880521))
+
 ## [1.13.2](https://github.com/shotstack/oas-api-definition/compare/v1.13.1...v1.13.2) (2026-06-16)
 
 
