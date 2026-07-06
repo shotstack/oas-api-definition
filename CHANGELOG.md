@@ -1,3 +1,10 @@
+# [1.14.0](https://github.com/shotstack/oas-api-definition/compare/v1.13.3...v1.14.0) (2026-07-06)
+
+
+### Features
+
+* enhance audio, image, and video asset schemas with new properties for music generation, resolution, duration, and aspect ratio ([0cf6650](https://github.com/shotstack/oas-api-definition/commit/0cf6650a3d1ded027edf2d68b432f05a219303d7))
+
 ## [1.13.3](https://github.com/shotstack/oas-api-definition/compare/v1.13.2...v1.13.3) (2026-07-01)
 
 
