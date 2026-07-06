@@ -53,10 +53,32 @@
           default: false
         model:
           description: >-
-            The generation model to use when `prompt` is set (e.g. `polly-neural`).
+            The generation model to use when `prompt` is set (e.g. `polly-neural`,
+            `fal/elevenlabs-tts`, `fal/minimax-speech`, `fal/elevenlabs-music`).
             Defaults to the platform's preferred generator if omitted.
           type: string
           example: polly-neural
+        musicLengthMs:
+          description: >-
+            Target duration in milliseconds for generated music (3,000–600,000).
+            Only meaningful when `prompt` is set and the model is a music generator
+            (e.g. `fal/elevenlabs-music`).
+          type: number
+          minimum: 3000
+          maximum: 600000
+          example: 30000
+        forceInstrumental:
+          description: >-
+            Set to `true` to force instrumental music (no vocals). Only meaningful
+            for music generation models.
+          type: boolean
+          default: false
+        compositionPlan:
+          description: >-
+            An optional structured composition plan for music generation. Only
+            meaningful for music generation models (e.g. `fal/elevenlabs-music`).
+          type: string
+          maxLength: 4000
         trim:
           description: >-
             The start trim point of the audio clip, in seconds (defaults to 0). Audio
