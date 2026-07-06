@@ -43,10 +43,63 @@
         model:
           description: >-
             The generation model to use when `prompt` is set (e.g. `luma-ray-3`,
-            `runpod-itv-mini`). Defaults to the platform's preferred generator if
-            omitted.
+            `runpod-itv-mini`, `fal/seedance-2.0`). Defaults to the platform's
+            preferred generator if omitted.
           type: string
           example: luma-ray-3
+        resolution:
+          description: >-
+            Output resolution for video generation. Only meaningful when `prompt`
+            is set and the model supports it (e.g. `fal/seedance-2.0`).
+          enum:
+            - '480p'
+            - '720p'
+            - '1080p'
+          type: string
+          example: '720p'
+        duration:
+          description: >-
+            Target video duration in seconds for generation models that accept
+            it. `"auto"` lets the model decide. Only meaningful when `prompt`
+            is set.
+          enum:
+            - 'auto'
+            - '4'
+            - '5'
+            - '6'
+            - '7'
+            - '8'
+            - '9'
+            - '10'
+            - '11'
+            - '12'
+            - '13'
+            - '14'
+            - '15'
+          type: string
+          default: auto
+          example: '5'
+        aspectRatio:
+          description: >-
+            Aspect ratio for the generated video. Only meaningful when `prompt`
+            is set and the model supports it.
+          enum:
+            - '1:1'
+            - '16:9'
+            - '9:16'
+            - '4:3'
+            - '3:4'
+            - '21:9'
+            - '9:21'
+          type: string
+          example: '16:9'
+        generateAudio:
+          description: >-
+            Set to `true` to request audio generation alongside the video. Only
+            meaningful for video generation models that support it (e.g.
+            `fal/seedance-2.0`).
+          type: boolean
+          default: false
         transcode:
           type: boolean
           description: >-

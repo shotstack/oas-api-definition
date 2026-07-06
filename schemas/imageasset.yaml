@@ -32,10 +32,35 @@
           example: A serene landscape with a crystal-clear mountain lake at sunrise.
         model:
           description: >-
-            The generation model to use when `prompt` is set (e.g. `flux-schnell`).
-            Defaults to the platform's preferred generator if omitted.
+            The generation model to use when `prompt` is set (e.g. `flux-schnell`,
+            `fal/flux-schnell`, `fal/nano-banana-2`). Defaults to the platform's
+            preferred generator if omitted.
           type: string
           example: flux-schnell
+        resolution:
+          description: >-
+            Output resolution tier for supported image generation models.
+            `1K` (default), `2K`, or `4K`. Only meaningful when `prompt` is set.
+          enum:
+            - '1K'
+            - '2K'
+            - '4K'
+          type: string
+          example: 1K
+        aspectRatio:
+          description: >-
+            Aspect ratio for the generated image. Only meaningful when `prompt`
+            is set and the model supports it.
+          enum:
+            - '1:1'
+            - '16:9'
+            - '9:16'
+            - '4:3'
+            - '3:4'
+            - '21:9'
+            - '9:21'
+          type: string
+          example: '1:1'
         crop:
           $ref: "./crop.yaml#/Crop"
       additionalProperties: false
