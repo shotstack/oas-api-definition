@@ -4,7 +4,11 @@
         (`src`) or generated from a text prompt (`prompt`). Exactly one of `src` or
         `prompt` must be provided.
 
-        - **Source URL:** set `src` to the publicly accessible URL of a jpg or png file.
+        - **Source URL:** set `src` to the publicly accessible URL of a jpg, png, or gif file.
+          Animated gifs use one animation cycle when the clip length is `auto` and
+          repeat to fill an explicitly longer clip. GIF files are limited to 50 MiB,
+          4096 pixels per dimension, 1000 frames, a 300 second animation cycle, and
+          128 MiB of decoded RGBA frame data.
         - **Generated:** set `prompt` to describe the image; the engine generates it
           using the provider chosen by `model` and fills `src` in automatically.
       type: object
@@ -16,8 +20,8 @@
           type: string
         src:
           description: >-
-            The image source URL. The URL must be publicly accessible or include
-            credentials. Provide either `src` or `prompt`, not both.
+            The jpg, png, or gif source URL. The URL must be publicly accessible or
+            include credentials. Provide either `src` or `prompt`, not both.
           type: string
           minLength: 1
           pattern: '\S'

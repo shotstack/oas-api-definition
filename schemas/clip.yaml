@@ -44,8 +44,10 @@
               description: >-
                 The duration the Clip should play for using a
                 [smart clip property](/docs/guide/architecting-an-application/smart-clips/).
-                Set to `auto` to play the Clip for the duration of the asset. Set to `end` to display or play the clip to
-                the end of the timeline. Use `alias://clip-name` to inherit the length from the referenced clip.
+                Set to `auto` to use the asset's intrinsic duration when one is available; assets without a usable
+                intrinsic duration use 3 seconds. Set to `end` to display or play the Clip to the end of the timeline
+                (or 0 seconds when the Clip starts after it). Use `alias://clip-name` to inherit the length from the
+                referenced clip.
               pattern: "^(auto|end|alias://[A-Za-z0-9_-]+)$"
               example: "auto"
         fit:
