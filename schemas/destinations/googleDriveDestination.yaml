@@ -10,9 +10,10 @@
           default: google-drive
           example: google-drive
         options:
-          description: Additional Google Drive configuration and features.
+          description: >-
+            Additional Google Drive configuration and features. If omitted, files are saved to the root of
+            My Drive using the default Shotstack filename.
           $ref: "./googleDriveDestinationOptions.yaml#/GoogleDriveDestinationOptions"
       type: object
       required:
         - provider
-        - options

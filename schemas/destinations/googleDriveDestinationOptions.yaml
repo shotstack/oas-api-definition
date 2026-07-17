@@ -4,8 +4,9 @@
       properties:
         folderId:
           description: >-
-            The Google Drive folder ID where asset will be stored. The folder ID is required and can be retrieved from
-            the URL when logged in to Google Drive, e.g. <a href="#">https://drive.google.com/drive/u/0/folders/1r-eTY6OLO8tzQRKwMyq-fIrQ_7AJEI6A</a>.
+            The Google Drive folder ID where the asset will be stored. If omitted, the asset is saved to the root of
+            My Drive. The folder ID can be retrieved from the URL when logged in to Google Drive,
+            e.g. <a href="#">https://drive.google.com/drive/u/0/folders/1r-eTY6OLO8tzQRKwMyq-fIrQ_7AJEI6A</a>.
           type: string
           example: 1r-eTY6OLO8tzQRKwMyq-fIrQ_7AJEI6A
         filename:
@@ -15,5 +16,3 @@
             and thumbnail images.
           type: string
           example: my-file
-      required:
-        - folderId
