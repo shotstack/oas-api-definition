@@ -1,3 +1,10 @@
+## [1.14.1](https://github.com/shotstack/oas-api-definition/compare/v1.14.0...v1.14.1) (2026-07-17)
+
+
+### Bug Fixes
+
+* make google-drive destination options and folderId optional, saving to My Drive root when omitted ([1b3af08](https://github.com/shotstack/oas-api-definition/commit/1b3af08721ffa627b8c29216036823aebc18b686))
+
 # [1.14.0](https://github.com/shotstack/oas-api-definition/compare/v1.13.3...v1.14.0) (2026-07-06)
 
 
