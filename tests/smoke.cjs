@@ -388,6 +388,52 @@ async function run() {
     assert.ok(typeof mod.edit === "object", "edit export not found");
   });
 
+  console.log("\n--- JSON Schema validation checks ---\n");
+
+  const Ajv2020 = require("ajv/dist/2020");
+  const ajv = new Ajv2020({ strict: true, validateFormats: false });
+  const editJsonSchema = require(path.join(distDir, "json-schema/edit.json"));
+  let validateEdit;
+
+  check("edit.json compiles under ajv strict (2020-12)", () => {
+    validateEdit = ajv.compile(editJsonSchema);
+  });
+
+  const baseEdit = (asset) => ({
+    timeline: { tracks: [{ clips: [{ asset, start: 0, length: 3 }] }] },
+    output: { format: "mp4", resolution: "hd" },
+  });
+
+  const schemaCases = [
+    ["accepts a valid rich-text edit", baseEdit({ type: "rich-text", text: "Hello" }), true],
+    ["accepts a valid video edit", baseEdit({ type: "video", src: "https://x.com/a.mp4" }), true],
+    ["accepts deprecated title asset", baseEdit({ type: "title", text: "Old" }), true],
+    ["rejects unknown asset property", baseEdit({ type: "video", src: "https://x.com/a.mp4", bogus: 1 }), false],
+    ["rejects missing output", { timeline: { tracks: [] } }, false],
+  ];
+
+  const sepiaEdit = baseEdit({ type: "video", src: "https://x.com/a.mp4" });
+  sepiaEdit.timeline.tracks[0].clips[0].filter = "sepia";
+  schemaCases.push(["rejects invalid filter enum value", sepiaEdit, false]);
+
+  const soundtrackEdit = baseEdit({ type: "video", src: "https://x.com/a.mp4" });
+  soundtrackEdit.timeline.soundtrack = { src: "https://x.com/a.mp3", effect: "fadeIn" };
+  schemaCases.push(["accepts deprecated soundtrack", soundtrackEdit, true]);
+
+  for (const [label, edit, expected] of schemaCases) {
+    check(label, () => {
+      assert.ok(validateEdit, "schema did not compile");
+      const ok = validateEdit(edit);
+      assert.strictEqual(
+        ok,
+        expected,
+        expected
+          ? `Expected valid, got: ${JSON.stringify((validateEdit.errors || []).slice(0, 2))}`
+          : "Expected validation to fail but it passed"
+      );
+    });
+  }
+
   console.log("\n========================================");
   console.log(`  Results: ${passed} passed, ${failed} failed`);
   console.log("========================================\n");

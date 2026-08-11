@@ -1,7 +1,7 @@
     HtmlAsset:
       deprecated: true
       description: |
-        **Notice: The HtmlAsset is deprecated, use the [TextAsset](#tocs_textasset) instead.**
+        **Notice: The HtmlAsset is deprecated, use the [RichTextAsset](#tocs_richtextasset) instead.**
 
         The HtmlAsset clip type lets you create text based layout and formatting using
         HTML and CSS. You can also set the height and width of a bounding box for the HTML

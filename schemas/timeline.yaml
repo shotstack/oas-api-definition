@@ -7,7 +7,10 @@
         specific amount of time.
       properties:
         soundtrack:
-          description: A music or audio soundtrack file in mp3 format.
+          deprecated: true
+          description: >-
+            A music or audio soundtrack file in mp3 format. Deprecated - use an
+            [AudioAsset](#tocs_audioasset) clip on its own track instead.
           $ref: "./soundtrack.yaml#/Soundtrack"
         background:
           description: >-
