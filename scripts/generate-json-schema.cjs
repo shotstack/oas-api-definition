@@ -122,14 +122,13 @@ fs.writeFileSync(
 );
 
 // Barrel files so `@shotstack/schemas/json` resolves for both module systems.
-fs.writeFileSync(
-  path.join(OUT_DIR, "index.js"),
-  `import { createRequire } from 'module';\nconst require = createRequire(import.meta.url);\nexport const edit = require('./edit.json');\n`,
-);
-fs.writeFileSync(
-  path.join(OUT_DIR, "index.cjs"),
-  `module.exports = { edit: require('./edit.json') };\n`,
-);
+// Data is inlined as plain JS: JSON require()/import needs runtime support
+// (createRequire breaks when bundlers emit CJS — import.meta.url is undefined;
+// JSON import attributes vary across Node versions). Plain JS modules work
+// everywhere, including esbuild/webpack Lambda bundles.
+const editJs = JSON.stringify(output);
+fs.writeFileSync(path.join(OUT_DIR, "index.js"), `export const edit = ${editJs};\n`);
+fs.writeFileSync(path.join(OUT_DIR, "index.cjs"), `module.exports = { edit: ${editJs} };\n`);
 fs.writeFileSync(
   path.join(OUT_DIR, "index.d.ts"),
   `export declare const edit: Record<string, unknown>;\n`,
