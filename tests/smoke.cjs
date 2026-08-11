@@ -388,6 +388,19 @@ async function run() {
     assert.ok(typeof mod.edit === "object", "edit export not found");
   });
 
+  console.log("\n--- JSON barrel bundler-safety checks ---\n");
+
+  // Regression: createRequire(import.meta.url) in the ESM barrel crashed
+  // esbuild CJS Lambda bundles (import.meta.url is undefined there). The
+  // barrels must be pure data modules — no runtime module machinery.
+  for (const barrel of ["json-schema/index.js", "json-schema/index.cjs"]) {
+    check(`${barrel} is a pure data module`, () => {
+      const src = fs.readFileSync(path.join(distDir, barrel), "utf8");
+      assert.ok(!src.includes("import.meta"), "contains import.meta");
+      assert.ok(!src.includes("require("), "contains runtime require()");
+    });
+  }
+
   console.log("\n--- JSON Schema validation checks ---\n");
 
   const Ajv2020 = require("ajv/dist/2020");
