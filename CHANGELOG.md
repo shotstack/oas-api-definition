@@ -1,3 +1,10 @@
+# [1.15.0](https://github.com/shotstack/oas-api-definition/compare/v1.14.1...v1.15.0) (2026-08-11)
+
+
+### Features
+
+* full-fidelity Edit JSON Schema; deprecate text and soundtrack, point html/title at rich-text ([0e6b3cc](https://github.com/shotstack/oas-api-definition/commit/0e6b3cc26462a7c00db8aea39e69b0b48377b320))
+
 ## [1.14.1](https://github.com/shotstack/oas-api-definition/compare/v1.14.0...v1.14.1) (2026-07-17)
 
 
