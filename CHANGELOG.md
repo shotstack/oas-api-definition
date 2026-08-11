@@ -1,3 +1,10 @@
+## [1.15.1](https://github.com/shotstack/oas-api-definition/compare/v1.15.0...v1.15.1) (2026-08-11)
+
+
+### Bug Fixes
+
+* inline JSON data in /json barrels so CJS bundlers don't hit createRequire(import.meta.url) ([c9d4529](https://github.com/shotstack/oas-api-definition/commit/c9d4529787ade9f991fd8403521121c4b834b7ce))
+
 # [1.15.0](https://github.com/shotstack/oas-api-definition/compare/v1.14.1...v1.15.0) (2026-08-11)
 
 
