@@ -43,7 +43,7 @@
           description: >-
             The generation model to use when `prompt` is set (e.g. `polly-neural`,
             `elevenlabs-tts`, `elevenlabs-music`). Defaults to
-            `polly-neural` if omitted. Each model's available options are defined
+            `elevenlabs-tts` (with a default voice) if omitted. Each model's available options are defined
             by the model registry.
           type: string
           example: polly-neural
