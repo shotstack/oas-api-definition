@@ -92,6 +92,12 @@ paths:
   /probe/{url}:
     $ref: "./paths/probe.yaml"
 
+  /generate:
+    $ref: "./paths/generate.yaml"
+
+  /generate/{id}:
+    $ref: "./paths/generateid.yaml"
+
   /assets/{id}:
     $ref: "./paths/assetsid.yaml"
 

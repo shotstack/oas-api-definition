@@ -1,15 +1,19 @@
     AudioAsset:
       description: |
         The AudioAsset adds audio to a Clip. The audio can be sourced from a URL
-        (`src`) or generated from a text prompt (`prompt`). Exactly one of `src` or
-        `prompt` must be provided.
+        (`src`), generated from a text prompt (`prompt`), or both. At least one of
+        `src` or `prompt` must be provided.
 
         - **Source URL:** set `src` to a publicly accessible audio URL (e.g. mp3).
-        - **Generated speech:** set `prompt` to the spoken text and `voice` to a voice
-          identifier (text-to-speech). Optionally set `language`/`newscaster`.
-        - **Generated music or SFX:** set `prompt` describing the sound; omit `voice`.
-        - Use `model` to choose the generator. The generated `src` is filled in
-          automatically.
+        - **Generated speech:** set `prompt` to the spoken text and choose a
+          text-to-speech `model`; set the voice via `options`.
+        - **Generated music or SFX:** set `prompt` describing the sound and choose
+          a music generation `model`.
+        - **Both:** `src` acts as a preview placeholder while `prompt` drives
+          generation — the audio is regenerated from the prompt at render time.
+          Unchanged prompts and options resolve from the generation cache.
+        - Use `model` to choose the generator and `options` to configure it. The
+          generated `src` is filled in automatically.
       type: object
       properties:
         type:
@@ -20,65 +24,40 @@
         src:
           description: >-
             The audio source URL. The URL must be publicly accessible or include
-            credentials. Provide either `src` or `prompt`, not both.
+            credentials. When `prompt` is also set, `src` serves as a preview
+            placeholder and the audio is regenerated from the prompt at render time.
           type: string
           minLength: 1
           pattern: '\S'
           example: https://s3-ap-northeast-1.amazonaws.com/my-bucket/sound.mp3
         prompt:
           description: >-
-            A text prompt. When `voice` is set, the prompt is the spoken text
-            (text-to-speech). Without `voice`, the prompt describes generated music
-            or sound effects. The generated `src` is filled in automatically.
+            A text prompt. For text-to-speech models the prompt is the spoken
+            text; for music models it describes the sound to generate. The
+            generated `src` is filled in automatically; an existing `src` is
+            treated as a preview placeholder and replaced.
           type: string
           maxLength: 4000
           example: Welcome to today's broadcast.
-        voice:
-          description: >-
-            Voice identifier for text-to-speech generation (e.g. `Matthew`, `Joanna`).
-            Only meaningful when `prompt` is set.
-          type: string
-          example: Matthew
-        language:
-          description: >-
-            Optional BCP-47 language code (e.g. `en-US`) for text-to-speech.
-            Only meaningful when `prompt` and `voice` are set.
-          type: string
-          example: en-US
-        newscaster:
-          description: >-
-            Set to `true` to use the voice's newscaster mode when supported.
-            Only meaningful when `prompt` and `voice` are set.
-          type: boolean
-          default: false
         model:
           description: >-
             The generation model to use when `prompt` is set (e.g. `polly-neural`,
-            `fal/elevenlabs-tts`, `fal/minimax-speech`, `fal/elevenlabs-music`).
-            Defaults to the platform's preferred generator if omitted.
+            `elevenlabs-tts`, `elevenlabs-music`). Defaults to
+            `elevenlabs-tts` (with a default voice) if omitted. Each model's available options are defined
+            by the model registry.
           type: string
           example: polly-neural
-        musicLengthMs:
+        options:
           description: >-
-            Target duration in milliseconds for generated music (3,000–600,000).
-            Only meaningful when `prompt` is set and the model is a music generator
-            (e.g. `fal/elevenlabs-music`).
-          type: number
-          minimum: 3000
-          maximum: 600000
-          example: 30000
-        forceInstrumental:
-          description: >-
-            Set to `true` to force instrumental music (no vocals). Only meaningful
-            for music generation models.
-          type: boolean
-          default: false
-        compositionPlan:
-          description: >-
-            An optional structured composition plan for music generation. Only
-            meaningful for music generation models (e.g. `fal/elevenlabs-music`).
-          type: string
-          maxLength: 4000
+            Model-specific generation settings. Valid keys and values depend on
+            the chosen `model` and are defined by the model registry. Omitted
+            options use the model's defaults. Unknown or invalid options are
+            rejected.
+          type: object
+          additionalProperties: true
+          example:
+            voice: Matthew
+            language: en-US
         trim:
           description: >-
             The start trim point of the audio clip, in seconds (defaults to 0). Audio

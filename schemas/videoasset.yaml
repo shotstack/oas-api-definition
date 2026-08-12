@@ -1,14 +1,17 @@
     VideoAsset:
       description: |
         The VideoAsset adds a video to a Clip. The video can be sourced from a URL
-        (`src`) or generated from a text prompt (`prompt`), optionally from a
-        starting image (`inputSrc`). Exactly one of `src` or `prompt` must be provided.
+        (`src`), generated from a text prompt (`prompt`), or both. At least one of
+        `src` or `prompt` must be provided.
 
         - **Source URL:** set `src` to the URL of an mp4 (or compatible) video file.
-        - **Generated:** set `prompt` to describe the motion. Optionally set `inputSrc`
-          to a starting image URL (image-to-video). Use `model` to choose the generator
-          (e.g. `luma-ray-3`, `runpod-itv-mini`). The generated `src` is filled in
+        - **Generated:** set `prompt` to describe the motion. Choose a generator
+          with `model` and configure it with model-specific `options` (including a
+          starting image for image-to-video). The generated `src` is filled in
           automatically.
+        - **Both:** `src` acts as a preview placeholder while `prompt` drives
+          generation — the video is regenerated from the prompt at render time.
+          Unchanged prompts and options resolve from the generation cache.
       type: object
       properties:
         type:
@@ -19,87 +22,42 @@
         src:
           description: >-
             The video source URL. The URL must be publicly accessible or include
-            credentials. Provide either `src` or `prompt`, not both.
+            credentials. When `prompt` is also set, `src` serves as a preview
+            placeholder and the video is regenerated from the prompt at render time.
           type: string
           minLength: 1
           pattern: '\S'
           example: https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4
         prompt:
           description: >-
-            A text prompt to generate the video from. When set without `src`, the
-            engine generates a video and fills `src` automatically. Optionally pair
-            with `inputSrc` for image-to-video. Use `model` to choose the generator.
+            A text prompt to generate the video from. The engine generates a video
+            at render time and fills `src` automatically; an existing `src` is
+            treated as a preview placeholder and replaced. Use `model` to choose
+            the generator and `options` to configure it (including a starting
+            image for image-to-video).
           type: string
           maxLength: 4000
           example: Slowly zoom out and orbit left around the object.
-        inputSrc:
-          description: >-
-            Input image URL for image-to-video generation. The image is used as the
-            starting frame; `prompt` describes the motion. Has no effect unless
-            `prompt` is set.
-          type: string
-          minLength: 1
-          example: https://s3-ap-northeast-1.amazonaws.com/my-bucket/input-image.jpg
         model:
           description: >-
-            The generation model to use when `prompt` is set (e.g. `luma-ray-3`,
-            `runpod-itv-mini`, `fal/seedance-2.0`). Defaults to the platform's
-            preferred generator if omitted.
+            The generation model to use when `prompt` is set (e.g.
+            `shotstack-itv-mini`, `ray-flash-2`, `seedance-2.0`). Defaults to
+            `seedance-2.0` if omitted. Each model's available options are
+            defined by the model registry.
           type: string
-          example: luma-ray-3
-        resolution:
+          example: seedance-2.0
+        options:
           description: >-
-            Output resolution for video generation. Only meaningful when `prompt`
-            is set and the model supports it (e.g. `fal/seedance-2.0`).
-          enum:
-            - '480p'
-            - '720p'
-            - '1080p'
-          type: string
-          example: '720p'
-        duration:
-          description: >-
-            Target video duration in seconds for generation models that accept
-            it. `"auto"` lets the model decide. Only meaningful when `prompt`
-            is set.
-          enum:
-            - 'auto'
-            - '4'
-            - '5'
-            - '6'
-            - '7'
-            - '8'
-            - '9'
-            - '10'
-            - '11'
-            - '12'
-            - '13'
-            - '14'
-            - '15'
-          type: string
-          default: auto
-          example: '5'
-        aspectRatio:
-          description: >-
-            Aspect ratio for the generated video. Only meaningful when `prompt`
-            is set and the model supports it.
-          enum:
-            - '1:1'
-            - '16:9'
-            - '9:16'
-            - '4:3'
-            - '3:4'
-            - '21:9'
-            - '9:21'
-          type: string
-          example: '16:9'
-        generateAudio:
-          description: >-
-            Set to `true` to request audio generation alongside the video. Only
-            meaningful for video generation models that support it (e.g.
-            `fal/seedance-2.0`).
-          type: boolean
-          default: false
+            Model-specific generation settings. Valid keys and values depend on
+            the chosen `model` and are defined by the model registry. Omitted
+            options use the model's defaults. Unknown or invalid options are
+            rejected.
+          type: object
+          additionalProperties: true
+          example:
+            resolution: 720p
+            duration: '8'
+            generateAudio: true
         transcode:
           type: boolean
           description: >-

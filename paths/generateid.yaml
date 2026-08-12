@@ -1,0 +1,32 @@
+    get:
+      responses:
+        "200":
+          description: The generation job has finished (done or failed).
+          content:
+            application/json:
+              schema:
+                $ref: "../schemas/responses/generationresponse.yaml#/GenerationResponse"
+        "202":
+          description: The generation job is still processing.
+          content:
+            application/json:
+              schema:
+                $ref: "../schemas/responses/generationresponse.yaml#/GenerationResponse"
+      description: |
+        Get the status of an on-demand asset generation job created with the
+        generate endpoint. Jobs are owner-scoped.
+
+        **Base URL:** <a href="#">https://api.shotstack.io/edit/{version}</a>
+      summary: Get Generation Status
+      operationId: getGenerate
+      security:
+        - DeveloperKey: []
+      tags:
+        - Edit
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        description: The generation job id returned by the generate endpoint.

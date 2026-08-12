@@ -1,0 +1,36 @@
+    GenerationResponse:
+      description: >-
+        The status of an on-demand asset generation job. Completed jobs include
+        the public URL of the generated asset.
+      type: object
+      properties:
+        id:
+          description: >-
+            The generation job id. Deterministic for a given owner and asset
+            payload (or idempotency key), so identical requests return the same
+            job and cached result.
+          type: string
+          example: 8a1f2c3d-4e5b-5a6c-9d7e-1f2a3b4c5d6e
+        status:
+          description: The status of the generation job.
+          type: string
+          enum:
+            - queued
+            - processing
+            - done
+            - failed
+          example: done
+        url:
+          description: >-
+            The public URL of the generated asset. Present only when `status`
+            is `done`.
+          type: string
+          example: https://shotstack-api-v1-output.s3-ap-southeast-2.amazonaws.com/owner/8a1f2c3d.png
+        error:
+          description: >-
+            A human readable error message. Present only when `status` is
+            `failed`.
+          type: string
+      required:
+        - id
+        - status

@@ -1,12 +1,16 @@
     ImageAsset:
       description: |
         The ImageAsset adds an image to a Clip. The image can be sourced from a URL
-        (`src`) or generated from a text prompt (`prompt`). Exactly one of `src` or
-        `prompt` must be provided.
+        (`src`), generated from a text prompt (`prompt`), or both. At least one of
+        `src` or `prompt` must be provided.
 
         - **Source URL:** set `src` to the publicly accessible URL of a jpg or png file.
-        - **Generated:** set `prompt` to describe the image; the engine generates it
-          using the provider chosen by `model` and fills `src` in automatically.
+        - **Generated:** set `prompt` to describe the image. Choose a generator with
+          `model` and configure it with model-specific `options`; the engine fills
+          `src` in automatically.
+        - **Both:** `src` acts as a preview placeholder while `prompt` drives
+          generation — the image is regenerated from the prompt at render time.
+          Unchanged prompts and options resolve from the generation cache.
       type: object
       properties:
         type:
@@ -17,50 +21,39 @@
         src:
           description: >-
             The image source URL. The URL must be publicly accessible or include
-            credentials. Provide either `src` or `prompt`, not both.
+            credentials. When `prompt` is also set, `src` serves as a preview
+            placeholder and the image is regenerated from the prompt at render time.
           type: string
           minLength: 1
           pattern: '\S'
           example: https://s3-ap-northeast-1.amazonaws.com/my-bucket/image.jpg
         prompt:
           description: >-
-            A text prompt to generate the image from. When set without `src`, the
-            engine generates an image and fills `src` automatically. Use `model` to
-            choose the generator.
+            A text prompt to generate the image from. The engine generates an image
+            at render time and fills `src` automatically; an existing `src` is
+            treated as a preview placeholder and replaced. Use `model` to choose
+            the generator and `options` to configure it.
           type: string
           maxLength: 4000
           example: A serene landscape with a crystal-clear mountain lake at sunrise.
         model:
           description: >-
             The generation model to use when `prompt` is set (e.g. `flux-schnell`,
-            `fal/flux-schnell`, `fal/nano-banana-2`). Defaults to the platform's
-            preferred generator if omitted.
+            `nano-banana-2`). Defaults to `nano-banana-2` if omitted. Each
+            model's available options are defined by the model registry.
           type: string
           example: flux-schnell
-        resolution:
+        options:
           description: >-
-            Output resolution tier for supported image generation models.
-            `1K` (default), `2K`, or `4K`. Only meaningful when `prompt` is set.
-          enum:
-            - '1K'
-            - '2K'
-            - '4K'
-          type: string
-          example: 1K
-        aspectRatio:
-          description: >-
-            Aspect ratio for the generated image. Only meaningful when `prompt`
-            is set and the model supports it.
-          enum:
-            - '1:1'
-            - '16:9'
-            - '9:16'
-            - '4:3'
-            - '3:4'
-            - '21:9'
-            - '9:21'
-          type: string
-          example: '1:1'
+            Model-specific generation settings. Valid keys and values depend on
+            the chosen `model` and are defined by the model registry. Omitted
+            options use the model's defaults. Unknown or invalid options are
+            rejected.
+          type: object
+          additionalProperties: true
+          example:
+            resolution: 1K
+            aspectRatio: '16:9'
         crop:
           $ref: "./crop.yaml#/Crop"
       additionalProperties: false
