@@ -39,7 +39,7 @@
         model:
           description: >-
             The generation model to use when `prompt` is set (e.g. `flux-schnell`,
-            `fal/nano-banana-2`). Defaults to `flux-schnell` if omitted. Each
+            `nano-banana-2`). Defaults to `flux-schnell` if omitted. Each
             model's available options are defined by the model registry.
           type: string
           example: flux-schnell

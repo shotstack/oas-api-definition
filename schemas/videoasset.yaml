@@ -41,11 +41,11 @@
         model:
           description: >-
             The generation model to use when `prompt` is set (e.g.
-            `shotstack-itv-mini`, `ray-flash-2`, `fal/seedance-2.0`). Defaults to
+            `shotstack-itv-mini`, `ray-flash-2`, `seedance-2.0`). Defaults to
             `shotstack-itv-mini` if omitted. Each model's available options are
             defined by the model registry.
           type: string
-          example: fal/seedance-2.0
+          example: seedance-2.0
         options:
           description: >-
             Model-specific generation settings. Valid keys and values depend on
