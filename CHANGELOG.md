@@ -1,3 +1,11 @@
+# [1.16.0](https://github.com/shotstack/oas-api-definition/compare/v1.15.1...v1.16.0) (2026-08-12)
+
+
+### Features
+
+* default generative assets to the current best models ([7a1c10f](https://github.com/shotstack/oas-api-definition/commit/7a1c10f16b3f3150ff6c74b7ba83346ee2dd5dd1))
+* model-scoped options object for generative assets ([f521bb7](https://github.com/shotstack/oas-api-definition/commit/f521bb7ccb33ebf8516018a575937da4ade89409))
+
 ## [1.15.1](https://github.com/shotstack/oas-api-definition/compare/v1.15.0...v1.15.1) (2026-08-11)
 
 
