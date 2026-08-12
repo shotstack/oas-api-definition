@@ -1,0 +1,55 @@
+    post:
+      responses:
+        "200":
+          description: The generated asset was already cached and is immediately available.
+          content:
+            application/json:
+              schema:
+                $ref: "../schemas/responses/generationresponse.yaml#/GenerationResponse"
+        "202":
+          description: The generation job has been queued. Poll the status endpoint.
+          headers:
+            Location:
+              description: The relative URL to poll for job status.
+              schema:
+                type: string
+            Retry-After:
+              description: Suggested seconds to wait before polling.
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                $ref: "../schemas/responses/generationresponse.yaml#/GenerationResponse"
+      description: |
+        Generate a single image, video or audio asset from a text prompt without
+        rendering a full edit. Submit a prompt-bearing asset; the response is
+        immediate when an identical asset has been generated before (results are
+        cached by prompt, model and options), otherwise the job is queued and can
+        be polled via the status endpoint.
+
+        Generation is billed in credits per asset. Identical repeat requests
+        resolve from the cache at no charge.
+
+        **Base URL:** <a href="#">https://api.shotstack.io/edit/{version}</a>
+      summary: Generate Asset
+      operationId: postGenerate
+      requestBody:
+        description: >-
+          A prompt-bearing image, video or audio asset to generate.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                asset:
+                  oneOf:
+                    - $ref: "../schemas/imageasset.yaml#/ImageAsset"
+                    - $ref: "../schemas/videoasset.yaml#/VideoAsset"
+                    - $ref: "../schemas/audioasset.yaml#/AudioAsset"
+              required:
+                - asset
+      security:
+        - DeveloperKey: []
+      tags:
+        - Edit

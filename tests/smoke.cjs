@@ -198,27 +198,27 @@ async function run() {
     assert.strictEqual(result.model, "flux-schnell");
   });
 
-  check("Parse videoAsset with prompt + inputSrc", () => {
+  check("Parse videoAsset with prompt + options.inputSrc", () => {
     const result = zodCjs.videoAssetSchema.parse({
       type: "video",
       prompt: "Slowly zoom out and orbit left around the object",
-      inputSrc: "https://example.com/input-image.jpg",
+      options: { inputSrc: "https://example.com/input-image.jpg" },
     });
     assert.strictEqual(result.prompt, "Slowly zoom out and orbit left around the object");
-    assert.strictEqual(result.inputSrc, "https://example.com/input-image.jpg");
+    assert.strictEqual(result.options.inputSrc, "https://example.com/input-image.jpg");
   });
 
-  check("Parse videoAsset with prompt + inputSrc + model", () => {
+  check("Parse videoAsset with prompt + model + options", () => {
     const result = zodCjs.videoAssetSchema.parse({
       type: "video",
       prompt: "Camera pans right",
-      inputSrc: "https://example.com/input.jpg",
-      model: "luma-ray-3",
+      model: "fal/seedance-2.0",
+      options: { inputSrc: "https://example.com/input.jpg" },
     });
-    assert.strictEqual(result.model, "luma-ray-3");
+    assert.strictEqual(result.model, "fal/seedance-2.0");
   });
 
-  check("REJECT videoAsset with removed `seed` field (use inputSrc instead)", () => {
+  check("REJECT videoAsset with removed `seed` field (generation inputs live in options)", () => {
     assert.throws(() =>
       zodCjs.videoAssetSchema.parse({
         type: "video",
@@ -228,26 +228,24 @@ async function run() {
     );
   });
 
-  check("Parse audioAsset with prompt + voice", () => {
+  check("Parse audioAsset with prompt + options.voice", () => {
     const result = zodCjs.audioAssetSchema.parse({
       type: "audio",
       prompt: "This is a text-to-speech example",
-      voice: "Matthew",
+      options: { voice: "Matthew" },
     });
     assert.strictEqual(result.prompt, "This is a text-to-speech example");
-    assert.strictEqual(result.voice, "Matthew");
+    assert.strictEqual(result.options.voice, "Matthew");
   });
 
-  check("Parse audioAsset with prompt + voice + language + newscaster", () => {
+  check("Parse audioAsset with speech options (voice, language, newscaster)", () => {
     const result = zodCjs.audioAssetSchema.parse({
       type: "audio",
       prompt: "Breaking news from around the world",
-      voice: "Matthew",
-      language: "en-US",
-      newscaster: true,
+      options: { voice: "Matthew", language: "en-US", newscaster: true },
     });
-    assert.strictEqual(result.language, "en-US");
-    assert.strictEqual(result.newscaster, true);
+    assert.strictEqual(result.options.language, "en-US");
+    assert.strictEqual(result.options.newscaster, true);
   });
 
   check("Parse audioAsset with prompt only (music/SFX generator)", () => {
@@ -289,18 +287,53 @@ async function run() {
 
   console.log("\n--- Unified asset: src-or-prompt rule (ADR 0001) ---\n");
 
-  // At-least-one: src OR prompt required on image/video/audio. Both allowed.
-  // Neither → rejected. inputSrc/voice are modifiers and never satisfy the rule.
+  // At-least-one: src OR prompt required on image/video/audio. Both allowed:
+  // src is a preview placeholder, prompt regenerates at render.
+  // Neither → rejected. The options object never satisfies the rule.
 
   check("image with src only is valid", () => {
     zodCjs.imageAssetSchema.parse({ type: "image", src: "https://example.com/a.jpg" });
   });
 
-  check("image with both src and prompt is valid (src wins downstream)", () => {
+  check("image with both src and prompt is valid (src previews; prompt regenerates at render)", () => {
     zodCjs.imageAssetSchema.parse({
       type: "image",
       src: "https://example.com/a.jpg",
       prompt: "a serene lake",
+    });
+  });
+
+  check("image accepts model-scoped options object", () => {
+    zodCjs.imageAssetSchema.parse({
+      type: "image",
+      prompt: "a serene lake",
+      model: "flux-schnell",
+      options: { resolution: "2K", aspectRatio: "16:9" },
+    });
+  });
+
+  check("video accepts model-scoped options object", () => {
+    zodCjs.videoAssetSchema.parse({
+      type: "video",
+      prompt: "slow orbit",
+      options: { duration: "8", generateAudio: true },
+    });
+  });
+
+  check("REJECT removed flat generation field on video", () => {
+    assert.throws(() => zodCjs.videoAssetSchema.parse({
+      type: "video",
+      prompt: "slow orbit",
+      resolution: "720p",
+    }));
+  });
+
+  check("audio accepts speech options", () => {
+    zodCjs.audioAssetSchema.parse({
+      type: "audio",
+      prompt: "Welcome to the show",
+      model: "polly-neural",
+      options: { voice: "Matthew", language: "en-US" },
     });
   });
 
@@ -316,9 +349,9 @@ async function run() {
     assert.throws(() => zodCjs.videoAssetSchema.parse({ type: "video" }));
   });
 
-  check("REJECT video with inputSrc but no src and no prompt (inputSrc is a modifier)", () => {
+  check("REJECT video with only options and no src/prompt (options never satisfies the rule)", () => {
     assert.throws(() =>
-      zodCjs.videoAssetSchema.parse({ type: "video", inputSrc: "https://example.com/input.jpg" })
+      zodCjs.videoAssetSchema.parse({ type: "video", options: { inputSrc: "https://example.com/input.jpg" } })
     );
   });
 
@@ -328,12 +361,12 @@ async function run() {
     );
   });
 
-  check("REJECT audio with voice but no src and no prompt (voice is a modifier)", () => {
-    assert.throws(() => zodCjs.audioAssetSchema.parse({ type: "audio", voice: "Matthew" }));
+  check("REJECT audio with only options and no src/prompt (options never satisfies the rule)", () => {
+    assert.throws(() => zodCjs.audioAssetSchema.parse({ type: "audio", options: { voice: "Matthew" } }));
   });
 
-  check("audio with prompt + voice is valid (text-to-speech shape)", () => {
-    zodCjs.audioAssetSchema.parse({ type: "audio", prompt: "hello", voice: "Matthew" });
+  check("audio with prompt + options voice is valid (text-to-speech shape)", () => {
+    zodCjs.audioAssetSchema.parse({ type: "audio", prompt: "hello", options: { voice: "Matthew" } });
   });
 
   console.log("\n--- Deprecation markers in bundled spec ---\n");
