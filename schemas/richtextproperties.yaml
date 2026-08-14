@@ -19,6 +19,14 @@ RichTextFont:
         The weight of the font. Can be a number (100-900) or a string ('normal', 'bold', etc.).
         100 is lightest, 900 is heaviest (boldest).
       default: "400"
+    style:
+      description: The font style.
+      type: string
+      enum:
+        - normal
+        - italic
+      default: "normal"
+      example: "italic"
     color:
       description: The text color using hexadecimal color notation.
       type: string

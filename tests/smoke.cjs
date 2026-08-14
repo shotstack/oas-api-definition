@@ -120,6 +120,25 @@ async function run() {
     });
   });
 
+  check("Parse rich-text font style italic", () => {
+    const result = zodCjs.richTextAssetSchema.parse({
+      type: "rich-text",
+      text: "Hello world",
+      font: { style: "italic" },
+    });
+    assert.strictEqual(result.font.style, "italic");
+  });
+
+  check("Reject unsupported rich-text font style", () => {
+    assert.throws(() => {
+      zodCjs.richTextAssetSchema.parse({
+        type: "rich-text",
+        text: "Hello world",
+        font: { style: "oblique" },
+      });
+    });
+  });
+
   check("Parse valid svg asset", () => {
     const result = zodCjs.svgAssetSchema.parse({
       type: "svg",
@@ -145,6 +164,25 @@ async function run() {
   check("Reject invalid rich-caption asset (wrong type value)", () => {
     assert.throws(() => {
       zodCjs.richCaptionAssetSchema.parse({ type: "not-a-type", src: 123 });
+    });
+  });
+
+  check("Parse rich-caption font style italic", () => {
+    const result = zodCjs.richCaptionAssetSchema.parse({
+      type: "rich-caption",
+      src: "https://example.com/captions.srt",
+      font: { style: "italic" },
+    });
+    assert.strictEqual(result.font.style, "italic");
+  });
+
+  check("Reject unsupported rich-caption font style", () => {
+    assert.throws(() => {
+      zodCjs.richCaptionAssetSchema.parse({
+        type: "rich-caption",
+        src: "https://example.com/captions.srt",
+        font: { style: "oblique" },
+      });
     });
   });
 
