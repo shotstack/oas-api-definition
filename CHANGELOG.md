@@ -1,3 +1,10 @@
+# [1.17.0](https://github.com/shotstack/oas-api-definition/compare/v1.16.0...v1.17.0) (2026-08-14)
+
+
+### Features
+
+* add italic font style schemas ([60f150e](https://github.com/shotstack/oas-api-definition/commit/60f150ec0746ba92e7d466bcd0e82d969fb19166))
+
 # [1.16.0](https://github.com/shotstack/oas-api-definition/compare/v1.15.1...v1.16.0) (2026-08-12)
 
 
