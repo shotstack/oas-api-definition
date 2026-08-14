@@ -109,17 +109,24 @@ async function run() {
     const result = zodCjs.richTextAssetSchema.parse({
       type: "rich-text",
       text: "Hello world",
-      font: { style: "italic" },
     });
     assert.strictEqual(result.type, "rich-text");
     assert.strictEqual(result.text, "Hello world");
-    assert.strictEqual(result.font.style, "italic");
   });
 
   check("Reject invalid rich-text asset (missing text)", () => {
     assert.throws(() => {
       zodCjs.richTextAssetSchema.parse({ type: "rich-text" });
     });
+  });
+
+  check("Parse rich-text font style italic", () => {
+    const result = zodCjs.richTextAssetSchema.parse({
+      type: "rich-text",
+      text: "Hello world",
+      font: { style: "italic" },
+    });
+    assert.strictEqual(result.font.style, "italic");
   });
 
   check("Reject unsupported rich-text font style", () => {
@@ -150,16 +157,23 @@ async function run() {
     const result = zodCjs.richCaptionAssetSchema.parse({
       type: "rich-caption",
       src: "https://example.com/captions.srt",
-      font: { style: "italic" },
     });
     assert.strictEqual(result.type, "rich-caption");
-    assert.strictEqual(result.font.style, "italic");
   });
 
   check("Reject invalid rich-caption asset (wrong type value)", () => {
     assert.throws(() => {
       zodCjs.richCaptionAssetSchema.parse({ type: "not-a-type", src: 123 });
     });
+  });
+
+  check("Parse rich-caption font style italic", () => {
+    const result = zodCjs.richCaptionAssetSchema.parse({
+      type: "rich-caption",
+      src: "https://example.com/captions.srt",
+      font: { style: "italic" },
+    });
+    assert.strictEqual(result.font.style, "italic");
   });
 
   check("Reject unsupported rich-caption font style", () => {
