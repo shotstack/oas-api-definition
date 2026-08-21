@@ -20,7 +20,7 @@
               schema:
                 $ref: "../schemas/responses/generationmodellistresponse.yaml#/GenerationModelListResponse"
         "400":
-          description: An unknown `type` or `status` was supplied.
+          description: An unknown `type` was supplied.
       security:
         - DeveloperKey: []
       tags:
@@ -37,17 +37,6 @@
             - video
             - audio
         example: video
-      - in: query
-        name: status
-        required: false
-        description: Return only models with this lifecycle status.
-        schema:
-          type: string
-          enum:
-            - active
-            - experimental
-            - deprecated
-        example: active
       - in: query
         name: expand
         required: false

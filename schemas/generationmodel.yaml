@@ -19,17 +19,6 @@
             - video
             - audio
           example: video
-        status:
-          description: >-
-            `active` for a model in general use, `experimental` for one that may change,
-            and `deprecated` for one scheduled for removal. Warn before a deprecated
-            model disappears.
-          type: string
-          enum:
-            - active
-            - experimental
-            - deprecated
-          example: active
         pricing:
           description: What one generation with this model costs.
           $ref: "./generationmodelpricing.yaml#/GenerationModelPricing"
@@ -43,5 +32,4 @@
       required:
         - model
         - type
-        - status
       type: object
