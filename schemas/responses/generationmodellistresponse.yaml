@@ -2,9 +2,7 @@
       description: The generation models available to this account.
       properties:
         models:
-          description: >-
-            The available models. Filtered by the `type` and `status` query parameters
-            when supplied.
+          description: The available models.
           type: array
           items:
             $ref: "../generationmodel.yaml#/GenerationModel"

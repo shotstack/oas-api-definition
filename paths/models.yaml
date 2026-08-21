@@ -5,7 +5,8 @@
 
         Use this to populate a model picker and render its option fields, rather than
         hard coding a model list. A newly launched model appears here without any change
-        on your side.
+        on your side. Each entry carries the asset type it generates, so filter the list
+        client side when a picker only needs one kind.
 
         Option schemas are omitted by default. Request them with `expand=options`.
 
@@ -19,24 +20,11 @@
             application/json:
               schema:
                 $ref: "../schemas/responses/generationmodellistresponse.yaml#/GenerationModelListResponse"
-        "400":
-          description: An unknown `type` was supplied.
       security:
         - DeveloperKey: []
       tags:
         - Edit
     parameters:
-      - in: query
-        name: type
-        required: false
-        description: Return only models generating this asset type.
-        schema:
-          type: string
-          enum:
-            - image
-            - video
-            - audio
-        example: video
       - in: query
         name: expand
         required: false
