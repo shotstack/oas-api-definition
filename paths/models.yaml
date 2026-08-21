@@ -1,0 +1,61 @@
+    get:
+      description: |
+        List the generation models available for `prompt`-bearing image, video and audio
+        assets, with the options each accepts and what it costs in credits.
+
+        Use this to populate a model picker and render its option fields, rather than
+        hard coding a model list. A newly launched model appears here without any change
+        on your side.
+
+        Option schemas are omitted by default. Request them with `expand=options`.
+
+        **Base URL:** <a href="#">https://api.shotstack.io/edit/{version}</a>
+      summary: List Generation Models
+      operationId: getModels
+      responses:
+        "200":
+          description: The available generation models.
+          content:
+            application/json:
+              schema:
+                $ref: "../schemas/responses/generationmodellistresponse.yaml#/GenerationModelListResponse"
+        "400":
+          description: An unknown `type` or `status` was supplied.
+      security:
+        - DeveloperKey: []
+      tags:
+        - Edit
+    parameters:
+      - in: query
+        name: type
+        required: false
+        description: Return only models generating this asset type.
+        schema:
+          type: string
+          enum:
+            - image
+            - video
+            - audio
+        example: video
+      - in: query
+        name: status
+        required: false
+        description: Return only models with this lifecycle status.
+        schema:
+          type: string
+          enum:
+            - active
+            - experimental
+            - deprecated
+        example: active
+      - in: query
+        name: expand
+        required: false
+        description: >-
+          Set to `options` to include each model's option schema in the list. Omitted by
+          default to keep the response small.
+        schema:
+          type: string
+          enum:
+            - options
+        example: options

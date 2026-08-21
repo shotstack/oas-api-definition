@@ -1,0 +1,29 @@
+    get:
+      description: |
+        Get one generation model, including the JSON Schema for the options it accepts and
+        what it costs in credits.
+
+        **Base URL:** <a href="#">https://api.shotstack.io/edit/{version}</a>
+      summary: Get Generation Model
+      operationId: getModel
+      responses:
+        "200":
+          description: The generation model, with its option schema.
+          content:
+            application/json:
+              schema:
+                $ref: "../schemas/generationmodel.yaml#/GenerationModel"
+        "404":
+          description: No model exists with that identifier.
+      security:
+        - DeveloperKey: []
+      tags:
+        - Edit
+    parameters:
+      - in: path
+        name: id
+        required: true
+        description: The model identifier, as returned by the list endpoint.
+        schema:
+          type: string
+        example: seedance-2.0

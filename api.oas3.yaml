@@ -98,6 +98,12 @@ paths:
   /generate/{id}:
     $ref: "./paths/generateid.yaml"
 
+  /models:
+    $ref: "./paths/models.yaml"
+
+  /models/{id}:
+    $ref: "./paths/modelsid.yaml"
+
   /assets/{id}:
     $ref: "./paths/assetsid.yaml"
 
