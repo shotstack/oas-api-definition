@@ -1,3 +1,10 @@
+# [1.18.0](https://github.com/shotstack/oas-api-definition/compare/v1.17.0...v1.18.0) (2026-08-24)
+
+
+### Features
+
+* publish generation model catalogue schemas ([d9b9a35](https://github.com/shotstack/oas-api-definition/commit/d9b9a35d4d1791292051a81cef38e9c66e1b97d3))
+
 # [1.17.0](https://github.com/shotstack/oas-api-definition/compare/v1.16.0...v1.17.0) (2026-08-14)
 
 
