@@ -1,0 +1,35 @@
+    GenerationModel:
+      description: >-
+        A generation model available to `prompt`-bearing image, video and audio assets,
+        with the options it accepts and what it costs. Render a model picker and its
+        option fields from this rather than hard coding a model list, so a newly launched
+        model is available without a client release.
+      properties:
+        model:
+          description: >-
+            The identifier to set as the asset `model`. Carries no provider name, so
+            routing can change without a public rename.
+          type: string
+          example: seedance-2.0
+        type:
+          description: The asset type this model generates.
+          type: string
+          enum:
+            - image
+            - video
+            - audio
+          example: video
+        pricing:
+          description: What one generation with this model costs.
+          $ref: "./generationmodelpricing.yaml#/GenerationModelPricing"
+        options:
+          description: >-
+            JSON Schema for the model's `options` object. Only returned for a single
+            model, or for a list requested with `expand=options`. Values outside this
+            schema are rejected.
+          type: object
+          additionalProperties: true
+      required:
+        - model
+        - type
+      type: object

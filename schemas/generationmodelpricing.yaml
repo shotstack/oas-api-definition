@@ -1,0 +1,56 @@
+    GenerationModelPricing:
+      description: >-
+        What one generation costs, in credits. There is no formula to evaluate: multiply
+        the rate by the number of units the generation consumes. Where a model charges
+        differently per option value, `credits` is an object keyed by that value and
+        `tieredBy` names the option that selects it.
+      properties:
+        unit:
+          description: >-
+            What one unit is. `render` means the whole generation counts as one unit,
+            whatever its size.
+          type: string
+          enum:
+            - render
+            - second
+            - minute
+            - thousandCharacters
+          example: second
+        credits:
+          description: >-
+            Credits per unit. A number when the rate is flat, or an object keyed by the
+            values of the options named in `tieredBy`.
+          oneOf:
+            - type: number
+            - type: object
+              additionalProperties: true
+          example:
+            480p: 0.9375
+            720p: 1.8962
+            1080p: 4.2625
+        tieredBy:
+          description: >-
+            The options whose values select the rate, outermost first. Absent when
+            `credits` is a single number.
+          type: array
+          items:
+            type: string
+          example:
+            - resolution
+        minUnits:
+          description: >-
+            The fewest units a generation is charged for, when a model has a minimum
+            charge.
+          type: number
+          example: 0.1
+        effectiveFrom:
+          description: >-
+            The date this rate took effect, or `legacy` for a rate that predates dated
+            pricing.
+          type: string
+          example: "2026-08-13"
+      required:
+        - unit
+        - credits
+        - effectiveFrom
+      type: object

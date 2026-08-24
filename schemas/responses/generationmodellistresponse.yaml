@@ -1,0 +1,11 @@
+    GenerationModelListResponse:
+      description: The generation models available to this account.
+      properties:
+        models:
+          description: The available models.
+          type: array
+          items:
+            $ref: "../generationmodel.yaml#/GenerationModel"
+      required:
+        - models
+      type: object
