@@ -2,9 +2,10 @@ ImageToVideoAsset:
   deprecated: true
   description: |
     **Notice: ImageToVideoAsset is deprecated. Use [VideoAsset](#tocs_videoasset)
-    with `prompt` and `inputSrc` instead.** This type continues to function and is
-    internally rewritten to VideoAsset; no behaviour change for existing
-    integrations.
+    with `prompt`, a `model` that accepts a starting image, and that image in
+    `options.inputSrc` — for example `shotstack-itv-mini`.** This type continues to
+    function and is internally rewritten to VideoAsset; no behaviour change for
+    existing integrations.
 
     The ImageToVideoAsset lets you create a video from an image and a text prompt.
   properties:

@@ -6,8 +6,9 @@
 
         - **Source URL:** set `src` to the URL of an mp4 (or compatible) video file.
         - **Generated:** set `prompt` to describe the motion. Choose a generator
-          with `model` and configure it with model-specific `options` (including a
-          starting image for image-to-video). The generated `src` is filled in
+          with `model` and configure it with model-specific `options`. Models that
+          animate a starting image take it as `options.inputSrc`; the default model
+          generates from the prompt alone. The generated `src` is filled in
           automatically.
         - **Both:** `src` acts as a preview placeholder while `prompt` drives
           generation — the video is regenerated from the prompt at render time.
@@ -33,8 +34,8 @@
             A text prompt to generate the video from. The engine generates a video
             at render time and fills `src` automatically; an existing `src` is
             treated as a preview placeholder and replaced. Use `model` to choose
-            the generator and `options` to configure it (including a starting
-            image for image-to-video).
+            the generator and `options` to configure it. A starting image goes in
+            `options.inputSrc`, on the models that accept one.
           type: string
           maxLength: 4000
           example: Slowly zoom out and orbit left around the object.
