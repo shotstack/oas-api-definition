@@ -251,7 +251,7 @@ async function run() {
       type: "video",
       prompt: "Camera pans right",
       model: "seedance-2.0",
-      options: { inputSrc: "https://example.com/input.jpg" },
+      options: { resolution: "720p", aspectRatio: "16:9" },
     });
     assert.strictEqual(result.model, "seedance-2.0");
   });
