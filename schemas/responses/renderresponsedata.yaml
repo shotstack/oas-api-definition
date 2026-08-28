@@ -22,6 +22,7 @@
               <li>`fetching` - assets are being fetched</li>
               <li>`preprocessing` - video assets are being processed for compatibility</li>
               <li>`rendering` - the asset is being rendered</li>
+              <li>`generating` - AI/media generation is in progress</li>
               <li>`saving` - the final asset is being saved to storage</li>
               <li>`done` - the asset is ready to be downloaded</li>
               <li>`failed` - there was an error rendering the asset</li>
@@ -31,6 +32,7 @@
             - fetching
             - preprocessing
             - rendering
+            - generating
             - saving
             - done
             - failed

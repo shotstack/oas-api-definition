@@ -1,5 +1,8 @@
     CaptionAsset:
+      deprecated: true
       description: |
+        **Notice: The CaptionAsset is deprecated, use the [RichCaptionAsset](#tocs_richcaptionasset) instead.**
+
         The CaptionAsset is used to add captions (subtitles) to a video. It uses a supplied SRT or VTT file which will
         be read and burnt to the video.
         
