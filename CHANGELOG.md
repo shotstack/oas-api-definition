@@ -1,3 +1,10 @@
+## [1.18.1](https://github.com/shotstack/oas-api-definition/compare/v1.18.0...v1.18.1) (2026-08-29)
+
+
+### Bug Fixes
+
+* deprecate CaptionAsset and add generating status ([d213946](https://github.com/shotstack/oas-api-definition/commit/d213946a55d578af098cf6e63e9a89feac77afe1))
+
 # [1.18.0](https://github.com/shotstack/oas-api-definition/compare/v1.17.0...v1.18.0) (2026-08-24)
 
 
