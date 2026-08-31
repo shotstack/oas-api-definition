@@ -1,9 +1,10 @@
     GenerationModelPricing:
       description: >-
-        What one generation costs, in credits. There is no formula to evaluate: multiply
-        the rate by the number of units the generation consumes. Where a model charges
-        differently per option value, `credits` is an object keyed by that value and
-        `tieredBy` names the option that selects it.
+        What one generation costs, in credits. Multiply the rate by the units the generation
+        consumes: `bounds` gives the range a model accepts, `units` says how a measured
+        quantity becomes a unit count, and `minUnits` is the fewest units charged. Where a
+        model charges differently per option value, `credits` is an object keyed by that
+        value and `tieredBy` names the option that selects it.
       properties:
         unit:
           description: >-
@@ -43,6 +44,39 @@
             charge.
           type: number
           example: 0.1
+        units:
+          description: >-
+            How a measured quantity becomes billable units. Divide by `divisor`, then round
+            up when `round` is `ceil`. Absent when one generation is one unit, when the
+            count comes from the prompt's length, or when an option's value is the unit
+            count already and needs no conversion.
+          type: object
+          properties:
+            divisor:
+              description: >-
+                What one unit is measured in, when it differs from the unit itself.
+              type: number
+              example: 60000
+            round:
+              description: >-
+                Present when a partial unit is charged as a whole one. A 61 second track on a
+                per-minute rate is charged as two minutes.
+              type: string
+              enum:
+                - ceil
+              example: ceil
+        bounds:
+          description: >-
+            The range a model accepts, in the same terms `units` is measured in. A shorter
+            request is charged at `min` and a longer one at `max`.
+          type: object
+          properties:
+            min:
+              type: number
+              example: 4
+            max:
+              type: number
+              example: 15
         effectiveFrom:
           description: >-
             The date this rate took effect, or `legacy` for a rate that predates dated
