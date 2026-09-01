@@ -1,3 +1,10 @@
+## [1.18.2](https://github.com/shotstack/oas-api-definition/compare/v1.18.1...v1.18.2) (2026-09-01)
+
+
+### Bug Fixes
+
+* describe how a generation's cost is calculated ([367c995](https://github.com/shotstack/oas-api-definition/commit/367c995a7012adf2a2dccfbade1b59e4b8cc6ee1))
+
 ## [1.18.1](https://github.com/shotstack/oas-api-definition/compare/v1.18.0...v1.18.1) (2026-08-29)
 
 
