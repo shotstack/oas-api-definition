@@ -1,25 +1,14 @@
     GenerationModelPricing:
       description: >-
-        What one generation costs, in credits. There is no formula to evaluate: multiply
-        the rate by the number of units the generation consumes. Where a model charges
-        differently per option value, `credits` is an object keyed by that value and
-        `tieredBy` names the option that selects it.
+        What one generation costs, in credits: the rate multiplied by the units consumed.
+        `quantity` says how to count the units, and is absent when one generation is one
+        unit. Where a model charges differently per option value, `credits` is an object
+        keyed by that value and `tieredBy` names the option that selects it.
       properties:
-        unit:
-          description: >-
-            What one unit is. `render` means the whole generation counts as one unit,
-            whatever its size.
-          type: string
-          enum:
-            - render
-            - second
-            - minute
-            - thousandCharacters
-          example: second
         credits:
           description: >-
             Credits per unit. A number when the rate is flat, or an object keyed by the
-            values of the options named in `tieredBy`.
+            values of the option named in `tieredBy`.
           oneOf:
             - type: number
             - type: object
@@ -30,19 +19,61 @@
             1080p: 4.2625
         tieredBy:
           description: >-
-            The options whose values select the rate, outermost first. Absent when
-            `credits` is a single number.
-          type: array
-          items:
-            type: string
-          example:
-            - resolution
-        minUnits:
+            The option whose value selects the rate, and the value assumed when the option
+            is absent. Present only when `credits` is keyed.
+          type: object
+          properties:
+            option:
+              type: string
+              example: resolution
+            default:
+              type: string
+              example: 720p
+          required:
+            - option
+            - default
+        quantity:
           description: >-
-            The fewest units a generation is charged for, when a model has a minimum
-            charge.
-          type: number
-          example: 0.1
+            How many units a generation consumes. Take the value `measure` names, or
+            `default` when the request carries none, hold it within `min` and `max`,
+            divide by `per`, and round up when `round` is `up`. Absent when one generation
+            is one unit.
+          type: object
+          properties:
+            measure:
+              description: What the count is taken from, and the scale it is measured in.
+              type: string
+              enum:
+                - clipSeconds
+                - promptCharacters
+              example: clipSeconds
+            per:
+              description: How many of `measure` make one billable unit.
+              type: number
+              example: 60
+            min:
+              description: Fewest accepted. A smaller request is charged at this.
+              type: number
+              example: 3
+            max:
+              description: Most accepted. A larger request is charged at this.
+              type: number
+              example: 600
+            default:
+              description: Assumed when the request carries no value.
+              type: number
+              example: 30
+            round:
+              description: >-
+                Present when a partial unit is charged as a whole one. A 61 second track on
+                a per-minute rate is charged as two minutes.
+              type: string
+              enum:
+                - up
+              example: up
+          required:
+            - measure
+            - per
         effectiveFrom:
           description: >-
             The date this rate took effect, or `legacy` for a rate that predates dated
@@ -50,7 +81,6 @@
           type: string
           example: "2026-08-13"
       required:
-        - unit
         - credits
         - effectiveFrom
       type: object
