@@ -250,10 +250,10 @@ async function run() {
     const result = zodCjs.videoAssetSchema.parse({
       type: "video",
       prompt: "Camera pans right",
-      model: "seedance-2.0",
+      model: "seedance-2.0-text-to-video",
       options: { resolution: "720p", aspectRatio: "16:9" },
     });
-    assert.strictEqual(result.model, "seedance-2.0");
+    assert.strictEqual(result.model, "seedance-2.0-text-to-video");
   });
 
   check("REJECT videoAsset with removed `seed` field (generation inputs live in options)", () => {

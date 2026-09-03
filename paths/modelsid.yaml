@@ -26,4 +26,4 @@
         description: The model identifier, as returned by the list endpoint.
         schema:
           type: string
-        example: seedance-2.0
+        example: seedance-2.0-text-to-video
