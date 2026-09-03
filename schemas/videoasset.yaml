@@ -42,11 +42,11 @@
         model:
           description: >-
             The generation model to use when `prompt` is set (e.g.
-            `shotstack-itv-mini`, `ray-flash-2`, `seedance-2.0`). Defaults to
-            `seedance-2.0` if omitted. Each model's available options are
-            defined by the model registry.
+            `seedance-2.0-text-to-video`). Defaults to
+            `seedance-2.0-text-to-video` if omitted. `GET /models` lists what is
+            available and the options each accepts.
           type: string
-          example: seedance-2.0
+          example: seedance-2.0-text-to-video
         options:
           description: >-
             Model-specific generation settings. Valid keys and values depend on

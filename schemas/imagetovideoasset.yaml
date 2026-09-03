@@ -3,7 +3,7 @@ ImageToVideoAsset:
   description: |
     **Notice: ImageToVideoAsset is deprecated. Use [VideoAsset](#tocs_videoasset)
     with `prompt`, a `model` that accepts a starting image, and that image in
-    `options.inputSrc` — for example `shotstack-itv-mini`.** This type continues to
+    `options.inputSrc` — for example `seedance-2.0-image-to-video`.** This type continues to
     function and is internally rewritten to VideoAsset; no behaviour change for
     existing integrations.
 

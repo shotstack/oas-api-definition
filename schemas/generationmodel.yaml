@@ -10,7 +10,7 @@
             The identifier to set as the asset `model`. Carries no provider name, so
             routing can change without a public rename.
           type: string
-          example: seedance-2.0
+          example: seedance-2.0-text-to-video
         type:
           description: The asset type this model generates.
           type: string
