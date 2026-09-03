@@ -1,3 +1,10 @@
+## [1.18.3](https://github.com/shotstack/oas-api-definition/compare/v1.18.2...v1.18.3) (2026-09-03)
+
+
+### Bug Fixes
+
+* name generation models that the catalogue actually offers ([e64a591](https://github.com/shotstack/oas-api-definition/commit/e64a5919055010ba9806e66cce90128d3e6e035e))
+
 ## [1.18.2](https://github.com/shotstack/oas-api-definition/compare/v1.18.1...v1.18.2) (2026-09-01)
 
 
