@@ -236,14 +236,14 @@ async function run() {
     assert.strictEqual(result.model, "flux-schnell");
   });
 
-  check("Parse videoAsset with prompt + options.inputSrc", () => {
+  check("Parse videoAsset with prompt + options.startSrc", () => {
     const result = zodCjs.videoAssetSchema.parse({
       type: "video",
       prompt: "Slowly zoom out and orbit left around the object",
-      options: { inputSrc: "https://example.com/input-image.jpg" },
+      options: { startSrc: "https://example.com/input-image.jpg" },
     });
     assert.strictEqual(result.prompt, "Slowly zoom out and orbit left around the object");
-    assert.strictEqual(result.options.inputSrc, "https://example.com/input-image.jpg");
+    assert.strictEqual(result.options.startSrc, "https://example.com/input-image.jpg");
   });
 
   check("Parse videoAsset with prompt + model + options", () => {
@@ -389,7 +389,7 @@ async function run() {
 
   check("REJECT video with only options and no src/prompt (options never satisfies the rule)", () => {
     assert.throws(() =>
-      zodCjs.videoAssetSchema.parse({ type: "video", options: { inputSrc: "https://example.com/input.jpg" } })
+      zodCjs.videoAssetSchema.parse({ type: "video", options: { startSrc: "https://example.com/input.jpg" } })
     );
   });
 
