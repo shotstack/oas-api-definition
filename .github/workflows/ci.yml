@@ -36,6 +36,20 @@ jobs:
       - name: Smoke tests
         run: pnpm test:smoke
 
+      - name: Install reference renderer
+        working-directory: .shins
+        run: npm ci --omit=dev --no-audit --no-fund
+
+      - name: Check reference versions and schema isolation
+        run: |
+          cp -R dist "$RUNNER_TEMP/schemas-before-docs"
+          : > .tags
+          pnpm build:docs
+          node tests/reference-versions.cjs
+          cmp dist/api.bundled.json build/docs/api.bundled.json
+          pnpm build
+          diff -r "$RUNNER_TEMP/schemas-before-docs" dist
+
       - name: Dry run release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
