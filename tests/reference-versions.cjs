@@ -57,7 +57,7 @@ try {
   succeeds(run('bash', ['build-docs.sh']));
   assert.ok(fs.existsSync(path.join(workspace, 'build/docs/versions/earlier/index.html')), 'build every archive with navigation disabled');
   assert.ok(!fs.existsSync(path.join(workspace, 'build/docs/stale.txt')), 'remove stale build output');
-  assert.doesNotMatch(read('build/docs/index.html'), /id="reference-version"/);
+  assert.doesNotMatch(read('build/docs/index.html'), /aria-label="Reference versions"/);
   const currentJson = read('build/docs/api.bundled.json');
 
   succeeds(run('bash', ['build-docs.sh'], '1'));
@@ -67,17 +67,19 @@ try {
     ['build/docs/versions/earlier', 'archived', '/docs/api/versions/earlier/'],
   ]) {
     const html = read(`${directory}/index.html`);
-    assert.ok(html.includes(`value="${selected}" selected`));
+    assert.ok(html.includes(`href="${selected}" aria-current="page"`));
+    assert.match(html, /aria-label="Reference versions"/);
+    assert.doesNotMatch(html, /<form onsubmit=/);
     assert.match(html, /Earlier &lt;reference&gt;/);
     assert.ok(html.includes(`${operation} operation`));
     assert.ok(!html.includes(`${operation === 'current' ? 'archived' : 'current'} operation`));
     const bundled = JSON.parse(read(`${directory}/api.bundled.json`));
     assert.deepEqual(Object.keys(bundled.paths), [`/${operation}`]);
     assert.deepEqual(Object.keys(JSON.parse(read(`${directory}/api.edit.json`)).paths), [`/${operation}`]);
-    for (const file of ['api.serve.json', 'api.ingest.json', 'pub/css/screen.css', 'pub/js/shins.js', 'source/images/custom_logo.svg']) {
+    for (const file of ['api.serve.json', 'api.ingest.json', 'pub/css/screen.css', 'pub/js/shins.js', 'pub/css/reference.css', 'pub/js/reference.js', 'source/images/custom_logo.svg']) {
       assert.ok(fs.existsSync(path.join(workspace, directory, file)), `${directory}/${file}`);
     }
-    assert.match(html, /href="api.bundled.json"/);
+    assert.doesNotMatch(html, /href="api\.(bundled|edit|serve|ingest)\.json"/);
   }
 
   for (const [entries, message] of [
@@ -94,7 +96,7 @@ try {
   }
   catalogue([versions[0]]);
   succeeds(run('bash', ['build-docs.sh'], '1'));
-  assert.doesNotMatch(read('build/docs/index.html'), /id="reference-version"/);
+  assert.doesNotMatch(read('build/docs/index.html'), /aria-label="Reference versions"/);
   console.log('Reference version checks passed (rendering, downloads, flags, validation, assets).');
 } finally {
   fs.rmSync(workspace, { recursive: true, force: true });

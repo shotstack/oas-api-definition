@@ -38,35 +38,30 @@ for (const version of versions.filter((v) => v.id !== 'current')) {
   execFileSync('bash', ['build-docs.sh', version.spec, directory(version)], { stdio: 'inherit' });
 }
 
+const chevron = '<svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="m4 6 4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>';
 for (const version of versions) {
   if (!navigation && version.id === 'current') continue;
-  const options = versions.map((v) => `<option value="${url(v)}"${v.id === version.id ? ' selected' : ''}>${escape(v.label)}</option>`).join('');
-  const selector = navigation ? `<form onsubmit="location.assign(this.elements.version.value);return false">
-    <label for="reference-version">Reference version</label>
-    <div class="reference-controls"><select id="reference-version" name="version">${options}</select><button type="submit">View</button></div>
-    </form>` : `<strong>${escape(version.label)}</strong>`;
-  const panel = `<section class="reference-version" aria-label="Reference documentation">
-    ${selector}
-    <p>${version.id === 'current' ? 'You are viewing the current reference.' : 'You are viewing an archived reference.'} Selecting a reference does not change your API behaviour.</p>
-    <nav aria-label="Reference links"><a href="/docs/api/">Current reference</a><a href="api.bundled.json">OpenAPI JSON</a><a href="api.edit.json">Edit</a><a href="api.serve.json">Serve</a><a href="api.ingest.json">Ingest</a></nav>
-    </section>`;
-  const style = `<style>
-    .reference-version { margin-right:50%; padding:24px 28px; background:#f3f7f9; border-bottom:1px solid #dce6eb; color:#24343e; }
-    .reference-version label { display:block; margin-bottom:8px; font-weight:600; }
-    .reference-controls { display:flex; gap:8px; }
-    .reference-controls select { min-width:0; flex:1; }
-    .reference-controls select,.reference-controls button { font:inherit; padding:9px 12px; border:1px solid #71838d; border-radius:4px; background:white; color:#24343e; }
-    .reference-controls button { cursor:pointer; }
-    .reference-version p { font-size:14px; line-height:1.5; margin:12px 0; }
-    .reference-version nav { display:flex; flex-wrap:wrap; gap:8px 16px; font-size:14px; }
-    .reference-version a { color:#176d76; text-decoration:underline; }
-    .reference-version :focus-visible { outline:3px solid #176d76; outline-offset:3px; }
-    @media(max-width:700px) { .reference-version { margin-right:0; padding:64px 20px 24px; } }
-    </style>`;
+  const options = versions.map((v) => `<a href="${url(v)}"${v.id === version.id ? ' aria-current="page"' : ''}>
+    <span>${escape(v.label)}</span>${v.id === version.id ? '<span aria-hidden="true">✓</span>' : ''}</a>`).join('');
+  const tools = navigation ? `<div class="reference-tools"><details name="reference-tools">
+    <summary aria-label="Reference version: ${escape(version.label)}"><span>${escape(version.label)}</span>${chevron}</summary>
+    <nav class="reference-menu" aria-label="Reference versions">${options}</nav>
+    </details></div>` : '';
+  const mobile = navigation ? `<header class="reference-mobile" aria-label="Reference tools">${tools}</header>` : '';
+  const notice = version.id === 'current' ? '' : `<div class="reference-archive" role="note">
+    <span>${navigation ? 'Archived reference' : escape(version.label)}</span><a href="/docs/api/">View current <span aria-hidden="true">→</span></a></div>`;
   const file = `${directory(version)}/index.html`;
-  const html = fs.readFileSync(file, 'utf8');
-  if (!html.includes('<div class="content">') || !html.includes('</head>')) {
+  let html = fs.readFileSync(file, 'utf8');
+  const logo = /(<a[^>]*><img[^>]*class="logo"[^>]*><\/a>)/;
+  if (!logo.test(html) || !html.includes('<div class="content">') || !html.includes('</head>')) {
     throw new Error(`Reference layout markers missing: ${file}`);
   }
-  fs.writeFileSync(file, html.replace('</head>', `${style}</head>`).replace('<div class="content">', `<div class="content">${panel}`));
+  html = html.replace('<body ', '<body data-reference-versioned ')
+    .replace('id="nav-button"', 'id="nav-button" aria-label="Toggle navigation"')
+    .replace('</head>', '<link rel="stylesheet" href="pub/css/reference.css"><script src="pub/js/reference.js" defer></script></head>')
+    .replace(logo, (match) => `${match}${tools}`)
+    .replace('<div class="content">', `<div class="content">${mobile}${notice}`);
+  fs.writeFileSync(file, html);
+  fs.copyFileSync('assets/reference.css', `${directory(version)}/pub/css/reference.css`);
+  fs.copyFileSync('assets/reference.js', `${directory(version)}/pub/js/reference.js`);
 }
