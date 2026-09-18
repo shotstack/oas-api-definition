@@ -88,3 +88,59 @@ jobs:
               echo "::error::Failed to dispatch to ${repo} after 3 attempts"
             fi
           done
+
+  docs:
+    name: Publish API reference
+    needs: release
+    # Skips rather than fails until the deploy role exists as a repository variable.
+    if: vars.AWS_DOCS_DEPLOY_ROLE_ARN != ''
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # shins' devDependencies pull in node-sass, which no longer compiles on current Node.
+      # The docs build only needs the runtime deps; the compiled CSS is committed.
+      - name: Install shins
+        working-directory: .shins
+        run: npm ci --omit=dev --no-audit --no-fund
+
+      # build-docs.sh splices .tags into <head> and removes the placeholder only when the file exists.
+      - name: Provide empty head tags
+        run: ': > .tags'
+
+      - name: Build API reference
+        run: pnpm build:docs
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.AWS_DOCS_DEPLOY_ROLE_ARN }}
+          aws-region: ap-southeast-2
+
+      - name: Sync to S3
+        run: aws s3 sync build/docs/ s3://shotstack.io/docs/api --delete
+
+      - name: Invalidate CloudFront
+        if: vars.DOCS_CLOUDFRONT_DISTRIBUTION_ID != ''
+        run: >
+          aws cloudfront create-invalidation
+          --distribution-id "${{ vars.DOCS_CLOUDFRONT_DISTRIBUTION_ID }}"
+          --paths '/docs/api/*'
