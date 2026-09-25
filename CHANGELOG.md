@@ -1,3 +1,10 @@
+# [1.19.0](https://github.com/shotstack/oas-api-definition/compare/v1.18.4...v1.19.0) (2026-09-25)
+
+
+### Features
+
+* report whether the calling account can use each generation model ([96947a7](https://github.com/shotstack/oas-api-definition/commit/96947a76816a47ee3181264c19d75e990e01d525))
+
 ## [1.18.4](https://github.com/shotstack/oas-api-definition/compare/v1.18.3...v1.18.4) (2026-09-25)
 
 
