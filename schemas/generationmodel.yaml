@@ -19,6 +19,16 @@
             - video
             - audio
           example: video
+        name:
+          description: The model's display name, for a model picker.
+          type: string
+          example: Seedance 2.0 · Text to video
+        description:
+          description: What the model is suited to, in a sentence or two.
+          type: string
+          example: >-
+            Generate cinematic video with realistic motion, prompt-directed camera movement
+            and optional synchronised audio.
         pricing:
           description: What one generation with this model costs.
           $ref: "./generationmodelpricing.yaml#/GenerationModelPricing"
