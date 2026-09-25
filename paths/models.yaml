@@ -10,6 +10,9 @@
 
         Option schemas are omitted by default. Request them with `expand=options`.
 
+        Each model's `available` reflects the plan of the account behind the calling API
+        key, so offer only the models it marks available.
+
         **Base URL:** <a href="#">https://api.shotstack.io/edit/{version}</a>
       summary: List Generation Models
       operationId: getModels

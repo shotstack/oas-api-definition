@@ -39,6 +39,25 @@
             schema are rejected.
           type: object
           additionalProperties: true
+        available:
+          description: >-
+            Whether the account behind the calling API key can generate with this model.
+            Omitted when that cannot be determined; treat a missing value as unknown, not
+            as available. Generation requests are checked either way.
+          type: boolean
+          example: false
+        unavailableReason:
+          description: >-
+            Why `available` is false. `AiCapabilityNotIncluded`: the account's plan does
+            not include this kind of generation. `AiDisabled`: AI generation is turned
+            off for the account. `AiAccessUnavailable`: access could not be confirmed;
+            try again later.
+          type: string
+          enum:
+            - AiCapabilityNotIncluded
+            - AiDisabled
+            - AiAccessUnavailable
+          example: AiCapabilityNotIncluded
       required:
         - model
         - type
