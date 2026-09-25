@@ -1,3 +1,10 @@
+## [1.18.4](https://github.com/shotstack/oas-api-definition/compare/v1.18.3...v1.18.4) (2026-09-25)
+
+
+### Bug Fixes
+
+* document the name and description returned for each generation model ([33ee57f](https://github.com/shotstack/oas-api-definition/commit/33ee57f5dfa37cdc77c04dc811050d2720deb431))
+
 ## [1.18.3](https://github.com/shotstack/oas-api-definition/compare/v1.18.2...v1.18.3) (2026-09-03)
 
 
