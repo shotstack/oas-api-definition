@@ -206,6 +206,20 @@ async function run() {
     assert.strictEqual(result.src, "https://example.com/video.mp4");
   });
 
+  check("Parse videoAsset with animated speed", () => {
+    const result = zodCjs.videoAssetSchema.parse({
+      type: "video",
+      src: "https://example.com/video.mp4",
+      speed: [{ from: 1, to: 3, start: 0, length: 1, interpolation: "bezier", easing: "easeInOut" }],
+    });
+    assert.strictEqual(result.speed.length, 1);
+  });
+
+  check("Parse videoAsset with numeric speed (existing shape)", () => {
+    const result = zodCjs.videoAssetSchema.parse({ type: "video", src: "https://example.com/video.mp4", speed: 2 });
+    assert.strictEqual(result.speed, 2);
+  });
+
   check("Parse audioAsset with src only (existing shape)", () => {
     const result = zodCjs.audioAssetSchema.parse({
       type: "audio",
