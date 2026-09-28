@@ -1,3 +1,10 @@
+# [1.20.0](https://github.com/shotstack/oas-api-definition/compare/v1.19.0...v1.20.0) (2026-09-28)
+
+
+### Features
+
+* allow video speed to change over time ([c69de12](https://github.com/shotstack/oas-api-definition/commit/c69de1285937866abc383e263511bb21ce2610ce))
+
 # [1.19.0](https://github.com/shotstack/oas-api-definition/compare/v1.18.4...v1.19.0) (2026-09-25)
 
 
