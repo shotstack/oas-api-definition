@@ -1,3 +1,13 @@
+## [1.20.1](https://github.com/shotstack/oas-api-definition/compare/v1.20.0...v1.20.1) (2026-09-29)
+
+
+### Bug Fixes
+
+* document the generate length, idempotency key and error responses ([66842d9](https://github.com/shotstack/oas-api-definition/commit/66842d958c120d623892c44a2362f73be51c612f))
+* register the generation schemas as components ([2d9e91f](https://github.com/shotstack/oas-api-definition/commit/2d9e91f1edfc56f7721ca483cad939bbbc0626ed))
+* say how a reused idempotency key behaves after 24 hours ([4e7c050](https://github.com/shotstack/oas-api-definition/commit/4e7c0503563a94ecbb940b886a1449def70399d2))
+* type tiered generation credits as numbers ([a719e28](https://github.com/shotstack/oas-api-definition/commit/a719e281271fe1715f09992ee0b9a735a5640d9d))
+
 # [1.20.0](https://github.com/shotstack/oas-api-definition/compare/v1.19.0...v1.20.0) (2026-09-28)
 
 
