@@ -1,0 +1,11 @@
+{{#def.sample}}{{? sample.hasBody }}const body = {{= sample.json }};
+
+{{?}}const response = await fetch("{{= sample.url }}", {
+{{? sample.method !== 'GET' }}  method: "{{= sample.method }}",
+{{?}}  headers: {
+{{~ sample.headers('process.env.SHOTSTACK_API_KEY', JSON.stringify) :h }}    "{{= h.name }}": {{= h.value }},
+{{~}}  },
+{{? sample.hasBody }}  body: JSON.stringify(body),
+{{?}}});
+
+console.log({{= sample.returnsJson ? 'await response.json()' : 'response.status' }});

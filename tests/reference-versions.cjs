@@ -29,7 +29,7 @@ const versions = [
 const catalogue = (entries) => write('docs/reference/versions.json', JSON.stringify({ versions: entries }));
 
 try {
-  for (const file of ['build-docs.sh', 'scripts', 'assets', '.shins']) {
+  for (const file of ['build-docs.sh', 'scripts', 'assets', '.shins', 'templates']) {
     fs.cpSync(path.join(root, file), path.join(workspace, file), {
       recursive: true, filter: (source) => path.basename(source) !== 'node_modules',
     });

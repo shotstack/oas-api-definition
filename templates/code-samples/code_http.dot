@@ -1,0 +1,6 @@
+{{#def.sample}}{{= sample.method }} {{= sample.path }} HTTP/1.1
+Host: {{= data.host }}{{~ sample.headers('YOUR_API_KEY', sample.raw) :h }}
+{{= h.name }}: {{= h.value }}{{~}}{{? sample.hasBody }}
+Content-Length: {{= Buffer.byteLength(sample.json) }}
+
+{{= sample.json }}{{?}}

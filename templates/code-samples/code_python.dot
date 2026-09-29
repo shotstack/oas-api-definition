@@ -1,0 +1,16 @@
+{{#def.sample}}import os
+
+import requests
+
+{{? sample.hasBody }}body = {{= sample.literal(sample.body, sample.python) }}
+
+{{?}}response = requests.{{= data.method.verb }}(
+    "{{= sample.url }}",
+    headers={
+{{~ sample.headers('os.environ["SHOTSTACK_API_KEY"]', JSON.stringify, true) :h }}        "{{= h.name }}": {{= h.value }},
+{{~}}    },
+{{? sample.hasBody }}    json=body,
+{{?}}    timeout=30,
+)
+response.raise_for_status()
+print({{= sample.returnsJson ? 'response.json()' : 'response.status_code' }})

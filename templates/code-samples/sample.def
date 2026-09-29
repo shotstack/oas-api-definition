@@ -1,0 +1,74 @@
+{{
+  /* Shared by the code_*.dot templates, which include it at their very start so it adds no output.
+     The templates read like the samples they produce; anything computed lives here. */
+  var sample = {};
+  sample.method = data.methodUpper;
+  sample.verb = data.methodUpper.charAt(0) + data.methodUpper.slice(1).toLowerCase();
+  sample.url = data.url + data.requiredQueryString;
+  sample.path = sample.url.replace(/^https?:\/\/[^\/]+/, '');
+  sample.hasBody = !!data.bodyParameter.present;
+  sample.body = data.bodyParameter.exampleValues.object;
+  sample.json = sample.hasBody ? JSON.stringify(sample.body, null, 2) : '';
+  sample.returnsJson = data.produces.length > 0;
+  var ref = data.bodyParameter.refName;
+  sample.bodyFile = (ref ? ref.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase() : 'body') + '.json';
+
+  sample.raw = function (text) { return text; };
+  sample.single = function (text) { return "'" + text.replace(/\\/g, '\\\\').replace(/'/g, "\\'") + "'"; };
+
+  /* Optional header parameters are left out: a sample would send their placeholder values. */
+  var optional = (data.method.operation.parameters || [])
+    .filter(function (p) { return p.in === 'header' && !p.required; })
+    .map(function (p) { return p.name; });
+  sample.headers = function (apiKey, quote, dropContentType) {
+    return data.allHeaders
+      .filter(function (p) { return optional.indexOf(p.name) === -1; })
+      .filter(function (p) { return !(dropContentType && sample.hasBody && p.name === 'Content-Type'); })
+      .map(function (p) {
+        var value = p.name.toLowerCase() === 'x-api-key' ? apiKey : quote(String(p.exampleValues.object));
+        return { name: p.name, value: value };
+      });
+  };
+
+  /* Renders a JSON value in a language's literal syntax. */
+  sample.literal = function (value, syntax, indent) {
+    indent = indent || '';
+    var inner = indent + syntax.indent;
+    if (value === null) return syntax.nil;
+    if (typeof value === 'boolean') return syntax.bool(value);
+    if (typeof value === 'number') return String(value);
+    if (typeof value === 'string') return syntax.string(value);
+    var list = Array.isArray(value);
+    var items = list
+      ? value.map(function (item) { return inner + sample.literal(item, syntax, inner) + ','; })
+      : Object.keys(value).map(function (key) { return inner + syntax.key(key) + sample.literal(value[key], syntax, inner) + ','; });
+    var brackets = list ? syntax.list : syntax.map;
+    if (!items.length) return list ? brackets.join('') : syntax.emptyMap;
+    return brackets[0] + '\n' + items.join('\n') + '\n' + indent + brackets[1];
+  };
+  sample.python = {
+    nil: 'None', bool: function (b) { return b ? 'True' : 'False'; }, string: JSON.stringify,
+    key: function (k) { return JSON.stringify(k) + ': '; }, list: ['[', ']'], map: ['{', '}'], emptyMap: '{}', indent: '    '
+  };
+  /* An empty object is (object) [], because Guzzle would encode an empty PHP array as a JSON list. */
+  sample.php = {
+    nil: 'null', bool: String, string: sample.single,
+    key: function (k) { return sample.single(k) + ' => '; }, list: ['[', ']'], map: ['[', ']'], emptyMap: '(object) []', indent: '    '
+  };
+  sample.ruby = {
+    nil: 'nil', bool: String, string: sample.single,
+    key: function (k) { return /^[A-Za-z_][A-Za-z0-9_]*$/.test(k) ? k + ': ' : sample.single(k) + ' => '; },
+    list: ['[', ']'], map: ['{', '}'], emptyMap: '{}', indent: '  '
+  };
+
+  /* Java text blocks interpret backslashes, so JSON escapes are doubled to survive. */
+  sample.javaTextBlock = sample.json.replace(/\\/g, '\\\\').split('\n').map(function (line) { return '            ' + line; }).join('\n');
+  var publisher = sample.hasBody ? 'HttpRequest.BodyPublishers.ofString(body)' : 'HttpRequest.BodyPublishers.noBody()';
+  sample.javaMethod = sample.method === 'GET' ? 'GET()'
+    : sample.method === 'DELETE' && !sample.hasBody ? 'DELETE()'
+    : sample.method === 'POST' || sample.method === 'PUT' ? sample.method + '(' + publisher + ')'
+    : 'method("' + sample.method + '", ' + publisher + ')';
+
+  /* A Go raw string can't contain a backtick, so such a body falls back to an interpreted string. */
+  sample.goBody = sample.json.indexOf('`') === -1 ? '`' + sample.json + '`' : JSON.stringify(sample.json);
+}}

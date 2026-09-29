@@ -1,0 +1,4 @@
+{{#def.sample}}{{? sample.hasBody }}# Save the body parameter below as {{= sample.bodyFile }}
+{{?}}curl {{? sample.method !== 'GET' }}-X {{= sample.method }} {{?}}"{{= sample.url }}"{{~ sample.headers('$SHOTSTACK_API_KEY', sample.raw) :h }} \
+  -H "{{= h.name }}: {{= h.value }}"{{~}}{{? sample.hasBody }} \
+  -d @{{= sample.bodyFile }}{{?}}
