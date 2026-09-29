@@ -8,10 +8,21 @@
                 $ref: "../schemas/responses/generationresponse.yaml#/GenerationResponse"
         "202":
           description: The generation job is still processing.
+          headers:
+            Retry-After:
+              description: Suggested seconds to wait before polling again.
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 $ref: "../schemas/responses/generationresponse.yaml#/GenerationResponse"
+        "404":
+          description: No generation job with this id exists for the calling account.
+          content:
+            application/json:
+              schema:
+                $ref: "../schemas/responses/generationerrorresponse.yaml#/GenerationErrorResponse"
       description: |
         Get the status of an on-demand asset generation job created with the
         generate endpoint. Jobs are owner-scoped.

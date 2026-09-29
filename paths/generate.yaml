@@ -1,7 +1,9 @@
     post:
       responses:
         "200":
-          description: The generated asset was already cached and is immediately available.
+          description: >-
+            The asset was generated before: `done` with its URL, or `failed` with the error
+            that ended it.
           content:
             application/json:
               schema:
@@ -21,6 +23,47 @@
             application/json:
               schema:
                 $ref: "../schemas/responses/generationresponse.yaml#/GenerationResponse"
+        "400":
+          description: The request is invalid, for example a missing asset or prompt, a disallowed URL or a `length` that is not positive.
+          content:
+            application/json:
+              schema:
+                $ref: "../schemas/responses/generationerrorresponse.yaml#/GenerationErrorResponse"
+        "402":
+          description: The account has too few credits for this generation. `available` holds how many it has.
+          content:
+            application/json:
+              schema:
+                $ref: "../schemas/responses/generationerrorresponse.yaml#/GenerationErrorResponse"
+        "403":
+          description: The account cannot use this generation. `code` says why.
+          content:
+            application/json:
+              schema:
+                $ref: "../schemas/responses/generationerrorresponse.yaml#/GenerationErrorResponse"
+        "409":
+          description: The `Idempotency-Key` was already used for a different asset.
+          content:
+            application/json:
+              schema:
+                $ref: "../schemas/responses/generationerrorresponse.yaml#/GenerationErrorResponse"
+        "429":
+          description: The account has reached its generation quota.
+          content:
+            application/json:
+              schema:
+                $ref: "../schemas/responses/generationerrorresponse.yaml#/GenerationErrorResponse"
+        "503":
+          description: A service the request depends on is temporarily unavailable. `code` is `AiAccessUnavailable` when access to AI generation could not be confirmed.
+          headers:
+            Retry-After:
+              description: Suggested seconds to wait before retrying.
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                $ref: "../schemas/responses/generationerrorresponse.yaml#/GenerationErrorResponse"
       description: |
         Generate a single image, video or audio asset from a text prompt without
         rendering a full edit. Submit a prompt-bearing asset; the response is
@@ -34,6 +77,18 @@
         **Base URL:** <a href="#">https://api.shotstack.io/edit/{version}</a>
       summary: Generate Asset
       operationId: postGenerate
+      parameters:
+        - in: header
+          name: Idempotency-Key
+          required: false
+          description: >-
+            A key that makes this request its own generation. Retrying with the same key
+            returns the job it first created instead of generating and billing again, and
+            a new key generates afresh even when the asset matches an earlier one. Without
+            a key, identical assets share one cached result. For 24 hours a key reused for
+            a different asset is rejected; after that it returns its first result.
+          schema:
+            type: string
       requestBody:
         description: >-
           A prompt-bearing image, video or audio asset to generate.
@@ -47,6 +102,15 @@
                     - $ref: "../schemas/imageasset.yaml#/ImageAsset"
                     - $ref: "../schemas/videoasset.yaml#/VideoAsset"
                     - $ref: "../schemas/audioasset.yaml#/AudioAsset"
+                length:
+                  description: >-
+                    The length, in seconds, of the clip the asset fills. A model that
+                    generates to a duration takes it from this value in place of its own
+                    duration option. Other models ignore it.
+                  type: number
+                  minimum: 0
+                  exclusiveMinimum: true
+                  example: 5
               required:
                 - asset
       security:

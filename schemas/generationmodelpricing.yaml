@@ -12,7 +12,8 @@
           oneOf:
             - type: number
             - type: object
-              additionalProperties: true
+              additionalProperties:
+                type: number
           example:
             480p: 0.9375
             720p: 1.8962

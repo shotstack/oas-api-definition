@@ -1,0 +1,23 @@
+    GenerationErrorResponse:
+      description: Why a generation request was not accepted or a job could not be found.
+      type: object
+      properties:
+        error:
+          description: A human readable error message.
+          type: string
+          example: Insufficient generation credits.
+        code:
+          description: >-
+            Why access to AI generation was refused. `AiCapabilityNotIncluded`: the account's
+            plan does not include this kind of generation. `FeatureNotIncluded`: the plan does
+            not include a feature the asset uses. `AiDisabled`: AI generation is turned off
+            for the account. `AiAccessUnavailable`: access could not be confirmed; try again
+            later.
+          type: string
+          example: AiCapabilityNotIncluded
+        available:
+          description: The credits the account has available. Present when it has too few.
+          type: number
+          example: 1.5
+      required:
+        - error
