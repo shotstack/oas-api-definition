@@ -1,73 +1,55 @@
 /* place your custom CSS overrides here */
-body {
-    font-family: 'Nunito Sans', serif;
-    font-weight: 300;
-    font-size: 1.2em;
+
+/* Tokens match the Shotstack dashboard and guide docs. */
+:root {
+    --ss-teal: #25d3d0;
+    /* Brand teal is under 2:1 contrast as text on light surfaces. */
+    --ss-ink: #0d7c79;
+    --ss-text: #1e293b;
+    --ss-muted: #71717a;
+    --ss-border: #e4e4e7;
+    --ss-hover: #f4f4f5;
+    --ss-canvas: #f6f9f9;
+    --ss-code-panel: #252526;
+    --ss-code: #1e1e1e;
 }
 
-.page-wrapper {
-	background-color: #fff;
+html,
+body {
+    background-color: var(--ss-canvas);
+}
+
+body {
+    font-family: 'Nunito Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: var(--ss-text);
 }
 
 a {
-    color: #25d3d0;
+    color: var(--ss-ink);
 }
 
-.content h1 {
-	border-top: none;
-	border-bottom: 1px solid #eeeeee;
-	background-color: #ffffff;
-    font-weight: normal;
-    color: #25d3d0;
+/* Long schema names and URLs otherwise force horizontal scroll on phones. */
+.content {
+    overflow-wrap: break-word;
 }
 
-.content h2 {
-    border-top: 01px solid #eee;
-    padding-bottom: 0.2em;
-    background-image: linear-gradient(to bottom, rgba(236, 236, 236, 0.2), rgba(255, 255, 255, 0));
-    font-weight: normal;
+.content a {
+    text-decoration: underline;
+    text-decoration-color: rgb(37 211 208 / 0.6);
+    text-underline-offset: 2px;
 }
 
-.content h4 {
-	font-size: 15px;
+.content a:hover {
+    text-decoration-color: currentColor;
 }
 
-.content > aside {
-    margin-right: 52%;
-    margin-left: 2%;
-    padding: 16px;
-    border-radius: 8px;
-}
-
-.content aside.warning {
-	background-color: #ff000010;
-}
-
-.content aside.warning::before {
-    content: none;
-}
+/* Navigation */
 
 .toc-wrapper {
-    background-color: #ffffff;
-    border-right: 1px solid #eee;
-}
-
-.toc-h1.toc-link {
-    padding-top: 6px;
-    padding-bottom: 6px;
-    text-transform: uppercase;
-    font-size: 1.2em;
-    font-weight: bold;
-}
-
-.toc-wrapper .toc-h2 {
-	font-size: 1.2em;
-}
-
-.toc-link, .toc-footer li {
-    color: #333333;
-    font-size: 1.1rem;
-    font-weight: normal;
+    background-color: #fff;
+    border-right: 1px solid var(--ss-border);
 }
 
 .toc-wrapper .logo {
@@ -79,115 +61,164 @@ a {
     margin-top: 1rem;
 }
 
+.toc-link,
+.toc-footer li {
+    color: #3f3f46;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.toc-h1.toc-link {
+    padding-top: 6px;
+    padding-bottom: 6px;
+    color: var(--ss-muted);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
 .toc-wrapper .toc-list-h2 {
-	background-color: #ffffff;
+    background-color: #fff;
 }
 
 .toc-wrapper .toc-link.active {
-	background-color: #f7f7f7;
-    color: #25d3d0;
-    border-right: 2px solid #25d3d0;
+    background-color: var(--ss-hover);
+    color: var(--ss-ink);
+    font-weight: 700;
+    box-shadow: inset 2px 0 0 var(--ss-teal);
 }
 
 .toc-wrapper .toc-link.active-parent {
-    background-color: #f1f1f1;
-	color: #25d3d0;
+    background-color: transparent;
+    color: var(--ss-ink);
 }
 
 .toc-wrapper > .search input {
-	background: #f7f7f7;
-	border: 1px solid #cccccc;
-	color: #777777;
-    border-radius: 6px;
-    font-weight: normal;
+    background: #fff;
+    border: 1px solid var(--ss-border);
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgb(0 0 0 / 0.03);
+    color: var(--ss-text);
+    font-weight: 400;
     padding-left: 26px;
 }
 
 .toc-wrapper > .search::before {
     left: 24px;
     top: 19px;
-	color: #25d3d0;
+    color: #a1a1aa;
 }
 
 .toc-wrapper .search-results a {
-	color: #25d3d0;
-	font-weight: normal;
+    color: var(--ss-ink);
+    font-weight: 400;
 }
 
 .toc-wrapper .toc-footer {
-	border-top: none;
+    border-top: none;
 }
 
-.content table tr:last-child {
-	border-bottom: none;
-}
+/* Headings */
 
-.content table th {
-	border-bottom: 1px solid #e7e7e7;
-	text-transform: uppercase;
-    font-size: 11px;
-    color: #aaa;
-}
-
-.content table td:first-child  {
-    font-weight: bold;
-}
-
-.content table tr:nth-child(2n) > td {
-	background-color: #f7f7f7;
-}
-
-.content blockquote > p {
-	color: #25d3d0;
-}
-
-div .highlight {
-	max-width: 46%;
-	max-height: 400px;
-	margin: 2%;
-}
-
-.content p code {
-	padding: 10px 10px 6px 10px;
-	font-weight: bold;
-	border: 1px solid #dddddd;
-}
-
-.page-wrapper .lang-selector {
-	top: 0;
-    font-size: 0.9em;
-}
-
-.lang-selector a.active {
-	color: #25d3d0;
-	border-top: 2px solid #25d3d0;
-	line-height: 26px;
-	padding-bottom: 2px;
+.content h1 {
+    border-top: none;
+    border-bottom: 1px solid var(--ss-border);
+    background-color: transparent;
+    color: var(--ss-text);
+    font-family: Kanit, sans-serif;
+    font-size: 1.75rem;
+    font-weight: 700;
 }
 
 h1#shotstack {
-	color: #333;
-    font-family: Kanit,sans-serif;
-	font-size: 3.5rem;
+    border-bottom: none;
+    font-size: 2.75rem;
     line-height: 1.1;
+    letter-spacing: -0.01em;
 }
 
 h1#shotstack::after {
     content: " API Reference";
 }
 
-h4#enumerated-values, h4#enumerated-values + table {
+.content h2 {
+    border-top: 1px solid var(--ss-border);
+    padding-bottom: 0.2em;
+    background-image: none;
+    color: var(--ss-text);
+    font-size: 1.375rem;
+}
+
+.content h3,
+.content h4 {
+    color: var(--ss-text);
+}
+
+.content h4 {
+    font-size: 1rem;
+}
+
+h4#enumerated-values,
+h4#enumerated-values + table {
     display: none;
 }
 
-@media (max-width: 700px) {
-    div .highlight {
-        max-width: 96%;
-    }
+/* Content */
 
-    .content > aside {
-        margin-right: 2%;
-    }
+.content code,
+.content pre {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.content p code,
+.content li code,
+.content td code {
+    padding: 0.1em 0.35em;
+    border: 1px solid var(--ss-border);
+    border-radius: 6px;
+    background-color: #fff;
+    color: var(--ss-text);
+    font-size: 0.875rem;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+}
+
+.content > aside,
+.content > aside.warning {
+    margin-right: 52%;
+    margin-left: 2%;
+    padding: 16px;
+    border: 1px solid rgb(37 211 208 / 0.4);
+    border-radius: 10px;
+    background-color: rgb(37 211 208 / 0.08);
+}
+
+.content aside.warning::before {
+    content: none;
+}
+
+.content table th {
+    border-bottom: 1px solid var(--ss-border);
+    background-color: var(--ss-hover);
+    color: var(--ss-muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.content table tr:nth-child(odd) > td,
+.content table tr:nth-child(even) > td {
+    background-color: #fff;
+}
+
+.content table tr:last-child {
+    border-bottom: none;
+}
+
+.content table td:first-child {
+    font-weight: bold;
 }
 
 ul {
@@ -197,4 +228,81 @@ ul {
 
 ul br {
     display: none;
+}
+
+/* Code panel */
+
+.page-wrapper {
+    background-color: var(--ss-canvas);
+}
+
+.page-wrapper .dark-box {
+    background-color: var(--ss-code-panel);
+}
+
+.page-wrapper .lang-selector {
+    top: 0;
+    border-bottom-color: var(--ss-code-panel);
+    font-size: 0.875rem;
+}
+
+.lang-selector {
+    background-color: var(--ss-code);
+}
+
+.lang-selector a {
+    color: #a1a1aa;
+    font-weight: 600;
+}
+
+.lang-selector a:hover {
+    color: #fff;
+}
+
+.lang-selector a.active {
+    background-color: transparent;
+    color: #fff;
+    box-shadow: inset 0 -2px 0 var(--ss-teal);
+}
+
+.content blockquote {
+    background-color: transparent;
+}
+
+.content blockquote > p {
+    background-color: transparent;
+    color: #a1a1aa;
+    font-size: 0.8125rem;
+    font-weight: 600;
+}
+
+.content pre,
+.highlight,
+.highlight .w {
+    background-color: var(--ss-code);
+    color: #d4d4d4;
+}
+
+div .highlight {
+    max-width: 46%;
+    max-height: 400px;
+    margin: 2%;
+    border-radius: 10px;
+    font-size: 13px;
+}
+
+@media (max-width: 700px) {
+    div .highlight {
+        max-width: 96%;
+    }
+
+    .content > aside,
+    .content > aside.warning {
+        margin-right: 2%;
+    }
+
+    /* The code panel collapses at this width, so its labels sit on the light canvas. */
+    .content blockquote > p {
+        color: var(--ss-muted);
+    }
 }
