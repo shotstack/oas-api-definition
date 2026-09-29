@@ -369,6 +369,19 @@ components:
     Transfer:
       $ref: "./schemas/serve/transfer.yaml#/Transfer"
 
+    # Generation schemas
+    GenerationModel:
+      $ref: "./schemas/generationmodel.yaml#/GenerationModel"
+
+    GenerationModelPricing:
+      $ref: "./schemas/generationmodelpricing.yaml#/GenerationModelPricing"
+
+    GenerationModelListResponse:
+      $ref: "./schemas/responses/generationmodellistresponse.yaml#/GenerationModelListResponse"
+
+    GenerationResponse:
+      $ref: "./schemas/responses/generationresponse.yaml#/GenerationResponse"
+
     # Edit response schemas
     QueuedResponse:
       $ref: "./schemas/responses/queuedresponse.yaml#/QueuedResponse"
