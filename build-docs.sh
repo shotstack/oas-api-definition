@@ -20,7 +20,7 @@ node scripts/split-by-api.cjs "$OAS3_JSON" "$DOCS_DIR"
 
 # Convert OpenAPI to doc to Shins Markdown
 ./node_modules/.bin/widdershins \
-    --theme dracula \
+    --theme vs2015 \
     --language_tabs shell:Curl http:HTTP javascript--nodejs:NodeJS php:PHP ruby:Ruby python:Python java:Java go:Go \
     --summary "$OAS3_JSON" \
     --outfile "$DOCS_DIR/index.html.md"
