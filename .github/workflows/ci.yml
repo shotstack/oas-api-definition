@@ -50,6 +50,9 @@ jobs:
           pnpm build
           diff -r "$RUNNER_TEMP/schemas-before-docs" dist
 
+      - name: Check reference code samples
+        run: node tests/reference-code-samples.cjs
+
       - name: Dry run release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
