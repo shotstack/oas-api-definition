@@ -82,9 +82,11 @@
           name: Idempotency-Key
           required: false
           description: >-
-            A key that identifies this request. Retrying with the same key returns the job
-            it first created instead of generating again. Reusing a key for a different
-            asset is rejected.
+            A key that makes this request its own generation. Retrying with the same key
+            returns the job it first created instead of generating and billing again, and
+            a new key generates afresh even when the asset matches an earlier one. Without
+            a key, identical assets share one cached result. For 24 hours a key reused for
+            a different asset is rejected; after that it returns its first result.
           schema:
             type: string
       requestBody:
