@@ -213,7 +213,8 @@ function clean(s) {
     s = s.split('<=').join('$3$');
     let a = s.split('```');
     for (let i=0;i<a.length;i++) {
-        if (!a[i].startsWith('xml')) {
+        // sanitize-html treats `<?php ... >` as a tag and drops it.
+        if (!a[i].startsWith('xml') && !a[i].startsWith('php')) {
             a[i] = sanitizeHtml(a[i],sanitizeOptions);
         }
     }
