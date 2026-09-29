@@ -1,0 +1,26 @@
+    GenerationModelErrorResponse:
+      description: Why a generation model could not be returned.
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            name:
+              description: >-
+                `UnknownGenerationModel`: no model has this identifier.
+                `WithdrawnGenerationModel`: the model is no longer listed, but edits that
+                already use it still validate, bill and render.
+              type: string
+              enum:
+                - UnknownGenerationModel
+                - WithdrawnGenerationModel
+              example: UnknownGenerationModel
+            message:
+              description: A human readable error message.
+              type: string
+              example: Unknown generation model "seedance-9".
+          required:
+            - name
+            - message
+      required:
+        - error

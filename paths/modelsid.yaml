@@ -14,7 +14,13 @@
               schema:
                 $ref: "../schemas/generationmodel.yaml#/GenerationModel"
         "404":
-          description: No model exists with that identifier.
+          description: >-
+            No listed model has that identifier. `error.name` tells an unknown model from one
+            that has been withdrawn.
+          content:
+            application/json:
+              schema:
+                $ref: "../schemas/responses/generationmodelerrorresponse.yaml#/GenerationModelErrorResponse"
       security:
         - DeveloperKey: []
       tags:

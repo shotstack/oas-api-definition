@@ -382,6 +382,12 @@ components:
     GenerationResponse:
       $ref: "./schemas/responses/generationresponse.yaml#/GenerationResponse"
 
+    GenerationErrorResponse:
+      $ref: "./schemas/responses/generationerrorresponse.yaml#/GenerationErrorResponse"
+
+    GenerationModelErrorResponse:
+      $ref: "./schemas/responses/generationmodelerrorresponse.yaml#/GenerationModelErrorResponse"
+
     # Edit response schemas
     QueuedResponse:
       $ref: "./schemas/responses/queuedresponse.yaml#/QueuedResponse"
