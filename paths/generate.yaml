@@ -98,7 +98,7 @@
               asset:
                 type: image
                 prompt: 'A lighthouse on a rocky coast at sunset, cinematic lighting'
-                model: flux-schnell
+                model: nano-banana-2
             schema:
               type: object
               properties:
