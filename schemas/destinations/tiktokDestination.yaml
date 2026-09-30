@@ -1,5 +1,9 @@
     TiktokDestination:
+      deprecated: true
       description: >-
+        **Notice: The TikTok destination is deprecated.** It continues to work, with no behaviour change for existing
+        integrations.
+
         Send videos to TikTok. TikTok credentials are required and added via the
         [dashboard](https://dashboard.shotstack.io/integrations/tiktok), not in the request.
       properties:
