@@ -1,3 +1,12 @@
+## [1.20.2](https://github.com/shotstack/oas-api-definition/compare/v1.20.1...v1.20.2) (2026-09-30)
+
+
+### Bug Fixes
+
+* replace deprecated assets in the API examples and cover every request body ([7dab72a](https://github.com/shotstack/oas-api-definition/commit/7dab72aea38e2b2ec874c3430907f62aaeba0cb6))
+* use nano-banana-2 as the example image generation model ([2c103b4](https://github.com/shotstack/oas-api-definition/commit/2c103b416731ec10052dc41368358980d0991cc4))
+* use the create example's template name in the update example ([57a09bd](https://github.com/shotstack/oas-api-definition/commit/57a09bd87a6ac74aa4971d47aaa46b3cdcc1371b))
+
 ## [1.20.1](https://github.com/shotstack/oas-api-definition/compare/v1.20.0...v1.20.1) (2026-09-29)
 
 
