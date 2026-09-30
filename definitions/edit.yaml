@@ -1,46 +1,54 @@
 timeline:
-  soundtrack:
-    src: "https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3"
-    effect: fadeInFadeOut
   background: "#000000"
+  fonts:
+    - src: "https://fonts.gstatic.com/s/montserrat/v31/JTUSjIg1_i6t8kCHKm45xW5rygbi49c.ttf"
   tracks:
     - clips:
         - asset:
-            type: title
+            type: rich-text
             text: Hello World
-            style: minimal
+            font:
+              family: JTUSjIg1_i6t8kCHKm45xW5rygbi49c
+              size: 64
+              weight: "700"
+              color: "#ffffff"
+            align:
+              horizontal: center
+              vertical: middle
           start: 0
           length: 4
           transition:
             in: fade
             out: fade
-          effect: slideRight
         - asset:
             type: image
-            src: >-
-              https://s3-ap-northeast-1.amazonaws.com/my-bucket/my-image.jpg
-          start: 3
-          length: 4
+            src: "https://shotstack-assets.s3.amazonaws.com/images/earth.jpg"
+          start: 4
+          length: 3
           effect: zoomIn
           filter: greyscale
     - clips:
         - asset:
             type: video
-            src: >-
-              https://s3-ap-northeast-1.amazonaws.com/my-bucket/my-clip-1.mp4
-            trim: 10.5
+            src: "https://shotstack-assets.s3.amazonaws.com/footage/beach.mp4"
             transcode: true
           start: 7
           length: 4.5
         - asset:
             type: video
-            src: >-
-              https://s3-ap-northeast-1.amazonaws.com/my-bucket/my-clip-2.mp4
+            src: "https://shotstack-assets.s3.amazonaws.com/footage/city-timelapse.mp4"
             volume: 0.5
           start: 11.5
           length: 5
           transition:
             out: wipeLeft
+    - clips:
+        - asset:
+            type: audio
+            src: "https://shotstack-assets.s3.amazonaws.com/music/unminus/lit.mp3"
+            effect: fadeInFadeOut
+          start: 0
+          length: end
 output:
   format: mp4
   resolution: sd
