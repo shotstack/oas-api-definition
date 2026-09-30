@@ -36,6 +36,9 @@ jobs:
       - name: Smoke tests
         run: pnpm test:smoke
 
+      - name: Request examples
+        run: pnpm test:examples
+
       - name: Install reference renderer
         working-directory: .shins
         run: npm ci --omit=dev --no-audit --no-fund

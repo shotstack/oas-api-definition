@@ -18,12 +18,17 @@ mkdir -p "$DOCS_DIR"
 # Split bundled spec into per-API JSON files (api.edit.json, api.serve.json, api.ingest.json)
 node scripts/split-by-api.cjs "$OAS3_JSON" "$DOCS_DIR"
 
+# The reference shows each request body's example; widdershins only reads them as `examples`
+SAMPLES_JSON=$(mktemp)
+node scripts/promote-request-examples.cjs "$OAS3_JSON" "$SAMPLES_JSON"
+
 # Convert OpenAPI to doc to Shins Markdown
 ./node_modules/.bin/widdershins \
     --theme vs2015 \
     --language_tabs shell:Curl http:HTTP javascript--nodejs:NodeJS php:PHP ruby:Ruby python:Python java:Java go:Go \
-    --summary "$OAS3_JSON" \
+    --summary "$SAMPLES_JSON" \
     --outfile "$DOCS_DIR/index.html.md"
+rm -f "$SAMPLES_JSON"
 
 cp "$DOCS_DIR/index.html.md" .shins/source/index.html.md
 

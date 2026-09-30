@@ -94,6 +94,11 @@
           A prompt-bearing image, video or audio asset to generate.
         content:
           application/json:
+            example:
+              asset:
+                type: image
+                prompt: 'A lighthouse on a rocky coast at sunset, cinematic lighting'
+                model: nano-banana-2
             schema:
               type: object
               properties:

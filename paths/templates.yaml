@@ -12,6 +12,35 @@
           Create a template with a name and [Edit](#tocs_edit).
         content:
           application/json:
+            example:
+              name: Jane's welcome video
+              template:
+                timeline:
+                  fonts:
+                    - src: 'https://fonts.gstatic.com/s/montserrat/v31/JTUSjIg1_i6t8kCHKm45xW5rygbi49c.ttf'
+                  tracks:
+                    - clips:
+                        - asset:
+                            type: rich-text
+                            text: 'HELLO {{NAME}}'
+                            font:
+                              family: JTUSjIg1_i6t8kCHKm45xW5rygbi49c
+                              size: 72
+                              weight: '800'
+                              color: '#ffffff'
+                            align:
+                              horizontal: center
+                              vertical: middle
+                          start: 0
+                          length: 5
+                output:
+                  format: mp4
+                  size:
+                    width: 1024
+                    height: 576
+                merge:
+                  - find: NAME
+                    replace: World
             schema:
               $ref: "../schemas/template.yaml#/Template"
         required: true

@@ -11,6 +11,11 @@ post:
       Fetch an asset from a URL and send it to one or more destinations.
     content:
       application/json:
+        example:
+          url: 'https://s3-ap-southeast-2.amazonaws.com/shotstack-assets/music/moment.mp3'
+          id: 018e8937-5015-75ee-aab6-03f214981133
+          destinations:
+            - provider: shotstack
         schema:
           $ref: "../schemas/serve/transfer.yaml#/Transfer"
     required: true

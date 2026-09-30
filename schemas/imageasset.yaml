@@ -42,7 +42,7 @@
             `nano-banana-2`). Defaults to `nano-banana-2` if omitted. Each
             model's available options are defined by the model registry.
           type: string
-          example: flux-schnell
+          example: nano-banana-2
         options:
           description: >-
             Model-specific generation settings. Valid keys and values depend on

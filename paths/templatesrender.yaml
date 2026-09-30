@@ -11,6 +11,11 @@
           Render a template by template id.
         content:
           application/json:
+            example:
+              id: f5493c17-d01f-445c-bb49-535fae65f219
+              merge:
+                - find: NAME
+                  replace: Jane
             schema:
               $ref: "../schemas/templaterender.yaml#/TemplateRender"
         required: true
