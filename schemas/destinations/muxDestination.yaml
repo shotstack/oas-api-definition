@@ -1,5 +1,9 @@
     MuxDestination:
+      deprecated: true
       description: >-
+        **Notice: The Mux destination is deprecated.** It continues to work, with no behaviour change for existing
+        integrations.
+
         Send videos to the [Mux](https://www.mux.com/docs) video hosting
         and streaming service. Mux credentials are required and added via the
         [dashboard](https://dashboard.shotstack.io/integrations/mux), not in the request.
