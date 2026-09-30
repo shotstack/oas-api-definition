@@ -31,7 +31,7 @@
         content:
           application/json:
             example:
-              name: Jane's welcome video (updated)
+              name: Jane's welcome video
               template:
                 timeline:
                   fonts:
