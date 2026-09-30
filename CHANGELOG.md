@@ -1,3 +1,10 @@
+## [1.20.3](https://github.com/shotstack/oas-api-definition/compare/v1.20.2...v1.20.3) (2026-09-30)
+
+
+### Bug Fixes
+
+* remove every dead link from the API reference ([117cef8](https://github.com/shotstack/oas-api-definition/commit/117cef815adbf47eafe8df2a820de14f55f41386))
+
 ## [1.20.2](https://github.com/shotstack/oas-api-definition/compare/v1.20.1...v1.20.2) (2026-09-30)
 
 
