@@ -8,7 +8,7 @@
                 $ref: "../schemas/responses/assetrenderresponse.yaml#/AssetRenderResponse"
       description: |
         A render may generate more than one file, such as a video, thumbnail and poster image. When the assets are
-        created the only known id is the render id returned by the original [render request](#render-video), status 
+        created the only known id is the render id returned by the original [render request](#render-asset), status 
         request or webhook. This endpoint lets you look up one or more assets by the render id.
 
         **Base URL:** <a href="#">https://api.shotstack.io/serve/{version}</a>

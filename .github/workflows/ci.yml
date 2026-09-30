@@ -88,6 +88,9 @@ jobs:
           CODE_SAMPLES_PHP_DIR: ${{ runner.temp }}/php
         run: node tests/reference-code-samples.cjs
 
+      - name: Check reference links
+        run: node tests/reference-links.cjs
+
       - name: Dry run release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

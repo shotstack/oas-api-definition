@@ -39,6 +39,9 @@ sed -i -e 's/\/edit\/{version}\/assets/\/serve\/{version}\/assets/g' .shins/sour
 sed -i -e 's/\/edit\/{version}\/sources/\/ingest\/{version}\/sources/g' .shins/source/index.html.md
 sed -i -e 's/\/edit\/{version}\/upload/\/ingest\/{version}\/upload/g' .shins/source/index.html.md
 
+# Base URLs hold a {version} placeholder, so they are shown as code rather than as links that can't open
+sed -i -e 's#<a href="\(https://api\.shotstack\.io/[a-z]*/{version}\)">\1</a>#`\1`#g' .shins/source/index.html.md
+
 # Build the Shins docs HTML
 cd .shins
 rm -f index.html
