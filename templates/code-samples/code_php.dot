@@ -1,0 +1,16 @@
+{{#def.sample}}<?php
+
+require 'vendor/autoload.php';
+
+use GuzzleHttp\Client;
+
+$client = new Client();
+
+$response = $client->request('{{= sample.method }}', {{= sample.single(sample.url) }}, [
+    'headers' => [
+{{~ sample.headers("getenv('SHOTSTACK_API_KEY')", sample.single, true) :h }}        {{= sample.single(h.name) }} => {{= h.value }},
+{{~}}    ],
+{{? sample.hasBody }}    'json' => {{= sample.literal(sample.body, sample.php, '    ') }},
+{{?}}]);
+
+echo {{= sample.returnsJson ? '$response->getBody()' : '$response->getStatusCode()' }}, PHP_EOL;

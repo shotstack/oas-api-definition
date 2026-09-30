@@ -53,7 +53,39 @@ jobs:
           pnpm build
           diff -r "$RUNNER_TEMP/schemas-before-docs" dist
 
+      # Every code sample is run, so CI needs each sample language's runtime.
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          tools: composer
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+          cache: false
+
+      - name: Install sample libraries
+        run: |
+          pip install requests
+          mkdir -p "$RUNNER_TEMP/php"
+          composer require guzzlehttp/guzzle:^7 --working-dir "$RUNNER_TEMP/php" --no-interaction
+
       - name: Check reference code samples
+        env:
+          CODE_SAMPLES_PHP_DIR: ${{ runner.temp }}/php
         run: node tests/reference-code-samples.cjs
 
       - name: Dry run release

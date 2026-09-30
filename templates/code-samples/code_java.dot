@@ -1,0 +1,20 @@
+{{#def.sample}}import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+{{? sample.hasBody }}        var body = """
+{{= sample.javaTextBlock }}
+            """;
+
+{{?}}        var request = HttpRequest.newBuilder(URI.create("{{= sample.url }}"))
+{{~ sample.headers('System.getenv("SHOTSTACK_API_KEY")', JSON.stringify) :h }}            .header("{{= h.name }}", {{= h.value }})
+{{~}}            .{{= sample.javaMethod }}
+            .build();
+
+        var response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+        System.out.println({{= sample.returnsJson ? 'response.body()' : 'response.statusCode()' }});
+    }
+}

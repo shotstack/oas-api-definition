@@ -1,0 +1,16 @@
+{{#def.sample}}{{? sample.hasBody }}require 'json'
+{{?}}require 'net/http'
+
+uri = URI({{= sample.single(sample.url) }})
+{{? sample.hasBody }}body = {{= sample.literal(sample.body, sample.ruby) }}
+{{?}}
+request = Net::HTTP::{{= sample.verb }}.new(uri, {
+{{~ sample.headers("ENV.fetch('SHOTSTACK_API_KEY')", sample.single) :h }}  {{= sample.single(h.name) }} => {{= h.value }},
+{{~}}})
+{{? sample.hasBody }}request.body = body.to_json
+{{?}}
+response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: uri.scheme == 'https') do |http|
+  http.request(request)
+end
+
+puts {{= sample.returnsJson ? 'response.body' : 'response.code' }}

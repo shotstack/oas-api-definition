@@ -25,6 +25,7 @@ node scripts/promote-request-examples.cjs "$OAS3_JSON" "$SAMPLES_JSON"
 # Convert OpenAPI to doc to Shins Markdown
 ./node_modules/.bin/widdershins \
     --theme vs2015 \
+    --user_templates templates/code-samples \
     --language_tabs shell:Curl http:HTTP javascript--nodejs:NodeJS php:PHP ruby:Ruby python:Python java:Java go:Go \
     --summary "$SAMPLES_JSON" \
     --outfile "$DOCS_DIR/index.html.md"
@@ -32,9 +33,11 @@ rm -f "$SAMPLES_JSON"
 
 cp "$DOCS_DIR/index.html.md" .shins/source/index.html.md
 
-# Replace Serve, Ingest API URL's as overrides do not work
-sed -i -e 's/https:\/\/api.shotstack.io\/edit\/{version}\/assets/https:\/\/api.shotstack.io\/serve\/{version}\/assets/g' .shins/source/index.html.md
-sed -i -e 's/https:\/\/api.shotstack.io\/edit\/{version}\/sources/https:\/\/api.shotstack.io\/ingest\/{version}\/sources/g' .shins/source/index.html.md
+# Replace Serve, Ingest API URL's as overrides do not work. Matching the path, not the full URL, also
+# rewrites the HTTP samples' request lines.
+sed -i -e 's/\/edit\/{version}\/assets/\/serve\/{version}\/assets/g' .shins/source/index.html.md
+sed -i -e 's/\/edit\/{version}\/sources/\/ingest\/{version}\/sources/g' .shins/source/index.html.md
+sed -i -e 's/\/edit\/{version}\/upload/\/ingest\/{version}\/upload/g' .shins/source/index.html.md
 
 # Build the Shins docs HTML
 cd .shins

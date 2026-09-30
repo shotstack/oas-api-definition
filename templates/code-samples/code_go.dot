@@ -1,0 +1,32 @@
+{{#def.sample}}package main
+
+import (
+	"fmt"
+{{? sample.returnsJson }}	"io"
+{{?}}	"net/http"
+	"os"
+{{? sample.hasBody }}	"strings"
+{{?}})
+
+func main() {
+{{? sample.hasBody }}	body := strings.NewReader({{= sample.goBody }})
+
+{{?}}	req, err := http.NewRequest(http.Method{{= sample.verb }}, "{{= sample.url }}", {{= sample.hasBody ? 'body' : 'nil' }})
+	if err != nil {
+		panic(err)
+	}
+{{~ sample.headers('os.Getenv("SHOTSTACK_API_KEY")', JSON.stringify) :h }}	req.Header.Set("{{= h.name }}", {{= h.value }})
+{{~}}
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		panic(err)
+	}
+	defer resp.Body.Close()
+
+{{? sample.returnsJson }}	out, err := io.ReadAll(resp.Body)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(resp.Status, string(out))
+{{??}}	fmt.Println(resp.Status)
+{{?}}}
