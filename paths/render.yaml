@@ -18,7 +18,7 @@
 
         **Video Preprocessing:**
         Video assets undergo automatic preprocessing to ensure compatibility. You can force 
-        preprocessing by setting `"transcode": true` on video assets. See [Preprocessing](#preprocessing) 
+        preprocessing by setting `"transcode": true` on video assets. See [VideoAsset](#tocs_videoasset) 
         for more details.
 
         **Base URL:** <a href="#">https://api.shotstack.io/edit/{version}</a>

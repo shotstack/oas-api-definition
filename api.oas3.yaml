@@ -259,6 +259,12 @@ components:
     RichTextAnimation:
       $ref: "./schemas/richtextproperties.yaml#/RichTextAnimation"
 
+    RichTextBorder:
+      $ref: "./schemas/richtextproperties.yaml#/RichTextBorder"
+
+    RichTextPadding:
+      $ref: "./schemas/richtextproperties.yaml#/RichTextPadding"
+
     CaptionFont:
       $ref: "./schemas/captionproperties.yaml#/CaptionFont"
   
