@@ -1,3 +1,10 @@
+# [1.21.0](https://github.com/shotstack/oas-api-definition/compare/v1.20.3...v1.21.0) (2026-09-30)
+
+
+### Features
+
+* deprecate the Mux and TikTok destinations ([ed296f5](https://github.com/shotstack/oas-api-definition/commit/ed296f5113b74178c1fab5abeb3ede47f23f8d8b))
+
 ## [1.20.3](https://github.com/shotstack/oas-api-definition/compare/v1.20.2...v1.20.3) (2026-09-30)
 
 
