@@ -1,3 +1,10 @@
+## [1.21.1](https://github.com/shotstack/oas-api-definition/compare/v1.21.0...v1.21.1) (2026-10-01)
+
+
+### Bug Fixes
+
+* type the generate request as the fields generation uses ([7ae25ef](https://github.com/shotstack/oas-api-definition/commit/7ae25efa866554dfb0c5314fbceccd6afa354bf1))
+
 # [1.21.0](https://github.com/shotstack/oas-api-definition/compare/v1.20.3...v1.21.0) (2026-09-30)
 
 
