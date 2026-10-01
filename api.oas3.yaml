@@ -376,6 +376,9 @@ components:
       $ref: "./schemas/serve/transfer.yaml#/Transfer"
 
     # Generation schemas
+    GenerationAsset:
+      $ref: "./schemas/generationasset.yaml#/GenerationAsset"
+
     GenerationModel:
       $ref: "./schemas/generationmodel.yaml#/GenerationModel"
 

@@ -90,8 +90,10 @@
           schema:
             type: string
       requestBody:
+        required: true
         description: >-
-          A prompt-bearing image, video or audio asset to generate.
+          The asset to generate and, for models that generate to a duration, the length of
+          the clip it fills.
         content:
           application/json:
             example:
@@ -103,10 +105,7 @@
               type: object
               properties:
                 asset:
-                  oneOf:
-                    - $ref: "../schemas/imageasset.yaml#/ImageAsset"
-                    - $ref: "../schemas/videoasset.yaml#/VideoAsset"
-                    - $ref: "../schemas/audioasset.yaml#/AudioAsset"
+                  $ref: "../schemas/generationasset.yaml#/GenerationAsset"
                 length:
                   description: >-
                     The length, in seconds, of the clip the asset fills. A model that
