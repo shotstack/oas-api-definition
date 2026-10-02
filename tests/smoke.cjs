@@ -105,6 +105,16 @@ async function run() {
 
   const zodCjs = require(path.join(distDir, "zod/zod.gen.cjs"));
 
+  check("Generation pricing adds typed components and rejects the old object shape", () => {
+    const schema = zodCjs.generationmodelpricingGenerationModelPricingSchema;
+    const output = { credits: { "1K": 0.33 }, tieredBy: { option: "resolution", default: "1K" }, effectiveFrom: "2026-10-02" };
+    const input = { credits: 0.0813, quantity: { measure: "inputImages", per: 1 }, effectiveFrom: "2026-10-02" };
+    assert.deepStrictEqual(schema.parse([output, input]), [output, input]);
+    for (const invalid of [output, [], [input, { ...input, surcharge: 1 }]]) {
+      assert.strictEqual(schema.safeParse(invalid).success, false);
+    }
+  });
+
   check("Parse valid rich-text asset", () => {
     const result = zodCjs.richTextAssetSchema.parse({
       type: "rich-text",
