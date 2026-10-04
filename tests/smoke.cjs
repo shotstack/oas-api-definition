@@ -108,7 +108,9 @@ async function run() {
   check("Generation quotes replace catalogue pricing", () => {
     const body = { asset: { type: "image", model: "gpt-image-2.5-sunburst-edit", prompt: "Change colour", options: { imageUrls: ["https://example.com/source.png"] } }, length: 5 };
     assert.deepStrictEqual(zodCjs.postGenerateQuoteRequest.parse({ body }).body, body);
-    assert.strictEqual(zodCjs.postGenerateQuoteRequest.safeParse({ body: { ...body, length: -1 } }).success, false);
+    for (const request of [zodCjs.postGenerateRequest, zodCjs.postGenerateQuoteRequest]) {
+      assert.strictEqual(request.safeParse({ body: { ...body, length: -1 } }).success, false);
+    }
     const quote = zodCjs.generationQuoteSchema;
     assert.deepStrictEqual(quote.parse({ credits: 0.6038, ceiling: false }), { credits: 0.6038, ceiling: false });
     for (const invalid of [{ credits: -1, ceiling: false }, { credits: 1 }, { credits: "invalid", ceiling: false }]) {

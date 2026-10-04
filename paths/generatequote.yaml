@@ -12,7 +12,16 @@
 
         **Base URL:** <a href="#">https://api.shotstack.io/edit/{version}</a>
       requestBody:
-        $ref: "./generate.yaml#/post/requestBody"
+        required: true
+        content:
+          application/json:
+            example:
+              asset:
+                type: image
+                prompt: 'A lighthouse on a rocky coast at sunset, cinematic lighting'
+                model: nano-banana-2
+            schema:
+              $ref: "../schemas/generationrequest.yaml#/GenerationRequest"
       responses:
         "200":
           description: The generation credit estimate.

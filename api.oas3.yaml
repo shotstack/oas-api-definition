@@ -385,6 +385,8 @@ components:
     GenerationModel:
       $ref: "./schemas/generationmodel.yaml#/GenerationModel"
 
+    GenerationRequest:
+      $ref: "./schemas/generationrequest.yaml#/GenerationRequest"
     GenerationQuote:
       $ref: "./schemas/responses/generationquote.yaml#/GenerationQuote"
 
