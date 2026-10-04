@@ -1,40 +1,23 @@
-    GenerationAsset:
-      description: An image, video or audio asset to generate from a text prompt.
-      type: object
-      properties:
-        type:
-          description: The kind of asset to generate.
-          type: string
-          enum: ['image', 'video', 'audio']
-          example: image
-        prompt:
-          description: >-
-            A description of the asset to generate. For text-to-speech models it is the
-            text spoken.
-          type: string
-          minLength: 1
-          maxLength: 4000
-          pattern: '\S'
-          example: A lighthouse on a rocky coast at sunset, cinematic lighting
-        model:
-          description: >-
-            The generation model. Defaults to `nano-banana-2` for images,
-            `seedance-2.0-text-to-video` for video and `elevenlabs-multilingual-v2` for
-            audio. `GET /models` lists the models for each type.
-          type: string
-          example: nano-banana-2
-        options:
-          description: >-
-            Settings for the chosen `model`. `GET /models` lists the options each model
-            accepts; omitted options use the model's defaults and unknown or invalid
-            options are rejected. A starting image for video goes in `startSrc`
-            (`inputSrc` on the original image-to-video models) and a speech voice in
-            `voice`.
-          type: object
+GenerationAsset:
+  description: >-
+    An image, video or audio asset to generate. Image and video assets require a
+    prompt. Audio uses a prompt for spoken text or a sound description. Legacy
+    text-to-image, image-to-video and text-to-speech assets are also accepted.
+  oneOf:
+    - allOf:
+        - oneOf:
+            - $ref: "./imageasset.yaml#/ImageAsset"
+            - $ref: "./videoasset.yaml#/VideoAsset"
+            - $ref: "./audioasset.yaml#/AudioAsset"
+            - $ref: "./texttoimageasset.yaml#/TextToImageAsset"
+            - $ref: "./imagetovideoasset.yaml#/ImageToVideoAsset"
+        - type: object
+          properties:
+            prompt:
+              type: string
+              minLength: 1
+              pattern: '\S'
+          required:
+            - prompt
           additionalProperties: true
-          example:
-            aspectRatio: '16:9'
-      additionalProperties: false
-      required:
-        - type
-        - prompt
+    - $ref: "./texttospeechasset.yaml#/TextToSpeechAsset"

@@ -25,6 +25,15 @@ ImageToVideoAsset:
       type: string
       description: The instructions for modifying the image into a video sequence.
       example: Slowly zoom out and orbit left around the object.
+    model:
+      type: string
+      description: The image-to-video model identifier.
+    enhancePrompt:
+      type: boolean
+      description: Let the model expand the prompt before generation.
+    loop:
+      type: boolean
+      description: Request a video that loops continuously.
     aspectRatio:
       description: >-
         The aspect ratio (shape) of the video output.

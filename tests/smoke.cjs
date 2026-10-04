@@ -120,6 +120,29 @@ async function run() {
     assert.strictEqual(zodCjs.generationmodelpricingGenerationModelPricingSchema, undefined);
   });
 
+  check("Generation requests accept render assets and legacy generation forms", () => {
+    for (const asset of [
+      { type: "image", prompt: "Sea", src: "https://example.com/preview.png", crop: { left: 0.1 } },
+      { type: "video", prompt: "Sea", trim: 1, volume: 0.5 },
+      { type: "audio", prompt: "Hello", options: { voice: "Joanna" }, volume: 0.5 },
+      { type: "text-to-image", prompt: "Sea", width: 512, height: 512 },
+      { type: "text-to-image", prompt: "x".repeat(4001) },
+      { type: "image-to-video", src: "https://example.com/start.png", prompt: "x".repeat(4001) },
+      { type: "text-to-speech", text: "Hello", voice: "Joanna" },
+      { type: "image-to-video", src: "https://example.com/start.png", prompt: "Pan left", model: "shotstack-itv-mini", enhancePrompt: true, loop: false },
+    ]) {
+      for (const request of [zodCjs.postGenerateRequest, zodCjs.postGenerateQuoteRequest]) {
+        assert.strictEqual(request.safeParse({ body: { asset } }).success, true, JSON.stringify(asset));
+        assert.strictEqual(request.safeParse({ body: { asset: { ...asset, unsupported: true } } }).success, false);
+      }
+    }
+    for (const asset of [
+      { type: "image", src: "https://example.com/source.png" },
+      { type: "video", prompt: "   " },
+      { type: "audio", prompt: "x".repeat(4001) },
+    ]) assert.strictEqual(zodCjs.generationRequestSchema.safeParse({ asset }).success, false);
+  });
+
   check("Parse valid rich-text asset", () => {
     const result = zodCjs.richTextAssetSchema.parse({
       type: "rich-text",

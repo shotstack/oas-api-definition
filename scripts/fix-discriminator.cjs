@@ -278,6 +278,14 @@ const clipClipSchemaWithFitFilter = clipClipSchema.transform((clip) => {
 // with meaningful error messages like: "Unrecognized key(s) in object: 'container'"
 console.log("Adding strict mode to all object schemas...");
 
+// The allOf prompt constraint must not reject or copy fields validated by the asset branch.
+function stripGenerationPrompt(code) {
+  return code.replace(
+    /(generationassetGenerationAssetSchema = [\s\S]*?prompt: [^\n]+\n\s*\}\))\.strict\(\)/,
+    "$1.strip()",
+  );
+}
+
 function addStrictToObjects(src, prefix) {
   // prefix is "z" for ESM TS/JS or "zod_1.z" for CJS
   const escapedPrefix = prefix.replace(/\./g, "\\.");
@@ -427,7 +435,7 @@ function addOutputDimensionsRefine(code, zPrefix) {
   return code;
 }
 
-content = addStrictToObjects(content, "z");
+content = stripGenerationPrompt(addStrictToObjects(content, "z"));
 content = addLegacyTextWrapMigrationError(content, "z");
 content = addSrcOrPromptRefine(content, "z");
 content = addOutputDimensionsRefine(content, "z");
@@ -650,7 +658,7 @@ const clipClipSchemaWithFitFilter = exports.clipClipSchema.transform((clip) => {
     console.log("⚠ Could not find clipSchema export in CJS to add fit property filter");
   }
 
-  cjsContent = addStrictToObjects(cjsContent, "zod_1.z");
+  cjsContent = stripGenerationPrompt(addStrictToObjects(cjsContent, "zod_1.z"));
   cjsContent = addLegacyTextWrapMigrationError(cjsContent, "zod_1.z");
   cjsContent = addSrcOrPromptRefine(cjsContent, "zod_1.z");
   cjsContent = addOutputDimensionsRefine(cjsContent, "zod_1.z");
@@ -785,7 +793,7 @@ const clipClipSchemaWithFitFilter = clipClipSchema.transform((clip) => {
     console.log("⚠ Could not find clipSchema export in ESM JS to add fit property filter");
   }
 
-  jsContent = addStrictToObjects(jsContent, "z");
+  jsContent = stripGenerationPrompt(addStrictToObjects(jsContent, "z"));
   jsContent = addLegacyTextWrapMigrationError(jsContent, "z");
   jsContent = addSrcOrPromptRefine(jsContent, "z");
   jsContent = addOutputDimensionsRefine(jsContent, "z");
