@@ -1,7 +1,7 @@
     GenerationModel:
       description: >-
         A generation model available to `prompt`-bearing image, video and audio assets,
-        with the options it accepts and what it costs. Render a model picker and its
+        with the options it accepts. Use `POST /generate/quote` for a credit estimate. Render a model picker and its
         option fields from this rather than hard coding a model list, so a newly launched
         model is available without a client release.
       properties:
@@ -29,9 +29,6 @@
           example: >-
             Generate cinematic video with realistic motion, prompt-directed camera movement
             and optional synchronised audio.
-        pricing:
-          description: What one generation with this model costs.
-          $ref: "./generationmodelpricing.yaml#/GenerationModelPricing"
         options:
           description: >-
             JSON Schema for the model's `options` object. Only returned for a single

@@ -1,0 +1,16 @@
+    GenerationRequest:
+      type: object
+      properties:
+        asset:
+          $ref: "./generationasset.yaml#/GenerationAsset"
+        length:
+          description: >-
+            The length, in seconds, of the clip the asset fills. A model that
+            generates to a duration takes it from this value in place of its own
+            duration option. Other models ignore it.
+          type: number
+          minimum: 0
+          exclusiveMinimum: true
+          example: 5
+      required:
+        - asset

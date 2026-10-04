@@ -95,6 +95,9 @@ paths:
   /generate:
     $ref: "./paths/generate.yaml"
 
+  /generate/quote:
+    $ref: "./paths/generatequote.yaml"
+
   /generate/{id}:
     $ref: "./paths/generateid.yaml"
 
@@ -382,8 +385,10 @@ components:
     GenerationModel:
       $ref: "./schemas/generationmodel.yaml#/GenerationModel"
 
-    GenerationModelPricing:
-      $ref: "./schemas/generationmodelpricing.yaml#/GenerationModelPricing"
+    GenerationRequest:
+      $ref: "./schemas/generationrequest.yaml#/GenerationRequest"
+    GenerationQuote:
+      $ref: "./schemas/responses/generationquote.yaml#/GenerationQuote"
 
     GenerationModelListResponse:
       $ref: "./schemas/responses/generationmodellistresponse.yaml#/GenerationModelListResponse"

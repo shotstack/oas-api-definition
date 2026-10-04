@@ -1,7 +1,7 @@
     get:
       description: |
         List the generation models available for `prompt`-bearing image, video and audio
-        assets, with the options each accepts and what it costs in credits.
+        assets, with the options each accepts. Use `POST /generate/quote` for a credit estimate.
 
         Use this to populate a model picker and render its option fields, rather than
         hard coding a model list. A newly launched model appears here without any change

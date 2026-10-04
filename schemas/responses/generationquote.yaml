@@ -1,0 +1,19 @@
+    GenerationQuote:
+      type: object
+      description: >-
+        Current credit estimate for a generation, calculated with the same rules as submission.
+        Does not reserve credits or lock a price. A cached result costs nothing; final duration-based
+        charges can be lower. Submit the same asset and length to generate it.
+      properties:
+        credits:
+          type: number
+          minimum: 0
+          description: Estimated generation credits, rounded to four decimal places.
+          example: 0.6038
+        ceiling:
+          type: boolean
+          description: True when an unresolved duration uses the model's reservation allowance.
+          example: false
+      required:
+        - credits
+        - ceiling

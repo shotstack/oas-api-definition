@@ -105,6 +105,21 @@ async function run() {
 
   const zodCjs = require(path.join(distDir, "zod/zod.gen.cjs"));
 
+  check("Generation quotes replace catalogue pricing", () => {
+    const body = { asset: { type: "image", model: "gpt-image-2.5-sunburst-edit", prompt: "Change colour", options: { imageUrls: ["https://example.com/source.png"] } }, length: 5 };
+    assert.deepStrictEqual(zodCjs.postGenerateQuoteRequest.parse({ body }).body, body);
+    for (const request of [zodCjs.postGenerateRequest, zodCjs.postGenerateQuoteRequest]) {
+      assert.strictEqual(request.safeParse({ body: { ...body, length: -1 } }).success, false);
+    }
+    const quote = zodCjs.generationQuoteSchema;
+    assert.deepStrictEqual(quote.parse({ credits: 0.6038, ceiling: false }), { credits: 0.6038, ceiling: false });
+    for (const invalid of [{ credits: -1, ceiling: false }, { credits: 1 }, { credits: "invalid", ceiling: false }]) {
+      assert.strictEqual(quote.safeParse(invalid).success, false);
+    }
+    assert.strictEqual(zodCjs.generationmodelGenerationModelSchema.safeParse({ model: "test", type: "image", pricing: [] }).success, false);
+    assert.strictEqual(zodCjs.generationmodelpricingGenerationModelPricingSchema, undefined);
+  });
+
   check("Parse valid rich-text asset", () => {
     const result = zodCjs.richTextAssetSchema.parse({
       type: "rich-text",
