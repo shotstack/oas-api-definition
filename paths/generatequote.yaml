@@ -1,0 +1,34 @@
+    post:
+      summary: Quote Generation
+      operationId: postGenerateQuote
+      description: |
+        Estimate credits for the same asset and clip length accepted by `POST /generate`.
+        Requires an API key and the same model access as generation. Invalid options and
+        disallowed source URLs are rejected. No provider request, job, quota usage or credit
+        reservation is created. A quote does not guarantee an available balance or quota.
+
+        Prices are evaluated at request time. Request another quote when settings change;
+        generation uses the current price when submitted.
+
+        **Base URL:** <a href="#">https://api.shotstack.io/edit/{version}</a>
+      requestBody:
+        $ref: "./generate.yaml#/post/requestBody"
+      responses:
+        "200":
+          description: The generation credit estimate.
+          content:
+            application/json:
+              schema:
+                $ref: "../schemas/responses/generationquote.yaml#/GenerationQuote"
+        "400":
+          $ref: "./generate.yaml#/post/responses/400"
+        "401":
+          description: An API key is required.
+        "403":
+          $ref: "./generate.yaml#/post/responses/403"
+        "503":
+          $ref: "./generate.yaml#/post/responses/503"
+      security:
+        - DeveloperKey: []
+      tags:
+        - Edit

@@ -105,14 +105,17 @@ async function run() {
 
   const zodCjs = require(path.join(distDir, "zod/zod.gen.cjs"));
 
-  check("Generation pricing adds typed components and rejects the old object shape", () => {
-    const schema = zodCjs.generationmodelpricingGenerationModelPricingSchema;
-    const output = { credits: { "1K": 0.33 }, tieredBy: { option: "resolution", default: "1K" }, effectiveFrom: "2026-10-02" };
-    const input = { credits: 0.0813, quantity: { measure: "inputImages", per: 1 }, effectiveFrom: "2026-10-02" };
-    assert.deepStrictEqual(schema.parse([output, input]), [output, input]);
-    for (const invalid of [output, [], [input, { ...input, surcharge: 1 }]]) {
-      assert.strictEqual(schema.safeParse(invalid).success, false);
+  check("Generation quotes replace catalogue pricing", () => {
+    const body = { asset: { type: "image", model: "gpt-image-2.5-sunburst-edit", prompt: "Change colour", options: { imageUrls: ["https://example.com/source.png"] } }, length: 5 };
+    assert.deepStrictEqual(zodCjs.postGenerateQuoteRequest.parse({ body }).body, body);
+    assert.strictEqual(zodCjs.postGenerateQuoteRequest.safeParse({ body: { ...body, length: -1 } }).success, false);
+    const quote = zodCjs.generationQuoteSchema;
+    assert.deepStrictEqual(quote.parse({ credits: 0.6038, ceiling: false }), { credits: 0.6038, ceiling: false });
+    for (const invalid of [{ credits: -1, ceiling: false }, { credits: 1 }, { credits: "invalid", ceiling: false }]) {
+      assert.strictEqual(quote.safeParse(invalid).success, false);
     }
+    assert.strictEqual(zodCjs.generationmodelGenerationModelSchema.safeParse({ model: "test", type: "image", pricing: [] }).success, false);
+    assert.strictEqual(zodCjs.generationmodelpricingGenerationModelPricingSchema, undefined);
   });
 
   check("Parse valid rich-text asset", () => {

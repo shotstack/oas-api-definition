@@ -1,7 +1,7 @@
     get:
       description: |
-        Get one generation model, including the JSON Schema for the options it accepts and
-        what it costs in credits.
+        Get one generation model, including the JSON Schema for the options it accepts.
+        Use `POST /generate/quote` for a credit estimate.
 
         **Base URL:** <a href="#">https://api.shotstack.io/edit/{version}</a>
       summary: Get Generation Model
