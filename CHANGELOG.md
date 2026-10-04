@@ -1,3 +1,16 @@
+# [1.22.0](https://github.com/shotstack/oas-api-definition/compare/v1.21.1...v1.22.0) (2026-10-04)
+
+
+### Bug Fixes
+
+* share a named generation request in reference examples ([085e05c](https://github.com/shotstack/oas-api-definition/commit/085e05ce2c9e19a455002db82c79d0cc93786ff9))
+
+
+### Features
+
+* expose additive generation pricing components ([40f2cda](https://github.com/shotstack/oas-api-definition/commit/40f2cdacf81bd632d3c77a308eb1644d132b7048))
+* replace catalogue pricing with generation quotes ([d61188c](https://github.com/shotstack/oas-api-definition/commit/d61188cb66f62c6ba8d01d5650f9486b0eef970e))
+
 ## [1.21.1](https://github.com/shotstack/oas-api-definition/compare/v1.21.0...v1.21.1) (2026-10-01)
 
 
