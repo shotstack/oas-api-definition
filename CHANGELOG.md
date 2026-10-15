@@ -1,3 +1,10 @@
+# [1.23.0](https://github.com/shotstack/oas-api-definition/compare/v1.22.0...v1.23.0) (2026-10-15)
+
+
+### Features
+
+* accept a source file on generation assets ([a8802d8](https://github.com/shotstack/oas-api-definition/commit/a8802d8d3840727478434e9050feaede380ec017))
+
 # [1.22.0](https://github.com/shotstack/oas-api-definition/compare/v1.21.1...v1.22.0) (2026-10-04)
 
 
