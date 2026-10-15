@@ -65,8 +65,8 @@
               schema:
                 $ref: "../schemas/responses/generationerrorresponse.yaml#/GenerationErrorResponse"
       description: |
-        Generate a single image, video or audio asset from a text prompt without
-        rendering a full edit. Submit a prompt-bearing asset; the response is
+        Generate a single image, video or audio asset from a prompt or, for some models, a source file, without
+        rendering a full edit. Submit an asset with a prompt or source file; the response is
         immediate when an identical asset has been generated before (results are
         cached by prompt, model and options), otherwise the job is queued and can
         be polled via the status endpoint.

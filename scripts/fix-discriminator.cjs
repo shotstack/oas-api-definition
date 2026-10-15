@@ -366,6 +366,7 @@ function addSrcOrPromptRefine(code, zPrefix) {
     'imageassetImageAssetSchema',
     'videoassetVideoAssetSchema',
     'audioassetAudioAssetSchema',
+    'generationassetGenerationAssetSchema',
   ];
   const strictMarker = '.strict()';
   const superRefine = strictMarker + '.superRefine((data, ctx) => {\n' +

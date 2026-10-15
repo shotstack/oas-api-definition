@@ -1,5 +1,7 @@
     GenerationAsset:
-      description: An image, video or audio asset to generate from a text prompt.
+      description: >-
+        An asset to generate, from a text `prompt` or, for models that take one, a source
+        `src`.
       type: object
       properties:
         type:
@@ -16,6 +18,12 @@
           maxLength: 4000
           pattern: '\S'
           example: A lighthouse on a rocky coast at sunset, cinematic lighting
+        src:
+          description: >-
+            The source file for models that take one instead of a prompt, such as
+            `shotstack-music-analysis`. A public HTTPS URL.
+          type: string
+          format: uri
         model:
           description: >-
             The generation model. Defaults to `nano-banana-2` for images,
@@ -37,4 +45,3 @@
       additionalProperties: false
       required:
         - type
-        - prompt
