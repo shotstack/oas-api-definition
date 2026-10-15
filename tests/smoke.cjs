@@ -120,6 +120,12 @@ async function run() {
     assert.strictEqual(zodCjs.generationmodelpricingGenerationModelPricingSchema, undefined);
   });
 
+  check("Generation assets accept a source file or a prompt", () => {
+    const analysis = { body: { asset: { type: "audio", model: "shotstack-music-analysis", src: "https://example.com/a.mp3" } } };
+    assert(zodCjs.postGenerateRequest.safeParse(analysis).success, "a src-input asset parses");
+    assert(!zodCjs.postGenerateRequest.safeParse({ body: { asset: { type: "audio" } } }).success, "an asset needs src or prompt");
+  });
+
   check("Parse valid rich-text asset", () => {
     const result = zodCjs.richTextAssetSchema.parse({
       type: "rich-text",
