@@ -1,3 +1,10 @@
+## [1.23.1](https://github.com/shotstack/oas-api-definition/compare/v1.23.0...v1.23.1) (2026-10-20)
+
+
+### Bug Fixes
+
+* state the 4K custom output size limits ([74f12b5](https://github.com/shotstack/oas-api-definition/commit/74f12b52217c85eed28e67fdf5bc8a6b44604291))
+
 # [1.23.0](https://github.com/shotstack/oas-api-definition/compare/v1.22.0...v1.23.0) (2026-10-15)
 
 
