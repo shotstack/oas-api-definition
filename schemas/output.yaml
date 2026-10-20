@@ -2,6 +2,9 @@
       description: >-
         The output format, render range and type of media to generate.
         For all formats except `mp3`, either `resolution` or `size` (with both `width` and `height`) must be specified.
+        A custom `size` can be up to 3840px on each side, or 1920px for `gif`. Video can be up to 3840 × 2160
+        pixels (8,294,400) in any shape, for example 2160 × 3840 for vertical 4K; larger sizes are rejected.
+        Video above 1920 × 1080 pixels, including the `4k` resolution, needs a plan that includes 4K.
       properties:
         format:
           description: >-
