@@ -28,7 +28,7 @@
                 <li>`zoom` - fast zoom in</li>
               </ul>
             The transition speed can also be controlled by appending `Fast` or `Slow`
-            to the transition, e.g. `fadeFast` or `CarouselLeftSlow`.
+            to any transition except `zoom`, e.g. `fadeFast` or `carouselLeftSlow`.
           enum:
             - none
             - fade
@@ -120,7 +120,7 @@
                 <li>`zoom` - fast zoom out</li>
               </ul>
             The transition speed can also be controlled by appending `Fast` or `Slow`
-            to the transition, e.g. `fadeFast` or `CarouselLeftSlow`.
+            to any transition except `zoom`, e.g. `fadeFast` or `carouselLeftSlow`.
           enum:
             - none
             - fade

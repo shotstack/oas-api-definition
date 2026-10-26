@@ -80,7 +80,7 @@ RichCaptionAnimation:
           <li>`highlight` - Word changes to active color when spoken (shows all words)</li>
           <li>`pop` - Each word scales up when active</li>
           <li>`fade` - Gradual opacity transition per word</li>
-          <li>`slide` - Words slide in from a direction</li>
+          <li>`slide` - Words slide in, travelling in `direction`</li>
           <li>`bounce` - Spring animation on word appearance</li>
           <li>`typewriter` - Words appear one by one and stay visible</li>
           <li>`none` - No animation, all words visible immediately</li>
@@ -98,7 +98,7 @@ RichCaptionAnimation:
       default: "highlight"
       example: "highlight"
     direction:
-      description: Direction for directional animations (slide). Only applicable when style is `slide`.
+      description: The direction words travel when style is `slide`.
       type: string
       enum:
         - left
