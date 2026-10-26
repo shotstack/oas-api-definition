@@ -1,3 +1,10 @@
+## [1.23.2](https://github.com/shotstack/oas-api-definition/compare/v1.23.1...v1.23.2) (2026-10-26)
+
+
+### Bug Fixes
+
+* describe text animation, tween and transition options as they render ([a154a60](https://github.com/shotstack/oas-api-definition/commit/a154a60ca9e2e189ec50e32bc98b3a649a603318))
+
 ## [1.23.1](https://github.com/shotstack/oas-api-definition/compare/v1.23.0...v1.23.1) (2026-10-20)
 
 
