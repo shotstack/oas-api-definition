@@ -31,7 +31,7 @@
             The preset output resolution of the video or image. For custom sizes use the `size` property.
             Either `resolution` or `size` (with both `width` and `height`) must be specified for all formats except `mp3`.
             <ul>
-              <li>`preview` - 512px x 288px @ 15fps</li>
+              <li>`preview` - 512px x 288px @ 12fps</li>
               <li>`mobile` - 640px x 360px @ 25fps</li>
               <li>`sd` - 1024px x 576px @ 25fps</li>
               <li>`hd` - 1280px x 720px @ 25fps</li>
@@ -71,7 +71,7 @@
           description: >-
             Override the default frames per second. Useful for when the source footage is recorded at 30fps, i.e. on 
             mobile devices. Lower frame rates can be used to add cinematic quality (24fps) or to create smaller file
-            size/faster render times or animated gifs (12 or 15fps). Default is 25fps.
+            size/faster render times or animated gifs (12 or 15fps). Default is 25fps, or 12fps for the `preview` resolution.
             <ul>
               <li>`12` - 12fps</li>
               <li>`15` - 15fps</li>
@@ -106,11 +106,11 @@
             scaleTo to output the file at SD and the text will be scaled to the correct size. This is useful if you
             want to create multiple asset sizes.
             <ul>
-              <li>`preview` - 512px x 288px @ 15fps</li>
-              <li>`mobile` - 640px x 360px @ 25fps</li>
-              <li>`sd` - 1024px x 576px @25fps</li>
-              <li>`hd` - 1280px x 720px @25fps</li>
-              <li>`1080` - 1920px x 1080px @25fps</li>
+              <li>`preview` - 512px x 288px</li>
+              <li>`mobile` - 640px x 360px</li>
+              <li>`sd` - 1024px x 576px</li>
+              <li>`hd` - 1280px x 720px</li>
+              <li>`1080` - 1920px x 1080px</li>
             </ul>
           enum:
             - preview
