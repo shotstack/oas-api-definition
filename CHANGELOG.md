@@ -1,3 +1,10 @@
+## [1.23.3](https://github.com/shotstack/oas-api-definition/compare/v1.23.2...v1.23.3) (2026-10-27)
+
+
+### Bug Fixes
+
+* state the preview resolution's 12fps default ([4eba20e](https://github.com/shotstack/oas-api-definition/commit/4eba20e671d59ee07062da3f766e12c2bebb3f3e))
+
 ## [1.23.2](https://github.com/shotstack/oas-api-definition/compare/v1.23.1...v1.23.2) (2026-10-26)
 
 
