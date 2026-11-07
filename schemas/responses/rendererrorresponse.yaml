@@ -1,0 +1,46 @@
+    RenderQueueLimitResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        message:
+          type: string
+          example: Too Many Requests
+        response:
+          type: object
+          properties:
+            code:
+              type: string
+              example: RENDER_QUEUE_LIMIT
+            error:
+              type: string
+              example: Your render queue is full. Upgrade your plan to queue more renders.
+          required:
+            - code
+            - error
+      required:
+        - success
+        - message
+        - response
+    RenderUnavailableResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        message:
+          type: string
+          example: Service Unavailable
+        response:
+          type: object
+          properties:
+            error:
+              type: string
+              example: Render queue is temporarily busy. Retry the request.
+          required:
+            - error
+      required:
+        - success
+        - message
+        - response

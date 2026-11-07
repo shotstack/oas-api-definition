@@ -6,6 +6,24 @@
             application/json:
               schema:
                 $ref: "../schemas/responses/queuedresponse.yaml#/QueuedResponse"
+        "429":
+          description: The render queue has reached the account limit.
+          headers:
+            Retry-After:
+              description: Seconds to wait before retrying the request.
+              schema:
+                type: string
+                example: "5"
+          content:
+            application/json:
+              schema:
+                $ref: "../schemas/responses/rendererrorresponse.yaml#/RenderQueueLimitResponse"
+        "503":
+          description: The render queue is temporarily busy. Retry the request.
+          content:
+            application/json:
+              schema:
+                $ref: "../schemas/responses/rendererrorresponse.yaml#/RenderUnavailableResponse"
       description: |
         Queue and render the contents of an [Edit](#tocs_edit) as a video, image or audio file.
 
