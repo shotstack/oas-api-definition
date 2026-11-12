@@ -52,8 +52,10 @@
           example: 9433.44
         url:
           description: >-
-            The URL of the final asset. This will only be available if status is done. This is a temporary URL and will
-            be deleted after 24 hours. By default all assets are copied to the Shotstack hosting and CDN destination.
+            A temporary download link to the final asset. This will only be available if status is done. By default all
+            assets are also copied to the [Shotstack hosting and CDN](https://shotstack.io/docs/guide/serving-assets/hosting/)
+            destination, where they stay until you delete them. Serve the asset to your users from its CDN URL,
+            `https://cdn.shotstack.io/au/{version}/{owner}/{id}.{format}`, not from this link, which expires after 24 hours.
           type: string
           example: https://shotstack-api-v1-output.s3-ap-southeast-2.amazonaws.com/5ca6hu7s9k/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4
         poster:
