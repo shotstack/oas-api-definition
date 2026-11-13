@@ -1,3 +1,10 @@
+## [1.23.4](https://github.com/shotstack/oas-api-definition/compare/v1.23.3...v1.23.4) (2026-11-13)
+
+
+### Bug Fixes
+
+* say that rendered files stay hosted and only the url is temporary ([912d9b9](https://github.com/shotstack/oas-api-definition/commit/912d9b94d4ac342ae9765c0ab1a69db36e2a543c))
+
 ## [1.23.3](https://github.com/shotstack/oas-api-definition/compare/v1.23.2...v1.23.3) (2026-10-27)
 
 
