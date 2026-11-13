@@ -105,6 +105,15 @@ async function run() {
 
   const zodCjs = require(path.join(distDir, "zod/zod.gen.cjs"));
 
+  check("Parse render concurrency API envelope", () => {
+    const response = {
+      success: true,
+      message: "OK",
+      response: { active: 2, queued: 5, concurrencyLimit: null, queueLimit: null, enforced: false },
+    };
+    assert.deepStrictEqual(zodCjs.getRenderConcurrencyResponse.parse(response), response);
+  });
+
   check("Generation quotes replace catalogue pricing", () => {
     const body = { asset: { type: "image", model: "gpt-image-2.5-sunburst-edit", prompt: "Change colour", options: { imageUrls: ["https://example.com/source.png"] } }, length: 5 };
     assert.deepStrictEqual(zodCjs.postGenerateQuoteRequest.parse({ body }).body, body);
