@@ -1,0 +1,30 @@
+BrightnessFilter:
+  description: >-
+    Lightens or darkens the clip.
+  type: object
+  additionalProperties: false
+  properties:
+    type:
+      description: The filter type - set to `brightness`.
+      type: string
+      enum:
+        - brightness
+    value:
+      description: >-
+        Sets the brightness shift of the clip. Use a number or an array of [Tween](./#tocs_tween) objects to
+        change it over time.
+      oneOf:
+        - type: number
+          description: >-
+            The brightness shift from -1 to 1. Positive values lighten the clip, negative values darken it and 0
+            leaves it unchanged (default).
+          minimum: -1
+          maximum: 1
+          example: 0.2
+        - type: array
+          description: >-
+            An array of [Tween](./#tocs_tween) objects that change the brightness shift over time.
+          items:
+            $ref: "./tween.yaml#/Tween"
+  required:
+    - type
