@@ -126,6 +126,15 @@ async function run() {
     assert(!zodCjs.postGenerateRequest.safeParse({ body: { asset: { type: "audio" } } }).success, "an asset needs src or prompt");
   });
 
+  const audio = (duck) => zodCjs.audioAssetSchema.safeParse({ type: "audio", src: "https://example.com/music.mp3", duck }).success;
+  check("duck accepts one alias", () => assert.strictEqual(audio({ under: "alias://voice" }), true));
+  check("duck accepts a list of aliases and a volume", () => assert.strictEqual(audio({ under: ["alias://vo1", "alias://vo2"], volume: 0.3 }), true));
+  check("duck requires under", () => assert.strictEqual(audio({ volume: 0.3 }), false));
+  check("duck rejects a reference that is not an alias", () => assert.strictEqual(audio({ under: "voice" }), false));
+  check("duck rejects an empty list", () => assert.strictEqual(audio({ under: [] }), false));
+  check("duck rejects a volume above 1", () => assert.strictEqual(audio({ under: "alias://voice", volume: 1.5 }), false));
+  check("duck rejects unknown keys", () => assert.strictEqual(audio({ under: "alias://voice", fade: 0.3 }), false));
+
   check("Parse valid rich-text asset", () => {
     const result = zodCjs.richTextAssetSchema.parse({
       type: "rich-text",

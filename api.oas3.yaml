@@ -217,6 +217,9 @@ components:
     Crop:
       $ref: "./schemas/crop.yaml#/Crop"
 
+    Duck:
+      $ref: "./schemas/duck.yaml#/Duck"
+
     Transformation:
       $ref: "./schemas/transformation.yaml#/Transformation"
 
