@@ -1,3 +1,10 @@
+# [1.24.0-beta.1](https://github.com/shotstack/oas-api-definition/compare/v1.23.4...v1.24.0-beta.1) (2026-11-17)
+
+
+### Features
+
+* add clip filters with values and keyframes ([e78c58d](https://github.com/shotstack/oas-api-definition/commit/e78c58d16232fa49169f4e8735cd2fad9ad54702))
+
 ## [1.23.4](https://github.com/shotstack/oas-api-definition/compare/v1.23.3...v1.23.4) (2026-11-13)
 
 
