@@ -1,0 +1,14 @@
+NegativeFilter:
+  description: >-
+    Inverts the clip, turning light areas dark and dark areas light. It has no properties other than `type`
+    and cannot be animated.
+  type: object
+  additionalProperties: false
+  properties:
+    type:
+      description: The filter type - set to `negative`.
+      type: string
+      enum:
+        - negative
+  required:
+    - type

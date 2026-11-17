@@ -194,6 +194,14 @@
             - negative
           type: string
           example: greyscale
+        filters:
+          description: >-
+            A list of filters to apply to the Clip, in the order they appear. Each filter has a `type` and its own
+            properties. The same type can be used more than once and numeric properties can be animated with
+            [Tween](./#tocs_tween) objects. If `filter` is also set, the filters in this list are applied before it.
+          type: array
+          items:
+            $ref: "./filter.yaml#/Filter"
         opacity:
           description: >-
             Offset an asset on the horizontal axis (left or right). Use a number or an array of

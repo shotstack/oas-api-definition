@@ -442,6 +442,115 @@ async function run() {
     zodCjs.audioAssetSchema.parse({ type: "audio", prompt: "hello", options: { voice: "Matthew" } });
   });
 
+  console.log("\n--- Clip filters ---\n");
+
+  const baseClip = { asset: { type: "video", src: "https://example.com/video.mp4" }, start: 0, length: 5 };
+  const filterClip = (filters, extra = {}) => ({ ...baseClip, ...extra, filters });
+  const flatIssues = (issues) => issues.flatMap((i) => [i, ...flatIssues((i.errors || []).flat())]);
+  const assertRejected = (result, predicate, reason) => {
+    assert.strictEqual(result.success, false, "Expected parsing to fail");
+    assert.ok(flatIssues(result.error.issues).some(predicate), `Expected ${reason}, got: ${JSON.stringify(result.error.issues)}`);
+  };
+
+  check("Parse clip with one filter of each type", () => {
+    const filters = [
+      { type: "brightness", value: 0.2 },
+      { type: "contrast", value: 1.5 },
+      { type: "saturation", value: 0 },
+      { type: "hue", value: 180 },
+      { type: "grade", exposure: 1, temperature: 0.3, tint: -0.2, highlights: -0.5, shadows: 0.5, vibrance: 0.1 },
+      { type: "blur", value: 10, x: 20, y: 0 },
+      { type: "sharpen", value: 5, radius: 3 },
+      { type: "pixelate", value: 0.5 },
+      { type: "rgbSplit", x: 0.02, y: -0.02 },
+      { type: "negative" },
+    ];
+    const result = zodCjs.clipSchema.parse(filterClip(filters));
+    assert.deepStrictEqual(result.filters, filters);
+  });
+
+  check("Parse contrast filter with keyframes", () => {
+    const value = [{ from: 1, to: 2, start: 0, length: 1 }];
+    const result = zodCjs.clipSchema.parse(filterClip([{ type: "contrast", value }]));
+    assert.deepStrictEqual(result.filters[0].value, value);
+  });
+
+  check("REJECT filter with unknown type", () => {
+    const result = zodCjs.clipSchema.safeParse(filterClip([{ type: "sepia", value: 1 }]));
+    assertRejected(result, (i) => i.note === "No matching discriminator" && i.path.join(".") === "filters.0.type", "no matching filter type");
+  });
+
+  check("REJECT filter with unknown field", () => {
+    const result = zodCjs.clipSchema.safeParse(filterClip([{ type: "contrast", value: 1, strength: 2 }]));
+    assertRejected(result, (i) => i.code === "unrecognized_keys" && i.keys.includes("strength"), "unrecognized key 'strength'");
+  });
+
+  check("REJECT filter with out-of-range value", () => {
+    const result = zodCjs.clipSchema.safeParse(filterClip([{ type: "brightness", value: 2 }]));
+    assertRejected(result, (i) => i.code === "too_big" && i.maximum === 1, "a value above the maximum of 1");
+  });
+
+  check("REJECT negative filter with a value", () => {
+    const result = zodCjs.clipSchema.safeParse(filterClip([{ type: "negative", value: 1 }]));
+    assertRejected(result, (i) => i.code === "unrecognized_keys" && i.keys.includes("value"), "unrecognized key 'value'");
+  });
+
+  const ranges = [
+    ["brightness", "value", -1, 1],
+    ["contrast", "value", 0, 4],
+    ["saturation", "value", 0, 4],
+    ["grade", "exposure", -4, 4],
+    ["grade", "temperature", -1, 1],
+    ["grade", "tint", -1, 1],
+    ["grade", "highlights", -1, 1],
+    ["grade", "shadows", -1, 1],
+    ["grade", "vibrance", -1, 1],
+    ["blur", "value", 0, 100],
+    ["blur", "x", 0, 100],
+    ["blur", "y", 0, 100],
+    ["sharpen", "value", 0, 40],
+    ["sharpen", "radius", 0, 10],
+    ["pixelate", "value", 0, 1],
+    ["rgbSplit", "x", -1, 1],
+    ["rgbSplit", "y", -1, 1],
+  ];
+  const parses = (type, field, n) => zodCjs.clipSchema.safeParse(filterClip([{ type, [field]: n }])).success;
+
+  check("Parse keyframes on every numeric filter field", () => {
+    const keyframes = [{ from: 0, to: 1, start: 0, length: 1 }];
+    for (const [type, field] of [...ranges, ["hue", "value"]]) {
+      const result = zodCjs.clipSchema.safeParse(filterClip([{ type, [field]: keyframes }]));
+      assert.ok(result.success, `${type}.${field} should accept keyframes`);
+      assert.deepStrictEqual(result.data.filters[0][field], keyframes);
+    }
+  });
+
+  check("Parse keyframes whose values are outside the field range", () => {
+    const value = [{ from: 5, to: 5, start: 0, length: 1 }];
+    const result = zodCjs.clipSchema.parse(filterClip([{ type: "brightness", value }]));
+    assert.deepStrictEqual(result.filters[0].value, value);
+  });
+
+  check("Filter ranges accept their limits and reject values beyond them", () => {
+    for (const [type, field, min, max] of ranges) {
+      assert.ok(parses(type, field, min) && parses(type, field, max), `${type}.${field} should accept ${min} and ${max}`);
+      assert.ok(!parses(type, field, min - 0.5) && !parses(type, field, max + 0.5), `${type}.${field} should reject beyond ${min} and ${max}`);
+    }
+    assert.ok(parses("hue", "value", -720) && parses("hue", "value", 720), "hue.value has no range");
+  });
+
+  check("Parse clip with both filter preset and filters", () => {
+    const result = zodCjs.clipSchema.parse(filterClip([{ type: "hue", value: 90 }], { filter: "boost" }));
+    assert.strictEqual(result.filter, "boost");
+    assert.strictEqual(result.filters.length, 1);
+  });
+
+  check("Parse clip with filter preset only (existing shape)", () => {
+    const result = zodCjs.clipSchema.parse({ ...baseClip, filter: "boost" });
+    assert.strictEqual(result.filter, "boost");
+    assert.strictEqual(result.filters, undefined);
+  });
+
   console.log("\n--- Deprecation markers in bundled spec ---\n");
 
   const bundledSpec = JSON.parse(
