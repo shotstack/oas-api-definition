@@ -1,0 +1,30 @@
+    Duck:
+      description: >-
+        Lowers the clip's volume while other clips play and restores it afterwards, for example to keep
+        music under a voiceover. The volume ramps down just before each referenced clip starts and back up
+        after it ends. Requires a numeric `volume` on the clip and cannot be combined with `speed`.
+      type: object
+      properties:
+        under:
+          description: >-
+            The clip or clips to duck under, each referenced by its alias in the form `alias://clip-name`.
+          oneOf:
+            - type: string
+              pattern: "^alias://[A-Za-z0-9_-]+$"
+              example: "alias://voice"
+            - type: array
+              minItems: 1
+              items:
+                type: string
+                pattern: "^alias://[A-Za-z0-9_-]+$"
+        volume:
+          description: >-
+            The volume while ducked, from 0 to 1 (defaults to 0.2). It must be lower than the clip's own volume.
+          type: number
+          format: float
+          minimum: 0
+          maximum: 1
+          example: 0.2
+      additionalProperties: false
+      required:
+        - under

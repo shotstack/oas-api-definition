@@ -109,6 +109,8 @@
             - fadeOut
             - fadeInFadeOut
           type: string
+        duck:
+          $ref: "./duck.yaml#/Duck"
       additionalProperties: false
       required:
         - type
