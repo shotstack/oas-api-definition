@@ -1,0 +1,30 @@
+ContrastFilter:
+  description: >-
+    Increases or decreases the difference between the light and dark areas of the clip.
+  type: object
+  additionalProperties: false
+  properties:
+    type:
+      description: The filter type - set to `contrast`.
+      type: string
+      enum:
+        - contrast
+    value:
+      description: >-
+        Sets the contrast of the clip. Use a number or an array of [Tween](./#tocs_tween) objects to change it
+        over time.
+      oneOf:
+        - type: number
+          description: >-
+            The contrast multiplier from 0 to 4. 1 leaves the clip unchanged (default), higher values increase
+            the contrast and 0 produces flat grey.
+          minimum: 0
+          maximum: 4
+          example: 1.5
+        - type: array
+          description: >-
+            An array of [Tween](./#tocs_tween) objects that change the contrast over time.
+          items:
+            $ref: "./tween.yaml#/Tween"
+  required:
+    - type

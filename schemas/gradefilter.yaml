@@ -1,0 +1,116 @@
+GradeFilter:
+  description: >-
+    Applies several grading adjustments at once: exposure, temperature, tint, highlights, shadows and
+    vibrance. Every property is optional and an omitted property leaves the clip unchanged.
+  type: object
+  additionalProperties: false
+  properties:
+    type:
+      description: The filter type - set to `grade`.
+      type: string
+      enum:
+        - grade
+    exposure:
+      description: >-
+        Sets the exposure of the clip in stops. Use a number or an array of [Tween](./#tocs_tween) objects to
+        change it over time.
+      oneOf:
+        - type: number
+          description: >-
+            The exposure change from -4 to 4 stops. Each stop doubles or halves the brightness. 0 leaves the
+            clip unchanged (default).
+          minimum: -4
+          maximum: 4
+          example: 0.5
+        - type: array
+          description: >-
+            An array of [Tween](./#tocs_tween) objects that change the exposure over time.
+          items:
+            $ref: "./tween.yaml#/Tween"
+    temperature:
+      description: >-
+        Sets the white balance of the clip. Use a number or an array of [Tween](./#tocs_tween) objects to change
+        it over time.
+      oneOf:
+        - type: number
+          description: >-
+            The temperature shift from -1 to 1. Positive values warm the clip, negative values cool it and 0
+            leaves it unchanged (default).
+          minimum: -1
+          maximum: 1
+          example: 0.3
+        - type: array
+          description: >-
+            An array of [Tween](./#tocs_tween) objects that change the temperature over time.
+          items:
+            $ref: "./tween.yaml#/Tween"
+    tint:
+      description: >-
+        Sets the tint of the clip between green and magenta. Use a number or an array of [Tween](./#tocs_tween)
+        objects to change it over time.
+      oneOf:
+        - type: number
+          description: >-
+            The tint shift from -1 to 1. Positive values shift the clip toward magenta, negative values toward
+            green and 0 leaves it unchanged (default).
+          minimum: -1
+          maximum: 1
+          example: 0.2
+        - type: array
+          description: >-
+            An array of [Tween](./#tocs_tween) objects that change the tint over time.
+          items:
+            $ref: "./tween.yaml#/Tween"
+    highlights:
+      description: >-
+        Adjusts the brightest areas of the clip. Use a number or an array of [Tween](./#tocs_tween) objects to
+        change it over time.
+      oneOf:
+        - type: number
+          description: >-
+            The highlights adjustment from -1 to 1. Positive values brighten the bright areas, negative values
+            darken them and 0 leaves the clip unchanged (default).
+          minimum: -1
+          maximum: 1
+          example: -0.3
+        - type: array
+          description: >-
+            An array of [Tween](./#tocs_tween) objects that change the highlights adjustment over time.
+          items:
+            $ref: "./tween.yaml#/Tween"
+    shadows:
+      description: >-
+        Adjusts the darkest areas of the clip. Use a number or an array of [Tween](./#tocs_tween) objects to
+        change it over time.
+      oneOf:
+        - type: number
+          description: >-
+            The shadows adjustment from -1 to 1. Positive values lift the dark areas, negative values deepen them
+            and 0 leaves the clip unchanged (default).
+          minimum: -1
+          maximum: 1
+          example: 0.3
+        - type: array
+          description: >-
+            An array of [Tween](./#tocs_tween) objects that change the shadows adjustment over time.
+          items:
+            $ref: "./tween.yaml#/Tween"
+    vibrance:
+      description: >-
+        Adjusts the saturation of the clip, with a stronger effect on muted colors than on colors that are
+        already vivid. Use a number or an array of [Tween](./#tocs_tween) objects to change it over time.
+      oneOf:
+        - type: number
+          description: >-
+            The vibrance adjustment from -1 to 1. Positive values strengthen color, mostly in muted tones,
+            negative values mute color and 0 leaves the clip unchanged (default).
+          minimum: -1
+          maximum: 1
+          example: 0.3
+        - type: array
+          description: >-
+            An array of [Tween](./#tocs_tween) objects that change the vibrance over time.
+          items:
+            $ref: "./tween.yaml#/Tween"
+  required:
+    - type

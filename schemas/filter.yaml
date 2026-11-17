@@ -1,0 +1,30 @@
+Filter:
+  type: object
+  description: >-
+    A filter that adjusts the look of a Clip. Choose from one of the available filter types below. Keyframe
+    values outside a field's range are limited to that range.
+  discriminator:
+    propertyName: type
+    mapping:
+      brightness: '#/components/schemas/BrightnessFilter'
+      contrast: '#/components/schemas/ContrastFilter'
+      saturation: '#/components/schemas/SaturationFilter'
+      hue: '#/components/schemas/HueFilter'
+      grade: '#/components/schemas/GradeFilter'
+      blur: '#/components/schemas/BlurFilter'
+      sharpen: '#/components/schemas/SharpenFilter'
+      pixelate: '#/components/schemas/PixelateFilter'
+      rgbSplit: '#/components/schemas/RgbSplitFilter'
+      negative: '#/components/schemas/NegativeFilter'
+  oneOf:
+    - $ref: './brightnessfilter.yaml#/BrightnessFilter'
+    - $ref: './contrastfilter.yaml#/ContrastFilter'
+    - $ref: './saturationfilter.yaml#/SaturationFilter'
+    - $ref: './huefilter.yaml#/HueFilter'
+    - $ref: './gradefilter.yaml#/GradeFilter'
+    - $ref: './blurfilter.yaml#/BlurFilter'
+    - $ref: './sharpenfilter.yaml#/SharpenFilter'
+    - $ref: './pixelatefilter.yaml#/PixelateFilter'
+    - $ref: './rgbsplitfilter.yaml#/RgbSplitFilter'
+    - $ref: './negativefilter.yaml#/NegativeFilter'
+  additionalProperties: false

@@ -1,0 +1,28 @@
+HueFilter:
+  description: >-
+    Rotates the hues of the clip around the color wheel.
+  type: object
+  additionalProperties: false
+  properties:
+    type:
+      description: The filter type - set to `hue`.
+      type: string
+      enum:
+        - hue
+    value:
+      description: >-
+        Sets the hue rotation of the clip in degrees. Use a number or an array of [Tween](./#tocs_tween) objects
+        to change it over time.
+      oneOf:
+        - type: number
+          description: >-
+            The rotation in degrees. 0 leaves the clip unchanged (default) and 360 is a full turn back to the
+            original hues.
+          example: 90
+        - type: array
+          description: >-
+            An array of [Tween](./#tocs_tween) objects that change the hue rotation over time.
+          items:
+            $ref: "./tween.yaml#/Tween"
+  required:
+    - type

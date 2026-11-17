@@ -1,0 +1,45 @@
+SharpenFilter:
+  description: >-
+    Sharpens the clip.
+  type: object
+  additionalProperties: false
+  properties:
+    type:
+      description: The filter type - set to `sharpen`.
+      type: string
+      enum:
+        - sharpen
+    value:
+      description: >-
+        Sets the amount of sharpening. Use a number or an array of [Tween](./#tocs_tween) objects to change it
+        over time.
+      oneOf:
+        - type: number
+          description: >-
+            The sharpening amount from 0 to 40. 0 applies no sharpening (default).
+          minimum: 0
+          maximum: 40
+          example: 5
+        - type: array
+          description: >-
+            An array of [Tween](./#tocs_tween) objects that change the sharpening amount over time.
+          items:
+            $ref: "./tween.yaml#/Tween"
+    radius:
+      description: >-
+        Sets the sharpening radius in pixels for a 720p frame. It scales with the frame height. Use a number or
+        an array of [Tween](./#tocs_tween) objects to change it over time.
+      oneOf:
+        - type: number
+          description: >-
+            The sharpening radius from 0 to 10. Defaults to 3.
+          minimum: 0
+          maximum: 10
+          example: 3
+        - type: array
+          description: >-
+            An array of [Tween](./#tocs_tween) objects that change the sharpening radius over time.
+          items:
+            $ref: "./tween.yaml#/Tween"
+  required:
+    - type
