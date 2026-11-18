@@ -1,7 +1,7 @@
 Filter:
   type: object
   description: >-
-    A filter that adjusts the look of a Clip. Choose from one of the available filter types below. Keyframe
+    A filter that adjusts the look of a Clip. Choose from one of the available filter types below. Tween
     values outside a field's range are limited to that range.
   discriminator:
     propertyName: type
