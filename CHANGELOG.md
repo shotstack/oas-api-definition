@@ -1,3 +1,10 @@
+# [1.25.0](https://github.com/shotstack/oas-api-definition/compare/v1.24.0...v1.25.0) (2026-11-18)
+
+
+### Features
+
+* duck an audio clip under other clips ([#169](https://github.com/shotstack/oas-api-definition/issues/169)) ([06850db](https://github.com/shotstack/oas-api-definition/commit/06850db237ba39e25a4de5fdc607aea93ff6de08))
+
 # [1.24.0](https://github.com/shotstack/oas-api-definition/compare/v1.23.4...v1.24.0) (2026-11-18)
 
 
