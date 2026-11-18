@@ -80,6 +80,9 @@ paths:
   /render/{id}:
     $ref: "./paths/renderid.yaml"
 
+  /render/concurrency:
+    $ref: "./paths/renderconcurrency.yaml"
+
   /templates:
     $ref: "./paths/templates.yaml"
 

@@ -1,0 +1,24 @@
+    get:
+      description: |
+        Get the current render concurrency counts and account limits.
+
+        **Base URL:** <a href="#">https://api.shotstack.io/edit/{version}</a>
+      summary: Get Render Concurrency
+      operationId: getRenderConcurrency
+      responses:
+        "200":
+          description: The current render concurrency counts and limits.
+          content:
+            application/json:
+              schema:
+                $ref: "../schemas/responses/renderconcurrencyresponse.yaml#/RenderConcurrencyResponse"
+        "503":
+          description: Account information is temporarily unavailable.
+          content:
+            application/json:
+              schema:
+                $ref: "../schemas/responses/rendererrorresponse.yaml#/RenderUnavailableResponse"
+      security:
+        - DeveloperKey: []
+      tags:
+        - Edit

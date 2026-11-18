@@ -1,0 +1,39 @@
+    RenderConcurrencyResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: OK
+        response:
+          type: object
+          properties:
+            active:
+              type: integer
+              example: 2
+            queued:
+              type: integer
+              example: 5
+            concurrencyLimit:
+              type: integer
+              nullable: true
+              example: 4
+            queueLimit:
+              type: integer
+              nullable: true
+              example: 12
+            enforced:
+              type: boolean
+              example: true
+          required:
+            - active
+            - queued
+            - concurrencyLimit
+            - queueLimit
+            - enforced
+      required:
+        - success
+        - message
+        - response
