@@ -19,12 +19,13 @@
                 pattern: "^alias://[A-Za-z0-9_-]+$"
         volume:
           description: >-
-            The volume while ducked, from 0 to 1 (defaults to 0.2). It must be lower than the clip's own volume.
+            The volume while ducked, from 0 to 1. When omitted, the level is chosen automatically so the
+            clips it ducks under stay clearly audible. When set, it must be lower than the clip's own volume.
           type: number
           format: float
           minimum: 0
           maximum: 1
-          example: 0.2
+          example: 0.1
       additionalProperties: false
       required:
         - under
