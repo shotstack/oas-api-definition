@@ -1,0 +1,49 @@
+RgbSplitFilter:
+  description: >-
+    Offsets the red and blue channels in opposite directions to create a color fringing effect. Channels
+    pushed past one edge of the frame reappear at the opposite edge, so small values such as 0.02 work best
+    and 1 or -1 shows no split.
+  type: object
+  additionalProperties: false
+  properties:
+    type:
+      description: The filter type - set to `rgbSplit`.
+      type: string
+      enum:
+        - rgbSplit
+    x:
+      description: >-
+        Sets the horizontal offset of the red and blue channels as a fraction of the clip's frame. Use a number
+        or an array of [Tween](./#tocs_tween) objects to change it over time.
+      oneOf:
+        - type: number
+          description: >-
+            The horizontal offset from -1 to 1. Red moves right by this fraction and blue moves left by the same
+            amount. Negative values reverse the direction and 0 applies no offset (default).
+          minimum: -1
+          maximum: 1
+          example: 0.02
+        - type: array
+          description: >-
+            An array of [Tween](./#tocs_tween) objects that change the horizontal offset over time.
+          items:
+            $ref: "./tween.yaml#/Tween"
+    y:
+      description: >-
+        Sets the vertical offset of the red and blue channels as a fraction of the clip's frame. Use a number or
+        an array of [Tween](./#tocs_tween) objects to change it over time.
+      oneOf:
+        - type: number
+          description: >-
+            The vertical offset from -1 to 1. Red moves up by this fraction and blue moves down by the same
+            amount. Negative values reverse the direction and 0 applies no offset (default).
+          minimum: -1
+          maximum: 1
+          example: 0.02
+        - type: array
+          description: >-
+            An array of [Tween](./#tocs_tween) objects that change the vertical offset over time.
+          items:
+            $ref: "./tween.yaml#/Tween"
+  required:
+    - type

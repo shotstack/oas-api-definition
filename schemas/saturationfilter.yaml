@@ -1,0 +1,30 @@
+SaturationFilter:
+  description: >-
+    Increases or decreases the intensity of the colors in the clip.
+  type: object
+  additionalProperties: false
+  properties:
+    type:
+      description: The filter type - set to `saturation`.
+      type: string
+      enum:
+        - saturation
+    value:
+      description: >-
+        Sets the saturation of the clip. Use a number or an array of [Tween](./#tocs_tween) objects to change it
+        over time.
+      oneOf:
+        - type: number
+          description: >-
+            The saturation multiplier from 0 to 4. 1 leaves the clip unchanged (default), higher values make
+            colors more vivid and 0 produces greyscale.
+          minimum: 0
+          maximum: 4
+          example: 1.5
+        - type: array
+          description: >-
+            An array of [Tween](./#tocs_tween) objects that change the saturation over time.
+          items:
+            $ref: "./tween.yaml#/Tween"
+  required:
+    - type

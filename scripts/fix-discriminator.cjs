@@ -80,6 +80,29 @@ if (assetUnionPattern.test(content)) {
   console.log("⚠ Could not find assetAssetSchema to replace");
 }
 
+const filterUnionPattern =
+  /export const filterFilterSchema = z\.union\(\[[\s\S]*?\]\);/;
+
+const newFilterSchema = `export const filterFilterSchema = z.discriminatedUnion("type", [
+  brightnessfilterBrightnessFilterSchema,
+  contrastfilterContrastFilterSchema,
+  saturationfilterSaturationFilterSchema,
+  huefilterHueFilterSchema,
+  gradefilterGradeFilterSchema,
+  blurfilterBlurFilterSchema,
+  sharpenfilterSharpenFilterSchema,
+  pixelatefilterPixelateFilterSchema,
+  rgbsplitfilterRgbSplitFilterSchema,
+  negativefilterNegativeFilterSchema,
+]);`;
+
+if (filterUnionPattern.test(content)) {
+  content = content.replace(filterUnionPattern, newFilterSchema);
+  console.log("✓ Fixed filterFilterSchema discriminator");
+} else {
+  console.log("⚠ Could not find filterFilterSchema to replace");
+}
+
 const svgShapeUnionPattern =
   /export const svgshapesSvgShapeSchema = z\.union\(\[[\s\S]*?\]\);/;
 

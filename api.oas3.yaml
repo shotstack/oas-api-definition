@@ -283,6 +283,39 @@ components:
     Tween:
       $ref: "./schemas/tween.yaml#/Tween"
 
+    Filter:
+      $ref: "./schemas/filter.yaml#/Filter"
+
+    BrightnessFilter:
+      $ref: "./schemas/brightnessfilter.yaml#/BrightnessFilter"
+
+    ContrastFilter:
+      $ref: "./schemas/contrastfilter.yaml#/ContrastFilter"
+
+    SaturationFilter:
+      $ref: "./schemas/saturationfilter.yaml#/SaturationFilter"
+
+    HueFilter:
+      $ref: "./schemas/huefilter.yaml#/HueFilter"
+
+    GradeFilter:
+      $ref: "./schemas/gradefilter.yaml#/GradeFilter"
+
+    BlurFilter:
+      $ref: "./schemas/blurfilter.yaml#/BlurFilter"
+
+    SharpenFilter:
+      $ref: "./schemas/sharpenfilter.yaml#/SharpenFilter"
+
+    PixelateFilter:
+      $ref: "./schemas/pixelatefilter.yaml#/PixelateFilter"
+
+    RgbSplitFilter:
+      $ref: "./schemas/rgbsplitfilter.yaml#/RgbSplitFilter"
+
+    NegativeFilter:
+      $ref: "./schemas/negativefilter.yaml#/NegativeFilter"
+
     MergeField:
       $ref: "./schemas/mergefield.yaml#/MergeField"
 

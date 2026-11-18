@@ -1,0 +1,29 @@
+PixelateFilter:
+  description: >-
+    Turns the clip into blocky pixels.
+  type: object
+  additionalProperties: false
+  properties:
+    type:
+      description: The filter type - set to `pixelate`.
+      type: string
+      enum:
+        - pixelate
+    value:
+      description: >-
+        Sets the strength of the pixelation. Use a number or an array of [Tween](./#tocs_tween) objects to
+        change it over time.
+      oneOf:
+        - type: number
+          description: >-
+            The pixelation strength from 0 to 1. 0 leaves the clip unchanged (default).
+          minimum: 0
+          maximum: 1
+          example: 0.5
+        - type: array
+          description: >-
+            An array of [Tween](./#tocs_tween) objects that change the pixelation strength over time.
+          items:
+            $ref: "./tween.yaml#/Tween"
+  required:
+    - type
