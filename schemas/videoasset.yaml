@@ -109,6 +109,8 @@
             - fadeOut
             - fadeInFadeOut
           type: string
+        mute:
+          $ref: "./mute.yaml#/Mute"
         speed:
           description: >-
             Adjust the playback speed of the video clip. Use a number for a constant speed or an array of
