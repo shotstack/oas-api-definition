@@ -1,0 +1,22 @@
+    Mute:
+      description: >-
+        Silences English profanity in the clip's speech, and any listed `words`. The audio is transcribed when
+        the edit renders, and the volume drops to zero just before each matching word and returns just after
+        it. Rich captions transcribed from this clip show the same words masked. Profanity detection is not
+        exhaustive: list any word that must not be heard. Cannot be combined with `speed`, `duck` or a volume
+        tween array.
+      type: object
+      properties:
+        words:
+          description: >-
+            Extra words to silence, each a single word, matched whole and ignoring case and surrounding
+            punctuation.
+          type: array
+          minItems: 1
+          maxItems: 200
+          items:
+            type: string
+            minLength: 1
+            maxLength: 50
+            pattern: "^\\S+$"
+      additionalProperties: false

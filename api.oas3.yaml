@@ -220,6 +220,9 @@ components:
     Duck:
       $ref: "./schemas/duck.yaml#/Duck"
 
+    Mute:
+      $ref: "./schemas/mute.yaml#/Mute"
+
     Transformation:
       $ref: "./schemas/transformation.yaml#/Transformation"
 
