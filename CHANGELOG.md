@@ -1,3 +1,12 @@
+# [1.27.0-beta.1](https://github.com/shotstack/oas-api-definition/compare/v1.26.0...v1.27.0-beta.1) (2026-11-19)
+
+
+### Features
+
+* add clip filters with values and keyframes ([e78c58d](https://github.com/shotstack/oas-api-definition/commit/e78c58d16232fa49169f4e8735cd2fad9ad54702))
+* duck an audio clip under other clips ([#165](https://github.com/shotstack/oas-api-definition/issues/165)) ([f4015d6](https://github.com/shotstack/oas-api-definition/commit/f4015d6008a28e94328d70ceb95b0991a2ab16b4))
+* mute profanity and listed words in a clip's speech ([#171](https://github.com/shotstack/oas-api-definition/issues/171)) ([8ec9fef](https://github.com/shotstack/oas-api-definition/commit/8ec9feff99d15cbbb5ed39570b46a56ebd7f1bdf))
+
 # [1.26.0](https://github.com/shotstack/oas-api-definition/compare/v1.25.0...v1.26.0) (2026-11-19)
 
 
