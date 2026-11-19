@@ -142,6 +142,9 @@ async function run() {
   check("mute rejects an empty word list", () => assert.strictEqual(audioMute({ words: [] }), false));
   check("mute rejects a phrase", () => assert.strictEqual(audioMute({ words: ["two words"] }), false));
   check("mute rejects unknown keys", () => assert.strictEqual(audioMute({ bleep: true }), false));
+  check("mute accepts sound bleep", () => assert.strictEqual(audioMute({ sound: "bleep" }), true));
+  check("mute accepts sound silence", () => assert.strictEqual(videoMute({ sound: "silence", words: ["bob"] }), true));
+  check("mute rejects an unknown sound", () => assert.strictEqual(audioMute({ sound: "beep" }), false));
 
   check("Parse valid rich-text asset", () => {
     const result = zodCjs.richTextAssetSchema.parse({
