@@ -1,3 +1,10 @@
+# [1.26.0](https://github.com/shotstack/oas-api-definition/compare/v1.25.0...v1.26.0) (2026-11-19)
+
+
+### Features
+
+* mute profanity and listed words in a clip's speech ([#171](https://github.com/shotstack/oas-api-definition/issues/171)) ([#172](https://github.com/shotstack/oas-api-definition/issues/172)) ([5887ce1](https://github.com/shotstack/oas-api-definition/commit/5887ce115b27a9f67ecff92b710204ef670d8b0e))
+
 # [1.24.0-beta.3](https://github.com/shotstack/oas-api-definition/compare/v1.24.0-beta.2...v1.24.0-beta.3) (2026-11-18)
 
 
