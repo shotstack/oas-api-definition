@@ -135,6 +135,14 @@ async function run() {
   check("duck rejects a volume above 1", () => assert.strictEqual(audio({ under: "alias://voice", volume: 1.5 }), false));
   check("duck rejects unknown keys", () => assert.strictEqual(audio({ under: "alias://voice", fade: 0.3 }), false));
 
+  const audioMute = (mute) => zodCjs.audioAssetSchema.safeParse({ type: "audio", src: "https://example.com/voice.mp3", mute }).success;
+  const videoMute = (mute) => zodCjs.videoAssetSchema.safeParse({ type: "video", src: "https://example.com/clip.mp4", mute }).success;
+  check("mute accepts profanity only", () => assert.strictEqual(audioMute({}), true));
+  check("mute accepts extra words on a video", () => assert.strictEqual(videoMute({ words: ["bob"] }), true));
+  check("mute rejects an empty word list", () => assert.strictEqual(audioMute({ words: [] }), false));
+  check("mute rejects a phrase", () => assert.strictEqual(audioMute({ words: ["two words"] }), false));
+  check("mute rejects unknown keys", () => assert.strictEqual(audioMute({ bleep: true }), false));
+
   check("Parse valid rich-text asset", () => {
     const result = zodCjs.richTextAssetSchema.parse({
       type: "rich-text",
