@@ -1,3 +1,10 @@
+# [1.27.0-beta.2](https://github.com/shotstack/oas-api-definition/compare/v1.27.0-beta.1...v1.27.0-beta.2) (2026-11-19)
+
+
+### Features
+
+* bleep muted words ([#174](https://github.com/shotstack/oas-api-definition/issues/174)) ([8c6809a](https://github.com/shotstack/oas-api-definition/commit/8c6809a86365d1cff83908692398dfc6744ed48d))
+
 # [1.27.0-beta.1](https://github.com/shotstack/oas-api-definition/compare/v1.26.0...v1.27.0-beta.1) (2026-11-19)
 
 
