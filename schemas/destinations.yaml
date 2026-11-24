@@ -8,10 +8,11 @@
         including 3rd party destinations.
 
 
-        By default all ingested and generated assets are automatically sent to the [Shotstack hosting
+        By default files rendered by the [Edit API](#shotstack-edit) are automatically sent to the [Shotstack hosting
         destination](https://shotstack.io/docs/guide/serving-assets/hosting/). You can
-        [opt-out](https://shotstack.io/docs/guide/serving-assets/self-host/) from by setting the Shotstack destination
-        **exclude** property to **true**.
+        [opt-out](https://shotstack.io/docs/guide/serving-assets/self-host/) by setting the Shotstack destination
+        **exclude** property to **true**. Ingest source and rendition files are sent to Shotstack hosting only when the
+        request includes a Shotstack destination; omit it to skip hosting.
       discriminator:
         propertyName: destinations
       anyOf:
