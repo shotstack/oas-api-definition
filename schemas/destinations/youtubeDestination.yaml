@@ -1,0 +1,17 @@
+    YoutubeDestination:
+      description: >-
+        Send videos to [YouTube](https://shotstack.io/docs/guide/serving-assets/destinations/youtube/). YouTube is in
+        beta and is enabled on request. Connect your YouTube channel in the
+        [dashboard](https://app.shotstack.io/integrations), not in the request.
+      properties:
+        provider:
+          description: The destination to send video to - set to `youtube` for YouTube.
+          type: string
+          default: youtube
+          example: youtube
+        options:
+          description: Additional YouTube configuration and features.
+          $ref: "./youtubeDestinationOptions.yaml#/YoutubeDestinationOptions"
+      type: object
+      required:
+        - provider

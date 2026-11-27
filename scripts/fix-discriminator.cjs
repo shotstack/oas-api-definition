@@ -17,6 +17,7 @@ const destinationProviderFixes = [
   { pattern: /provider: z\.string\(\)\.default\(["']google-drive["']\)/, replacement: 'provider: z.literal("google-drive")' },
   { pattern: /provider: z\.string\(\)\.default\(["']vimeo["']\)/, replacement: 'provider: z.literal("vimeo")' },
   { pattern: /provider: z\.string\(\)\.default\(["']tiktok["']\)/, replacement: 'provider: z.literal("tiktok")' },
+  { pattern: /provider: z\.string\(\)\.default\(["']youtube["']\)/, replacement: 'provider: z.literal("youtube")' },
   { pattern: /provider: z\.string\(\)\.default\(["']akamai-netstorage["']\)/, replacement: 'provider: z.literal("akamai-netstorage")' },
   { pattern: /provider: z\.string\(\)\.default\(["']azure-blob-storage["']\)/, replacement: 'provider: z.literal("azure-blob-storage")' },
 ];
@@ -40,6 +41,7 @@ const newDestinationsSchema = `export const destinationsDestinationsSchema = z.d
   googleDriveDestinationGoogleDriveDestinationSchema,
   vimeoDestinationVimeoDestinationSchema,
   tiktokDestinationTiktokDestinationSchema,
+  youtubeDestinationYoutubeDestinationSchema,
   akamaiNetStorageDestinationAkamaiNetStorageDestinationSchema,
   azureBlobStorageDestinationAzureBlobStorageDestinationSchema
 ]);`;
@@ -472,6 +474,7 @@ if (fs.existsSync(zodGenCjsPath)) {
     { pattern: /provider: zod_1\.z\.string\(\)\.default\(["']google-drive["']\)/, replacement: 'provider: zod_1.z.literal("google-drive")' },
     { pattern: /provider: zod_1\.z\.string\(\)\.default\(["']vimeo["']\)/, replacement: 'provider: zod_1.z.literal("vimeo")' },
     { pattern: /provider: zod_1\.z\.string\(\)\.default\(["']tiktok["']\)/, replacement: 'provider: zod_1.z.literal("tiktok")' },
+    { pattern: /provider: zod_1\.z\.string\(\)\.default\(["']youtube["']\)/, replacement: 'provider: zod_1.z.literal("youtube")' },
   ];
 
   cjsDestinationProviderFixes.forEach(({ pattern, replacement }) => {
@@ -493,6 +496,7 @@ if (fs.existsSync(zodGenCjsPath)) {
   exports.googleDriveDestinationGoogleDriveDestinationSchema,
   exports.vimeoDestinationVimeoDestinationSchema,
   exports.tiktokDestinationTiktokDestinationSchema,
+  exports.youtubeDestinationYoutubeDestinationSchema,
   exports.akamaiNetStorageDestinationAkamaiNetStorageDestinationSchema,
   exports.azureBlobStorageDestinationAzureBlobStorageDestinationSchema
 ]);`;

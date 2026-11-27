@@ -379,6 +379,12 @@ components:
     VimeoDestinationPrivacyOptions:
       $ref: "./schemas/destinations/vimeoDestinationPrivacyOptions.yaml#/VimeoDestinationPrivacyOptions"
 
+    YoutubeDestination:
+      $ref: "./schemas/destinations/youtubeDestination.yaml#/YoutubeDestination"
+
+    YoutubeDestinationOptions:
+      $ref: "./schemas/destinations/youtubeDestinationOptions.yaml#/YoutubeDestinationOptions"
+
     Template:
       $ref: "./schemas/template.yaml#/Template"
 
