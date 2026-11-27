@@ -1,0 +1,49 @@
+    YoutubeDestinationOptions:
+      description: >-
+        Pass additional options to control how YouTube publishes video, including title, description, tags and privacy
+        settings.
+      properties:
+        title:
+          description: >-
+            A title for the video that will be displayed on YouTube. Defaults to the rendered file's name without its
+            extension.
+          type: string
+          maxLength: 100
+          example: My product launch video
+        description:
+          description: >-
+            A description of the video that will be displayed on YouTube. YouTube limits the description to 5000 bytes,
+            which is fewer than 5000 characters if the text includes multi-byte characters such as emoji.
+          type: string
+          maxLength: 5000
+        tags:
+          description: A list of tags for the video.
+          type: array
+          items:
+            type: string
+          example:
+            - product
+            - launch
+        privacy:
+          description: >-
+            The privacy status of the video. Options are:
+            <ul>
+              <li>`public` - video is visible to everyone</li>
+              <li>`unlisted` - video is visible to anyone with the link</li>
+              <li>`private` - video is only visible to you</li>
+            </ul>
+          type: string
+          enum:
+            - public
+            - unlisted
+            - private
+          default: private
+        madeForKids:
+          description: >-
+            Declare whether the video is made for kids. This sets the audience setting of the video on YouTube.
+          type: boolean
+        containsSyntheticMedia:
+          description: >-
+            Disclose that the video contains realistic altered or synthetic content.
+          type: boolean
+      type: object

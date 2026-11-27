@@ -73,7 +73,7 @@ const AnimationWithDirection = richTextAnimationSchema.refine(
 
 - Edit, Timeline, Track, Clip, Output
 - Assets: VideoAsset, ImageAsset, AudioAsset, HtmlAsset, TextAsset, TitleAsset, LumaAsset, CaptionAsset, ShapeAsset, RichTextAsset
-- Destinations: ShotstackDestination, S3Destination, MuxDestination, VimeoDestination, GoogleDriveDestination, GoogleCloudStorageDestination
+- Destinations: ShotstackDestination, S3Destination, MuxDestination, VimeoDestination, YoutubeDestination, GoogleDriveDestination, GoogleCloudStorageDestination
 - Transforms, Transitions, Fonts, MergeFields, and more
 
 ## Development
